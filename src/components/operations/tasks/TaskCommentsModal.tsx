@@ -100,9 +100,9 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
               style={{
                 width: 28,
                 height: 28,
-                borderRadius: 6,
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-xs)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -113,14 +113,14 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
                 <h2 className="tasks-modal-title">Task Discussion</h2>
-                <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#2563EB" }}>
+                <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-blue)" }}>
                   #{task.tag_id}
                 </span>
               </div>
               <div
                 style={{
                   fontSize: "0.725rem",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   maxWidth: "360px",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
@@ -131,7 +131,7 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
               </div>
             </div>
           </div>
-          <button
+          <button aria-label="Close" title="Close"
             type="button"
             onClick={onClose}
             disabled={isSending}
@@ -150,17 +150,17 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
             display: "flex",
             flexDirection: "column",
             gap: "0.75rem",
-            backgroundColor: "#F8FAFC",
+            backgroundColor: "rgba(0, 0, 0, 0.025)",
           }}
         >
           {error && (
             <div
               style={{
                 padding: "0.6rem 0.85rem",
-                backgroundColor: "#FEF2F2",
-                border: "1px solid #FECACA",
-                borderRadius: "8px",
-                color: "#991B1B",
+                backgroundColor: "var(--ads-red-tint)",
+                border: "1px solid transparent",
+                borderRadius: "var(--ads-r-sm)",
+                color: "var(--ads-red)",
                 fontSize: "0.775rem",
                 display: "flex",
                 alignItems: "center",
@@ -203,9 +203,9 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
                   <div
                     style={{
                       flex: 1,
-                      backgroundColor: isMe ? "#EFF6FF" : "#FFFFFF",
-                      border: isMe ? "1px solid #BFDBFE" : "1px solid #E2E8F0",
-                      borderRadius: "8px",
+                      backgroundColor: isMe ? "var(--ads-blue-tint)" : "#FFFFFF",
+                      border: isMe ? "1px solid transparent" : "1px solid var(--ads-hairline)",
+                      borderRadius: "var(--ads-r-sm)",
                       padding: "0.6rem 0.8rem",
                       boxShadow: "0 1px 2px rgba(0, 0, 0, 0.02)",
                     }}
@@ -222,13 +222,13 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
                         style={{
                           fontSize: "0.75rem",
                           fontWeight: 700,
-                          color: isMe ? "#1D4ED8" : "#1E293B",
+                          color: isMe ? "var(--ads-blue)" : "var(--ads-ink)",
                         }}
                       >
                         {authorName}
                       </span>
                       {c.created_at && (
-                        <span style={{ fontSize: "0.675rem", color: "#94A3B8" }}>
+                        <span style={{ fontSize: "0.675rem", color: "var(--ads-ink-tertiary)" }}>
                           {formatDate(c.created_at)}
                         </span>
                       )}
@@ -237,7 +237,7 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
                       style={{
                         margin: 0,
                         fontSize: "0.8rem",
-                        color: "#334155",
+                        color: "var(--ads-ink-secondary)",
                         lineHeight: 1.4,
                         wordBreak: "break-word",
                       }}
@@ -253,7 +253,7 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
               style={{
                 margin: "auto",
                 textAlign: "center",
-                color: "#94A3B8",
+                color: "var(--ads-ink-tertiary)",
                 fontSize: "0.8rem",
                 display: "flex",
                 flexDirection: "column",
@@ -261,7 +261,7 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
                 gap: "0.5rem",
               }}
             >
-              <MessageSquare size={32} style={{ color: "#CBD5E1" }} />
+              <MessageSquare size={32} style={{ color: "var(--ads-ink-quaternary)" }} />
               <span>No comments yet. Post the first update below.</span>
             </div>
           )}
@@ -273,8 +273,8 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
           onSubmit={handleSendComment}
           style={{
             padding: "0.75rem 1.25rem",
-            backgroundColor: "#FFFFFF",
-            borderTop: "1px solid #E2E8F0",
+            backgroundColor: "var(--ads-material-thick)",
+            borderTop: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             gap: "0.5rem",
@@ -297,6 +297,7 @@ export const TaskCommentsModal: FC<TaskCommentsModalProps> = ({
             className="btn-add-task"
             style={{ padding: "0.5rem 0.85rem", height: 38 }}
             title="Send Comment"
+            aria-label="Send Comment"
           >
             <Send size={14} style={{ color: "#FFFFFF" }} />
           </button>

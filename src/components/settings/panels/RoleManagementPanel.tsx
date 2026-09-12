@@ -119,31 +119,24 @@ export const RoleManagementPanel: FC<RoleManagementPanelProps> = ({ onNotificati
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <UserCheck size={20} className="text-blue-600" />
-            <span>Role Creation & Assignment</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Configure system roles, operational responsibilities, and module permission levels
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Configure system roles, operational responsibilities, and module permission levels
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="settings-grid">
         {/* Roles List */}
         <div className="settings-card lg:col-span-1">
           <div className="settings-card-title-row">
             <h3 className="settings-card-title">
-              <Shield size={16} className="text-blue-600" />
+              <Shield size={16} />
               <span>Defined Roles</span>
             </h3>
-            <span className="text-xs text-slate-500 font-medium">{roles.length} Roles</span>
+            <span className="ads-caption">{roles.length} Roles</span>
           </div>
 
-          <div className="flex flex-col gap-2 mt-1">
+          <div className="settings-stack">
             {roles.map((role) => {
               const isActive = role.id === selectedRole.id;
               return (
@@ -151,25 +144,53 @@ export const RoleManagementPanel: FC<RoleManagementPanelProps> = ({ onNotificati
                   key={role.id}
                   type="button"
                   onClick={() => setSelectedRoleId(role.id)}
-                  className={`p-3 rounded-lg border text-left transition-all flex flex-col gap-1 ${
-                    isActive
-                      ? "bg-blue-50 border-blue-300 shadow-sm"
-                      : "bg-white border-slate-200 hover:bg-slate-50"
-                  }`}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "var(--ads-s1)",
+                    padding: "var(--ads-s3)",
+                    textAlign: "left",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    background: isActive ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+                    border: isActive
+                      ? "1px solid var(--ads-blue)"
+                      : "1px solid var(--ads-hairline)",
+                    borderRadius: "var(--ads-r-sm)",
+                    transition:
+                      "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
+                  }}
                 >
-                  <div className="flex items-center justify-between">
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "var(--ads-s2)",
+                    }}
+                  >
                     <span
-                      className={`text-sm font-semibold ${
-                        isActive ? "text-blue-700" : "text-slate-800"
-                      }`}
+                      style={{
+                        fontSize: "0.875rem",
+                        fontWeight: 600,
+                        letterSpacing: "-0.01em",
+                        color: isActive ? "var(--ads-blue)" : "var(--ads-ink)",
+                      }}
                     >
                       {role.name}
                     </span>
-                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium">
+                    <span className="ads-badge ads-badge--neutral">
                       {role.userCount} {role.userCount === 1 ? "user" : "users"}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed m-0">
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: "0.75rem",
+                      lineHeight: 1.45,
+                      color: "var(--ads-ink-tertiary)",
+                    }}
+                  >
                     {role.description}
                   </p>
                 </button>
@@ -188,13 +209,13 @@ export const RoleManagementPanel: FC<RoleManagementPanelProps> = ({ onNotificati
               <p className="settings-card-desc">{selectedRole.description}</p>
             </div>
             {selectedRole.id === "owner" && (
-              <span className="text-xs font-semibold px-2.5 py-1 bg-amber-50 text-amber-800 border border-amber-200 rounded-md">
+              <span className="ads-badge ads-badge--amber">
                 Root Account (Full Access)
               </span>
             )}
           </div>
 
-          <div className="flex flex-col gap-2.5 mt-2">
+          <div className="settings-stack">
             {[
               {
                 key: "dispatch" as const,

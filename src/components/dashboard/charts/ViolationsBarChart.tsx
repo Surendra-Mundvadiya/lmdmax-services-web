@@ -17,10 +17,11 @@ export const ViolationsBarChart: FC<Props> = ({ data }) => {
   const list = data && data.length > 0 ? data.slice(0, 6) : [];
   const maxCount = Math.max(...list.map((i) => i.count), 10);
 
+  // Severity is real data, so this stays on the semantic --ads-* scale.
   const getBarColor = (severity: string) => {
-    if (severity === "critical") return "#EF4444"; // Vivid Red
-    if (severity === "medium") return "#F59E0B"; // Amber
-    return "#3B82F6"; // Blue
+    if (severity === "critical") return "#D70015";
+    if (severity === "medium") return "#B25000";
+    return "#0071E3";
   };
 
   const handleBarClick = (type: string) => {
@@ -35,9 +36,8 @@ export const ViolationsBarChart: FC<Props> = ({ data }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#94A3B8",
+          color: "var(--ads-ink-tertiary)",
           fontSize: "0.8125rem",
-          fontStyle: "italic",
         }}
       >
         No safety infractions recorded for this timeframe
@@ -55,7 +55,7 @@ export const ViolationsBarChart: FC<Props> = ({ data }) => {
           height: 155,
           gap: "0.75rem",
           paddingBottom: "1.75rem",
-          borderBottom: "1px solid #E2E8F0",
+          borderBottom: "1px solid var(--ads-hairline)",
         }}
       >
         {list.map((item, idx) => {
@@ -79,8 +79,8 @@ export const ViolationsBarChart: FC<Props> = ({ data }) => {
               <div
                 style={{
                   fontSize: "0.6875rem",
-                  fontWeight: 700,
-                  color: "#475569",
+                  fontWeight: 600,
+                  color: "var(--ads-ink-secondary)",
                   marginBottom: 4,
                 }}
               >
@@ -94,10 +94,10 @@ export const ViolationsBarChart: FC<Props> = ({ data }) => {
                   maxWidth: "40px",
                   height: `${heightPercent}%`,
                   backgroundColor: color,
-                  borderRadius: "6px 6px 0 0",
+                  borderRadius: "var(--ads-r-xs) var(--ads-r-xs) 0 0",
                   cursor: "pointer",
-                  transition: "all 0.2s ease",
-                  boxShadow: item.severity === "critical" ? "0 2px 8px rgba(239, 68, 68, 0.25)" : "none",
+                  transition: "filter var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
+                  boxShadow: item.severity === "critical" ? "0 2px 8px rgba(215, 0, 21, 0.24)" : "none",
                 }}
                 onClick={() => handleBarClick(item.violationType)}
                 onMouseEnter={(e) => {
@@ -120,7 +120,7 @@ export const ViolationsBarChart: FC<Props> = ({ data }) => {
                   textAlign: "center",
                   fontSize: "0.625rem",
                   fontWeight: 600,
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
@@ -143,19 +143,19 @@ export const ViolationsBarChart: FC<Props> = ({ data }) => {
           gap: "0.75rem",
           marginTop: "1.75rem",
           fontSize: "0.6875rem",
-          color: "#64748B",
+          color: "var(--ads-ink-secondary)",
         }}
       >
         <span style={{ display: "inline-flex", alignItems: "center", gap: "0.25rem" }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "#EF4444" }} />
+          <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "var(--ads-red)" }} />
           Critical Infraction
         </span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: "0.25rem" }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "#F59E0B" }} />
+          <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "var(--ads-amber)" }} />
           Medium Hazard
         </span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: "0.25rem" }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "#3B82F6" }} />
+          <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "var(--ads-blue)" }} />
           Standard Telemetry
         </span>
       </div>

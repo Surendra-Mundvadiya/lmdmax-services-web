@@ -103,10 +103,10 @@ export const CompactKpiCards: FC<Props> = ({
           <span
             className="uop-compact-pill"
             style={{
-              backgroundColor: "#FEF2F2",
-              color: "#DC2626",
-              border: "1px solid #FECACA",
-              fontWeight: 700,
+              backgroundColor: "var(--ads-red-tint)",
+              color: "var(--ads-red)",
+              border: "1px solid transparent",
+              fontWeight: 600,
             }}
             onClick={(e) => {
               e.stopPropagation();
@@ -149,10 +149,10 @@ export const CompactKpiCards: FC<Props> = ({
               <span
                 className="uop-compact-pill"
                 style={{
-                  backgroundColor: "#FEF2F2",
-                  color: "#DC2626",
-                  border: "1px solid #FECACA",
-                  fontWeight: 700,
+                  backgroundColor: "var(--ads-red-tint)",
+                  color: "var(--ads-red)",
+                  border: "1px solid transparent",
+                  fontWeight: 600,
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -182,7 +182,7 @@ export const CompactKpiCards: FC<Props> = ({
                 <CheckCircle2 size={10} />
                 {activeVehicles} Active Vehicles
               </span>
-              <span style={{ fontSize: "0.625rem", color: "#64748B", fontWeight: 600 }}>
+              <span style={{ fontSize: "0.625rem", color: "var(--ads-ink-secondary)", fontWeight: 600 }}>
                 Condition Breakdown
               </span>
             </div>
@@ -202,9 +202,9 @@ export const CompactKpiCards: FC<Props> = ({
               <span
                 className="uop-condition-chip"
                 style={{
-                  backgroundColor: "#F1F5F9",
-                  color: "#475569",
-                  border: "1px solid #CBD5E1",
+                  backgroundColor: "var(--uop-wash-strong)",
+                  color: "var(--ads-ink-secondary)",
+                  border: "1px solid transparent",
                   fontWeight: 600,
                 }}
                 onClick={(e) => {
@@ -240,7 +240,7 @@ export const CompactKpiCards: FC<Props> = ({
         </div>
 
         <div className="uop-compact-footer">
-          <span style={{ fontSize: "0.6875rem", color: "#64748B" }}>
+          <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-secondary)" }}>
             {totalVehicles > 0 ? `${Math.round((activeVehicles / totalVehicles) * 100)}% Active` : "Fleet Ready"}
           </span>
           <span className="uop-card-link-hint">
@@ -252,18 +252,14 @@ export const CompactKpiCards: FC<Props> = ({
 
       {/* 3. Inspection Alerts KPI Card (1x) */}
       <div
-        className="uop-card uop-compact-kpi-card clickable"
+        className={`uop-card uop-compact-kpi-card clickable${criticalFailures > 0 ? " uop-card--alert" : ""}`}
         onClick={() => navigate("/fleet/driver-inspection")}
         title="View inspection alerts"
-        style={{
-          borderColor: criticalFailures > 0 ? "#FECACA" : "#E2E8F0",
-          backgroundColor: criticalFailures > 0 ? "#FFF8F8" : "#FFFFFF",
-        }}
       >
         <div className="uop-compact-header">
           <span
             className="uop-compact-title"
-            style={{ color: criticalFailures > 0 ? "#DC2626" : "inherit" }}
+            style={{ color: criticalFailures > 0 ? "var(--ads-red)" : "inherit" }}
           >
             Inspection Alerts
           </span>
@@ -274,7 +270,7 @@ export const CompactKpiCards: FC<Props> = ({
 
         <div
           className="uop-compact-value"
-          style={{ color: criticalFailures > 0 ? "#DC2626" : "#0F172A" }}
+          style={{ color: criticalFailures > 0 ? "var(--ads-red)" : "var(--ads-ink)" }}
         >
           {isLoading ? <div className="uop-skeleton" style={{ width: 40, height: 26 }} /> : totalAlerts}
         </div>
@@ -283,15 +279,15 @@ export const CompactKpiCards: FC<Props> = ({
           <span
             className="uop-compact-pill"
             style={{
-              backgroundColor: criticalFailures > 0 ? "#FEF2F2" : "#ECFDF5",
-              color: criticalFailures > 0 ? "#DC2626" : "#059669",
-              border: criticalFailures > 0 ? "1px solid #FECACA" : "1px solid #A7F3D0",
-              fontWeight: 700,
+              backgroundColor: criticalFailures > 0 ? "var(--ads-red-tint)" : "var(--ads-green-tint)",
+              color: criticalFailures > 0 ? "var(--ads-red)" : "var(--ads-green)",
+              border: "1px solid transparent",
+              fontWeight: 600,
             }}
           >
             {criticalFailures} Critical
           </span>
-          <span style={{ fontSize: "0.6875rem", color: "#64748B", fontWeight: 600 }}>
+          <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-secondary)", fontWeight: 600 }}>
             {pendingReviews} Review
           </span>
         </div>
@@ -300,7 +296,7 @@ export const CompactKpiCards: FC<Props> = ({
           <span />
           <span
             className="uop-card-link-hint"
-            style={{ color: criticalFailures > 0 ? "#DC2626" : "#2563EB" }}
+            style={{ color: criticalFailures > 0 ? "var(--ads-red)" : "var(--ads-blue)" }}
           >
             <span>Inspections</span>
             <ChevronRight size={12} />
@@ -323,7 +319,7 @@ export const CompactKpiCards: FC<Props> = ({
 
         <div
           className="uop-compact-value"
-          style={{ color: totalCallouts > 0 ? "#D97706" : "#0F172A" }}
+          style={{ color: totalCallouts > 0 ? "var(--ads-amber)" : "var(--ads-ink)" }}
         >
           {isLoading ? <div className="uop-skeleton" style={{ width: 40, height: 26 }} /> : totalCallouts}
         </div>
@@ -335,10 +331,10 @@ export const CompactKpiCards: FC<Props> = ({
           <span
             className="uop-compact-pill"
             style={{
-              backgroundColor: unexcused > 0 ? "#FEF2F2" : "#F8FAFC",
-              color: unexcused > 0 ? "#DC2626" : "#64748B",
-              border: unexcused > 0 ? "1px solid #FECACA" : "1px solid #E2E8F0",
-              fontWeight: 700,
+              backgroundColor: unexcused > 0 ? "var(--ads-red-tint)" : "var(--uop-wash-strong)",
+              color: unexcused > 0 ? "var(--ads-red)" : "var(--ads-ink-secondary)",
+              border: "1px solid transparent",
+              fontWeight: 600,
             }}
           >
             {unexcused > 0 && <AlertTriangle size={10} />}
@@ -374,7 +370,7 @@ export const CompactKpiCards: FC<Props> = ({
           ) : (
             <>
               {totalDelivered.toLocaleString()}
-              <span style={{ fontSize: "0.8125rem", color: "#64748B", fontWeight: 500 }}>
+              <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-secondary)", fontWeight: 500 }}>
                 {" "}/{target.toLocaleString()}
               </span>
             </>
@@ -384,12 +380,12 @@ export const CompactKpiCards: FC<Props> = ({
         <div className="uop-compact-progress-wrap">
           <div
             className="uop-compact-progress-fill"
-            style={{ width: `${Math.min(completionRate, 100)}%` }}
+            style={{ transform: `scaleX(${Math.min(completionRate, 100) / 100})` }}
           />
         </div>
 
         <div className="uop-compact-footer">
-          <span style={{ color: "#059669", fontWeight: 700, fontSize: "0.6875rem" }}>
+          <span style={{ color: "var(--ads-green)", fontWeight: 600, fontSize: "0.6875rem" }}>
             {completionRate}% Delivered
           </span>
           <span className="uop-card-link-hint">

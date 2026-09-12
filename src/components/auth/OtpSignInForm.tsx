@@ -256,7 +256,7 @@ export const OtpSignInForm: FC<OtpSignInFormProps> = ({
           <div className="resend-row">
             {countdown > 0 ? (
               <span className="countdown-text">
-                Resend in <strong style={{ color: "#4F8BFF" }}>{countdown}s</strong>
+                Resend in <strong style={{ color: "var(--ads-blue)" }}>{countdown}s</strong>
               </span>
             ) : (
               <button

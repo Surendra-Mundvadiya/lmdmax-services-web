@@ -265,7 +265,7 @@ export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
           <div className="resend-row">
             {countdown > 0 ? (
               <span className="countdown-text">
-                Resend in <strong style={{ color: "#4F8BFF" }}>{countdown}s</strong>
+                Resend in <strong style={{ color: "var(--ads-blue)" }}>{countdown}s</strong>
               </span>
             ) : (
               <button
@@ -318,6 +318,8 @@ export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
                 type="button"
                 className="password-toggle-btn"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                title={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>

@@ -41,9 +41,9 @@ export const DeleteAdminModal: FC<DeleteAdminModalProps> = ({
   };
 
   return (
-    <div className="custom-modal-overlay" onClick={onClose}>
+    <div className="custom-modal-overlay ads-admin-modal-overlay" onClick={onClose}>
       <div
-        className="custom-modal-dialog delete-dialog"
+        className="custom-modal-dialog delete-dialog ads-admin-modal"
         style={{ maxWidth: "430px", width: "100%", margin: "auto" }}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
@@ -51,11 +51,25 @@ export const DeleteAdminModal: FC<DeleteAdminModalProps> = ({
       >
         {/* Header */}
         <div className="custom-modal-header">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0">
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "32px",
+                height: "32px",
+                flexShrink: 0,
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-red-tint)",
+                color: "var(--ads-red)",
+              }}
+            >
               <AlertTriangle size={18} />
             </div>
-            <h3 className="custom-modal-title text-red-600">Delete Administrator</h3>
+            <h3 className="custom-modal-title" style={{ color: "var(--ads-red)" }}>
+              Delete Administrator
+            </h3>
           </div>
           <button
             type="button"
@@ -63,30 +77,61 @@ export const DeleteAdminModal: FC<DeleteAdminModalProps> = ({
             onClick={onClose}
             disabled={isSubmitting}
             title="Close dialog"
+            aria-label="Close dialog"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Body */}
-        <div className="custom-modal-body flex flex-col gap-2.5 py-4">
+        <div
+          className="custom-modal-body"
+          style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s3)" }}
+        >
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 font-medium">
+            <div
+              style={{
+                padding: "var(--ads-s3)",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                color: "var(--ads-red)",
+                background: "var(--ads-red-tint)",
+                borderRadius: "var(--ads-r-sm)",
+              }}
+            >
               {error}
             </div>
           )}
 
-          <p className="text-sm text-slate-700 leading-relaxed m-0">
-            Are you sure you want to delete administrator <strong className="text-slate-900 font-semibold">"{admin.name}"</strong>?
+          <p
+            style={{
+              margin: 0,
+              fontSize: "0.875rem",
+              lineHeight: 1.55,
+              color: "var(--ads-ink-secondary)",
+            }}
+          >
+            Are you sure you want to delete administrator{" "}
+            <strong style={{ color: "var(--ads-ink)", fontWeight: 600 }}>"{admin.name}"</strong>?
           </p>
 
-          <p className="text-xs text-slate-500 leading-normal m-0">
+          <p style={{ margin: 0, fontSize: "0.75rem", lineHeight: 1.5, color: "var(--ads-ink-tertiary)" }}>
             This action cannot be undone. This administrator will immediately lose access to the system.
           </p>
         </div>
 
         {/* Footer */}
-        <div className="modal-footer" style={{ display: "flex", gap: "0.85rem", justifyContent: "flex-end", marginTop: "1rem", paddingTop: "0.85rem", borderTop: "1px solid #E2E8F0" }}>
+        <div
+          className="modal-footer"
+          style={{
+            display: "flex",
+            gap: "var(--ads-s3)",
+            justifyContent: "flex-end",
+            marginTop: "var(--ads-s4)",
+            paddingTop: "var(--ads-s4)",
+            borderTop: "1px solid var(--ads-hairline)",
+          }}
+        >
           <button
             type="button"
             className="btn-outline-cancel"
@@ -104,24 +149,28 @@ export const DeleteAdminModal: FC<DeleteAdminModalProps> = ({
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "0.45rem",
-              backgroundColor: "#DC2626",
+              gap: "var(--ads-s2)",
+              backgroundColor: "var(--ads-red)",
               color: "#FFFFFF",
-              border: "none",
-              padding: "0.5rem 1.25rem",
-              borderRadius: "6px",
+              border: "1px solid transparent",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              fontFamily: "inherit",
               fontWeight: 600,
-              fontSize: "0.875rem",
+              fontSize: "0.8125rem",
+              letterSpacing: "-0.01em",
               cursor: "pointer",
+              transition:
+                "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             {isSubmitting ? (
               <>
-                <Loader2 size={15} className="animate-spin text-white" />
-                <span className="text-white">Deleting...</span>
+                <Loader2 size={15} className="animate-spin" style={{ color: "#FFFFFF" }} />
+                <span style={{ color: "#FFFFFF" }}>Deleting...</span>
               </>
             ) : (
-              <span className="text-white">Delete Admin</span>
+              <span style={{ color: "#FFFFFF" }}>Delete Admin</span>
             )}
           </button>
         </div>

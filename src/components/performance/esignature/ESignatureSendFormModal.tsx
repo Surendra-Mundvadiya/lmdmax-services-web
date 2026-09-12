@@ -381,15 +381,15 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
             alignItems: "center",
             gap: "0.5rem",
             padding: "0.65rem 0.95rem",
-            backgroundColor: "#FEF2F2",
-            border: "1px solid #FECACA",
-            borderRadius: "8px",
-            color: "#991B1B",
+            backgroundColor: "var(--ads-red-tint)",
+            border: "1px solid transparent",
+            borderRadius: "var(--ads-r-sm)",
+            color: "var(--ads-red)",
             fontSize: "0.775rem",
             fontWeight: 600,
           }}
         >
-          <AlertTriangle size={16} style={{ color: "#DC2626", flexShrink: 0 }} />
+          <AlertTriangle size={16} style={{ color: "var(--ads-red)", flexShrink: 0 }} />
           <span>{errorMessage}</span>
         </div>
       )}
@@ -452,14 +452,18 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                   type="button"
                   onClick={() => setIsBulkMode(!isBulkMode)}
                   style={{
-                    padding: "0.2rem 0.55rem",
-                    borderRadius: "5px",
+                    padding: "0.25rem 0.7rem",
+                    borderRadius: "var(--ads-r-pill)",
                     fontSize: "0.725rem",
                     fontWeight: 600,
-                    backgroundColor: isBulkMode ? "#2563EB" : "#F1F5F9",
-                    color: isBulkMode ? "#FFFFFF" : "#475569",
+                    letterSpacing: "-0.005em",
+                    backgroundColor: isBulkMode ? "var(--ads-blue)" : "rgba(0, 0, 0, 0.06)",
+                    color: isBulkMode ? "#FFFFFF" : "var(--ads-ink-secondary)",
                     border: "none",
                     cursor: "pointer",
+                    boxShadow: isBulkMode ? "0 1px 4px rgba(0, 113, 227, 0.3)" : "none",
+                    transition:
+                      "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 >
                   {isBulkMode ? "Bulk Mode: ON" : "Single Driver Mode"}
@@ -472,21 +476,21 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                       style={{
                         background: "none",
                         border: "none",
-                        color: "#2563EB",
+                        color: "var(--ads-blue)",
                         fontWeight: 600,
                         cursor: "pointer",
                       }}
                     >
                       Select All ({availableDrivers.length})
                     </button>
-                    <span style={{ color: "#CBD5E1" }}>•</span>
+                    <span style={{ color: "var(--ads-ink-quaternary)" }}>•</span>
                     <button
                       type="button"
                       onClick={handleClearDrivers}
                       style={{
                         background: "none",
                         border: "none",
-                        color: "#64748B",
+                        color: "var(--ads-ink-tertiary)",
                         fontWeight: 500,
                         cursor: "pointer",
                       }}
@@ -522,7 +526,7 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
             {/* Drivers Selection List */}
             <div className="esign-driver-pill-list">
               {availableDrivers.length === 0 ? (
-                <div style={{ gridColumn: "1 / -1", textAlign: "center", padding: "1.5rem 0", color: "#94A3B8", fontSize: "0.75rem" }}>
+                <div style={{ gridColumn: "1 / -1", textAlign: "center", padding: "1.5rem 0", color: "var(--ads-ink-quaternary)", fontSize: "0.75rem" }}>
                   No active drivers found matching search.
                 </div>
               ) : (
@@ -574,7 +578,7 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                 style={{
                   background: "none",
                   border: "none",
-                  color: "#2563EB",
+                  color: "var(--ads-blue)",
                   fontSize: "0.75rem",
                   fontWeight: 600,
                   cursor: "pointer",
@@ -595,9 +599,9 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                   alignItems: "center",
                   gap: "0.45rem",
                   padding: "0.5rem",
-                  backgroundColor: "#EFF6FF",
-                  borderRadius: "8px",
-                  border: "1px solid #BFDBFE",
+                  backgroundColor: "var(--ads-blue-tint)",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid transparent",
                 }}
               >
                 <input
@@ -647,8 +651,8 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
           <div className="esign-form-group">
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <label className="esign-form-label">Notes & Incident Statement</label>
-              <span style={{ fontSize: "0.7rem", color: "#64748B" }}>
-                Use <strong style={{ color: "#2563EB" }}>{"${name}"}</strong> for driver's name
+              <span style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)" }}>
+                Use <strong style={{ color: "var(--ads-blue)" }}>{"${name}"}</strong> for driver's name
               </span>
             </div>
             <textarea
@@ -672,7 +676,7 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                 style={{
                   background: "none",
                   border: "none",
-                  color: "#2563EB",
+                  color: "var(--ads-blue)",
                   fontSize: "0.75rem",
                   fontWeight: 600,
                   cursor: "pointer",
@@ -699,22 +703,22 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
               <div
                 onClick={() => fileInputRef.current?.click()}
                 style={{
-                  border: "2px dashed #CBD5E1",
-                  borderRadius: "10px",
+                  border: "2px dashed var(--ads-hairline-strong)",
+                  borderRadius: "var(--ads-r-md)",
                   padding: "1.25rem 1rem",
                   textAlign: "center",
                   cursor: "pointer",
-                  backgroundColor: "#F8FAFC",
+                  backgroundColor: "rgba(0, 0, 0, 0.025)",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
                   gap: "0.3rem",
                   fontSize: "0.775rem",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                 }}
               >
-                <Paperclip size={18} style={{ color: "#94A3B8" }} />
+                <Paperclip size={18} style={{ color: "var(--ads-ink-quaternary)" }} />
                 <span>Drop inspection photos, PDF incident reports, or click to upload</span>
               </div>
             ) : (
@@ -727,22 +731,32 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                       alignItems: "center",
                       justifyContent: "space-between",
                       padding: "0.4rem 0.65rem",
-                      borderRadius: "7px",
-                      backgroundColor: "#F1F5F9",
-                      border: "1px solid #E2E8F0",
+                      borderRadius: "var(--ads-r-xs)",
+                      backgroundColor: "rgba(0, 0, 0, 0.05)",
+                      border: "1px solid var(--ads-hairline)",
                       fontSize: "0.75rem",
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 0 }}>
-                      <FileText size={13} style={{ color: "#2563EB", flexShrink: 0 }} />
-                      <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", color: "#1E293B" }}>
+                      <FileText size={13} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
+                      <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", color: "var(--ads-ink)" }}>
                         {file.name}
                       </span>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleRemoveFile(idx)}
-                      style={{ background: "none", border: "none", color: "#94A3B8", cursor: "pointer", padding: "2px" }}
+                      aria-label={`Remove attachment ${file.name}`}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        color: "var(--ads-ink-tertiary)",
+                        cursor: "pointer",
+                        padding: "2px",
+                        borderRadius: "var(--ads-r-xs)",
+                        display: "flex",
+                        transition: "color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+                      }}
                     >
                       <Trash2 size={13} />
                     </button>
@@ -761,26 +775,26 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
           <div
             style={{
               padding: "1rem",
-              backgroundColor: "#EFF6FF",
-              border: "1px solid #BFDBFE",
-              borderRadius: "10px",
+              backgroundColor: "var(--ads-blue-tint)",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-md)",
             }}
           >
             <div
               style={{
-                fontSize: "0.75rem",
-                fontWeight: 700,
-                color: "#1E40AF",
-                textTransform: "capitalize",
-                letterSpacing: "0.02em",
+                fontSize: "0.6875rem",
+                fontWeight: 600,
+                color: "#0058B0",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
                 marginBottom: "0.35rem",
               }}
             >
               Select delivery channels
             </div>
-            <p style={{ margin: "0 0 0.85rem", fontSize: "0.775rem", color: "#475569" }}>
+            <p style={{ margin: "0 0 0.85rem", fontSize: "0.775rem", color: "var(--ads-ink-secondary)" }}>
               Choose how this digital form is delivered to{" "}
-              <strong style={{ color: "#0F172A" }}>
+              <strong style={{ color: "var(--ads-ink)" }}>
                 {selectedDriverIds.size} recipient driver{selectedDriverIds.size > 1 ? "s" : ""}
               </strong>
               :
@@ -793,12 +807,12 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                 }
                 className={`esign-channel-card ${channels.inapp ? "selected" : ""}`}
               >
-                <Smartphone size={18} style={{ color: "#2563EB" }} />
+                <Smartphone size={18} style={{ color: "var(--ads-blue)" }} />
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: "0.8125rem", color: "#0F172A" }}>
+                  <div style={{ fontWeight: 600, fontSize: "0.8125rem", color: "var(--ads-ink)" }}>
                     In-App Chat
                   </div>
-                  <div style={{ fontSize: "0.7rem", color: "#64748B" }}>
+                  <div style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)" }}>
                     Driver App Mobile Alert
                   </div>
                 </div>
@@ -810,12 +824,12 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                 }
                 className={`esign-channel-card ${channels.sms ? "selected" : ""}`}
               >
-                <MessageSquare size={18} style={{ color: "#059669" }} />
+                <MessageSquare size={18} style={{ color: "var(--ads-green)" }} />
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: "0.8125rem", color: "#0F172A" }}>
+                  <div style={{ fontWeight: 600, fontSize: "0.8125rem", color: "var(--ads-ink)" }}>
                     SMS Text
                   </div>
-                  <div style={{ fontSize: "0.7rem", color: "#64748B" }}>
+                  <div style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)" }}>
                     Direct Phone Text Message
                   </div>
                 </div>
@@ -827,12 +841,12 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                 }
                 className={`esign-channel-card ${channels.email ? "selected" : ""}`}
               >
-                <Mail size={18} style={{ color: "#7C3AED" }} />
+                <Mail size={18} style={{ color: "var(--ads-purple)" }} />
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: "0.8125rem", color: "#0F172A" }}>
+                  <div style={{ fontWeight: 600, fontSize: "0.8125rem", color: "var(--ads-ink)" }}>
                     Email
                   </div>
-                  <div style={{ fontSize: "0.7rem", color: "#64748B" }}>
+                  <div style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)" }}>
                     Driver Email Dispatch
                   </div>
                 </div>
@@ -846,12 +860,12 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
             <div
               style={{
                 padding: "0.75rem 1rem",
-                backgroundColor: "#F8FAFC",
-                border: "1px solid #E2E8F0",
-                borderRadius: "8px",
+                backgroundColor: "rgba(0, 0, 0, 0.025)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-sm)",
                 fontSize: "0.775rem",
                 fontFamily: "monospace",
-                color: "#334155",
+                color: "var(--ads-ink-secondary)",
                 whiteSpace: "pre-wrap",
                 lineHeight: 1.45,
               }}
@@ -917,7 +931,7 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                 style={{ display: "flex", alignItems: "center", gap: "0.35rem", padding: "0.45rem 0.75rem" }}
                 title="Insert preset document template"
               >
-                <Sparkles size={13} style={{ color: "#2563EB" }} />
+                <Sparkles size={13} style={{ color: "var(--ads-blue)" }} />
                 <span>Templates</span>
               </button>
 
@@ -929,10 +943,12 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                     top: "100%",
                     marginTop: "0.35rem",
                     width: "280px",
-                    backgroundColor: "#FFFFFF",
-                    borderRadius: "10px",
-                    boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)",
-                    border: "1px solid #E2E8F0",
+                    backgroundColor: "var(--ads-material-thick)",
+                    backdropFilter: "var(--ads-blur-lg)",
+                    WebkitBackdropFilter: "var(--ads-blur-lg)",
+                    borderRadius: "var(--ads-r-md)",
+                    boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+                    border: "1px solid var(--ads-hairline)",
                     padding: "0.4rem 0",
                     zIndex: 100,
                   }}
@@ -941,10 +957,10 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                     style={{
                       padding: "0.3rem 0.8rem",
                       fontSize: "0.6875rem",
-                      fontWeight: 700,
-                      color: "#94A3B8",
-                      textTransform: "capitalize",
-                      letterSpacing: "0.02em",
+                      fontWeight: 600,
+                      color: "var(--ads-ink-quaternary)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em",
                     }}
                   >
                     Preset templates
@@ -964,15 +980,15 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                         display: "flex",
                         flexDirection: "column",
                         gap: "0.15rem",
-                        borderBottom: "1px solid #F1F5F9",
+                        borderBottom: "1px solid var(--ads-hairline)",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#EFF6FF")}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)")}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                     >
-                      <span style={{ fontWeight: 600, fontSize: "0.775rem", color: "#1E293B" }}>
+                      <span style={{ fontWeight: 600, fontSize: "0.775rem", color: "var(--ads-ink)" }}>
                         {tmpl.name}
                       </span>
-                      <span style={{ fontSize: "0.6875rem", color: "#64748B", textTransform: "capitalize" }}>
+                      <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)", textTransform: "capitalize" }}>
                         {tmpl.type} • {tmpl.violations.join(", ")}
                       </span>
                     </button>
@@ -1060,7 +1076,7 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
 
           {/* Stepper Back navigation when on preview step */}
           {currentStep === 1 && (
-            <div style={{ marginTop: "1.5rem", paddingTop: "1rem", borderTop: "1px solid #E2E8F0" }}>
+            <div style={{ marginTop: "1.5rem", paddingTop: "1rem", borderTop: "1px solid var(--ads-hairline)" }}>
               <button
                 type="button"
                 onClick={() => setCurrentStep(0)}
@@ -1110,7 +1126,7 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                 style={{ padding: "0.35rem 0.65rem", fontSize: "0.75rem" }}
                 title="Insert preset document template"
               >
-                <Sparkles size={13} style={{ color: "#2563EB" }} />
+                <Sparkles size={13} style={{ color: "var(--ads-blue)" }} />
                 <span>Templates</span>
               </button>
 
@@ -1122,10 +1138,12 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                     top: "100%",
                     marginTop: "0.35rem",
                     width: "280px",
-                    backgroundColor: "#FFFFFF",
-                    borderRadius: "10px",
-                    boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)",
-                    border: "1px solid #E2E8F0",
+                    backgroundColor: "var(--ads-material-thick)",
+                    backdropFilter: "var(--ads-blur-lg)",
+                    WebkitBackdropFilter: "var(--ads-blur-lg)",
+                    borderRadius: "var(--ads-r-md)",
+                    boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+                    border: "1px solid var(--ads-hairline)",
                     padding: "0.4rem 0",
                     zIndex: 100,
                   }}
@@ -1134,10 +1152,10 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                     style={{
                       padding: "0.3rem 0.8rem",
                       fontSize: "0.6875rem",
-                      fontWeight: 700,
-                      color: "#94A3B8",
-                      textTransform: "capitalize",
-                      letterSpacing: "0.02em",
+                      fontWeight: 600,
+                      color: "var(--ads-ink-quaternary)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em",
                     }}
                   >
                     Preset templates
@@ -1157,15 +1175,15 @@ export const ESignatureSendFormModal: React.FC<ESignatureSendFormModalProps> = (
                         display: "flex",
                         flexDirection: "column",
                         gap: "0.15rem",
-                        borderBottom: "1px solid #F1F5F9",
+                        borderBottom: "1px solid var(--ads-hairline)",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#EFF6FF")}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)")}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                     >
-                      <span style={{ fontWeight: 600, fontSize: "0.775rem", color: "#1E293B" }}>
+                      <span style={{ fontWeight: 600, fontSize: "0.775rem", color: "var(--ads-ink)" }}>
                         {tmpl.name}
                       </span>
-                      <span style={{ fontSize: "0.6875rem", color: "#64748B", textTransform: "capitalize" }}>
+                      <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)", textTransform: "capitalize" }}>
                         {tmpl.type} • {tmpl.violations.join(", ")}
                       </span>
                     </button>

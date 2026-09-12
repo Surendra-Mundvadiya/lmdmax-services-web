@@ -36,25 +36,17 @@ export const RemindersSettingsPanel: FC<RemindersSettingsPanelProps> = ({ onNoti
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <BellRing size={20} className="text-blue-600" />
-            <span>Reminders</span>
-            <span className="badge-custom blue">Communications</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Configure automated SMS shift wave reminders, standby callout broadcasts, and AI voice replacement dialing
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Configure automated SMS shift wave reminders, standby callout broadcasts, and AI voice replacement dialing
+        </p>
       </div>
 
       {/* 1. SMS & Automated Driver Reminders */}
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <BellRing size={17} className="text-blue-600" />
+            <BellRing size={17} />
             <span>SMS Alerts & Shift Reminders</span>
           </h3>
         </div>
@@ -62,7 +54,7 @@ export const RemindersSettingsPanel: FC<RemindersSettingsPanelProps> = ({ onNoti
           Automated text notifications delivered directly to driver phone numbers prior to scheduled launch.
         </p>
 
-        <div className="flex flex-col gap-2.5">
+        <div className="settings-stack">
           <div className="settings-toggle-row">
             <div className="settings-toggle-info">
               <span className="settings-toggle-title">Pre-Shift Wave Reminder SMS</span>
@@ -130,7 +122,7 @@ export const RemindersSettingsPanel: FC<RemindersSettingsPanelProps> = ({ onNoti
           Automated phone assistant that receives incoming driver callouts, logs reasons, and dials standby replacements.
         </p>
 
-        <div className="flex flex-col gap-2.5">
+        <div className="settings-stack">
           <div className="settings-toggle-row">
             <div className="settings-toggle-info">
               <span className="settings-toggle-title">Enable AI Voice Assistant for Driver Callouts</span>

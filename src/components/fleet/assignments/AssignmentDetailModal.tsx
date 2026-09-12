@@ -189,28 +189,31 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.6)",
-        backdropFilter: "blur(4px)",
+        background: "rgba(0,0,0,0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         zIndex: 9999,
-        padding: "1rem",
+        padding: "var(--ads-s4)",
       }}
       onClick={onClose}
     >
       <div
         className="modal-card"
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "14px",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
           width: "100%",
           maxWidth: "860px",
           maxHeight: "92vh",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 25px 50px -12px rgba(15, 23, 42, 0.25)",
-          border: "1px solid #E2E8F0",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          border: "1px solid var(--ads-hairline)",
           overflow: "hidden",
         }}
         onClick={(e) => e.stopPropagation()}
@@ -218,12 +221,12 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
         {/* Header */}
         <div
           style={{
-            padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            backgroundColor: "#F8FAFC",
+            background: "transparent",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
@@ -231,20 +234,20 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
               style={{
                 width: "42px",
                 height: "42px",
-                borderRadius: "10px",
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                border: "1px solid #DBEAFE",
+                border: "1px solid var(--ads-blue-tint-strong)",
               }}
             >
               <Truck size={22} />
             </div>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <h2 style={{ fontSize: "1.125rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+                <h2 style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.019em" }}>
                   {vehicle.unit_number || vehicle.name || `Vehicle #${vehicle.id}`}
                 </h2>
                 <span
@@ -252,18 +255,18 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                     fontSize: "0.75rem",
                     fontWeight: 600,
                     padding: "0.15rem 0.5rem",
-                    borderRadius: "9999px",
-                    backgroundColor: "#EFF6FF",
-                    color: "#2563EB",
-                    border: "1px solid #DBEAFE",
+                    borderRadius: "var(--ads-r-pill)",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    color: "var(--ads-blue)",
+                    border: "1px solid var(--ads-blue-tint-strong)",
                   }}
                 >
                   {vehicle.make || "Ford"} {vehicle.model || "Transit"}
                 </span>
               </div>
-              <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.2rem 0 0 0" }}>
+              <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: "0.2rem 0 0 0" }}>
                 Driver Return Inspection & Vehicle Assignment Details • Date:{" "}
-                <span style={{ fontWeight: 600, color: "#1E293B" }}>{date}</span>
+                <span style={{ fontWeight: 600, color: "var(--ads-ink)" }}>{date}</span>
               </p>
             </div>
           </div>
@@ -276,14 +279,17 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                 display: "flex",
                 alignItems: "center",
                 gap: "0.4rem",
-                padding: "0.45rem 0.75rem",
+                padding: "9px 18px",
                 fontSize: "0.8125rem",
                 fontWeight: 600,
-                color: "#475569",
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #CBD5E1",
-                borderRadius: "8px",
+                letterSpacing: "-0.01em",
+                color: "var(--ads-ink)",
+                background: "var(--ads-material-thick)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-pill)",
+                boxShadow: "var(--ads-bevel)",
                 cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
               title="Print Driver Return Report"
             >
@@ -293,17 +299,19 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
             <button
               type="button"
               onClick={onClose}
+              aria-label="Close assignment details"
               style={{
                 width: "36px",
                 height: "36px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                borderRadius: "8px",
-                border: "1px solid #E2E8F0",
-                backgroundColor: "#FFFFFF",
-                color: "#64748B",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
+                background: "transparent",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               <X size={18} />
@@ -316,27 +324,27 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-            gap: "0.75rem",
-            padding: "1rem 1.5rem",
-            backgroundColor: "#FFFFFF",
-            borderBottom: "1px solid #F1F5F9",
+            gap: "var(--ads-s3)",
+            padding: "var(--ads-s4) var(--ads-s6)",
+            background: "transparent",
+            borderBottom: "1px solid var(--ads-hairline)",
           }}
         >
           {/* Driver */}
           <div
             style={{
-              padding: "0.75rem",
-              borderRadius: "8px",
-              backgroundColor: "#F8FAFC",
-              border: "1px solid #E2E8F0",
+              padding: "var(--ads-s3)",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-canvas)",
+              border: "1px solid var(--ads-hairline)",
             }}
           >
-            <span style={{ fontSize: "0.6875rem", fontWeight: 600, textTransform: "uppercase", color: "#64748B" }}>
+            <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)" }}>
               Assigned Driver
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "0.25rem" }}>
-              <User size={15} style={{ color: "#2563EB" }} />
-              <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>
+              <User size={15} style={{ color: "var(--ads-blue)" }} />
+              <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                 {vehicle.assigned_driver_name || "Unassigned"}
               </span>
             </div>
@@ -345,18 +353,18 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
           {/* Start Mileage */}
           <div
             style={{
-              padding: "0.75rem",
-              borderRadius: "8px",
-              backgroundColor: "#F8FAFC",
-              border: "1px solid #E2E8F0",
+              padding: "var(--ads-s3)",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-canvas)",
+              border: "1px solid var(--ads-hairline)",
             }}
           >
-            <span style={{ fontSize: "0.6875rem", fontWeight: 600, textTransform: "uppercase", color: "#64748B" }}>
+            <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)" }}>
               Start Odometer
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "0.25rem" }}>
-              <Gauge size={15} style={{ color: "#059669" }} />
-              <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>
+              <Gauge size={15} style={{ color: "var(--ads-green)" }} />
+              <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                 {typeof startMileage === "number" ? `${startMileage.toLocaleString()} mi` : startMileage}
               </span>
             </div>
@@ -365,18 +373,18 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
           {/* Return Mileage */}
           <div
             style={{
-              padding: "0.75rem",
-              borderRadius: "8px",
-              backgroundColor: "#F8FAFC",
-              border: "1px solid #E2E8F0",
+              padding: "var(--ads-s3)",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-canvas)",
+              border: "1px solid var(--ads-hairline)",
             }}
           >
-            <span style={{ fontSize: "0.6875rem", fontWeight: 600, textTransform: "uppercase", color: "#64748B" }}>
+            <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)" }}>
               Return Odometer
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "0.25rem" }}>
-              <Gauge size={15} style={{ color: "#2563EB" }} />
-              <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>
+              <Gauge size={15} style={{ color: "var(--ads-blue)" }} />
+              <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                 {typeof endMileage === "number" ? `${endMileage.toLocaleString()} mi` : endMileage}
               </span>
             </div>
@@ -385,18 +393,18 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
           {/* Gas Level */}
           <div
             style={{
-              padding: "0.75rem",
-              borderRadius: "8px",
-              backgroundColor: "#F8FAFC",
-              border: "1px solid #E2E8F0",
+              padding: "var(--ads-s3)",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-canvas)",
+              border: "1px solid var(--ads-hairline)",
             }}
           >
-            <span style={{ fontSize: "0.6875rem", fontWeight: 600, textTransform: "uppercase", color: "#64748B" }}>
+            <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)" }}>
               Return Fuel Gauge
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "0.25rem" }}>
-              <Fuel size={15} style={{ color: "#D97706" }} />
-              <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>
+              <Fuel size={15} style={{ color: "var(--ads-amber)" }} />
+              <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                 {formatGas(gasLevel)}
               </span>
             </div>
@@ -405,18 +413,18 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
           {/* Miles Traveled */}
           <div
             style={{
-              padding: "0.75rem",
-              borderRadius: "8px",
-              backgroundColor: "#EFF6FF",
-              border: "1px solid #DBEAFE",
+              padding: "var(--ads-s3)",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-blue-tint)",
+              border: "1px solid var(--ads-blue-tint-strong)",
             }}
           >
-            <span style={{ fontSize: "0.6875rem", fontWeight: 600, textTransform: "uppercase", color: "#2563EB" }}>
+            <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-blue)" }}>
               Miles Traveled
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "0.25rem" }}>
-              <Truck size={15} style={{ color: "#2563EB" }} />
-              <span style={{ fontSize: "0.875rem", fontWeight: 800, color: "#1D4ED8" }}>
+              <Truck size={15} style={{ color: "var(--ads-blue)" }} />
+              <span style={{ fontSize: "0.875rem", fontWeight: 800, color: "var(--ads-blue)" }}>
                 {milesTraveled !== "--" ? `${milesTraveled} miles` : "--"}
               </span>
             </div>
@@ -428,25 +436,26 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "0.5rem",
-            padding: "0.5rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            gap: "var(--ads-s2)",
+            padding: "var(--ads-s2) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
+            background: "transparent",
           }}
         >
           <button
             type="button"
             onClick={() => setActiveTab("summary")}
             style={{
-              padding: "0.45rem 0.9rem",
+              padding: "7px 15px",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              borderRadius: "6px",
-              border: "none",
+              letterSpacing: "-0.01em",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid transparent",
               cursor: "pointer",
-              backgroundColor: activeTab === "summary" ? "#2563EB" : "transparent",
-              color: activeTab === "summary" ? "#FFFFFF" : "#64748B",
-              transition: "all 0.15s ease",
+              background: activeTab === "summary" ? "var(--ads-blue)" : "transparent",
+              color: activeTab === "summary" ? "#FFFFFF" : "var(--ads-ink-tertiary)",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             DVIC Inspection Summary
@@ -455,15 +464,16 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
             type="button"
             onClick={() => setActiveTab("comparison")}
             style={{
-              padding: "0.45rem 0.9rem",
+              padding: "7px 15px",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              borderRadius: "6px",
-              border: "none",
+              letterSpacing: "-0.01em",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid transparent",
               cursor: "pointer",
-              backgroundColor: activeTab === "comparison" ? "#2563EB" : "transparent",
-              color: activeTab === "comparison" ? "#FFFFFF" : "#64748B",
-              transition: "all 0.15s ease",
+              background: activeTab === "comparison" ? "var(--ads-blue)" : "transparent",
+              color: activeTab === "comparison" ? "#FFFFFF" : "var(--ads-ink-tertiary)",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             Pre-Trip vs Return Comparison
@@ -472,15 +482,16 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
             type="button"
             onClick={() => setActiveTab("photos")}
             style={{
-              padding: "0.45rem 0.9rem",
+              padding: "7px 15px",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              borderRadius: "6px",
-              border: "none",
+              letterSpacing: "-0.01em",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid transparent",
               cursor: "pointer",
-              backgroundColor: activeTab === "photos" ? "#2563EB" : "transparent",
-              color: activeTab === "photos" ? "#FFFFFF" : "#64748B",
-              transition: "all 0.15s ease",
+              background: activeTab === "photos" ? "var(--ads-blue)" : "transparent",
+              color: activeTab === "photos" ? "#FFFFFF" : "var(--ads-ink-tertiary)",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             4-Side Inspection Photos
@@ -492,7 +503,7 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
           style={{
             flex: 1,
             overflowY: "auto",
-            padding: "1.25rem 1.5rem",
+            padding: "var(--ads-s6)",
             minHeight: "360px",
           }}
         >
@@ -502,24 +513,28 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
               {/* Vehicle Specification Grid */}
               <div
                 style={{
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "10px",
-                  padding: "1rem 1.25rem",
-                  backgroundColor: "#FFFFFF",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-md)",
+                  padding: "var(--ads-s4) var(--ads-s5)",
+                  background: "var(--ads-material-thick)",
+                  backdropFilter: "var(--ads-blur-md)",
+                  WebkitBackdropFilter: "var(--ads-blur-md)",
+                  boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
                 }}
               >
                 <h3
                   style={{
                     fontSize: "0.875rem",
                     fontWeight: 700,
-                    color: "#1E293B",
+                    color: "var(--ads-ink)",
+                    letterSpacing: "-0.01em",
                     margin: "0 0 0.75rem 0",
                     display: "flex",
                     alignItems: "center",
                     gap: "0.4rem",
                   }}
                 >
-                  <Truck size={16} style={{ color: "#2563EB" }} />
+                  <Truck size={16} style={{ color: "var(--ads-blue)" }} />
                   Vehicle Registry Details
                 </h3>
                 <div
@@ -530,26 +545,26 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                   }}
                 >
                   <div>
-                    <span style={{ fontSize: "0.75rem", color: "#64748B" }}>VIN Number</span>
-                    <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B", fontFamily: "monospace" }}>
+                    <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>VIN Number</span>
+                    <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)", fontFamily: "monospace" }}>
                       {vehicle.vin || "N/A"}
                     </p>
                   </div>
                   <div>
-                    <span style={{ fontSize: "0.75rem", color: "#64748B" }}>License Plate</span>
-                    <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                    <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>License Plate</span>
+                    <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                       {vehicle.license_plate || "N/A"} {vehicle.registered_state ? `(${vehicle.registered_state})` : ""}
                     </p>
                   </div>
                   <div>
-                    <span style={{ fontSize: "0.75rem", color: "#64748B" }}>Make & Model</span>
-                    <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                    <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>Make & Model</span>
+                    <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                       {vehicle.make || "Ford"} {vehicle.model || "Transit"} {vehicle.year || ""}
                     </p>
                   </div>
                   <div>
-                    <span style={{ fontSize: "0.75rem", color: "#64748B" }}>Gas Card ID</span>
-                    <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                    <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>Gas Card ID</span>
+                    <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                       {vehicle.gas_card_id || vehicle.gas_card_number || "Default Fleet Card"}
                     </p>
                   </div>
@@ -559,24 +574,28 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
               {/* Status Checklist Card */}
               <div
                 style={{
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "10px",
-                  padding: "1rem 1.25rem",
-                  backgroundColor: "#FFFFFF",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-md)",
+                  padding: "var(--ads-s4) var(--ads-s5)",
+                  background: "var(--ads-material-thick)",
+                  backdropFilter: "var(--ads-blur-md)",
+                  WebkitBackdropFilter: "var(--ads-blur-md)",
+                  boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
                 }}
               >
                 <h3
                   style={{
                     fontSize: "0.875rem",
                     fontWeight: 700,
-                    color: "#1E293B",
+                    color: "var(--ads-ink)",
+                    letterSpacing: "-0.01em",
                     margin: "0 0 0.75rem 0",
                     display: "flex",
                     alignItems: "center",
                     gap: "0.4rem",
                   }}
                 >
-                  <ShieldCheck size={16} style={{ color: "#059669" }} />
+                  <ShieldCheck size={16} style={{ color: "var(--ads-green)" }} />
                   Driver Return Inspection Results
                 </h3>
 
@@ -588,19 +607,19 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        padding: "0.5rem 0.75rem",
-                        borderRadius: "6px",
-                        backgroundColor: item.isPostWarning ? "#FFFBEB" : "#F8FAFC",
-                        border: `1px solid ${item.isPostWarning ? "#FDE68A" : "#F1F5F9"}`,
+                        padding: "var(--ads-s2) var(--ads-s3)",
+                        borderRadius: "var(--ads-r-xs)",
+                        backgroundColor: item.isPostWarning ? "var(--ads-amber-tint)" : "var(--ads-canvas)",
+                        border: `1px solid ${item.isPostWarning ? "var(--ads-amber-tint)" : "var(--ads-hairline)"}`,
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                         {item.isPostWarning ? (
-                          <AlertTriangle size={15} style={{ color: "#D97706" }} />
+                          <AlertTriangle size={15} style={{ color: "var(--ads-amber)" }} />
                         ) : (
-                          <CheckCircle2 size={15} style={{ color: "#059669" }} />
+                          <CheckCircle2 size={15} style={{ color: "var(--ads-green)" }} />
                         )}
-                        <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                        <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                           {item.label}
                         </span>
                       </div>
@@ -608,7 +627,7 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                         style={{
                           fontSize: "0.75rem",
                           fontWeight: 700,
-                          color: item.isPostWarning ? "#B45309" : "#059669",
+                          color: item.isPostWarning ? "var(--ads-amber)" : "var(--ads-green)",
                         }}
                       >
                         {item.postVal}
@@ -622,22 +641,22 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
               {(formData.pre_comments || formData.post_comments) && (
                 <div
                   style={{
-                    border: "1px solid #E2E8F0",
-                    borderRadius: "10px",
-                    padding: "1rem 1.25rem",
-                    backgroundColor: "#F8FAFC",
+                    border: "1px solid var(--ads-hairline)",
+                    borderRadius: "var(--ads-r-md)",
+                    padding: "var(--ads-s4) var(--ads-s5)",
+                    backgroundColor: "var(--ads-canvas)",
                   }}
                 >
-                  <h4 style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B", margin: "0 0 0.5rem 0" }}>
+                  <h4 style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)", margin: "0 0 0.5rem 0" }}>
                     Driver & Inspection Notes
                   </h4>
                   {formData.pre_comments && (
-                    <p style={{ fontSize: "0.8125rem", color: "#475569", margin: "0 0 0.35rem 0" }}>
+                    <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-secondary)", margin: "0 0 0.35rem 0" }}>
                       <strong>Pre-Trip Note:</strong> {formData.pre_comments}
                     </p>
                   )}
                   {formData.post_comments && (
-                    <p style={{ fontSize: "0.8125rem", color: "#475569", margin: 0 }}>
+                    <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-secondary)", margin: 0 }}>
                       <strong>Return Note:</strong> {formData.post_comments}
                     </p>
                   )}
@@ -648,18 +667,18 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
 
           {/* TAB 2: PRE-TRIP VS POST-TRIP COMPARISON */}
           {activeTab === "comparison" && (
-            <div style={{ border: "1px solid #E2E8F0", borderRadius: "10px", overflow: "hidden" }}>
+            <div style={{ border: "1px solid var(--ads-hairline)", borderRadius: "var(--ads-r-md)", overflow: "hidden", background: "var(--ads-material-thick)", backdropFilter: "var(--ads-blur-md)", WebkitBackdropFilter: "var(--ads-blur-md)", boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
                 <thead>
-                  <tr style={{ backgroundColor: "#F8FAFC", borderBottom: "1px solid #E2E8F0" }}>
-                    <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
-                      INSPECTION ITEM / QUESTION
+                  <tr>
+                    <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
+                      Inspection Item / Question
                     </th>
-                    <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#2563EB" }}>
-                      PRE-TRIP (MORNING)
+                    <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
+                      Pre-Trip (Morning)
                     </th>
-                    <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#059669" }}>
-                      DRIVER RETURN (EOD)
+                    <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
+                      Driver Return (EOD)
                     </th>
                   </tr>
                 </thead>
@@ -668,20 +687,27 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                     <tr
                       key={item.id}
                       style={{
-                        borderBottom: idx < comparisonItems.length - 1 ? "1px solid #F1F5F9" : "none",
-                        backgroundColor: item.isPostWarning ? "#FFFDF5" : "#FFFFFF",
+                        borderBottom: idx < comparisonItems.length - 1 ? "1px solid var(--ads-hairline)" : "none",
+                        background: item.isPostWarning ? "var(--ads-amber-tint)" : "transparent",
+                        transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "rgba(0,113,227,0.045)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = item.isPostWarning ? "var(--ads-amber-tint)" : "transparent";
                       }}
                     >
-                      <td style={{ padding: "0.75rem 1rem", fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                      <td style={{ padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                         {item.label}
                       </td>
-                      <td style={{ padding: "0.75rem 1rem", fontSize: "0.8125rem" }}>
+                      <td style={{ padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.8125rem" }}>
                         <span
                           style={{
                             display: "inline-flex",
                             alignItems: "center",
                             gap: "0.35rem",
-                            color: item.isPreWarning ? "#B45309" : "#059669",
+                            color: item.isPreWarning ? "var(--ads-amber)" : "var(--ads-green)",
                             fontWeight: 600,
                           }}
                         >
@@ -689,13 +715,13 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                           {item.preVal}
                         </span>
                       </td>
-                      <td style={{ padding: "0.75rem 1rem", fontSize: "0.8125rem" }}>
+                      <td style={{ padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.8125rem" }}>
                         <span
                           style={{
                             display: "inline-flex",
                             alignItems: "center",
                             gap: "0.35rem",
-                            color: item.isPostWarning ? "#B45309" : "#059669",
+                            color: item.isPostWarning ? "var(--ads-amber)" : "var(--ads-green)",
                             fontWeight: 700,
                           }}
                         >
@@ -736,17 +762,20 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                     <div
                       key={side.key}
                       style={{
-                        border: "1px solid #E2E8F0",
-                        borderRadius: "10px",
-                        padding: "0.75rem",
-                        backgroundColor: "#FFFFFF",
+                        border: "1px solid var(--ads-hairline)",
+                        borderRadius: "var(--ads-r-md)",
+                        padding: "var(--ads-s3)",
+                        background: "var(--ads-material-thick)",
+                        backdropFilter: "var(--ads-blur-md)",
+                        WebkitBackdropFilter: "var(--ads-blur-md)",
+                        boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
                         textAlign: "center",
                       }}
                     >
-                      <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#1E293B", marginBottom: "0.5rem" }}>
+                      <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink)", marginBottom: "0.5rem" }}>
                         {side.title}
                       </span>
                       {photoUrl ? (
@@ -757,8 +786,8 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                             width: "100%",
                             height: "130px",
                             objectFit: "cover",
-                            borderRadius: "6px",
-                            border: "1px solid #CBD5E1",
+                            borderRadius: "var(--ads-r-xs)",
+                            border: "1px solid var(--ads-hairline-strong)",
                           }}
                         />
                       ) : (
@@ -766,14 +795,14 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
                           style={{
                             width: "100%",
                             height: "130px",
-                            backgroundColor: "#F8FAFC",
-                            border: "1px dashed #CBD5E1",
-                            borderRadius: "6px",
+                            backgroundColor: "var(--ads-canvas)",
+                            border: "1px dashed var(--ads-hairline-strong)",
+                            borderRadius: "var(--ads-r-xs)",
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
                             justifyContent: "center",
-                            color: "#94A3B8",
+                            color: "var(--ads-ink-quaternary)",
                             gap: "0.35rem",
                           }}
                         >
@@ -792,27 +821,28 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
         {/* Footer Actions */}
         <div
           style={{
-            padding: "1rem 1.5rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            padding: "var(--ads-s4) var(--ads-s6)",
+            borderTop: "1px solid var(--ads-hairline)",
+            background: "transparent",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: "var(--ads-s3)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-            <span style={{ fontSize: "0.75rem", color: "#64748B" }}>
+            <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
               Inspection Form Status:
             </span>
             <span
               style={{
                 fontSize: "0.75rem",
                 fontWeight: 700,
-                color: formData.eod_checked_out ? "#059669" : "#2563EB",
-                backgroundColor: formData.eod_checked_out ? "#ECFDF5" : "#EFF6FF",
+                color: formData.eod_checked_out ? "var(--ads-green)" : "var(--ads-blue)",
+                backgroundColor: formData.eod_checked_out ? "var(--ads-green-tint)" : "var(--ads-blue-tint)",
                 padding: "0.2rem 0.5rem",
-                borderRadius: "4px",
-                border: `1px solid ${formData.eod_checked_out ? "#A7F3D0" : "#DBEAFE"}`,
+                borderRadius: "var(--ads-r-pill)",
+                border: `1px solid ${formData.eod_checked_out ? "var(--ads-green-tint)" : "var(--ads-blue-tint-strong)"}`,
               }}
             >
               {formData.eod_checked_out ? "EOD Checked Out" : "Inspection Active"}
@@ -823,15 +853,16 @@ export const AssignmentDetailModal: FC<AssignmentDetailModalProps> = ({
             type="button"
             onClick={onClose}
             style={{
-              padding: "0.55rem 1.25rem",
+              padding: "9px 18px",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              backgroundColor: "#2563EB",
+              letterSpacing: "-0.01em",
+              background: "var(--ads-blue)",
               color: "#FFFFFF",
-              border: "none",
-              borderRadius: "8px",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-pill)",
               cursor: "pointer",
-              boxShadow: "0 2px 4px rgba(37, 99, 235, 0.2)",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             Close Summary

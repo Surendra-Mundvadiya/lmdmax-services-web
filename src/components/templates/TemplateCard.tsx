@@ -105,6 +105,7 @@ export const TemplateCard: FC<TemplateCardProps> = ({
             type="button"
             className="template-icon-btn edit-btn"
             onClick={() => onEdit(template)}
+            aria-label={`Edit template: ${template.title}`}
             title="Edit Template"
           >
             <Edit3 size={15} />
@@ -115,6 +116,7 @@ export const TemplateCard: FC<TemplateCardProps> = ({
             type="button"
             className="template-icon-btn delete-btn"
             onClick={() => onDelete(template)}
+            aria-label={`Delete template: ${template.title}`}
             title="Delete Template"
           >
             <Trash2 size={15} />

@@ -229,10 +229,10 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
         display: "inline-flex",
         alignItems: "center",
         gap: "0.25rem",
-        backgroundColor: "#F8FAFC",
+        backgroundColor: "rgba(0, 0, 0, 0.04)",
         padding: isSmall ? "0.2rem 0.3rem" : "0.25rem 0.4rem",
-        borderRadius: "7px",
-        border: "1px solid #E2E8F0",
+        borderRadius: "var(--ads-r-xs)",
+        border: "1px solid var(--ads-hairline)",
         position: "relative",
         boxSizing: "border-box",
         ...style,
@@ -248,17 +248,18 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: "5px",
-          border: "1px solid #CBD5E1",
-          backgroundColor: "#FFFFFF",
-          color: "#475569",
+          borderRadius: "var(--ads-r-xs)",
+          border: "1px solid var(--ads-hairline)",
+          backgroundColor: "var(--ads-material-thick)",
+          color: "var(--ads-ink-secondary)",
           cursor: "pointer",
           padding: 0,
-          transition: "all 0.15s ease",
+          transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
         }}
         title="Previous Day"
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
+        aria-label="Previous day"
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-white)")}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-material-thick)")}
       >
         <ChevronLeft size={isSmall ? 14 : 16} />
       </button>
@@ -272,27 +273,27 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
           display: "inline-flex",
           alignItems: "center",
           gap: "0.4rem",
-          backgroundColor: isCalendarOpen ? "#DBEAFE" : "#EFF6FF",
-          border: "1px solid #BFDBFE",
-          borderRadius: "5px",
+          backgroundColor: isCalendarOpen ? "var(--ads-blue-tint-strong)" : "var(--ads-blue-tint)",
+          border: "1px solid var(--ads-blue-tint-strong)",
+          borderRadius: "var(--ads-r-xs)",
           padding: isSmall ? "0.2rem 0.65rem" : "0.3rem 0.8rem",
           cursor: "pointer",
-          color: "#1D4ED8",
+          color: "var(--ads-blue)",
           fontSize: btnFontSize,
           fontWeight: 700,
           whiteSpace: "nowrap",
-          transition: "all 0.15s ease",
+          transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
         }}
         title="Click to open calendar and select any date"
       >
-        <CalendarIcon size={isSmall ? 13 : 15} style={{ color: "#2563EB", flexShrink: 0 }} />
+        <CalendarIcon size={isSmall ? 13 : 15} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
         <span>{formattedDateTitle}</span>
         <ChevronDown
           size={isSmall ? 12 : 14}
           style={{
-            color: "#2563EB",
+            color: "var(--ads-blue)",
             transform: isCalendarOpen ? "rotate(180deg)" : "none",
-            transition: "transform 0.15s ease",
+            transition: "transform var(--ads-dur-fast) var(--ads-ease)",
             flexShrink: 0,
           }}
         />
@@ -308,17 +309,18 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: "5px",
-          border: "1px solid #CBD5E1",
-          backgroundColor: "#FFFFFF",
-          color: "#475569",
+          borderRadius: "var(--ads-r-xs)",
+          border: "1px solid var(--ads-hairline)",
+          backgroundColor: "var(--ads-material-thick)",
+          color: "var(--ads-ink-secondary)",
           cursor: "pointer",
           padding: 0,
-          transition: "all 0.15s ease",
+          transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
         }}
         title="Next Day"
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
+        aria-label="Next day"
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-white)")}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-material-thick)")}
       >
         <ChevronRight size={isSmall ? 14 : 16} />
       </button>
@@ -333,17 +335,17 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
             padding: isSmall ? "0.2rem 0.55rem" : "0.3rem 0.7rem",
             fontSize: isSmall ? "0.75rem" : "0.8125rem",
             fontWeight: 600,
-            backgroundColor: "#2563EB",
+            backgroundColor: "var(--ads-blue)",
             color: "#FFFFFF",
             border: "none",
-            borderRadius: "5px",
+            borderRadius: "var(--ads-r-pill)",
             cursor: "pointer",
             whiteSpace: "nowrap",
-            transition: "all 0.15s ease",
+            transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
           }}
           title="Jump to Today"
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue-hover)")}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue)")}
         >
           Today
         </button>
@@ -357,14 +359,17 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
             top: "calc(100% + 6px)",
             ...(align === "right" ? { right: 0 } : { left: 0 }),
             zIndex: 2000,
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #CBD5E1",
-            borderRadius: "10px",
-            boxShadow:
-              "0 12px 28px -4px rgba(0, 0, 0, 0.16), 0 8px 10px -4px rgba(0, 0, 0, 0.08)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-lg)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-lg)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
             padding: "0.75rem",
             width: "280px",
+            maxWidth: "calc(100vw - 32px)",
             boxSizing: "border-box",
+            animation: "ads-sheet-in var(--ads-dur) var(--ads-ease)",
             userSelect: "none",
           }}
           onClick={(e) => e.stopPropagation()}
@@ -388,13 +393,14 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                borderRadius: "5px",
-                border: "1px solid #E2E8F0",
-                backgroundColor: "#F8FAFC",
-                color: "#475569",
+                borderRadius: "var(--ads-r-xs)",
+                border: "1px solid var(--ads-hairline)",
+                backgroundColor: "rgba(0, 0, 0, 0.04)",
+                color: "var(--ads-ink-secondary)",
                 cursor: "pointer",
               }}
               title="Previous Month"
+              aria-label="Previous month"
             >
               <ChevronLeft size={14} />
             </button>
@@ -406,10 +412,10 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                 style={{
                   fontSize: "0.8125rem",
                   fontWeight: 600,
-                  color: "#1E293B",
-                  backgroundColor: "#F1F5F9",
-                  border: "1px solid #CBD5E1",
-                  borderRadius: "5px",
+                  color: "var(--ads-ink)",
+                  backgroundColor: "rgba(0, 0, 0, 0.05)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-xs)",
                   padding: "0.2rem 0.4rem",
                   cursor: "pointer",
                   outline: "none",
@@ -428,10 +434,10 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                 style={{
                   fontSize: "0.8125rem",
                   fontWeight: 600,
-                  color: "#1E293B",
-                  backgroundColor: "#F1F5F9",
-                  border: "1px solid #CBD5E1",
-                  borderRadius: "5px",
+                  color: "var(--ads-ink)",
+                  backgroundColor: "rgba(0, 0, 0, 0.05)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-xs)",
                   padding: "0.2rem 0.4rem",
                   cursor: "pointer",
                   outline: "none",
@@ -454,13 +460,14 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                borderRadius: "5px",
-                border: "1px solid #E2E8F0",
-                backgroundColor: "#F8FAFC",
-                color: "#475569",
+                borderRadius: "var(--ads-r-xs)",
+                border: "1px solid var(--ads-hairline)",
+                backgroundColor: "rgba(0, 0, 0, 0.04)",
+                color: "var(--ads-ink-secondary)",
                 cursor: "pointer",
               }}
               title="Next Month"
+              aria-label="Next month"
             >
               <ChevronRight size={14} />
             </button>
@@ -474,7 +481,7 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
               textAlign: "center",
               fontSize: "0.6875rem",
               fontWeight: 700,
-              color: "#94A3B8",
+              color: "var(--ads-ink-quaternary)",
               marginBottom: "0.35rem",
             }}
           >
@@ -508,13 +515,13 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "0.75rem",
-                    color: "#CBD5E1",
-                    borderRadius: "4px",
+                    color: "var(--ads-hairline-strong)",
+                    borderRadius: "var(--ads-r-xs)",
                     border: "none",
                     background: "transparent",
                     cursor: "pointer",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F8FAFC")}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.04)")}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                   title="Previous month day"
                 >
@@ -543,23 +550,23 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                     justifyContent: "center",
                     fontSize: "0.75rem",
                     fontWeight: isSelected ? 700 : isTodayDay ? 700 : 500,
-                    color: isSelected ? "#FFFFFF" : isTodayDay ? "#2563EB" : "#1E293B",
+                    color: isSelected ? "#FFFFFF" : isTodayDay ? "var(--ads-blue)" : "var(--ads-ink)",
                     backgroundColor: isSelected
-                      ? "#2563EB"
+                      ? "var(--ads-blue)"
                       : isTodayDay
-                      ? "#EFF6FF"
+                      ? "var(--ads-blue-tint)"
                       : "transparent",
-                    border: isTodayDay && !isSelected ? "1px solid #93C5FD" : "none",
-                    borderRadius: "5px",
+                    border: isTodayDay && !isSelected ? "1px solid var(--ads-blue-tint-strong)" : "none",
+                    borderRadius: "var(--ads-r-xs)",
                     cursor: "pointer",
-                    transition: "all 0.1s ease",
+                    transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
                   }}
                   onMouseEnter={(e) => {
-                    if (!isSelected) e.currentTarget.style.backgroundColor = "#F1F5F9";
+                    if (!isSelected) e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
                   }}
                   onMouseLeave={(e) => {
                     if (!isSelected) {
-                      e.currentTarget.style.backgroundColor = isTodayDay ? "#EFF6FF" : "transparent";
+                      e.currentTarget.style.backgroundColor = isTodayDay ? "var(--ads-blue-tint)" : "transparent";
                     }
                   }}
                 >
@@ -583,13 +590,13 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "0.75rem",
-                    color: "#CBD5E1",
-                    borderRadius: "4px",
+                    color: "var(--ads-hairline-strong)",
+                    borderRadius: "var(--ads-r-xs)",
                     border: "none",
                     background: "transparent",
                     cursor: "pointer",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F8FAFC")}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.04)")}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                   title="Next month day"
                 >
@@ -607,7 +614,7 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
               justifyContent: "space-between",
               marginTop: "0.6rem",
               paddingTop: "0.5rem",
-              borderTop: "1px solid #F1F5F9",
+              borderTop: "1px solid var(--ads-hairline)",
             }}
           >
             <div style={{ display: "flex", gap: "0.3rem" }}>
@@ -617,12 +624,13 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                 style={{
                   fontSize: "0.6875rem",
                   fontWeight: 600,
-                  color: "#475569",
-                  backgroundColor: "#F1F5F9",
+                  color: "var(--ads-ink-secondary)",
+                  backgroundColor: "rgba(0, 0, 0, 0.05)",
                   border: "none",
-                  borderRadius: "4px",
-                  padding: "0.2rem 0.45rem",
+                  borderRadius: "var(--ads-r-pill)",
+                  padding: "3px 9px",
                   cursor: "pointer",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 Yesterday
@@ -633,12 +641,13 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                 style={{
                   fontSize: "0.6875rem",
                   fontWeight: 600,
-                  color: "#2563EB",
-                  backgroundColor: "#EFF6FF",
+                  color: "var(--ads-blue)",
+                  backgroundColor: "var(--ads-blue-tint)",
                   border: "none",
-                  borderRadius: "4px",
-                  padding: "0.2rem 0.45rem",
+                  borderRadius: "var(--ads-r-pill)",
+                  padding: "3px 9px",
                   cursor: "pointer",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 Today
@@ -649,12 +658,13 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
                 style={{
                   fontSize: "0.6875rem",
                   fontWeight: 600,
-                  color: "#475569",
-                  backgroundColor: "#F1F5F9",
+                  color: "var(--ads-ink-secondary)",
+                  backgroundColor: "rgba(0, 0, 0, 0.05)",
                   border: "none",
-                  borderRadius: "4px",
-                  padding: "0.2rem 0.45rem",
+                  borderRadius: "var(--ads-r-pill)",
+                  padding: "3px 9px",
                   cursor: "pointer",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 Tomorrow
@@ -667,15 +677,16 @@ export const AppDateNavigator: FC<AppDateNavigatorProps> = ({
               style={{
                 fontSize: "0.6875rem",
                 fontWeight: 600,
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 backgroundColor: "transparent",
                 border: "none",
-                borderRadius: "4px",
-                padding: "0.2rem 0.45rem",
+                borderRadius: "var(--ads-r-pill)",
+                padding: "3px 9px",
                 cursor: "pointer",
+                transition: "color var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#1E293B")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#64748B")}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--ads-ink)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ads-ink-tertiary)")}
             >
               Close
             </button>

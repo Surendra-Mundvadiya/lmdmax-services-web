@@ -218,7 +218,10 @@ export const ScorecardThresholdView: FC<ScorecardThresholdViewProps> = ({
       {/* Top Header & Actions */}
       <div className="threshold-view-header">
         <div>
-          <h3 className="threshold-view-title flex items-center gap-2">
+          <h3
+            className="threshold-view-title"
+            style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}
+          >
             <span>Set Metrics for Weekly Scorecard</span>
             <span className="badge-custom blue">Live API</span>
           </h3>
@@ -265,17 +268,16 @@ export const ScorecardThresholdView: FC<ScorecardThresholdViewProps> = ({
           onClick={() => setIsModalOpen(true)}
           title="Change how drivers receive scorecards"
         >
-          <span className="font-semibold text-slate-800">
+          <span style={{ fontWeight: 600, color: "var(--ads-ink)" }}>
             {SEND_OPTION_LABELS[sendType] || "Scorecard by Image"}
           </span>
-          <ChevronDown size={16} className="text-slate-500" />
+          <ChevronDown size={16} style={{ color: "var(--ads-ink-tertiary)" }} />
         </button>
       </div>
 
       {/* Color Code Legend */}
       <ColorLegendBar
         type={sendType === "scorecard_lmd" ? "scorecard_report" : "lmd_report"}
-        className="my-3"
       />
 
       {/* Metrics List */}
@@ -308,9 +310,17 @@ export const ScorecardThresholdView: FC<ScorecardThresholdViewProps> = ({
         </div>
       ) : (
         <div className="threshold-empty-state">
-          <AlertCircle size={32} className="text-slate-400 mb-2" />
-          <h4 className="text-sm font-semibold text-slate-700">No Metrics Available</h4>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm text-center">
+          <AlertCircle size={32} style={{ color: "var(--ads-ink-quaternary)", marginBottom: "var(--ads-s2)" }} />
+          <h4 style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink)" }}>No Metrics Available</h4>
+          <p
+            style={{
+              margin: "var(--ads-s1) 0 0",
+              maxWidth: "24rem",
+              textAlign: "center",
+              fontSize: "0.8125rem",
+              color: "var(--ads-ink-tertiary)",
+            }}
+          >
             Please upload the Weekly Scorecard report to generate and configure metric thresholds.
           </p>
         </div>

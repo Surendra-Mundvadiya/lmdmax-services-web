@@ -20,14 +20,16 @@ export const Tier3ScorecardMatrix: FC<Props> = ({ scorecard, isLoading }) => {
   // Great -> green
   // Fair -> orange
   // Poor -> red
+  // Mirrors the --ads-* semantic tokens; literal values so SVG stroke
+  // presentation attributes resolve in every engine.
   const getTierColor = (tier?: string) => {
     const t = (tier || "").toLowerCase();
-    if (t.includes("plus")) return "#7C3AED"; // Purple
-    if (t.includes("fantastic")) return "#2563EB"; // Blue
-    if (t.includes("great")) return "#059669"; // Green
-    if (t.includes("fair")) return "#EA580C"; // Orange
-    if (t.includes("poor")) return "#DC2626"; // Red
-    return "#2563EB";
+    if (t.includes("plus")) return "#6E4FC4";
+    if (t.includes("fantastic")) return "#0071E3";
+    if (t.includes("great")) return "#248A3D";
+    if (t.includes("fair")) return "#B25000";
+    if (t.includes("poor")) return "#D70015";
+    return "#0071E3";
   };
 
   const getPillClass = (tier?: string) => {
@@ -113,9 +115,9 @@ export const Tier3ScorecardMatrix: FC<Props> = ({ scorecard, isLoading }) => {
                       strokeDashoffset={strokeDashoffset}
                       transform={`rotate(-90 ${size / 2} ${size / 2})`}
                       style={{
-                        transition: "all 0.2s ease",
+                        transition: "stroke-width var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
                         cursor: "pointer",
-                        opacity: hoveredIdx !== null && !isHovered ? 0.45 : 1,
+                        opacity: hoveredIdx !== null && !isHovered ? 0.4 : 1,
                       }}
                       onMouseEnter={() => setHoveredIdx(idx)}
                       onMouseLeave={() => setHoveredIdx(null)}
@@ -142,10 +144,10 @@ export const Tier3ScorecardMatrix: FC<Props> = ({ scorecard, isLoading }) => {
                 <span
                   style={{
                     fontSize: "1.25rem",
-                    fontWeight: 800,
+                    fontWeight: 700,
                     color: getTierColor(overallStanding),
                     lineHeight: 1.1,
-                    letterSpacing: "-0.01em",
+                    letterSpacing: "-0.022em",
                   }}
                 >
                   {isLoading ? "..." : overallStanding}
@@ -153,8 +155,8 @@ export const Tier3ScorecardMatrix: FC<Props> = ({ scorecard, isLoading }) => {
                 <span
                   style={{
                     fontSize: "0.625rem",
-                    fontWeight: 800,
-                    color: "#64748B",
+                    fontWeight: 600,
+                    color: "var(--ads-ink-quaternary)",
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
                     marginTop: "0.25rem",
@@ -169,11 +171,11 @@ export const Tier3ScorecardMatrix: FC<Props> = ({ scorecard, isLoading }) => {
               style={{
                 marginTop: "0.45rem",
                 fontSize: "0.725rem",
-                color: "#475569",
-                fontWeight: 700,
-                backgroundColor: "#F1F5F9",
-                padding: "0.15rem 0.6rem",
-                borderRadius: "9999px",
+                color: "var(--ads-ink-secondary)",
+                fontWeight: 600,
+                backgroundColor: "var(--uop-wash-strong)",
+                padding: "0.2rem 0.7rem",
+                borderRadius: "var(--ads-r-pill)",
                 display: "inline-flex",
                 alignItems: "center",
               }}
@@ -202,7 +204,7 @@ export const Tier3ScorecardMatrix: FC<Props> = ({ scorecard, isLoading }) => {
                       backgroundColor: m.color,
                       flexShrink: 0,
                       boxShadow: hoveredIdx === idx ? `0 0 0 3px ${m.color}33` : "none",
-                      transition: "box-shadow 0.2s ease",
+                      transition: "box-shadow var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   />
                   <span className="uop-scorecard-row-title">{m.title}</span>

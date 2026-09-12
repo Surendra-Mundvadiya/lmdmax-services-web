@@ -10,14 +10,15 @@ export const ViolationsPieChart: FC<Props> = ({ data }) => {
   const navigate = useNavigate();
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
-  // Balanced mid-tone colors (neither too dark nor too light)
+  // Categorical ramp mirroring the --ads-* accent + semantic tokens.
+  // Literal values so SVG stroke attributes resolve in every engine.
   const pieColors = [
-    "#EF4444", // Vivid Red
-    "#F97316", // Bright Orange
-    "#F59E0B", // Warm Amber
-    "#3B82F6", // Royal Blue
-    "#8B5CF6", // Purple
-    "#06B6D4", // Cyan
+    "#0071E3", // accent blue
+    "#D70015", // red
+    "#B25000", // amber
+    "#6E4FC4", // purple
+    "#0E7C74", // teal
+    "#248A3D", // green
   ];
 
   const list = data && data.length > 0 ? data.slice(0, 6) : [];
@@ -35,9 +36,8 @@ export const ViolationsPieChart: FC<Props> = ({ data }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#94A3B8",
+          color: "var(--ads-ink-tertiary)",
           fontSize: "0.8125rem",
-          fontStyle: "italic",
         }}
       >
         Zero safety infractions recorded
@@ -92,8 +92,8 @@ export const ViolationsPieChart: FC<Props> = ({ data }) => {
                   transform={`rotate(-90 ${size / 2} ${size / 2})`}
                   style={{
                     cursor: "pointer",
-                    transition: "all 0.2s ease",
-                    opacity: activeIdx !== null && !isHovered ? 0.45 : 1,
+                    transition: "stroke-width var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
+                    opacity: activeIdx !== null && !isHovered ? 0.4 : 1,
                   }}
                   onMouseEnter={() => setActiveIdx(idx)}
                   onMouseLeave={() => setActiveIdx(null)}
@@ -120,10 +120,10 @@ export const ViolationsPieChart: FC<Props> = ({ data }) => {
             <span
               style={{
                 fontSize: "1.65rem",
-                fontWeight: 800,
-                color: activeItem ? pieColors[activeIdx! % pieColors.length] : "#0F172A",
+                fontWeight: 700,
+                color: activeItem ? pieColors[activeIdx! % pieColors.length] : "var(--ads-ink)",
                 lineHeight: 1,
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.022em",
               }}
             >
               {activeItem ? activeItem.count : total}
@@ -131,8 +131,8 @@ export const ViolationsPieChart: FC<Props> = ({ data }) => {
             <span
               style={{
                 fontSize: "0.625rem",
-                color: "#64748B",
-                fontWeight: 800,
+                color: "var(--ads-ink-quaternary)",
+                fontWeight: 600,
                 textTransform: "uppercase",
                 letterSpacing: "0.06em",
                 marginTop: "0.25rem",
@@ -148,11 +148,11 @@ export const ViolationsPieChart: FC<Props> = ({ data }) => {
           style={{
             marginTop: "0.45rem",
             fontSize: "0.725rem",
-            color: "#475569",
-            fontWeight: 700,
-            backgroundColor: "#F1F5F9",
-            padding: "0.15rem 0.6rem",
-            borderRadius: "9999px",
+            color: "var(--ads-ink-secondary)",
+            fontWeight: 600,
+            backgroundColor: "var(--uop-wash-strong)",
+            padding: "0.2rem 0.7rem",
+            borderRadius: "var(--ads-r-pill)",
             display: "inline-flex",
             alignItems: "center",
           }}
@@ -179,11 +179,11 @@ export const ViolationsPieChart: FC<Props> = ({ data }) => {
                 justifyContent: "space-between",
                 gap: "0.5rem",
                 padding: "0.35rem 0.55rem",
-                borderRadius: "8px",
-                border: isHovered ? "1px solid #E2E8F0" : "1px solid transparent",
-                backgroundColor: isHovered ? "#F8FAFC" : "transparent",
+                borderRadius: "var(--ads-r-sm)",
+                border: isHovered ? "1px solid var(--ads-hairline)" : "1px solid transparent",
+                backgroundColor: isHovered ? "var(--uop-wash)" : "transparent",
                 cursor: "pointer",
-                transition: "all 0.15s ease",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
               }}
               onMouseEnter={() => setActiveIdx(idx)}
               onMouseLeave={() => setActiveIdx(null)}
@@ -199,14 +199,14 @@ export const ViolationsPieChart: FC<Props> = ({ data }) => {
                     backgroundColor: color,
                     flexShrink: 0,
                     boxShadow: isHovered ? `0 0 0 3px ${color}33` : "none",
-                    transition: "box-shadow 0.2s ease",
+                    transition: "box-shadow var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 />
                 <span
                   style={{
                     fontSize: "0.8125rem",
-                    color: isHovered ? "#0F172A" : "#1E293B",
-                    fontWeight: isHovered ? 700 : 600,
+                    color: "var(--ads-ink)",
+                    fontWeight: isHovered ? 650 : 550,
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
@@ -220,12 +220,12 @@ export const ViolationsPieChart: FC<Props> = ({ data }) => {
                 <span
                   style={{
                     fontSize: "0.75rem",
-                    fontWeight: 800,
+                    fontWeight: 600,
                     color,
-                    padding: "0.15rem 0.55rem",
-                    borderRadius: "5px",
-                    backgroundColor: `${color}15`,
-                    border: `1px solid ${color}30`,
+                    padding: "0.18rem 0.6rem",
+                    borderRadius: "var(--ads-r-pill)",
+                    backgroundColor: `${color}14`,
+                    border: "1px solid transparent",
                     minWidth: "24px",
                     textAlign: "center",
                   }}

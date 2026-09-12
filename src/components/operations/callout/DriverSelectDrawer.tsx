@@ -47,8 +47,9 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
         zIndex: 9999,
         display: "flex",
         justifyContent: "flex-end",
-        backgroundColor: "rgba(15, 23, 42, 0.4)",
-        backdropFilter: "blur(2px)",
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         transition: "opacity 0.2s ease",
       }}
       onClick={onClose}
@@ -58,8 +59,11 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
           width: "100%",
           maxWidth: "420px",
           height: "100%",
-          backgroundColor: "#FFFFFF",
-          boxShadow: "-4px 0 24px rgba(0, 0, 0, 0.12)",
+          backgroundColor: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderLeft: "1px solid var(--ads-hairline)",
+          boxShadow: "var(--ads-shadow-lg)",
           display: "flex",
           flexDirection: "column",
           boxSizing: "border-box",
@@ -70,11 +74,11 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
         <div
           style={{
             padding: "1.1rem 1.25rem",
-            borderBottom: "1px solid #E2E8F0",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            backgroundColor: "#F8FAFC",
+            backgroundColor: "rgba(0, 0, 0, 0.025)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
@@ -82,9 +86,9 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
               style={{
                 width: "34px",
                 height: "34px",
-                borderRadius: "8px",
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -93,10 +97,10 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
               <Users size={18} />
             </div>
             <div>
-              <h2 style={{ fontSize: "1rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+              <h2 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0 }}>
                 Select Drivers
               </h2>
-              <p style={{ fontSize: "0.75rem", color: "#64748B", margin: "0.15rem 0 0 0" }}>
+              <p style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", margin: "0.15rem 0 0 0" }}>
                 {selectedSet.size > 0
                   ? `${selectedSet.size} driver${selectedSet.size > 1 ? "s" : ""} selected for callout`
                   : "Click drivers to add as callout rows"}
@@ -113,32 +117,33 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              borderRadius: "6px",
-              border: "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
-              color: "#64748B",
+              borderRadius: "var(--ads-r-xs)",
+              border: "1px solid var(--ads-hairline)",
+              backgroundColor: "var(--ads-material-thick)",
+              color: "var(--ads-ink-tertiary)",
               cursor: "pointer",
             }}
             title="Close Drawer"
+            aria-label="Close Drawer"
           >
             <X size={16} />
           </button>
         </div>
 
         {/* Search Bar */}
-        <div style={{ padding: "0.85rem 1.25rem", borderBottom: "1px solid #F1F5F9" }}>
+        <div style={{ padding: "0.85rem 1.25rem", borderBottom: "1px solid var(--ads-hairline)" }}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
-              backgroundColor: "#F8FAFC",
-              border: "1px solid #CBD5E1",
-              borderRadius: "6px",
+              backgroundColor: "rgba(0, 0, 0, 0.025)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-xs)",
               padding: "0.45rem 0.75rem",
             }}
           >
-            <Search size={15} style={{ color: "#94A3B8" }} />
+            <Search size={15} style={{ color: "var(--ads-ink-tertiary)" }} />
             <input
               type="text"
               placeholder="Search by name, ID, phone..."
@@ -149,7 +154,7 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
                 background: "transparent",
                 outline: "none",
                 fontSize: "0.8125rem",
-                color: "#1E293B",
+                color: "var(--ads-ink)",
                 width: "100%",
               }}
               autoFocus
@@ -158,7 +163,9 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                style={{ background: "none", border: "none", color: "#94A3B8", cursor: "pointer" }}
+                aria-label="Clear search"
+                title="Clear search"
+                style={{ background: "none", border: "none", color: "var(--ads-ink-tertiary)", cursor: "pointer" }}
               >
                 <X size={14} />
               </button>
@@ -178,7 +185,7 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
           }}
         >
           {filteredDrivers.length === 0 ? (
-            <div style={{ padding: "2.5rem 1rem", textAlign: "center", color: "#64748B", fontSize: "0.8125rem" }}>
+            <div style={{ padding: "2.5rem 1rem", textAlign: "center", color: "var(--ads-ink-tertiary)", fontSize: "0.8125rem" }}>
               No active drivers found matching &ldquo;{searchQuery}&rdquo;.
             </div>
           ) : (
@@ -193,14 +200,14 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
                     alignItems: "center",
                     justifyContent: "space-between",
                     padding: "0.6rem 0.85rem",
-                    borderRadius: "8px",
-                    border: isSelected ? "1.5px solid #2563EB" : "1px solid #E2E8F0",
-                    backgroundColor: isSelected ? "#EFF6FF" : "#FFFFFF",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: isSelected ? "1.5px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                    backgroundColor: isSelected ? "var(--ads-blue-tint)" : "#FFFFFF",
                     cursor: "pointer",
                     transition: "all 0.12s ease",
                   }}
                   onMouseEnter={(e) => {
-                    if (!isSelected) e.currentTarget.style.backgroundColor = "#F8FAFC";
+                    if (!isSelected) e.currentTarget.style.backgroundColor = "rgba(0, 113, 227, 0.045)";
                   }}
                   onMouseLeave={(e) => {
                     if (!isSelected) e.currentTarget.style.backgroundColor = "#FFFFFF";
@@ -212,8 +219,8 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
                         width: "34px",
                         height: "34px",
                         borderRadius: "50%",
-                        backgroundColor: isSelected ? "#2563EB" : "#F1F5F9",
-                        color: isSelected ? "#FFFFFF" : "#475569",
+                        backgroundColor: isSelected ? "var(--ads-blue)" : "rgba(0, 0, 0, 0.045)",
+                        color: isSelected ? "#FFFFFF" : "var(--ads-ink-secondary)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -234,7 +241,7 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
                         style={{
                           fontSize: "0.875rem",
                           fontWeight: 700,
-                          color: isSelected ? "#1D4ED8" : "#1E293B",
+                          color: isSelected ? "var(--ads-blue)" : "var(--ads-ink)",
                           whiteSpace: "nowrap",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
@@ -245,7 +252,7 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
                       <div
                         style={{
                           fontSize: "0.6875rem",
-                          color: "#64748B",
+                          color: "var(--ads-ink-tertiary)",
                           whiteSpace: "nowrap",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
@@ -260,9 +267,9 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
                     style={{
                       width: "22px",
                       height: "22px",
-                      borderRadius: "6px",
-                      border: isSelected ? "2px solid #2563EB" : "2px solid #CBD5E1",
-                      backgroundColor: isSelected ? "#2563EB" : "#FFFFFF",
+                      borderRadius: "var(--ads-r-xs)",
+                      border: isSelected ? "2px solid var(--ads-blue)" : "2px solid var(--ads-hairline-strong)",
+                      backgroundColor: isSelected ? "var(--ads-blue)" : "#FFFFFF",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -281,27 +288,30 @@ export const DriverSelectDrawer: FC<DriverSelectDrawerProps> = ({
         <div
           style={{
             padding: "0.85rem 1.25rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            borderTop: "1px solid var(--ads-hairline)",
+            backgroundColor: "rgba(0, 0, 0, 0.025)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#64748B" }}>
+          <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-tertiary)" }}>
             {selectedSet.size} driver{selectedSet.size !== 1 ? "s" : ""} selected
           </span>
           <button
             type="button"
             onClick={onClose}
             style={{
-              padding: "0.45rem 1.1rem",
+              padding: "9px 18px",
               fontSize: "0.8125rem",
-              fontWeight: 700,
-              backgroundColor: "#2563EB",
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
+              lineHeight: 1,
+              backgroundColor: "var(--ads-blue)",
               color: "#FFFFFF",
-              border: "none",
-              borderRadius: "6px",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-pill)",
+              boxShadow: "0 1px 3px rgba(0, 113, 227, 0.24)",
               cursor: "pointer",
             }}
           >

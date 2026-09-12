@@ -5,17 +5,43 @@ export const ThresholdLoader: FC<{ title?: string }> = ({
 }) => {
   return (
     <div className="threshold-loader-container">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="threshold-skeleton w-48 h-6 rounded" />
-        <div className="threshold-skeleton w-28 h-8 rounded ml-auto" />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "var(--ads-s3)",
+          marginBottom: "var(--ads-s6)",
+        }}
+      >
+        <div className="threshold-skeleton" style={{ width: "12rem", height: "24px" }} />
+        <div
+          className="threshold-skeleton"
+          style={{ width: "7rem", height: "32px", marginLeft: "auto" }}
+        />
       </div>
-      <div className="threshold-skeleton w-full h-10 rounded-lg mb-4" />
-      <div className="space-y-3">
+      <div
+        className="threshold-skeleton"
+        style={{ width: "100%", height: "40px", marginBottom: "var(--ads-s4)" }}
+      />
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s3)" }}>
         {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="threshold-skeleton w-full h-16 rounded-lg" />
+          <div
+            key={i}
+            className="threshold-skeleton"
+            style={{ width: "100%", height: "64px" }}
+          />
         ))}
       </div>
-      <p className="text-center text-xs text-slate-400 mt-6 animate-pulse">{title}</p>
+      <p
+        style={{
+          margin: "var(--ads-s6) 0 0",
+          textAlign: "center",
+          fontSize: "0.75rem",
+          color: "var(--ads-ink-tertiary)",
+        }}
+      >
+        {title}
+      </p>
     </div>
   );
 };

@@ -274,7 +274,7 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
               <span
                 style={{
                   fontSize: "0.875rem",
-                  color: selectedRescuerName ? "#0F172A" : "#94A3B8",
+                  color: selectedRescuerName ? "var(--ads-ink)" : "var(--ads-ink-tertiary)",
                   fontWeight: selectedRescuerName ? 600 : 400,
                   whiteSpace: "nowrap",
                   overflow: "hidden",
@@ -310,9 +310,9 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                 top: "calc(100% + 4px)",
                 left: 0,
                 right: 0,
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #CBD5E1",
-                borderRadius: "8px",
+                backgroundColor: "var(--ads-material-thick)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-sm)",
                 boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08)",
                 zIndex: 1000,
                 maxHeight: "260px",
@@ -324,11 +324,11 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
               <div
                 style={{
                   padding: "0.5rem 0.75rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  borderBottom: "1px solid var(--ads-hairline)",
                   display: "flex",
                   alignItems: "center",
                   gap: "0.5rem",
-                  backgroundColor: "#F8FAFC",
+                  backgroundColor: "rgba(0, 0, 0, 0.025)",
                 }}
               >
                 <Search size={14} className="text-slate-400" />
@@ -343,7 +343,7 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                     border: "none",
                     outline: "none",
                     fontSize: "0.8125rem",
-                    color: "#0F172A",
+                    color: "var(--ads-ink)",
                     background: "transparent",
                     fontFamily: "inherit",
                   }}
@@ -352,7 +352,9 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setRescuerSearch("")}
-                    style={{ background: "none", border: "none", cursor: "pointer", color: "#94A3B8" }}
+                    aria-label="Clear rescuer search"
+                    title="Clear search"
+                    style={{ background: "none", border: "none", cursor: "pointer", color: "var(--ads-ink-tertiary)" }}
                   >
                     <X size={14} />
                   </button>
@@ -361,7 +363,7 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
 
               <div style={{ overflowY: "auto", flex: 1, maxHeight: "200px" }}>
                 {filteredRescuers.length === 0 ? (
-                  <div style={{ padding: "0.85rem", textAlign: "center", fontSize: "0.8125rem", color: "#94A3B8" }}>
+                  <div style={{ padding: "0.85rem", textAlign: "center", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                     No drivers found
                   </div>
                 ) : (
@@ -385,13 +387,13 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                           justifyContent: "space-between",
                           padding: "0.55rem 0.85rem",
                           cursor: isSameAsReceiver ? "not-allowed" : "pointer",
-                          backgroundColor: isSelected ? "#EFF6FF" : "transparent",
-                          color: isSameAsReceiver ? "#94A3B8" : isSelected ? "#1D4ED8" : "#1E293B",
+                          backgroundColor: isSelected ? "var(--ads-blue-tint)" : "transparent",
+                          color: isSameAsReceiver ? "var(--ads-ink-tertiary)" : isSelected ? "var(--ads-blue)" : "var(--ads-ink)",
                           fontSize: "0.8125rem",
                           transition: "background 0.1s ease",
                         }}
                         onMouseEnter={(e) => {
-                          if (!isSelected && !isSameAsReceiver) e.currentTarget.style.backgroundColor = "#F8FAFC";
+                          if (!isSelected && !isSameAsReceiver) e.currentTarget.style.backgroundColor = "rgba(0, 113, 227, 0.045)";
                         }}
                         onMouseLeave={(e) => {
                           if (!isSelected && !isSameAsReceiver) e.currentTarget.style.backgroundColor = "transparent";
@@ -403,8 +405,8 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                               width: 24,
                               height: 24,
                               borderRadius: "50%",
-                              backgroundColor: isSelected ? "#BFDBFE" : "#F1F5F9",
-                              color: isSelected ? "#1D4ED8" : "#64748B",
+                              backgroundColor: isSelected ? "var(--ads-blue-tint-strong)" : "rgba(0, 0, 0, 0.045)",
+                              color: isSelected ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
@@ -419,9 +421,9 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                           </div>
                         </div>
                         {isSameAsReceiver ? (
-                          <span style={{ fontSize: "0.6875rem", color: "#EF4444" }}>Selected as Receiver</span>
+                          <span style={{ fontSize: "0.6875rem", color: "var(--ads-red)" }}>Selected as Receiver</span>
                         ) : isSelected ? (
-                          <Check size={14} style={{ color: "#2563EB" }} />
+                          <Check size={14} style={{ color: "var(--ads-blue)" }} />
                         ) : null}
                       </div>
                     );
@@ -450,7 +452,7 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
               <span
                 style={{
                   fontSize: "0.875rem",
-                  color: selectedReceiverName ? "#0F172A" : "#94A3B8",
+                  color: selectedReceiverName ? "var(--ads-ink)" : "var(--ads-ink-tertiary)",
                   fontWeight: selectedReceiverName ? 600 : 400,
                   whiteSpace: "nowrap",
                   overflow: "hidden",
@@ -486,9 +488,9 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                 top: "calc(100% + 4px)",
                 left: 0,
                 right: 0,
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #CBD5E1",
-                borderRadius: "8px",
+                backgroundColor: "var(--ads-material-thick)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-sm)",
                 boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08)",
                 zIndex: 1000,
                 maxHeight: "260px",
@@ -500,11 +502,11 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
               <div
                 style={{
                   padding: "0.5rem 0.75rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  borderBottom: "1px solid var(--ads-hairline)",
                   display: "flex",
                   alignItems: "center",
                   gap: "0.5rem",
-                  backgroundColor: "#F8FAFC",
+                  backgroundColor: "rgba(0, 0, 0, 0.025)",
                 }}
               >
                 <Search size={14} className="text-slate-400" />
@@ -519,7 +521,7 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                     border: "none",
                     outline: "none",
                     fontSize: "0.8125rem",
-                    color: "#0F172A",
+                    color: "var(--ads-ink)",
                     background: "transparent",
                     fontFamily: "inherit",
                   }}
@@ -528,7 +530,9 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setReceiverSearch("")}
-                    style={{ background: "none", border: "none", cursor: "pointer", color: "#94A3B8" }}
+                    aria-label="Clear receiver search"
+                    title="Clear search"
+                    style={{ background: "none", border: "none", cursor: "pointer", color: "var(--ads-ink-tertiary)" }}
                   >
                     <X size={14} />
                   </button>
@@ -537,7 +541,7 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
 
               <div style={{ overflowY: "auto", flex: 1, maxHeight: "200px" }}>
                 {filteredReceivers.length === 0 ? (
-                  <div style={{ padding: "0.85rem", textAlign: "center", fontSize: "0.8125rem", color: "#94A3B8" }}>
+                  <div style={{ padding: "0.85rem", textAlign: "center", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                     No drivers found
                   </div>
                 ) : (
@@ -561,13 +565,13 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                           justifyContent: "space-between",
                           padding: "0.55rem 0.85rem",
                           cursor: isSameAsRescuer ? "not-allowed" : "pointer",
-                          backgroundColor: isSelected ? "#EFF6FF" : "transparent",
-                          color: isSameAsRescuer ? "#94A3B8" : isSelected ? "#1D4ED8" : "#1E293B",
+                          backgroundColor: isSelected ? "var(--ads-blue-tint)" : "transparent",
+                          color: isSameAsRescuer ? "var(--ads-ink-tertiary)" : isSelected ? "var(--ads-blue)" : "var(--ads-ink)",
                           fontSize: "0.8125rem",
                           transition: "background 0.1s ease",
                         }}
                         onMouseEnter={(e) => {
-                          if (!isSelected && !isSameAsRescuer) e.currentTarget.style.backgroundColor = "#F8FAFC";
+                          if (!isSelected && !isSameAsRescuer) e.currentTarget.style.backgroundColor = "rgba(0, 113, 227, 0.045)";
                         }}
                         onMouseLeave={(e) => {
                           if (!isSelected && !isSameAsRescuer) e.currentTarget.style.backgroundColor = "transparent";
@@ -579,8 +583,8 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                               width: 24,
                               height: 24,
                               borderRadius: "50%",
-                              backgroundColor: isSelected ? "#BFDBFE" : "#F1F5F9",
-                              color: isSelected ? "#1D4ED8" : "#64748B",
+                              backgroundColor: isSelected ? "var(--ads-blue-tint-strong)" : "rgba(0, 0, 0, 0.045)",
+                              color: isSelected ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
@@ -595,9 +599,9 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
                           </div>
                         </div>
                         {isSameAsRescuer ? (
-                          <span style={{ fontSize: "0.6875rem", color: "#EF4444" }}>Selected as Rescuer</span>
+                          <span style={{ fontSize: "0.6875rem", color: "var(--ads-red)" }}>Selected as Rescuer</span>
                         ) : isSelected ? (
-                          <Check size={14} style={{ color: "#2563EB" }} />
+                          <Check size={14} style={{ color: "var(--ads-blue)" }} />
                         ) : null}
                       </div>
                     );
@@ -690,7 +694,7 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
       <div className="add-driver-field-group">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <label className="add-driver-label">Reason / Operational Notes</label>
-          <span style={{ fontSize: "0.75rem", color: "#94A3B8" }}>{reason.length}/250</span>
+          <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>{reason.length}/250</span>
         </div>
         <textarea
           rows={3}
@@ -699,10 +703,10 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
           style={{
             width: "100%",
             padding: "0.75rem",
-            borderRadius: "8px",
-            border: "1.5px solid #CBD5E1",
+            borderRadius: "var(--ads-r-sm)",
+            border: "1.5px solid var(--ads-hairline)",
             fontSize: "0.875rem",
-            color: "#0F172A",
+            color: "var(--ads-ink)",
             resize: "none",
             fontFamily: "inherit",
             boxSizing: "border-box",
@@ -789,8 +793,9 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.55)",
-        backdropFilter: "blur(4px)",
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         zIndex: 9999,
         display: "flex",
         alignItems: "center",
@@ -801,16 +806,18 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
     >
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "16px",
+          backgroundColor: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
           width: "100%",
           maxWidth: "600px",
           maxHeight: "90vh",
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-          border: "1px solid #E2E8F0",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          border: "1px solid var(--ads-hairline)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -820,16 +827,16 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
             alignItems: "center",
             justifyContent: "space-between",
             padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
+            borderBottom: "1px solid var(--ads-hairline)",
           }}
         >
-          <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 700, color: "#0F172A" }}>
+          <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 700, color: "var(--ads-ink)" }}>
             {isEditMode ? "Edit Rescue" : "Add Rescue"}
           </h3>
-          <button
+          <button aria-label="Close" title="Close"
             type="button"
             onClick={onClose}
-            style={{ background: "none", border: "none", cursor: "pointer", color: "#64748B" }}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "var(--ads-ink-tertiary)" }}
           >
             <X size={20} />
           </button>
@@ -843,8 +850,8 @@ export const AddRescueModal: FC<AddRescueModalProps> = ({
             justifyContent: "flex-end",
             gap: "0.75rem",
             padding: "1rem 1.5rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            borderTop: "1px solid var(--ads-hairline)",
+            backgroundColor: "rgba(0, 0, 0, 0.025)",
           }}
         >
           <button type="button" onClick={onClose} className="btn-outline-cancel">

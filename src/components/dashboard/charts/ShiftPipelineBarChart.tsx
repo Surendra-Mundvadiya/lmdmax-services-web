@@ -26,12 +26,13 @@ export const ShiftPipelineBarChart: FC<Props> = ({ data }) => {
 
   const total = (published + accepted + autoAccepted + pending + open) || 1;
 
+  // Matches the Shift Pipeline tile family (--ads-* semantics + the teal sixth hue).
   const segments = [
-    { label: "Published", key: "published", count: published, color: "#2563EB" },
-    { label: "Accepted", key: "accepted", count: accepted, color: "#10B981" },
-    { label: "Auto-Accepted", key: "auto_accepted", count: autoAccepted, color: "#14B8A6" },
-    { label: "Pending", key: "pending", count: pending, color: "#F59E0B" },
-    { label: "Open Slots", key: "open", count: open, color: "#94A3B8" },
+    { label: "Published", key: "published", count: published, color: "var(--ads-blue)" },
+    { label: "Accepted", key: "accepted", count: accepted, color: "var(--ads-green)" },
+    { label: "Auto-Accepted", key: "auto_accepted", count: autoAccepted, color: "var(--uop-teal)" },
+    { label: "Pending", key: "pending", count: pending, color: "var(--ads-amber)" },
+    { label: "Open Slots", key: "open", count: open, color: "var(--ads-ink-quaternary)" },
   ];
 
   const handleSegmentClick = (statusKey: string) => {

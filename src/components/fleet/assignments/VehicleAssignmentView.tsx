@@ -95,24 +95,24 @@ const DriverSelectCell: FC<DriverSelectCellProps> = ({
           padding: "0.2rem 0.5rem",
           fontSize: "0.8125rem",
           fontWeight: isAssigned ? 600 : 400,
-          color: isAssigned ? "#1E293B" : "#94A3B8",
-          backgroundColor: isAssigned ? "#F8FAFC" : "#FFFFFF",
-          border: `1px solid ${isOpen ? "#2563EB" : isAssigned ? "#CBD5E1" : "#E2E8F0"}`,
-          borderRadius: "5px",
+          color: isAssigned ? "var(--ads-ink)" : "var(--ads-ink-quaternary)",
+          backgroundColor: isAssigned ? "var(--ads-canvas)" : "var(--ads-material-thick)",
+          border: `1px solid ${isOpen ? "var(--ads-blue)" : isAssigned ? "var(--ads-hairline-strong)" : "var(--ads-hairline)"}`,
+          borderRadius: "var(--ads-r-xs)",
           cursor: "pointer",
           outline: "none",
           boxSizing: "border-box",
-          transition: "all 0.12s ease",
+          transition: "all var(--ads-dur-fast) var(--ads-ease)",
         }}
         title={displayName || "Click to assign driver"}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", minWidth: 0, overflow: "hidden" }}>
-          <User size={12} style={{ color: isAssigned ? "#2563EB" : "#94A3B8", flexShrink: 0 }} />
+          <User size={12} style={{ color: isAssigned ? "var(--ads-blue)" : "var(--ads-ink-quaternary)", flexShrink: 0 }} />
           <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
             {displayName || "— Unassigned —"}
           </span>
         </div>
-        <ChevronDown size={12} style={{ color: "#64748B", flexShrink: 0 }} />
+        <ChevronDown size={12} style={{ color: "var(--ads-ink-tertiary)", flexShrink: 0 }} />
       </button>
 
       {isOpen && (
@@ -122,10 +122,12 @@ const DriverSelectCell: FC<DriverSelectCellProps> = ({
             top: "calc(100% + 4px)",
             left: 0,
             width: "210px",
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #CBD5E1",
-            borderRadius: "7px",
-            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.08)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-lg)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-md)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
             zIndex: 1000,
             padding: "0.35rem",
             boxSizing: "border-box",
@@ -137,14 +139,14 @@ const DriverSelectCell: FC<DriverSelectCellProps> = ({
               display: "flex",
               alignItems: "center",
               gap: "0.3rem",
-              backgroundColor: "#F8FAFC",
-              border: "1px solid #E2E8F0",
-              borderRadius: "4px",
+              backgroundColor: "var(--ads-canvas)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-xs)",
               padding: "0.2rem 0.4rem",
               marginBottom: "0.3rem",
             }}
           >
-            <Search size={11} style={{ color: "#94A3B8" }} />
+            <Search size={11} style={{ color: "var(--ads-ink-quaternary)" }} />
             <input
               type="text"
               placeholder="Search driver..."
@@ -156,7 +158,7 @@ const DriverSelectCell: FC<DriverSelectCellProps> = ({
                 background: "transparent",
                 outline: "none",
                 fontSize: "0.75rem",
-                color: "#1E293B",
+                color: "var(--ads-ink)",
                 width: "100%",
               }}
             />
@@ -164,7 +166,8 @@ const DriverSelectCell: FC<DriverSelectCellProps> = ({
               <button
                 type="button"
                 onClick={() => setSearch("")}
-                style={{ background: "none", border: "none", color: "#94A3B8", cursor: "pointer", padding: 0 }}
+                aria-label="Clear driver search"
+                style={{ background: "none", border: "none", color: "var(--ads-ink-tertiary)", cursor: "pointer", padding: 0 }}
               >
                 <X size={11} />
               </button>
@@ -185,10 +188,10 @@ const DriverSelectCell: FC<DriverSelectCellProps> = ({
                 padding: "0.3rem 0.45rem",
                 fontSize: "0.75rem",
                 fontWeight: !isAssigned ? 700 : 400,
-                color: !isAssigned ? "#2563EB" : "#64748B",
-                backgroundColor: !isAssigned ? "#EFF6FF" : "transparent",
+                color: !isAssigned ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+                backgroundColor: !isAssigned ? "var(--ads-blue-tint)" : "transparent",
                 border: "none",
-                borderRadius: "4px",
+                borderRadius: "var(--ads-r-xs)",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
@@ -196,11 +199,11 @@ const DriverSelectCell: FC<DriverSelectCellProps> = ({
               }}
             >
               <span>— Unassigned —</span>
-              {!isAssigned && <Check size={12} style={{ color: "#2563EB" }} />}
+              {!isAssigned && <Check size={12} style={{ color: "var(--ads-blue)" }} />}
             </button>
 
             {filteredDrivers.length === 0 ? (
-              <div style={{ padding: "0.4rem", fontSize: "0.6875rem", color: "#94A3B8", textAlign: "center" }}>
+              <div style={{ padding: "0.4rem", fontSize: "0.6875rem", color: "var(--ads-ink-quaternary)", textAlign: "center" }}>
                 No drivers found
               </div>
             ) : (
@@ -220,17 +223,17 @@ const DriverSelectCell: FC<DriverSelectCellProps> = ({
                       padding: "0.3rem 0.45rem",
                       fontSize: "0.75rem",
                       fontWeight: isSelected ? 700 : 500,
-                      color: isSelected ? "#2563EB" : "#1E293B",
-                      backgroundColor: isSelected ? "#EFF6FF" : "transparent",
+                      color: isSelected ? "var(--ads-blue)" : "var(--ads-ink)",
+                      backgroundColor: isSelected ? "var(--ads-blue-tint)" : "transparent",
                       border: "none",
-                      borderRadius: "4px",
+                      borderRadius: "var(--ads-r-xs)",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
                     }}
                     onMouseEnter={(e) => {
-                      if (!isSelected) e.currentTarget.style.backgroundColor = "#F8FAFC";
+                      if (!isSelected) e.currentTarget.style.backgroundColor = "rgba(0,113,227,0.045)";
                     }}
                     onMouseLeave={(e) => {
                       if (!isSelected) e.currentTarget.style.backgroundColor = "transparent";
@@ -239,7 +242,7 @@ const DriverSelectCell: FC<DriverSelectCellProps> = ({
                     <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {d.name}
                     </span>
-                    {isSelected && <Check size={12} style={{ color: "#2563EB", flexShrink: 0 }} />}
+                    {isSelected && <Check size={12} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />}
                   </button>
                 );
               })
@@ -830,12 +833,12 @@ export const VehicleAssignmentView: FC = () => {
             top: "70px",
             right: "24px",
             zIndex: 9999,
-            backgroundColor: notification.type === "success" ? "#ECFDF5" : "#FEF2F2",
-            border: `1px solid ${notification.type === "success" ? "#A7F3D0" : "#FCA5A5"}`,
-            color: notification.type === "success" ? "#065F46" : "#991B1B",
-            padding: "0.75rem 1rem",
-            borderRadius: "8px",
-            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+            backgroundColor: notification.type === "success" ? "var(--ads-green-tint)" : "var(--ads-red-tint)",
+            border: "1px solid var(--ads-hairline)",
+            color: notification.type === "success" ? "var(--ads-green)" : "var(--ads-red)",
+            padding: "var(--ads-s3) var(--ads-s4)",
+            borderRadius: "var(--ads-r-md)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
             display: "flex",
             alignItems: "center",
             gap: "0.65rem",
@@ -848,6 +851,7 @@ export const VehicleAssignmentView: FC = () => {
           <button
             type="button"
             onClick={() => setNotification(null)}
+            aria-label="Dismiss notification"
             style={{
               background: "none",
               border: "none",
@@ -864,11 +868,13 @@ export const VehicleAssignmentView: FC = () => {
       {/* 1. Single Sleek Top Bar (Single Row, No Clutter, Maximum Assignment Visibility) */}
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "10px",
-          border: "1px solid #E2E8F0",
-          boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
-          padding: "0.55rem 1rem",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-md)",
+          WebkitBackdropFilter: "var(--ads-blur-md)",
+          borderRadius: "var(--ads-r-lg)",
+          border: "1px solid var(--ads-hairline)",
+          boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+          padding: "0.55rem var(--ads-s4)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -886,19 +892,19 @@ export const VehicleAssignmentView: FC = () => {
               style={{
                 width: "32px",
                 height: "32px",
-                borderRadius: "7px",
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-xs)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                border: "1px solid #DBEAFE",
+                border: "1px solid var(--ads-blue-tint-strong)",
                 flexShrink: 0,
               }}
             >
               <Truck size={17} />
             </div>
-            <h1 style={{ fontSize: "1.125rem", fontWeight: 700, color: "#1E293B", margin: 0, whiteSpace: "nowrap" }}>
+            <h1 style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0, whiteSpace: "nowrap", letterSpacing: "-0.019em" }}>
               Driver Inspection
             </h1>
           </div>
@@ -909,14 +915,14 @@ export const VehicleAssignmentView: FC = () => {
               display: "flex",
               alignItems: "center",
               gap: "0.35rem",
-              backgroundColor: "#F8FAFC",
-              border: "1px solid #CBD5E1",
-              borderRadius: "6px",
+              backgroundColor: "var(--ads-canvas)",
+              border: "1px solid var(--ads-hairline-strong)",
+              borderRadius: "var(--ads-r-xs)",
               padding: "0.22rem 0.55rem",
               width: "160px",
             }}
           >
-            <Search size={13} style={{ color: "#94A3B8" }} />
+            <Search size={13} style={{ color: "var(--ads-ink-quaternary)" }} />
             <input
               type="text"
               placeholder="Search..."
@@ -927,7 +933,7 @@ export const VehicleAssignmentView: FC = () => {
                 background: "transparent",
                 outline: "none",
                 fontSize: "0.75rem",
-                color: "#1E293B",
+                color: "var(--ads-ink)",
                 width: "100%",
               }}
             />
@@ -935,7 +941,8 @@ export const VehicleAssignmentView: FC = () => {
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                style={{ background: "none", border: "none", color: "#94A3B8", cursor: "pointer", padding: 0 }}
+                aria-label="Clear search"
+                style={{ background: "none", border: "none", color: "var(--ads-ink-tertiary)", cursor: "pointer", padding: 0 }}
               >
                 <X size={12} />
               </button>
@@ -948,17 +955,17 @@ export const VehicleAssignmentView: FC = () => {
               display: "flex",
               alignItems: "center",
               gap: "0.35rem",
-              backgroundColor: "#F8FAFC",
-              border: "1px solid #CBD5E1",
-              borderRadius: "6px",
+              backgroundColor: "var(--ads-canvas)",
+              border: "1px solid var(--ads-hairline-strong)",
+              borderRadius: "var(--ads-r-xs)",
               padding: "0.22rem 0.55rem",
             }}
           >
-            <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#1E293B", whiteSpace: "nowrap" }}>
+            <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink)", whiteSpace: "nowrap" }}>
               Vans dispatched:
             </span>
             {isEodCheckedOut ? (
-              <span style={{ fontSize: "0.875rem", fontWeight: 800, color: "#2563EB" }}>
+              <span style={{ fontSize: "0.875rem", fontWeight: 800, color: "var(--ads-blue)" }}>
                 {vanCountInput || stats.assigned}
               </span>
             ) : (
@@ -975,11 +982,11 @@ export const VehicleAssignmentView: FC = () => {
                     textAlign: "center",
                     fontSize: "0.8125rem",
                     fontWeight: 700,
-                    borderRadius: "4px",
-                    border: "1px solid #94A3B8",
-                    color: "#1E293B",
+                    borderRadius: "var(--ads-r-xs)",
+                    border: "1px solid var(--ads-hairline-strong)",
+                    color: "var(--ads-ink)",
                     outline: "none",
-                    backgroundColor: "#FFFFFF",
+                    backgroundColor: "var(--ads-material-thick)",
                   }}
                 />
                 <button
@@ -993,10 +1000,10 @@ export const VehicleAssignmentView: FC = () => {
                     padding: "0.2rem 0.5rem",
                     fontSize: "0.6875rem",
                     fontWeight: 600,
-                    backgroundColor: "#2563EB",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
                     border: "none",
-                    borderRadius: "4px",
+                    borderRadius: "var(--ads-r-xs)",
                     cursor: isSubmittingVanCount ? "not-allowed" : "pointer",
                   }}
                 >
@@ -1016,10 +1023,10 @@ export const VehicleAssignmentView: FC = () => {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                backgroundColor: "#F1F5F9",
+                backgroundColor: "rgba(0,0,0,0.04)",
                 padding: "2px",
-                borderRadius: "5px",
-                border: "1px solid #E2E8F0",
+                borderRadius: "var(--ads-r-pill)",
+                border: "1px solid var(--ads-hairline)",
               }}
             >
               <button
@@ -1029,10 +1036,10 @@ export const VehicleAssignmentView: FC = () => {
                   padding: "0.22rem 0.55rem",
                   fontSize: "0.6875rem",
                   fontWeight: activeInspectionType === "pre" ? 700 : 500,
-                  color: activeInspectionType === "pre" ? "#2563EB" : "#64748B",
-                  backgroundColor: activeInspectionType === "pre" ? "#FFFFFF" : "transparent",
-                  border: activeInspectionType === "pre" ? "1px solid #CBD5E1" : "none",
-                  borderRadius: "4px",
+                  color: activeInspectionType === "pre" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+                  backgroundColor: activeInspectionType === "pre" ? "var(--ads-material-thick)" : "transparent",
+                  border: activeInspectionType === "pre" ? "1px solid var(--ads-hairline-strong)" : "none",
+                  borderRadius: "var(--ads-r-xs)",
                   cursor: "pointer",
                 }}
               >
@@ -1045,10 +1052,10 @@ export const VehicleAssignmentView: FC = () => {
                   padding: "0.22rem 0.55rem",
                   fontSize: "0.6875rem",
                   fontWeight: activeInspectionType === "post" ? 700 : 500,
-                  color: activeInspectionType === "post" ? "#2563EB" : "#64748B",
-                  backgroundColor: activeInspectionType === "post" ? "#FFFFFF" : "transparent",
-                  border: activeInspectionType === "post" ? "1px solid #CBD5E1" : "none",
-                  borderRadius: "4px",
+                  color: activeInspectionType === "post" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+                  backgroundColor: activeInspectionType === "post" ? "var(--ads-material-thick)" : "transparent",
+                  border: activeInspectionType === "post" ? "1px solid var(--ads-hairline-strong)" : "none",
+                  borderRadius: "var(--ads-r-xs)",
                   cursor: "pointer",
                 }}
               >
@@ -1068,19 +1075,21 @@ export const VehicleAssignmentView: FC = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: "0.3rem",
-              padding: "0.28rem 0.65rem",
+              padding: "6px 13px",
               fontSize: "0.75rem",
               fontWeight: 600,
-              backgroundColor: "#EFF6FF",
-              color: "#2563EB",
-              border: "1px solid #BFDBFE",
-              borderRadius: "6px",
+              letterSpacing: "-0.01em",
+              backgroundColor: "var(--ads-blue-tint)",
+              color: "var(--ads-blue)",
+              border: "1px solid var(--ads-blue-tint-strong)",
+              borderRadius: "var(--ads-r-pill)",
               cursor: "pointer",
               whiteSpace: "nowrap",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
             title="Upload Daily Operation Report Spreadsheet"
           >
-            <FileSpreadsheet size={13} style={{ color: "#2563EB" }} />
+            <FileSpreadsheet size={13} style={{ color: "var(--ads-blue)" }} />
             <span>Daily operation report</span>
           </button>
 
@@ -1093,22 +1102,25 @@ export const VehicleAssignmentView: FC = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: "0.3rem",
-              padding: "0.28rem 0.65rem",
+              padding: "6px 13px",
               fontSize: "0.75rem",
               fontWeight: 600,
-              backgroundColor: "#FFFFFF",
-              color: "#2563EB",
-              border: "1px solid #BFDBFE",
-              borderRadius: "6px",
+              letterSpacing: "-0.01em",
+              background: "var(--ads-material-thick)",
+              color: "var(--ads-blue)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-pill)",
+              boxShadow: "var(--ads-bevel)",
               cursor: isRefreshing ? "not-allowed" : "pointer",
               whiteSpace: "nowrap",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
             title="Auto-Assign Available Roster Drivers"
           >
             {isRefreshing ? (
-              <Loader2 size={12} className="animate-spin" style={{ color: "#2563EB" }} />
+              <Loader2 size={12} className="animate-spin" style={{ color: "var(--ads-blue)" }} />
             ) : (
-              <Sparkles size={12} style={{ color: "#2563EB" }} />
+              <Sparkles size={12} style={{ color: "var(--ads-blue)" }} />
             )}
             <span>Auto Assign</span>
           </button>
@@ -1121,19 +1133,21 @@ export const VehicleAssignmentView: FC = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: "0.3rem",
-              padding: "0.28rem 0.65rem",
+              padding: "6px 13px",
               fontSize: "0.75rem",
               fontWeight: 600,
-              backgroundColor: "#ECFDF5",
-              color: "#059669",
-              border: "1px solid #A7F3D0",
-              borderRadius: "6px",
+              letterSpacing: "-0.01em",
+              backgroundColor: "var(--ads-green-tint)",
+              color: "var(--ads-green)",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-pill)",
               cursor: "pointer",
               whiteSpace: "nowrap",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
             title="Perform End-of-Day Checkout"
           >
-            <ShieldCheck size={13} style={{ color: "#059669" }} />
+            <ShieldCheck size={13} style={{ color: "var(--ads-green)" }} />
             <span>EOD Checkout</span>
           </button>
 
@@ -1146,16 +1160,18 @@ export const VehicleAssignmentView: FC = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: "0.35rem",
-              padding: "0.28rem 0.75rem",
+              padding: "6px 15px",
               fontSize: "0.75rem",
               fontWeight: 600,
-              backgroundColor: assignedCount > 0 ? "#2563EB" : "#94A3B8",
+              letterSpacing: "-0.01em",
+              background: "var(--ads-blue)",
+              opacity: assignedCount > 0 ? 1 : 0.4,
               color: "#FFFFFF",
-              border: "none",
-              borderRadius: "6px",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-pill)",
               cursor: assignedCount > 0 ? "pointer" : "not-allowed",
-              boxShadow: assignedCount > 0 ? "0 1px 2px rgba(37, 99, 235, 0.2)" : "none",
               whiteSpace: "nowrap",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
             title="Send assignment message to all assigned drivers"
           >
@@ -1175,11 +1191,13 @@ export const VehicleAssignmentView: FC = () => {
       {/* 2. Compact Vehicle Assignments & Inspections Table */}
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "8px",
-          border: "1px solid #E2E8F0",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-md)",
+          WebkitBackdropFilter: "var(--ads-blur-md)",
+          borderRadius: "var(--ads-r-lg)",
+          border: "1px solid var(--ads-hairline)",
           overflow: "hidden",
-          boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+          boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
           width: "100%",
         }}
       >
@@ -1193,11 +1211,11 @@ export const VehicleAssignmentView: FC = () => {
             }}
           >
             <thead>
-              <tr style={{ backgroundColor: "#F8FAFC", borderBottom: "1px solid #E2E8F0" }}>
-                <th style={{ width: "180px", minWidth: "180px", padding: "0.55rem 0.85rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+              <tr>
+                <th style={{ width: "180px", minWidth: "180px", position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "0.55rem 0.85rem", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                   VEHICLE NAME
                 </th>
-                <th style={{ width: "200px", minWidth: "200px", padding: "0.55rem 0.85rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ width: "200px", minWidth: "200px", position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "0.55rem 0.85rem", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                   ASSIGNED DRIVER
                 </th>
                 <th
@@ -1205,11 +1223,19 @@ export const VehicleAssignmentView: FC = () => {
                   style={{
                     width: "165px",
                     minWidth: "165px",
+                    position: "sticky",
+                    top: 0,
+                    zIndex: 3,
+                    background: "rgba(255,255,255,0.80)",
+                    backdropFilter: "var(--ads-blur-sm)",
+                    WebkitBackdropFilter: "var(--ads-blur-sm)",
                     padding: "0.55rem 0.85rem",
-                    fontSize: "0.75rem",
-                    fontWeight: 700,
-                    color: "#475569",
-                    position: "relative",
+                    fontSize: "0.6875rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.04em",
+                    textTransform: "uppercase",
+                    color: "var(--ads-ink-tertiary)",
+                    borderBottom: "1px solid var(--ads-hairline)",
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
@@ -1228,14 +1254,14 @@ export const VehicleAssignmentView: FC = () => {
                         padding: "0.15rem 0.4rem",
                         fontSize: "0.6875rem",
                         fontWeight: 600,
-                        borderRadius: "4px",
-                        border: statusFilter !== "all" ? "1px solid #2563EB" : "1px solid #CBD5E1",
-                        backgroundColor: statusFilter !== "all" ? "#EFF6FF" : "#FFFFFF",
-                        color: statusFilter !== "all" ? "#2563EB" : "#64748B",
+                        borderRadius: "var(--ads-r-xs)",
+                        border: statusFilter !== "all" ? "1px solid var(--ads-blue)" : "1px solid var(--ads-hairline-strong)",
+                        backgroundColor: statusFilter !== "all" ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+                        color: statusFilter !== "all" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
                         cursor: "pointer",
                       }}
                     >
-                      <Filter size={11} style={{ color: statusFilter !== "all" ? "#2563EB" : "#94A3B8" }} />
+                      <Filter size={11} style={{ color: statusFilter !== "all" ? "var(--ads-blue)" : "var(--ads-ink-quaternary)" }} />
                       <span>
                         {statusFilter === "all"
                           ? "Filter"
@@ -1257,21 +1283,23 @@ export const VehicleAssignmentView: FC = () => {
                         position: "absolute",
                         top: "calc(100% + 2px)",
                         left: "0.85rem",
-                        backgroundColor: "#FFFFFF",
-                        border: "1px solid #CBD5E1",
-                        borderRadius: "8px",
-                        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08)",
+                        background: "var(--ads-material-thick)",
+                        backdropFilter: "var(--ads-blur-lg)",
+                        WebkitBackdropFilter: "var(--ads-blur-lg)",
+                        border: "1px solid var(--ads-hairline)",
+                        borderRadius: "var(--ads-r-md)",
+                        boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
                         zIndex: 100,
                         minWidth: "160px",
                         padding: "0.35rem 0",
                       }}
                     >
                       {[
-                        { id: "all", label: "All Statuses", color: "#1E293B" },
-                        { id: "in_progress", label: "In Progress", color: "#D97706" },
-                        { id: "completed", label: "Completed", color: "#059669" },
-                        { id: "not_started", label: "Not Started", color: "#64748B" },
-                        { id: "assigned", label: "Assigned", color: "#2563EB" },
+                        { id: "all", label: "All Statuses", color: "var(--ads-ink)" },
+                        { id: "in_progress", label: "In Progress", color: "var(--ads-amber)" },
+                        { id: "completed", label: "Completed", color: "var(--ads-green)" },
+                        { id: "not_started", label: "Not Started", color: "var(--ads-ink-tertiary)" },
+                        { id: "assigned", label: "Assigned", color: "var(--ads-blue)" },
                       ].map((item) => (
                         <button
                           key={item.id}
@@ -1286,8 +1314,8 @@ export const VehicleAssignmentView: FC = () => {
                             padding: "0.45rem 0.85rem",
                             fontSize: "0.8125rem",
                             fontWeight: statusFilter === item.id ? 700 : 500,
-                            color: statusFilter === item.id ? "#2563EB" : item.color,
-                            backgroundColor: statusFilter === item.id ? "#EFF6FF" : "transparent",
+                            color: statusFilter === item.id ? "var(--ads-blue)" : item.color,
+                            backgroundColor: statusFilter === item.id ? "var(--ads-blue-tint)" : "transparent",
                             border: "none",
                             cursor: "pointer",
                             display: "flex",
@@ -1296,28 +1324,28 @@ export const VehicleAssignmentView: FC = () => {
                           }}
                         >
                           <span>{item.label}</span>
-                          {statusFilter === item.id && <CheckCircle2 size={13} style={{ color: "#2563EB" }} />}
+                          {statusFilter === item.id && <CheckCircle2 size={13} style={{ color: "var(--ads-blue)" }} />}
                         </button>
                       ))}
                     </div>
                   )}
                 </th>
-                <th style={{ width: "110px", minWidth: "110px", padding: "0.55rem 0.85rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569", textAlign: "center" }}>
+                <th style={{ width: "110px", minWidth: "110px", position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "0.55rem 0.85rem", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)", textAlign: "center" }}>
                   ACTIONS
                 </th>
-                <th style={{ width: "105px", minWidth: "105px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ width: "105px", minWidth: "105px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink-secondary)" }}>
                   CX NO.
                 </th>
-                <th style={{ width: "135px", minWidth: "135px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ width: "135px", minWidth: "135px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink-secondary)" }}>
                   STAGING LOCATION
                 </th>
-                <th style={{ width: "80px", minWidth: "80px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ width: "80px", minWidth: "80px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink-secondary)" }}>
                   STOPS
                 </th>
-                <th style={{ width: "85px", minWidth: "85px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ width: "85px", minWidth: "85px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink-secondary)" }}>
                   PACKAGES
                 </th>
-                <th style={{ width: "125px", minWidth: "125px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ width: "125px", minWidth: "125px", padding: "0.55rem 0.65rem", fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink-secondary)" }}>
                   EST. TIME RETURN
                 </th>
                 {customTextHeaders.map((q: any) => (
@@ -1326,10 +1354,18 @@ export const VehicleAssignmentView: FC = () => {
                     style={{
                       width: "140px",
                       minWidth: "140px",
+                      position: "sticky",
+                      top: 0,
+                      zIndex: 2,
+                      background: "rgba(255,255,255,0.80)",
+                      backdropFilter: "var(--ads-blur-sm)",
+                      WebkitBackdropFilter: "var(--ads-blur-sm)",
                       padding: "0.55rem 0.65rem",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "#475569",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.04em",
+                      color: "var(--ads-ink-tertiary)",
+                      borderBottom: "1px solid var(--ads-hairline)",
                       textTransform: "uppercase",
                     }}
                   >
@@ -1341,7 +1377,7 @@ export const VehicleAssignmentView: FC = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={9 + customTextHeaders.length} style={{ padding: "3rem", textAlign: "center", color: "#64748B" }}>
+                  <td colSpan={9 + customTextHeaders.length} style={{ padding: "3rem", textAlign: "center", color: "var(--ads-ink-tertiary)" }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
                       <Loader2 size={18} className="animate-spin text-blue-600" />
                       <span>Loading driver inspection records...</span>
@@ -1350,7 +1386,7 @@ export const VehicleAssignmentView: FC = () => {
                 </tr>
               ) : filteredVehicleRows.length === 0 ? (
                 <tr>
-                  <td colSpan={9 + customTextHeaders.length} style={{ padding: "3rem", textAlign: "center", color: "#64748B" }}>
+                  <td colSpan={9 + customTextHeaders.length} style={{ padding: "3rem", textAlign: "center", color: "var(--ads-ink-tertiary)" }}>
                     No vehicle records found for {selectedDate}.
                   </td>
                 </tr>
@@ -1370,10 +1406,10 @@ export const VehicleAssignmentView: FC = () => {
                     <tr
                       key={v.id}
                       style={{
-                        borderBottom: "1px solid #F1F5F9",
-                        transition: "background-color 0.12s ease",
+                        borderBottom: "1px solid var(--ads-hairline)",
+                        transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F8FAFC")}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,113,227,0.045)")}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                     >
                       {/* Column 1: Vehicle Name */}
@@ -1383,23 +1419,23 @@ export const VehicleAssignmentView: FC = () => {
                             style={{
                               width: "30px",
                               height: "30px",
-                              borderRadius: "6px",
-                              backgroundColor: isAssigned ? "#EFF6FF" : "#F1F5F9",
-                              color: isAssigned ? "#2563EB" : "#94A3B8",
+                              borderRadius: "var(--ads-r-xs)",
+                              backgroundColor: isAssigned ? "var(--ads-blue-tint)" : "rgba(0,0,0,0.04)",
+                              color: isAssigned ? "var(--ads-blue)" : "var(--ads-ink-quaternary)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
-                              border: `1px solid ${isAssigned ? "#DBEAFE" : "#E2E8F0"}`,
+                              border: `1px solid ${isAssigned ? "var(--ads-blue-tint-strong)" : "var(--ads-hairline)"}`,
                               flexShrink: 0,
                             }}
                           >
                             <Truck size={15} />
                           </div>
                           <div style={{ minWidth: 0, overflow: "hidden" }}>
-                            <div style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                            <div style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                               {v.unit_number || v.name || `Vehicle #${v.id}`}
                             </div>
-                            <span style={{ fontSize: "0.6875rem", color: "#64748B", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", display: "block" }}>
+                            <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", display: "block" }}>
                               {v.make || "Ford"} {v.model || "Transit"} • {v.vehicle_type || "Cargo"}
                             </span>
                           </div>
@@ -1428,10 +1464,10 @@ export const VehicleAssignmentView: FC = () => {
                                   alignItems: "center",
                                   gap: "0.4rem",
                                   padding: "0.22rem 0.6rem",
-                                  borderRadius: "6px",
-                                  backgroundColor: preDone ? "#ECFDF5" : isAssigned ? "#F1F5F9" : "#F8FAFC",
-                                  color: preDone ? "#059669" : isAssigned ? "#475569" : "#94A3B8",
-                                  border: `1px solid ${preDone ? "#A7F3D0" : isAssigned ? "#E2E8F0" : "#CBD5E1"}`,
+                                  borderRadius: "var(--ads-r-xs)",
+                                  backgroundColor: preDone ? "var(--ads-green-tint)" : isAssigned ? "rgba(0,0,0,0.04)" : "var(--ads-canvas)",
+                                  color: preDone ? "var(--ads-green)" : isAssigned ? "var(--ads-ink-secondary)" : "var(--ads-ink-quaternary)",
+                                  border: `1px solid ${preDone ? "var(--ads-green-tint)" : isAssigned ? "var(--ads-hairline)" : "var(--ads-hairline-strong)"}`,
                                   fontSize: "0.75rem",
                                   fontWeight: 600,
                                   width: "fit-content",
@@ -1442,7 +1478,7 @@ export const VehicleAssignmentView: FC = () => {
                                     width: "6px",
                                     height: "6px",
                                     borderRadius: "50%",
-                                    backgroundColor: preDone ? "#10B981" : isAssigned ? "#94A3B8" : "#CBD5E1",
+                                    backgroundColor: preDone ? "var(--ads-green)" : isAssigned ? "var(--ads-ink-quaternary)" : "rgba(0,0,0,0.04)",
                                   }}
                                 />
                                 <span>{preDone ? "Pre-Trip Done" : isAssigned ? "Not Started" : "Unassigned"}</span>
@@ -1454,10 +1490,10 @@ export const VehicleAssignmentView: FC = () => {
                                   alignItems: "center",
                                   gap: "0.4rem",
                                   padding: "0.22rem 0.6rem",
-                                  borderRadius: "6px",
-                                  backgroundColor: postDone ? "#ECFDF5" : preDone ? "#FFFBEB" : "#F1F5F9",
-                                  color: postDone ? "#059669" : preDone ? "#B45309" : "#475569",
-                                  border: `1px solid ${postDone ? "#A7F3D0" : preDone ? "#FDE68A" : "#E2E8F0"}`,
+                                  borderRadius: "var(--ads-r-xs)",
+                                  backgroundColor: postDone ? "var(--ads-green-tint)" : preDone ? "var(--ads-amber-tint)" : "rgba(0,0,0,0.04)",
+                                  color: postDone ? "var(--ads-green)" : preDone ? "var(--ads-amber)" : "var(--ads-ink-secondary)",
+                                  border: `1px solid ${postDone ? "var(--ads-green-tint)" : preDone ? "var(--ads-amber-tint)" : "var(--ads-hairline)"}`,
                                   fontSize: "0.75rem",
                                   fontWeight: 600,
                                   width: "fit-content",
@@ -1468,7 +1504,7 @@ export const VehicleAssignmentView: FC = () => {
                                     width: "6px",
                                     height: "6px",
                                     borderRadius: "50%",
-                                    backgroundColor: postDone ? "#10B981" : preDone ? "#F59E0B" : "#94A3B8",
+                                    backgroundColor: postDone ? "var(--ads-green)" : preDone ? "var(--ads-amber)" : "var(--ads-ink-quaternary)",
                                   }}
                                 />
                                 <span>{postDone ? "Post-Trip Done" : preDone ? "Pending Post" : "Not Started"}</span>
@@ -1482,10 +1518,10 @@ export const VehicleAssignmentView: FC = () => {
                                   alignItems: "center",
                                   gap: "0.4rem",
                                   padding: "0.22rem 0.6rem",
-                                  borderRadius: "6px",
-                                  backgroundColor: postDone ? "#ECFDF5" : preDone ? "#FFFBEB" : "#F1F5F9",
-                                  color: postDone ? "#059669" : preDone ? "#B45309" : "#475569",
-                                  border: `1px solid ${postDone ? "#A7F3D0" : preDone ? "#FDE68A" : "#E2E8F0"}`,
+                                  borderRadius: "var(--ads-r-xs)",
+                                  backgroundColor: postDone ? "var(--ads-green-tint)" : preDone ? "var(--ads-amber-tint)" : "rgba(0,0,0,0.04)",
+                                  color: postDone ? "var(--ads-green)" : preDone ? "var(--ads-amber)" : "var(--ads-ink-secondary)",
+                                  border: `1px solid ${postDone ? "var(--ads-green-tint)" : preDone ? "var(--ads-amber-tint)" : "var(--ads-hairline)"}`,
                                   fontSize: "0.75rem",
                                   fontWeight: 600,
                                   width: "fit-content",
@@ -1496,17 +1532,17 @@ export const VehicleAssignmentView: FC = () => {
                                     width: "6px",
                                     height: "6px",
                                     borderRadius: "50%",
-                                    backgroundColor: postDone ? "#10B981" : preDone ? "#F59E0B" : "#94A3B8",
+                                    backgroundColor: postDone ? "var(--ads-green)" : preDone ? "var(--ads-amber)" : "var(--ads-ink-quaternary)",
                                   }}
                                 />
                                 <span>{postDone ? "Completed" : preDone ? "In Progress" : "Not Started"}</span>
                               </div>
-                              <span style={{ fontSize: "0.6875rem", color: "#64748B", paddingLeft: "0.2rem" }}>
+                              <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)", paddingLeft: "0.2rem" }}>
                                 Pre:{" "}
                                 {preDone ? (
-                                  <strong style={{ color: "#059669" }}>Done</strong>
+                                  <strong style={{ color: "var(--ads-green)" }}>Done</strong>
                                 ) : (
-                                  <span style={{ color: "#D97706", fontWeight: 600 }}>Pending</span>
+                                  <span style={{ color: "var(--ads-amber)", fontWeight: 600 }}>Pending</span>
                                 )}
                               </span>
                             </>
@@ -1521,19 +1557,19 @@ export const VehicleAssignmentView: FC = () => {
                           <button
                             type="button"
                             onClick={() => handleViewInspection(v)}
+                            aria-label="View driver inspection summary"
                             style={{
                               display: "inline-flex",
                               alignItems: "center",
                               justifyContent: "center",
                               width: "30px",
                               height: "30px",
-                              borderRadius: "6px",
-                              backgroundColor: "#2563EB",
+                              borderRadius: "var(--ads-r-sm)",
+                              background: "var(--ads-blue)",
                               color: "#FFFFFF",
-                              border: "none",
+                              border: "1px solid transparent",
                               cursor: "pointer",
-                              boxShadow: "0 1px 2px rgba(37, 99, 235, 0.2)",
-                              transition: "all 0.12s ease",
+                              transition: "all var(--ads-dur-fast) var(--ads-ease)",
                             }}
                             title="View Driver Inspection Summary & Details"
                           >
@@ -1546,22 +1582,23 @@ export const VehicleAssignmentView: FC = () => {
                               type="button"
                               onClick={() => handleSendSingleMessage(v)}
                               disabled={isSendingMessages}
+                              aria-label="Send assignment message to driver"
                               style={{
                                 display: "inline-flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 width: "30px",
                                 height: "30px",
-                                borderRadius: "6px",
-                                border: "1px solid #BFDBFE",
-                                backgroundColor: "#EFF6FF",
-                                color: "#2563EB",
+                                borderRadius: "var(--ads-r-sm)",
+                                border: "1px solid var(--ads-hairline)",
+                                backgroundColor: "var(--ads-blue-tint)",
+                                color: "var(--ads-blue)",
                                 cursor: isSendingMessages ? "not-allowed" : "pointer",
-                                transition: "all 0.12s ease",
+                                transition: "all var(--ads-dur-fast) var(--ads-ease)",
                               }}
                               title={`Send assignment message to ${v.assigned_driver_name || "driver"}`}
                             >
-                              <Send size={13} style={{ color: "#2563EB" }} />
+                              <Send size={13} style={{ color: "var(--ads-blue)" }} />
                             </button>
                           )}
 
@@ -1570,22 +1607,23 @@ export const VehicleAssignmentView: FC = () => {
                             <button
                               type="button"
                               onClick={() => handleInlineAssign(v.id, "")}
+                              aria-label="Clear driver assignment"
                               style={{
                                 display: "inline-flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 width: "30px",
                                 height: "30px",
-                                color: "#EF4444",
-                                backgroundColor: "#FEF2F2",
-                                border: "1px solid #FECACA",
-                                borderRadius: "6px",
+                                color: "var(--ads-red)",
+                                backgroundColor: "var(--ads-red-tint)",
+                                border: "1px solid var(--ads-hairline)",
+                                borderRadius: "var(--ads-r-sm)",
                                 cursor: "pointer",
-                                transition: "all 0.12s ease",
+                                transition: "all var(--ads-dur-fast) var(--ads-ease)",
                               }}
                               title="Clear Driver Assignment"
                             >
-                              <Trash2 size={13} style={{ color: "#EF4444" }} />
+                              <Trash2 size={13} style={{ color: "var(--ads-red)" }} />
                             </button>
                           )}
                         </div>
@@ -1604,10 +1642,10 @@ export const VehicleAssignmentView: FC = () => {
                             height: "28px",
                             padding: "0.2rem 0.45rem",
                             fontSize: "0.75rem",
-                            color: "#1E293B",
-                            backgroundColor: isAssigned ? "#FFFFFF" : "#F8FAFC",
-                            border: "1px solid #CBD5E1",
-                            borderRadius: "4px",
+                            color: "var(--ads-ink)",
+                            backgroundColor: isAssigned ? "var(--ads-material-thick)" : "var(--ads-canvas)",
+                            border: "1px solid var(--ads-hairline-strong)",
+                            borderRadius: "var(--ads-r-xs)",
                             outline: "none",
                             boxSizing: "border-box",
                           }}
@@ -1627,10 +1665,10 @@ export const VehicleAssignmentView: FC = () => {
                             height: "28px",
                             padding: "0.2rem 0.45rem",
                             fontSize: "0.75rem",
-                            color: "#1E293B",
-                            backgroundColor: isAssigned ? "#FFFFFF" : "#F8FAFC",
-                            border: "1px solid #CBD5E1",
-                            borderRadius: "4px",
+                            color: "var(--ads-ink)",
+                            backgroundColor: isAssigned ? "var(--ads-material-thick)" : "var(--ads-canvas)",
+                            border: "1px solid var(--ads-hairline-strong)",
+                            borderRadius: "var(--ads-r-xs)",
                             outline: "none",
                             boxSizing: "border-box",
                           }}
@@ -1650,10 +1688,10 @@ export const VehicleAssignmentView: FC = () => {
                             height: "28px",
                             padding: "0.2rem 0.45rem",
                             fontSize: "0.75rem",
-                            color: "#1E293B",
-                            backgroundColor: isAssigned ? "#FFFFFF" : "#F8FAFC",
-                            border: "1px solid #CBD5E1",
-                            borderRadius: "4px",
+                            color: "var(--ads-ink)",
+                            backgroundColor: isAssigned ? "var(--ads-material-thick)" : "var(--ads-canvas)",
+                            border: "1px solid var(--ads-hairline-strong)",
+                            borderRadius: "var(--ads-r-xs)",
                             outline: "none",
                             boxSizing: "border-box",
                             textAlign: "center",
@@ -1674,10 +1712,10 @@ export const VehicleAssignmentView: FC = () => {
                             height: "28px",
                             padding: "0.2rem 0.45rem",
                             fontSize: "0.75rem",
-                            color: "#1E293B",
-                            backgroundColor: isAssigned ? "#FFFFFF" : "#F8FAFC",
-                            border: "1px solid #CBD5E1",
-                            borderRadius: "4px",
+                            color: "var(--ads-ink)",
+                            backgroundColor: isAssigned ? "var(--ads-material-thick)" : "var(--ads-canvas)",
+                            border: "1px solid var(--ads-hairline-strong)",
+                            borderRadius: "var(--ads-r-xs)",
                             outline: "none",
                             boxSizing: "border-box",
                             textAlign: "center",
@@ -1698,10 +1736,10 @@ export const VehicleAssignmentView: FC = () => {
                             height: "28px",
                             padding: "0.2rem 0.45rem",
                             fontSize: "0.75rem",
-                            color: "#1E293B",
-                            backgroundColor: isAssigned ? "#FFFFFF" : "#F8FAFC",
-                            border: "1px solid #CBD5E1",
-                            borderRadius: "4px",
+                            color: "var(--ads-ink)",
+                            backgroundColor: isAssigned ? "var(--ads-material-thick)" : "var(--ads-canvas)",
+                            border: "1px solid var(--ads-hairline-strong)",
+                            borderRadius: "var(--ads-r-xs)",
                             outline: "none",
                             boxSizing: "border-box",
                           }}
@@ -1725,10 +1763,10 @@ export const VehicleAssignmentView: FC = () => {
                                 height: "28px",
                                 padding: "0.2rem 0.45rem",
                                 fontSize: "0.75rem",
-                                color: "#1E293B",
-                                backgroundColor: isAssigned ? "#FFFFFF" : "#F8FAFC",
-                                border: "1px solid #CBD5E1",
-                                borderRadius: "4px",
+                                color: "var(--ads-ink)",
+                                backgroundColor: isAssigned ? "var(--ads-material-thick)" : "var(--ads-canvas)",
+                                border: "1px solid var(--ads-hairline-strong)",
+                                borderRadius: "var(--ads-r-xs)",
                                 outline: "none",
                                 boxSizing: "border-box",
                               }}
@@ -1759,25 +1797,28 @@ export const VehicleAssignmentView: FC = () => {
           style={{
             position: "fixed",
             inset: 0,
-            backgroundColor: "rgba(15, 23, 42, 0.5)",
+            background: "rgba(0,0,0,0.32)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             zIndex: 9999,
-            padding: "1rem",
-            backdropFilter: "blur(2px)",
+            padding: "var(--ads-s4)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
           }}
           onClick={() => setIsBulkMessageModalOpen(false)}
         >
           <div
             style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: "12px",
-              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+              background: "var(--ads-material-thick)",
+              backdropFilter: "var(--ads-blur-lg)",
+              WebkitBackdropFilter: "var(--ads-blur-lg)",
+              borderRadius: "var(--ads-r-xl)",
+              boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
               width: "100%",
               maxWidth: "460px",
               overflow: "hidden",
-              border: "1px solid #E2E8F0",
+              border: "1px solid var(--ads-hairline)",
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -1787,9 +1828,9 @@ export const VehicleAssignmentView: FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "1rem 1.25rem",
-                borderBottom: "1px solid #E2E8F0",
-                backgroundColor: "#F8FAFC",
+                padding: "var(--ads-s5) var(--ads-s6)",
+                borderBottom: "1px solid var(--ads-hairline)",
+                background: "transparent",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
@@ -1797,9 +1838,9 @@ export const VehicleAssignmentView: FC = () => {
                   style={{
                     width: "32px",
                     height: "32px",
-                    borderRadius: "6px",
-                    backgroundColor: "#EFF6FF",
-                    color: "#2563EB",
+                    borderRadius: "var(--ads-r-xs)",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    color: "var(--ads-blue)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -1807,19 +1848,26 @@ export const VehicleAssignmentView: FC = () => {
                 >
                   <MessageSquare size={16} />
                 </div>
-                <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+                <h3 style={{ fontSize: "1.0625rem", fontWeight: 600, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.014em" }}>
                   Send Assignment Messages
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsBulkMessageModalOpen(false)}
+                aria-label="Close send messages dialog"
                 style={{
+                  width: "32px",
+                  height: "32px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   background: "transparent",
-                  border: "none",
-                  color: "#94A3B8",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-sm)",
+                  color: "var(--ads-ink-tertiary)",
                   cursor: "pointer",
-                  padding: "0.25rem",
+                  transition: "all var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 <X size={18} />
@@ -1827,15 +1875,15 @@ export const VehicleAssignmentView: FC = () => {
             </div>
 
             {/* Modal Content */}
-            <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <div style={{ padding: "var(--ads-s6)", display: "flex", flexDirection: "column", gap: "var(--ads-s4)" }}>
               <div
                 style={{
-                  padding: "0.75rem",
-                  borderRadius: "8px",
-                  backgroundColor: "#EFF6FF",
-                  border: "1px solid #DBEAFE",
+                  padding: "var(--ads-s3)",
+                  borderRadius: "var(--ads-r-sm)",
+                  backgroundColor: "var(--ads-blue-tint)",
+                  border: "1px solid var(--ads-blue-tint-strong)",
                   fontSize: "0.8125rem",
-                  color: "#1E40AF",
+                  color: "var(--ads-blue)",
                   lineHeight: 1.45,
                 }}
               >
@@ -1846,7 +1894,7 @@ export const VehicleAssignmentView: FC = () => {
 
               {/* Delivery Channels */}
               <div>
-                <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#334155", display: "block", marginBottom: "0.5rem" }}>
+                <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink-secondary)", display: "block", marginBottom: "0.5rem" }}>
                   Delivery Channels
                 </label>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -1856,7 +1904,7 @@ export const VehicleAssignmentView: FC = () => {
                       alignItems: "center",
                       gap: "0.6rem",
                       fontSize: "0.8125rem",
-                      color: "#1E293B",
+                      color: "var(--ads-ink)",
                       cursor: "pointer",
                     }}
                   >
@@ -1866,7 +1914,7 @@ export const VehicleAssignmentView: FC = () => {
                       onChange={(e) =>
                         setBulkChannels((prev) => ({ ...prev, sms: e.target.checked }))
                       }
-                      style={{ width: "16px", height: "16px", accentColor: "#2563EB", cursor: "pointer" }}
+                      style={{ width: "16px", height: "16px", accentColor: "var(--ads-blue)", cursor: "pointer" }}
                     />
                     <span>Text Message (SMS)</span>
                   </label>
@@ -1876,7 +1924,7 @@ export const VehicleAssignmentView: FC = () => {
                       alignItems: "center",
                       gap: "0.6rem",
                       fontSize: "0.8125rem",
-                      color: "#1E293B",
+                      color: "var(--ads-ink)",
                       cursor: "pointer",
                     }}
                   >
@@ -1886,7 +1934,7 @@ export const VehicleAssignmentView: FC = () => {
                       onChange={(e) =>
                         setBulkChannels((prev) => ({ ...prev, inApp: e.target.checked }))
                       }
-                      style={{ width: "16px", height: "16px", accentColor: "#2563EB", cursor: "pointer" }}
+                      style={{ width: "16px", height: "16px", accentColor: "var(--ads-blue)", cursor: "pointer" }}
                     />
                     <span>In-App Driver Notification</span>
                   </label>
@@ -1894,7 +1942,7 @@ export const VehicleAssignmentView: FC = () => {
               </div>
 
               {/* Information preview */}
-              <div style={{ fontSize: "0.75rem", color: "#64748B", lineHeight: 1.4 }}>
+              <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", lineHeight: 1.4 }}>
                 Each driver receives their specific vehicle unit, CX/route number, staging location, stops, packages, and return time based on the values in the table.
               </div>
             </div>
@@ -1905,10 +1953,10 @@ export const VehicleAssignmentView: FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-end",
-                gap: "0.65rem",
-                padding: "0.85rem 1.25rem",
-                borderTop: "1px solid #E2E8F0",
-                backgroundColor: "#F8FAFC",
+                gap: "var(--ads-s3)",
+                padding: "var(--ads-s4) var(--ads-s6)",
+                borderTop: "1px solid var(--ads-hairline)",
+                background: "transparent",
               }}
             >
               <button
@@ -1916,14 +1964,17 @@ export const VehicleAssignmentView: FC = () => {
                 onClick={() => setIsBulkMessageModalOpen(false)}
                 disabled={isSendingMessages}
                 style={{
-                  padding: "0.45rem 0.9rem",
+                  padding: "9px 18px",
                   fontSize: "0.8125rem",
                   fontWeight: 600,
-                  backgroundColor: "#FFFFFF",
-                  border: "1px solid #CBD5E1",
-                  borderRadius: "6px",
-                  color: "#475569",
+                  letterSpacing: "-0.01em",
+                  background: "var(--ads-material-thick)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-pill)",
+                  boxShadow: "var(--ads-bevel)",
+                  color: "var(--ads-ink)",
                   cursor: isSendingMessages ? "not-allowed" : "pointer",
+                  transition: "all var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 Cancel
@@ -1936,15 +1987,16 @@ export const VehicleAssignmentView: FC = () => {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "0.4rem",
-                  padding: "0.45rem 1rem",
+                  padding: "9px 18px",
                   fontSize: "0.8125rem",
                   fontWeight: 600,
-                  backgroundColor: "#2563EB",
-                  border: "none",
-                  borderRadius: "6px",
+                  letterSpacing: "-0.01em",
+                  background: "var(--ads-blue)",
+                  border: "1px solid transparent",
+                  borderRadius: "var(--ads-r-pill)",
                   color: "#FFFFFF",
                   cursor: isSendingMessages || (!bulkChannels.sms && !bulkChannels.inApp) ? "not-allowed" : "pointer",
-                  boxShadow: "0 1px 2px rgba(37, 99, 235, 0.2)",
+                  transition: "all var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 {isSendingMessages ? (

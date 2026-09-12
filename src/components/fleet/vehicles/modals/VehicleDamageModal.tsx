@@ -191,15 +191,15 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
   const getFlagStyle = (f: DamageFlagColor) => {
     switch (f) {
       case "green":
-        return { bg: "#ECFDF5", text: "#065F46", border: "#A7F3D0", label: "Minor / Low" };
+        return { bg: "var(--ads-green-tint)", text: "var(--ads-green)", border: "var(--ads-green-tint)", label: "Minor / Low" };
       case "yellow":
-        return { bg: "#FFFBEB", text: "#92400E", border: "#FDE68A", label: "Moderate" };
+        return { bg: "var(--ads-amber-tint)", text: "var(--ads-amber)", border: "var(--ads-amber-tint)", label: "Moderate" };
       case "red":
-        return { bg: "#FEF2F2", text: "#991B1B", border: "#FCA5A5", label: "Severe (Ground)" };
+        return { bg: "var(--ads-red-tint)", text: "var(--ads-red)", border: "var(--ads-red-tint)", label: "Severe (Ground)" };
       case "black":
-        return { bg: "#1E293B", text: "#FFFFFF", border: "#0F172A", label: "Critical Hazard" };
+        return { bg: "var(--ads-ink)", text: "#FFFFFF", border: "var(--ads-ink)", label: "Critical Hazard" };
       default:
-        return { bg: "#F1F5F9", text: "#475569", border: "#CBD5E1", label: f };
+        return { bg: "rgba(0,0,0,0.04)", text: "var(--ads-ink-secondary)", border: "var(--ads-hairline-strong)", label: f };
     }
   };
 
@@ -212,9 +212,10 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(15, 23, 42, 0.45)",
-        backdropFilter: "blur(4px)",
-        padding: "1rem",
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
+        padding: "var(--ads-s4)",
       }}
       onClick={onClose}
     >
@@ -223,25 +224,28 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
           width: "100%",
           maxWidth: "760px",
           maxHeight: "90vh",
-          backgroundColor: "#FFFFFF",
-          borderRadius: "16px",
-          boxShadow: "0 25px 50px -12px rgba(15, 23, 42, 0.25)",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
-          border: "1px solid #E2E8F0",
+          border: "1px solid var(--ads-hairline)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
         <div
           style={{
-            padding: "1.25rem 1.5rem",
-            backgroundColor: "#F8FAFC",
-            borderBottom: "1px solid #E2E8F0",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            background: "transparent",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: "var(--ads-s3)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
@@ -249,9 +253,9 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
               style={{
                 width: "40px",
                 height: "40px",
-                borderRadius: "10px",
-                backgroundColor: isBody ? "#EFF6FF" : "#FFFBEB",
-                color: isBody ? "#2563EB" : "#D97706",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: isBody ? "var(--ads-blue-tint)" : "var(--ads-amber-tint)",
+                color: isBody ? "var(--ads-blue)" : "var(--ads-amber)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -260,30 +264,33 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
               {isBody ? <ShieldAlert size={22} /> : <Wrench size={22} />}
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: "1.125rem", fontWeight: 750, color: "#0F172A" }}>
+              <h3 style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 600, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                 {title} • {vehicle.name}
               </h3>
-              <span style={{ fontSize: "0.8125rem", color: "#64748B" }}>
+              <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                 VIN: <code style={{ fontWeight: 600 }}>{vehicle.vin}</code> • Plate: {vehicle.plate}
               </span>
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
             <button
               type="button"
               onClick={showForm ? () => setShowForm(false) : handleOpenAdd}
               style={{
-                display: "flex",
+                display: "inline-flex",
                 alignItems: "center",
-                gap: "0.4rem",
-                padding: "0.45rem 0.95rem",
-                borderRadius: "8px",
-                backgroundColor: showForm ? "#F1F5F9" : "#2563EB",
-                border: showForm ? "1px solid #CBD5E1" : "none",
-                color: showForm ? "#475569" : "#FFFFFF",
+                gap: "var(--ads-s2)",
+                padding: "9px 18px",
+                borderRadius: "var(--ads-r-pill)",
+                background: showForm ? "var(--ads-material-thick)" : "var(--ads-blue)",
+                border: "1px solid " + (showForm ? "var(--ads-hairline)" : "transparent"),
+                boxShadow: showForm ? "var(--ads-bevel)" : "none",
+                color: showForm ? "var(--ads-ink)" : "#FFFFFF",
                 fontSize: "0.8125rem",
                 fontWeight: 600,
+                letterSpacing: "-0.01em",
+                whiteSpace: "nowrap",
                 cursor: "pointer",
               }}
             >
@@ -292,16 +299,30 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
             <button
               type="button"
               onClick={onClose}
+              aria-label={`Close ${title}`}
               style={{
-                padding: "0.4rem",
-                borderRadius: "8px",
-                border: "none",
-                backgroundColor: "transparent",
-                color: "#64748B",
+                width: 32,
+                height: 32,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
+                background: "transparent",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(0,0,0,0.05)";
+                e.currentTarget.style.color = "var(--ads-ink)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "var(--ads-ink-tertiary)";
               }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
         </div>
@@ -310,22 +331,24 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
         {!showForm && (
           <div
             style={{
-              padding: "0.75rem 1.5rem",
-              borderBottom: "1px solid #E2E8F0",
-              backgroundColor: "#FFFFFF",
+              padding: "var(--ads-s3) var(--ads-s6)",
+              borderBottom: "1px solid var(--ads-hairline)",
+              background: "rgba(0, 0, 0, 0.025)",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              gap: "var(--ads-s3)",
             }}
           >
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                backgroundColor: "#F1F5F9",
+                backgroundColor: "rgba(0,0,0,0.04)",
+                border: "1px solid var(--ads-hairline)",
                 padding: "3px",
-                borderRadius: "8px",
-                gap: "2px",
+                borderRadius: "var(--ads-r-pill)",
+                gap: "3px",
               }}
             >
               {[
@@ -337,41 +360,44 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                   key={tab.key}
                   type="button"
                   onClick={() => setFilter(tab.key as any)}
+                  aria-pressed={filter === tab.key}
                   style={{
-                    padding: "0.3rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "none",
-                    backgroundColor: filter === tab.key ? "#FFFFFF" : "transparent",
-                    color: filter === tab.key ? "#2563EB" : "#64748B",
+                    padding: "6px 14px",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid " + (filter === tab.key ? "var(--ads-hairline)" : "transparent"),
+                    background: filter === tab.key ? "var(--ads-material-thick)" : "transparent",
+                    color: filter === tab.key ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
                     fontSize: "0.8125rem",
-                    fontWeight: filter === tab.key ? 700 : 500,
+                    fontWeight: filter === tab.key ? 600 : 550,
+                    letterSpacing: "-0.005em",
                     cursor: "pointer",
-                    boxShadow: filter === tab.key ? "0 1px 3px rgba(0, 0, 0, 0.06)" : "none",
+                    transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+                    boxShadow: filter === tab.key ? "var(--ads-shadow-xs), var(--ads-bevel)" : "none",
                   }}
                 >
                   {tab.label}
                 </button>
               ))}
             </div>
-            <span style={{ fontSize: "0.8125rem", color: "#64748B" }}>
+            <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
               Showing {filteredRecords.length} record{filteredRecords.length !== 1 ? "s" : ""}
             </span>
           </div>
         )}
 
         {/* Modal Body */}
-        <div style={{ flex: 1, overflowY: "auto", padding: "1.5rem" }}>
+        <div style={{ flex: 1, overflowY: "auto", padding: "var(--ads-s6)" }}>
           {showForm ? (
             /* ADD / EDIT FORM */
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
               <div
                 style={{
                   padding: "0.75rem 1rem",
-                  backgroundColor: "#EFF6FF",
-                  borderRadius: "8px",
-                  border: "1px solid #BFDBFE",
+                  backgroundColor: "var(--ads-blue-tint)",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid var(--ads-blue-tint-strong)",
                   fontSize: "0.875rem",
-                  color: "#1E40AF",
+                  color: "var(--ads-blue-active)",
                   fontWeight: 600,
                 }}
               >
@@ -382,11 +408,11 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                 <div
                   style={{
                     padding: "0.65rem 0.85rem",
-                    backgroundColor: "#FEF2F2",
-                    borderRadius: "8px",
-                    border: "1px solid #FCA5A5",
+                    backgroundColor: "var(--ads-red-tint)",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-red-tint)",
                     fontSize: "0.8125rem",
-                    color: "#991B1B",
+                    color: "var(--ads-red)",
                   }}
                 >
                   {errorMsg}
@@ -397,8 +423,8 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
                 {/* Severity Flag */}
                 <div>
-                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                    Severity Level <span style={{ color: "#DC2626" }}>*</span>
+                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.35rem" }}>
+                    Severity Level <span style={{ color: "var(--ads-red)" }}>*</span>
                   </label>
                   <select
                     value={flag}
@@ -406,11 +432,11 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                     style={{
                       width: "100%",
                       padding: "0.55rem 0.75rem",
-                      borderRadius: "8px",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
                       fontSize: "0.875rem",
-                      color: "#0F172A",
+                      color: "var(--ads-ink)",
                     }}
                   >
                     <option value="green">Green (Minor / Cosmetic)</option>
@@ -422,8 +448,8 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
 
                 {/* Location or Category */}
                 <div>
-                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                    {isBody ? "Damage Location" : "System / Issue Category"} <span style={{ color: "#DC2626" }}>*</span>
+                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.35rem" }}>
+                    {isBody ? "Damage Location" : "System / Issue Category"} <span style={{ color: "var(--ads-red)" }}>*</span>
                   </label>
                   <select
                     value={locationCategory}
@@ -431,11 +457,11 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                     style={{
                       width: "100%",
                       padding: "0.55rem 0.75rem",
-                      borderRadius: "8px",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
                       fontSize: "0.875rem",
-                      color: "#0F172A",
+                      color: "var(--ads-ink)",
                     }}
                   >
                     {(isBody ? BODY_LOCATIONS : MECHANICAL_CATEGORIES).map((opt) => (
@@ -448,8 +474,8 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
 
                 {/* Date */}
                 <div>
-                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                    Date Recorded <span style={{ color: "#DC2626" }}>*</span>
+                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.35rem" }}>
+                    Date Recorded <span style={{ color: "var(--ads-red)" }}>*</span>
                   </label>
                   <input
                     type="date"
@@ -458,18 +484,18 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                     style={{
                       width: "100%",
                       padding: "0.55rem 0.75rem",
-                      borderRadius: "8px",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
                       fontSize: "0.875rem",
-                      color: "#0F172A",
+                      color: "var(--ads-ink)",
                     }}
                   />
                 </div>
 
                 {/* Estimated Cost */}
                 <div>
-                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.35rem" }}>
                     Estimated Repair Cost ($)
                   </label>
                   <input
@@ -482,19 +508,19 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                     style={{
                       width: "100%",
                       padding: "0.55rem 0.75rem",
-                      borderRadius: "8px",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
                       fontSize: "0.875rem",
-                      color: "#0F172A",
+                      color: "var(--ads-ink)",
                     }}
                   />
                 </div>
 
                 {/* Detail Description */}
                 <div style={{ gridColumn: "span 2" }}>
-                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                    Description &amp; Observations <span style={{ color: "#DC2626" }}>*</span>
+                  <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.35rem" }}>
+                    Description &amp; Observations <span style={{ color: "var(--ads-red)" }}>*</span>
                   </label>
                   <textarea
                     rows={3}
@@ -504,11 +530,11 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                     style={{
                       width: "100%",
                       padding: "0.6rem 0.75rem",
-                      borderRadius: "8px",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
                       fontSize: "0.875rem",
-                      color: "#0F172A",
+                      color: "var(--ads-ink)",
                       resize: "none",
                     }}
                   />
@@ -522,13 +548,15 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                   onClick={() => setShowForm(false)}
                   disabled={isSubmitting}
                   style={{
-                    padding: "0.5rem 1rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    color: "#475569",
-                    fontSize: "0.875rem",
+                    padding: "9px 18px",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    boxShadow: "var(--ads-bevel)",
+                    color: "var(--ads-ink)",
+                    fontSize: "0.8125rem",
                     fontWeight: 600,
+                    letterSpacing: "-0.01em",
                     cursor: "pointer",
                   }}
                 >
@@ -538,16 +566,18 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                   type="submit"
                   disabled={isSubmitting || !detail.trim()}
                   style={{
-                    display: "flex",
+                    display: "inline-flex",
                     alignItems: "center",
-                    gap: "0.45rem",
-                    padding: "0.5rem 1.25rem",
-                    borderRadius: "8px",
-                    backgroundColor: "#2563EB",
-                    border: "none",
+                    gap: "var(--ads-s2)",
+                    padding: "9px 18px",
+                    borderRadius: "var(--ads-r-pill)",
+                    backgroundColor: "var(--ads-blue)",
+                    border: "1px solid transparent",
                     color: "#FFFFFF",
-                    fontSize: "0.875rem",
+                    fontSize: "0.8125rem",
                     fontWeight: 600,
+                    letterSpacing: "-0.01em",
+                    opacity: isSubmitting || !detail.trim() ? 0.4 : 1,
                     cursor: isSubmitting || !detail.trim() ? "not-allowed" : "pointer",
                   }}
                 >
@@ -559,19 +589,19 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
           ) : loading ? (
             /* LOADING SKELETON */
             <div style={{ padding: "3rem", textAlign: "center" }}>
-              <LoadingSpinner size="lg" color="#2563EB" />
-              <p style={{ marginTop: "1rem", color: "#64748B", fontSize: "0.875rem" }}>
+              <LoadingSpinner size="lg" color="var(--ads-blue)" />
+              <p style={{ marginTop: "1rem", color: "var(--ads-ink-tertiary)", fontSize: "0.875rem" }}>
                 Loading {title.toLowerCase()} from microservice...
               </p>
             </div>
           ) : filteredRecords.length === 0 ? (
             /* EMPTY STATE */
             <div style={{ padding: "3.5rem 1rem", textAlign: "center" }}>
-              <CheckCircle2 size={42} color="#10B981" style={{ margin: "0 auto 0.75rem" }} />
-              <h4 style={{ margin: "0 0 0.25rem", color: "#0F172A", fontSize: "1rem", fontWeight: 700 }}>
+              <CheckCircle2 size={42} color="var(--ads-green)" style={{ margin: "0 auto 0.75rem" }} />
+              <h4 style={{ margin: "0 0 0.25rem", color: "var(--ads-ink)", fontSize: "1rem", fontWeight: 700 }}>
                 No {title} Found
               </h4>
-              <p style={{ color: "#64748B", fontSize: "0.875rem", margin: "0 0 1.25rem" }}>
+              <p style={{ color: "var(--ads-ink-tertiary)", fontSize: "0.875rem", margin: "0 0 1.25rem" }}>
                 There are no {filter !== "all" ? filter : ""} records on file for vehicle {vehicle.name}.
               </p>
               <button
@@ -580,14 +610,15 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.4rem",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "8px",
-                  backgroundColor: "#2563EB",
-                  border: "none",
+                  gap: "var(--ads-s2)",
+                  padding: "9px 18px",
+                  borderRadius: "var(--ads-r-pill)",
+                  backgroundColor: "var(--ads-blue)",
+                  border: "1px solid transparent",
                   color: "#FFFFFF",
                   fontSize: "0.8125rem",
                   fontWeight: 600,
+                  letterSpacing: "-0.01em",
                   cursor: "pointer",
                 }}
               >
@@ -606,28 +637,40 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                   <div
                     key={rec.id}
                     style={{
-                      backgroundColor: "#FFFFFF",
-                      border: "1px solid #E2E8F0",
-                      borderRadius: "12px",
-                      padding: "1rem 1.25rem",
-                      boxShadow: "0 1px 3px rgba(0, 0, 0, 0.03)",
+                      background: "var(--ads-material-thick)",
+                      border: "1px solid var(--ads-hairline)",
+                      borderRadius: "var(--ads-r-md)",
+                      padding: "var(--ads-s4) var(--ads-s5)",
+                      boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "0.6rem",
+                      gap: "var(--ads-s2)",
+                      transition: "box-shadow var(--ads-dur) var(--ads-ease), transform var(--ads-dur) var(--ads-ease), border-color var(--ads-dur) var(--ads-ease)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+                      e.currentTarget.style.borderColor = "var(--ads-hairline-strong)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "var(--ads-shadow-xs), var(--ads-bevel)";
+                      e.currentTarget.style.borderColor = "var(--ads-hairline)";
                     }}
                   >
                     {/* Top Row: Location + Severity Flag + Actions */}
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-                        <span style={{ fontSize: "0.95rem", fontWeight: 750, color: "#0F172A" }}>
+                        <span style={{ fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                           {itemLocation || (isBody ? "Body Area" : "Mechanical Component")}
                         </span>
                         <span
                           style={{
-                            padding: "0.15rem 0.55rem",
-                            borderRadius: "6px",
-                            fontSize: "0.75rem",
-                            fontWeight: 700,
+                            padding: "3px 9px",
+                            borderRadius: "var(--ads-r-pill)",
+                            fontSize: "0.6875rem",
+                            fontWeight: 600,
+                            letterSpacing: "-0.005em",
                             backgroundColor: flagStyle.bg,
                             color: flagStyle.text,
                             border: `1px solid ${flagStyle.border}`,
@@ -637,19 +680,27 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s1)" }}>
                         <button
                           type="button"
                           onClick={() => handleOpenEdit(rec)}
                           title="Edit"
+                          aria-label={`Edit ${isBody ? "damage" : "issue"} record`}
                           style={{
-                            padding: "0.35rem",
-                            borderRadius: "6px",
-                            border: "1px solid #E2E8F0",
-                            backgroundColor: "#FFFFFF",
-                            color: "#2563EB",
+                            width: 30,
+                            height: 30,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: "var(--ads-r-sm)",
+                            border: "1px solid var(--ads-hairline)",
+                            background: "transparent",
+                            color: "var(--ads-blue)",
                             cursor: "pointer",
+                            transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                           }}
+                          onMouseEnter={(e) => (e.currentTarget.style.background = "var(--ads-blue-tint)")}
+                          onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                         >
                           <Edit2 size={14} />
                         </button>
@@ -657,14 +708,22 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                           type="button"
                           onClick={() => handleDelete(rec.id)}
                           title="Delete"
+                          aria-label={`Delete ${isBody ? "damage" : "issue"} record`}
                           style={{
-                            padding: "0.35rem",
-                            borderRadius: "6px",
-                            border: "1px solid #E2E8F0",
-                            backgroundColor: "#FFFFFF",
-                            color: "#DC2626",
+                            width: 30,
+                            height: 30,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: "var(--ads-r-sm)",
+                            border: "1px solid var(--ads-hairline)",
+                            background: "transparent",
+                            color: "var(--ads-red)",
                             cursor: "pointer",
+                            transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                           }}
+                          onMouseEnter={(e) => (e.currentTarget.style.background = "var(--ads-red-tint)")}
+                          onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                         >
                           <Trash2 size={14} />
                         </button>
@@ -672,7 +731,7 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                     </div>
 
                     {/* Detail Description */}
-                    <p style={{ margin: 0, fontSize: "0.875rem", color: "#334155", lineHeight: 1.5 }}>
+                    <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--ads-ink-secondary)", lineHeight: 1.5 }}>
                       {rec.detail || rec.description}
                     </p>
 
@@ -682,10 +741,10 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                         display: "flex",
                         alignItems: "center",
                         gap: "1.25rem",
-                        paddingTop: "0.4rem",
-                        borderTop: "1px solid #F8FAFC",
+                        paddingTop: "var(--ads-s2)",
+                        borderTop: "1px solid var(--ads-hairline)",
                         fontSize: "0.75rem",
-                        color: "#64748B",
+                        color: "var(--ads-ink-tertiary)",
                         flexWrap: "wrap",
                       }}
                     >
@@ -694,7 +753,7 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                         <span>{rec.damage_date || rec.created_at?.slice(0, 10) || "N/A"}</span>
                       </div>
                       {rec.estimated_cost ? (
-                        <div style={{ display: "flex", alignItems: "center", gap: "0.2rem", color: "#059669", fontWeight: 600 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.2rem", color: "var(--ads-green)", fontWeight: 600 }}>
                           <DollarSign size={13} />
                           <span>Est. ${Number(rec.estimated_cost).toFixed(2)}</span>
                         </div>
@@ -706,7 +765,7 @@ export const VehicleDamageModal: FC<VehicleDamageModalProps> = ({
                         style={{
                           marginLeft: "auto",
                           fontWeight: 650,
-                          color: rec.partially_resolved ? "#059669" : "#D97706",
+                          color: rec.partially_resolved ? "var(--ads-green)" : "var(--ads-amber)",
                         }}
                       >
                         {rec.partially_resolved ? "✓ Resolved" : "● Open Defect"}

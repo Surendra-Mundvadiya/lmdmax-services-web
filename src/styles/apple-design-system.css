@@ -1,0 +1,353 @@
+/* ============================================================================
+   LMDmax — Apple-inspired design system
+   Single source of truth for color, material, radius, elevation, motion.
+   Imported last in main.tsx so it wins the cascade over legacy CSS.
+
+   Apple's three principles this encodes:
+     Deference — chrome recedes, content leads
+     Clarity   — high-contrast type, generous whitespace, one accent
+     Depth     — translucent material layers, spring motion
+   ========================================================================= */
+
+:root {
+  /* ── Accent ────────────────────────────────────────────────────────── */
+  --ads-blue: #0071E3;
+  --ads-blue-hover: #0077ED;
+  --ads-blue-active: #0062C4;
+  --ads-blue-tint: #E8F2FD;
+  --ads-blue-tint-strong: #D2E5FB;
+
+  /* ── Neutrals (Apple grays) ────────────────────────────────────────── */
+  --ads-ink: #1D1D1F;
+  --ads-ink-secondary: #424245;
+  --ads-ink-tertiary: #6E6E73;
+  --ads-ink-quaternary: #86868B;
+  --ads-canvas: #F5F5F7;
+  --ads-white: #FFFFFF;
+
+  /* ── Semantic ──────────────────────────────────────────────────────── */
+  --ads-green: #248A3D;
+  --ads-green-tint: #E7F5EC;
+  --ads-amber: #B25000;
+  --ads-amber-tint: #FDF0E5;
+  --ads-red: #D70015;
+  --ads-red-tint: #FDECEE;
+  --ads-purple: #6E4FC4;
+  --ads-purple-tint: #F0EBFB;
+
+  /* ── Materials ─────────────────────────────────────────────────────────
+     Apple's material hierarchy. Thicker = more opaque = more legible.
+     Use thick/regular behind text; thin/ultrathin for transient chrome.   */
+  --ads-material-ultrathin: rgba(255, 255, 255, 0.60);
+  --ads-material-thin:      rgba(255, 255, 255, 0.72);
+  --ads-material-regular:   rgba(255, 255, 255, 0.82);
+  --ads-material-thick:     rgba(255, 255, 255, 0.92);
+
+  --ads-blur-sm: blur(12px) saturate(180%);
+  --ads-blur-md: blur(20px) saturate(180%);
+  --ads-blur-lg: blur(32px) saturate(190%);
+
+  /* Apple's signature inner top highlight — sells the "pane of glass" look */
+  --ads-bevel: inset 0 1px 0 0 rgba(255, 255, 255, 0.75);
+  --ads-hairline: rgba(0, 0, 0, 0.08);
+  --ads-hairline-strong: rgba(0, 0, 0, 0.14);
+
+  /* ── Elevation ─────────────────────────────────────────────────────── */
+  --ads-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --ads-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --ads-shadow-md: 0 2px 6px rgba(0, 0, 0, 0.06), 0 10px 28px rgba(0, 0, 0, 0.06);
+  --ads-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.07), 0 20px 48px rgba(0, 0, 0, 0.09);
+  --ads-shadow-focus: 0 0 0 4px rgba(0, 113, 227, 0.28);
+
+  /* ── Radius (Apple favours generous, continuous curvature) ─────────── */
+  --ads-r-xs: 6px;
+  --ads-r-sm: 10px;
+  --ads-r-md: 14px;
+  --ads-r-lg: 18px;
+  --ads-r-xl: 22px;
+  --ads-r-pill: 980px;
+
+  /* ── Spacing (4pt grid) ────────────────────────────────────────────── */
+  --ads-s1: 4px;
+  --ads-s2: 8px;
+  --ads-s3: 12px;
+  --ads-s4: 16px;
+  --ads-s5: 20px;
+  --ads-s6: 24px;
+  --ads-s8: 32px;
+  --ads-s10: 40px;
+
+  /* ── Motion ────────────────────────────────────────────────────────── */
+  --ads-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ads-ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ads-dur-fast: 180ms;
+  --ads-dur: 280ms;
+  --ads-dur-slow: 420ms;
+  --ads-t: var(--ads-dur) var(--ads-ease);
+}
+
+/* ============================================================================
+   Base — typography and canvas
+   ========================================================================= */
+
+html, body {
+  background: var(--ads-canvas);
+  color: var(--ads-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Apple tightens tracking as type scales up */
+h1, .ads-h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.022em; line-height: 1.18; color: var(--ads-ink); }
+h2, .ads-h2 { font-size: 1.375rem; font-weight: 650; letter-spacing: -0.019em; line-height: 1.22; color: var(--ads-ink); }
+h3, .ads-h3 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.014em; line-height: 1.3; color: var(--ads-ink); }
+h4, .ads-h4 { font-size: 0.9375rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; color: var(--ads-ink); }
+
+.ads-body { font-size: 0.875rem; line-height: 1.5; color: var(--ads-ink-secondary); }
+.ads-caption { font-size: 0.75rem; line-height: 1.4; color: var(--ads-ink-tertiary); }
+.ads-overline {
+  font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--ads-ink-quaternary);
+}
+
+/* ============================================================================
+   Ambient canvas — gives the glass something to refract.
+   Without this, translucency over flat white is invisible.
+   ========================================================================= */
+
+.ads-ambient,
+.glass-app-layout-shell,
+.glass-sidebar-layout-shell,
+.operations-page-container {
+  position: relative;
+  background-color: var(--ads-canvas);
+  background-image:
+    radial-gradient(1200px 600px at 12% -8%, rgba(0, 113, 227, 0.10), transparent 60%),
+    radial-gradient(1000px 560px at 92% 4%, rgba(110, 79, 196, 0.07), transparent 62%),
+    radial-gradient(900px 520px at 50% 104%, rgba(0, 168, 150, 0.055), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* ============================================================================
+   Materials — the glass primitives
+   ========================================================================= */
+
+.ads-glass,
+.ads-card {
+  background: var(--ads-material-thick);
+  -webkit-backdrop-filter: var(--ads-blur-md);
+  backdrop-filter: var(--ads-blur-md);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-lg);
+  box-shadow: var(--ads-shadow-sm), var(--ads-bevel);
+  transition: box-shadow var(--ads-t), transform var(--ads-t), border-color var(--ads-t);
+}
+
+.ads-card--interactive { cursor: pointer; }
+.ads-card--interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ads-shadow-md), var(--ads-bevel);
+  border-color: var(--ads-hairline-strong);
+}
+.ads-card--interactive:active { transform: translateY(0); }
+
+.ads-chrome {
+  background: var(--ads-material-thin);
+  -webkit-backdrop-filter: var(--ads-blur-lg);
+  backdrop-filter: var(--ads-blur-lg);
+  border-bottom: 1px solid var(--ads-hairline);
+}
+
+/* ============================================================================
+   Buttons
+   ========================================================================= */
+
+.ads-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ads-s2);
+  padding: 9px 18px;
+  border-radius: var(--ads-r-pill);
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease),
+              border-color var(--ads-dur-fast) var(--ads-ease);
+}
+.ads-btn:active { transform: scale(0.97); }
+.ads-btn:focus-visible { outline: none; box-shadow: var(--ads-shadow-focus); }
+.ads-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.ads-btn--primary { background: var(--ads-blue); color: #FFFFFF; }
+.ads-btn--primary:hover:not(:disabled) { background: var(--ads-blue-hover); }
+.ads-btn--primary:active:not(:disabled) { background: var(--ads-blue-active); }
+/* Contrast guard: nested icons/text in a filled blue button stay pure white */
+.ads-btn--primary * { color: #FFFFFF; }
+
+.ads-btn--secondary {
+  background: var(--ads-material-thick);
+  -webkit-backdrop-filter: var(--ads-blur-sm);
+  backdrop-filter: var(--ads-blur-sm);
+  color: var(--ads-ink);
+  border-color: var(--ads-hairline);
+  box-shadow: var(--ads-bevel);
+}
+.ads-btn--secondary:hover:not(:disabled) {
+  background: var(--ads-white);
+  border-color: var(--ads-hairline-strong);
+}
+
+.ads-btn--ghost { background: transparent; color: var(--ads-blue); }
+.ads-btn--ghost:hover:not(:disabled) { background: var(--ads-blue-tint); }
+
+.ads-btn--danger { background: var(--ads-red); color: #FFFFFF; }
+.ads-btn--danger * { color: #FFFFFF; }
+
+.ads-btn--sm { padding: 6px 13px; font-size: 0.75rem; }
+.ads-btn--lg { padding: 12px 24px; font-size: 0.875rem; }
+
+/* ============================================================================
+   Form controls
+   ========================================================================= */
+
+.ads-input,
+.ads-select,
+.ads-textarea {
+  width: 100%;
+  padding: 9px 13px;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: var(--ads-ink);
+  background: var(--ads-material-thick);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-sm);
+  transition: border-color var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease),
+              background-color var(--ads-dur-fast) var(--ads-ease);
+}
+.ads-input::placeholder { color: var(--ads-ink-quaternary); }
+.ads-input:hover { border-color: var(--ads-hairline-strong); }
+.ads-input:focus,
+.ads-select:focus,
+.ads-textarea:focus {
+  outline: none;
+  background: var(--ads-white);
+  border-color: var(--ads-blue);
+  box-shadow: var(--ads-shadow-focus);
+}
+
+/* ============================================================================
+   Badges & pills
+   ========================================================================= */
+
+.ads-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: var(--ads-r-pill);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+  border: 1px solid transparent;
+}
+.ads-badge--neutral { background: rgba(0,0,0,0.05); color: var(--ads-ink-secondary); }
+.ads-badge--blue    { background: var(--ads-blue-tint);  color: #0058B0; }
+.ads-badge--green   { background: var(--ads-green-tint); color: var(--ads-green); }
+.ads-badge--amber   { background: var(--ads-amber-tint); color: var(--ads-amber); }
+.ads-badge--red     { background: var(--ads-red-tint);   color: var(--ads-red); }
+.ads-badge--purple  { background: var(--ads-purple-tint);color: var(--ads-purple); }
+
+.ads-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 15px;
+  border-radius: var(--ads-r-pill);
+  font-size: 0.8125rem;
+  font-weight: 550;
+  color: var(--ads-ink-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--ads-dur-fast) var(--ads-ease);
+}
+.ads-pill:hover { background: rgba(0,0,0,0.04); color: var(--ads-ink); }
+.ads-pill[aria-selected="true"],
+.ads-pill--active {
+  background: var(--ads-blue);
+  color: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0,113,227,0.32);
+}
+.ads-pill--active * { color: #FFFFFF; }
+
+/* ============================================================================
+   Overlays
+   ========================================================================= */
+
+.ads-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: ads-fade var(--ads-dur) var(--ads-ease);
+}
+
+.ads-sheet {
+  background: var(--ads-material-thick);
+  -webkit-backdrop-filter: var(--ads-blur-lg);
+  backdrop-filter: var(--ads-blur-lg);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-xl);
+  box-shadow: var(--ads-shadow-lg), var(--ads-bevel);
+  animation: ads-sheet-in var(--ads-dur) var(--ads-ease);
+}
+
+@keyframes ads-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ads-sheet-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================================================
+   Accessibility
+   ========================================================================= */
+
+:focus-visible { outline: 2px solid var(--ads-blue); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Translucency is decorative — drop it when the OS asks for contrast,
+   and fall back to opaque where backdrop-filter is unsupported. */
+@media (prefers-contrast: more) {
+  .ads-card, .ads-glass, .ads-chrome, .ads-sheet {
+    background: var(--ads-white);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: var(--ads-hairline-strong);
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .ads-card, .ads-glass, .ads-chrome, .ads-sheet, .ads-btn--secondary, .ads-input {
+    background: var(--ads-white);
+  }
+}

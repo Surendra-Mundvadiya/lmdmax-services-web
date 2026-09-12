@@ -13,12 +13,14 @@ These 10 rules are MANDATORY and MUST be strictly followed across the entire app
    - Do NOT make any changes to the backend microservices (`fleet-users-msrv-production`, `fleet-performance-msrv-production`, `fleet-scheduler-msrv-production`, etc.).
    - All tasks, proxying, formatting, state management, and adaptations must be achieved purely on the frontend.
 
-3. **Strict Theme, Typography & Modern UI/UX Consistency**:
-   - **Universal Font Family**: `'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif` used universally across all headers, cards, tables, inputs, buttons, and micro-copy in both layouts.
-   - **Modern UI/UX & Sleek Transitions**: Use fluid state transitions (`cubic-bezier(0.16, 1, 0.3, 1)`), subtle micro-animations, and clean hover elevations.
-   - **Crisp Solid Cards (Zero Murky Glassapp Gradients)**: Cards must be solid `#FFFFFF !important` with clean `1px solid #E2E8F0` borders, `border-radius: 14px`, and subtle elevation (`0 2px 8px rgba(15, 23, 42, 0.04)`). No muddy radial gradients or illegible background blur bleed-through.
-   - **Consistent Blue-and-White Theme**: `#4F8BFF`, `#2563EB`, `#1D4ED8`, `#EFF6FF`, `#F0F6FF`, `#FFFFFF`, `#1E293B`, `#64748B`.
-   - **High Contrast Buttons**: All blue buttons and active blue pills (`#2563EB`) and their nested child text/icons MUST have pure white text (`#FFFFFF !important`).
+3. **Apple-Inspired Design System (Single Source of Truth)**:
+   - **All** color, material, radius, elevation, spacing and motion values come from `src/styles/apple-design-system.css`. Never hardcode a hex value, radius or shadow in a component — use the `--ads-*` tokens. If a token is missing, add it to the design system rather than inventing a local value.
+   - **Universal Font Family**: `'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif` across all headers, cards, tables, inputs, buttons and micro-copy in both layouts. Tracking tightens as type scales up (`-0.022em` at h1 → `-0.005em` at caption).
+   - **Translucent Material Surfaces**: Cards, modals and chrome use the material scale (`--ads-material-thin/regular/thick`) with `backdrop-filter: var(--ads-blur-sm/md/lg)`, a `1px solid var(--ads-hairline)` border and the inner top highlight `var(--ads-bevel)`. Anything carrying body text uses `--ads-material-thick` or heavier so contrast is preserved.
+   - **Accent & Neutrals**: Apple system blue `--ads-blue: #0071E3` is the single accent. Text uses `--ads-ink` (#1D1D1F) / `--ads-ink-secondary` / `--ads-ink-tertiary`. Canvas is `--ads-canvas` (#F5F5F7). Semantic colors (`--ads-green/amber/red/purple`) are for status only, never decoration.
+   - **High Contrast Buttons**: Filled blue buttons and active pills and their nested child text/icons MUST render pure white (`#FFFFFF`). Never blue-on-blue.
+   - **Motion**: Transitions use `var(--ads-ease)` (`cubic-bezier(0.16, 1, 0.3, 1)`) at `--ads-dur-fast`/`--ads-dur`. Hover lifts are `translateY(-1px|-2px)`; presses are `scale(0.97)`. All motion must respect `prefers-reduced-motion`.
+   - **No inline styles for theming.** Inline `style={{}}` blocks defeat the cascade and are the main source of drift in this codebase. Use design-system classes; reserve inline styles for genuinely dynamic values (computed widths, positions).
 
 4. **Single Header Architecture (No Double Headers)**:
    - Never render double headers on any page.

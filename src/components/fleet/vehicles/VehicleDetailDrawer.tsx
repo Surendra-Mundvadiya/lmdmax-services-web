@@ -129,11 +129,36 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
   };
 
   const statusConfig = {
-    active: { label: "In Service", bg: "#ECFDF5", text: "#065F46", border: "#A7F3D0" },
-    grounded: { label: "Grounded", bg: "#FEF2F2", text: "#991B1B", border: "#FCA5A5" },
-    maintenance: { label: "In Maintenance", bg: "#FFFBEB", text: "#92400E", border: "#FDE68A" },
-    inactive: { label: "Inactive", bg: "#F1F5F9", text: "#475569", border: "#CBD5E1" },
-  }[vehicle.status] || { label: vehicle.status, bg: "#F1F5F9", text: "#475569", border: "#CBD5E1" };
+    active: {
+      label: "In Service",
+      bg: "var(--ads-green-tint)",
+      text: "var(--ads-green)",
+      border: "var(--ads-hairline)",
+    },
+    grounded: {
+      label: "Grounded",
+      bg: "var(--ads-red-tint)",
+      text: "var(--ads-red)",
+      border: "var(--ads-hairline)",
+    },
+    maintenance: {
+      label: "In Maintenance",
+      bg: "var(--ads-amber-tint)",
+      text: "var(--ads-amber)",
+      border: "var(--ads-hairline)",
+    },
+    inactive: {
+      label: "Inactive",
+      bg: "rgba(0,0,0,0.04)",
+      text: "var(--ads-ink-secondary)",
+      border: "var(--ads-hairline)",
+    },
+  }[vehicle.status] || {
+    label: vehicle.status,
+    bg: "rgba(0,0,0,0.04)",
+    text: "var(--ads-ink-secondary)",
+    border: "var(--ads-hairline)",
+  };
 
   return (
     <div
@@ -143,8 +168,9 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
         zIndex: 2500,
         display: "flex",
         justifyContent: "flex-end",
-        backgroundColor: "rgba(15, 23, 42, 0.4)",
-        backdropFilter: "blur(4px)",
+        backgroundColor: "rgba(0,0,0,0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
       }}
       onClick={onClose}
     >
@@ -153,8 +179,13 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
           width: "100%",
           maxWidth: "580px",
           height: "100%",
-          backgroundColor: "#FFFFFF",
-          boxShadow: "-8px 0 24px rgba(0, 0, 0, 0.15)",
+          backgroundColor: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          border: "1px solid var(--ads-hairline)",
+          borderRadius: "var(--ads-r-xl) 0 0 var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          overflow: "hidden",
           display: "flex",
           flexDirection: "column",
           animation: "drawerSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -164,9 +195,9 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
         {/* Drawer Header */}
         <div
           style={{
-            padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
+            backgroundColor: "transparent",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -177,29 +208,31 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
               style={{
                 width: "42px",
                 height: "42px",
-                borderRadius: "10px",
-                backgroundColor: "#EFF6FF",
-                border: "1px solid #BFDBFE",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-blue-tint)",
+                border: "1px solid var(--ads-blue-tint-strong)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#2563EB",
+                color: "var(--ads-blue)",
+                flexShrink: 0,
               }}
             >
-              <Truck size={22} />
+              <Truck size={22} color="var(--ads-blue)" />
             </div>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <h2 style={{ margin: 0, fontSize: "1.125rem", fontWeight: 750, color: "#0F172A" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+                <h2 style={{ margin: 0, fontSize: "1.125rem", fontWeight: 650, letterSpacing: "-0.019em", color: "var(--ads-ink)" }}>
                   {vehicle.name}
                 </h2>
                 <span
                   style={{
                     display: "inline-block",
-                    padding: "0.15rem 0.55rem",
-                    borderRadius: "6px",
-                    fontSize: "0.75rem",
-                    fontWeight: 650,
+                    padding: "3px 9px",
+                    borderRadius: "var(--ads-r-pill)",
+                    fontSize: "0.6875rem",
+                    fontWeight: 600,
+                    letterSpacing: "-0.005em",
                     backgroundColor: statusConfig.bg,
                     color: statusConfig.text,
                     border: `1px solid ${statusConfig.border}`,
@@ -208,28 +241,31 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
                   {statusConfig.label}
                 </span>
               </div>
-              <span style={{ fontSize: "0.8125rem", color: "#64748B", marginTop: "0.15rem", display: "block" }}>
-                VIN: <code style={{ fontWeight: 600, color: "#334155" }}>{vehicle.vin}</code> • Plate: {vehicle.plate} ({vehicle.state})
+              <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", marginTop: "0.15rem", display: "block" }}>
+                VIN: <code style={{ fontWeight: 600, color: "var(--ads-ink-secondary)" }}>{vehicle.vin}</code> • Plate: {vehicle.plate} ({vehicle.state})
               </span>
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
             <button
               type="button"
               onClick={() => onEdit(vehicle)}
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.35rem",
-                padding: "0.45rem 0.85rem",
-                borderRadius: "8px",
-                border: "1px solid #CBD5E1",
-                backgroundColor: "#FFFFFF",
-                color: "#1E293B",
+                gap: "var(--ads-s2)",
+                padding: "9px 18px",
+                borderRadius: "var(--ads-r-pill)",
+                border: "1px solid var(--ads-hairline)",
+                backgroundColor: "var(--ads-material-thick)",
+                boxShadow: "var(--ads-bevel)",
+                color: "var(--ads-ink)",
                 fontSize: "0.8125rem",
                 fontWeight: 600,
+                letterSpacing: "-0.01em",
                 cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               <Edit2 size={14} />
@@ -238,16 +274,24 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
             <button
               type="button"
               onClick={onClose}
+              aria-label="Close vehicle details"
+              title="Close"
               style={{
-                padding: "0.45rem",
-                borderRadius: "8px",
-                border: "none",
+                width: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
                 backgroundColor: "transparent",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
         </div>
@@ -257,21 +301,23 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
           style={{
             display: "flex",
             alignItems: "center",
-            padding: "0 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
-            backgroundColor: "#FFFFFF",
-            gap: "1.5rem",
+            padding: "0 var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
+            backgroundColor: "transparent",
+            gap: "var(--ads-s6)",
           }}
         >
           <button
             type="button"
             onClick={() => setActiveTab("overview")}
             style={{
-              padding: "0.85rem 0",
+              padding: "var(--ads-s3) 0",
               border: "none",
-              borderBottom: activeTab === "overview" ? "2px solid #2563EB" : "2px solid transparent",
+              letterSpacing: "-0.01em",
+              transition: "color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
+              borderBottom: activeTab === "overview" ? "2px solid var(--ads-blue)" : "2px solid transparent",
               backgroundColor: "transparent",
-              color: activeTab === "overview" ? "#2563EB" : "#64748B",
+              color: activeTab === "overview" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
               fontSize: "0.875rem",
               fontWeight: activeTab === "overview" ? 700 : 500,
               cursor: "pointer",
@@ -283,11 +329,13 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
             type="button"
             onClick={() => setActiveTab("notes")}
             style={{
-              padding: "0.85rem 0",
+              padding: "var(--ads-s3) 0",
               border: "none",
-              borderBottom: activeTab === "notes" ? "2px solid #2563EB" : "2px solid transparent",
+              letterSpacing: "-0.01em",
+              transition: "color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
+              borderBottom: activeTab === "notes" ? "2px solid var(--ads-blue)" : "2px solid transparent",
               backgroundColor: "transparent",
-              color: activeTab === "notes" ? "#2563EB" : "#64748B",
+              color: activeTab === "notes" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
               fontSize: "0.875rem",
               fontWeight: activeTab === "notes" ? 700 : 500,
               cursor: "pointer",
@@ -299,11 +347,13 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
             type="button"
             onClick={() => setActiveTab("defects")}
             style={{
-              padding: "0.85rem 0",
+              padding: "var(--ads-s3) 0",
               border: "none",
-              borderBottom: activeTab === "defects" ? "2px solid #2563EB" : "2px solid transparent",
+              letterSpacing: "-0.01em",
+              transition: "color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
+              borderBottom: activeTab === "defects" ? "2px solid var(--ads-blue)" : "2px solid transparent",
               backgroundColor: "transparent",
-              color: activeTab === "defects" ? "#2563EB" : "#64748B",
+              color: activeTab === "defects" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
               fontSize: "0.875rem",
               fontWeight: activeTab === "defects" ? 700 : 500,
               cursor: "pointer",
@@ -315,11 +365,13 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
             type="button"
             onClick={() => setActiveTab("docs")}
             style={{
-              padding: "0.85rem 0",
+              padding: "var(--ads-s3) 0",
               border: "none",
-              borderBottom: activeTab === "docs" ? "2px solid #2563EB" : "2px solid transparent",
+              letterSpacing: "-0.01em",
+              transition: "color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
+              borderBottom: activeTab === "docs" ? "2px solid var(--ads-blue)" : "2px solid transparent",
               backgroundColor: "transparent",
-              color: activeTab === "docs" ? "#2563EB" : "#64748B",
+              color: activeTab === "docs" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
               fontSize: "0.875rem",
               fontWeight: activeTab === "docs" ? 700 : 500,
               cursor: "pointer",
@@ -330,63 +382,64 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
         </div>
 
         {/* Tab Body */}
-        <div style={{ flex: 1, overflowY: "auto", padding: "1.5rem" }}>
+        <div style={{ flex: 1, overflowY: "auto", padding: "var(--ads-s6)" }}>
           {/* TAB 1: OVERVIEW */}
           {activeTab === "overview" && (
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s6)" }}>
               {/* Specifications Card */}
               <div
                 style={{
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "12px",
-                  padding: "1.25rem",
+                  backgroundColor: "var(--ads-canvas)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-md)",
+                  padding: "var(--ads-s5)",
+                  boxShadow: "var(--ads-shadow-xs)",
                 }}
               >
-                <h4 style={{ margin: "0 0 1rem", fontSize: "0.875rem", fontWeight: 700, color: "#334155" }}>
+                <h4 style={{ margin: "0 0 var(--ads-s4)", fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                   Vehicle Specifications
                 </h4>
                 <div
                   style={{
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",
-                    gap: "0.85rem 1rem",
+                    gap: "var(--ads-s3) var(--ads-s4)",
                     fontSize: "0.8125rem",
                   }}
                 >
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Make &amp; Model</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Make &amp; Model</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {vehicle.make || "Ford"} {vehicle.model || "Transit 250"}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Year / Trim</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Year / Trim</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {vehicle.year || "2024"} {vehicle.trim ? `• ${vehicle.trim}` : ""}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Van Classification</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Van Classification</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {String(vehicle.vehicle_type || "Cargo Van")}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Sub-Type</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Sub-Type</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {String(vehicle.vehicle_sub_type || "Prime Van")}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Ownership</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Ownership</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {String(vehicle.ownership_type || "Leased (Amazon)")}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Fleet Vendor</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Fleet Vendor</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {vehicle.vendor || "Element Fleet"}
                     </strong>
                   </div>
@@ -396,37 +449,38 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
               {/* Station & Driver Card */}
               <div
                 style={{
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "12px",
-                  padding: "1.25rem",
+                  backgroundColor: "var(--ads-canvas)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-md)",
+                  padding: "var(--ads-s5)",
+                  boxShadow: "var(--ads-shadow-xs)",
                 }}
               >
-                <h4 style={{ margin: "0 0 1rem", fontSize: "0.875rem", fontWeight: 700, color: "#334155" }}>
+                <h4 style={{ margin: "0 0 var(--ads-s4)", fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                   Station &amp; Driver Assignment
                 </h4>
                 <div
                   style={{
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",
-                    gap: "0.85rem 1rem",
+                    gap: "var(--ads-s3) var(--ads-s4)",
                     fontSize: "0.8125rem",
                   }}
                 >
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Assigned Station</span>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Assigned Station</span>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", marginTop: "0.2rem" }}>
-                      <Building size={14} color="#2563EB" />
-                      <strong style={{ color: "#1E293B" }}>
+                      <Building size={14} color="var(--ads-blue)" />
+                      <strong style={{ color: "var(--ads-ink)" }}>
                         {vehicle.station_code || vehicle.stations?.[0]?.station_code || "QUE4"}
                       </strong>
                     </div>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Current Assigned Driver</span>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Current Assigned Driver</span>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", marginTop: "0.2rem" }}>
-                      <User size={14} color={vehicle.assigned_driver_name ? "#059669" : "#94A3B8"} />
-                      <strong style={{ color: vehicle.assigned_driver_name ? "#1E293B" : "#64748B" }}>
+                      <User size={14} color={vehicle.assigned_driver_name ? "var(--ads-green)" : "var(--ads-ink-quaternary)"} />
+                      <strong style={{ color: vehicle.assigned_driver_name ? "var(--ads-ink)" : "var(--ads-ink-tertiary)" }}>
                         {vehicle.assigned_driver_name || "Unassigned"}
                       </strong>
                     </div>
@@ -437,44 +491,45 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
               {/* Compliance & Key Dates Card */}
               <div
                 style={{
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "12px",
-                  padding: "1.25rem",
+                  backgroundColor: "var(--ads-canvas)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-md)",
+                  padding: "var(--ads-s5)",
+                  boxShadow: "var(--ads-shadow-xs)",
                 }}
               >
-                <h4 style={{ margin: "0 0 1rem", fontSize: "0.875rem", fontWeight: 700, color: "#334155" }}>
+                <h4 style={{ margin: "0 0 var(--ads-s4)", fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                   Compliance &amp; Key Dates
                 </h4>
                 <div
                   style={{
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",
-                    gap: "0.85rem 1rem",
+                    gap: "var(--ads-s3) var(--ads-s4)",
                     fontSize: "0.8125rem",
                   }}
                 >
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Date Received</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Date Received</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {vehicle.recieved || vehicle.date_received || "N/A"}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Date Insured</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Date Insured</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {vehicle.insured || vehicle.date_insured || "N/A"}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Insurance Expiration</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Insurance Expiration</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {vehicle.insurance_expires || vehicle.insurance_expiry || "N/A"}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Inspection Renewal</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Inspection Renewal</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {vehicle.insp_renewal_date || vehicle.inspection_renewal || "N/A"}
                     </strong>
                   </div>
@@ -484,32 +539,33 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
               {/* Passes & Equipment */}
               <div
                 style={{
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "12px",
-                  padding: "1.25rem",
+                  backgroundColor: "var(--ads-canvas)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-md)",
+                  padding: "var(--ads-s5)",
+                  boxShadow: "var(--ads-shadow-xs)",
                 }}
               >
-                <h4 style={{ margin: "0 0 1rem", fontSize: "0.875rem", fontWeight: 700, color: "#334155" }}>
+                <h4 style={{ margin: "0 0 var(--ads-s4)", fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                   Cards &amp; Toll Equipment
                 </h4>
                 <div
                   style={{
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",
-                    gap: "0.85rem 1rem",
+                    gap: "var(--ads-s3) var(--ads-s4)",
                     fontSize: "0.8125rem",
                   }}
                 >
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>Gas Card ID</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>Gas Card ID</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {vehicle.gas_card_id || vehicle.gas_card || "N/A"}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: "#64748B", display: "block" }}>EZ Pass Transponder</span>
-                    <strong style={{ color: "#1E293B" }}>
+                    <span style={{ color: "var(--ads-ink-tertiary)", display: "block" }}>EZ Pass Transponder</span>
+                    <strong style={{ color: "var(--ads-ink)" }}>
                       {vehicle.ez_pass || vehicle.ezpass_number || "N/A"}
                     </strong>
                   </div>
@@ -520,18 +576,18 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
 
           {/* TAB 2: NOTES */}
           {activeTab === "notes" && (
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s4)" }}>
               {/* Add Note Form */}
               <form
                 onSubmit={handleAddNote}
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "0.5rem",
-                  padding: "1rem",
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "10px",
+                  gap: "var(--ads-s2)",
+                  padding: "var(--ads-s4)",
+                  backgroundColor: "var(--ads-canvas)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-sm)",
                 }}
               >
                 <textarea
@@ -541,12 +597,14 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
                   onChange={(e) => setNewNoteText(e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.6rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                     resize: "none",
                   }}
@@ -558,16 +616,18 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "0.35rem",
-                      padding: "0.45rem 0.95rem",
-                      borderRadius: "8px",
-                      backgroundColor: "#2563EB",
-                      border: "none",
+                      gap: "var(--ads-s2)",
+                      padding: "9px 18px",
+                      borderRadius: "var(--ads-r-pill)",
+                      backgroundColor: "var(--ads-blue)",
+                      border: "1px solid transparent",
                       color: "#FFFFFF",
                       fontSize: "0.8125rem",
                       fontWeight: 600,
+                      letterSpacing: "-0.01em",
                       cursor: !newNoteText.trim() || isAddingNote ? "not-allowed" : "pointer",
-                      opacity: !newNoteText.trim() || isAddingNote ? 0.6 : 1,
+                      opacity: !newNoteText.trim() || isAddingNote ? 0.4 : 1,
+                      transition: "all var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     <Plus size={14} color="#FFFFFF" />
@@ -577,24 +637,24 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
               </form>
 
               {notesLoading ? (
-                <div style={{ padding: "2rem", textAlign: "center" }}>
-                  <LoadingSpinner size="md" color="#2563EB" />
+                <div style={{ padding: "var(--ads-s8)", textAlign: "center" }}>
+                  <LoadingSpinner size="md" color="var(--ads-blue)" />
                 </div>
               ) : notes.length === 0 ? (
-                <div style={{ padding: "2.5rem 1rem", textAlign: "center", color: "#94A3B8", fontSize: "0.875rem" }}>
+                <div style={{ padding: "var(--ads-s10) var(--ads-s4)", textAlign: "center", color: "var(--ads-ink-tertiary)", fontSize: "0.875rem" }}>
                   No vehicle notes recorded yet.
                 </div>
               ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s3)" }}>
                   {notes.map((note) => (
                     <div
                       key={note.id}
                       style={{
-                        padding: "0.85rem 1rem",
-                        backgroundColor: "#FFFFFF",
-                        border: "1px solid #E2E8F0",
-                        borderRadius: "10px",
-                        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
+                        padding: "var(--ads-s3) var(--ads-s4)",
+                        backgroundColor: "var(--ads-material-thick)",
+                        border: "1px solid var(--ads-hairline)",
+                        borderRadius: "var(--ads-r-md)",
+                        boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "flex-start",
@@ -602,14 +662,14 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
                     >
                       <div>
                         {note.title && (
-                          <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B", display: "block" }}>
+                          <span style={{ fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)", display: "block" }}>
                             {note.title}
                           </span>
                         )}
-                        <p style={{ margin: "0.25rem 0", fontSize: "0.875rem", color: "#334155" }}>
+                        <p style={{ margin: "var(--ads-s1) 0", fontSize: "0.875rem", color: "var(--ads-ink-secondary)" }}>
                           {note.note}
                         </p>
-                        <span style={{ fontSize: "0.75rem", color: "#94A3B8" }}>
+                        <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                           {note.created_at ? new Date(note.created_at).toLocaleString() : ""}
                           {note.user_name || note.created_by ? ` • By ${note.user_name || note.created_by}` : ""}
                         </span>
@@ -618,12 +678,20 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
                         type="button"
                         onClick={() => handleDeleteNote(note.id)}
                         title="Delete note"
+                        aria-label="Delete note"
                         style={{
-                          padding: "0.35rem",
-                          border: "none",
+                          width: "32px",
+                          height: "32px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                          borderRadius: "var(--ads-r-sm)",
+                          border: "1px solid var(--ads-hairline)",
                           backgroundColor: "transparent",
-                          color: "#94A3B8",
+                          color: "var(--ads-ink-tertiary)",
                           cursor: "pointer",
+                          transition: "all var(--ads-dur-fast) var(--ads-ease)",
                         }}
                       >
                         <Trash2 size={15} />
@@ -639,52 +707,53 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
           {activeTab === "defects" && (
             <div>
               {defectsLoading ? (
-                <div style={{ padding: "2rem", textAlign: "center" }}>
-                  <LoadingSpinner size="md" color="#2563EB" />
+                <div style={{ padding: "var(--ads-s8)", textAlign: "center" }}>
+                  <LoadingSpinner size="md" color="var(--ads-blue)" />
                 </div>
               ) : defects.length === 0 ? (
-                <div style={{ padding: "2.5rem 1rem", textAlign: "center", color: "#94A3B8", fontSize: "0.875rem" }}>
-                  <CheckCircle2 size={32} color="#10B981" style={{ margin: "0 auto 0.5rem" }} />
-                  <p style={{ margin: 0, fontWeight: 600, color: "#10B981" }}>Clean Inspection Record</p>
+                <div style={{ padding: "var(--ads-s10) var(--ads-s4)", textAlign: "center", color: "var(--ads-ink-tertiary)", fontSize: "0.875rem" }}>
+                  <CheckCircle2 size={32} color="var(--ads-green)" style={{ margin: "0 auto var(--ads-s2)" }} />
+                  <p style={{ margin: 0, fontWeight: 600, color: "var(--ads-green)" }}>Clean Inspection Record</p>
                   <span>No open defects or inspection flags reported for this vehicle.</span>
                 </div>
               ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s3)" }}>
                   {defects.map((def) => (
                     <div
                       key={def.id}
                       style={{
-                        padding: "0.85rem 1rem",
-                        backgroundColor: "#FFFFFF",
-                        border: "1px solid #E2E8F0",
-                        borderRadius: "10px",
-                        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
+                        padding: "var(--ads-s3) var(--ads-s4)",
+                        backgroundColor: "var(--ads-material-thick)",
+                        border: "1px solid var(--ads-hairline)",
+                        borderRadius: "var(--ads-r-md)",
+                        boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                        <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A" }}>
+                        <span style={{ fontSize: "0.875rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                           {def.defect_title || def.defect_type || "Inspection Defect"}
                         </span>
                         <span
                           style={{
-                            padding: "0.15rem 0.5rem",
-                            borderRadius: "6px",
-                            fontSize: "0.75rem",
-                            fontWeight: 650,
-                            backgroundColor: def.severity === "critical" || def.severity === "high" ? "#FEF2F2" : "#FFFBEB",
-                            color: def.severity === "critical" || def.severity === "high" ? "#991B1B" : "#92400E",
-                            border: `1px solid ${def.severity === "critical" || def.severity === "high" ? "#FCA5A5" : "#FDE68A"}`,
+                            padding: "3px 9px",
+                            borderRadius: "var(--ads-r-pill)",
+                            fontSize: "0.6875rem",
+                            fontWeight: 600,
+                            letterSpacing: "-0.005em",
+                            backgroundColor: def.severity === "critical" || def.severity === "high" ? "var(--ads-red-tint)" : "var(--ads-amber-tint)",
+                            color: def.severity === "critical" || def.severity === "high" ? "var(--ads-red)" : "var(--ads-amber)",
+                            border: "1px solid var(--ads-hairline)",
                           }}
                         >
                           {def.severity?.toUpperCase() || "SEV"}
                         </span>
                       </div>
                       {def.description && (
-                        <p style={{ margin: "0.4rem 0", fontSize: "0.8125rem", color: "#475569" }}>
+                        <p style={{ margin: "0.4rem 0", fontSize: "0.8125rem", color: "var(--ads-ink-secondary)" }}>
                           {def.description}
                         </p>
                       )}
-                      <span style={{ fontSize: "0.75rem", color: "#94A3B8" }}>
+                      <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                         Status: <strong>{def.status}</strong>
                         {def.driver_name ? ` • Reported by ${def.driver_name}` : ""}
                       </span>
@@ -699,37 +768,38 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
           {activeTab === "docs" && (
             <div>
               {docsLoading ? (
-                <div style={{ padding: "2rem", textAlign: "center" }}>
-                  <LoadingSpinner size="md" color="#2563EB" />
+                <div style={{ padding: "var(--ads-s8)", textAlign: "center" }}>
+                  <LoadingSpinner size="md" color="var(--ads-blue)" />
                 </div>
               ) : docs.length === 0 ? (
-                <div style={{ padding: "2.5rem 1rem", textAlign: "center", color: "#94A3B8", fontSize: "0.875rem" }}>
-                  <FileText size={32} color="#CBD5E1" style={{ margin: "0 auto 0.5rem" }} />
+                <div style={{ padding: "var(--ads-s10) var(--ads-s4)", textAlign: "center", color: "var(--ads-ink-tertiary)", fontSize: "0.875rem" }}>
+                  <FileText size={32} color="var(--ads-ink-quaternary)" style={{ margin: "0 auto var(--ads-s2)" }} />
                   <p style={{ margin: 0 }}>No documents uploaded for this vehicle.</p>
                 </div>
               ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s3)" }}>
                   {docs.map((doc) => (
                     <div
                       key={doc.id}
                       style={{
-                        padding: "0.85rem 1rem",
-                        backgroundColor: "#FFFFFF",
-                        border: "1px solid #E2E8F0",
-                        borderRadius: "10px",
+                        padding: "var(--ads-s3) var(--ads-s4)",
+                        backgroundColor: "var(--ads-material-thick)",
+                        border: "1px solid var(--ads-hairline)",
+                        borderRadius: "var(--ads-r-md)",
+                        boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
                       }}
                     >
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-                        <FileText size={18} color="#2563EB" />
+                      <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+                        <FileText size={18} color="var(--ads-blue)" />
                         <div>
-                          <span style={{ fontSize: "0.875rem", fontWeight: 600, color: "#1E293B" }}>
+                          <span style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                             {doc.doc_name}
                           </span>
                           {doc.created_at && (
-                            <span style={{ fontSize: "0.75rem", color: "#94A3B8", display: "block" }}>
+                            <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", display: "block" }}>
                               {new Date(doc.created_at).toLocaleDateString()}
                             </span>
                           )}
@@ -743,11 +813,13 @@ export const VehicleDetailDrawer: FC<VehicleDetailDrawerProps> = ({
                           style={{
                             display: "flex",
                             alignItems: "center",
-                            gap: "0.25rem",
-                            color: "#2563EB",
+                            gap: "var(--ads-s1)",
+                            color: "var(--ads-blue)",
                             fontSize: "0.8125rem",
                             textDecoration: "none",
                             fontWeight: 600,
+                            letterSpacing: "-0.01em",
+                            transition: "opacity var(--ads-dur-fast) var(--ads-ease)",
                           }}
                         >
                           <span>View</span>

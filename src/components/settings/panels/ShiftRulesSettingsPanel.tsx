@@ -36,25 +36,17 @@ export const ShiftRulesSettingsPanel: FC<ShiftRulesSettingsPanelProps> = ({ onNo
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <Calendar size={20} className="text-blue-600" />
-            <span>Shift Rules</span>
-            <span className="badge-custom blue">Scheduler</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Rules governing driver availability deadlines, maximum work hours, consecutive day limits, and automated shift approvals
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Rules governing driver availability deadlines, maximum work hours, consecutive day limits, and automated shift approvals
+        </p>
       </div>
 
       {/* 1. Availability Submission Rules */}
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Clock size={17} className="text-blue-600" />
+            <Clock size={17} />
             <span>Availability Submission Deadlines</span>
           </h3>
         </div>
@@ -93,7 +85,7 @@ export const ShiftRulesSettingsPanel: FC<ShiftRulesSettingsPanelProps> = ({ onNo
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Users size={17} className="text-blue-600" />
+            <Users size={17} />
             <span>Labor Constraints & Overtime Prevention</span>
           </h3>
         </div>
@@ -132,7 +124,7 @@ export const ShiftRulesSettingsPanel: FC<ShiftRulesSettingsPanelProps> = ({ onNo
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <ArrowLeftRight size={17} className="text-blue-600" />
+            <ArrowLeftRight size={17} />
             <span>Automated Approvals & Shift Swaps</span>
           </h3>
         </div>
@@ -140,7 +132,7 @@ export const ShiftRulesSettingsPanel: FC<ShiftRulesSettingsPanelProps> = ({ onNo
           Configurable workflows for automatic roster approvals and driver-to-driver route trades.
         </p>
 
-        <div className="flex flex-col gap-2.5">
+        <div className="settings-stack">
           <div className="settings-toggle-row">
             <div className="settings-toggle-info">
               <span className="settings-toggle-title">Automated Shift Approval</span>

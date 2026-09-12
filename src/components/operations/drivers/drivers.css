@@ -1,0 +1,400 @@
+/* ==========================================================================
+   DRIVER DIRECTORY (Delivery Associates table + kebab popover)
+   Apple-inspired glass design system — tokens from apple-design-system.css
+   Matches the table language used by tasks / notes / rescue / callout.
+   ========================================================================== */
+
+.driver-table-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+.driver-table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.driver-table-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.driver-table-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: var(--ads-r-pill);
+}
+
+.driver-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.30);
+}
+
+.driver-data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  font-size: 0.8125rem;
+}
+
+/* ── Sticky translucent header ─────────────────────────────────────────── */
+.driver-table-head-row {
+  background: transparent;
+  border-bottom: none;
+}
+
+.driver-table-head-row th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--ads-material-thin);
+  -webkit-backdrop-filter: var(--ads-blur-sm);
+  backdrop-filter: var(--ads-blur-sm);
+  padding: var(--ads-s3) var(--ads-s4);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ads-ink-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--ads-hairline);
+  border-radius: 0;
+  transition: color var(--ads-dur-fast) var(--ads-ease),
+              background-color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.driver-table-head-row th:first-child,
+.driver-table-head-row th:last-child {
+  border-radius: 0;
+}
+
+.driver-table-head-row th.cursor-pointer {
+  cursor: pointer;
+  user-select: none;
+}
+
+.driver-table-head-row th.cursor-pointer:hover {
+  color: var(--ads-blue);
+}
+
+.driver-data-table .table-col-name.cursor-pointer {
+  cursor: pointer;
+}
+
+/* ── Rows ──────────────────────────────────────────────────────────────── */
+.driver-table-row {
+  border-bottom: none;
+  transition: background-color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.driver-table-row td {
+  padding: var(--ads-s3) var(--ads-s4);
+  vertical-align: middle;
+  color: var(--ads-ink);
+  border-bottom: 1px solid var(--ads-hairline);
+}
+
+.driver-table-row:hover {
+  background-color: rgba(0, 113, 227, 0.045);
+}
+
+.driver-table-row.row-selected {
+  background-color: var(--ads-blue-tint) !important;
+}
+
+.driver-table-row.row-inactive {
+  opacity: 0.72;
+  background-color: transparent;
+}
+
+.driver-data-table tbody tr:last-child td:first-child,
+.driver-data-table tbody tr:last-child td:last-child {
+  border-radius: 0;
+}
+
+.table-col-actions {
+  padding-right: var(--ads-s4) !important;
+}
+
+/* ── Cell content ──────────────────────────────────────────────────────── */
+.table-expand-btn {
+  background: none;
+  border: none;
+  color: var(--ads-ink-tertiary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border-radius: var(--ads-r-xs);
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              color var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease);
+}
+
+.table-expand-btn:hover {
+  background-color: var(--ads-blue-tint);
+  color: var(--ads-blue);
+}
+
+.table-expand-btn:active { transform: scale(0.97); }
+
+.driver-fullname-text {
+  font-weight: 600;
+  color: var(--ads-ink);
+  font-size: 0.8125rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.table-col-name:hover .driver-fullname-text {
+  color: var(--ads-blue);
+}
+
+.phone-cell-text {
+  color: var(--ads-ink-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap !important;
+  display: inline-block;
+}
+
+.email-cell-text {
+  color: var(--ads-ink-secondary);
+  font-size: 0.8125rem;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transporter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid transparent;
+  border-radius: var(--ads-r-pill);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-weight: 600;
+  color: var(--ads-ink-secondary);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* ── Kebab trigger + portaled popover ──────────────────────────────────── */
+.driver-kebab-btn.active {
+  background-color: var(--ads-blue-tint) !important;
+  border-color: transparent !important;
+  color: var(--ads-blue) !important;
+}
+
+.driver-kebab-dropdown {
+  background: var(--ads-material-thick);
+  -webkit-backdrop-filter: var(--ads-blur-lg);
+  backdrop-filter: var(--ads-blur-lg);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-md);
+  box-shadow: var(--ads-shadow-lg), var(--ads-bevel);
+  padding: var(--ads-s1);
+  min-width: 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transform-origin: top right;
+  animation: ads-sheet-in var(--ads-dur-fast) var(--ads-ease);
+}
+
+.driver-kebab-dropdown .driver-kebab-item {
+  display: flex;
+  align-items: center;
+  gap: var(--ads-s3);
+  padding: var(--ads-s2) var(--ads-s3);
+  border: none;
+  background: none;
+  border-radius: var(--ads-r-xs);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 550;
+  letter-spacing: -0.005em;
+  color: var(--ads-ink);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.driver-kebab-dropdown .driver-kebab-item:hover:not(:disabled) {
+  background-color: var(--ads-blue-tint);
+  color: var(--ads-blue);
+}
+
+.driver-kebab-dropdown .driver-kebab-item:hover:not(:disabled) .driver-kebab-icon {
+  color: var(--ads-blue);
+}
+
+.driver-kebab-dropdown .driver-kebab-item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.driver-kebab-dropdown .driver-kebab-item.delete-item,
+.driver-kebab-dropdown .driver-kebab-item.delete-item .driver-kebab-icon,
+.driver-kebab-dropdown .driver-kebab-item.delete-item span {
+  color: var(--ads-red);
+}
+
+.driver-kebab-dropdown .driver-kebab-item.delete-item:hover:not(:disabled) {
+  background-color: var(--ads-red-tint);
+}
+
+.driver-kebab-dropdown .driver-kebab-item.delete-item:hover:not(:disabled) .driver-kebab-icon,
+.driver-kebab-dropdown .driver-kebab-item.delete-item:hover:not(:disabled) span {
+  color: var(--ads-red);
+}
+
+.driver-kebab-dropdown .driver-kebab-icon {
+  flex-shrink: 0;
+  color: var(--ads-ink-tertiary);
+  transition: color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.driver-kebab-dropdown .driver-kebab-divider {
+  height: 1px;
+  background-color: var(--ads-hairline);
+  margin: var(--ads-s1) 0;
+}
+
+/* ── Driver profile screen ─────────────────────────────────────────────────
+   The markup carries Tailwind-style utility names but Tailwind is not part of
+   this build, so those classes resolve to nothing. These scoped rules give the
+   intended colour/weight using design-system tokens, without defining the
+   utility names globally.                                                    */
+.driver-profile-screen-container .text-blue-600,
+.driver-profile-screen-container .text-blue-700 { color: var(--ads-blue); }
+.driver-profile-screen-container .text-emerald-500,
+.driver-profile-screen-container .text-emerald-600,
+.driver-profile-screen-container .text-emerald-700 { color: var(--ads-green); }
+.driver-profile-screen-container .text-amber-600 { color: var(--ads-amber); }
+.driver-profile-screen-container .text-indigo-600 { color: var(--ads-purple); }
+.driver-profile-screen-container .text-red-600 { color: var(--ads-red); }
+.driver-profile-screen-container .text-slate-400 { color: var(--ads-ink-tertiary); }
+.driver-profile-screen-container .text-slate-500 { color: var(--ads-ink-tertiary); }
+.driver-profile-screen-container .text-slate-700,
+.driver-profile-screen-container .text-slate-800 { color: var(--ads-ink-secondary); }
+.driver-profile-screen-container .text-xs { font-size: 0.75rem; line-height: 1.4; }
+.driver-profile-screen-container .font-medium { font-weight: 550; }
+.driver-profile-screen-container .font-semibold { font-weight: 600; }
+.driver-profile-screen-container .font-bold { font-weight: 650; }
+.driver-profile-screen-container .font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.driver-profile-screen-container .flex { display: flex; }
+.driver-profile-screen-container .items-center { align-items: center; }
+.driver-profile-screen-container .gap-1 { gap: var(--ads-s1); }
+.driver-profile-screen-container .block { display: block; }
+.driver-profile-screen-container .ml-auto { margin-left: auto; }
+.driver-profile-screen-container .mb-2 { margin-bottom: var(--ads-s2); }
+.driver-profile-screen-container .shrink-0 { flex-shrink: 0; }
+.driver-profile-screen-container .leading-relaxed { line-height: 1.6; }
+
+/* ── Driver profile screen: inline status badge, permission list, notes ── */
+.status-badge-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: var(--ads-r-pill);
+  border: 1px solid transparent;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--ads-ink-secondary);
+  white-space: nowrap;
+}
+
+.status-badge-inline.active {
+  background-color: var(--ads-green-tint);
+  color: var(--ads-green);
+}
+
+.status-badge-inline.inactive {
+  background-color: var(--ads-red-tint);
+  color: var(--ads-red);
+}
+
+.permissions-settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ads-s2);
+}
+
+.notes-box-placeholder {
+  display: block;
+  padding: var(--ads-s3) var(--ads-s4);
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-sm);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--ads-ink-tertiary);
+}
+
+/* ── Bulk action bar / status filter labels ────────────────────────────── */
+.bulk-selected-count {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ads-ink);
+}
+
+.filter-btn-text {
+  font-size: 0.8125rem;
+  font-weight: 550;
+  letter-spacing: -0.005em;
+  color: var(--ads-ink);
+  white-space: nowrap;
+}
+
+/* ── Empty state — matches the four management views ───────────────────── */
+.driver-table-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ads-s10) var(--ads-s6);
+  text-align: center;
+  gap: var(--ads-s3);
+}
+
+.empty-state-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--ads-r-md);
+  background-color: var(--ads-blue-tint);
+  color: var(--ads-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.driver-table-empty-state .empty-state-heading {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ads-ink);
+  margin: 0;
+}
+
+.driver-table-empty-state .empty-state-desc {
+  font-size: 0.8125rem;
+  color: var(--ads-ink-tertiary);
+  max-width: 360px;
+  line-height: 1.5;
+  margin: 0;
+}

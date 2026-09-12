@@ -10,7 +10,8 @@ export const NegativeFeedbackDonutChart: FC<Props> = ({ data }) => {
   const navigate = useNavigate();
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
-  const colors = ["#EF4444", "#F59E0B", "#3B82F6", "#8B5CF6", "#10B981"];
+  // Same categorical ramp as the other dashboard charts, mirroring --ads-* tokens.
+  const colors = ["#0071E3", "#D70015", "#B25000", "#6E4FC4", "#0E7C74"];
   const list = data && data.length > 0 ? data.slice(0, 5) : [];
   const total = list.reduce((acc, curr) => acc + curr.count, 0);
 
@@ -30,9 +31,8 @@ export const NegativeFeedbackDonutChart: FC<Props> = ({ data }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#94A3B8",
+          color: "var(--ads-ink-tertiary)",
           fontSize: "0.8125rem",
-          fontStyle: "italic",
         }}
       >
         Zero customer concessions recorded
@@ -84,8 +84,8 @@ export const NegativeFeedbackDonutChart: FC<Props> = ({ data }) => {
                 transform={`rotate(-90 ${size / 2} ${size / 2})`}
                 style={{
                   cursor: "pointer",
-                  transition: "all 0.2s ease",
-                  opacity: activeIdx !== null && !isHovered ? 0.45 : 1,
+                  transition: "stroke-width var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
+                  opacity: activeIdx !== null && !isHovered ? 0.4 : 1,
                 }}
                 onMouseEnter={() => setActiveIdx(idx)}
                 onMouseLeave={() => setActiveIdx(null)}
@@ -107,10 +107,10 @@ export const NegativeFeedbackDonutChart: FC<Props> = ({ data }) => {
             pointerEvents: "none",
           }}
         >
-          <span style={{ fontSize: "1.2rem", fontWeight: 800, color: "#0F172A", lineHeight: 1 }}>
+          <span style={{ fontSize: "1.2rem", fontWeight: 700, letterSpacing: "-0.022em", color: "var(--ads-ink)", lineHeight: 1 }}>
             {activeIdx !== null ? list[activeIdx]?.count : total}
           </span>
-          <span style={{ fontSize: "0.625rem", color: "#64748B", fontWeight: 600, marginTop: 2 }}>
+          <span style={{ fontSize: "0.625rem", color: "var(--ads-ink-quaternary)", fontWeight: 600, letterSpacing: "0.06em", marginTop: 2 }}>
             {activeIdx !== null ? "SELECTED" : "DEFECTS"}
           </span>
         </div>
@@ -131,10 +131,10 @@ export const NegativeFeedbackDonutChart: FC<Props> = ({ data }) => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "0.25rem 0.4rem",
-                borderRadius: "6px",
+                borderRadius: "var(--ads-r-xs)",
                 cursor: "pointer",
-                backgroundColor: isHovered ? "#F1F5F9" : "transparent",
-                transition: "background-color 0.12s ease",
+                backgroundColor: isHovered ? "var(--uop-wash)" : "transparent",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
               }}
               onMouseEnter={() => setActiveIdx(idx)}
               onMouseLeave={() => setActiveIdx(null)}
@@ -154,8 +154,8 @@ export const NegativeFeedbackDonutChart: FC<Props> = ({ data }) => {
                 <span
                   style={{
                     fontSize: "0.725rem",
-                    color: isHovered ? "#0F172A" : "#334155",
-                    fontWeight: isHovered ? 700 : 500,
+                    color: "var(--ads-ink)",
+                    fontWeight: isHovered ? 650 : 500,
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
@@ -167,8 +167,8 @@ export const NegativeFeedbackDonutChart: FC<Props> = ({ data }) => {
               <span
                 style={{
                   fontSize: "0.725rem",
-                  fontWeight: 700,
-                  color: "#475569",
+                  fontWeight: 600,
+                  color: "var(--ads-ink-secondary)",
                   marginLeft: "0.5rem",
                   flexShrink: 0,
                 }}

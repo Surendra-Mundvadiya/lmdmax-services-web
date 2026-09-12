@@ -83,7 +83,10 @@ export const PpsThresholdView: FC<PpsThresholdViewProps> = ({ onNotification }) 
       {/* Header */}
       <div className="threshold-view-header">
         <div>
-          <h3 className="threshold-view-title flex items-center gap-2">
+          <h3
+            className="threshold-view-title"
+            style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}
+          >
             <span>Set Threshold for Weekly PPS Report</span>
             <span className="badge-custom blue">Live API</span>
           </h3>
@@ -119,7 +122,7 @@ export const PpsThresholdView: FC<PpsThresholdViewProps> = ({ onNotification }) 
       </div>
 
       {/* Color Legend */}
-      <ColorLegendBar type="scorecard_report" className="my-3" />
+      <ColorLegendBar type="scorecard_report" />
 
       {/* Metrics List */}
       {visibleMetrics.length > 0 ? (
@@ -135,9 +138,17 @@ export const PpsThresholdView: FC<PpsThresholdViewProps> = ({ onNotification }) 
         </div>
       ) : (
         <div className="threshold-empty-state">
-          <AlertCircle size={32} className="text-slate-400 mb-2" />
-          <h4 className="text-sm font-semibold text-slate-700">No PPS Metrics Available</h4>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm text-center">
+          <AlertCircle size={32} style={{ color: "var(--ads-ink-quaternary)", marginBottom: "var(--ads-s2)" }} />
+          <h4 style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink)" }}>No PPS Metrics Available</h4>
+          <p
+            style={{
+              margin: "var(--ads-s1) 0 0",
+              maxWidth: "24rem",
+              textAlign: "center",
+              fontSize: "0.8125rem",
+              color: "var(--ads-ink-tertiary)",
+            }}
+          >
             Please upload the Weekly PPS Report to configure parking sequence threshold benchmarks.
           </p>
         </div>

@@ -393,8 +393,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Accident & Injury Report",
               subtitle: "Incident claims, accident logs & injury reporting",
               icon: ShieldAlert,
-              color: "#DC2626",
-              bgColor: "#FEF2F2",
+              color: "var(--ads-red)",
+              bgColor: "var(--ads-red-tint)",
               isCurrent: currentRoute === "accident_injury",
             },
           ],
@@ -409,8 +409,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               icon: Users,
               badge: "Active",
               badgeType: "emerald",
-              color: "#059669",
-              bgColor: "#ECFDF5",
+              color: "var(--ads-green)",
+              bgColor: "var(--ads-green-tint)",
               isCurrent: currentRoute === "operations" || currentRoute === "drivers",
             },
             {
@@ -418,8 +418,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Vehicles",
               subtitle: "Fleet vans, telematics & DVIC checks",
               icon: Truck,
-              color: "#2563EB",
-              bgColor: "#EFF6FF",
+              color: "var(--ads-blue)",
+              bgColor: "var(--ads-blue-tint)",
               isCurrent: currentRoute === "vehicles",
             },
             {
@@ -427,8 +427,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Inventory",
               subtitle: "Delivery devices, fuel cards & gear",
               icon: Package,
-              color: "#D97706",
-              bgColor: "#FFFBEB",
+              color: "var(--ads-amber)",
+              bgColor: "var(--ads-amber-tint)",
               isCurrent: currentRoute === "inventory",
             },
           ],
@@ -446,8 +446,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Callout",
               subtitle: "Driver callouts & shift replacement",
               icon: PhoneCall,
-              color: "#DC2626",
-              bgColor: "#FEF2F2",
+              color: "var(--ads-red)",
+              bgColor: "var(--ads-red-tint)",
               isCurrent: currentRoute === "callout",
             },
             {
@@ -455,8 +455,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Rescue",
               subtitle: "Live delivery rescues & package sweeps",
               icon: LifeBuoy,
-              color: "#059669",
-              bgColor: "#ECFDF5",
+              color: "var(--ads-green)",
+              bgColor: "var(--ads-green-tint)",
               isCurrent: currentRoute === "rescue",
             },
           ],
@@ -469,8 +469,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Tasks",
               subtitle: "Station duties & daily checklist",
               icon: CheckSquare,
-              color: "#2563EB",
-              bgColor: "#EFF6FF",
+              color: "var(--ads-blue)",
+              bgColor: "var(--ads-blue-tint)",
               isCurrent: currentRoute === "tasks",
             },
             {
@@ -478,8 +478,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Notes",
               subtitle: "Dispatcher shift logs & handovers",
               icon: FileText,
-              color: "#475569",
-              bgColor: "#F1F5F9",
+              color: "var(--ads-ink-secondary)",
+              bgColor: "rgba(0, 0, 0, 0.05)",
               isCurrent: currentRoute === "notes",
             },
             {
@@ -487,8 +487,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Upload Roster Report",
               subtitle: "Amazon roster report & route file import",
               icon: FileSpreadsheet,
-              color: "#0891B2",
-              bgColor: "#ECFEFF",
+              color: "var(--ads-blue)",
+              bgColor: "var(--ads-blue-tint)",
               isCurrent: currentRoute === "upload_roster",
             },
             {
@@ -496,8 +496,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Bulk Upload",
               subtitle: "Batch import driver and fleet data",
               icon: UploadCloud,
-              color: "#6366F1",
-              bgColor: "#EEF2FF",
+              color: "var(--ads-purple)",
+              bgColor: "var(--ads-purple-tint)",
               isCurrent: currentRoute === "bulk_upload",
             },
           ],
@@ -515,8 +515,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "Templates",
               subtitle: "Message templates & shift formats",
               icon: LayoutTemplate,
-              color: "#7C3AED",
-              bgColor: "#F5F3FF",
+              color: "var(--ads-purple)",
+              bgColor: "var(--ads-purple-tint)",
               isCurrent: currentRoute === "templates",
             },
             {
@@ -526,8 +526,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               icon: Sliders,
               badge: curationCounts.total > 0 ? `${curationCounts.total}` : undefined,
               badgeType: "amber",
-              color: "#D97706",
-              bgColor: "#FFFBEB",
+              color: "var(--ads-amber)",
+              bgColor: "var(--ads-amber-tint)",
               isCurrent: currentRoute === "curations",
             },
             {
@@ -537,8 +537,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               icon: Cloud,
               badge: "Shared",
               badgeType: "blue",
-              color: "#0284C7",
-              bgColor: "#F0F9FF",
+              color: "var(--ads-blue)",
+              bgColor: "var(--ads-blue-tint)",
               isCurrent: currentRoute === "cloud",
             },
             {
@@ -546,8 +546,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               title: "E-Signature",
               subtitle: "Digital sign-off & acknowledgements",
               icon: FileCheck,
-              color: "#2563EB",
-              bgColor: "#EFF6FF",
+              color: "var(--ads-blue)",
+              bgColor: "var(--ads-blue-tint)",
               isCurrent: currentRoute === "e_signature",
             },
           ],
@@ -600,6 +600,9 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               if (isOwnershipLevelRoute) return;
               setStationMenuOpen(!stationMenuOpen);
             }}
+            aria-label={`Switch delivery station, currently ${activeStation}`}
+            aria-expanded={stationMenuOpen}
+            aria-haspopup="menu"
             title={
               isOnChatPage
                 ? "Station switching is not required on the Chat page. Chats operate at the company ownership level."
@@ -626,7 +629,7 @@ export const AppNavbar: FC<AppNavbarProps> = ({
             <div className="navbar-station-popover">
               <div className="popover-header">
                 <span>Switch Station</span>
-                <span style={{ fontSize: "0.6875rem", color: "#2563EB", background: "#EFF6FF", padding: "0.1rem 0.45rem", borderRadius: "9999px" }}>
+                <span style={{ fontSize: "0.6875rem", color: "var(--ads-blue)", background: "var(--ads-blue-tint)", padding: "0.1rem 0.45rem", borderRadius: "var(--ads-r-pill)" }}>
                   {availableStations.length} Stations
                 </span>
               </div>
@@ -675,7 +678,7 @@ export const AppNavbar: FC<AppNavbarProps> = ({
                           width: "18px",
                           height: "18px",
                           borderRadius: "50%",
-                          background: "#2563EB",
+                          background: "var(--ads-blue)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
@@ -733,15 +736,15 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               label: "Upload Reports",
               path: "/performance/upload",
               icon: UploadCloud,
-              color: "#2563EB",
-              bgColor: "#EFF6FF",
+              color: "var(--ads-blue)",
+              bgColor: "var(--ads-blue-tint)",
             },
             {
               label: "See Reports Data",
               path: "/performance/reports",
               icon: BarChart3,
-              color: "#059669",
-              bgColor: "#ECFDF5",
+              color: "var(--ads-green)",
+              bgColor: "var(--ads-green-tint)",
             },
           ]}
         />
@@ -762,29 +765,29 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               label: "Driver Inspection",
               path: "/fleet/driver-inspection",
               icon: Truck,
-              color: "#2563EB",
-              bgColor: "#EFF6FF",
+              color: "var(--ads-blue)",
+              bgColor: "var(--ads-blue-tint)",
             },
             {
               label: "Inspection Question Form",
               path: "/fleet/caution",
               icon: ClipboardList,
-              color: "#7C3AED",
-              bgColor: "#F5F3FF",
+              color: "var(--ads-purple)",
+              bgColor: "var(--ads-purple-tint)",
             },
             {
               label: "Vehicle Inspection",
               path: "/fleet/vehicle-inspection",
               icon: FileText,
-              color: "#0891B2",
-              bgColor: "#ECFEFF",
+              color: "var(--ads-blue)",
+              bgColor: "var(--ads-blue-tint)",
             },
             {
               label: "Inspection Reports",
               path: "/fleet/reports",
               icon: FileSpreadsheet,
-              color: "#059669",
-              bgColor: "#ECFDF5",
+              color: "var(--ads-green)",
+              bgColor: "var(--ads-green-tint)",
             },
           ]}
         />
@@ -810,6 +813,9 @@ export const AppNavbar: FC<AppNavbarProps> = ({
               setActiveNavDropdown(null);
             }}
             title="Global Utilities – operational features & tools"
+            aria-label="Global Utilities menu"
+            aria-expanded={seeMoreOpen}
+            aria-haspopup="menu"
           >
             <MoreHorizontal size={14} />
             <span>Global Utilities</span>
@@ -865,13 +871,13 @@ export const AppNavbar: FC<AppNavbarProps> = ({
                                   gap: "0.65rem",
                                   padding: "0.48rem 0.65rem",
                                   paddingLeft: opt.isCurrent ? "0.95rem" : "0.65rem",
-                                  borderRadius: "9px",
-                                  transition: "all 0.16s cubic-bezier(0.16, 1, 0.3, 1)",
+                                  borderRadius: "var(--ads-r-sm)",
+                                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                                   width: "100%",
                                   textAlign: "left",
-                                  backgroundColor: opt.isCurrent ? "#EFF6FF" : "transparent",
-                                  border: opt.isCurrent ? "1px solid #BFDBFE" : "1px solid transparent",
-                                  boxShadow: opt.isCurrent ? "0 2px 6px -1px rgba(37, 99, 235, 0.12)" : "none",
+                                  backgroundColor: opt.isCurrent ? "var(--ads-blue-tint)" : "transparent",
+                                  border: opt.isCurrent ? "1px solid var(--ads-blue-tint-strong)" : "1px solid transparent",
+                                  boxShadow: opt.isCurrent ? "var(--ads-shadow-xs)" : "none",
                                   cursor: "pointer",
                                 }}
                               >
@@ -884,8 +890,8 @@ export const AppNavbar: FC<AppNavbarProps> = ({
                                       top: "22%",
                                       bottom: "22%",
                                       width: "3px",
-                                      borderRadius: "4px",
-                                      backgroundColor: "#2563EB",
+                                      borderRadius: "var(--ads-r-xs)",
+                                      backgroundColor: "var(--ads-blue)",
                                     }}
                                   />
                                 )}
@@ -894,18 +900,18 @@ export const AppNavbar: FC<AppNavbarProps> = ({
                                 <div
                                   className="see-more-icon-box"
                                   style={{
-                                    color: opt.isCurrent ? "#2563EB" : opt.color,
-                                    backgroundColor: opt.isCurrent ? "#DBEAFE" : opt.bgColor,
+                                    color: opt.isCurrent ? "var(--ads-blue)" : opt.color,
+                                    backgroundColor: opt.isCurrent ? "var(--ads-blue-tint-strong)" : opt.bgColor,
                                     width: "30px",
                                     height: "30px",
-                                    borderRadius: "8px",
+                                    borderRadius: "var(--ads-r-sm)",
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
                                     flexShrink: 0,
-                                    transition: "all 0.16s ease",
-                                    border: opt.isCurrent ? "1px solid rgba(37, 99, 235, 0.25)" : "1px solid transparent",
-                                    boxShadow: opt.isCurrent ? "0 2px 4px rgba(37, 99, 235, 0.18)" : "none",
+                                    transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
+                                    border: opt.isCurrent ? "1px solid rgba(0, 113, 227, 0.25)" : "1px solid transparent",
+                                    boxShadow: "none",
                                   }}
                                 >
                                   <Icon size={15} />
@@ -919,7 +925,7 @@ export const AppNavbar: FC<AppNavbarProps> = ({
                                       style={{
                                         fontSize: "0.82rem",
                                         fontWeight: opt.isCurrent ? 650 : 500,
-                                        color: opt.isCurrent ? "#1D4ED8" : "#1E293B",
+                                        color: opt.isCurrent ? "var(--ads-blue)" : "var(--ads-ink)",
                                         whiteSpace: "nowrap",
                                         overflow: "hidden",
                                         textOverflow: "ellipsis",
@@ -946,10 +952,10 @@ export const AppNavbar: FC<AppNavbarProps> = ({
                                       width: "18px",
                                       height: "18px",
                                       borderRadius: "50%",
-                                      backgroundColor: "#2563EB",
+                                      backgroundColor: "var(--ads-blue)",
                                       color: "#FFFFFF",
                                       flexShrink: 0,
-                                      boxShadow: "0 2px 5px rgba(37, 99, 235, 0.35)",
+                                      boxShadow: "var(--ads-shadow-xs)",
                                       marginLeft: "auto",
                                     }}
                                     title="Currently active"

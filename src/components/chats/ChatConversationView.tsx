@@ -54,20 +54,28 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
               width: "64px",
               height: "64px",
               borderRadius: "50%",
-              backgroundColor: "#EFF6FF",
+              background: "var(--ads-blue-tint)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#2563EB",
+              color: "var(--ads-blue)",
             }}
           >
             <MessageSquare size={32} />
           </div>
           <div>
-            <h3 style={{ fontSize: "1.125rem", fontWeight: 700, color: "#1E293B", marginBottom: "0.4rem" }}>
+            <h3
+              style={{
+                fontSize: "1.375rem",
+                fontWeight: 650,
+                letterSpacing: "-0.019em",
+                color: "var(--ads-ink)",
+                marginBottom: "var(--ads-s2)",
+              }}
+            >
               Select a Conversation
             </h3>
-            <p style={{ fontSize: "0.875rem", color: "#64748B", lineHeight: 1.5 }}>
+            <p style={{ fontSize: "0.875rem", color: "var(--ads-ink-secondary)", lineHeight: 1.5 }}>
               Choose a driver or inquiry thread from the left list to view chat history and send live dispatch messages.
             </p>
           </div>
@@ -123,14 +131,16 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
       {/* Top Header */}
       <div
         style={{
-          padding: "0.85rem 1.25rem",
-          borderBottom: "1px solid #F1F5F9",
+          padding: "var(--ads-s3) var(--ads-s5)",
+          borderBottom: "1px solid var(--ads-hairline)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           flexWrap: "wrap",
-          gap: "0.75rem",
-          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          gap: "var(--ads-s3)",
+          background: "var(--ads-material-thin)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
           flexShrink: 0,
         }}
       >
@@ -140,6 +150,7 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
             type="button"
             className="chat-header-btn chat-mobile-back-btn"
             onClick={onBackToList}
+            aria-label="Back to conversations list"
             title="Back to conversations list"
           >
             <ChevronLeft size={18} />
@@ -150,7 +161,7 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
             style={{
               width: "38px",
               height: "38px",
-              borderRadius: "10px",
+              borderRadius: "var(--ads-r-sm)",
               backgroundColor: avatarBg,
               color: "#FFFFFF",
               display: "flex",
@@ -159,7 +170,7 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
               fontSize: "0.875rem",
               fontWeight: 700,
               flexShrink: 0,
-              boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
+              boxShadow: "var(--ads-shadow-xs)",
             }}
           >
             {initials}
@@ -170,10 +181,10 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
               <h2
                 style={{
                   margin: 0,
-                  fontSize: "1.05rem",
-                  fontWeight: 700,
-                  color: "#0F172A",
-                  letterSpacing: "-0.01em",
+                  fontSize: "1.0625rem",
+                  fontWeight: 600,
+                  color: "var(--ads-ink)",
+                  letterSpacing: "-0.014em",
                 }}
               >
                 {activeThread.name}
@@ -181,12 +192,12 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
               <span
                 style={{
                   fontSize: "0.6875rem",
-                  fontWeight: 650,
-                  padding: "0.15rem 0.5rem",
-                  borderRadius: "6px",
-                  backgroundColor: "#ECFDF5",
-                  color: "#059669",
-                  border: "1px solid #A7F3D0",
+                  fontWeight: 600,
+                  padding: "3px 9px",
+                  borderRadius: "var(--ads-r-pill)",
+                  background: "var(--ads-green-tint)",
+                  color: "var(--ads-green)",
+                  border: "1px solid transparent",
                 }}
               >
                 {activeThread.status || "Active"}
@@ -194,12 +205,12 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
               <span
                 style={{
                   fontSize: "0.6875rem",
-                  fontWeight: 650,
-                  padding: "0.15rem 0.5rem",
-                  borderRadius: "6px",
-                  backgroundColor: "#EFF6FF",
-                  color: "#2563EB",
-                  border: "1px solid #DBEAFE",
+                  fontWeight: 600,
+                  padding: "3px 9px",
+                  borderRadius: "var(--ads-r-pill)",
+                  background: "var(--ads-blue-tint)",
+                  color: "#0058B0",
+                  border: "1px solid transparent",
                 }}
               >
                 {channelType.toUpperCase().replace("_", " ")}
@@ -209,7 +220,7 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
             <div
               style={{
                 fontSize: "0.775rem",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.5rem",
@@ -238,15 +249,17 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
             type="button"
             className={`chat-header-btn ${activeThread.is_pinned ? "pinned" : ""}`}
             onClick={onTogglePin}
+            aria-label={activeThread.is_pinned ? "Unpin conversation" : "Pin conversation to top"}
             title={activeThread.is_pinned ? "Unpin conversation" : "Pin conversation to top"}
           >
-            <Pin size={15} fill={activeThread.is_pinned ? "#D97706" : "none"} />
+            <Pin size={15} fill={activeThread.is_pinned ? "#B25000" : "none"} />
           </button>
 
           <button
             type="button"
             className="chat-header-btn"
             onClick={onRefresh}
+            aria-label="Refresh messages feed"
             title="Refresh messages feed"
           >
             <RefreshCw size={15} />
@@ -257,14 +270,14 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
       {/* Messages Scroll Feed */}
       <div className="chat-messages-scroll">
         {loadingMessages ? (
-          <div style={{ display: "flex", justifyContent: "center", padding: "2rem", color: "#64748B" }}>
+          <div style={{ display: "flex", justifyContent: "center", padding: "2rem", color: "var(--ads-ink-tertiary)" }}>
             Loading message thread...
           </div>
         ) : Object.keys(groupedMessages).length === 0 ? (
-          <div style={{ textAlign: "center", padding: "3rem 1rem", color: "#64748B" }}>
-            <MessageSquare size={36} color="#CBD5E1" style={{ margin: "0 auto 0.75rem auto" }} />
-            <div style={{ fontWeight: 600, color: "#1E293B" }}>No messages yet</div>
-            <div style={{ fontSize: "0.8rem", color: "#94A3B8", marginTop: "0.25rem" }}>
+          <div style={{ textAlign: "center", padding: "3rem 1rem", color: "var(--ads-ink-tertiary)" }}>
+            <MessageSquare size={36} color="#86868B" style={{ margin: "0 auto 0.75rem auto" }} />
+            <div style={{ fontWeight: 600, color: "var(--ads-ink)" }}>No messages yet</div>
+            <div style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", marginTop: "0.25rem" }}>
               Send an SMS or dispatch notification below to start communicating with {activeThread.name}.
             </div>
           </div>
@@ -292,6 +305,7 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
                           backgroundColor: avatarBg,
                           width: "30px",
                           height: "30px",
+                          borderRadius: "var(--ads-r-xs)",
                           fontSize: "0.75rem",
                           flexShrink: 0,
                         }}
@@ -327,7 +341,7 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
                                     display: "inline-flex",
                                     alignItems: "center",
                                     gap: "0.4rem",
-                                    color: isDispatcher ? "#FFFFFF" : "#2563EB",
+                                    color: isDispatcher ? "#FFFFFF" : "var(--ads-blue)",
                                     fontSize: "0.75rem",
                                     textDecoration: "underline",
                                   }}
@@ -348,16 +362,16 @@ export const ChatConversationView: FC<ChatConversationViewProps> = ({
                           <span>
                             {msg.status === "failed" || msg.error_message ? (
                               <span
-                                style={{ color: "#EF4444", display: "inline-flex", alignItems: "center", gap: "2px" }}
+                                style={{ color: "#FFD5D9", display: "inline-flex", alignItems: "center", gap: "2px" }}
                                 title={msg.error_message || "Delivery failed"}
                               >
                                 <AlertCircle size={12} />
                                 Failed
                               </span>
                             ) : msg.status === "read" ? (
-                              <CheckCheck size={13} style={{ color: "#93C5FD" }} />
+                              <CheckCheck size={13} style={{ color: "#FFFFFF" }} />
                             ) : (
-                              <Check size={13} style={{ color: "#BFDBFE" }} />
+                              <Check size={13} style={{ color: "rgba(255,255,255,0.75)" }} />
                             )}
                           </span>
                         )}

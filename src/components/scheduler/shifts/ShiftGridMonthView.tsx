@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
-import { Plus, Clock, Sparkles } from "lucide-react";
+import { Plus } from "lucide-react";
+import { ShiftCard } from "./ShiftCard";
 import {
   SchedulerShiftItem,
   SchedulerDriverItem,
@@ -121,10 +122,12 @@ export const ShiftGridMonthView: FC<ShiftGridMonthViewProps> = ({
   return (
     <div
       style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "14px",
-        border: "1px solid #E2E8F0",
-        boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
+        background: "var(--ads-material-thick)",
+        WebkitBackdropFilter: "var(--ads-blur-md)",
+        backdropFilter: "var(--ads-blur-md)",
+        borderRadius: "var(--ads-r-lg)",
+        border: "1px solid var(--ads-hairline)",
+        boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
         overflow: "hidden",
       }}
     >
@@ -132,21 +135,23 @@ export const ShiftGridMonthView: FC<ShiftGridMonthViewProps> = ({
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(7, 1fr)",
-          backgroundColor: "#F8FAFC",
-          borderBottom: "1px solid #E2E8F0",
+          background: "var(--ads-material-thin)",
+          WebkitBackdropFilter: "var(--ads-blur-sm)",
+          backdropFilter: "var(--ads-blur-sm)",
+          borderBottom: "1px solid var(--ads-hairline)",
         }}
       >
         {daysOfWeek.map((day) => (
           <div
             key={day}
             style={{
-              padding: "0.75rem 0.5rem",
+              padding: "var(--ads-s3) var(--ads-s2)",
               textAlign: "center",
-              fontSize: "0.75rem",
-              fontWeight: 700,
-              color: "#64748B",
+              fontSize: "0.6875rem",
+              fontWeight: 600,
+              color: "var(--ads-ink-quaternary)",
               textTransform: "uppercase",
-              letterSpacing: "0.05em",
+              letterSpacing: "0.06em",
             }}
           >
             {day}
@@ -158,7 +163,7 @@ export const ShiftGridMonthView: FC<ShiftGridMonthViewProps> = ({
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(7, 1fr)",
-          backgroundColor: "#E2E8F0",
+          backgroundColor: "var(--ads-hairline)",
           gap: "1px",
         }}
       >
@@ -174,13 +179,17 @@ export const ShiftGridMonthView: FC<ShiftGridMonthViewProps> = ({
               onDrop={(e) => handleDrop(e, cell.dateStr)}
               style={{
                 minHeight: "120px",
-                backgroundColor: isDragOver ? "#EFF6FF" : cell.isCurrentMonth ? "#FFFFFF" : "#F8FAFC",
-                padding: "0.5rem",
+                backgroundColor: isDragOver
+                  ? "var(--ads-blue-tint)"
+                  : cell.isCurrentMonth
+                  ? "var(--ads-white)"
+                  : "var(--ads-canvas)",
+                padding: "var(--ads-s2)",
                 display: "flex",
                 flexDirection: "column",
-                gap: "0.35rem",
+                gap: "var(--ads-s1)",
                 position: "relative",
-                transition: "background-color 0.15s ease",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               <div
@@ -193,15 +202,19 @@ export const ShiftGridMonthView: FC<ShiftGridMonthViewProps> = ({
                 <span
                   style={{
                     fontSize: "0.8125rem",
-                    fontWeight: cell.isToday ? 800 : cell.isCurrentMonth ? 600 : 400,
-                    color: cell.isToday ? "#2563EB" : cell.isCurrentMonth ? "#1E293B" : "#94A3B8",
+                    fontWeight: cell.isToday ? 700 : cell.isCurrentMonth ? 600 : 500,
+                    color: cell.isToday
+                      ? "var(--ads-blue)"
+                      : cell.isCurrentMonth
+                      ? "var(--ads-ink)"
+                      : "var(--ads-ink-quaternary)",
                     display: "inline-flex",
                     alignItems: "center",
                     justifyContent: "center",
                     width: cell.isToday ? "24px" : "auto",
                     height: cell.isToday ? "24px" : "auto",
-                    borderRadius: cell.isToday ? "50%" : "none",
-                    backgroundColor: cell.isToday ? "#EFF6FF" : "transparent",
+                    borderRadius: cell.isToday ? "var(--ads-r-pill)" : undefined,
+                    backgroundColor: cell.isToday ? "var(--ads-blue-tint)" : "transparent",
                   }}
                 >
                   {cell.dayNumber}
@@ -216,13 +229,28 @@ export const ShiftGridMonthView: FC<ShiftGridMonthViewProps> = ({
                     justifyContent: "center",
                     width: "20px",
                     height: "20px",
-                    borderRadius: "4px",
-                    border: "1px solid #E2E8F0",
-                    backgroundColor: "#FFFFFF",
-                    color: "#64748B",
+                    borderRadius: "var(--ads-r-xs)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink-tertiary)",
                     cursor: "pointer",
-                    transition: "all 0.15s ease",
+                    transition:
+                      "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                   }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)";
+                    e.currentTarget.style.borderColor = "var(--ads-blue)";
+                    e.currentTarget.style.color = "var(--ads-blue)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-material-thick)";
+                    e.currentTarget.style.borderColor = "var(--ads-hairline)";
+                    e.currentTarget.style.color = "var(--ads-ink-tertiary)";
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                  onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                  onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                  aria-label={`Add shift on ${cell.dateStr}`}
                   title={`Add shift on ${cell.dateStr}`}
                 >
                   <Plus size={11} />
@@ -233,74 +261,31 @@ export const ShiftGridMonthView: FC<ShiftGridMonthViewProps> = ({
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "0.25rem",
+                  gap: "var(--ads-s1)",
                   flex: 1,
                   overflowY: "auto",
                   maxHeight: "95px",
                 }}
               >
-                {dayShifts.slice(0, 3).map((shift) => {
-                  const isBackup = Boolean(shift.is_backup || shift.sch_status === "backup");
-                  const isDraft = !shift.is_published;
-
-                  return (
-                    <div
-                      key={shift.id}
-                      onClick={() => onEditShift(shift)}
-                      draggable={true}
-                      onDragStart={(e) => {
-                        e.dataTransfer.setData(
-                          "application/json",
-                          JSON.stringify({
-                            shiftId: shift.id,
-                            assign_to: shift.assign_to,
-                            schedule_date: shift.schedule_date,
-                          })
-                        );
-                        e.dataTransfer.effectAllowed = "move";
-                      }}
-                      style={{
-                        padding: "0.25rem 0.4rem",
-                        borderRadius: "5px",
-                        fontSize: "0.6875rem",
-                        fontWeight: 600,
-                        cursor: "grab",
-                        backgroundColor: isBackup
-                          ? "#FAF5FF"
-                          : isDraft
-                          ? "#FFFBEB"
-                          : "#EFF6FF",
-                        border: isBackup
-                          ? "1px solid #C084FC"
-                          : isDraft
-                          ? "1px dashed #F59E0B"
-                          : "1px solid #BFDBFE",
-                        color: isBackup
-                          ? "#6B21A8"
-                          : isDraft
-                          ? "#92400E"
-                          : "#1E40AF",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                      title={`${shift.driver_name || "Unassigned"} (${shift.shift_duration_start?.slice(0, 5)} - ${shift.shift_duration_end?.slice(0, 5)})`}
-                    >
-                      <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
-                        {shift.driver_name || "Unassigned"}
-                      </span>
-                      <span style={{ fontSize: "0.625rem", color: "#64748B", marginLeft: "0.2rem" }}>
-                        {shift.shift_duration_start?.slice(0, 5)}
-                      </span>
-                    </div>
-                  );
-                })}
+                {dayShifts.slice(0, 3).map((shift) => (
+                  <ShiftCard
+                    key={shift.id}
+                    shift={shift}
+                    density="compact"
+                    onEdit={onEditShift}
+                    title={`${shift.driver_name || "Unassigned"} (${shift.shift_duration_start?.slice(0, 5)} - ${shift.shift_duration_end?.slice(0, 5)})`}
+                  />
+                ))}
 
                 {dayShifts.length > 3 && (
-                  <span style={{ fontSize: "0.625rem", color: "#64748B", fontWeight: 600, textAlign: "center" }}>
+                  <span
+                    style={{
+                      fontSize: "0.625rem",
+                      color: "var(--ads-ink-tertiary)",
+                      fontWeight: 600,
+                      textAlign: "center",
+                    }}
+                  >
                     +{dayShifts.length - 3} more
                   </span>
                 )}

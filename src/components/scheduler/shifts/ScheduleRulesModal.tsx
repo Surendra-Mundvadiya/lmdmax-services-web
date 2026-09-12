@@ -701,25 +701,49 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="sch-modal-overlay">
-      <div className="sch-modal-window">
+    <div
+      className="sch-modal-overlay"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        WebkitBackdropFilter: "blur(6px)",
+        backdropFilter: "blur(6px)",
+        padding: "var(--ads-s4)",
+      }}
+    >
+      <div
+        className="sch-modal-window"
+        style={{
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          backdropFilter: "var(--ads-blur-lg)",
+          border: "1px solid var(--ads-hairline)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+        }}
+      >
         {/* =================================================================
             VIEW MODE 1: CATALOG OF SCHEDULE RULES
             ================================================================= */}
         {viewMode === "catalog" ? (
           <>
-            <div className="sch-modal-header">
+            <div
+              className="sch-modal-header"
+              style={{
+                background: "transparent",
+                borderBottom: "1px solid var(--ads-hairline)",
+                padding: "var(--ads-s4) var(--ads-s5)",
+              }}
+            >
               <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-                <Layers size={20} style={{ color: "#2563EB" }} />
-                <h3 className="sch-modal-title" style={{ color: "#0F172A" }}>
+                <Layers size={20} style={{ color: "var(--ads-blue)" }} />
+                <h3 className="sch-modal-title" style={{ color: "var(--ads-ink)" }}>
                   Schedule Rules
                 </h3>
                 <span
                   style={{
                     fontSize: "0.75rem",
                     fontWeight: 700,
-                    color: "#2563EB",
-                    background: "#EFF6FF",
+                    color: "var(--ads-blue)",
+                    background: "var(--ads-blue-tint)",
                     padding: "0.2rem 0.6rem",
                     borderRadius: "12px",
                   }}
@@ -745,10 +769,10 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                     alignItems: "center",
                     gap: "0.5rem",
                     padding: "0.75rem 1rem",
-                    background: "#FEF2F2",
-                    border: "1px solid #FECACA",
+                    background: "var(--ads-red-tint)",
+                    border: "1px solid rgba(215, 0, 21, 0.28)",
                     borderRadius: "8px",
-                    color: "#DC2626",
+                    color: "var(--ads-red)",
                     fontSize: "0.8125rem",
                   }}
                 >
@@ -764,10 +788,10 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                     alignItems: "center",
                     gap: "0.5rem",
                     padding: "0.75rem 1rem",
-                    background: "#F0FDF4",
-                    border: "1px solid #BBF7D0",
+                    background: "var(--ads-green-tint)",
+                    border: "1px solid rgba(36, 138, 61, 0.28)",
                     borderRadius: "8px",
-                    color: "#15803D",
+                    color: "var(--ads-green)",
                     fontSize: "0.8125rem",
                   }}
                 >
@@ -785,7 +809,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                     justifyContent: "center",
                     padding: "3rem 1.5rem",
                     textAlign: "center",
-                    color: "#64748B",
+                    color: "var(--ads-ink-tertiary)",
                   }}
                 >
                   <div
@@ -793,12 +817,12 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                       width: "56px",
                       height: "56px",
                       borderRadius: "50%",
-                      background: "#EFF6FF",
+                      background: "var(--ads-blue-tint)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       marginBottom: "1rem",
-                      color: "#2563EB",
+                      color: "var(--ads-blue)",
                     }}
                   >
                     <Sparkles size={24} />
@@ -807,7 +831,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                     style={{
                       fontSize: "1rem",
                       fontWeight: 700,
-                      color: "#1E293B",
+                      color: "var(--ads-ink)",
                       margin: "0 0 0.35rem 0",
                     }}
                   >
@@ -816,7 +840,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                   <p
                     style={{
                       fontSize: "0.8125rem",
-                      color: "#64748B",
+                      color: "var(--ads-ink-tertiary)",
                       maxWidth: "340px",
                       margin: "0 0 1.25rem 0",
                     }}
@@ -865,7 +889,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                           justifyContent: "space-between",
                           padding: "1rem 1.15rem",
                           background: "#FFFFFF",
-                          border: "1px solid #E2E8F0",
+                          border: "1px solid var(--ads-hairline)",
                           borderRadius: "12px",
                           boxShadow: "0 1px 3px rgba(15, 23, 42, 0.04)",
                           transition: "border-color 0.15s ease",
@@ -887,7 +911,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                 style={{
                                   fontSize: "0.9375rem",
                                   fontWeight: 700,
-                                  color: "#0F172A",
+                                  color: "var(--ads-ink)",
                                 }}
                               >
                                 {rule.name}
@@ -896,8 +920,8 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                 style={{
                                   fontSize: "0.6875rem",
                                   fontWeight: 700,
-                                  color: isMmd ? "#7C3AED" : "#2563EB",
-                                  background: isMmd ? "#F5F3FF" : "#EFF6FF",
+                                  color: isMmd ? "var(--ads-purple)" : "var(--ads-blue)",
+                                  background: isMmd ? "var(--ads-purple-tint)" : "var(--ads-blue-tint)",
                                   padding: "0.15rem 0.5rem",
                                   borderRadius: "6px",
                                 }}
@@ -912,7 +936,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                 gap: "1rem",
                                 marginTop: "0.25rem",
                                 fontSize: "0.775rem",
-                                color: "#64748B",
+                                color: "var(--ads-ink-tertiary)",
                               }}
                             >
                               <span style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
@@ -936,9 +960,9 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                             style={{
                               padding: "0.4rem 0.75rem",
                               borderRadius: "6px",
-                              border: "1px solid #CBD5E1",
+                              border: "1px solid var(--ads-hairline-strong)",
                               background: "#FFFFFF",
-                              color: "#1E293B",
+                              color: "var(--ads-ink)",
                               fontSize: "0.775rem",
                               fontWeight: 600,
                               cursor: "pointer",
@@ -947,7 +971,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                               gap: "0.35rem",
                             }}
                           >
-                            <Edit2 size={13} style={{ color: "#2563EB" }} />
+                            <Edit2 size={13} style={{ color: "var(--ads-blue)" }} />
                             <span>Edit</span>
                           </button>
                           <button
@@ -957,9 +981,9 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                             style={{
                               padding: "0.4rem",
                               borderRadius: "6px",
-                              border: "1px solid #FECACA",
-                              background: "#FEF2F2",
-                              color: "#DC2626",
+                              border: "1px solid rgba(215, 0, 21, 0.28)",
+                              background: "var(--ads-red-tint)",
+                              color: "var(--ads-red)",
                               cursor: "pointer",
                               display: "flex",
                               alignItems: "center",
@@ -977,7 +1001,15 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
               )}
             </div>
 
-            <div className="sch-modal-footer">
+            <div
+              className="sch-modal-footer"
+              style={{
+                background: "transparent",
+                borderTop: "1px solid var(--ads-hairline)",
+                padding: "var(--ads-s4) var(--ads-s5)",
+                gap: "var(--ads-s2)",
+              }}
+            >
               <button
                 type="button"
                 className="sch-footer-cancel-btn"
@@ -1001,7 +1033,14 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
               ================================================================= */
           <>
             {/* Header: Title & Close */}
-            <div className="sch-modal-header">
+            <div
+              className="sch-modal-header"
+              style={{
+                background: "transparent",
+                borderBottom: "1px solid var(--ads-hairline)",
+                padding: "var(--ads-s4) var(--ads-s5)",
+              }}
+            >
               <h3 className="sch-modal-title">
                 {editingRule ? "Edit Schedule" : "Add Schedule"}
               </h3>
@@ -1098,10 +1137,10 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                   alignItems: "center",
                   gap: "0.5rem",
                   padding: "0.65rem 0.85rem",
-                  background: "#FEF2F2",
-                  border: "1px solid #FECACA",
+                  background: "var(--ads-red-tint)",
+                  border: "1px solid rgba(215, 0, 21, 0.28)",
                   borderRadius: "8px",
-                  color: "#DC2626",
+                  color: "var(--ads-red)",
                   fontSize: "0.8125rem",
                 }}
               >
@@ -1158,7 +1197,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                           className="sch-color-swatch"
                           style={{ backgroundColor: color }}
                         />
-                        <ChevronDown size={14} style={{ color: "#64748B" }} />
+                        <ChevronDown size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
                       </button>
 
                       {isColorPickerOpen && (
@@ -1202,8 +1241,8 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                           style={{
                             fontSize: "0.75rem",
                             fontWeight: 700,
-                            color: "#2563EB",
-                            background: "#EFF6FF",
+                            color: "var(--ads-blue)",
+                            background: "var(--ads-blue-tint)",
                             padding: "0.2rem 0.5rem",
                             borderRadius: "6px",
                           }}
@@ -1221,7 +1260,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                             checked={allDaysChecked}
                             onChange={(e) => handleToggleAll(e.target.checked)}
                           />
-                          <span style={{ fontWeight: 700, color: "#0F172A" }}>All</span>
+                          <span style={{ fontWeight: 700, color: "var(--ads-ink)" }}>All</span>
                         </label>
 
                         <div className="sch-time-selectors-group">
@@ -1264,7 +1303,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                               />
                               <span
                                 style={{
-                                  color: dayItem.isSelected ? "#1E293B" : "#94A3B8",
+                                  color: dayItem.isSelected ? "var(--ads-ink)" : "var(--ads-ink-quaternary)",
                                 }}
                               >
                                 {dayItem.title}
@@ -1338,8 +1377,8 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                             alignItems: "center",
                             gap: "0.75rem",
                             padding: "0.85rem 1rem",
-                            background: "#F8FAFC",
-                            border: "1px solid #E2E8F0",
+                            background: "var(--ads-canvas)",
+                            border: "1px solid var(--ads-hairline)",
                             borderRadius: "10px",
                           }}
                         >
@@ -1405,10 +1444,10 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                   cursor: "pointer",
                                   fontFamily: "inherit",
                                   border: isAct
-                                    ? "1.5px solid #2563EB"
-                                    : "1.5px solid #E2E8F0",
+                                    ? "1.5px solid var(--ads-blue)"
+                                    : "1.5px solid var(--ads-hairline)",
                                   background: isAct ? "#EFF6FF" : "#FFFFFF",
-                                  color: isAct ? "#2563EB" : "#64748B",
+                                  color: isAct ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
                                   transition: "all 0.15s ease",
                                 }}
                               >
@@ -1426,16 +1465,16 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                           alignItems: "center",
                           justifyContent: "space-between",
                           padding: "0.85rem 1rem",
-                          background: "#F8FAFC",
-                          border: "1px solid #E2E8F0",
+                          background: "var(--ads-canvas)",
+                          border: "1px solid var(--ads-hairline)",
                           borderRadius: "10px",
                         }}
                       >
                         <div>
-                          <div style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>
+                          <div style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                             Multi-Day / Overnight Shift
                           </div>
-                          <div style={{ fontSize: "0.75rem", color: "#64748B" }}>
+                          <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                             Allow shift to span across consecutive calendar days
                           </div>
                         </div>
@@ -1468,7 +1507,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                               width: "100px",
                               height: "38px",
                               padding: "0 0.75rem",
-                              border: "1.5px solid #CBD5E1",
+                              border: "1.5px solid var(--ads-hairline-strong)",
                               borderRadius: "8px",
                             }}
                             value={targetShiftsPerWeek}
@@ -1476,7 +1515,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                               setTargetShiftsPerWeek(parseInt(e.target.value, 10) || 1)
                             }
                           />
-                          <span style={{ fontSize: "0.8125rem", color: "#64748B" }}>
+                          <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                             Estimated weekly load: {totalWeeklyHours} hours
                           </span>
                         </div>
@@ -1487,7 +1526,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                   {/* Break Settings (Uniform for both types) */}
                   <div
                     style={{
-                      borderTop: "1px solid #E2E8F0",
+                      borderTop: "1px solid var(--ads-hairline)",
                       paddingTop: "1rem",
                       display: "flex",
                       flexDirection: "column",
@@ -1502,8 +1541,8 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                        <Coffee size={16} style={{ color: "#2563EB" }} />
-                        <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>
+                        <Coffee size={16} style={{ color: "var(--ads-blue)" }} />
+                        <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                           Meal & Rest Break
                         </span>
                       </div>
@@ -1524,13 +1563,13 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                           alignItems: "center",
                           gap: "1.5rem",
                           padding: "0.75rem 1rem",
-                          background: "#F8FAFC",
-                          border: "1px solid #E2E8F0",
+                          background: "var(--ads-canvas)",
+                          border: "1px solid var(--ads-hairline)",
                           borderRadius: "10px",
                         }}
                       >
                         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                          <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#475569" }}>
+                          <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink-secondary)" }}>
                             Duration:
                           </span>
                           <select
@@ -1547,7 +1586,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                          <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#475569" }}>
+                          <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink-secondary)" }}>
                             Start Time:
                           </span>
                           <select
@@ -1580,10 +1619,10 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                       alignItems: "center",
                       gap: "0.5rem",
                       padding: "0.65rem 0.85rem",
-                      background: "#EFF6FF",
-                      border: "1px solid #DBEAFE",
+                      background: "var(--ads-blue-tint)",
+                      border: "1px solid rgba(0, 113, 227, 0.22)",
                       borderRadius: "8px",
-                      color: "#1E40AF",
+                      color: "var(--ads-blue)",
                       fontSize: "0.8125rem",
                     }}
                   >
@@ -1638,7 +1677,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                 style={{
                                   fontSize: "0.775rem",
                                   fontWeight: 600,
-                                  color: "#475569",
+                                  color: "var(--ads-ink-secondary)",
                                 }}
                               >
                                 Response Window:
@@ -1649,7 +1688,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                 style={{
                                   width: "60px",
                                   height: "32px",
-                                  border: "1.5px solid #CBD5E1",
+                                  border: "1.5px solid var(--ads-hairline-strong)",
                                   borderRadius: "6px",
                                   padding: "0 0.5rem",
                                   fontSize: "0.8125rem",
@@ -1697,7 +1736,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                   style={{
                                     fontSize: "0.775rem",
                                     fontWeight: 600,
-                                    color: "#475569",
+                                    color: "var(--ads-ink-secondary)",
                                   }}
                                 >
                                   Decline Window:
@@ -1708,7 +1747,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                   style={{
                                     width: "60px",
                                     height: "32px",
-                                    border: "1.5px solid #CBD5E1",
+                                    border: "1.5px solid var(--ads-hairline-strong)",
                                     borderRadius: "6px",
                                     padding: "0 0.5rem",
                                     fontSize: "0.8125rem",
@@ -1725,7 +1764,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                     setMessageTemplates(updated);
                                   }}
                                 />
-                                <span style={{ fontSize: "0.775rem", color: "#64748B" }}>
+                                <span style={{ fontSize: "0.775rem", color: "var(--ads-ink-tertiary)" }}>
                                   hours
                                 </span>
                               </div>
@@ -1760,10 +1799,10 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                         }}
                       />
                       <div>
-                        <div style={{ fontSize: "1.0625rem", fontWeight: 700, color: "#0F172A" }}>
+                        <div style={{ fontSize: "1.0625rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                           {scheduleName}
                         </div>
-                        <div style={{ fontSize: "0.775rem", color: "#64748B" }}>
+                        <div style={{ fontSize: "0.775rem", color: "var(--ads-ink-tertiary)" }}>
                           {scheduleType === "lmd"
                             ? "Day Specific Shift Schedule"
                             : "Flexible Shift Schedule"}
@@ -1772,10 +1811,10 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                     </div>
 
                     <div style={{ textAlign: "right" }}>
-                      <div style={{ fontSize: "1.125rem", fontWeight: 800, color: "#2563EB" }}>
+                      <div style={{ fontSize: "1.125rem", fontWeight: 800, color: "var(--ads-blue)" }}>
                         {totalWeeklyHours} hrs
                       </div>
-                      <div style={{ fontSize: "0.75rem", color: "#64748B" }}>
+                      <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                         Total Weekly Scheduled
                       </div>
                     </div>
@@ -1805,8 +1844,8 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                     style={{
                                       fontSize: "0.75rem",
                                       fontWeight: 700,
-                                      color: "#16A34A",
-                                      background: "#F0FDF4",
+                                      color: "var(--ads-green)",
+                                      background: "var(--ads-green-tint)",
                                       padding: "0.15rem 0.45rem",
                                       borderRadius: "4px",
                                     }}
@@ -1818,7 +1857,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                     style={{
                                       fontSize: "0.75rem",
                                       fontWeight: 600,
-                                      color: "#94A3B8",
+                                      color: "var(--ads-ink-quaternary)",
                                     }}
                                   >
                                     Off
@@ -1827,7 +1866,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                               </td>
                               <td>{d.isSelected ? d.startTime : "-"}</td>
                               <td>{d.isSelected ? d.endTime : "-"}</td>
-                              <td style={{ textAlign: "right", fontWeight: 700, color: "#2563EB" }}>
+                              <td style={{ textAlign: "right", fontWeight: 700, color: "var(--ads-blue)" }}>
                                 {d.isSelected ? `${d.totalHours}h` : "-"}
                               </td>
                             </tr>
@@ -1838,8 +1877,8 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                       <div
                         style={{
                           padding: "1rem",
-                          background: "#F8FAFC",
-                          border: "1px solid #E2E8F0",
+                          background: "var(--ads-canvas)",
+                          border: "1px solid var(--ads-hairline)",
                           borderRadius: "10px",
                           display: "flex",
                           justifyContent: "space-between",
@@ -1847,10 +1886,10 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                         }}
                       >
                         <div>
-                          <div style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>
+                          <div style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                             {flexStartTime} - {flexEndTime}
                           </div>
-                          <div style={{ fontSize: "0.775rem", color: "#64748B", marginTop: "0.2rem" }}>
+                          <div style={{ fontSize: "0.775rem", color: "var(--ads-ink-tertiary)", marginTop: "0.2rem" }}>
                             Active on: {flexActiveDays.map((d) => d.slice(0, 3)).join(", ")}
                           </div>
                         </div>
@@ -1859,7 +1898,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                             style={{
                               fontSize: "0.8125rem",
                               fontWeight: 700,
-                              color: "#2563EB",
+                              color: "var(--ads-blue)",
                             }}
                           >
                             {calculateHours(flexStartTime, flexEndTime)} hrs / shift
@@ -1893,7 +1932,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                             border: "none",
                             fontSize: "0.75rem",
                             fontWeight: 600,
-                            color: "#2563EB",
+                            color: "var(--ads-blue)",
                             cursor: "pointer",
                           }}
                         >
@@ -1908,7 +1947,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                             border: "none",
                             fontSize: "0.75rem",
                             fontWeight: 600,
-                            color: "#64748B",
+                            color: "var(--ads-ink-tertiary)",
                             cursor: "pointer",
                           }}
                         >
@@ -1919,7 +1958,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
 
                     <div className="sch-driver-picker-box">
                       <div className="sch-driver-search-bar">
-                        <Search size={14} style={{ color: "#94A3B8" }} />
+                        <Search size={14} style={{ color: "var(--ads-ink-quaternary)" }} />
                         <input
                           type="text"
                           placeholder="Search active drivers by name or transporter ID..."
@@ -1943,7 +1982,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                               padding: "1rem",
                               textAlign: "center",
                               fontSize: "0.8125rem",
-                              color: "#94A3B8",
+                              color: "var(--ads-ink-quaternary)",
                             }}
                           >
                             No matching active drivers found
@@ -1985,7 +2024,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                                       style={{
                                         fontSize: "0.8125rem",
                                         fontWeight: 600,
-                                        color: "#1E293B",
+                                        color: "var(--ads-ink)",
                                       }}
                                     >
                                       {drv.name}
@@ -1995,7 +2034,7 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
 
                                 <div>
                                   {isSelected ? (
-                                    <CheckSquare size={16} style={{ color: "#2563EB" }} />
+                                    <CheckSquare size={16} style={{ color: "var(--ads-blue)" }} />
                                   ) : (
                                     <Square size={16} style={{ color: "#CBD5E1" }} />
                                   )}
@@ -2015,19 +2054,19 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
                       alignItems: "center",
                       justifyContent: "space-between",
                       padding: "0.85rem 1rem",
-                      background: "#F8FAFC",
-                      border: "1px solid #E2E8F0",
+                      background: "var(--ads-canvas)",
+                      border: "1px solid var(--ads-hairline)",
                       borderRadius: "10px",
                       fontSize: "0.8125rem",
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                      <Coffee size={15} style={{ color: "#2563EB" }} />
-                      <span style={{ fontWeight: 600, color: "#1E293B" }}>
+                      <Coffee size={15} style={{ color: "var(--ads-blue)" }} />
+                      <span style={{ fontWeight: 600, color: "var(--ads-ink)" }}>
                         Meal Break:
                       </span>
                     </div>
-                    <span style={{ fontWeight: 700, color: "#0F172A" }}>
+                    <span style={{ fontWeight: 700, color: "var(--ads-ink)" }}>
                       {setBreak
                         ? `${breakTime} mins at ${breakDurationStart}`
                         : "No break configured"}
@@ -2038,7 +2077,15 @@ export const ScheduleRulesModal: FC<ScheduleRulesModalProps> = ({
             </div>
 
             {/* Footer Navigation Buttons */}
-            <div className="sch-modal-footer">
+            <div
+              className="sch-modal-footer"
+              style={{
+                background: "transparent",
+                borderTop: "1px solid var(--ads-hairline)",
+                padding: "var(--ads-s4) var(--ads-s5)",
+                gap: "var(--ads-s2)",
+              }}
+            >
               <button
                 type="button"
                 className="sch-footer-cancel-btn"

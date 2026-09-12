@@ -138,28 +138,28 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
         return {
           icon: <ShieldAlert size={16} />,
           label: "Body Damage",
-          bg: "#FEF2F2",
-          text: "#DC2626",
-          border: "#FECACA",
-          dotColor: "#EF4444",
+          bg: "var(--ads-red-tint)",
+          text: "var(--ads-red)",
+          border: "var(--ads-red-tint)",
+          dotColor: "var(--ads-red)",
         };
       case "mechanical":
         return {
           icon: <AlertTriangle size={16} />,
           label: "Mechanical Issue",
-          bg: "#FFFBEB",
-          text: "#D97706",
-          border: "#FDE68A",
-          dotColor: "#F59E0B",
+          bg: "var(--ads-amber-tint)",
+          text: "var(--ads-amber)",
+          border: "var(--ads-amber-tint)",
+          dotColor: "var(--ads-amber)",
         };
       case "preventive_maintenance":
         return {
           icon: <Wrench size={16} />,
           label: "Preventive Log",
-          bg: "#EFF6FF",
-          text: "#2563EB",
-          border: "#BFDBFE",
-          dotColor: "#3B82F6",
+          bg: "var(--ads-blue-tint)",
+          text: "var(--ads-blue)",
+          border: "var(--ads-blue-tint-strong)",
+          dotColor: "var(--ads-blue)",
         };
       case "default_inspection":
       case "pre_inspection":
@@ -168,49 +168,49 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
         return {
           icon: <ClipboardList size={16} />,
           label: "Driver Inspection",
-          bg: "#F0FDF4",
-          text: "#16A34A",
-          border: "#BBF7D0",
-          dotColor: "#10B981",
+          bg: "var(--ads-green-tint)",
+          text: "var(--ads-green)",
+          border: "var(--ads-green-tint)",
+          dotColor: "var(--ads-green)",
         };
       case "task_management":
       case "task":
         return {
           icon: <CheckCircle2 size={16} />,
           label: "Task Update",
-          bg: "#F5F3FF",
-          text: "#7C3AED",
-          border: "#DDD6FE",
-          dotColor: "#8B5CF6",
+          bg: "var(--ads-purple-tint)",
+          text: "var(--ads-purple)",
+          border: "var(--ads-purple-tint)",
+          dotColor: "var(--ads-purple)",
         };
       case "accident_report":
       case "accident":
         return {
           icon: <Flame size={16} />,
           label: "Accident Report",
-          bg: "#FFF1F2",
-          text: "#E11D48",
-          border: "#FECDD3",
-          dotColor: "#F43F5E",
+          bg: "var(--ads-red-tint)",
+          text: "var(--ads-red)",
+          border: "var(--ads-red-tint)",
+          dotColor: "var(--ads-red)",
         };
       case "notes":
       case "note":
         return {
           icon: <FileText size={16} />,
           label: "Vehicle Note",
-          bg: "#F8FAFC",
-          text: "#475569",
-          border: "#E2E8F0",
-          dotColor: "#64748B",
+          bg: "var(--ads-canvas)",
+          text: "var(--ads-ink-secondary)",
+          border: "var(--ads-hairline)",
+          dotColor: "var(--ads-ink-tertiary)",
         };
       default:
         return {
           icon: <Truck size={16} />,
           label: "Vehicle Activity",
-          bg: "#EFF6FF",
-          text: "#1D4ED8",
-          border: "#BFDBFE",
-          dotColor: "#2563EB",
+          bg: "var(--ads-blue-tint)",
+          text: "var(--ads-blue-active)",
+          border: "var(--ads-blue-tint-strong)",
+          dotColor: "var(--ads-blue)",
         };
     }
   };
@@ -222,23 +222,25 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.65)",
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
         backdropFilter: "blur(6px)",
         WebkitBackdropFilter: "blur(6px)",
         zIndex: 10050,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "1rem",
+        padding: "var(--ads-s4)",
       }}
       onClick={onClose}
     >
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "1rem",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-          border: "1px solid #E2E8F0",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          border: "1px solid var(--ads-hairline)",
           width: "100%",
           maxWidth: "880px",
           maxHeight: "90vh",
@@ -251,12 +253,12 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
         {/* Header */}
         <div
           style={{
-            padding: "1.25rem 1.75rem",
-            borderBottom: "1px solid #E2E8F0",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            background: "linear-gradient(to right, #F8FAFC, #FFFFFF)",
+            background: "transparent",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.875rem" }}>
@@ -264,61 +266,70 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
               style={{
                 width: "42px",
                 height: "42px",
-                borderRadius: "10px",
-                background: "#EFF6FF",
-                border: "1px solid #BFDBFE",
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-blue-tint)",
+                border: "1px solid var(--ads-blue-tint-strong)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#2563EB",
+                color: "var(--ads-blue)",
               }}
             >
               <Clock size={22} />
             </div>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <h2 style={{ margin: 0, fontSize: "1.2rem", fontWeight: 700, color: "#1E293B" }}>
+                <h2 style={{ margin: 0, fontSize: "1.2rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                   Vehicle Timeline
                 </h2>
                 <span
                   style={{
-                    backgroundColor: "#EFF6FF",
-                    color: "#2563EB",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    color: "var(--ads-blue)",
                     fontSize: "0.75rem",
                     fontWeight: 700,
                     padding: "0.15rem 0.6rem",
-                    borderRadius: "9999px",
-                    border: "1px solid #BFDBFE",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid var(--ads-blue-tint-strong)",
                   }}
                 >
                   {filteredItems.length} Events
                 </span>
               </div>
-              <p style={{ margin: "0.2rem 0 0", fontSize: "0.85rem", color: "#64748B" }}>
+              <p style={{ margin: "0.2rem 0 0", fontSize: "0.85rem", color: "var(--ads-ink-tertiary)" }}>
                 Vehicle: <strong>{vehicle.vin || "Vehicle #" + vehicle.id}</strong>
                 {(vehicle as any).license_plate ? ` (${(vehicle as any).license_plate})` : ""}
               </p>
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
             <button
               type="button"
               onClick={loadData}
               title="Refresh Timeline"
+              aria-label="Refresh timeline"
               style={{
-                background: "#F1F5F9",
-                border: "none",
-                borderRadius: "0.375rem",
-                padding: "0.45rem",
-                color: "#475569",
+                width: 32,
+                height: 32,
+                background: "transparent",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-sm)",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#E2E8F0")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.05)";
+                e.currentTarget.style.color = "var(--ads-ink)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.color = "var(--ads-ink-tertiary)";
+              }}
             >
               <RotateCw size={16} />
             </button>
@@ -326,21 +337,30 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
             <button
               type="button"
               onClick={onClose}
+              aria-label="Close vehicle timeline"
               style={{
+                width: 32,
+                height: 32,
                 background: "transparent",
-                border: "none",
-                color: "#94A3B8",
+                border: "1px solid var(--ads-hairline)",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
-                padding: "0.4rem",
-                borderRadius: "0.375rem",
+                borderRadius: "var(--ads-r-sm)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#1E293B")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#94A3B8")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--ads-ink)";
+                e.currentTarget.style.background = "rgba(0,0,0,0.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--ads-ink-tertiary)";
+                e.currentTarget.style.background = "transparent";
+              }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
         </div>
@@ -348,12 +368,12 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
         {/* Category Filter Pills */}
         <div
           style={{
-            padding: "0.75rem 1.75rem",
-            backgroundColor: "#F8FAFC",
-            borderBottom: "1px solid #E2E8F0",
+            padding: "var(--ads-s3) var(--ads-s6)",
+            background: "rgba(0, 0, 0, 0.025)",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
-            gap: "0.5rem",
+            gap: "var(--ads-s2)",
             overflowX: "auto",
             scrollbarWidth: "none",
           }}
@@ -365,18 +385,20 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
+                aria-pressed={isSelected}
                 style={{
-                  padding: "0.35rem 0.85rem",
-                  borderRadius: "9999px",
-                  fontSize: "0.8rem",
-                  fontWeight: isSelected ? 700 : 500,
-                  border: isSelected ? "1px solid #2563EB" : "1px solid #E2E8F0",
-                  backgroundColor: isSelected ? "#2563EB" : "#FFFFFF",
-                  color: isSelected ? "#FFFFFF" : "#64748B",
+                  padding: "6px 14px",
+                  borderRadius: "var(--ads-r-pill)",
+                  fontSize: "0.8125rem",
+                  fontWeight: isSelected ? 600 : 550,
+                  letterSpacing: "-0.005em",
+                  border: "1px solid " + (isSelected ? "transparent" : "var(--ads-hairline)"),
+                  backgroundColor: isSelected ? "var(--ads-blue)" : "var(--ads-material-thick)",
+                  color: isSelected ? "#FFFFFF" : "var(--ads-ink-secondary)",
                   cursor: "pointer",
                   whiteSpace: "nowrap",
-                  transition: "all 0.15s ease",
-                  boxShadow: isSelected ? "0 2px 4px rgba(37, 99, 235, 0.2)" : "none",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+                  boxShadow: isSelected ? "0 1px 4px rgba(0, 113, 227, 0.32)" : "var(--ads-bevel)",
                 }}
               >
                 {cat}
@@ -388,7 +410,7 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
         {/* Timeline Body */}
         <div
           style={{
-            padding: "1.5rem 1.75rem",
+            padding: "var(--ads-s6)",
             flex: 1,
             overflowY: "auto",
           }}
@@ -401,7 +423,7 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                 alignItems: "center",
                 justifyContent: "center",
                 padding: "3.5rem",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
               }}
             >
               <LoadingSpinner size="lg" />
@@ -414,7 +436,7 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
               style={{
                 textAlign: "center",
                 padding: "3.5rem 1rem",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
               }}
             >
               <div
@@ -422,8 +444,8 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                   width: "56px",
                   height: "56px",
                   borderRadius: "50%",
-                  background: "#EFF6FF",
-                  color: "#3B82F6",
+                  background: "var(--ads-blue-tint)",
+                  color: "var(--ads-blue)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -432,10 +454,10 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
               >
                 <Layers size={28} />
               </div>
-              <h4 style={{ margin: "0 0 0.4rem", fontSize: "1.05rem", fontWeight: 700, color: "#1E293B" }}>
+              <h4 style={{ margin: "0 0 0.4rem", fontSize: "1.05rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                 No Timeline Logs Found
               </h4>
-              <p style={{ margin: "0", fontSize: "0.85rem", color: "#64748B" }}>
+              <p style={{ margin: "0", fontSize: "0.85rem", color: "var(--ads-ink-tertiary)" }}>
                 No recorded activity found for the &ldquo;{selectedCategory}&rdquo; filter.
               </p>
             </div>
@@ -456,15 +478,15 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                       style={{
                         fontSize: "0.82rem",
                         fontWeight: 700,
-                        color: "#1E293B",
-                        backgroundColor: "#F1F5F9",
+                        color: "var(--ads-ink)",
+                        backgroundColor: "rgba(0,0,0,0.04)",
                         padding: "0.2rem 0.65rem",
-                        borderRadius: "0.375rem",
+                        borderRadius: "var(--ads-r-xs)",
                       }}
                     >
                       {groupTitle}
                     </span>
-                    <div style={{ flex: 1, height: "1px", backgroundColor: "#E2E8F0" }} />
+                    <div style={{ flex: 1, height: "1px", backgroundColor: "var(--ads-hairline)" }} />
                   </div>
 
                   {/* Events in this group */}
@@ -474,7 +496,7 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                       flexDirection: "column",
                       gap: "0.75rem",
                       paddingLeft: "0.5rem",
-                      borderLeft: "2px solid #E2E8F0",
+                      borderLeft: "2px solid var(--ads-hairline)",
                       marginLeft: "0.5rem",
                     }}
                   >
@@ -514,13 +536,24 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                         <div
                           key={item.id || idx}
                           style={{
-                            backgroundColor: "#FFFFFF",
-                            border: "1px solid #E2E8F0",
-                            borderRadius: "0.75rem",
-                            padding: "0.875rem 1.15rem",
-                            boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.04)",
-                            marginLeft: "0.75rem",
+                            background: "var(--ads-material-thick)",
+                            border: "1px solid var(--ads-hairline)",
+                            borderRadius: "var(--ads-r-md)",
+                            padding: "var(--ads-s3) var(--ads-s4)",
+                            boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
+                            marginLeft: "var(--ads-s3)",
                             position: "relative",
+                            transition: "box-shadow var(--ads-dur) var(--ads-ease), transform var(--ads-dur) var(--ads-ease), border-color var(--ads-dur) var(--ads-ease)",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "translateY(-2px)";
+                            e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+                            e.currentTarget.style.borderColor = "var(--ads-hairline-strong)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "translateY(0)";
+                            e.currentTarget.style.boxShadow = "var(--ads-shadow-xs), var(--ads-bevel)";
+                            e.currentTarget.style.borderColor = "var(--ads-hairline)";
                           }}
                         >
                           {/* Dot indicator on timeline spine */}
@@ -534,7 +567,7 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                               borderRadius: "50%",
                               backgroundColor: cfg.dotColor,
                               border: "2px solid #FFFFFF",
-                              boxShadow: "0 0 0 2px #E2E8F0",
+                              boxShadow: "0 0 0 2px var(--ads-hairline)",
                             }}
                           />
 
@@ -557,8 +590,8 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                                 backgroundColor: cfg.bg,
                                 color: cfg.text,
                                 border: `1px solid ${cfg.border}`,
-                                padding: "0.15rem 0.55rem",
-                                borderRadius: "0.375rem",
+                                padding: "3px 9px",
+                                borderRadius: "var(--ads-r-pill)",
                               }}
                             >
                               {cfg.icon}
@@ -566,7 +599,7 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                             </span>
 
                             {formattedTime && (
-                              <span style={{ fontSize: "0.75rem", color: "#94A3B8" }}>
+                              <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-quaternary)" }}>
                                 {formattedTime}
                               </span>
                             )}
@@ -577,7 +610,7 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                               margin: "0 0 0.35rem",
                               fontSize: "0.88rem",
                               fontWeight: 500,
-                              color: "#1E293B",
+                              color: "var(--ads-ink)",
                               lineHeight: 1.4,
                             }}
                           >
@@ -592,12 +625,12 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
                               gap: "1rem",
                               flexWrap: "wrap",
                               fontSize: "0.78rem",
-                              color: "#64748B",
+                              color: "var(--ads-ink-tertiary)",
                             }}
                           >
                             {user && (
                               <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-                                <User size={13} color="#94A3B8" />
+                                <User size={13} color="var(--ads-ink-quaternary)" />
                                 <span>{user}</span>
                               </div>
                             )}
@@ -639,28 +672,31 @@ export const VehicleTimelineModal: FC<VehicleTimelineModalProps> = ({
         {/* Footer */}
         <div
           style={{
-            padding: "0.875rem 1.75rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            padding: "var(--ads-s4) var(--ads-s6)",
+            borderTop: "1px solid var(--ads-hairline)",
+            background: "transparent",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: "var(--ads-s3)",
           }}
         >
-          <span style={{ fontSize: "0.8rem", color: "#64748B" }}>
+          <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
             Real-time chronological events from Fleet Timeline MS
           </span>
           <button
             type="button"
             onClick={onClose}
             style={{
-              padding: "0.45rem 1.1rem",
-              borderRadius: "0.5rem",
-              border: "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
-              color: "#334155",
-              fontSize: "0.85rem",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid var(--ads-hairline)",
+              background: "var(--ads-material-thick)",
+              boxShadow: "var(--ads-bevel)",
+              color: "var(--ads-ink)",
+              fontSize: "0.8125rem",
               fontWeight: 600,
+              letterSpacing: "-0.01em",
               cursor: "pointer",
             }}
           >

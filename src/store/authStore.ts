@@ -113,12 +113,12 @@ try {
 export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
-      user: defaultStagingUser,
-      token: "staging_token_queen_admin",
-      isAuthenticated: true,
+      user: null,
+      token: null,
+      isAuthenticated: false,
       accessDeniedModalOpen: false,
-      stations: defaultStations,
-      allStations: defaultStations,
+      stations: [],
+      allStations: [],
       switchingStationId: null,
       isLoadingProfile: false,
 

@@ -22,6 +22,86 @@ interface InspectionReportDrawerProps {
   onReassignVehicle?: (inspection: InspectionRecord) => void;
 }
 
+const statusPillStyle = (tint: string, fg: string): React.CSSProperties => ({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "6px",
+  padding: "4px 12px",
+  borderRadius: "var(--ads-r-pill)",
+  fontSize: "0.75rem",
+  fontWeight: 600,
+  letterSpacing: "-0.005em",
+  background: tint,
+  color: fg,
+  border: "1px solid transparent",
+});
+
+const itemPillStyle = (tint: string, fg: string): React.CSSProperties => ({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "4px",
+  padding: "2px 8px",
+  borderRadius: "var(--ads-r-pill)",
+  fontSize: "0.6875rem",
+  fontWeight: 600,
+  background: tint,
+  color: fg,
+  border: "1px solid transparent",
+});
+
+const summaryCardStyle: React.CSSProperties = {
+  background: "var(--ads-canvas)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-md)",
+  padding: "var(--ads-s3)",
+};
+
+const summaryLabelStyle: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+  fontSize: "0.75rem",
+  color: "var(--ads-ink-tertiary)",
+  fontWeight: 500,
+  marginBottom: "var(--ads-s1)",
+};
+
+const summaryValueStyle: React.CSSProperties = {
+  fontSize: "0.75rem",
+  fontWeight: 600,
+  color: "var(--ads-ink)",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+};
+
+const summaryMetaStyle: React.CSSProperties = {
+  fontSize: "0.625rem",
+  color: "var(--ads-ink-quaternary)",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+};
+
+const sectionTitleStyle: React.CSSProperties = {
+  margin: 0,
+  display: "flex",
+  alignItems: "center",
+  gap: "var(--ads-s2)",
+  fontSize: "0.9375rem",
+  fontWeight: 600,
+  letterSpacing: "-0.01em",
+  color: "var(--ads-ink)",
+};
+
+const metaRowStyle: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: "var(--ads-s2)",
+  fontSize: "0.75rem",
+};
+
 export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
   isOpen,
   onClose,
@@ -63,28 +143,28 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
     switch (status) {
       case "passed":
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-            <CheckCircle2 size={13} className="text-emerald-600" />
+          <span style={statusPillStyle("var(--ads-green-tint)", "var(--ads-green)")}>
+            <CheckCircle2 size={13} style={{ color: "var(--ads-green)" }} />
             PASS
           </span>
         );
       case "caution":
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
-            <AlertTriangle size={13} className="text-amber-600" />
+          <span style={statusPillStyle("var(--ads-amber-tint)", "var(--ads-amber)")}>
+            <AlertTriangle size={13} style={{ color: "var(--ads-amber)" }} />
             CAUTION
           </span>
         );
       case "failed":
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
-            <XCircle size={13} className="text-rose-600" />
+          <span style={statusPillStyle("var(--ads-red-tint)", "var(--ads-red)")}>
+            <XCircle size={13} style={{ color: "var(--ads-red)" }} />
             FAIL / GROUNDED
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+          <span style={statusPillStyle("rgba(0,0,0,0.05)", "var(--ads-ink-secondary)")}>
             PENDING
           </span>
         );
@@ -95,22 +175,22 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
     switch (status) {
       case "pass":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-            <CheckCircle2 size={11} className="text-emerald-600" />
+          <span style={itemPillStyle("var(--ads-green-tint)", "var(--ads-green)")}>
+            <CheckCircle2 size={11} style={{ color: "var(--ads-green)" }} />
             Satisfactory
           </span>
         );
       case "caution":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
-            <AlertTriangle size={11} className="text-amber-600" />
+          <span style={itemPillStyle("var(--ads-amber-tint)", "var(--ads-amber)")}>
+            <AlertTriangle size={11} style={{ color: "var(--ads-amber)" }} />
             Attention Needed
           </span>
         );
       case "fail":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">
-            <XCircle size={11} className="text-rose-600" />
+          <span style={itemPillStyle("var(--ads-red-tint)", "var(--ads-red)")}>
+            <XCircle size={11} style={{ color: "var(--ads-red)" }} />
             Defect / Grounded
           </span>
         );
@@ -118,105 +198,230 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
+    <div style={{ position: "fixed", inset: 0, zIndex: 50, overflow: "hidden" }}>
       {/* Dimmed Backdrop */}
       <div
-        className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "rgba(0,0,0,0.32)",
+          backdropFilter: "blur(6px)",
+          WebkitBackdropFilter: "blur(6px)",
+        }}
         onClick={onClose}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-2xl bg-white shadow-2xl border-l-2 border-slate-200 flex flex-col animate-in slide-in-from-right duration-250">
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          bottom: 0,
+          right: 0,
+          maxWidth: "100%",
+          display: "flex",
+          paddingLeft: "var(--ads-s10)",
+        }}
+      >
+        <div
+          style={{
+            width: "100vw",
+            maxWidth: "42rem",
+            display: "flex",
+            flexDirection: "column",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-lg)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-xl) 0 0 var(--ads-r-xl)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          }}
+        >
           {/* Header */}
-          <div className="p-5 border-b-2 border-slate-200 bg-slate-50/70 flex items-start justify-between">
+          <div
+            style={{
+              padding: "var(--ads-s5) var(--ads-s6)",
+              background: "transparent",
+              borderBottom: "1px solid var(--ads-hairline)",
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "space-between",
+              gap: "var(--ads-s3)",
+            }}
+          >
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--ads-s2)",
+                  marginBottom: "var(--ads-s1)",
+                  flexWrap: "wrap",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "0.6875rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.04em",
+                    textTransform: "uppercase",
+                    color: "var(--ads-ink-quaternary)",
+                  }}
+                >
                   Inspection Report
                 </span>
-                <span className="text-xs text-slate-400">•</span>
-                <span className="text-xs font-semibold text-slate-600">
+                <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-quaternary)" }}>•</span>
+                <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)" }}>
                   {inspection.shift_type || "Daily Inspection"}
                 </span>
-                <span className="text-xs text-slate-400">•</span>
-                <span className="text-xs font-mono text-slate-500">#{inspection.id}</span>
+                <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-quaternary)" }}>•</span>
+                <span
+                  style={{
+                    fontSize: "0.75rem",
+                    fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+                    color: "var(--ads-ink-tertiary)",
+                  }}
+                >
+                  #{inspection.id}
+                </span>
               </div>
-              <div className="flex items-center gap-3">
-                <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                  <Truck size={20} className="text-blue-600" />
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)", flexWrap: "wrap" }}>
+                <h3
+                  style={{
+                    margin: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--ads-s2)",
+                    fontSize: "1.375rem",
+                    fontWeight: 650,
+                    letterSpacing: "-0.019em",
+                    color: "var(--ads-ink)",
+                  }}
+                >
+                  <Truck size={20} style={{ color: "var(--ads-blue)" }} />
                   {inspection.vehicle_unit || "Vehicle"}
                 </h3>
                 {getStatusBadge(inspection.status)}
               </div>
-              <p className="text-xs text-slate-500 mt-1 flex items-center gap-2">
-                <span>VIN: <strong className="font-mono text-slate-700">{inspection.vin || "—"}</strong></span>
+              <p
+                style={{
+                  margin: "var(--ads-s1) 0 0 0",
+                  fontSize: "0.75rem",
+                  color: "var(--ads-ink-tertiary)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--ads-s2)",
+                  flexWrap: "wrap",
+                }}
+              >
+                <span>
+                  VIN:{" "}
+                  <strong
+                    style={{
+                      fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+                      color: "var(--ads-ink-secondary)",
+                    }}
+                  >
+                    {inspection.vin || "—"}
+                  </strong>
+                </span>
                 <span>•</span>
-                <span>Plate: <strong className="text-slate-700">{inspection.license_plate || "—"}</strong></span>
+                <span>
+                  Plate: <strong style={{ color: "var(--ads-ink-secondary)" }}>{inspection.license_plate || "—"}</strong>
+                </span>
               </p>
             </div>
 
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors"
+              aria-label="Close inspection report"
               title="Close drawer (Esc)"
+              style={{
+                width: "32px",
+                height: "32px",
+                flexShrink: 0,
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
+                background: "transparent",
+                color: "var(--ads-ink-tertiary)",
+                cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
+              }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
 
           {/* Body Content */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-5">
+          <div
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              padding: "var(--ads-s6)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--ads-s5)",
+            }}
+          >
             {/* Quick Summary Cards Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="bg-slate-50 border-2 border-slate-200 rounded-xl p-3">
-                <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium mb-1">
-                  <User size={13} className="text-blue-600" />
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+                gap: "var(--ads-s3)",
+              }}
+            >
+              <div style={summaryCardStyle}>
+                <div style={summaryLabelStyle}>
+                  <User size={13} style={{ color: "var(--ads-blue)" }} />
                   <span>Driver</span>
                 </div>
-                <div className="text-xs font-bold text-slate-900 truncate">
+                <div style={summaryValueStyle}>
                   {inspection.driver_name || "Unassigned"}
                 </div>
-                <div className="text-[10px] text-slate-400 truncate">
+                <div style={summaryMetaStyle}>
                   {inspection.driver_id ? `ID: #${inspection.driver_id}` : "Assigned"}
                 </div>
               </div>
 
-              <div className="bg-slate-50 border-2 border-slate-200 rounded-xl p-3">
-                <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium mb-1">
-                  <Calendar size={13} className="text-blue-600" />
+              <div style={summaryCardStyle}>
+                <div style={summaryLabelStyle}>
+                  <Calendar size={13} style={{ color: "var(--ads-blue)" }} />
                   <span>Inspection Date</span>
                 </div>
-                <div className="text-xs font-bold text-slate-900">
+                <div style={summaryValueStyle}>
                   {inspection.date || "Today"}
                 </div>
-                <div className="text-[10px] text-slate-400">
+                <div style={summaryMetaStyle}>
                   {inspection.shift_type || "RTS Check"}
                 </div>
               </div>
 
-              <div className="bg-slate-50 border-2 border-slate-200 rounded-xl p-3">
-                <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium mb-1">
-                  <Gauge size={13} className="text-blue-600" />
+              <div style={summaryCardStyle}>
+                <div style={summaryLabelStyle}>
+                  <Gauge size={13} style={{ color: "var(--ads-blue)" }} />
                   <span>Odometer</span>
                 </div>
-                <div className="text-xs font-bold text-slate-900">
+                <div style={summaryValueStyle}>
                   {inspection.odometer ? `${inspection.odometer.toLocaleString()} mi` : "—"}
                 </div>
-                <div className="text-[10px] text-slate-400">
+                <div style={summaryMetaStyle}>
                   Verified by driver
                 </div>
               </div>
 
-              <div className="bg-slate-50 border-2 border-slate-200 rounded-xl p-3">
-                <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium mb-1">
-                  <Fuel size={13} className="text-blue-600" />
+              <div style={summaryCardStyle}>
+                <div style={summaryLabelStyle}>
+                  <Fuel size={13} style={{ color: "var(--ads-blue)" }} />
                   <span>Fuel / Battery</span>
                 </div>
-                <div className="text-xs font-bold text-slate-900">
+                <div style={summaryValueStyle}>
                   {inspection.fuel_level || "Full (100%)"}
                 </div>
-                <div className="text-[10px] text-emerald-600 font-semibold">
+                <div style={{ ...summaryMetaStyle, color: "var(--ads-green)", fontWeight: 600 }}>
                   Operating level
                 </div>
               </div>
@@ -225,26 +430,42 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
             {/* Defect / Notes Warning Banner if flagged */}
             {(inspection.status === "failed" || inspection.status === "caution" || (inspection.defects_found && inspection.defects_found > 0)) && (
               <div
-                className={`p-4 rounded-xl border-2 flex items-start gap-3 ${
-                  inspection.status === "failed"
-                    ? "bg-rose-50/80 border-rose-200 text-rose-900"
-                    : "bg-amber-50/80 border-amber-200 text-amber-900"
-                }`}
+                style={{
+                  padding: "var(--ads-s4)",
+                  borderRadius: "var(--ads-r-md)",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "var(--ads-s3)",
+                  background:
+                    inspection.status === "failed" ? "var(--ads-red-tint)" : "var(--ads-amber-tint)",
+                  border: `1px solid ${
+                    inspection.status === "failed" ? "var(--ads-red)" : "var(--ads-amber)"
+                  }`,
+                  color: inspection.status === "failed" ? "var(--ads-red)" : "var(--ads-amber)",
+                }}
               >
-                <div className="mt-0.5">
+                <div style={{ marginTop: "2px" }}>
                   {inspection.status === "failed" ? (
-                    <XCircle size={18} className="text-rose-600" />
+                    <XCircle size={18} style={{ color: "var(--ads-red)" }} />
                   ) : (
-                    <AlertTriangle size={18} className="text-amber-600" />
+                    <AlertTriangle size={18} style={{ color: "var(--ads-amber)" }} />
                   )}
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-xs font-bold uppercase tracking-wider mb-1">
+                <div style={{ flex: 1 }}>
+                  <h4
+                    style={{
+                      margin: "0 0 var(--ads-s1) 0",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.04em",
+                      textTransform: "uppercase",
+                    }}
+                  >
                     {inspection.status === "failed"
                       ? "Grounded / Critical Defects Reported"
                       : "Caution Items Noted"}
                   </h4>
-                  <p className="text-xs leading-relaxed">
+                  <p style={{ margin: 0, fontSize: "0.75rem", lineHeight: 1.5 }}>
                     {inspection.notes ||
                       "Driver or safety inspector flagged physical items during vehicle return check. Requires maintenance dispatch review."}
                   </p>
@@ -254,18 +475,36 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
 
             {/* Itemized Checklist Tabs & Questions */}
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <ShieldCheck size={16} className="text-blue-600" />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "var(--ads-s2)",
+                  marginBottom: "var(--ads-s3)",
+                }}
+              >
+                <h4 style={sectionTitleStyle}>
+                  <ShieldCheck size={16} style={{ color: "var(--ads-blue)" }} />
                   Itemized DVIC Checklist Questions
                 </h4>
-                <span className="text-xs font-semibold text-slate-500">
+                <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-tertiary)" }}>
                   {checklist.filter((i) => i.status === "pass").length} / {checklist.length} Passed
                 </span>
               </div>
 
               {/* Category Pills */}
-              <div className="flex items-center gap-1.5 border-b border-slate-200 pb-2 mb-3 overflow-x-auto">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  borderBottom: "1px solid var(--ads-hairline)",
+                  paddingBottom: "var(--ads-s2)",
+                  marginBottom: "var(--ads-s3)",
+                  overflowX: "auto",
+                }}
+              >
                 {[
                   { id: "all", label: "All Items" },
                   { id: "exterior", label: "Exterior & Body" },
@@ -277,11 +516,18 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
                     key={cat.id}
                     type="button"
                     onClick={() => setActiveCategory(cat.id as any)}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
-                      activeCategory === cat.id
-                        ? "bg-blue-600 text-white"
-                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                    }`}
+                    style={{
+                      padding: "5px 12px",
+                      borderRadius: "var(--ads-r-pill)",
+                      fontSize: "0.75rem",
+                      fontWeight: 600,
+                      whiteSpace: "nowrap",
+                      border: "1px solid transparent",
+                      background: activeCategory === cat.id ? "var(--ads-blue)" : "rgba(0,0,0,0.04)",
+                      color: activeCategory === cat.id ? "#FFFFFF" : "var(--ads-ink-secondary)",
+                      cursor: "pointer",
+                      transition: "all var(--ads-dur-fast) var(--ads-ease)",
+                    }}
                   >
                     {cat.label}
                   </button>
@@ -289,38 +535,77 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
               </div>
 
               {/* Questions List */}
-              <div className="space-y-2">
+              <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s2)" }}>
                 {filteredChecklist.length === 0 ? (
-                  <div className="p-4 text-center text-xs text-slate-400 bg-slate-50 rounded-xl border border-slate-200">
+                  <div
+                    style={{
+                      padding: "var(--ads-s4)",
+                      textAlign: "center",
+                      fontSize: "0.75rem",
+                      color: "var(--ads-ink-quaternary)",
+                      background: "var(--ads-canvas)",
+                      borderRadius: "var(--ads-r-md)",
+                      border: "1px solid var(--ads-hairline)",
+                    }}
+                  >
                     No items found for this category.
                   </div>
                 ) : (
                   filteredChecklist.map((item) => (
                     <div
                       key={item.id}
-                      className={`p-3 rounded-xl border-2 transition-all ${
-                        item.status === "fail"
-                          ? "bg-rose-50/50 border-rose-200"
-                          : item.status === "caution"
-                          ? "bg-amber-50/50 border-amber-200"
-                          : "bg-white border-slate-200 hover:border-slate-300"
-                      }`}
+                      style={{
+                        padding: "var(--ads-s3)",
+                        borderRadius: "var(--ads-r-md)",
+                        background:
+                          item.status === "fail"
+                            ? "var(--ads-red-tint)"
+                            : item.status === "caution"
+                            ? "var(--ads-amber-tint)"
+                            : "var(--ads-material-thick)",
+                        border: `1px solid ${
+                          item.status === "fail"
+                            ? "var(--ads-red)"
+                            : item.status === "caution"
+                            ? "var(--ads-amber)"
+                            : "var(--ads-hairline)"
+                        }`,
+                        transition: "all var(--ads-dur-fast) var(--ads-ease)",
+                      }}
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-slate-900">
+                      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "var(--ads-s3)" }}>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)", flexWrap: "wrap" }}>
+                            <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                               {item.title}
                             </span>
                             {getItemStatusBadge(item.status)}
                           </div>
                           {item.description && (
-                            <p className="text-[11px] text-slate-500 mt-1 leading-snug">
+                            <p
+                              style={{
+                                margin: "var(--ads-s1) 0 0 0",
+                                fontSize: "0.6875rem",
+                                color: "var(--ads-ink-tertiary)",
+                                lineHeight: 1.4,
+                              }}
+                            >
                               {item.description}
                             </p>
                           )}
                           {item.notes && (
-                            <div className="mt-2 text-[11px] font-semibold text-rose-700 bg-rose-50 p-2 rounded-lg border border-rose-200/60">
+                            <div
+                              style={{
+                                marginTop: "var(--ads-s2)",
+                                fontSize: "0.6875rem",
+                                fontWeight: 600,
+                                color: "var(--ads-red)",
+                                background: "var(--ads-red-tint)",
+                                padding: "var(--ads-s2)",
+                                borderRadius: "var(--ads-r-sm)",
+                                border: "1px solid var(--ads-hairline)",
+                              }}
+                            >
                               Inspector Note: {item.notes}
                             </div>
                           )}
@@ -334,37 +619,98 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
 
             {/* Media & Photos Section */}
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <Camera size={16} className="text-blue-600" />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "var(--ads-s2)",
+                  marginBottom: "var(--ads-s3)",
+                }}
+              >
+                <h4 style={sectionTitleStyle}>
+                  <Camera size={16} style={{ color: "var(--ads-blue)" }} />
                   Media & Photo Uploads ({inspection.images?.length || 0})
                 </h4>
-                <span className="text-xs text-slate-400">Timestamped Inspection Captures</span>
+                <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-quaternary)" }}>
+                  Timestamped Inspection Captures
+                </span>
               </div>
 
               {(!inspection.images || inspection.images.length === 0) ? (
-                <div className="p-6 text-center border-2 border-dashed border-slate-200 rounded-xl bg-slate-50 text-xs text-slate-400">
-                  <Camera size={24} className="mx-auto mb-1.5 opacity-40" />
+                <div
+                  style={{
+                    padding: "var(--ads-s6)",
+                    textAlign: "center",
+                    border: "1px dashed var(--ads-hairline-strong)",
+                    borderRadius: "var(--ads-r-md)",
+                    background: "var(--ads-canvas)",
+                    fontSize: "0.75rem",
+                    color: "var(--ads-ink-quaternary)",
+                  }}
+                >
+                  <Camera
+                    size={24}
+                    style={{ display: "block", margin: "0 auto var(--ads-s1)", color: "var(--ads-ink-quaternary)" }}
+                  />
                   No defect or exterior photos uploaded with this inspection.
                 </div>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
+                    gap: "var(--ads-s3)",
+                  }}
+                >
                   {inspection.images.map((img, i) => (
                     <div
                       key={i}
-                      className="group relative aspect-video rounded-xl overflow-hidden border-2 border-slate-200 bg-slate-100 cursor-pointer shadow-xs"
+                      style={{
+                        position: "relative",
+                        aspectRatio: "16 / 9",
+                        borderRadius: "var(--ads-r-md)",
+                        overflow: "hidden",
+                        border: "1px solid var(--ads-hairline)",
+                        background: "var(--ads-canvas)",
+                        cursor: "pointer",
+                        boxShadow: "var(--ads-shadow-xs)",
+                        transition: "transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+                      }}
                       onClick={() => setSelectedPhoto(img)}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow = "var(--ads-shadow-md)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+                      }}
                     >
                       <img
                         src={img}
                         alt={`Inspection capture ${i + 1}`}
-                        className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                         onError={(e) => {
                           (e.currentTarget as HTMLElement).style.display = "none";
                         }}
                       />
-                      <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                        <Maximize2 size={16} />
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#FFFFFF",
+                          background: "rgba(0,0,0,0.28)",
+                          opacity: 0,
+                          transition: "opacity var(--ads-dur-fast) var(--ads-ease)",
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+                        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0")}
+                      >
+                        <Maximize2 size={16} style={{ color: "#FFFFFF" }} />
                       </div>
                     </div>
                   ))}
@@ -373,22 +719,38 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
             </div>
 
             {/* Verification / Submission Details Footer Card */}
-            <div className="p-4 bg-slate-50 border-2 border-slate-200 rounded-xl space-y-2">
-              <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500 font-medium">Submission Source</span>
-                <span className="font-semibold text-slate-800">
+            <div
+              style={{
+                padding: "var(--ads-s4)",
+                background: "var(--ads-canvas)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-md)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "var(--ads-s2)",
+              }}
+            >
+              <div style={metaRowStyle}>
+                <span style={{ color: "var(--ads-ink-tertiary)", fontWeight: 500 }}>Submission Source</span>
+                <span style={{ fontWeight: 600, color: "var(--ads-ink)" }}>
                   {inspection.submission_source || "Mobile Driver App"}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500 font-medium">Verified By</span>
-                <span className="font-semibold text-slate-800">
+              <div style={metaRowStyle}>
+                <span style={{ color: "var(--ads-ink-tertiary)", fontWeight: 500 }}>Verified By</span>
+                <span style={{ fontWeight: 600, color: "var(--ads-ink)" }}>
                   {inspection.verified_by || "Station Safety Lead"}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500 font-medium">Verified On</span>
-                <span className="font-semibold text-slate-800 font-mono">
+              <div style={metaRowStyle}>
+                <span style={{ color: "var(--ads-ink-tertiary)", fontWeight: 500 }}>Verified On</span>
+                <span
+                  style={{
+                    fontWeight: 600,
+                    color: "var(--ads-ink)",
+                    fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+                  }}
+                >
                   {inspection.verified_on || inspection.created_at || "Today"}
                 </span>
               </div>
@@ -396,11 +758,33 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
           </div>
 
           {/* Drawer Footer Actions */}
-          <div className="p-4 border-t-2 border-slate-200 bg-white flex items-center justify-between gap-3">
+          <div
+            style={{
+              padding: "var(--ads-s4) var(--ads-s6)",
+              background: "transparent",
+              borderTop: "1px solid var(--ads-hairline)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "var(--ads-s3)",
+            }}
+          >
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
+              style={{
+                padding: "9px 18px",
+                fontSize: "0.8125rem",
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+                color: "var(--ads-ink)",
+                background: "var(--ads-material-thick)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-pill)",
+                boxShadow: "var(--ads-bevel)",
+                cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
+              }}
             >
               Close Report
             </button>
@@ -412,11 +796,24 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
                   onClose();
                   onReassignVehicle(inspection);
                 }}
-                className="px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all shadow-xs flex items-center gap-1.5"
-                style={{ color: "#FFFFFF" }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "9px 18px",
+                  fontSize: "0.8125rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.01em",
+                  color: "#FFFFFF",
+                  background: "var(--ads-blue)",
+                  border: "1px solid transparent",
+                  borderRadius: "var(--ads-r-pill)",
+                  cursor: "pointer",
+                  transition: "all var(--ads-dur-fast) var(--ads-ease)",
+                }}
               >
                 <Truck size={14} style={{ color: "#FFFFFF" }} />
-                <span>Reassign Vehicle</span>
+                <span style={{ color: "#FFFFFF" }}>Reassign Vehicle</span>
               </button>
             )}
           </div>
@@ -426,21 +823,70 @@ export const InspectionReportDrawer: FC<InspectionReportDrawerProps> = ({
       {/* Photo Modal Zoom */}
       {selectedPhoto && (
         <div
-          className="fixed inset-0 z-60 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4"
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 60,
+            background: "rgba(0,0,0,0.32)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "var(--ads-s4)",
+          }}
           onClick={() => setSelectedPhoto(null)}
         >
-          <div className="relative max-w-4xl max-h-[90vh] bg-slate-900 rounded-2xl overflow-hidden shadow-2xl p-2">
+          <div
+            style={{
+              position: "relative",
+              maxWidth: "56rem",
+              maxHeight: "90vh",
+              background: "var(--ads-material-thick)",
+              backdropFilter: "var(--ads-blur-lg)",
+              WebkitBackdropFilter: "var(--ads-blur-lg)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-xl)",
+              boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+              overflow: "hidden",
+              padding: "var(--ads-s2)",
+            }}
+          >
             <button
               type="button"
               onClick={() => setSelectedPhoto(null)}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-slate-800/80 text-white hover:bg-slate-700"
+              aria-label="Close photo preview"
+              style={{
+                position: "absolute",
+                top: "var(--ads-s4)",
+                right: "var(--ads-s4)",
+                zIndex: 10,
+                width: "32px",
+                height: "32px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
+                background: "var(--ads-material-thick)",
+                color: "var(--ads-ink-tertiary)",
+                cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
+              }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
             <img
               src={selectedPhoto}
               alt="Expanded preview"
-              className="w-full h-auto max-h-[85vh] object-contain rounded-xl"
+              style={{
+                width: "100%",
+                height: "auto",
+                maxHeight: "85vh",
+                objectFit: "contain",
+                borderRadius: "var(--ads-r-lg)",
+                display: "block",
+              }}
             />
           </div>
         </div>

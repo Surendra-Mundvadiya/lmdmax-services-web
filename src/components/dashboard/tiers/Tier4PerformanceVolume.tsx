@@ -53,13 +53,13 @@ export const Tier4PerformanceVolume: FC<Props> = ({
         </div>
 
         {isLoading ? (
-          <div className="uop-skeleton" style={{ width: "100%", height: 180, borderRadius: 8 }} />
+          <div className="uop-skeleton" style={{ width: "100%", height: 180, borderRadius: "var(--ads-r-md)" }} />
         ) : (
           <ViolationsPieChart data={violations} />
         )}
 
         <div className="uop-card-footer" style={{ marginTop: "auto" }}>
-          <span style={{ fontSize: "0.6875rem", color: "#64748B" }}>
+          <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)" }}>
             Real-time telemetry alerts
           </span>
           <span
@@ -85,13 +85,13 @@ export const Tier4PerformanceVolume: FC<Props> = ({
         </div>
 
         {isLoading ? (
-          <div className="uop-skeleton" style={{ width: "100%", height: 180, borderRadius: 8 }} />
+          <div className="uop-skeleton" style={{ width: "100%", height: 180, borderRadius: "var(--ads-r-md)" }} />
         ) : (
           <NegativeFeedbackBarChart data={negativeFeedback} />
         )}
 
         <div className="uop-card-footer" style={{ marginTop: "auto" }}>
-          <span style={{ fontSize: "0.6875rem", color: "#64748B" }}>
+          <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)" }}>
             Customer defect attribution
           </span>
           <span

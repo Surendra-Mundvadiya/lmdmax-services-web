@@ -10,6 +10,21 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+const VEHICLE_TH_STYLE: React.CSSProperties = {
+  padding: "var(--ads-s2) var(--ads-s3)",
+  fontSize: "0.6875rem",
+  fontWeight: 600,
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+  color: "var(--ads-ink-tertiary)",
+  borderBottom: "1px solid var(--ads-hairline)",
+};
+
+const VEHICLE_TD_STYLE: React.CSSProperties = {
+  padding: "var(--ads-s2) var(--ads-s3)",
+  color: "var(--ads-ink-secondary)",
+};
+
 interface VehicleManagementPanelProps {
   onNotification: (msg: { text: string; type: "success" | "error" }) => void;
 }
@@ -53,28 +68,20 @@ export const VehicleManagementPanel: FC<VehicleManagementPanelProps> = ({ onNoti
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <Truck size={20} className="text-blue-600" />
-            <span>Vehicle Management</span>
-            <span className="badge-custom blue">Fleet</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Configure delivery van profiles, chassis classifications, cargo capacities, and customize driver return inspection rules
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Configure delivery van profiles, chassis classifications, cargo capacities, and customize driver return inspection rules
+        </p>
       </div>
 
       {/* 1. Vehicle Types & Subtypes */}
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Truck size={17} className="text-blue-600" />
+            <Truck size={17} />
             <span>Registered Vehicle Types & Classifications</span>
           </h3>
-          <span className="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md">
+          <span className="ads-badge ads-badge--neutral">
             {vehicleTypes.length} Types Configured
           </span>
         </div>
@@ -82,26 +89,39 @@ export const VehicleManagementPanel: FC<VehicleManagementPanelProps> = ({ onNoti
           Vehicle profiles categorized for package cubic volume capacities and delivery station assignments.
         </p>
 
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
-          <table className="w-full text-left border-collapse text-xs">
+        <div
+          style={{
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-md)",
+            overflow: "hidden",
+          }}
+        >
+          <table
+            style={{
+              width: "100%",
+              textAlign: "left",
+              borderCollapse: "collapse",
+              fontSize: "0.75rem",
+            }}
+          >
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold">
-                <th className="py-2.5 px-3">Vehicle Type Name</th>
-                <th className="py-2.5 px-3">Category / Chassis</th>
-                <th className="py-2.5 px-3">Cargo Volume</th>
-                <th className="py-2.5 px-3 text-center">Active Fleet Count</th>
+              <tr style={{ background: "rgba(0, 0, 0, 0.03)" }}>
+                <th style={VEHICLE_TH_STYLE}>Vehicle Type Name</th>
+                <th style={VEHICLE_TH_STYLE}>Category / Chassis</th>
+                <th style={VEHICLE_TH_STYLE}>Cargo Volume</th>
+                <th style={{ ...VEHICLE_TH_STYLE, textAlign: "center" }}>Active Fleet Count</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody>
               {vehicleTypes.map((vt) => (
-                <tr key={vt.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="py-2.5 px-3 font-semibold text-slate-800">{vt.name}</td>
-                  <td className="py-2.5 px-3 text-slate-600">{vt.category}</td>
-                  <td className="py-2.5 px-3 text-slate-600">{vt.capacity}</td>
-                  <td className="py-2.5 px-3 text-center">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700">
-                      {vt.activeCount} vans
-                    </span>
+                <tr key={vt.id} style={{ borderTop: "1px solid var(--ads-hairline)" }}>
+                  <td style={{ ...VEHICLE_TD_STYLE, fontWeight: 600, color: "var(--ads-ink)" }}>
+                    {vt.name}
+                  </td>
+                  <td style={VEHICLE_TD_STYLE}>{vt.category}</td>
+                  <td style={VEHICLE_TD_STYLE}>{vt.capacity}</td>
+                  <td style={{ ...VEHICLE_TD_STYLE, textAlign: "center" }}>
+                    <span className="ads-badge ads-badge--blue">{vt.activeCount} vans</span>
                   </td>
                 </tr>
               ))}
@@ -114,7 +134,7 @@ export const VehicleManagementPanel: FC<VehicleManagementPanelProps> = ({ onNoti
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <ClipboardCheck size={17} className="text-blue-600" />
+            <ClipboardCheck size={17} />
             <span>Driver Return Inspection (DVIC) Checklist Requirements</span>
           </h3>
         </div>
@@ -122,7 +142,7 @@ export const VehicleManagementPanel: FC<VehicleManagementPanelProps> = ({ onNoti
           Customize required check items drivers must complete upon parking at station return.
         </p>
 
-        <div className="flex flex-col gap-2.5">
+        <div className="settings-stack">
           <div className="settings-toggle-row">
             <div className="settings-toggle-info">
               <span className="settings-toggle-title flex items-center gap-1.5">

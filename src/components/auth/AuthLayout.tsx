@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import Logo from "../../assets/Logo";
+import "./auth-apple.css";
 
 interface AuthLayoutProps {
   children: ReactNode;

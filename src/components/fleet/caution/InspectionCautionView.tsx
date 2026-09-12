@@ -128,11 +128,13 @@ export const InspectionCautionView: FC = () => {
           justifyContent: "space-between",
           flexWrap: "wrap",
           gap: "1rem",
-          backgroundColor: "#FFFFFF",
-          padding: "1rem 1.25rem",
-          borderRadius: "10px",
-          border: "1px solid #E2E8F0",
-          boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-md)",
+          WebkitBackdropFilter: "var(--ads-blur-md)",
+          padding: "var(--ads-s4) var(--ads-s5)",
+          borderRadius: "var(--ads-r-lg)",
+          border: "1px solid var(--ads-hairline)",
+          boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
@@ -140,22 +142,22 @@ export const InspectionCautionView: FC = () => {
             style={{
               width: "40px",
               height: "40px",
-              borderRadius: "8px",
-              backgroundColor: "#FFFBEB",
-              color: "#D97706",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-amber-tint)",
+              color: "var(--ads-amber)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              border: "1px solid #FDE68A",
+              border: "1px solid var(--ads-hairline)",
             }}
           >
             <AlertCircle size={20} />
           </div>
           <div>
-            <h1 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+            <h1 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.022em" }}>
               Inspection Question Form
             </h1>
-            <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.15rem 0 0 0" }}>
+            <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: "0.15rem 0 0 0" }}>
               Inspection caution questions, warning flags & preventive resolution tracker
             </p>
           </div>
@@ -177,14 +179,17 @@ export const InspectionCautionView: FC = () => {
               display: "flex",
               alignItems: "center",
               gap: "0.4rem",
-              padding: "0.45rem 0.85rem",
+              padding: "9px 18px",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              backgroundColor: "#FFFFFF",
-              color: "#475569",
-              border: "1px solid #CBD5E1",
-              borderRadius: "6px",
+              letterSpacing: "-0.01em",
+              background: "var(--ads-material-thick)",
+              color: "var(--ads-ink)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-pill)",
+              boxShadow: "var(--ads-bevel)",
               cursor: "pointer",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
@@ -203,56 +208,89 @@ export const InspectionCautionView: FC = () => {
       >
         <div
           style={{
-            backgroundColor: "#FFFFFF",
-            padding: "1rem 1.25rem",
-            borderRadius: "10px",
-            border: "1px solid #E2E8F0",
-            boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-md)",
+            WebkitBackdropFilter: "var(--ads-blur-md)",
+            padding: "var(--ads-s4) var(--ads-s5)",
+            borderRadius: "var(--ads-r-lg)",
+            border: "1px solid var(--ads-hairline)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+            transition: "transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-sm), var(--ads-bevel)";
           }}
         >
-          <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#D97706", textTransform: "uppercase" }}>
+          <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", color: "var(--ads-amber)", textTransform: "uppercase" }}>
             Active Cautions
           </span>
-          <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "#D97706", marginTop: "0.25rem" }}>
+          <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "var(--ads-amber)", marginTop: "0.25rem", letterSpacing: "-0.022em" }}>
             {cautionRecords.length}
           </div>
-          <span style={{ fontSize: "0.75rem", color: "#64748B" }}>Requires fleet attention</span>
+          <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>Requires fleet attention</span>
         </div>
 
         <div
           style={{
-            backgroundColor: "#FFFFFF",
-            padding: "1rem 1.25rem",
-            borderRadius: "10px",
-            border: "1px solid #E2E8F0",
-            boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-md)",
+            WebkitBackdropFilter: "var(--ads-blur-md)",
+            padding: "var(--ads-s4) var(--ads-s5)",
+            borderRadius: "var(--ads-r-lg)",
+            border: "1px solid var(--ads-hairline)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+            transition: "transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-sm), var(--ads-bevel)";
           }}
         >
-          <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#059669", textTransform: "uppercase" }}>
+          <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", color: "var(--ads-green)", textTransform: "uppercase" }}>
             Clean / Normal
           </span>
-          <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "#059669", marginTop: "0.25rem" }}>
+          <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "var(--ads-green)", marginTop: "0.25rem", letterSpacing: "-0.022em" }}>
             {Math.max(0, vehicles.length - cautionRecords.length)}
           </div>
-          <span style={{ fontSize: "0.75rem", color: "#64748B" }}>Zero caution flags</span>
+          <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>Zero caution flags</span>
         </div>
 
         <div
           style={{
-            backgroundColor: "#FFFFFF",
-            padding: "1rem 1.25rem",
-            borderRadius: "10px",
-            border: "1px solid #E2E8F0",
-            boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-md)",
+            WebkitBackdropFilter: "var(--ads-blur-md)",
+            padding: "var(--ads-s4) var(--ads-s5)",
+            borderRadius: "var(--ads-r-lg)",
+            border: "1px solid var(--ads-hairline)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+            transition: "transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-sm), var(--ads-bevel)";
           }}
         >
-          <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#2563EB", textTransform: "uppercase" }}>
+          <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", color: "var(--ads-blue)", textTransform: "uppercase" }}>
             Total Evaluated
           </span>
-          <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "#2563EB", marginTop: "0.25rem" }}>
+          <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "var(--ads-blue)", marginTop: "0.25rem", letterSpacing: "-0.022em" }}>
             {vehicles.length}
           </div>
-          <span style={{ fontSize: "0.75rem", color: "#64748B" }}>Active fleet vehicles</span>
+          <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>Active fleet vehicles</span>
         </div>
       </div>
 
@@ -264,10 +302,13 @@ export const InspectionCautionView: FC = () => {
           justifyContent: "space-between",
           flexWrap: "wrap",
           gap: "0.75rem",
-          backgroundColor: "#FFFFFF",
-          padding: "0.75rem 1rem",
-          borderRadius: "8px",
-          border: "1px solid #E2E8F0",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-md)",
+          WebkitBackdropFilter: "var(--ads-blur-md)",
+          padding: "var(--ads-s3) var(--ads-s4)",
+          borderRadius: "var(--ads-r-md)",
+          border: "1px solid var(--ads-hairline)",
+          boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
         }}
       >
         <div style={{ position: "relative", minWidth: "260px", flex: 1, maxWidth: "420px" }}>
@@ -278,7 +319,7 @@ export const InspectionCautionView: FC = () => {
               left: "0.75rem",
               top: "50%",
               transform: "translateY(-50%)",
-              color: "#94A3B8",
+              color: "var(--ads-ink-quaternary)",
             }}
           />
           <input
@@ -288,11 +329,14 @@ export const InspectionCautionView: FC = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
               width: "100%",
-              padding: "0.45rem 0.75rem 0.45rem 2.25rem",
+              padding: "9px 13px 9px 2.25rem",
               fontSize: "0.8125rem",
-              border: "1px solid #CBD5E1",
-              borderRadius: "6px",
+              border: "1px solid var(--ads-hairline)",
+              background: "var(--ads-material-thick)",
+              color: "var(--ads-ink)",
+              borderRadius: "var(--ads-r-sm)",
               outline: "none",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           />
         </div>
@@ -301,30 +345,32 @@ export const InspectionCautionView: FC = () => {
       {/* 4. Caution Flags Table */}
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "10px",
-          border: "1px solid #E2E8F0",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-md)",
+          WebkitBackdropFilter: "var(--ads-blur-md)",
+          borderRadius: "var(--ads-r-lg)",
+          border: "1px solid var(--ads-hairline)",
           overflow: "hidden",
-          boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+          boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
         }}
       >
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
             <thead>
-              <tr style={{ backgroundColor: "#F8FAFC", borderBottom: "1px solid #E2E8F0" }}>
-                <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+              <tr>
+                <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                   VEHICLE UNIT #
                 </th>
-                <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                   CAUTION CATEGORY
                 </th>
-                <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                   ISSUE DETAILS
                 </th>
-                <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                   REPORT DATE
                 </th>
-                <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                   STATUS
                 </th>
               </tr>
@@ -332,22 +378,22 @@ export const InspectionCautionView: FC = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={5} style={{ padding: "2.5rem", textAlign: "center", color: "#64748B" }}>
+                  <td colSpan={5} style={{ padding: "var(--ads-s10)", textAlign: "center", color: "var(--ads-ink-tertiary)" }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
-                      <RefreshCw size={18} className="animate-spin" style={{ color: "#2563EB" }} />
+                      <RefreshCw size={18} className="animate-spin" style={{ color: "var(--ads-blue)" }} />
                       <span>Loading inspection caution records...</span>
                     </div>
                   </td>
                 </tr>
               ) : filteredCautions.length === 0 ? (
                 <tr>
-                  <td colSpan={5} style={{ padding: "2.5rem", textAlign: "center", color: "#64748B" }}>
+                  <td colSpan={5} style={{ padding: "var(--ads-s10)", textAlign: "center", color: "var(--ads-ink-tertiary)" }}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                      <CheckCircle2 size={32} style={{ color: "#059669" }} />
-                      <span style={{ fontWeight: 600, color: "#1E293B" }}>
+                      <CheckCircle2 size={32} style={{ color: "var(--ads-green)" }} />
+                      <span style={{ fontWeight: 600, color: "var(--ads-ink)" }}>
                         Zero Caution Flags on {selectedDate}
                       </span>
-                      <span style={{ fontSize: "0.8125rem", color: "#64748B" }}>
+                      <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                         All inspected vehicles passed cautionary checks without defects.
                       </span>
                     </div>
@@ -358,40 +404,40 @@ export const InspectionCautionView: FC = () => {
                   <tr
                     key={item.id}
                     style={{
-                      borderBottom: "1px solid #F1F5F9",
-                      transition: "background-color 0.12s ease",
+                      borderBottom: "1px solid var(--ads-hairline)",
+                      transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FFFDF5")}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,113,227,0.045)")}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                   >
-                    <td style={{ padding: "0.85rem 1rem" }}>
+                    <td style={{ padding: "var(--ads-s3) var(--ads-s4)" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
                         <div
                           style={{
                             width: "32px",
                             height: "32px",
-                            borderRadius: "6px",
-                            backgroundColor: "#FFFBEB",
-                            color: "#D97706",
+                            borderRadius: "var(--ads-r-xs)",
+                            backgroundColor: "var(--ads-amber-tint)",
+                            color: "var(--ads-amber)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            border: "1px solid #FDE68A",
+                            border: "1px solid var(--ads-hairline)",
                           }}
                         >
                           <Truck size={16} />
                         </div>
                         <div>
-                          <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>
+                          <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                             {item.vehicle.unit_number || item.vehicle.name}
                           </span>
-                          <p style={{ margin: 0, fontSize: "0.6875rem", color: "#64748B" }}>
+                          <p style={{ margin: 0, fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)" }}>
                             VIN: {item.vehicle.vin}
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td style={{ padding: "0.85rem 1rem" }}>
+                    <td style={{ padding: "var(--ads-s3) var(--ads-s4)" }}>
                       <span
                         style={{
                           display: "inline-flex",
@@ -399,32 +445,32 @@ export const InspectionCautionView: FC = () => {
                           gap: "0.3rem",
                           fontSize: "0.75rem",
                           fontWeight: 700,
-                          padding: "0.2rem 0.55rem",
-                          borderRadius: "4px",
-                          backgroundColor: "#FFFBEB",
-                          color: "#B45309",
-                          border: "1px solid #FDE68A",
+                          padding: "3px 9px",
+                          borderRadius: "var(--ads-r-pill)",
+                          backgroundColor: "var(--ads-amber-tint)",
+                          color: "var(--ads-amber)",
+                          border: "1px solid transparent",
                         }}
                       >
                         <AlertTriangle size={12} />
                         {item.caution_type}
                       </span>
                     </td>
-                    <td style={{ padding: "0.85rem 1rem", fontSize: "0.8125rem", color: "#475569" }}>
+                    <td style={{ padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.8125rem", color: "var(--ads-ink-secondary)" }}>
                       {item.description}
                     </td>
-                    <td style={{ padding: "0.85rem 1rem", fontSize: "0.8125rem", color: "#64748B" }}>
+                    <td style={{ padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                       {item.reported_at}
                     </td>
-                    <td style={{ padding: "0.85rem 1rem" }}>
+                    <td style={{ padding: "var(--ads-s3) var(--ads-s4)" }}>
                       <span
                         style={{
-                          fontSize: "0.75rem",
-                          fontWeight: 700,
-                          color: "#B45309",
-                          backgroundColor: "#FEF3C7",
-                          padding: "0.15rem 0.5rem",
-                          borderRadius: "4px",
+                          fontSize: "0.6875rem",
+                          fontWeight: 600,
+                          color: "var(--ads-amber)",
+                          backgroundColor: "var(--ads-amber-tint)",
+                          padding: "3px 9px",
+                          borderRadius: "var(--ads-r-pill)",
                         }}
                       >
                         Needs Review

@@ -21,8 +21,8 @@ export const AccessDeniedModal: FC = () => {
             width: "56px",
             height: "56px",
             borderRadius: "50%",
-            backgroundColor: "#FEE2E2",
-            color: "#DC2626",
+            backgroundColor: "var(--ads-red-tint)",
+            color: "var(--ads-red)",
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
@@ -34,10 +34,11 @@ export const AccessDeniedModal: FC = () => {
 
         <h3
           style={{
-            fontSize: "1.25rem",
-            fontWeight: 700,
-            color: "#0F172A",
-            marginBottom: "0.5rem",
+            fontSize: "1.375rem",
+            fontWeight: 650,
+            letterSpacing: "-0.019em",
+            color: "var(--ads-ink)",
+            marginBottom: "var(--ads-s2)",
           }}
         >
           Access Restricted
@@ -46,9 +47,9 @@ export const AccessDeniedModal: FC = () => {
         <p
           style={{
             fontSize: "0.875rem",
-            color: "#64748B",
+            color: "var(--ads-ink-secondary)",
             lineHeight: 1.5,
-            marginBottom: "1.5rem",
+            marginBottom: "var(--ads-s6)",
           }}
         >
           Your account does not currently have permissions enabled to access this LMDmax application. Please contact your company administrator or dispatch manager to request access.
@@ -56,9 +57,9 @@ export const AccessDeniedModal: FC = () => {
 
         <div
           style={{
-            backgroundColor: "#F8FAFC",
-            border: "1px solid #E2E8F0",
-            borderRadius: "0.75rem",
+            backgroundColor: "rgba(0, 0, 0, 0.04)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-md)",
             padding: "0.875rem",
             display: "flex",
             alignItems: "center",
@@ -67,12 +68,12 @@ export const AccessDeniedModal: FC = () => {
             marginBottom: "1.5rem",
           }}
         >
-          <Mail size={18} style={{ color: "#4F8BFF" }} />
+          <Mail size={18} style={{ color: "var(--ads-blue)" }} />
           <div>
-            <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+            <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
               Need help?
             </div>
-            <div style={{ fontSize: "0.75rem", color: "#64748B" }}>
+            <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
               Contact support at support@lmdmax.com
             </div>
           </div>
@@ -80,22 +81,10 @@ export const AccessDeniedModal: FC = () => {
 
         <button
           onClick={handleClose}
-          style={{
-            width: "100%",
-            padding: "0.75rem 1rem",
-            backgroundColor: "#4F8BFF",
-            color: "#FFFFFF",
-            border: "none",
-            borderRadius: "0.5rem",
-            fontSize: "0.9375rem",
-            fontWeight: 600,
-            cursor: "pointer",
-            transition: "all 0.15s ease",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#3B82F6")}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#4F8BFF")}
+          className="ads-btn ads-btn--primary"
+          style={{ width: "100%", padding: "12px 24px", fontSize: "0.875rem" }}
         >
-          Acknowledge & Close
+          Acknowledge &amp; Close
         </button>
       </div>
     </Modal>

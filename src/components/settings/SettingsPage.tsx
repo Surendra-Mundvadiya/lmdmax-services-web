@@ -29,6 +29,7 @@ import {
   Layout,
 } from "lucide-react";
 import GlassAppLayout from "../layout/GlassAppLayout";
+import "./settings-glass.css";
 import AdminTable from "./admins/AdminTable";
 import AddAdminScreen from "./admins/AddAdminScreen";
 import AdminPermissionsScreen from "./admins/AdminPermissionsScreen";
@@ -569,6 +570,7 @@ export const SettingsPage: FC = () => {
               className="close-notif-btn"
               onClick={() => setNotification(null)}
               title="Dismiss"
+              aria-label="Dismiss notification"
             >
               <X size={15} />
             </button>
@@ -659,15 +661,15 @@ export const SettingsPage: FC = () => {
               >
                 Settings
               </span>
-              <ChevronRight size={14} style={{ color: "#64748B" }} />
+              <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
               <span className="upload-breadcrumb-current">{activeGroup.groupTitle}</span>
-              <ChevronRight size={14} style={{ color: "#64748B" }} />
+              <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
               <span className="upload-breadcrumb-active-report">
                 {activeItem.title}
                 {activeItem.subSections && activeReport && (
                   <>
                     {" "}
-                    <span style={{ color: "#94A3B8", fontWeight: 400 }}>•</span>{" "}
+                    <span style={{ color: "var(--ads-ink-quaternary)", fontWeight: 400 }}>•</span>{" "}
                     {activeItem.subSections.find((s) => s.id === activeReport)?.title || activeReport}
                   </>
                 )}
@@ -715,23 +717,23 @@ export const SettingsPage: FC = () => {
               {/* In-Sidebar Search Box */}
               <div
                 style={{
-                  padding: "0.65rem 0.85rem",
-                  borderBottom: "1px solid #F1F5F9",
-                  backgroundColor: "#FFFFFF",
+                  padding: "var(--ads-s3) var(--ads-s4)",
+                  borderBottom: "1px solid var(--ads-hairline)",
+                  backgroundColor: "transparent",
                 }}
               >
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "0.45rem",
-                    backgroundColor: "#F8FAFC",
-                    border: "1px solid #E2E8F0",
-                    borderRadius: "8px",
-                    padding: "0.35rem 0.65rem",
+                    gap: "var(--ads-s2)",
+                    backgroundColor: "rgba(0, 0, 0, 0.04)",
+                    border: "1px solid var(--ads-hairline)",
+                    borderRadius: "var(--ads-r-pill)",
+                    padding: "6px var(--ads-s3)",
                   }}
                 >
-                  <Search size={14} style={{ color: "#94A3B8" }} />
+                  <Search size={14} style={{ color: "var(--ads-ink-quaternary)" }} />
                   <input
                     type="text"
                     placeholder={`Search ${activeGroup.groupTitle.toLowerCase()}...`}
@@ -742,7 +744,7 @@ export const SettingsPage: FC = () => {
                       background: "transparent",
                       outline: "none",
                       fontSize: "0.78125rem",
-                      color: "#0F172A",
+                      color: "var(--ads-ink)",
                       width: "100%",
                       fontFamily: "inherit",
                     }}
@@ -751,12 +753,14 @@ export const SettingsPage: FC = () => {
                     <button
                       type="button"
                       onClick={() => setNavSearch("")}
+                      aria-label="Clear settings search"
+                      title="Clear search"
                       style={{
                         border: "none",
                         background: "transparent",
                         cursor: "pointer",
                         padding: 0,
-                        color: "#94A3B8",
+                        color: "var(--ads-ink-quaternary)",
                       }}
                     >
                       <X size={12} />
@@ -772,11 +776,11 @@ export const SettingsPage: FC = () => {
                     style={{
                       padding: "2rem 1rem",
                       textAlign: "center",
-                      color: "#64748B",
+                      color: "var(--ads-ink-tertiary)",
                       fontSize: "0.8125rem",
                     }}
                   >
-                    <AlertCircle size={24} style={{ margin: "0 auto 0.5rem", color: "#94A3B8" }} />
+                    <AlertCircle size={24} style={{ margin: "0 auto 0.5rem", color: "var(--ads-ink-quaternary)" }} />
                     <p style={{ margin: 0, fontWeight: 600 }}>No settings match "{navSearch}"</p>
                   </div>
                 ) : (
@@ -796,24 +800,29 @@ export const SettingsPage: FC = () => {
                             style={{
                               width: "32px",
                               height: "32px",
-                              borderRadius: "8px",
-                              backgroundColor: isActive ? "#EFF6FF" : "#F1F5F9",
-                              border: isActive ? "1px solid #BFDBFE" : "1px solid #E2E8F0",
+                              borderRadius: "var(--ads-r-sm)",
+                              backgroundColor: isActive ? "var(--ads-blue-tint)" : "rgba(0, 0, 0, 0.04)",
+                              border: "1px solid var(--ads-hairline)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
                               flexShrink: 0,
+                              transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                             }}
                           >
-                            <ItemIcon size={16} style={{ color: isActive ? "#2563EB" : "#64748B" }} />
+                            <ItemIcon
+                              size={16}
+                              style={{ color: isActive ? "var(--ads-blue)" : "var(--ads-ink-tertiary)" }}
+                            />
                           </div>
 
                           <div style={{ flex: 1, minWidth: 0 }}>
                             <div
                               style={{
                                 fontSize: "0.8125rem",
-                                fontWeight: isActive ? 700 : 550,
-                                color: isActive ? "#1D4ED8" : "#1E293B",
+                                fontWeight: isActive ? 600 : 550,
+                                letterSpacing: "-0.005em",
+                                color: isActive ? "var(--ads-blue)" : "var(--ads-ink)",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -826,7 +835,7 @@ export const SettingsPage: FC = () => {
                           <ChevronRight
                             size={14}
                             style={{
-                              color: isActive ? "#2563EB" : "#CBD5E1",
+                              color: isActive ? "var(--ads-blue)" : "var(--ads-ink-quaternary)",
                               flexShrink: 0,
                             }}
                           />
@@ -857,23 +866,26 @@ export const SettingsPage: FC = () => {
                                     alignItems: "center",
                                     gap: "0.5rem",
                                     padding: "0.38rem 0.65rem",
-                                    borderRadius: "7px",
-                                    border: isSubActive ? "1px solid #BFDBFE" : "1px solid transparent",
-                                    backgroundColor: isSubActive ? "#EFF6FF" : "transparent",
-                                    color: isSubActive ? "#1D4ED8" : "#64748B",
+                                    borderRadius: "var(--ads-r-pill)",
+                                    border: "1px solid transparent",
+                                    backgroundColor: isSubActive ? "var(--ads-blue-tint)" : "transparent",
+                                    color: isSubActive ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
                                     fontSize: "0.75rem",
-                                    fontWeight: isSubActive ? 700 : 500,
+                                    fontWeight: isSubActive ? 600 : 500,
                                     cursor: "pointer",
                                     textAlign: "left",
                                     width: "100%",
-                                    transition: "all 0.15s ease",
+                                    transition:
+                                      "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
                                     fontFamily: "inherit",
                                   }}
                                 >
                                   {SubIcon && (
                                     <SubIcon
                                       size={12}
-                                      style={{ color: isSubActive ? "#2563EB" : "#94A3B8" }}
+                                      style={{
+                                        color: isSubActive ? "var(--ads-blue)" : "var(--ads-ink-quaternary)",
+                                      }}
                                     />
                                   )}
                                   <span
@@ -902,44 +914,46 @@ export const SettingsPage: FC = () => {
               {/* Unified Workspace Header */}
               <div
                 style={{
-                  padding: "0.85rem 1.25rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  padding: "var(--ads-s3) var(--ads-s5)",
+                  borderBottom: "1px solid var(--ads-hairline)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                   flexWrap: "wrap",
-                  gap: "0.75rem",
-                  backgroundColor: "rgba(255, 255, 255, 0.96)",
+                  gap: "var(--ads-s3)",
+                  backgroundColor: "var(--ads-material-thin)",
+                  backdropFilter: "var(--ads-blur-lg)",
+                  WebkitBackdropFilter: "var(--ads-blur-lg)",
                   flexShrink: 0,
                 }}
               >
                 {/* Left: Active Item Identity & Category Badge */}
-                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
                   <div
                     style={{
                       width: "36px",
                       height: "36px",
-                      borderRadius: "10px",
-                      backgroundColor: "#EFF6FF",
-                      border: "1px solid #BFDBFE",
+                      borderRadius: "var(--ads-r-sm)",
+                      backgroundColor: "var(--ads-blue-tint)",
+                      border: "1px solid transparent",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      color: "#2563EB",
+                      color: "var(--ads-blue)",
                       flexShrink: 0,
                     }}
                   >
                     <activeItem.icon size={18} />
                   </div>
                   <div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
                       <h2
                         style={{
                           margin: 0,
-                          fontSize: "1.1rem",
-                          fontWeight: 700,
-                          color: "#0F172A",
-                          letterSpacing: "-0.015em",
+                          fontSize: "1.0625rem",
+                          fontWeight: 600,
+                          color: "var(--ads-ink)",
+                          letterSpacing: "-0.014em",
                         }}
                       >
                         {activeItem.title}
@@ -947,12 +961,13 @@ export const SettingsPage: FC = () => {
                       <span
                         style={{
                           fontSize: "0.6875rem",
-                          fontWeight: 650,
-                          color: "#2563EB",
-                          backgroundColor: "#EFF6FF",
-                          border: "1px solid #BFDBFE",
-                          padding: "0.12rem 0.5rem",
-                          borderRadius: "9999px",
+                          fontWeight: 600,
+                          letterSpacing: "-0.005em",
+                          color: "#0058B0",
+                          backgroundColor: "var(--ads-blue-tint)",
+                          border: "1px solid transparent",
+                          padding: "3px 9px",
+                          borderRadius: "var(--ads-r-pill)",
                         }}
                       >
                         {activeGroup.groupTitle}
@@ -1002,6 +1017,8 @@ export const SettingsPage: FC = () => {
                             type="button"
                             className="standard-search-clear"
                             onClick={() => setAdminSearchQuery("")}
+                            aria-label="Clear admin search"
+                            title="Clear search"
                           >
                             <X size={12} />
                           </button>
@@ -1100,7 +1117,13 @@ export const SettingsPage: FC = () => {
 
                 {/* Preferences Panels */}
                 {activeTab === "app_layout" && (
-                  <div style={{ padding: "1.25rem 1.5rem", height: "100%", overflowY: "auto" }}>
+                  <div
+                    style={{
+                      padding: "var(--ads-s5) var(--ads-s6) var(--ads-s8)",
+                      height: "100%",
+                      overflowY: "auto",
+                    }}
+                  >
                     <AppLayoutSettingsPanel />
                   </div>
                 )}

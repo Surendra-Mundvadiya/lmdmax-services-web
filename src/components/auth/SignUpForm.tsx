@@ -183,6 +183,8 @@ export const SignUpForm: FC<SignUpFormProps> = ({
                 <button
                   type="button"
                   className="tooltip-trigger-btn"
+                  aria-label="What is an access code?"
+                  title="What is an access code?"
                   onMouseEnter={() => setShowAccessTooltip(true)}
                   onMouseLeave={() => setShowAccessTooltip(false)}
                   onClick={() => setShowAccessTooltip(!showAccessTooltip)}
@@ -231,6 +233,8 @@ export const SignUpForm: FC<SignUpFormProps> = ({
                 type="button"
                 className="password-toggle-btn"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                title={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
@@ -256,6 +260,8 @@ export const SignUpForm: FC<SignUpFormProps> = ({
                 type="button"
                 className="password-toggle-btn"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                aria-label={showConfirmPassword ? "Hide confirmed password" : "Show confirmed password"}
+                title={showConfirmPassword ? "Hide confirmed password" : "Show confirmed password"}
               >
                 {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>

@@ -51,17 +51,33 @@ export const DeleteTemplateModal: FC<DeleteTemplateModalProps> = ({
       >
         {/* Header: Title only, no subtitle */}
         <div className="custom-modal-header">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0">
+          <div className="flex items-center gap-2.5" style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
+            <div
+              className="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0"
+              style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-red-tint)",
+                color: "var(--ads-red)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
               <AlertTriangle size={18} />
             </div>
-            <h3 className="custom-modal-title text-red-600">Delete Template</h3>
+            <h3 className="custom-modal-title" style={{ color: "var(--ads-red)" }}>
+              Delete Template
+            </h3>
           </div>
           <button
             type="button"
             className="custom-modal-close"
             onClick={onClose}
             disabled={isSubmitting}
+            aria-label="Close delete dialog"
             title="Close dialog"
           >
             <X size={18} />
@@ -69,19 +85,32 @@ export const DeleteTemplateModal: FC<DeleteTemplateModalProps> = ({
         </div>
 
         {/* Body: Clean message only, no tags, no template type info */}
-        <div className="custom-modal-body flex flex-col gap-2.5 py-4">
+        <div
+          className="custom-modal-body flex flex-col gap-2.5 py-4"
+          style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s3)", padding: "var(--ads-s4) 0" }}
+        >
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 font-medium">
+            <div
+              style={{
+                padding: "var(--ads-s3) var(--ads-s4)",
+                background: "var(--ads-red-tint)",
+                border: "1px solid rgba(215, 0, 21, 0.22)",
+                borderRadius: "var(--ads-r-sm)",
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                color: "var(--ads-red)",
+              }}
+            >
               {error}
             </div>
           )}
 
-          <p className="text-sm text-slate-700 leading-relaxed m-0">
+          <p style={{ margin: 0, fontSize: "0.875rem", lineHeight: 1.5, color: "var(--ads-ink-secondary)" }}>
             Are you sure you want to remove template{" "}
-            <strong className="text-slate-900 font-semibold">"{template.title}"</strong>?
+            <strong style={{ color: "var(--ads-ink)", fontWeight: 600 }}>"{template.title}"</strong>?
           </p>
 
-          <p className="text-xs text-slate-500 leading-normal m-0">
+          <p style={{ margin: 0, fontSize: "0.75rem", lineHeight: 1.45, color: "var(--ads-ink-tertiary)" }}>
             This action cannot be undone. This template will be permanently removed from your company's library.
           </p>
         </div>
@@ -105,26 +134,31 @@ export const DeleteTemplateModal: FC<DeleteTemplateModalProps> = ({
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "0.45rem",
-              backgroundColor: "#DC2626",
+              gap: "var(--ads-s2)",
+              background: "var(--ads-red)",
               color: "#FFFFFF",
-              border: "none",
-              padding: "0.5rem 1.25rem",
-              borderRadius: "6px",
+              border: "1px solid transparent",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
               fontWeight: 600,
-              fontSize: "0.875rem",
-              cursor: "pointer",
+              fontSize: "0.8125rem",
+              letterSpacing: "-0.01em",
+              cursor: isSubmitting ? "not-allowed" : "pointer",
+              opacity: isSubmitting ? 0.4 : 1,
+              boxShadow: "0 1px 3px rgba(215, 0, 21, 0.26)",
+              transition:
+                "background-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             {isSubmitting ? (
               <>
-                <Loader2 size={16} className="animate-spin" />
-                <span>Deleting...</span>
+                <Loader2 size={16} className="animate-spin" style={{ color: "#FFFFFF" }} />
+                <span style={{ color: "#FFFFFF" }}>Deleting...</span>
               </>
             ) : (
               <>
-                <Trash2 size={16} />
-                <span>Delete Template</span>
+                <Trash2 size={16} style={{ color: "#FFFFFF" }} />
+                <span style={{ color: "#FFFFFF" }}>Delete Template</span>
               </>
             )}
           </button>

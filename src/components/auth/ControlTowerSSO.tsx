@@ -54,40 +54,60 @@ export const ControlTowerSSO: FC = () => {
 
   return (
     <div
+      className="ads-ambient"
       style={{
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#0F172A",
-        color: "#F8FAFC",
-        padding: "2rem",
+        color: "var(--ads-ink)",
+        padding: "var(--ads-s8)",
       }}
     >
-      <Logo width={160} height={90} />
-      <div style={{ marginTop: "2rem", textAlign: "center" }}>
+      <div
+        className="ads-card"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "var(--ads-s6)",
+          width: "100%",
+          maxWidth: "420px",
+          padding: "var(--ads-s10) var(--ads-s8)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          textAlign: "center",
+        }}
+      >
+        <Logo width={160} height={90} />
+
         {error ? (
-          <div style={{ color: "#EF4444", fontSize: "1rem" }}>
-            <p>{error}</p>
-            <button
-              onClick={() => navigate("/")}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--ads-s5)" }}>
+            <p
               style={{
-                marginTop: "1.5rem",
-                padding: "0.5rem 1.25rem",
-                backgroundColor: "#4F8BFF",
-                border: "none",
-                borderRadius: "0.5rem",
-                color: "#FFFFFF",
-                cursor: "pointer",
-                fontWeight: 500,
+                margin: 0,
+                fontSize: "0.875rem",
+                lineHeight: 1.5,
+                color: "var(--ads-red)",
               }}
+            >
+              {error}
+            </p>
+            <button
+              type="button"
+              onClick={() => navigate("/")}
+              className="ads-btn ads-btn--primary ads-btn--lg"
             >
               Return to Login
             </button>
           </div>
         ) : (
-          <LoadingSpinner size="lg" color="#4F8BFF" label="Authenticating via Control Tower..." />
+          <LoadingSpinner
+            size="lg"
+            color="#0071E3"
+            label="Authenticating via Control Tower..."
+          />
         )}
       </div>
     </div>

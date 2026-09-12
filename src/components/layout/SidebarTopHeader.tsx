@@ -302,13 +302,14 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
           className="sidebar-mobile-hamburger-btn"
           onClick={() => setMobileSidebarOpen(true)}
           title="Open navigation menu"
+          aria-label="Open navigation menu"
           style={{
             background: "transparent",
             border: "none",
-            color: "#475569",
+            color: "var(--ads-ink-secondary)",
             cursor: "pointer",
             padding: "0.4rem",
-            borderRadius: "8px",
+            borderRadius: "var(--ads-r-sm)",
             display: "none", // Visible on mobile via CSS
             alignItems: "center",
             justifyContent: "center",
@@ -330,15 +331,15 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
             overflow: "hidden",
           }}
         >
-          <span style={{ color: "#64748B", fontWeight: 550, whiteSpace: "nowrap" }}>
+          <span style={{ color: "var(--ads-ink-tertiary)", fontWeight: 550, whiteSpace: "nowrap" }}>
             {breadcrumb.section}
           </span>
           {breadcrumb.page && (
             <>
-              <ChevronRight size={13} style={{ color: "#94A3B8", flexShrink: 0 }} />
+              <ChevronRight size={13} style={{ color: "var(--ads-ink-quaternary)", flexShrink: 0 }} />
               <span
                 style={{
-                  color: breadcrumb.subPage ? "#64748B" : "#0F172A",
+                  color: breadcrumb.subPage ? "var(--ads-ink-tertiary)" : "var(--ads-ink)",
                   fontWeight: breadcrumb.subPage ? 550 : 750,
                   whiteSpace: "nowrap",
                 }}
@@ -349,10 +350,10 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
           )}
           {breadcrumb.subPage && (
             <>
-              <ChevronRight size={13} style={{ color: "#94A3B8", flexShrink: 0 }} />
+              <ChevronRight size={13} style={{ color: "var(--ads-ink-quaternary)", flexShrink: 0 }} />
               <span
                 style={{
-                  color: breadcrumb.detail ? "#64748B" : "#0F172A",
+                  color: breadcrumb.detail ? "var(--ads-ink-tertiary)" : "var(--ads-ink)",
                   fontWeight: breadcrumb.detail ? 550 : 750,
                   whiteSpace: "nowrap",
                 }}
@@ -363,10 +364,10 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
           )}
           {breadcrumb.detail && (
             <>
-              <ChevronRight size={13} style={{ color: "#94A3B8", flexShrink: 0 }} />
+              <ChevronRight size={13} style={{ color: "var(--ads-ink-quaternary)", flexShrink: 0 }} />
               <span
                 style={{
-                  color: "#2563EB",
+                  color: "var(--ads-blue)",
                   fontWeight: 750,
                   whiteSpace: "nowrap",
                   overflow: "hidden",
@@ -395,27 +396,33 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
               alignItems: "center",
               gap: "0.55rem",
               padding: "0.38rem 0.85rem",
-              borderRadius: "10px",
-              backgroundColor: stationPopoverOpen ? "#EFF6FF" : "#FFFFFF",
-              border: stationPopoverOpen ? "1px solid #BFDBFE" : "1px solid #E2E8F0",
-              color: "#0F172A",
+              borderRadius: "var(--ads-r-sm)",
+              background: stationPopoverOpen ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+              backdropFilter: "var(--ads-blur-sm)",
+              WebkitBackdropFilter: "var(--ads-blur-sm)",
+              border: stationPopoverOpen ? "1px solid var(--ads-blue-tint-strong)" : "1px solid var(--ads-hairline)",
+              color: "var(--ads-ink)",
               cursor: "pointer",
-              transition: "all 0.18s cubic-bezier(0.16, 1, 0.3, 1)",
-              boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+              transition:
+                "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+              boxShadow: "var(--ads-bevel)",
             }}
             title={`Active Delivery Station: ${activeStation}`}
+            aria-label={`Switch delivery station, currently ${activeStation}`}
+            aria-expanded={stationPopoverOpen}
+            aria-haspopup="menu"
           >
             <div
               style={{
                 width: "22px",
                 height: "22px",
-                borderRadius: "6px",
-                backgroundColor: "#EFF6FF",
-                border: "1px solid #DBEAFE",
+                borderRadius: "var(--ads-r-xs)",
+                backgroundColor: "var(--ads-blue-tint)",
+                border: "1px solid var(--ads-blue-tint-strong)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#2563EB",
+                color: "var(--ads-blue)",
                 flexShrink: 0,
               }}
             >
@@ -426,14 +433,14 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                 style={{
                   fontSize: "0.62rem",
                   fontWeight: 700,
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   textTransform: "uppercase",
                   letterSpacing: "0.04em",
                 }}
               >
                 Station
               </span>
-              <span style={{ fontSize: "0.82rem", fontWeight: 750, color: "#0F172A" }}>
+              <span style={{ fontSize: "0.82rem", fontWeight: 750, color: "var(--ads-ink)" }}>
                 {activeStation}
               </span>
             </div>
@@ -442,7 +449,7 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                 width: "6.5px",
                 height: "6.5px",
                 borderRadius: "50%",
-                backgroundColor: isStationInactive ? "#EF4444" : "#10B981",
+                backgroundColor: isStationInactive ? "var(--ads-red)" : "var(--ads-green)",
                 flexShrink: 0,
                 marginLeft: "2px",
               }}
@@ -450,7 +457,7 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
             <ChevronDown
               size={13}
               style={{
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 transform: stationPopoverOpen ? "rotate(180deg)" : "rotate(0deg)",
                 transition: "transform 0.18s ease",
               }}
@@ -460,45 +467,50 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
           {/* Station Dropdown Popover */}
           {stationPopoverOpen && (
             <div
+              role="menu"
+              aria-label="Delivery stations"
               style={{
                 position: "absolute",
                 right: 0,
                 top: "calc(100% + 8px)",
-                backgroundColor: "#FFFFFF",
-                borderRadius: "16px",
-                boxShadow: "0 16px 40px -6px rgba(15, 23, 42, 0.16), 0 4px 12px -2px rgba(15, 23, 42, 0.06)",
-                border: "1px solid #E2E8F0",
+                background: "var(--ads-material-thick)",
+                backdropFilter: "var(--ads-blur-lg)",
+                WebkitBackdropFilter: "var(--ads-blur-lg)",
+                borderRadius: "var(--ads-r-xl)",
+                boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+                border: "1px solid var(--ads-hairline)",
                 width: "280px",
+                maxWidth: "calc(100vw - 32px)",
                 zIndex: 10060,
                 display: "flex",
                 flexDirection: "column",
                 overflow: "hidden",
-                animation: "appleMenuScale 0.18s cubic-bezier(0.16, 1, 0.3, 1) both",
+                animation: "ads-sheet-in var(--ads-dur) var(--ads-ease)",
               }}
             >
               {/* Popover Header */}
               <div
                 style={{
                   padding: "0.75rem 1rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  borderBottom: "1px solid rgba(0, 0, 0, 0.05)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  backgroundColor: "#FAFAFA",
+                  backgroundColor: "rgba(0, 0, 0, 0.02)",
                 }}
               >
-                <span style={{ fontSize: "0.8125rem", fontWeight: 750, color: "#0F172A" }}>
+                <span style={{ fontSize: "0.8125rem", fontWeight: 750, color: "var(--ads-ink)" }}>
                   Delivery Stations
                 </span>
                 <span
                   style={{
                     fontSize: "0.6875rem",
                     fontWeight: 650,
-                    color: "#2563EB",
-                    backgroundColor: "#EFF6FF",
-                    border: "1px solid #BFDBFE",
+                    color: "var(--ads-blue)",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    border: "1px solid var(--ads-blue-tint-strong)",
                     padding: "0.12rem 0.5rem",
-                    borderRadius: "9999px",
+                    borderRadius: "var(--ads-r-pill)",
                   }}
                 >
                   {availableStations.length} available
@@ -507,19 +519,19 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
 
               {/* Popover Search Box */}
               {availableStations.length > 2 && (
-                <div style={{ padding: "0.55rem 0.85rem", borderBottom: "1px solid #F1F5F9" }}>
+                <div style={{ padding: "0.55rem 0.85rem", borderBottom: "1px solid rgba(0, 0, 0, 0.05)" }}>
                   <div
                     style={{
                       display: "flex",
                       alignItems: "center",
                       gap: "0.45rem",
-                      backgroundColor: "#F8FAFC",
-                      border: "1px solid #E2E8F0",
-                      borderRadius: "8px",
+                      backgroundColor: "rgba(0, 0, 0, 0.04)",
+                      border: "1px solid var(--ads-hairline)",
+                      borderRadius: "var(--ads-r-sm)",
                       padding: "0.3rem 0.6rem",
                     }}
                   >
-                    <Search size={13} style={{ color: "#94A3B8" }} />
+                    <Search size={13} style={{ color: "var(--ads-ink-quaternary)" }} />
                     <input
                       type="text"
                       placeholder="Search station..."
@@ -530,7 +542,7 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                         background: "transparent",
                         outline: "none",
                         fontSize: "0.78rem",
-                        color: "#0F172A",
+                        color: "var(--ads-ink)",
                         width: "100%",
                         fontFamily: "inherit",
                       }}
@@ -539,12 +551,14 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                       <button
                         type="button"
                         onClick={() => setStationSearchQuery("")}
+                        title="Clear station search"
+                        aria-label="Clear station search"
                         style={{
                           border: "none",
                           background: "transparent",
                           cursor: "pointer",
                           padding: 0,
-                          color: "#94A3B8",
+                          color: "var(--ads-ink-quaternary)",
                         }}
                       >
                         <X size={12} />
@@ -557,7 +571,7 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
               {/* Station List */}
               <div style={{ maxHeight: "230px", overflowY: "auto", padding: "0.35rem 0.45rem" }}>
                 {filteredStations.length === 0 ? (
-                  <div style={{ padding: "1.5rem 1rem", textAlign: "center", color: "#64748B", fontSize: "0.8rem" }}>
+                  <div style={{ padding: "1.5rem 1rem", textAlign: "center", color: "var(--ads-ink-tertiary)", fontSize: "0.8rem" }}>
                     No stations match "{stationSearchQuery}"
                   </div>
                 ) : (
@@ -570,21 +584,25 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                         key={st.station_code}
                         type="button"
                         onClick={() => handleStationSwitch(st)}
+                        role="menuitemradio"
+                        aria-checked={isSelected}
+                        aria-label={`Switch to station ${st.station_code}`}
                         style={{
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "space-between",
                           width: "100%",
                           padding: "0.5rem 0.65rem",
-                          borderRadius: "10px",
-                          border: isSelected ? "1px solid #BFDBFE" : "1px solid transparent",
-                          backgroundColor: isSelected ? "#EFF6FF" : "transparent",
-                          color: isSelected ? "#1D4ED8" : "#334155",
+                          borderRadius: "var(--ads-r-sm)",
+                          border: isSelected ? "1px solid var(--ads-blue-tint-strong)" : "1px solid transparent",
+                          backgroundColor: isSelected ? "var(--ads-blue-tint)" : "transparent",
+                          color: isSelected ? "var(--ads-blue)" : "var(--ads-ink-secondary)",
                           cursor: "pointer",
-                          transition: "all 0.15s ease",
+                          transition:
+                            "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                         }}
                         onMouseEnter={(e) => {
-                          if (!isSelected) e.currentTarget.style.backgroundColor = "#F8FAFC";
+                          if (!isSelected) e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.04)";
                         }}
                         onMouseLeave={(e) => {
                           if (!isSelected) e.currentTarget.style.backgroundColor = "transparent";
@@ -595,12 +613,12 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                             style={{
                               width: "28px",
                               height: "28px",
-                              borderRadius: "7px",
-                              backgroundColor: isSelected ? "#DBEAFE" : "#F1F5F9",
+                              borderRadius: "var(--ads-r-xs)",
+                              backgroundColor: isSelected ? "var(--ads-blue-tint-strong)" : "rgba(0, 0, 0, 0.05)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
-                              color: isSelected ? "#2563EB" : "#64748B",
+                              color: isSelected ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
                             }}
                           >
                             <Building size={14} />
@@ -609,21 +627,21 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                             <span style={{ fontSize: "0.82rem", fontWeight: isSelected ? 750 : 600 }}>
                               {st.station_code}
                             </span>
-                            <span style={{ fontSize: "0.68rem", color: "#64748B" }}>
+                            <span style={{ fontSize: "0.68rem", color: "var(--ads-ink-tertiary)" }}>
                               {st.company_name || st.name || (isSelected ? "Current station" : "Delivery station")}
                             </span>
                           </div>
                         </div>
 
                         {isCurrentLoading ? (
-                          <Loader2 size={14} className="spin-animation" style={{ color: "#2563EB" }} />
+                          <Loader2 size={14} className="spin-animation" style={{ color: "var(--ads-blue)" }} />
                         ) : isSelected ? (
                           <div
                             style={{
                               width: "20px",
                               height: "20px",
                               borderRadius: "50%",
-                              backgroundColor: "#2563EB",
+                              backgroundColor: "var(--ads-blue)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
@@ -643,20 +661,20 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
               <div
                 style={{
                   padding: "0.5rem 1rem",
-                  borderTop: "1px solid #F1F5F9",
-                  backgroundColor: "#FAFAFA",
+                  borderTop: "1px solid rgba(0, 0, 0, 0.05)",
+                  backgroundColor: "rgba(0, 0, 0, 0.02)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                   fontSize: "0.72rem",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                 }}
               >
                 <span>
                   Active: <strong>{activeStation}</strong>
                 </span>
-                <span style={{ display: "flex", alignItems: "center", gap: "4px", color: "#059669", fontWeight: 650 }}>
-                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#10B981" }} />
+                <span style={{ display: "flex", alignItems: "center", gap: "4px", color: "var(--ads-green)", fontWeight: 650 }}>
+                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "var(--ads-green)" }} />
                   Connected
                 </span>
               </div>
@@ -672,26 +690,33 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
               setNotifDropdownOpen(!notifDropdownOpen);
               setStationPopoverOpen(false);
             }}
+            className="sidebar-icon-btn"
             style={{
               width: "36px",
               height: "36px",
-              borderRadius: "50%",
-              backgroundColor: notifDropdownOpen ? "#EFF6FF" : "#F8FAFC",
-              border: "1px solid #E2E8F0",
-              color: notifDropdownOpen ? "#2563EB" : "#475569",
+              borderRadius: "var(--ads-r-pill)",
+              backgroundColor: notifDropdownOpen ? "var(--ads-blue-tint)" : "rgba(0, 0, 0, 0.04)",
+              border: "1px solid var(--ads-hairline)",
+              color: notifDropdownOpen ? "var(--ads-blue)" : "var(--ads-ink-secondary)",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               position: "relative",
-              transition: "all 0.15s ease",
             }}
             title="Notifications"
+            aria-label={
+              unreadNotifCount > 0
+                ? `Notifications, ${unreadNotifCount} unread`
+                : "Notifications"
+            }
+            aria-expanded={notifDropdownOpen}
+            aria-haspopup="menu"
             onMouseEnter={(e) => {
-              if (!notifDropdownOpen) e.currentTarget.style.backgroundColor = "#F1F5F9";
+              if (!notifDropdownOpen) e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
             }}
             onMouseLeave={(e) => {
-              if (!notifDropdownOpen) e.currentTarget.style.backgroundColor = "#F8FAFC";
+              if (!notifDropdownOpen) e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.04)";
             }}
           >
             <Bell size={16} />
@@ -701,11 +726,11 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                   position: "absolute",
                   top: "-2px",
                   right: "-2px",
-                  backgroundColor: "#EF4444",
+                  backgroundColor: "var(--ads-red)",
                   color: "#FFFFFF",
                   fontSize: "0.62rem",
                   fontWeight: 700,
-                  borderRadius: "9999px",
+                  borderRadius: "var(--ads-r-pill)",
                   padding: "0.08rem 0.32rem",
                   border: "2px solid #FFFFFF",
                 }}
@@ -718,42 +743,48 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
           {/* Notification Popover */}
           {notifDropdownOpen && (
             <div
+              role="menu"
+              aria-label="Notifications"
               style={{
                 position: "absolute",
                 right: 0,
                 top: "calc(100% + 10px)",
-                backgroundColor: "#FFFFFF",
-                borderRadius: "14px",
-                boxShadow: "0 14px 35px -5px rgba(0, 0, 0, 0.18), 0 8px 16px -6px rgba(0, 0, 0, 0.1)",
-                border: "1px solid #CBD5E1",
+                background: "var(--ads-material-thick)",
+                backdropFilter: "var(--ads-blur-lg)",
+                WebkitBackdropFilter: "var(--ads-blur-lg)",
+                borderRadius: "var(--ads-r-xl)",
+                boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+                border: "1px solid var(--ads-hairline)",
                 width: "320px",
+                maxWidth: "calc(100vw - 32px)",
                 zIndex: 10060,
                 display: "flex",
                 flexDirection: "column",
                 overflow: "hidden",
                 fontFamily: "var(--font-sans)",
+                animation: "ads-sheet-in var(--ads-dur) var(--ads-ease)",
               }}
             >
               <div
                 style={{
                   padding: "0.75rem 1rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  borderBottom: "1px solid rgba(0, 0, 0, 0.05)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                 }}
               >
-                <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#1E293B" }}>
+                <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                   Notifications
                 </span>
                 {unreadNotifCount > 0 && (
                   <span
                     style={{
                       fontSize: "0.72rem",
-                      color: "#2563EB",
-                      backgroundColor: "#EFF6FF",
+                      color: "var(--ads-blue)",
+                      backgroundColor: "var(--ads-blue-tint)",
                       padding: "0.15rem 0.5rem",
-                      borderRadius: "9999px",
+                      borderRadius: "var(--ads-r-pill)",
                       fontWeight: 600,
                     }}
                   >
@@ -764,8 +795,8 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
 
               <div style={{ maxHeight: "280px", overflowY: "auto", padding: "0.35rem 0" }}>
                 {notifications.length === 0 ? (
-                  <div style={{ padding: "2rem 1rem", textAlign: "center", color: "#64748B" }}>
-                    <Bell size={24} style={{ margin: "0 auto 0.5rem", color: "#CBD5E1" }} />
+                  <div style={{ padding: "2rem 1rem", textAlign: "center", color: "var(--ads-ink-tertiary)" }}>
+                    <Bell size={24} style={{ margin: "0 auto 0.5rem", color: "var(--ads-hairline-strong)" }} />
                     <p style={{ margin: 0, fontSize: "0.82rem" }}>No notifications yet</p>
                   </div>
                 ) : (
@@ -774,15 +805,15 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                       key={notif.id}
                       style={{
                         padding: "0.6rem 1rem",
-                        borderBottom: "1px solid #F8FAFC",
+                        borderBottom: "1px solid rgba(0, 0, 0, 0.04)",
                         fontSize: "0.8rem",
-                        color: "#334155",
+                        color: "var(--ads-ink-secondary)",
                       }}
                     >
                       <p style={{ margin: "0 0 0.2rem", fontWeight: 550 }}>
                         {notif.message || notif.title || "Notification"}
                       </p>
-                      <span style={{ fontSize: "0.72rem", color: "#94A3B8" }}>
+                      <span style={{ fontSize: "0.72rem", color: "var(--ads-ink-quaternary)" }}>
                         {notif.timestamp || "Recent"}
                       </span>
                     </div>
@@ -793,8 +824,8 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
               <div
                 style={{
                   padding: "0.5rem 1rem",
-                  borderTop: "1px solid #F1F5F9",
-                  backgroundColor: "#F8FAFC",
+                  borderTop: "1px solid rgba(0, 0, 0, 0.05)",
+                  backgroundColor: "rgba(0, 0, 0, 0.04)",
                   textAlign: "center",
                 }}
               >
@@ -807,7 +838,7 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
                   style={{
                     background: "transparent",
                     border: "none",
-                    color: "#2563EB",
+                    color: "var(--ads-blue)",
                     fontSize: "0.78rem",
                     fontWeight: 650,
                     cursor: "pointer",
@@ -824,27 +855,28 @@ export const SidebarTopHeader: FC<SidebarTopHeaderProps> = ({ activeBreadcrumb }
         <button
           type="button"
           onClick={() => navigate("/help-and-support")}
+          className="sidebar-icon-btn"
           style={{
             width: "36px",
             height: "36px",
-            borderRadius: "50%",
-            backgroundColor: "#F8FAFC",
-            border: "1px solid #E2E8F0",
-            color: "#475569",
+            borderRadius: "var(--ads-r-pill)",
+            backgroundColor: "rgba(0, 0, 0, 0.04)",
+            border: "1px solid var(--ads-hairline)",
+            color: "var(--ads-ink-secondary)",
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            transition: "all 0.15s ease",
           }}
           title="Help and Support"
+          aria-label="Help and support"
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "#EFF6FF";
-            e.currentTarget.style.color = "#2563EB";
+            e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)";
+            e.currentTarget.style.color = "var(--ads-blue)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "#F8FAFC";
-            e.currentTarget.style.color = "#475569";
+            e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.04)";
+            e.currentTarget.style.color = "var(--ads-ink-secondary)";
           }}
         >
           <HelpCircle size={16} />

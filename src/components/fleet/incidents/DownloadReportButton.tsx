@@ -103,29 +103,33 @@ export const DownloadReportButton: FC<DownloadReportButtonProps> = ({
           onClick={handleClick}
           disabled={loading}
           title={type === "accident" ? "Download Accident Report (PDF)" : "Download Injury Report (.docx)"}
+          aria-label={type === "accident" ? "Download accident report" : "Download injury report"}
           style={{
             width: 30,
             height: 30,
-            borderRadius: "7px",
-            border: "1px solid #E2E8F0",
-            backgroundColor: "#FFFFFF",
-            color: "#2563EB",
+            borderRadius: "var(--ads-r-sm)",
+            border: "1px solid var(--ads-hairline)",
+            backgroundColor: "transparent",
+            color: "var(--ads-blue)",
             cursor: loading ? "not-allowed" : "pointer",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            transition: "all 0.15s ease",
+            transition: "all var(--ads-dur-fast) var(--ads-ease)",
             padding: 0,
           }}
           onMouseEnter={(e) => {
-            if (!loading) e.currentTarget.style.backgroundColor = "#EFF6FF";
+            if (!loading) e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)";
           }}
           onMouseLeave={(e) => {
-            if (!loading) e.currentTarget.style.backgroundColor = "#FFFFFF";
+            if (!loading) e.currentTarget.style.backgroundColor = "transparent";
           }}
         >
           {loading ? (
-            <Loader2 size={13} style={{ animation: "spin 0.8s linear infinite", color: "#2563EB" }} />
+            <Loader2
+              size={13}
+              style={{ animation: "spin 0.8s linear infinite", color: "var(--ads-blue)" }}
+            />
           ) : (
             <Download size={14} />
           )}
@@ -136,24 +140,28 @@ export const DownloadReportButton: FC<DownloadReportButtonProps> = ({
           onClick={handleClick}
           disabled={loading}
           style={{
-            padding: "0.45rem 0.85rem",
-            borderRadius: "8px",
-            border: "1px solid #BFDBFE",
-            backgroundColor: "#EFF6FF",
-            color: "#1D4ED8",
+            padding: "9px 18px",
+            borderRadius: "var(--ads-r-pill)",
+            border: "1px solid var(--ads-hairline)",
+            backgroundColor: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-sm)",
+            WebkitBackdropFilter: "var(--ads-blur-sm)",
+            boxShadow: "var(--ads-bevel)",
+            color: "var(--ads-ink)",
             fontSize: "0.8125rem",
             fontWeight: 600,
+            letterSpacing: "-0.01em",
             cursor: loading ? "not-allowed" : "pointer",
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.4rem",
-            transition: "all 0.15s ease",
+            gap: "var(--ads-s2)",
+            transition: "all var(--ads-dur-fast) var(--ads-ease)",
           }}
           onMouseEnter={(e) => {
-            if (!loading) e.currentTarget.style.backgroundColor = "#DBEAFE";
+            if (!loading) e.currentTarget.style.backgroundColor = "var(--ads-white)";
           }}
           onMouseLeave={(e) => {
-            if (!loading) e.currentTarget.style.backgroundColor = "#EFF6FF";
+            if (!loading) e.currentTarget.style.backgroundColor = "var(--ads-material-thick)";
           }}
         >
           {loading ? (
@@ -172,15 +180,17 @@ export const DownloadReportButton: FC<DownloadReportButtonProps> = ({
           style={{
             position: "absolute",
             right: 0,
-            top: "calc(100% + 4px)",
-            backgroundColor: "#FFFFFF",
-            borderRadius: "10px",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
-            border: "1px solid #E2E8F0",
+            top: "calc(100% + var(--ads-s1))",
+            backgroundColor: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-lg)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            borderRadius: "var(--ads-r-md)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+            border: "1px solid var(--ads-hairline)",
             zIndex: 99999,
             minWidth: "200px",
             overflow: "hidden",
-            padding: "0.25rem 0",
+            padding: "var(--ads-s1) 0",
           }}
           onClick={(e) => e.stopPropagation()}
         >
@@ -196,15 +206,16 @@ export const DownloadReportButton: FC<DownloadReportButtonProps> = ({
               cursor: "pointer",
               fontSize: "0.8125rem",
               fontWeight: 500,
-              color: "#0F172A",
+              color: "var(--ads-ink)",
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
+              gap: "var(--ads-s2)",
+              transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#EFF6FF")}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)")}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
           >
-            <FileText size={14} color="#2563EB" />
+            <FileText size={14} color="var(--ads-blue)" />
             <span>Accident Report (Standard)</span>
           </button>
           <button
@@ -219,16 +230,17 @@ export const DownloadReportButton: FC<DownloadReportButtonProps> = ({
               cursor: "pointer",
               fontSize: "0.8125rem",
               fontWeight: 500,
-              color: "#0F172A",
+              color: "var(--ads-ink)",
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
-              borderTop: "1px solid #F1F5F9",
+              gap: "var(--ads-s2)",
+              borderTop: "1px solid var(--ads-hairline)",
+              transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#EFF6FF")}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)")}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
           >
-            <FileText size={14} color="#059669" />
+            <FileText size={14} color="var(--ads-green)" />
             <span>DA Incident Report (Detailed)</span>
           </button>
         </div>

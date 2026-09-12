@@ -21,7 +21,7 @@ export const DriverExpandedRow: FC<DriverExpandedRowProps> = ({
       <div className="driver-expand-permissions-row">
         {/* 1. Driver Sign In Toggle */}
         <div className="expand-permission-card">
-          <div className="permission-card-icon-wrap text-blue-600 bg-blue-50">
+          <div className="permission-card-icon-wrap" style={{ color: "var(--ads-blue)", backgroundColor: "var(--ads-blue-tint)" }}>
             <Smartphone size={18} />
           </div>
           <div className="permission-card-content">
@@ -47,7 +47,7 @@ export const DriverExpandedRow: FC<DriverExpandedRowProps> = ({
 
         {/* 2. Driver Inspection Allow Option */}
         <div className="expand-permission-card">
-          <div className="permission-card-icon-wrap text-emerald-600 bg-emerald-50">
+          <div className="permission-card-icon-wrap" style={{ color: "var(--ads-green)", backgroundColor: "var(--ads-green-tint)" }}>
             <ShieldCheck size={18} />
           </div>
           <div className="permission-card-content">

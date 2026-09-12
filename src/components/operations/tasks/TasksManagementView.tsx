@@ -427,6 +427,7 @@ export const TasksManagementView: FC = () => {
               onClick={() => setDeleteConfirmTask(task)}
               className="task-delete-btn"
               title="Delete Task"
+              aria-label="Delete Task"
             >
               <Trash2 size={13} />
             </button>
@@ -467,7 +468,7 @@ export const TasksManagementView: FC = () => {
                 ))}
               </div>
             ) : (
-              <div style={{ fontSize: "0.725rem", color: "#94A3B8", textAlign: "center", padding: "4px 0" }}>
+              <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", textAlign: "center", padding: "4px 0" }}>
                 No comments yet. Start the conversation below.
               </div>
             )}
@@ -501,6 +502,7 @@ export const TasksManagementView: FC = () => {
                 }
                 className="task-comment-send-btn"
                 title="Post Comment"
+                aria-label="Post Comment"
               >
                 <Send size={12} />
               </button>
@@ -601,6 +603,7 @@ export const TasksManagementView: FC = () => {
                   onClick={() => setSearchQuery("")}
                   className="tasks-search-clear"
                   title="Clear search"
+                  aria-label="Clear search"
                 >
                   <X size={12} />
                 </button>
@@ -616,6 +619,7 @@ export const TasksManagementView: FC = () => {
                 onClick={() => setCurrentWeekOffset((prev) => prev - 1)}
                 className="tasks-week-nav-btn"
                 title="Previous week"
+                aria-label="Previous week"
               >
                 <ChevronLeft size={14} />
               </button>
@@ -625,7 +629,7 @@ export const TasksManagementView: FC = () => {
                 onClick={() => setCurrentWeekOffset(0)}
                 title="Click to jump to current week"
               >
-                <Calendar size={13} style={{ color: "#2563EB" }} />
+                <Calendar size={13} style={{ color: "var(--ads-blue)" }} />
                 <span>{weekFormatted}</span>
               </div>
 
@@ -634,6 +638,7 @@ export const TasksManagementView: FC = () => {
                 onClick={() => setCurrentWeekOffset((prev) => prev + 1)}
                 className="tasks-week-nav-btn"
                 title="Next week"
+                aria-label="Next week"
               >
                 <ChevronRight size={14} />
               </button>
@@ -657,6 +662,7 @@ export const TasksManagementView: FC = () => {
               disabled={isLoading}
               className="tasks-tool-btn"
               title="Refresh tasks"
+              aria-label="Refresh tasks"
             >
               <RefreshCw size={13} className={isLoading ? "animate-spin" : ""} />
             </button>
@@ -668,6 +674,7 @@ export const TasksManagementView: FC = () => {
                 onClick={() => setViewMode("kanban")}
                 className={`tasks-view-btn ${viewMode === "kanban" ? "active" : ""}`}
                 title="Kanban Board View"
+                aria-label="Kanban Board View"
               >
                 <LayoutGrid size={13} />
               </button>
@@ -676,6 +683,7 @@ export const TasksManagementView: FC = () => {
                 onClick={() => setViewMode("list")}
                 className={`tasks-view-btn ${viewMode === "list" ? "active" : ""}`}
                 title="Dense List View"
+                aria-label="Dense List View"
               >
                 <ListIcon size={13} />
               </button>
@@ -742,11 +750,11 @@ export const TasksManagementView: FC = () => {
         {successToast && (
           <div
             style={{
-              padding: "0.5rem 1.25rem",
-              backgroundColor: "#ECFDF5",
-              color: "#065F46",
-              borderBottom: "1px solid #A7F3D0",
-              fontSize: "0.775rem",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              backgroundColor: "var(--ads-green-tint)",
+              color: "var(--ads-green)",
+              borderBottom: "1px solid var(--ads-hairline)",
+              fontSize: "0.8125rem",
               fontWeight: 600,
               display: "flex",
               alignItems: "center",
@@ -754,12 +762,14 @@ export const TasksManagementView: FC = () => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <CheckCircle2 size={15} style={{ color: "#059669" }} />
+              <CheckCircle2 size={15} style={{ color: "var(--ads-green)" }} />
               <span>{successToast}</span>
             </div>
             <button
               onClick={() => setSuccessToast(null)}
-              style={{ background: "none", border: "none", color: "#065F46", cursor: "pointer" }}
+              aria-label="Dismiss message"
+              title="Dismiss"
+              style={{ background: "none", border: "none", color: "var(--ads-green)", cursor: "pointer" }}
             >
               ✕
             </button>
@@ -769,11 +779,11 @@ export const TasksManagementView: FC = () => {
         {error && (
           <div
             style={{
-              padding: "0.5rem 1.25rem",
-              backgroundColor: "#FEF2F2",
-              color: "#991B1B",
-              borderBottom: "1px solid #FECACA",
-              fontSize: "0.775rem",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              backgroundColor: "var(--ads-red-tint)",
+              color: "var(--ads-red)",
+              borderBottom: "1px solid var(--ads-hairline)",
+              fontSize: "0.8125rem",
               fontWeight: 600,
               display: "flex",
               alignItems: "center",
@@ -781,12 +791,14 @@ export const TasksManagementView: FC = () => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <AlertCircle size={15} style={{ color: "#DC2626" }} />
+              <AlertCircle size={15} style={{ color: "var(--ads-red)" }} />
               <span>{error}</span>
             </div>
             <button
               onClick={() => setError(null)}
-              style={{ background: "none", border: "none", color: "#991B1B", cursor: "pointer" }}
+              aria-label="Dismiss error"
+              title="Dismiss"
+              style={{ background: "none", border: "none", color: "var(--ads-red)", cursor: "pointer" }}
             >
               ✕
             </button>
@@ -898,7 +910,7 @@ export const TasksManagementView: FC = () => {
                     const status = (task.status as TaskStatusType) || "created";
                     return (
                       <tr key={task.tag_id}>
-                        <td style={{ fontWeight: 700, color: "#2563EB" }}>#{task.tag_id}</td>
+                        <td style={{ fontWeight: 600, color: "var(--ads-blue)" }}>#{task.tag_id}</td>
                         <td style={{ fontWeight: 500 }}>{task.tag_message}</td>
                         <td>
                           <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
@@ -937,7 +949,7 @@ export const TasksManagementView: FC = () => {
                             <option value="completed">Completed</option>
                           </select>
                         </td>
-                        <td style={{ color: "#64748B", fontSize: "0.75rem" }}>
+                        <td style={{ color: "var(--ads-ink-tertiary)", fontSize: "0.75rem" }}>
                           {formatDate(task.created_at)}
                         </td>
                         <td style={{ textAlign: "right" }}>
@@ -971,6 +983,7 @@ export const TasksManagementView: FC = () => {
                               onClick={() => setDeleteConfirmTask(task)}
                               className="task-delete-btn"
                               title="Delete Task"
+                              aria-label="Delete Task"
                             >
                               <Trash2 size={13} />
                             </button>
@@ -981,7 +994,7 @@ export const TasksManagementView: FC = () => {
                   })
                 ) : (
                   <tr>
-                    <td colSpan={8} style={{ textAlign: "center", padding: "3rem", color: "#94A3B8" }}>
+                    <td colSpan={8} style={{ textAlign: "center", padding: "var(--ads-s10)", color: "var(--ads-ink-tertiary)" }}>
                       No tasks found for this period.
                     </td>
                   </tr>
@@ -1004,29 +1017,31 @@ export const TasksManagementView: FC = () => {
         >
           <div className="tasks-modal-card" style={{ maxWidth: 440 }}>
             <div className="tasks-modal-header">
-              <h2 className="tasks-modal-title" style={{ color: "#EF4444" }}>
+              <h2 className="tasks-modal-title" style={{ color: "var(--ads-red)" }}>
                 Delete Task #{deleteConfirmTask.tag_id}
               </h2>
               <button
                 type="button"
                 onClick={() => setDeleteConfirmTask(null)}
                 className="tasks-modal-close-btn"
+                aria-label="Close delete task dialog"
+                title="Close"
               >
                 <X size={16} />
               </button>
             </div>
             <div className="tasks-modal-body">
-              <p style={{ margin: 0, fontSize: "0.8125rem", color: "#334155", lineHeight: 1.5 }}>
+              <p style={{ margin: 0, fontSize: "0.8125rem", color: "var(--ads-ink-secondary)", lineHeight: 1.5 }}>
                 Are you sure you want to permanently delete this task?
               </p>
               <div
                 style={{
-                  padding: "0.65rem 0.85rem",
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "8px",
-                  fontSize: "0.775rem",
-                  color: "#1E293B",
+                  padding: "var(--ads-s3) var(--ads-s4)",
+                  backgroundColor: "rgba(0, 0, 0, 0.035)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-sm)",
+                  fontSize: "0.8125rem",
+                  color: "var(--ads-ink-secondary)",
                   fontStyle: "italic",
                 }}
               >
@@ -1047,14 +1062,18 @@ export const TasksManagementView: FC = () => {
                 onClick={handleConfirmDelete}
                 disabled={isDeleting}
                 style={{
-                  backgroundColor: "#EF4444",
+                  backgroundColor: "var(--ads-red)",
                   color: "#FFFFFF",
-                  border: "none",
-                  borderRadius: "7px",
-                  padding: "0.45rem 0.95rem",
+                  border: "1px solid transparent",
+                  borderRadius: "var(--ads-r-pill)",
+                  padding: "9px 18px",
                   fontSize: "0.8125rem",
                   fontWeight: 600,
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1,
+                  boxShadow: "0 1px 3px rgba(215, 0, 21, 0.24)",
                   cursor: "pointer",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 {isDeleting ? "Deleting..." : "Delete Task"}

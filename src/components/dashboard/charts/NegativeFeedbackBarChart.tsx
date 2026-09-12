@@ -10,13 +10,13 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
   const navigate = useNavigate();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
-  // Balanced mid-tone colors (neither too dark nor too light)
+  // Same categorical ramp as the other dashboard charts, mirroring --ads-* tokens.
   const barColors = [
-    "#EF4444", // Vivid Red
-    "#F97316", // Vibrant Orange
-    "#3B82F6", // Royal Blue
-    "#8B5CF6", // Purple
-    "#10B981", // Emerald
+    "#0071E3", // accent blue
+    "#D70015", // red
+    "#B25000", // amber
+    "#6E4FC4", // purple
+    "#0E7C74", // teal
   ];
 
   const list = data && data.length > 0 ? data.slice(0, 5) : [];
@@ -39,9 +39,8 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#94A3B8",
+          color: "var(--ads-ink-tertiary)",
           fontSize: "0.8125rem",
-          fontStyle: "italic",
         }}
       >
         Zero customer concessions recorded
@@ -58,7 +57,7 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "0.15rem 0.35rem 0.55rem",
-          borderBottom: "1px solid #F1F5F9",
+          borderBottom: "1px solid var(--ads-hairline)",
           marginBottom: "0.55rem",
         }}
       >
@@ -66,10 +65,10 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
           <span
             style={{
               fontSize: "1.45rem",
-              fontWeight: 800,
-              color: "#0F172A",
+              fontWeight: 700,
+              color: "var(--ads-ink)",
               lineHeight: 1,
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.022em",
             }}
           >
             {total}
@@ -77,10 +76,10 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
           <span
             style={{
               fontSize: "0.725rem",
-              fontWeight: 700,
-              color: "#64748B",
+              fontWeight: 600,
+              color: "var(--ads-ink-quaternary)",
               textTransform: "uppercase",
-              letterSpacing: "0.04em",
+              letterSpacing: "0.06em",
             }}
           >
             Total Defects
@@ -90,12 +89,12 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
         <span
           style={{
             fontSize: "0.6875rem",
-            fontWeight: 700,
-            padding: "0.15rem 0.55rem",
-            borderRadius: "9999px",
-            backgroundColor: "#FFFBEB",
-            color: "#D97706",
-            border: "1px solid #FDE68A",
+            fontWeight: 600,
+            padding: "0.2rem 0.65rem",
+            borderRadius: "var(--ads-r-pill)",
+            backgroundColor: "var(--ads-amber-tint)",
+            color: "var(--ads-amber)",
+            border: "1px solid transparent",
             display: "inline-flex",
             alignItems: "center",
           }}
@@ -119,11 +118,11 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
                 flexDirection: "column",
                 gap: "0.35rem",
                 padding: "0.4rem 0.55rem",
-                borderRadius: "8px",
-                border: isHovered ? "1px solid #E2E8F0" : "1px solid transparent",
-                backgroundColor: isHovered ? "#F8FAFC" : "transparent",
+                borderRadius: "var(--ads-r-sm)",
+                border: isHovered ? "1px solid var(--ads-hairline)" : "1px solid transparent",
+                backgroundColor: isHovered ? "var(--uop-wash)" : "transparent",
                 cursor: "pointer",
-                transition: "all 0.15s ease",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
               }}
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
@@ -148,14 +147,14 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
                       backgroundColor: color,
                       flexShrink: 0,
                       boxShadow: isHovered ? `0 0 0 3px ${color}33` : "none",
-                      transition: "box-shadow 0.2s ease",
+                      transition: "box-shadow var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   />
                   <span
                     style={{
                       fontSize: "0.8125rem",
-                      fontWeight: isHovered ? 700 : 600,
-                      color: isHovered ? "#0F172A" : "#1E293B",
+                      fontWeight: isHovered ? 650 : 550,
+                      color: "var(--ads-ink)",
                       whiteSpace: "nowrap",
                       overflow: "hidden",
                       textOverflow: "ellipsis",
@@ -169,12 +168,12 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
                   <span
                     style={{
                       fontSize: "0.75rem",
-                      fontWeight: 800,
+                      fontWeight: 600,
                       color,
-                      padding: "0.15rem 0.55rem",
-                      borderRadius: "5px",
-                      backgroundColor: `${color}15`,
-                      border: `1px solid ${color}30`,
+                      padding: "0.18rem 0.6rem",
+                      borderRadius: "var(--ads-r-pill)",
+                      backgroundColor: `${color}14`,
+                      border: "1px solid transparent",
                       minWidth: "24px",
                       textAlign: "center",
                     }}
@@ -189,18 +188,20 @@ export const NegativeFeedbackBarChart: FC<Props> = ({ data }) => {
                 style={{
                   width: "100%",
                   height: 6,
-                  backgroundColor: "#E2E8F0",
-                  borderRadius: "9999px",
+                  backgroundColor: "var(--uop-wash-strong)",
+                  borderRadius: "var(--ads-r-pill)",
                   overflow: "hidden",
                 }}
               >
                 <div
                   style={{
-                    width: `${barWidthPct}%`,
+                    width: "100%",
                     height: "100%",
                     backgroundColor: color,
-                    borderRadius: "9999px",
-                    transition: "width 0.4s ease",
+                    borderRadius: "var(--ads-r-pill)",
+                    transformOrigin: "left center",
+                    transform: `scaleX(${barWidthPct / 100})`,
+                    transition: "transform var(--ads-dur) var(--ads-ease)",
                   }}
                 />
               </div>

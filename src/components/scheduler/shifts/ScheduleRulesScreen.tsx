@@ -552,7 +552,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
         width: "100%",
         height: "100%",
         overflowY: "auto",
-        padding: "1.5rem",
+        padding: "var(--ads-s6)",
       }}
     >
       {/* 1. Header: Back + Title on Left, Cancel & Submit Button on Right */}
@@ -565,7 +565,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
           justifyContent: "space-between",
           width: "100%",
           paddingBottom: "0.85rem",
-          borderBottom: "1px solid #E2E8F0",
+          borderBottom: "1px solid var(--ads-hairline)",
           marginBottom: "1.25rem",
         }}
       >
@@ -588,11 +588,11 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
           </button>
           <div
             className="screen-title-divider"
-            style={{ width: "1px", height: "20px", backgroundColor: "#CBD5E1" }}
+            style={{ width: "1px", height: "20px", backgroundColor: "var(--ads-hairline-strong)" }}
           />
           <h2
             className="screen-heading"
-            style={{ margin: 0, fontSize: "1.15rem", fontWeight: 700, color: "#0F172A" }}
+            style={{ margin: 0, fontSize: "1.15rem", fontWeight: 700, color: "var(--ads-ink)" }}
           >
             {screenMode === "wizard"
               ? editingRule
@@ -674,17 +674,22 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
       {statusAlert && (
         <div
           style={{
-            marginBottom: "1.25rem",
-            padding: "0.75rem 1rem",
-            borderRadius: "10px",
+            marginBottom: "var(--ads-s5)",
+            padding: "var(--ads-s3) var(--ads-s4)",
+            borderRadius: "var(--ads-r-sm)",
             fontSize: "0.8125rem",
-            fontWeight: 500,
+            fontWeight: 550,
             display: "flex",
             alignItems: "center",
-            gap: "0.5rem",
-            backgroundColor: statusAlert.type === "success" ? "#F0FDF4" : "#FEF2F2",
-            border: `1px solid ${statusAlert.type === "success" ? "#BBF7D0" : "#FECACA"}`,
-            color: statusAlert.type === "success" ? "#166534" : "#991B1B",
+            gap: "var(--ads-s2)",
+            backgroundColor:
+              statusAlert.type === "success" ? "var(--ads-green-tint)" : "var(--ads-red-tint)",
+            border: `1px solid ${
+              statusAlert.type === "success"
+                ? "rgba(36, 138, 61, 0.28)"
+                : "rgba(215, 0, 21, 0.28)"
+            }`,
+            color: statusAlert.type === "success" ? "var(--ads-green)" : "var(--ads-red)",
           }}
         >
           {statusAlert.type === "success" ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
@@ -711,32 +716,30 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
             <div style={{ position: "relative", width: "300px" }}>
               <Search
                 size={14}
-                style={{ position: "absolute", left: "10px", top: "50%", transform: "translateY(-50%)", color: "#94A3B8" }}
+                style={{ position: "absolute", left: "10px", top: "50%", transform: "translateY(-50%)", color: "var(--ads-ink-quaternary)" }}
               />
               <input
                 type="text"
                 placeholder="Search schedule rules..."
                 value={rulesSearchQuery}
                 onChange={(e) => setRulesSearchQuery(e.target.value)}
+                className="ads-input"
+                aria-label="Search schedule rules"
                 style={{
-                  width: "100%",
-                  padding: "0.45rem 0.75rem 0.45rem 2rem",
+                  padding: "var(--ads-s2) var(--ads-s3) var(--ads-s2) 2rem",
                   fontSize: "0.8125rem",
-                  borderRadius: "8px",
-                  border: "1px solid #E2E8F0",
-                  outline: "none",
                 }}
               />
             </div>
 
-            <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#64748B" }}>
-              Total Rules: <span style={{ color: "#0F172A", fontWeight: 700 }}>{filteredRulesList.length}</span>
+            <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink-tertiary)" }}>
+              Total Rules: <span style={{ color: "var(--ads-ink)", fontWeight: 700 }}>{filteredRulesList.length}</span>
             </div>
           </div>
 
           {/* Rules Cards Grid */}
           {filteredRulesList.length === 0 ? (
-            <div style={{ padding: "4rem 1rem", textAlign: "center", color: "#94A3B8" }}>
+            <div style={{ padding: "4rem 1rem", textAlign: "center", color: "var(--ads-ink-quaternary)" }}>
               <Layers size={40} style={{ margin: "0 auto 0.75rem", opacity: 0.4 }} />
               <p style={{ margin: 0, fontSize: "0.875rem", fontWeight: 600 }}>No schedule rules found</p>
               <p style={{ margin: "0.25rem 0 1rem", fontSize: "0.75rem" }}>
@@ -777,11 +780,9 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                 return (
                   <div
                     key={rule.id}
+                    className="ads-card"
                     style={{
-                      border: "1px solid #E2E8F0",
-                      borderRadius: "12px",
-                      backgroundColor: "#FFFFFF",
-                      boxShadow: "0 1px 3px rgba(15, 23, 42, 0.04)",
+                      borderRadius: "var(--ads-r-md)",
                       overflow: "hidden",
                       display: "flex",
                       flexDirection: "column",
@@ -802,7 +803,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                               flexShrink: 0,
                             }}
                           />
-                          <h4 style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 700, color: "#0F172A" }}>
+                          <h4 style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                             {rule.name}
                           </h4>
                         </div>
@@ -810,11 +811,13 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                         <span
                           style={{
                             fontSize: "0.6875rem",
-                            fontWeight: 700,
-                            padding: "0.2rem 0.5rem",
-                            borderRadius: "6px",
-                            backgroundColor: isMmd ? "#F5F3FF" : "#EFF6FF",
-                            color: isMmd ? "#7C3AED" : "#2563EB",
+                            fontWeight: 600,
+                            padding: "2px var(--ads-s2)",
+                            borderRadius: "var(--ads-r-pill)",
+                            backgroundColor: isMmd
+                              ? "var(--ads-purple-tint)"
+                              : "var(--ads-blue-tint)",
+                            color: isMmd ? "var(--ads-purple)" : "var(--ads-blue)",
                             whiteSpace: "nowrap",
                           }}
                         >
@@ -822,22 +825,22 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginTop: "0.85rem", fontSize: "0.75rem", color: "#64748B" }}>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginTop: "0.85rem", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-                          <Clock size={13} style={{ color: "#94A3B8" }} />
+                          <Clock size={13} style={{ color: "var(--ads-ink-quaternary)" }} />
                           <span>{activeDaysCount} Active {isMmd ? "Shifts" : "Days"}</span>
                         </div>
 
                         {rule.break_time ? (
                           <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-                            <Coffee size={13} style={{ color: "#94A3B8" }} />
+                            <Coffee size={13} style={{ color: "var(--ads-ink-quaternary)" }} />
                             <span>{rule.break_time}m Break</span>
                           </div>
                         ) : null}
 
                         {preferredCount > 0 && (
                           <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-                            <span style={{ fontWeight: 600, color: "#2563EB" }}>{preferredCount}</span>
+                            <span style={{ fontWeight: 600, color: "var(--ads-blue)" }}>{preferredCount}</span>
                             <span>Drivers</span>
                           </div>
                         )}
@@ -847,14 +850,14 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                     <div
                       style={{
                         padding: "0.75rem 1.1rem",
-                        backgroundColor: "#F8FAFC",
-                        borderTop: "1px solid #F1F5F9",
+                        backgroundColor: "var(--ads-canvas)",
+                        borderTop: "1px solid var(--ads-hairline)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ fontSize: "0.6875rem", color: "#94A3B8", fontWeight: 600 }}>
+                      <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-quaternary)", fontWeight: 600 }}>
                         ID #{rule.id}
                       </span>
 
@@ -868,15 +871,15 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                             gap: "0.3rem",
                             padding: "0.3rem 0.6rem",
                             borderRadius: "6px",
-                            border: "1px solid #CBD5E1",
-                            backgroundColor: "#FFFFFF",
-                            color: "#334155",
+                            border: "1px solid var(--ads-hairline-strong)",
+                            backgroundColor: "var(--ads-material-thick)",
+                            color: "var(--ads-ink-secondary)",
                             fontSize: "0.75rem",
                             fontWeight: 600,
                             cursor: "pointer",
                           }}
                         >
-                          <Edit2 size={12} style={{ color: "#2563EB" }} />
+                          <Edit2 size={12} style={{ color: "var(--ads-blue)" }} />
                           <span>Edit</span>
                         </button>
 
@@ -890,9 +893,9 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                             gap: "0.3rem",
                             padding: "0.3rem 0.6rem",
                             borderRadius: "6px",
-                            border: "1px solid #FEE2E2",
-                            backgroundColor: "#FEF2F2",
-                            color: "#DC2626",
+                            border: "1px solid rgba(215, 0, 21, 0.28)",
+                            backgroundColor: "var(--ads-red-tint)",
+                            color: "var(--ads-red)",
                             fontSize: "0.75rem",
                             fontWeight: 600,
                             cursor: "pointer",
@@ -935,7 +938,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
           </div>
 
           {/* Stepper Navigation Bar */}
-          <div className="sch-stepper-bar" style={{ padding: "0 0 1.75rem 0", marginBottom: "1.75rem", borderBottom: "1px solid #E2E8F0" }}>
+          <div className="sch-stepper-bar" style={{ padding: "0 0 1.75rem 0", marginBottom: "1.75rem", borderBottom: "1px solid var(--ads-hairline)" }}>
             {/* Step 1 Node */}
             <div
               className={`sch-step-node ${currentStep === 1 ? "active" : currentStep > 1 ? "completed" : ""}`}
@@ -1014,7 +1017,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                           height: "28px",
                           borderRadius: "50%",
                           backgroundColor: c,
-                          border: color === c ? "2.5px solid #2563EB" : "1.5px solid rgba(0,0,0,0.12)",
+                          border: color === c ? "2.5px solid var(--ads-blue)" : "1.5px solid rgba(0,0,0,0.12)",
                           cursor: "pointer",
                           display: "flex",
                           alignItems: "center",
@@ -1048,8 +1051,8 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                       style={{
                         fontSize: "0.75rem",
                         fontWeight: 700,
-                        color: "#2563EB",
-                        background: "#EFF6FF",
+                        color: "var(--ads-blue)",
+                        background: "var(--ads-blue-tint)",
                         padding: "0.2rem 0.55rem",
                         borderRadius: "6px",
                       }}
@@ -1067,7 +1070,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                         checked={allDaysChecked}
                         onChange={(e) => handleToggleAllDays(e.target.checked)}
                       />
-                      <span style={{ fontWeight: 700, color: "#0F172A" }}>All Days</span>
+                      <span style={{ fontWeight: 700, color: "var(--ads-ink)" }}>All Days</span>
                     </label>
 
                     <div className="sch-time-selectors-group">
@@ -1107,7 +1110,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                           checked={d.isSelected}
                           onChange={() => handleToggleDay(idx)}
                         />
-                        <span style={{ color: d.isSelected ? "#0F172A" : "#94A3B8" }}>{d.title}</span>
+                        <span style={{ color: d.isSelected ? "var(--ads-ink)" : "var(--ads-ink-quaternary)" }}>{d.title}</span>
                       </label>
 
                       <div className="sch-time-selectors-group">
@@ -1162,8 +1165,8 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                         style={{
                           fontSize: "0.75rem",
                           fontWeight: 700,
-                          color: "#2563EB",
-                          background: "#EFF6FF",
+                          color: "var(--ads-blue)",
+                          background: "var(--ads-blue-tint)",
                           padding: "0.2rem 0.55rem",
                           borderRadius: "6px",
                         }}
@@ -1178,9 +1181,9 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                         alignItems: "center",
                         gap: "0.75rem",
                         padding: "0.85rem 1rem",
-                        backgroundColor: "#F8FAFC",
+                        backgroundColor: "var(--ads-canvas)",
                         borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
+                        border: "1px solid var(--ads-hairline)",
                       }}
                     >
                       <div className="sch-time-selectors-group">
@@ -1227,9 +1230,9 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                             style={{
                               padding: "0.45rem 0.85rem",
                               borderRadius: "8px",
-                              border: isSel ? "1.5px solid #2563EB" : "1px solid #CBD5E1",
-                              backgroundColor: isSel ? "#EFF6FF" : "#FFFFFF",
-                              color: isSel ? "#2563EB" : "#475569",
+                              border: isSel ? "1.5px solid var(--ads-blue)" : "1px solid var(--ads-hairline-strong)",
+                              backgroundColor: isSel ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+                              color: isSel ? "var(--ads-blue)" : "var(--ads-ink-secondary)",
                               fontWeight: isSel ? 700 : 500,
                               fontSize: "0.8125rem",
                               cursor: "pointer",
@@ -1262,19 +1265,19 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
               <div
                 style={{
                   padding: "1rem 1.15rem",
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
+                  backgroundColor: "var(--ads-canvas)",
+                  border: "1px solid var(--ads-hairline)",
                   borderRadius: "10px",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-                    <Coffee size={17} style={{ color: "#2563EB" }} />
+                    <Coffee size={17} style={{ color: "var(--ads-blue)" }} />
                     <div>
-                      <div style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A" }}>
+                      <div style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                         Meal & Rest Break
                       </div>
-                      <div style={{ fontSize: "0.75rem", color: "#64748B" }}>
+                      <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                         Automatically schedule standard meal/rest pauses during shifts
                       </div>
                     </div>
@@ -1292,7 +1295,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                       style={{
                         position: "absolute",
                         inset: 0,
-                        backgroundColor: setBreak ? "#2563EB" : "#CBD5E1",
+                        backgroundColor: setBreak ? "var(--ads-blue)" : "var(--ads-hairline-strong)",
                         borderRadius: "24px",
                         transition: "0.2s",
                       }}
@@ -1304,7 +1307,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                           width: "18px",
                           left: setBreak ? "20px" : "3px",
                           bottom: "3px",
-                          backgroundColor: "#FFFFFF",
+                          backgroundColor: "var(--ads-material-thick)",
                           borderRadius: "50%",
                           transition: "0.2s",
                           boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
@@ -1322,7 +1325,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                       gap: "1rem",
                       marginTop: "1rem",
                       paddingTop: "0.85rem",
-                      borderTop: "1px solid #E2E8F0",
+                      borderTop: "1px solid var(--ads-hairline)",
                     }}
                   >
                     <div>
@@ -1367,7 +1370,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                   justifyContent: "space-between",
                   marginTop: "1.5rem",
                   paddingTop: "1.25rem",
-                  borderTop: "1px solid #E2E8F0",
+                  borderTop: "1px solid var(--ads-hairline)",
                 }}
               >
                 <button
@@ -1397,7 +1400,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                 <label className="add-driver-label" style={{ marginBottom: "0.25rem" }}>
                   Company Message Templates
                 </label>
-                <p style={{ margin: "0 0 0.85rem", fontSize: "0.75rem", color: "#64748B" }}>
+                <p style={{ margin: "0 0 0.85rem", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                   Select communication templates automatically dispatched for shifts under this rule.
                 </p>
 
@@ -1406,10 +1409,10 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                     style={{
                       padding: "2rem",
                       borderRadius: "8px",
-                      border: "1px solid #E2E8F0",
-                      backgroundColor: "#F8FAFC",
+                      border: "1px solid var(--ads-hairline)",
+                      backgroundColor: "var(--ads-canvas)",
                       textAlign: "center",
-                      color: "#94A3B8",
+                      color: "var(--ads-ink-quaternary)",
                       fontSize: "0.8125rem",
                     }}
                   >
@@ -1430,8 +1433,8 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                           style={{
                             padding: "0.85rem 1.15rem",
                             borderRadius: "10px",
-                            border: isChecked ? "1.5px solid #2563EB" : "1px solid #E2E8F0",
-                            backgroundColor: isChecked ? "#EFF6FF" : "#FFFFFF",
+                            border: isChecked ? "1.5px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                            backgroundColor: isChecked ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
                             cursor: "pointer",
                             display: "flex",
                             alignItems: "center",
@@ -1440,14 +1443,14 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                           }}
                         >
                           <div>
-                            <div style={{ fontWeight: 600, fontSize: "0.8125rem", color: "#0F172A" }}>
+                            <div style={{ fontWeight: 600, fontSize: "0.8125rem", color: "var(--ads-ink)" }}>
                               {tpl.title || tpl.name || `Template #${tpl.id}`}
                             </div>
-                            <div style={{ fontSize: "0.75rem", color: "#64748B", marginTop: "0.15rem" }}>
+                            <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", marginTop: "0.15rem" }}>
                               {tpl.message || tpl.content}
                             </div>
                           </div>
-                          {isChecked && <CheckCircle2 size={18} style={{ color: "#2563EB", flexShrink: 0 }} />}
+                          {isChecked && <CheckCircle2 size={18} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />}
                         </div>
                       );
                     })}
@@ -1460,13 +1463,13 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                 style={{
                   padding: "1rem 1.15rem",
                   borderRadius: "10px",
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
+                  backgroundColor: "var(--ads-canvas)",
+                  border: "1px solid var(--ads-hairline)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.5rem" }}>
-                  <Clock size={15} style={{ color: "#2563EB" }} />
-                  <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A" }}>
+                  <Clock size={15} style={{ color: "var(--ads-blue)" }} />
+                  <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                     Automated Shift Reminders
                   </span>
                 </div>
@@ -1477,7 +1480,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                     checked={reminderEnabled}
                     onChange={(e) => setReminderEnabled(e.target.checked)}
                   />
-                  <span style={{ fontSize: "0.8125rem", color: "#334155" }}>
+                  <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-secondary)" }}>
                     Send automated reminder prior to shift start
                   </span>
                 </label>
@@ -1506,7 +1509,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                   justifyContent: "space-between",
                   marginTop: "1.5rem",
                   paddingTop: "1.25rem",
-                  borderTop: "1px solid #E2E8F0",
+                  borderTop: "1px solid var(--ads-hairline)",
                 }}
               >
                 <button
@@ -1535,10 +1538,10 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem" }}>
                 <div>
-                  <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A" }}>
+                  <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                     Assign Preferred Drivers
                   </span>
-                  <p style={{ margin: "0.15rem 0 0", fontSize: "0.75rem", color: "#64748B" }}>
+                  <p style={{ margin: "0.15rem 0 0", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                     Drivers prioritized during auto-scheduling for shifts under this rule.
                   </p>
                 </div>
@@ -1550,9 +1553,9 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                     style={{
                       padding: "0.3rem 0.6rem",
                       borderRadius: "6px",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
-                      color: "#2563EB",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
+                      color: "var(--ads-blue)",
                       fontSize: "0.75rem",
                       fontWeight: 600,
                       cursor: "pointer",
@@ -1566,9 +1569,9 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                     style={{
                       padding: "0.3rem 0.6rem",
                       borderRadius: "6px",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
-                      color: "#64748B",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
+                      color: "var(--ads-ink-tertiary)",
                       fontSize: "0.75rem",
                       fontWeight: 600,
                       cursor: "pointer",
@@ -1583,7 +1586,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
               <div style={{ position: "relative" }}>
                 <Search
                   size={14}
-                  style={{ position: "absolute", left: "10px", top: "50%", transform: "translateY(-50%)", color: "#94A3B8" }}
+                  style={{ position: "absolute", left: "10px", top: "50%", transform: "translateY(-50%)", color: "var(--ads-ink-quaternary)" }}
                 />
                 <input
                   type="text"
@@ -1595,14 +1598,14 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                     padding: "0.45rem 0.75rem 0.45rem 2rem",
                     fontSize: "0.8125rem",
                     borderRadius: "8px",
-                    border: "1px solid #E2E8F0",
+                    border: "1px solid var(--ads-hairline)",
                     outline: "none",
                   }}
                 />
               </div>
 
               {/* Selected Count Indicator */}
-              <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#2563EB" }}>
+              <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-blue)" }}>
                 {preferredDrivers.length} of {drivers.length} drivers selected
               </div>
 
@@ -1629,8 +1632,8 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                         gap: "0.6rem",
                         padding: "0.6rem 0.8rem",
                         borderRadius: "8px",
-                        border: isChecked ? "1.5px solid #2563EB" : "1px solid #E2E8F0",
-                        backgroundColor: isChecked ? "#EFF6FF" : "#FFFFFF",
+                        border: isChecked ? "1.5px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                        backgroundColor: isChecked ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
                         cursor: "pointer",
                         transition: "all 0.15s ease",
                       }}
@@ -1642,7 +1645,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                         style={{ cursor: "pointer" }}
                       />
                       <div style={{ overflow: "hidden" }}>
-                        <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#0F172A", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                           {d.name}
                         </div>
                       </div>
@@ -1659,7 +1662,7 @@ export const ScheduleRulesScreen: FC<ScheduleRulesScreenProps> = ({
                   justifyContent: "space-between",
                   marginTop: "1.5rem",
                   paddingTop: "1.25rem",
-                  borderTop: "1px solid #E2E8F0",
+                  borderTop: "1px solid var(--ads-hairline)",
                 }}
               >
                 <button

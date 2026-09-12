@@ -25,106 +25,48 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
     },
     ref
   ) => {
-    const getVariantStyles = (): {
-      container: React.CSSProperties;
-      dotColor: string;
-    } => {
-      switch (variant) {
-        case "primary":
-          return {
-            container: {
-              backgroundColor: "rgba(37, 99, 235, 0.15)",
-              color: "#2563EB",
-              border: "1px solid rgba(37, 99, 235, 0.3)",
-              boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.25)",
-            },
-            dotColor: "#2563EB",
-          };
-        case "success":
-          return {
-            container: {
-              backgroundColor: "rgba(16, 185, 129, 0.12)",
-              color: "#059669",
-              border: "1px solid rgba(16, 185, 129, 0.25)",
-              boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.25)",
-            },
-            dotColor: "#10B981",
-          };
-        case "warning":
-          return {
-            container: {
-              backgroundColor: "rgba(245, 158, 11, 0.12)",
-              color: "#D97706",
-              border: "1px solid rgba(245, 158, 11, 0.25)",
-              boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.25)",
-            },
-            dotColor: "#F59E0B",
-          };
-        case "error":
-          return {
-            container: {
-              backgroundColor: "rgba(239, 68, 68, 0.12)",
-              color: "#DC2626",
-              border: "1px solid rgba(239, 68, 68, 0.25)",
-              boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.25)",
-            },
-            dotColor: "#EF4444",
-          };
-        case "info":
-          return {
-            container: {
-              backgroundColor: "rgba(14, 165, 233, 0.12)",
-              color: "#0284C7",
-              border: "1px solid rgba(14, 165, 233, 0.25)",
-              boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.25)",
-            },
-            dotColor: "#0EA5E9",
-          };
-        case "neutral":
-        default:
-          return {
-            container: {
-              backgroundColor: "var(--surface-bg-subtle)",
-              color: "var(--text-secondary)",
-              border: "1px solid var(--surface-border)",
-              boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.1)",
-            },
-            dotColor: "var(--text-muted)",
-          };
-      }
+    // Variants map onto the `.ads-badge--*` primitives; the tint/ink pairs
+    // below come straight from the design system's semantic tokens.
+    const ADS_VARIANT: Record<BadgeVariant, string> = {
+      primary: "blue",
+      info: "blue",
+      success: "green",
+      warning: "amber",
+      error: "red",
+      neutral: "neutral",
     };
 
-    const { container, dotColor } = getVariantStyles();
+    const DOT_COLOR: Record<BadgeVariant, string> = {
+      primary: "var(--ads-blue)",
+      info: "var(--ads-blue)",
+      success: "var(--ads-green)",
+      warning: "var(--ads-amber)",
+      error: "var(--ads-red)",
+      neutral: "var(--ads-ink-quaternary)",
+    };
 
     return (
       <span
         ref={ref}
         style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.35rem",
-          padding: size === "sm" ? "0.15rem 0.45rem" : "0.22rem 0.6rem",
-          borderRadius: "9999px",
+          gap: "var(--ads-s1)",
+          padding: size === "sm" ? "2px 8px" : "3px 9px",
           fontSize: size === "sm" ? "0.6875rem" : "0.75rem",
-          fontWeight: 700,
-          lineHeight: 1.2,
-          letterSpacing: "0.01em",
           userSelect: "none",
-          transition: "all 0.15s var(--ease-spring)",
-          ...container,
+          transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
           ...style,
         }}
-        className={`badge badge-${variant} ${className}`}
+        className={`ads-badge ads-badge--${ADS_VARIANT[variant]} badge badge-${variant} ${className}`}
         {...rest}
       >
         {dot && (
           <span
+            aria-hidden="true"
             style={{
               width: "6px",
               height: "6px",
-              borderRadius: "50%",
-              backgroundColor: dotColor,
-              boxShadow: `0 0 0 2px ${dotColor}33`,
+              borderRadius: "var(--ads-r-pill)",
+              backgroundColor: DOT_COLOR[variant],
               flexShrink: 0,
             }}
           />

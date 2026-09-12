@@ -38,25 +38,17 @@ export const SchedulerFormatSettingsPanel: FC<SchedulerFormatSettingsPanelProps>
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <Sliders size={20} className="text-blue-600" />
-            <span>Dashboard & Format</span>
-            <span className="badge-custom blue">Scheduler</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Configure calendar week start day, timeline display format, scheduler default landing view, and roster export formats
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Configure calendar week start day, timeline display format, scheduler default landing view, and roster export formats
+        </p>
       </div>
 
       {/* 1. Regional & Calendar Configuration */}
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Calendar size={17} className="text-blue-600" />
+            <Calendar size={17} />
             <span>Calendar & Time Formatting</span>
           </h3>
         </div>
@@ -108,7 +100,7 @@ export const SchedulerFormatSettingsPanel: FC<SchedulerFormatSettingsPanelProps>
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Layout size={17} className="text-blue-600" />
+            <Layout size={17} />
             <span>Default Navigation Landing View</span>
           </h3>
         </div>
@@ -136,7 +128,7 @@ export const SchedulerFormatSettingsPanel: FC<SchedulerFormatSettingsPanelProps>
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <FileSpreadsheet size={17} className="text-blue-600" />
+            <FileSpreadsheet size={17} />
             <span>Roster Export & Data Formatting</span>
           </h3>
         </div>

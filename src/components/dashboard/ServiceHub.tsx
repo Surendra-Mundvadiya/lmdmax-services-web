@@ -23,8 +23,8 @@ export const ServiceHub: FC = () => {
       description:
         "Manage vehicle condition reports, conduct mandatory daily pre/post inspections, record AI damage scans, and ensure complete DVIC compliance.",
       icon: Truck,
-      color: "#2563EB",
-      badgeBg: "#EFF6FF",
+      color: "var(--ads-blue)",
+      badgeBg: "var(--ads-blue-tint)",
       features: [
         "Pre & Post-trip Driver Vehicle Inspections (DVIC)",
         "AI Damage Detection & Audit Trail",
@@ -41,8 +41,8 @@ export const ServiceHub: FC = () => {
       description:
         "Track delivery quality scores, driver tier leaderboards, Netradyne safety events, customer escalation records, and two-way notifications.",
       icon: BarChart3,
-      color: "#1D4ED8",
-      badgeBg: "#EFF6FF",
+      color: "var(--ads-blue)",
+      badgeBg: "var(--ads-blue-tint)",
       features: [
         "Scorecards & Weekly Tier Rankings",
         "Netradyne Safety & Video Events",
@@ -59,8 +59,8 @@ export const ServiceHub: FC = () => {
       description:
         "Automate weekly shift generation, manage driver availability, approve time-off requests, and maintain optimal DSP route coverage.",
       icon: CalendarDays,
-      color: "#1E40AF",
-      badgeBg: "#EFF6FF",
+      color: "var(--ads-blue)",
+      badgeBg: "var(--ads-blue-tint)",
       features: [
         "Automated Shift Scheduling Engine",
         "Driver Availability & Shift Swapping",

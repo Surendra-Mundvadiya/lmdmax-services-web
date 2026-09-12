@@ -486,7 +486,7 @@ export const AddDriverScreen: FC<AddDriverScreenProps> = ({
           justifyContent: "space-between",
           width: "100%",
           paddingBottom: "0.85rem",
-          borderBottom: "1px solid #E2E8F0",
+          borderBottom: "1px solid var(--ads-hairline)",
           marginBottom: "0.25rem",
         }}
       >
@@ -511,11 +511,11 @@ export const AddDriverScreen: FC<AddDriverScreenProps> = ({
           </button>
           <div
             className="screen-title-divider"
-            style={{ width: "1px", height: "20px", backgroundColor: "#CBD5E1" }}
+            style={{ width: "1px", height: "20px", backgroundColor: "var(--ads-hairline-strong)" }}
           />
           <h2
             className="screen-heading"
-            style={{ margin: 0, fontSize: "1.15rem", fontWeight: 700, color: "#0F172A" }}
+            style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 600, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}
           >
             {isEditMode ? "Edit Driver" : "Add Driver"}
           </h2>
@@ -755,7 +755,7 @@ export const AddDriverScreen: FC<AddDriverScreenProps> = ({
                             padding: "0.6rem",
                             textAlign: "center",
                             fontSize: "0.75rem",
-                            color: "#94A3B8",
+                            color: "var(--ads-ink-tertiary)",
                           }}
                         >
                           No active stations found

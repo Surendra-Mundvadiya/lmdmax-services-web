@@ -78,31 +78,31 @@ export const HelpAndSupportPage: FC = () => {
       case 2:
         return {
           label: "Open",
-          bg: "#EFF6FF",
-          color: "#2563EB",
-          border: "#BFDBFE",
+          bg: "var(--ads-blue-tint)",
+          color: "var(--ads-blue)",
+          border: "var(--ads-blue-tint-strong)",
         };
       case 3:
         return {
           label: "Pending",
-          bg: "#FFFBEB",
-          color: "#D97706",
-          border: "#FDE68A",
+          bg: "var(--ads-amber-tint)",
+          color: "var(--ads-amber)",
+          border: "var(--ads-amber-tint)",
         };
       case 4:
         return {
           label: "Resolved",
-          bg: "#ECFDF5",
-          color: "#059669",
-          border: "#A7F3D0",
+          bg: "var(--ads-green-tint)",
+          color: "var(--ads-green)",
+          border: "var(--ads-green-tint)",
         };
       case 5:
       default:
         return {
           label: "Closed",
-          bg: "#F1F5F9",
-          color: "#64748B",
-          border: "#CBD5E1",
+          bg: "var(--ads-canvas)",
+          color: "var(--ads-ink-tertiary)",
+          border: "var(--ads-hairline)",
         };
     }
   };
@@ -132,11 +132,13 @@ export const HelpAndSupportPage: FC = () => {
              ========================================================================= */
           <div
             style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: "10px",
-              border: "1px solid #E2E8F0",
+              background: "var(--ads-material-thick)",
+              backdropFilter: "var(--ads-blur-md)",
+              WebkitBackdropFilter: "var(--ads-blur-md)",
+              borderRadius: "var(--ads-r-lg)",
+              border: "1px solid var(--ads-hairline)",
               padding: "1.5rem",
-              boxShadow: "0 1px 3px rgba(0, 0, 0, 0.02)",
+              boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
             }}
           >
             <div
@@ -146,7 +148,7 @@ export const HelpAndSupportPage: FC = () => {
                 justifyContent: "space-between",
                 marginBottom: "1.25rem",
                 paddingBottom: "0.75rem",
-                borderBottom: "1px solid #F1F5F9",
+                borderBottom: "1px solid var(--ads-hairline)",
                 flexWrap: "wrap",
                 gap: "0.75rem",
               }}
@@ -156,7 +158,8 @@ export const HelpAndSupportPage: FC = () => {
                   margin: 0,
                   fontSize: "1.125rem",
                   fontWeight: 700,
-                  color: "#0F172A",
+                  letterSpacing: "-0.015em",
+                  color: "var(--ads-ink)",
                 }}
               >
                 Previous Queries ({tickets.length})
@@ -171,17 +174,28 @@ export const HelpAndSupportPage: FC = () => {
                     alignItems: "center",
                     gap: "0.35rem",
                     padding: "0.45rem 0.85rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    color: "#475569",
+                    borderRadius: "var(--ads-r-xs)",
+                    border: "1px solid var(--ads-hairline-strong)",
+                    backgroundColor: "var(--ads-white)",
+                    color: "var(--ads-ink-secondary)",
                     fontSize: "0.8125rem",
                     fontWeight: 600,
                     cursor: "pointer",
-                    transition: "all 0.15s ease",
+                    transition:
+                      "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F8FAFC")}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-canvas)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-white)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                  onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                  onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
                 >
                   <ArrowLeft size={14} />
                   <span>Back to FAQs</span>
@@ -195,37 +209,49 @@ export const HelpAndSupportPage: FC = () => {
                     alignItems: "center",
                     gap: "0.35rem",
                     padding: "0.45rem 0.95rem",
-                    borderRadius: "6px",
+                    borderRadius: "var(--ads-r-xs)",
                     border: "none",
-                    backgroundColor: "#2563EB",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
                     fontSize: "0.8125rem",
                     fontWeight: 650,
                     cursor: "pointer",
-                    transition: "background-color 0.15s ease",
+                    boxShadow: "var(--ads-shadow-xs)",
+                    transition:
+                      "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-blue-hover)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-sm)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-blue)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+                  }}
+                  onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                  onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
                 >
-                  <MessageSquarePlus size={14} />
-                  <span>New Query</span>
+                  <MessageSquarePlus size={14} style={{ color: "#FFFFFF" }} />
+                  <span style={{ color: "#FFFFFF" }}>New Query</span>
                 </button>
               </div>
             </div>
 
             {loadingTickets ? (
-              <div style={{ padding: "3rem", textAlign: "center", color: "#64748B" }}>
-                <Clock size={28} className="animate-spin" style={{ margin: "0 auto 0.75rem", color: "#2563EB" }} />
+              <div style={{ padding: "3rem", textAlign: "center", color: "var(--ads-ink-tertiary)" }}>
+                <Clock size={28} className="animate-spin" style={{ margin: "0 auto 0.75rem", color: "var(--ads-blue)" }} />
                 <p style={{ margin: 0, fontSize: "0.875rem" }}>Loading your submitted queries...</p>
               </div>
             ) : ticketsError ? (
               <div
                 style={{
                   padding: "1.5rem",
-                  borderRadius: "8px",
-                  backgroundColor: "#FEF2F2",
-                  border: "1px solid #FECACA",
-                  color: "#DC2626",
+                  borderRadius: "var(--ads-r-sm)",
+                  backgroundColor: "var(--ads-red-tint)",
+                  border: "1px solid var(--ads-red)",
+                  color: "var(--ads-red)",
                   textAlign: "center",
                 }}
               >
@@ -237,9 +263,9 @@ export const HelpAndSupportPage: FC = () => {
                 style={{
                   padding: "3.5rem 1rem",
                   textAlign: "center",
-                  backgroundColor: "#F8FAFC",
-                  borderRadius: "8px",
-                  border: "1px dashed #CBD5E1",
+                  backgroundColor: "var(--ads-canvas)",
+                  borderRadius: "var(--ads-r-md)",
+                  border: "1px dashed var(--ads-hairline-strong)",
                 }}
               >
                 <div
@@ -247,8 +273,8 @@ export const HelpAndSupportPage: FC = () => {
                     width: "48px",
                     height: "48px",
                     borderRadius: "50%",
-                    backgroundColor: "#EFF6FF",
-                    color: "#2563EB",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    color: "var(--ads-blue)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -257,10 +283,10 @@ export const HelpAndSupportPage: FC = () => {
                 >
                   <HelpCircle size={24} />
                 </div>
-                <h3 style={{ margin: "0 0 0.4rem", fontSize: "1rem", fontWeight: 700, color: "#1E293B" }}>
+                <h3 style={{ margin: "0 0 0.4rem", fontSize: "1rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                   No Queries Found
                 </h3>
-                <p style={{ margin: "0 0 1.25rem", fontSize: "0.8125rem", color: "#64748B" }}>
+                <p style={{ margin: "0 0 1.25rem", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                   You haven't submitted any support queries yet.
                 </p>
                 <button
@@ -268,14 +294,29 @@ export const HelpAndSupportPage: FC = () => {
                   onClick={() => setIsSubmitModalOpen(true)}
                   style={{
                     padding: "0.5rem 1.125rem",
-                    borderRadius: "6px",
+                    borderRadius: "var(--ads-r-xs)",
                     border: "none",
-                    backgroundColor: "#2563EB",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
                     fontSize: "0.8125rem",
                     fontWeight: 650,
                     cursor: "pointer",
+                    boxShadow: "var(--ads-shadow-xs)",
+                    transition:
+                      "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                   }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-blue-hover)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-sm)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-blue)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+                  }}
+                  onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                  onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
                 >
                   Submit a Query
                 </button>
@@ -291,10 +332,22 @@ export const HelpAndSupportPage: FC = () => {
                       key={ticket._id || ticket.id || index}
                       style={{
                         padding: "1.125rem 1.25rem",
-                        borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
-                        backgroundColor: "#FFFFFF",
-                        transition: "box-shadow 0.15s ease",
+                        borderRadius: "var(--ads-r-md)",
+                        border: "1px solid var(--ads-hairline)",
+                        backgroundColor: "var(--ads-white)",
+                        boxShadow: "var(--ads-shadow-xs)",
+                        transition:
+                          "box-shadow var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.boxShadow = "var(--ads-shadow-md)";
+                        e.currentTarget.style.borderColor = "var(--ads-hairline-strong)";
+                        e.currentTarget.style.transform = "translateY(-1px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+                        e.currentTarget.style.borderColor = "var(--ads-hairline)";
+                        e.currentTarget.style.transform = "translateY(0)";
                       }}
                     >
                       <div
@@ -307,7 +360,7 @@ export const HelpAndSupportPage: FC = () => {
                           marginBottom: "0.75rem",
                         }}
                       >
-                        <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#2563EB" }}>
+                        <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-blue)" }}>
                           Query #{index + 1}
                         </span>
 
@@ -317,7 +370,7 @@ export const HelpAndSupportPage: FC = () => {
                               fontSize: "0.71875rem",
                               fontWeight: 700,
                               padding: "0.2rem 0.55rem",
-                              borderRadius: "9999px",
+                              borderRadius: "var(--ads-r-pill)",
                               backgroundColor: badge.bg,
                               color: badge.color,
                               border: `1px solid ${badge.border}`,
@@ -328,7 +381,7 @@ export const HelpAndSupportPage: FC = () => {
                             {badge.label}
                           </span>
 
-                          <span style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 500 }}>
+                          <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", fontWeight: 500 }}>
                             {ticket.created_at
                               ? new Date(ticket.created_at).toLocaleDateString("en-US", {
                                   month: "short",
@@ -342,11 +395,13 @@ export const HelpAndSupportPage: FC = () => {
 
                       <div
                         style={{
-                          backgroundColor: "#EFF6FF",
-                          borderRadius: "6px",
+                          backgroundColor: "var(--ads-blue-tint)",
+                          border: "1px solid var(--ads-blue-tint-strong)",
+                          borderRadius: "var(--ads-r-xs)",
                           padding: "0.45rem 0.75rem",
                           fontSize: "0.75rem",
-                          color: "#1E40AF",
+                          lineHeight: 1.5,
+                          color: "var(--ads-blue)",
                           marginBottom: "0.75rem",
                         }}
                       >
@@ -358,7 +413,7 @@ export const HelpAndSupportPage: FC = () => {
                           margin: "0 0 0.35rem",
                           fontSize: "0.9375rem",
                           fontWeight: 650,
-                          color: "#0F172A",
+                          color: "var(--ads-ink)",
                         }}
                       >
                         {ticket.subject}
@@ -368,7 +423,7 @@ export const HelpAndSupportPage: FC = () => {
                         style={{
                           margin: "0 0 0.75rem",
                           fontSize: "0.8125rem",
-                          color: "#475569",
+                          color: "var(--ads-ink-secondary)",
                           lineHeight: 1.5,
                           whiteSpace: "pre-line",
                         }}
@@ -383,7 +438,8 @@ export const HelpAndSupportPage: FC = () => {
                               display: "block",
                               fontSize: "0.71875rem",
                               fontWeight: 650,
-                              color: "#64748B",
+                              color: "var(--ads-ink-tertiary)",
+                              letterSpacing: "0.4px",
                               marginBottom: "0.35rem",
                               textTransform: "uppercase",
                             }}
@@ -402,12 +458,24 @@ export const HelpAndSupportPage: FC = () => {
                                   alignItems: "center",
                                   gap: "0.3rem",
                                   padding: "0.25rem 0.6rem",
-                                  borderRadius: "6px",
-                                  border: "1px solid #CBD5E1",
-                                  backgroundColor: "#F8FAFC",
+                                  borderRadius: "var(--ads-r-xs)",
+                                  border: "1px solid var(--ads-hairline)",
+                                  backgroundColor: "var(--ads-canvas)",
                                   fontSize: "0.75rem",
-                                  color: "#2563EB",
+                                  color: "var(--ads-blue)",
                                   textDecoration: "none",
+                                  transition:
+                                    "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)";
+                                  e.currentTarget.style.borderColor = "var(--ads-blue-tint-strong)";
+                                  e.currentTarget.style.transform = "translateY(-1px)";
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.backgroundColor = "var(--ads-canvas)";
+                                  e.currentTarget.style.borderColor = "var(--ads-hairline)";
+                                  e.currentTarget.style.transform = "translateY(0)";
                                 }}
                               >
                                 <Paperclip size={12} />
@@ -430,11 +498,13 @@ export const HelpAndSupportPage: FC = () => {
              ========================================================================= */
           <div
             style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: "10px",
-              border: "1px solid #E2E8F0",
+              background: "var(--ads-material-thick)",
+              backdropFilter: "var(--ads-blur-md)",
+              WebkitBackdropFilter: "var(--ads-blur-md)",
+              borderRadius: "var(--ads-r-lg)",
+              border: "1px solid var(--ads-hairline)",
               padding: "1.75rem 2rem",
-              boxShadow: "0 1px 3px rgba(0, 0, 0, 0.02)",
+              boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -461,7 +531,7 @@ export const HelpAndSupportPage: FC = () => {
                 <span
                   style={{
                     fontSize: "0.8125rem",
-                    color: "#475569",
+                    color: "var(--ads-ink-secondary)",
                     fontWeight: 500,
                   }}
                 >
@@ -472,17 +542,29 @@ export const HelpAndSupportPage: FC = () => {
                   onClick={() => setShowPreviousQueries(true)}
                   style={{
                     padding: "0.45rem 1.1rem",
-                    borderRadius: "6px",
+                    borderRadius: "var(--ads-r-xs)",
                     border: "none",
-                    backgroundColor: "#2563EB",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
                     fontSize: "0.8125rem",
                     fontWeight: 650,
                     cursor: "pointer",
-                    transition: "background-color 0.15s ease",
+                    boxShadow: "var(--ads-shadow-xs)",
+                    transition:
+                      "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-blue-hover)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-sm)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--ads-blue)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+                  }}
+                  onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                  onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
                 >
                   View
                 </button>
@@ -496,17 +578,34 @@ export const HelpAndSupportPage: FC = () => {
                   margin: "0 0 0.5rem",
                   fontSize: "1.5rem",
                   fontWeight: 750,
-                  color: "#0F172A",
+                  letterSpacing: "-0.02em",
+                  color: "var(--ads-ink)",
                 }}
               >
                 Frequently Asked Questions
               </h1>
-              <p style={{ margin: "0 0 1.25rem", fontSize: "0.875rem", color: "#64748B" }}>
+              <p style={{ margin: "0 0 1.25rem", fontSize: "0.875rem", lineHeight: 1.5, color: "var(--ads-ink-tertiary)" }}>
                 Find quick answers to common questions about inspections, vehicle assignments, and fleet setups
               </p>
 
               {/* Search Bar */}
               <div style={{ position: "relative", width: "100%" }}>
+                <label
+                  htmlFor="faq-search-input"
+                  style={{
+                    position: "absolute",
+                    width: "1px",
+                    height: "1px",
+                    padding: 0,
+                    margin: "-1px",
+                    overflow: "hidden",
+                    clip: "rect(0, 0, 0, 0)",
+                    whiteSpace: "nowrap",
+                    border: 0,
+                  }}
+                >
+                  Search frequently asked questions
+                </label>
                 <Search
                   size={16}
                   style={{
@@ -514,10 +613,12 @@ export const HelpAndSupportPage: FC = () => {
                     left: "1rem",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "#94A3B8",
+                    color: "var(--ads-ink-tertiary)",
+                    pointerEvents: "none",
                   }}
                 />
                 <input
+                  id="faq-search-input"
                   type="text"
                   placeholder="Search your issue or keyword..."
                   value={searchQuery}
@@ -525,17 +626,24 @@ export const HelpAndSupportPage: FC = () => {
                   style={{
                     width: "100%",
                     padding: searchQuery ? "0.75rem 2.2rem 0.75rem 2.75rem" : "0.75rem 1rem 0.75rem 2.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline-strong)",
                     fontSize: "0.875rem",
                     outline: "none",
-                    backgroundColor: "#F8FAFC",
-                    color: "#0F172A",
+                    backgroundColor: "var(--ads-white)",
+                    color: "var(--ads-ink)",
                     boxSizing: "border-box",
-                    transition: "border-color 0.15s ease",
+                    transition:
+                      "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = "#2563EB")}
-                  onBlur={(e) => (e.target.style.borderColor = "#CBD5E1")}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "var(--ads-blue)";
+                    e.target.style.boxShadow = "var(--ads-shadow-focus)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = "var(--ads-hairline-strong)";
+                    e.target.style.boxShadow = "none";
+                  }}
                 />
                 {searchQuery && (
                   <button
@@ -548,10 +656,16 @@ export const HelpAndSupportPage: FC = () => {
                       transform: "translateY(-50%)",
                       background: "none",
                       border: "none",
-                      color: "#94A3B8",
+                      color: "var(--ads-ink-tertiary)",
                       cursor: "pointer",
                       padding: 0,
+                      display: "flex",
+                      transition: "color var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
                     }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--ads-ink)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ads-ink-tertiary)")}
+                    aria-label="Clear search"
+                    title="Clear search"
                   >
                     <X size={15} />
                   </button>
@@ -562,7 +676,7 @@ export const HelpAndSupportPage: FC = () => {
             {/* Questions Accordion List */}
             <div style={{ width: "100%", maxWidth: "800px", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
               {filteredQuestions.length === 0 ? (
-                <div style={{ padding: "2.5rem 1rem", textAlign: "center", color: "#64748B" }}>
+                <div style={{ padding: "2.5rem 1rem", textAlign: "center", color: "var(--ads-ink-tertiary)" }}>
                   <p style={{ margin: "0 0 0.5rem", fontSize: "0.9375rem", fontWeight: 600 }}>
                     No matching questions found
                   </p>
@@ -578,20 +692,25 @@ export const HelpAndSupportPage: FC = () => {
                     <div
                       key={q.id}
                       style={{
-                        borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
+                        borderRadius: "var(--ads-r-md)",
+                        border: isOpen
+                          ? "1px solid var(--ads-blue-tint-strong)"
+                          : "1px solid var(--ads-hairline)",
                         overflow: "hidden",
-                        backgroundColor: "#FFFFFF",
-                        transition: "border-color 0.15s ease",
+                        backgroundColor: "var(--ads-white)",
+                        boxShadow: isOpen ? "var(--ads-shadow-sm)" : "var(--ads-shadow-xs)",
+                        transition:
+                          "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                       }}
                     >
                       <button
                         type="button"
                         onClick={() => toggleQuestion(q.id)}
+                        aria-expanded={isOpen}
                         style={{
                           width: "100%",
                           padding: "0.85rem 1.125rem",
-                          backgroundColor: isOpen ? "#F8FAFC" : "#FFFFFF",
+                          backgroundColor: isOpen ? "var(--ads-blue-tint)" : "transparent",
                           border: "none",
                           cursor: "pointer",
                           display: "flex",
@@ -599,22 +718,32 @@ export const HelpAndSupportPage: FC = () => {
                           justifyContent: "space-between",
                           textAlign: "left",
                           gap: "1rem",
+                          transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isOpen) e.currentTarget.style.backgroundColor = "var(--ads-canvas)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = isOpen
+                            ? "var(--ads-blue-tint)"
+                            : "transparent";
                         }}
                       >
                         <span
                           style={{
                             fontSize: "0.875rem",
                             fontWeight: 650,
-                            color: isOpen ? "#1D4ED8" : "#1E293B",
+                            color: isOpen ? "var(--ads-blue)" : "var(--ads-ink)",
                             lineHeight: 1.4,
+                            transition: "color var(--ads-dur-fast) var(--ads-ease)",
                           }}
                         >
                           {q.question}
                         </span>
                         {isOpen ? (
-                          <ChevronUp size={16} style={{ color: "#2563EB", flexShrink: 0 }} />
+                          <ChevronUp size={16} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
                         ) : (
-                          <ChevronDown size={16} style={{ color: "#94A3B8", flexShrink: 0 }} />
+                          <ChevronDown size={16} style={{ color: "var(--ads-ink-tertiary)", flexShrink: 0 }} />
                         )}
                       </button>
 
@@ -622,8 +751,8 @@ export const HelpAndSupportPage: FC = () => {
                         <div
                           style={{
                             padding: "0.85rem 1.25rem 1.125rem 1.5rem",
-                            borderTop: "1px solid #F1F5F9",
-                            backgroundColor: "#FFFFFF",
+                            borderTop: "1px solid var(--ads-hairline)",
+                            backgroundColor: "var(--ads-white)",
                           }}
                         >
                           {q.steps.length === 1 ? (
@@ -631,7 +760,7 @@ export const HelpAndSupportPage: FC = () => {
                               style={{
                                 margin: 0,
                                 fontSize: "0.8125rem",
-                                color: "#334155",
+                                color: "var(--ads-ink-secondary)",
                                 lineHeight: 1.6,
                               }}
                             >
@@ -652,7 +781,7 @@ export const HelpAndSupportPage: FC = () => {
                                   key={idx}
                                   style={{
                                     fontSize: "0.8125rem",
-                                    color: "#334155",
+                                    color: "var(--ads-ink-secondary)",
                                     lineHeight: 1.55,
                                   }}
                                 >
@@ -676,9 +805,9 @@ export const HelpAndSupportPage: FC = () => {
                 maxWidth: "800px",
                 marginTop: "1.75rem",
                 padding: "1.125rem 1.5rem",
-                borderRadius: "10px",
-                backgroundColor: "#EFF6FF",
-                border: "1px solid #BFDBFE",
+                borderRadius: "var(--ads-r-lg)",
+                backgroundColor: "var(--ads-blue-tint)",
+                border: "1px solid var(--ads-blue-tint-strong)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -692,12 +821,12 @@ export const HelpAndSupportPage: FC = () => {
                     margin: "0 0 0.25rem",
                     fontSize: "0.9375rem",
                     fontWeight: 700,
-                    color: "#1E3A8A",
+                    color: "var(--ads-ink)",
                   }}
                 >
                   Still have questions?
                 </h4>
-                <p style={{ margin: 0, fontSize: "0.8125rem", color: "#1D4ED8" }}>
+                <p style={{ margin: 0, fontSize: "0.8125rem", lineHeight: 1.5, color: "var(--ads-ink-secondary)" }}>
                   Can’t find the answer you are looking for? Please leave your query here.
                 </p>
               </div>
@@ -710,20 +839,32 @@ export const HelpAndSupportPage: FC = () => {
                   alignItems: "center",
                   gap: "0.4rem",
                   padding: "0.55rem 1.125rem",
-                  borderRadius: "6px",
+                  borderRadius: "var(--ads-r-xs)",
                   border: "none",
-                  backgroundColor: "#2563EB",
+                  backgroundColor: "var(--ads-blue)",
                   color: "#FFFFFF",
                   fontSize: "0.8125rem",
                   fontWeight: 650,
                   cursor: "pointer",
-                  transition: "background-color 0.15s ease",
+                  boxShadow: "var(--ads-shadow-xs)",
+                  transition:
+                    "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--ads-blue-hover)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                  e.currentTarget.style.boxShadow = "var(--ads-shadow-sm)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--ads-blue)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+                }}
+                onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
               >
-                <MessageSquarePlus size={15} />
-                <span>Send query</span>
+                <MessageSquarePlus size={15} style={{ color: "#FFFFFF" }} />
+                <span style={{ color: "#FFFFFF" }}>Send query</span>
               </button>
             </div>
           </div>

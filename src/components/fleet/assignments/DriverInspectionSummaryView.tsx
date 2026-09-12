@@ -275,11 +275,13 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
           justifyContent: "space-between",
           flexWrap: "wrap",
           gap: "1rem",
-          backgroundColor: "#FFFFFF",
-          padding: "1rem 1.25rem",
-          borderRadius: "10px",
-          border: "1px solid #E2E8F0",
-          boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-md)",
+          WebkitBackdropFilter: "var(--ads-blur-md)",
+          padding: "var(--ads-s4) var(--ads-s5)",
+          borderRadius: "var(--ads-r-lg)",
+          border: "1px solid var(--ads-hairline)",
+          boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -290,26 +292,27 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
               display: "flex",
               alignItems: "center",
               gap: "0.4rem",
-              padding: "0.45rem 0.85rem",
+              padding: "9px 18px",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              backgroundColor: "#EFF6FF",
-              color: "#2563EB",
-              border: "1px solid #DBEAFE",
-              borderRadius: "6px",
+              letterSpacing: "-0.01em",
+              backgroundColor: "var(--ads-blue-tint)",
+              color: "var(--ads-blue)",
+              border: "1px solid var(--ads-blue-tint-strong)",
+              borderRadius: "var(--ads-r-pill)",
               cursor: "pointer",
-              transition: "all 0.15s ease",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <ArrowLeft size={16} />
             <span>Back to Driver Inspection</span>
           </button>
 
-          <div style={{ height: "24px", width: "1px", backgroundColor: "#CBD5E1" }} />
+          <div style={{ height: "24px", width: "1px", backgroundColor: "var(--ads-hairline)" }} />
 
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <h1 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+              <h1 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.022em" }}>
                 {vehicle?.unit_number || vehicle?.name || `Vehicle #${vehicleId}`}
               </h1>
               <span
@@ -317,20 +320,20 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "0.25rem",
-                  fontSize: "0.75rem",
-                  fontWeight: 700,
-                  padding: "0.2rem 0.6rem",
-                  borderRadius: "9999px",
-                  backgroundColor: postDone ? "#ECFDF5" : preDone ? "#FFFBEB" : "#F1F5F9",
-                  color: postDone ? "#059669" : preDone ? "#B45309" : "#64748B",
-                  border: `1px solid ${postDone ? "#A7F3D0" : preDone ? "#FDE68A" : "#CBD5E1"}`,
+                  fontSize: "0.6875rem",
+                  fontWeight: 600,
+                  padding: "3px 9px",
+                  borderRadius: "var(--ads-r-pill)",
+                  backgroundColor: postDone ? "var(--ads-green-tint)" : preDone ? "var(--ads-amber-tint)" : "rgba(0,0,0,0.05)",
+                  color: postDone ? "var(--ads-green)" : preDone ? "var(--ads-amber)" : "var(--ads-ink-secondary)",
+                  border: "1px solid transparent",
                 }}
               >
                 {postDone ? <CheckCircle2 size={12} /> : preDone ? <AlertTriangle size={12} /> : <Clock size={12} />}
                 {postDone ? "Return Complete" : preDone ? "In Progress" : "Pending Inspection"}
               </span>
             </div>
-            <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.15rem 0 0 0" }}>
+            <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: "0.15rem 0 0 0" }}>
               Inspection Summary • {vehicle?.make || "Ford"} {vehicle?.model || "Transit"} • VIN: {vehicle?.vin || "—"}
             </p>
           </div>
@@ -340,20 +343,21 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
           {/* Switch Vehicle Dropdown */}
           <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
-            <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#64748B" }}>Switch Vehicle:</span>
+            <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-tertiary)" }}>Switch Vehicle:</span>
             <select
               value={vehicle?.id ? String(vehicle.id) : ""}
               onChange={(e) => handleSwitchVehicle(e.target.value)}
               style={{
-                padding: "0.4rem 0.65rem",
+                padding: "9px 13px",
                 fontSize: "0.8125rem",
                 fontWeight: 600,
-                color: "#1E293B",
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #CBD5E1",
-                borderRadius: "6px",
+                color: "var(--ads-ink)",
+                background: "var(--ads-material-thick)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-sm)",
                 outline: "none",
                 cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               {allVehicles.map((v) => (
@@ -370,13 +374,13 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
-              backgroundColor: "#EFF6FF",
-              border: "1px solid #DBEAFE",
-              borderRadius: "6px",
+              backgroundColor: "var(--ads-blue-tint)",
+              border: "1px solid var(--ads-blue-tint-strong)",
+              borderRadius: "var(--ads-r-sm)",
               padding: "0.35rem 0.75rem",
             }}
           >
-            <Calendar size={15} style={{ color: "#2563EB" }} />
+            <Calendar size={15} style={{ color: "var(--ads-blue)" }} />
             <input
               type="date"
               value={selectedDate}
@@ -384,7 +388,7 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
               style={{
                 border: "none",
                 background: "transparent",
-                color: "#1D4ED8",
+                color: "var(--ads-blue)",
                 fontWeight: 700,
                 fontSize: "0.875rem",
                 outline: "none",
@@ -406,11 +410,22 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
         {/* Vehicle Overview */}
         <div
           style={{
-            backgroundColor: "#FFFFFF",
-            borderRadius: "10px",
-            border: "1px solid #E2E8F0",
-            padding: "1rem",
-            boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-md)",
+            WebkitBackdropFilter: "var(--ads-blur-md)",
+            borderRadius: "var(--ads-r-lg)",
+            border: "1px solid var(--ads-hairline)",
+            padding: "var(--ads-s4)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+            transition: "transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-sm), var(--ads-bevel)";
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
@@ -418,9 +433,9 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
               style={{
                 width: "28px",
                 height: "28px",
-                borderRadius: "6px",
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-xs)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -428,17 +443,17 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
             >
               <Truck size={15} />
             </div>
-            <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#64748B", textTransform: "uppercase" }}>
+            <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", color: "var(--ads-ink-tertiary)", textTransform: "uppercase" }}>
               Vehicle Information
             </span>
           </div>
-          <div style={{ fontSize: "1rem", fontWeight: 700, color: "#1E293B" }}>
+          <div style={{ fontSize: "1rem", fontWeight: 700, color: "var(--ads-ink)", letterSpacing: "-0.014em" }}>
             {vehicle?.unit_number || vehicle?.name || `Vehicle #${vehicleId}`}
           </div>
-          <div style={{ fontSize: "0.75rem", color: "#64748B", marginTop: "0.25rem" }}>
+          <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", marginTop: "0.25rem" }}>
             {vehicle?.make || "Ford"} {vehicle?.model || "Transit"} • Plate: {vehicle?.license_plate || "None"}
           </div>
-          <div style={{ fontSize: "0.75rem", fontFamily: "monospace", color: "#475569", marginTop: "0.15rem" }}>
+          <div style={{ fontSize: "0.75rem", fontFamily: "monospace", color: "var(--ads-ink-secondary)", marginTop: "0.15rem" }}>
             VIN: {vehicle?.vin || "—"}
           </div>
         </div>
@@ -446,11 +461,22 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
         {/* Driver Overview */}
         <div
           style={{
-            backgroundColor: "#FFFFFF",
-            borderRadius: "10px",
-            border: "1px solid #E2E8F0",
-            padding: "1rem",
-            boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-md)",
+            WebkitBackdropFilter: "var(--ads-blur-md)",
+            borderRadius: "var(--ads-r-lg)",
+            border: "1px solid var(--ads-hairline)",
+            padding: "var(--ads-s4)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+            transition: "transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-sm), var(--ads-bevel)";
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
@@ -458,9 +484,9 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
               style={{
                 width: "28px",
                 height: "28px",
-                borderRadius: "6px",
-                backgroundColor: "#F0FDF4",
-                color: "#16A34A",
+                borderRadius: "var(--ads-r-xs)",
+                backgroundColor: "var(--ads-green-tint)",
+                color: "var(--ads-green)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -468,17 +494,17 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
             >
               <User size={15} />
             </div>
-            <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#64748B", textTransform: "uppercase" }}>
+            <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", color: "var(--ads-ink-tertiary)", textTransform: "uppercase" }}>
               Assigned Driver
             </span>
           </div>
-          <div style={{ fontSize: "1rem", fontWeight: 700, color: "#1E293B" }}>
+          <div style={{ fontSize: "1rem", fontWeight: 700, color: "var(--ads-ink)", letterSpacing: "-0.014em" }}>
             {vehicle?.assigned_driver_name || inspectionForm?.driver_name || "Unassigned"}
           </div>
-          <div style={{ fontSize: "0.75rem", color: "#64748B", marginTop: "0.25rem" }}>
+          <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", marginTop: "0.25rem" }}>
             Shift: {inspectionForm?.shift_type || "Day Loadout & Return"}
           </div>
-          <div style={{ fontSize: "0.75rem", color: "#059669", fontWeight: 600, marginTop: "0.15rem" }}>
+          <div style={{ fontSize: "0.75rem", color: "var(--ads-green)", fontWeight: 600, marginTop: "0.15rem" }}>
             Verification: {postDone ? "Verified by Safety Lead" : "In Progress"}
           </div>
         </div>
@@ -486,11 +512,22 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
         {/* Mileage & Fuel Card */}
         <div
           style={{
-            backgroundColor: "#FFFFFF",
-            borderRadius: "10px",
-            border: "1px solid #E2E8F0",
-            padding: "1rem",
-            boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-md)",
+            WebkitBackdropFilter: "var(--ads-blur-md)",
+            borderRadius: "var(--ads-r-lg)",
+            border: "1px solid var(--ads-hairline)",
+            padding: "var(--ads-s4)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+            transition: "transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "var(--ads-shadow-sm), var(--ads-bevel)";
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
@@ -498,9 +535,9 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
               style={{
                 width: "28px",
                 height: "28px",
-                borderRadius: "6px",
-                backgroundColor: "#FFFBEB",
-                color: "#D97706",
+                borderRadius: "var(--ads-r-xs)",
+                backgroundColor: "var(--ads-amber-tint)",
+                color: "var(--ads-amber)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -508,20 +545,20 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
             >
               <Gauge size={15} />
             </div>
-            <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#64748B", textTransform: "uppercase" }}>
+            <span style={{ fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", color: "var(--ads-ink-tertiary)", textTransform: "uppercase" }}>
               Odometer & Fuel
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
-            <span style={{ fontSize: "1.125rem", fontWeight: 700, color: "#1E293B" }}>
+            <span style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--ads-ink)", letterSpacing: "-0.019em" }}>
               {typeof returnMileage === "number" ? returnMileage.toLocaleString() : returnMileage} mi
             </span>
-            <span style={{ fontSize: "0.75rem", color: "#059669", fontWeight: 600 }}>
+            <span style={{ fontSize: "0.75rem", color: "var(--ads-green)", fontWeight: 600 }}>
               (+{milesDriven} mi driven)
             </span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "0.25rem", fontSize: "0.75rem", color: "#64748B" }}>
-            <Fuel size={13} style={{ color: "#D97706" }} />
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "0.25rem", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
+            <Fuel size={13} style={{ color: "var(--ads-amber)" }} />
             <span>Pre-Trip Fuel: {formatGas(gasPre)} • Return Fuel: {formatGas(gasPost)}</span>
           </div>
         </div>
@@ -531,25 +568,28 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
       <div
         style={{
           display: "flex",
-          borderBottom: "1px solid #E2E8F0",
-          backgroundColor: "#FFFFFF",
-          borderRadius: "10px 10px 0 0",
-          padding: "0 1rem",
+          borderBottom: "1px solid var(--ads-hairline)",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-md)",
+          WebkitBackdropFilter: "var(--ads-blur-md)",
+          borderRadius: "var(--ads-r-lg) var(--ads-r-lg) 0 0",
+          padding: "0 var(--ads-s4)",
         }}
       >
         <button
           type="button"
           onClick={() => setActiveTab("comparison")}
           style={{
-            padding: "0.85rem 1.25rem",
+            padding: "var(--ads-s3) var(--ads-s5)",
             fontSize: "0.875rem",
-            fontWeight: 700,
+            fontWeight: 600,
+            letterSpacing: "-0.01em",
             border: "none",
             background: "none",
-            color: activeTab === "comparison" ? "#2563EB" : "#64748B",
-            borderBottom: activeTab === "comparison" ? "3px solid #2563EB" : "3px solid transparent",
+            color: activeTab === "comparison" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+            borderBottom: activeTab === "comparison" ? "2px solid var(--ads-blue)" : "2px solid transparent",
             cursor: "pointer",
-            transition: "all 0.15s ease",
+            transition: "all var(--ads-dur-fast) var(--ads-ease)",
           }}
         >
           Pre-Trip vs Return Comparison
@@ -559,15 +599,16 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
           type="button"
           onClick={() => setActiveTab("checklist")}
           style={{
-            padding: "0.85rem 1.25rem",
+            padding: "var(--ads-s3) var(--ads-s5)",
             fontSize: "0.875rem",
-            fontWeight: 700,
+            fontWeight: 600,
+            letterSpacing: "-0.01em",
             border: "none",
             background: "none",
-            color: activeTab === "checklist" ? "#2563EB" : "#64748B",
-            borderBottom: activeTab === "checklist" ? "3px solid #2563EB" : "3px solid transparent",
+            color: activeTab === "checklist" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+            borderBottom: activeTab === "checklist" ? "2px solid var(--ads-blue)" : "2px solid transparent",
             cursor: "pointer",
-            transition: "all 0.15s ease",
+            transition: "all var(--ads-dur-fast) var(--ads-ease)",
           }}
         >
           DVIC Inspection Checklist
@@ -577,15 +618,16 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
           type="button"
           onClick={() => setActiveTab("photos")}
           style={{
-            padding: "0.85rem 1.25rem",
+            padding: "var(--ads-s3) var(--ads-s5)",
             fontSize: "0.875rem",
-            fontWeight: 700,
+            fontWeight: 600,
+            letterSpacing: "-0.01em",
             border: "none",
             background: "none",
-            color: activeTab === "photos" ? "#2563EB" : "#64748B",
-            borderBottom: activeTab === "photos" ? "3px solid #2563EB" : "3px solid transparent",
+            color: activeTab === "photos" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+            borderBottom: activeTab === "photos" ? "2px solid var(--ads-blue)" : "2px solid transparent",
             cursor: "pointer",
-            transition: "all 0.15s ease",
+            transition: "all var(--ads-dur-fast) var(--ads-ease)",
           }}
         >
           Inspection Photos (4-Side & Gauges)
@@ -595,15 +637,16 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
           type="button"
           onClick={() => setActiveTab("telematics")}
           style={{
-            padding: "0.85rem 1.25rem",
+            padding: "var(--ads-s3) var(--ads-s5)",
             fontSize: "0.875rem",
-            fontWeight: 700,
+            fontWeight: 600,
+            letterSpacing: "-0.01em",
             border: "none",
             background: "none",
-            color: activeTab === "telematics" ? "#2563EB" : "#64748B",
-            borderBottom: activeTab === "telematics" ? "3px solid #2563EB" : "3px solid transparent",
+            color: activeTab === "telematics" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+            borderBottom: activeTab === "telematics" ? "2px solid var(--ads-blue)" : "2px solid transparent",
             cursor: "pointer",
-            transition: "all 0.15s ease",
+            transition: "all var(--ads-dur-fast) var(--ads-ease)",
           }}
         >
           Odometer & Fuel Details
@@ -613,17 +656,19 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
       {/* 4. TAB CONTENT */}
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "0 0 10px 10px",
-          border: "1px solid #E2E8F0",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-md)",
+          WebkitBackdropFilter: "var(--ads-blur-md)",
+          borderRadius: "0 0 var(--ads-r-lg) var(--ads-r-lg)",
+          border: "1px solid var(--ads-hairline)",
           borderTop: "none",
-          padding: "1.5rem",
-          boxShadow: "0 1px 3px rgba(15, 23, 42, 0.05)",
+          padding: "var(--ads-s6)",
+          boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
           minHeight: "360px",
         }}
       >
         {loading ? (
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "4rem", gap: "0.5rem", color: "#64748B" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "4rem", gap: "0.5rem", color: "var(--ads-ink-tertiary)" }}>
             <RefreshCw size={20} className="animate-spin text-blue-600" />
             <span>Loading inspection summary details...</span>
           </div>
@@ -634,29 +679,29 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div>
-                    <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+                    <h3 style={{ fontSize: "1.0625rem", fontWeight: 600, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.014em" }}>
                       Inspection Comparison Log
                     </h3>
-                    <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.2rem 0 0 0" }}>
+                    <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: "0.2rem 0 0 0" }}>
                       Direct pre-trip dispatch vs driver return checklist comparison for {selectedDate}
                     </p>
                   </div>
                 </div>
 
-                <div style={{ overflowX: "auto", border: "1px solid #E2E8F0", borderRadius: "8px" }}>
+                <div style={{ overflowX: "auto", border: "1px solid var(--ads-hairline)", borderRadius: "var(--ads-r-md)" }}>
                   <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
                     <thead>
-                      <tr style={{ backgroundColor: "#F8FAFC", borderBottom: "1px solid #E2E8F0" }}>
-                        <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                      <tr>
+                        <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                           INSPECTION ITEM / QUESTION
                         </th>
-                        <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                        <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                           PRE-TRIP DISPATCH
                         </th>
-                        <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569" }}>
+                        <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)" }}>
                           DRIVER INSPECTION
                         </th>
-                        <th style={{ padding: "0.75rem 1rem", fontSize: "0.75rem", fontWeight: 700, color: "#475569", textAlign: "right" }}>
+                        <th style={{ position: "sticky", top: 0, zIndex: 2, background: "rgba(255,255,255,0.80)", backdropFilter: "var(--ads-blur-sm)", WebkitBackdropFilter: "var(--ads-blur-sm)", padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ads-ink-tertiary)", borderBottom: "1px solid var(--ads-hairline)", textAlign: "right" }}>
                           VARIANCE / STATUS
                         </th>
                       </tr>
@@ -666,31 +711,38 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
                         <tr
                           key={item.id}
                           style={{
-                            borderBottom: "1px solid #F1F5F9",
-                            backgroundColor: item.isIssue ? "#FEF2F2" : "transparent",
+                            borderBottom: "1px solid var(--ads-hairline)",
+                            background: item.isIssue ? "var(--ads-red-tint)" : "transparent",
+                            transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = "rgba(0,113,227,0.045)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = item.isIssue ? "var(--ads-red-tint)" : "transparent";
                           }}
                         >
-                          <td style={{ padding: "0.85rem 1rem", fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                          <td style={{ padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                             {item.title}
                           </td>
-                          <td style={{ padding: "0.85rem 1rem", fontSize: "0.8125rem", color: "#475569" }}>
+                          <td style={{ padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.8125rem", color: "var(--ads-ink-secondary)" }}>
                             {item.pre}
                           </td>
-                          <td style={{ padding: "0.85rem 1rem", fontSize: "0.8125rem", fontWeight: item.isIssue ? 700 : 500, color: item.isIssue ? "#DC2626" : "#1E293B" }}>
+                          <td style={{ padding: "var(--ads-s3) var(--ads-s4)", fontSize: "0.8125rem", fontWeight: item.isIssue ? 700 : 500, color: item.isIssue ? "var(--ads-red)" : "var(--ads-ink)" }}>
                             {item.post}
                           </td>
-                          <td style={{ padding: "0.85rem 1rem", textAlign: "right" }}>
+                          <td style={{ padding: "var(--ads-s3) var(--ads-s4)", textAlign: "right" }}>
                             <span
                               style={{
                                 display: "inline-flex",
                                 alignItems: "center",
                                 gap: "0.25rem",
-                                fontSize: "0.75rem",
-                                fontWeight: 700,
-                                padding: "0.15rem 0.5rem",
-                                borderRadius: "4px",
-                                backgroundColor: item.isIssue ? "#FEE2E2" : "#ECFDF5",
-                                color: item.isIssue ? "#DC2626" : "#059669",
+                                fontSize: "0.6875rem",
+                                fontWeight: 600,
+                                padding: "3px 9px",
+                                borderRadius: "var(--ads-r-pill)",
+                                backgroundColor: item.isIssue ? "var(--ads-red-tint)" : "var(--ads-green-tint)",
+                                color: item.isIssue ? "var(--ads-red)" : "var(--ads-green)",
                               }}
                             >
                               {item.isIssue ? <AlertTriangle size={12} /> : <CheckCircle2 size={12} />}
@@ -710,10 +762,10 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div>
-                    <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+                    <h3 style={{ fontSize: "1.0625rem", fontWeight: 600, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.014em" }}>
                       Safety & Roadworthiness DVIC Checklist
                     </h3>
-                    <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.2rem 0 0 0" }}>
+                    <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: "0.2rem 0 0 0" }}>
                       Amazon standard vehicle inspection checklist questions and answers
                     </p>
                   </div>
@@ -724,31 +776,43 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
                     <div
                       key={q.id}
                       style={{
-                        padding: "0.85rem 1rem",
-                        borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
-                        backgroundColor: "#F8FAFC",
+                        padding: "var(--ads-s3) var(--ads-s4)",
+                        borderRadius: "var(--ads-r-md)",
+                        border: "1px solid var(--ads-hairline)",
+                        background: "var(--ads-material-thick)",
+                        backdropFilter: "var(--ads-blur-md)",
+                        WebkitBackdropFilter: "var(--ads-blur-md)",
+                        boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
                         display: "flex",
                         alignItems: "flex-start",
                         justifyContent: "space-between",
-                        gap: "0.75rem",
+                        gap: "var(--ads-s3)",
+                        transition: "transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "var(--ads-shadow-xs), var(--ads-bevel)";
                       }}
                     >
                       <div>
-                        <div style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>{q.title}</div>
-                        <div style={{ fontSize: "0.75rem", color: "#64748B", marginTop: "0.2rem" }}>{q.description}</div>
+                        <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--ads-ink)", letterSpacing: "-0.01em" }}>{q.title}</div>
+                        <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", marginTop: "0.2rem" }}>{q.description}</div>
                       </div>
                       <span
                         style={{
                           display: "inline-flex",
                           alignItems: "center",
                           gap: "0.25rem",
-                          fontSize: "0.75rem",
-                          fontWeight: 700,
-                          padding: "0.2rem 0.5rem",
-                          borderRadius: "4px",
-                          backgroundColor: "#ECFDF5",
-                          color: "#059669",
+                          fontSize: "0.6875rem",
+                          fontWeight: 600,
+                          padding: "3px 9px",
+                          borderRadius: "var(--ads-r-pill)",
+                          backgroundColor: "var(--ads-green-tint)",
+                          color: "var(--ads-green)",
                           flexShrink: 0,
                         }}
                       >
@@ -765,10 +829,10 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
             {activeTab === "photos" && (
               <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                 <div>
-                  <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+                  <h3 style={{ fontSize: "1.0625rem", fontWeight: 600, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.014em" }}>
                     4-Side Vehicle Inspection Photos
                   </h3>
-                  <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.2rem 0 0 0" }}>
+                  <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: "0.2rem 0 0 0" }}>
                     Physical walk-around photographs captured during Driver Return Check on {selectedDate}
                   </p>
                 </div>
@@ -781,18 +845,30 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
                   }}
                 >
                   {[
-                    { label: "Front Exterior & Grille", color: "#EFF6FF", iconColor: "#2563EB" },
-                    { label: "Driver Side Panels", color: "#F0FDF4", iconColor: "#16A34A" },
-                    { label: "Passenger Side Panels", color: "#FFFBEB", iconColor: "#D97706" },
-                    { label: "Rear Cargo Doors & Bumper", color: "#F5F3FF", iconColor: "#7C3AED" },
+                    { label: "Front Exterior & Grille", color: "var(--ads-blue-tint)", iconColor: "var(--ads-blue)" },
+                    { label: "Driver Side Panels", color: "var(--ads-green-tint)", iconColor: "var(--ads-green)" },
+                    { label: "Passenger Side Panels", color: "var(--ads-amber-tint)", iconColor: "var(--ads-amber)" },
+                    { label: "Rear Cargo Doors & Bumper", color: "var(--ads-purple-tint)", iconColor: "var(--ads-purple)" },
                   ].map((photo, i) => (
                     <div
                       key={i}
                       style={{
-                        borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
+                        borderRadius: "var(--ads-r-md)",
+                        border: "1px solid var(--ads-hairline)",
                         overflow: "hidden",
-                        backgroundColor: "#FFFFFF",
+                        background: "var(--ads-material-thick)",
+                        backdropFilter: "var(--ads-blur-md)",
+                        WebkitBackdropFilter: "var(--ads-blur-md)",
+                        boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+                        transition: "transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "var(--ads-shadow-sm), var(--ads-bevel)";
                       }}
                     >
                       <div
@@ -810,9 +886,9 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
                         <Camera size={36} />
                         <span style={{ fontSize: "0.75rem", fontWeight: 600 }}>Inspection Photo Verified</span>
                       </div>
-                      <div style={{ padding: "0.75rem", borderTop: "1px solid #E2E8F0" }}>
-                        <div style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B" }}>{photo.label}</div>
-                        <div style={{ fontSize: "0.6875rem", color: "#64748B", marginTop: "0.15rem" }}>
+                      <div style={{ padding: "var(--ads-s3)", borderTop: "1px solid var(--ads-hairline)" }}>
+                        <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)", letterSpacing: "-0.01em" }}>{photo.label}</div>
+                        <div style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)", marginTop: "0.15rem" }}>
                           Timestamp: {selectedDate} • Verified Clean
                         </div>
                       </div>
@@ -826,59 +902,59 @@ export const DriverInspectionSummaryView: FC<DriverInspectionSummaryViewProps> =
             {activeTab === "telematics" && (
               <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                 <div>
-                  <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+                  <h3 style={{ fontSize: "1.0625rem", fontWeight: 600, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.014em" }}>
                     Odometer & Fuel Telematics
                   </h3>
-                  <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.2rem 0 0 0" }}>
+                  <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: "0.2rem 0 0 0" }}>
                     Physical meter readings and gas tank levels recorded at start and end of dispatch
                   </p>
                 </div>
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
-                  <div style={{ padding: "1.25rem", borderRadius: "8px", border: "1px solid #E2E8F0", backgroundColor: "#F8FAFC" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#2563EB", fontWeight: 700, fontSize: "0.875rem" }}>
+                  <div style={{ padding: "var(--ads-s5)", borderRadius: "var(--ads-r-md)", border: "1px solid var(--ads-hairline)", backgroundColor: "var(--ads-canvas)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--ads-blue)", fontWeight: 700, fontSize: "0.875rem" }}>
                       <Gauge size={16} />
                       <span>Odometer Tracking</span>
                     </div>
                     <div style={{ marginTop: "1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8125rem" }}>
-                        <span style={{ color: "#64748B" }}>Pre-Trip Start:</span>
-                        <span style={{ fontWeight: 700, color: "#1E293B" }}>
+                        <span style={{ color: "var(--ads-ink-tertiary)" }}>Pre-Trip Start:</span>
+                        <span style={{ fontWeight: 700, color: "var(--ads-ink)" }}>
                           {typeof startMileage === "number" ? `${startMileage.toLocaleString()} mi` : startMileage}
                         </span>
                       </div>
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8125rem" }}>
-                        <span style={{ color: "#64748B" }}>Return Odometer:</span>
-                        <span style={{ fontWeight: 700, color: "#1E293B" }}>
+                        <span style={{ color: "var(--ads-ink-tertiary)" }}>Return Odometer:</span>
+                        <span style={{ fontWeight: 700, color: "var(--ads-ink)" }}>
                           {typeof returnMileage === "number" ? `${returnMileage.toLocaleString()} mi` : returnMileage}
                         </span>
                       </div>
-                      <div style={{ height: "1px", backgroundColor: "#E2E8F0", margin: "0.25rem 0" }} />
+                      <div style={{ height: "1px", backgroundColor: "var(--ads-hairline)", margin: "0.25rem 0" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem" }}>
-                        <span style={{ fontWeight: 600, color: "#1E293B" }}>Total Route Distance:</span>
-                        <span style={{ fontWeight: 800, color: "#059669" }}>{milesDriven} Miles</span>
+                        <span style={{ fontWeight: 600, color: "var(--ads-ink)" }}>Total Route Distance:</span>
+                        <span style={{ fontWeight: 800, color: "var(--ads-green)" }}>{milesDriven} Miles</span>
                       </div>
                     </div>
                   </div>
 
-                  <div style={{ padding: "1.25rem", borderRadius: "8px", border: "1px solid #E2E8F0", backgroundColor: "#F8FAFC" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#D97706", fontWeight: 700, fontSize: "0.875rem" }}>
+                  <div style={{ padding: "var(--ads-s5)", borderRadius: "var(--ads-r-md)", border: "1px solid var(--ads-hairline)", backgroundColor: "var(--ads-canvas)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--ads-amber)", fontWeight: 700, fontSize: "0.875rem" }}>
                       <Fuel size={16} />
                       <span>Gas Tank Level</span>
                     </div>
                     <div style={{ marginTop: "1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8125rem" }}>
-                        <span style={{ color: "#64748B" }}>Pre-Trip Gas Gauge:</span>
-                        <span style={{ fontWeight: 700, color: "#1E293B" }}>{formatGas(gasPre)}</span>
+                        <span style={{ color: "var(--ads-ink-tertiary)" }}>Pre-Trip Gas Gauge:</span>
+                        <span style={{ fontWeight: 700, color: "var(--ads-ink)" }}>{formatGas(gasPre)}</span>
                       </div>
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8125rem" }}>
-                        <span style={{ color: "#64748B" }}>Return Gas Gauge:</span>
-                        <span style={{ fontWeight: 700, color: "#1E293B" }}>{formatGas(gasPost)}</span>
+                        <span style={{ color: "var(--ads-ink-tertiary)" }}>Return Gas Gauge:</span>
+                        <span style={{ fontWeight: 700, color: "var(--ads-ink)" }}>{formatGas(gasPost)}</span>
                       </div>
-                      <div style={{ height: "1px", backgroundColor: "#E2E8F0", margin: "0.25rem 0" }} />
+                      <div style={{ height: "1px", backgroundColor: "var(--ads-hairline)", margin: "0.25rem 0" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem" }}>
-                        <span style={{ fontWeight: 600, color: "#1E293B" }}>Fuel Used on Shift:</span>
-                        <span style={{ fontWeight: 800, color: "#2563EB" }}>Approx. 1/4 Tank</span>
+                        <span style={{ fontWeight: 600, color: "var(--ads-ink)" }}>Fuel Used on Shift:</span>
+                        <span style={{ fontWeight: 800, color: "var(--ads-blue)" }}>Approx. 1/4 Tank</span>
                       </div>
                     </div>
                   </div>

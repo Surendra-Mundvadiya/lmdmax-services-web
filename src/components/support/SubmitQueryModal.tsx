@@ -127,8 +127,9 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(15, 23, 42, 0.5)",
-        backdropFilter: "blur(3px)",
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         padding: "1rem",
       }}
       onClick={handleModalClose}
@@ -137,12 +138,15 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
         style={{
           width: "100%",
           maxWidth: submitted ? "440px" : "560px",
-          backgroundColor: "#FFFFFF",
-          borderRadius: "12px",
-          boxShadow:
-            "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
+          border: "1px solid var(--ads-hairline)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
           overflow: "hidden",
-          transition: "all 0.2s ease",
+          transition:
+            "transform var(--ads-dur) var(--ads-ease), opacity var(--ads-dur) var(--ads-ease), box-shadow var(--ads-dur) var(--ads-ease)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -154,12 +158,12 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                 width: "56px",
                 height: "56px",
                 borderRadius: "50%",
-                backgroundColor: "#EFF6FF",
+                backgroundColor: "var(--ads-blue-tint)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 margin: "0 auto 1.25rem",
-                color: "#2563EB",
+                color: "var(--ads-blue)",
               }}
             >
               <CheckCircle size={32} />
@@ -169,7 +173,8 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
               style={{
                 fontSize: "1.25rem",
                 fontWeight: 700,
-                color: "#0F172A",
+                color: "var(--ads-ink)",
+                letterSpacing: "-0.015em",
                 marginBottom: "0.5rem",
               }}
             >
@@ -179,7 +184,7 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
             <p
               style={{
                 fontSize: "0.875rem",
-                color: "#475569",
+                color: "var(--ads-ink-secondary)",
                 lineHeight: 1.5,
                 marginBottom: "1rem",
               }}
@@ -189,12 +194,13 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
 
             <div
               style={{
-                backgroundColor: "#EFF6FF",
-                border: "1px solid #BFDBFE",
-                borderRadius: "8px",
+                backgroundColor: "var(--ads-blue-tint)",
+                border: "1px solid var(--ads-blue-tint-strong)",
+                borderRadius: "var(--ads-r-sm)",
                 padding: "0.75rem 1rem",
                 fontSize: "0.8125rem",
-                color: "#1E40AF",
+                lineHeight: 1.5,
+                color: "var(--ads-blue)",
                 marginBottom: "1.5rem",
                 textAlign: "left",
               }}
@@ -208,17 +214,29 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
               style={{
                 width: "100%",
                 padding: "0.625rem 1rem",
-                borderRadius: "8px",
+                borderRadius: "var(--ads-r-sm)",
                 border: "none",
-                backgroundColor: "#2563EB",
+                backgroundColor: "var(--ads-blue)",
                 color: "#FFFFFF",
                 fontSize: "0.875rem",
                 fontWeight: 650,
                 cursor: "pointer",
-                transition: "background-color 0.15s ease",
+                boxShadow: "var(--ads-shadow-xs)",
+                transition:
+                  "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "var(--ads-blue-hover)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+                e.currentTarget.style.boxShadow = "var(--ads-shadow-sm)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "var(--ads-blue)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+              }}
+              onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+              onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
             >
               Done
             </button>
@@ -230,7 +248,7 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
             <div
               style={{
                 padding: "1.25rem 1.5rem",
-                borderBottom: "1px solid #E2E8F0",
+                borderBottom: "1px solid var(--ads-hairline)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -241,7 +259,8 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                   margin: 0,
                   fontSize: "1.125rem",
                   fontWeight: 700,
-                  color: "#0F172A",
+                  letterSpacing: "-0.015em",
+                  color: "var(--ads-ink)",
                 }}
               >
                 How can we help you?
@@ -250,14 +269,30 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                 type="button"
                 onClick={handleModalClose}
                 style={{
-                  background: "none",
-                  border: "none",
-                  color: "#64748B",
+                  background: "transparent",
+                  border: "1px solid transparent",
+                  color: "var(--ads-ink-tertiary)",
                   cursor: "pointer",
-                  padding: "4px",
-                  borderRadius: "6px",
+                  padding: "6px",
+                  borderRadius: "var(--ads-r-xs)",
                   display: "flex",
+                  transition:
+                    "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--ads-canvas)";
+                  e.currentTarget.style.borderColor = "var(--ads-hairline)";
+                  e.currentTarget.style.color = "var(--ads-ink)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.borderColor = "transparent";
+                  e.currentTarget.style.color = "var(--ads-ink-tertiary)";
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+                onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                aria-label="Close dialog"
                 title="Close"
               >
                 <X size={18} />
@@ -273,10 +308,10 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                     alignItems: "center",
                     gap: "0.5rem",
                     padding: "0.75rem 1rem",
-                    borderRadius: "8px",
-                    backgroundColor: "#FEF2F2",
-                    border: "1px solid #FECACA",
-                    color: "#DC2626",
+                    borderRadius: "var(--ads-r-sm)",
+                    backgroundColor: "var(--ads-red-tint)",
+                    border: "1px solid var(--ads-red)",
+                    color: "var(--ads-red)",
                     fontSize: "0.8125rem",
                   }}
                 >
@@ -288,17 +323,19 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
               {/* Title Field */}
               <div>
                 <label
+                  htmlFor="support-query-title"
                   style={{
                     display: "block",
                     fontSize: "0.8125rem",
                     fontWeight: 650,
-                    color: "#334155",
+                    color: "var(--ads-ink-secondary)",
                     marginBottom: "0.35rem",
                   }}
                 >
-                  Title of your Query <span style={{ color: "#EF4444" }}>*</span>
+                  Title of your Query <span style={{ color: "var(--ads-red)" }}>*</span>
                 </label>
                 <input
+                  id="support-query-title"
                   type="text"
                   placeholder="e.g. Question regarding inspection checklist"
                   value={title}
@@ -309,18 +346,38 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                   style={{
                     width: "100%",
                     padding: "0.55rem 0.75rem",
-                    borderRadius: "6px",
-                    border: titleError ? "1px solid #EF4444" : "1px solid #CBD5E1",
+                    borderRadius: "var(--ads-r-xs)",
+                    border: titleError
+                      ? "1px solid var(--ads-red)"
+                      : "1px solid var(--ads-hairline-strong)",
+                    backgroundColor: "var(--ads-white)",
                     fontSize: "0.875rem",
-                    color: "#0F172A",
+                    color: "var(--ads-ink)",
                     outline: "none",
                     boxSizing: "border-box",
+                    transition:
+                      "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = "#2563EB")}
-                  onBlur={(e) => (e.target.style.borderColor = titleError ? "#EF4444" : "#CBD5E1")}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "var(--ads-blue)";
+                    e.target.style.boxShadow = "var(--ads-shadow-focus)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = titleError
+                      ? "var(--ads-red)"
+                      : "var(--ads-hairline-strong)";
+                    e.target.style.boxShadow = "none";
+                  }}
                 />
                 {titleError && (
-                  <span style={{ fontSize: "0.75rem", color: "#EF4444", marginTop: "0.25rem", display: "block" }}>
+                  <span
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "var(--ads-red)",
+                      marginTop: "0.25rem",
+                      display: "block",
+                    }}
+                  >
                     {titleError}
                   </span>
                 )}
@@ -329,17 +386,19 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
               {/* Description Field */}
               <div>
                 <label
+                  htmlFor="support-query-description"
                   style={{
                     display: "block",
                     fontSize: "0.8125rem",
                     fontWeight: 650,
-                    color: "#334155",
+                    color: "var(--ads-ink-secondary)",
                     marginBottom: "0.35rem",
                   }}
                 >
-                  Describe your Query / Issue <span style={{ color: "#EF4444" }}>*</span>
+                  Describe your Query / Issue <span style={{ color: "var(--ads-red)" }}>*</span>
                 </label>
                 <textarea
+                  id="support-query-description"
                   placeholder="Provide full details about the issue or question..."
                   rows={5}
                   value={description}
@@ -350,20 +409,41 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                   style={{
                     width: "100%",
                     padding: "0.55rem 0.75rem",
-                    borderRadius: "6px",
-                    border: descError ? "1px solid #EF4444" : "1px solid #CBD5E1",
+                    borderRadius: "var(--ads-r-xs)",
+                    border: descError
+                      ? "1px solid var(--ads-red)"
+                      : "1px solid var(--ads-hairline-strong)",
+                    backgroundColor: "var(--ads-white)",
                     fontSize: "0.875rem",
-                    color: "#0F172A",
+                    color: "var(--ads-ink)",
                     outline: "none",
                     resize: "vertical",
                     boxSizing: "border-box",
                     fontFamily: "inherit",
+                    lineHeight: 1.5,
+                    transition:
+                      "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = "#2563EB")}
-                  onBlur={(e) => (e.target.style.borderColor = descError ? "#EF4444" : "#CBD5E1")}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "var(--ads-blue)";
+                    e.target.style.boxShadow = "var(--ads-shadow-focus)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = descError
+                      ? "var(--ads-red)"
+                      : "var(--ads-hairline-strong)";
+                    e.target.style.boxShadow = "none";
+                  }}
                 />
                 {descError && (
-                  <span style={{ fontSize: "0.75rem", color: "#EF4444", marginTop: "0.25rem", display: "block" }}>
+                  <span
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "var(--ads-red)",
+                      marginTop: "0.25rem",
+                      display: "block",
+                    }}
+                  >
                     {descError}
                   </span>
                 )}
@@ -372,22 +452,41 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
               {/* Screenshot / Attachment Uploader */}
               <div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.4rem" }}>
-                  <span style={{ fontSize: "0.8125rem", fontWeight: 650, color: "#334155" }}>
+                  <span
+                    style={{
+                      fontSize: "0.8125rem",
+                      fontWeight: 650,
+                      color: "var(--ads-ink-secondary)",
+                    }}
+                  >
                     Attachments (Optional)
                   </span>
                   <label
+                    htmlFor="support-query-attachment"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "0.35rem",
                       fontSize: "0.75rem",
                       fontWeight: 600,
-                      color: "#2563EB",
+                      color: "var(--ads-blue)",
                       cursor: uploadingImage ? "not-allowed" : "pointer",
-                      padding: "0.25rem 0.5rem",
-                      borderRadius: "6px",
-                      border: "1px dashed #93C5FD",
-                      backgroundColor: "#EFF6FF",
+                      padding: "0.3rem 0.6rem",
+                      borderRadius: "var(--ads-r-xs)",
+                      border: "1px dashed var(--ads-blue-tint-strong)",
+                      backgroundColor: "var(--ads-blue-tint)",
+                      transition:
+                        "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!uploadingImage) {
+                        e.currentTarget.style.borderColor = "var(--ads-blue)";
+                        e.currentTarget.style.transform = "translateY(-1px)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "var(--ads-blue-tint-strong)";
+                      e.currentTarget.style.transform = "translateY(0)";
                     }}
                   >
                     {uploadingImage ? (
@@ -397,6 +496,7 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                     )}
                     <span>{uploadingImage ? "Uploading..." : "Add Screenshot"}</span>
                     <input
+                      id="support-query-attachment"
                       type="file"
                       accept="image/*"
                       style={{ display: "none" }}
@@ -416,10 +516,11 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                           position: "relative",
                           width: "64px",
                           height: "64px",
-                          borderRadius: "6px",
-                          border: "1px solid #CBD5E1",
+                          borderRadius: "var(--ads-r-xs)",
+                          border: "1px solid var(--ads-hairline)",
                           overflow: "hidden",
-                          backgroundColor: "#F8FAFC",
+                          backgroundColor: "var(--ads-canvas)",
+                          boxShadow: "var(--ads-shadow-xs)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
@@ -442,8 +543,8 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                             right: "2px",
                             width: "18px",
                             height: "18px",
-                            borderRadius: "50%",
-                            backgroundColor: "rgba(15, 23, 42, 0.75)",
+                            borderRadius: "var(--ads-r-pill)",
+                            backgroundColor: "rgba(0, 0, 0, 0.62)",
                             color: "#FFFFFF",
                             border: "none",
                             cursor: "pointer",
@@ -451,10 +552,23 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                             alignItems: "center",
                             justifyContent: "center",
                             padding: 0,
+                            transition:
+                              "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                           }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = "var(--ads-red)";
+                            e.currentTarget.style.transform = "scale(1.08)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.62)";
+                            e.currentTarget.style.transform = "scale(1)";
+                          }}
+                          onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                          onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
+                          aria-label={`Remove attachment ${idx + 1}`}
                           title="Remove attachment"
                         >
-                          <Trash2 size={10} />
+                          <Trash2 size={10} style={{ color: "#FFFFFF" }} />
                         </button>
                       </div>
                     ))}
@@ -467,12 +581,12 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
             <div
               style={{
                 padding: "1rem 1.5rem",
-                borderTop: "1px solid #E2E8F0",
+                borderTop: "1px solid var(--ads-hairline)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-end",
                 gap: "0.75rem",
-                backgroundColor: "#F8FAFC",
+                backgroundColor: "var(--ads-canvas)",
               }}
             >
               <button
@@ -481,13 +595,34 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                 disabled={submitting}
                 style={{
                   padding: "0.5rem 1rem",
-                  borderRadius: "6px",
-                  border: "1px solid #CBD5E1",
-                  backgroundColor: "#FFFFFF",
-                  color: "#475569",
+                  borderRadius: "var(--ads-r-xs)",
+                  border: "1px solid var(--ads-hairline-strong)",
+                  backgroundColor: "var(--ads-white)",
+                  color: "var(--ads-ink-secondary)",
                   fontSize: "0.8125rem",
                   fontWeight: 600,
                   cursor: submitting ? "not-allowed" : "pointer",
+                  opacity: submitting ? 0.6 : 1,
+                  transition:
+                    "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+                }}
+                onMouseEnter={(e) => {
+                  if (!submitting) {
+                    e.currentTarget.style.backgroundColor = "var(--ads-canvas)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--ads-white)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+                onMouseDown={(e) => {
+                  if (!submitting) e.currentTarget.style.transform = "scale(0.97)";
+                }}
+                onMouseUp={(e) => {
+                  if (!submitting) e.currentTarget.style.transform = "translateY(-1px)";
                 }}
               >
                 Cancel
@@ -500,24 +635,41 @@ export const SubmitQueryModal: FC<SubmitQueryModalProps> = ({
                   alignItems: "center",
                   gap: "0.4rem",
                   padding: "0.5rem 1.25rem",
-                  borderRadius: "6px",
+                  borderRadius: "var(--ads-r-xs)",
                   border: "none",
-                  backgroundColor: "#2563EB",
+                  backgroundColor: "var(--ads-blue)",
                   color: "#FFFFFF",
                   fontSize: "0.8125rem",
                   fontWeight: 650,
                   cursor: submitting ? "not-allowed" : "pointer",
-                  transition: "background-color 0.15s ease",
+                  opacity: submitting ? 0.75 : 1,
+                  boxShadow: "var(--ads-shadow-xs)",
+                  transition:
+                    "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
                 }}
                 onMouseEnter={(e) => {
-                  if (!submitting) e.currentTarget.style.backgroundColor = "#1D4ED8";
+                  if (!submitting) {
+                    e.currentTarget.style.backgroundColor = "var(--ads-blue-hover)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-sm)";
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  if (!submitting) e.currentTarget.style.backgroundColor = "#2563EB";
+                  if (!submitting) {
+                    e.currentTarget.style.backgroundColor = "var(--ads-blue)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-xs)";
+                  }
+                }}
+                onMouseDown={(e) => {
+                  if (!submitting) e.currentTarget.style.transform = "scale(0.97)";
+                }}
+                onMouseUp={(e) => {
+                  if (!submitting) e.currentTarget.style.transform = "translateY(-1px)";
                 }}
               >
-                {submitting && <Loader2 size={14} className="animate-spin" />}
-                <span>{submitting ? "Sending..." : "Send"}</span>
+                {submitting && <Loader2 size={14} className="animate-spin" style={{ color: "#FFFFFF" }} />}
+                <span style={{ color: "#FFFFFF" }}>{submitting ? "Sending..." : "Send"}</span>
               </button>
             </div>
           </form>

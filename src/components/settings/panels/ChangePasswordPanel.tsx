@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { KeyRound, Eye, EyeOff, Save, ShieldCheck, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, Save, ShieldCheck, AlertCircle } from "lucide-react";
 import AuthAPI from "../../../api/auth";
 
 interface ChangePasswordPanelProps {
@@ -72,22 +72,28 @@ export const ChangePasswordPanel: FC<ChangePasswordPanelProps> = ({ onNotificati
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <KeyRound size={20} className="text-blue-600" />
-            <span>Change Password</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Update your account password and enforce credentials security
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Update your account password and enforce credentials security
+        </p>
       </div>
 
       <form onSubmit={handleSubmit} className="settings-card max-w-xl">
         {errorMessage && (
-          <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 font-medium flex items-center gap-2">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--ads-s2)",
+              padding: "var(--ads-s3)",
+              fontSize: "0.75rem",
+              fontWeight: 600,
+              color: "var(--ads-red)",
+              background: "var(--ads-red-tint)",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-sm)",
+            }}
+          >
             <AlertCircle size={15} className="flex-shrink-0" />
             <span>{errorMessage}</span>
           </div>
@@ -95,7 +101,7 @@ export const ChangePasswordPanel: FC<ChangePasswordPanelProps> = ({ onNotificati
 
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <ShieldCheck size={17} className="text-blue-600" />
+            <ShieldCheck size={17} />
             <span>Security Credentials</span>
           </h3>
         </div>
@@ -127,11 +133,12 @@ export const ChangePasswordPanel: FC<ChangePasswordPanelProps> = ({ onNotificati
                 transform: "translateY(-50%)",
                 background: "none",
                 border: "none",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
                 padding: "0.2rem",
               }}
               title={showCurrent ? "Hide password" : "Show password"}
+              aria-label={showCurrent ? "Hide current password" : "Show current password"}
             >
               {showCurrent ? <EyeOff size={15} /> : <Eye size={15} />}
             </button>
@@ -162,11 +169,12 @@ export const ChangePasswordPanel: FC<ChangePasswordPanelProps> = ({ onNotificati
                 transform: "translateY(-50%)",
                 background: "none",
                 border: "none",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
                 padding: "0.2rem",
               }}
               title={showNew ? "Hide password" : "Show password"}
+              aria-label={showNew ? "Hide new password" : "Show new password"}
             >
               {showNew ? <EyeOff size={15} /> : <Eye size={15} />}
             </button>
@@ -197,11 +205,12 @@ export const ChangePasswordPanel: FC<ChangePasswordPanelProps> = ({ onNotificati
                 transform: "translateY(-50%)",
                 background: "none",
                 border: "none",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
                 padding: "0.2rem",
               }}
               title={showConfirm ? "Hide password" : "Show password"}
+              aria-label={showConfirm ? "Hide confirmed password" : "Show confirmed password"}
             >
               {showConfirm ? <EyeOff size={15} /> : <Eye size={15} />}
             </button>

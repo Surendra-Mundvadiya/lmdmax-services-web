@@ -4,6 +4,79 @@ import type { ProfileFormState, ProfileData } from "../../types/profile";
 import { validatePhoneNumber, formatPhoneNumber } from "../../utils/validators";
 import LoadingSpinner from "../common/LoadingSpinner";
 
+const sectionCardStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-material-thick)",
+  backdropFilter: "var(--ads-blur-md)",
+  WebkitBackdropFilter: "var(--ads-blur-md)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-lg)",
+  boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+};
+
+const sectionHeaderStyle: React.CSSProperties = {
+  borderBottom: "1px solid var(--ads-hairline)",
+};
+
+const sectionIconBoxStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-blue-tint)",
+  border: "1px solid transparent",
+  color: "var(--ads-blue)",
+  borderRadius: "var(--ads-r-sm)",
+};
+
+const sectionHeadingStyle: React.CSSProperties = {
+  color: "var(--ads-ink)",
+  letterSpacing: "-0.015em",
+};
+
+const fieldLabelStyle: React.CSSProperties = {
+  color: "var(--ads-ink-secondary)",
+};
+
+const readonlyCellStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-canvas)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-sm)",
+  color: "var(--ads-ink)",
+};
+
+const inputWrapStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-material-thick)",
+  borderRadius: "var(--ads-r-sm)",
+};
+
+const cellInputStyle: React.CSSProperties = {
+  background: "transparent",
+  border: "none",
+  boxShadow: "none",
+  color: "var(--ads-ink)",
+  borderRadius: 0,
+};
+
+const cellIconStyle: React.CSSProperties = {
+  color: "var(--ads-blue)",
+  flexShrink: 0,
+};
+
+const cellValueStyle: React.CSSProperties = {
+  color: "var(--ads-ink)",
+  letterSpacing: "-0.01em",
+};
+
+const pillBlueStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-blue-tint)",
+  color: "var(--ads-blue)",
+  border: "1px solid transparent",
+  borderRadius: "var(--ads-r-pill)",
+};
+
+const pillGoldStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-amber-tint)",
+  color: "var(--ads-amber)",
+  border: "1px solid transparent",
+  borderRadius: "var(--ads-r-pill)",
+};
+
 interface UserDetailsSectionProps {
   isEditing: boolean;
   profileData: ProfileData;
@@ -33,13 +106,15 @@ export const UserDetailsSection: FC<UserDetailsSectionProps> = ({
   const role = (profileData?.role || "owner").toUpperCase();
 
   return (
-    <section className="profile-section-card">
-      <div className="section-card-header flex-between">
+    <section className="profile-section-card" style={sectionCardStyle}>
+      <div className="section-card-header flex-between" style={sectionHeaderStyle}>
         <div className="section-header-title-wrap">
-          <div className="section-header-icon-box">
-            <User size={15} />
+          <div className="section-header-icon-box" style={sectionIconBoxStyle}>
+            <User size={15} style={{ color: "var(--ads-blue)" }} />
           </div>
-          <h2 className="section-card-heading">User Details</h2>
+          <h2 className="section-card-heading" style={sectionHeadingStyle}>
+            User Details
+          </h2>
         </div>
 
         <div className="section-header-actions">
@@ -94,30 +169,47 @@ export const UserDetailsSection: FC<UserDetailsSectionProps> = ({
       <div className="profile-fields-grid-3col">
         {/* Email Address */}
         <div className="profile-field-cell">
-          <label className="field-cell-label">Email Address</label>
-          <div className="field-cell-readonly">
-            <Mail className="cell-icon text-blue-600" size={14} />
-            <span className="cell-value-text">{email}</span>
-            <span className="pill-badge pill-blue">Primary</span>
+          <label className="field-cell-label" style={fieldLabelStyle}>
+            Email Address
+          </label>
+          <div className="field-cell-readonly" style={readonlyCellStyle}>
+            <Mail className="cell-icon text-blue-600" size={14} style={cellIconStyle} />
+            <span className="cell-value-text" style={cellValueStyle}>
+              {email}
+            </span>
+            <span className="pill-badge pill-blue" style={pillBlueStyle}>
+              Primary
+            </span>
           </div>
         </div>
 
         {/* Mobile Number */}
         <div className="profile-field-cell">
-          <label htmlFor="user_phone_input" className="field-cell-label">
-            Mobile Number {isEditing && <span className="text-red-500">*</span>}
+          <label
+            htmlFor="user_phone_input"
+            className="field-cell-label"
+            style={fieldLabelStyle}
+          >
+            Mobile Number{" "}
+            {isEditing && (
+              <span className="text-red-500" style={{ color: "var(--ads-red)" }}>
+                *
+              </span>
+            )}
           </label>
           {isEditing && formState ? (
             <div
               className={`field-cell-input-wrap ${
                 formState.phoneNumber.error ? "input-has-error" : ""
               }`}
+              style={inputWrapStyle}
             >
-              <Phone className="cell-icon text-blue-600" size={14} />
+              <Phone className="cell-icon text-blue-600" size={14} style={cellIconStyle} />
               <input
                 id="user_phone_input"
                 type="tel"
                 className="cell-text-input"
+                style={cellInputStyle}
                 placeholder="10-digit phone"
                 value={formState.phoneNumber.value}
                 maxLength={10}
@@ -130,25 +222,36 @@ export const UserDetailsSection: FC<UserDetailsSectionProps> = ({
               />
             </div>
           ) : (
-            <div className="field-cell-readonly">
-              <Phone className="cell-icon text-blue-600" size={14} />
-              <span className="cell-value-text">
+            <div className="field-cell-readonly" style={readonlyCellStyle}>
+              <Phone className="cell-icon text-blue-600" size={14} style={cellIconStyle} />
+              <span className="cell-value-text" style={cellValueStyle}>
                 {profileData.phone ? formatPhoneNumber(profileData.phone) : "Not provided"}
               </span>
             </div>
           )}
           {isEditing && formState?.phoneNumber.error && (
-            <span className="cell-error-feedback">{formState.phoneNumber.helperText}</span>
+            <span
+              className="cell-error-feedback"
+              style={{ color: "var(--ads-red)" }}
+            >
+              {formState.phoneNumber.helperText}
+            </span>
           )}
         </div>
 
         {/* Account Role */}
         <div className="profile-field-cell">
-          <label className="field-cell-label">Account Role</label>
-          <div className="field-cell-readonly">
-            <ShieldCheck className="cell-icon text-blue-600" size={14} />
-            <span className="cell-value-text">{role}</span>
-            <span className="pill-badge pill-gold">{role}</span>
+          <label className="field-cell-label" style={fieldLabelStyle}>
+            Account Role
+          </label>
+          <div className="field-cell-readonly" style={readonlyCellStyle}>
+            <ShieldCheck className="cell-icon text-blue-600" size={14} style={cellIconStyle} />
+            <span className="cell-value-text" style={cellValueStyle}>
+              {role}
+            </span>
+            <span className="pill-badge pill-gold" style={pillGoldStyle}>
+              {role}
+            </span>
           </div>
         </div>
       </div>

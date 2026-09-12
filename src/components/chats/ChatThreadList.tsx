@@ -81,14 +81,17 @@ export const ChatThreadList: FC<ChatThreadListProps> = ({
             <input
               type="text"
               className="chat-search-input"
+              aria-label="Search conversations"
               placeholder="Search conversations..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
             />
             {searchQuery && (
               <button
+                type="button"
                 className="chat-search-clear-btn"
                 onClick={() => onSearchChange("")}
+                aria-label="Clear search"
                 title="Clear search"
               >
                 <X size={14} />
@@ -140,16 +143,16 @@ export const ChatThreadList: FC<ChatThreadListProps> = ({
       {/* Threads List */}
       <div className="chat-thread-list">
         {loading ? (
-          <div style={{ padding: "2rem 1rem", textAlign: "center", color: "#64748B", fontSize: "0.85rem" }}>
+          <div style={{ padding: "2rem 1rem", textAlign: "center", color: "var(--ads-ink-tertiary)", fontSize: "0.8125rem" }}>
             Loading conversations...
           </div>
         ) : filteredThreads.length === 0 ? (
           <div className="chat-empty-threads">
-            <MessageSquare size={32} color="#94A3B8" />
-            <div style={{ fontWeight: 600, color: "#1E293B", fontSize: "0.875rem" }}>
+            <MessageSquare size={32} color="#86868B" />
+            <div style={{ fontWeight: 600, color: "var(--ads-ink)", fontSize: "0.875rem" }}>
               {searchQuery ? "No matching conversations" : "No conversation threads"}
             </div>
-            <div style={{ fontSize: "0.775rem", color: "#94A3B8" }}>
+            <div style={{ fontSize: "0.775rem", color: "var(--ads-ink-tertiary)" }}>
               {searchQuery
                 ? "Try searching with a different driver name or phone number."
                 : "Real-time messages will appear here once received or sent."}
@@ -187,7 +190,7 @@ export const ChatThreadList: FC<ChatThreadListProps> = ({
                   <div className="chat-thread-meta-row">
                     <span className="chat-thread-message-snippet">
                       {thread.attachments && thread.attachments.length > 0 && (
-                        <span style={{ display: "inline-flex", alignItems: "center", gap: "2px", marginRight: "4px", color: "#2563EB" }}>
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: "2px", marginRight: "4px", color: "var(--ads-blue)" }}>
                           <Paperclip size={11} />
                           [Attachment]
                         </span>
@@ -198,7 +201,7 @@ export const ChatThreadList: FC<ChatThreadListProps> = ({
                     <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
                       {thread.is_pinned && (
                         <span className="chat-pin-icon" title="Pinned conversation">
-                          <Pin size={12} fill="#F59E0B" />
+                          <Pin size={12} fill="#B25000" />
                         </span>
                       )}
                       {thread.unread_count > 0 && (

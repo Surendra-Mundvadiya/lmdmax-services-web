@@ -109,8 +109,8 @@ export const AdminPermissionsModal: FC<AdminPermissionsModalProps> = ({
   };
 
   return (
-    <div className="custom-modal-overlay">
-      <div className="custom-modal-dialog max-w-3xl">
+    <div className="custom-modal-overlay ads-admin-modal-overlay">
+      <div className="custom-modal-dialog max-w-3xl ads-admin-modal">
         {/* Modal Header */}
         <div className="custom-modal-header">
           <div className="flex items-center gap-2">

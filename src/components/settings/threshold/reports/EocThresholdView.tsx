@@ -136,31 +136,36 @@ export const EocThresholdView: FC<EocThresholdViewProps> = ({ onNotification }) 
           <div className="screen-nav-left" style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <button
               type="button"
-              className="back-btn"
               onClick={() => setIsTemplateModalOpen(false)}
               title="Back to Thresholds"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.5rem 0.85rem",
-                borderRadius: "8px",
-                border: "1px solid #E2E8F0",
-                backgroundColor: "#FFFFFF",
-                color: "#1E293B",
-                fontWeight: 600,
-                fontSize: "0.85rem",
-                cursor: "pointer",
-              }}
+              aria-label="Back to thresholds"
+              className="btn-outline-cancel"
+              style={{ gap: "var(--ads-s2)" }}
             >
               <ArrowLeft size={16} />
               <span>Back to Thresholds</span>
             </button>
             <div className="screen-heading">
-              <h1 className="screen-title" style={{ fontSize: "1.25rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+              <h1
+                className="screen-title"
+                style={{
+                  fontSize: "1.0625rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.014em",
+                  color: "var(--ads-ink)",
+                  margin: 0,
+                }}
+              >
                 Choose EOC Coaching Template
               </h1>
-              <p className="screen-subtitle" style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.2rem 0 0 0" }}>
+              <p
+                className="screen-subtitle"
+                style={{
+                  fontSize: "0.8125rem",
+                  color: "var(--ads-ink-tertiary)",
+                  margin: "var(--ads-s1) 0 0 0",
+                }}
+              >
                 Select the template message to dispatch to drivers below threshold
               </p>
             </div>
@@ -168,18 +173,8 @@ export const EocThresholdView: FC<EocThresholdViewProps> = ({ onNotification }) 
           <div className="screen-nav-right">
             <button
               type="button"
-              className="btn-secondary"
+              className="btn-outline-cancel"
               onClick={() => setIsTemplateModalOpen(false)}
-              style={{
-                padding: "0.55rem 1.1rem",
-                borderRadius: "8px",
-                border: "1px solid #CBD5E1",
-                backgroundColor: "#FFFFFF",
-                color: "#475569",
-                fontWeight: 600,
-                fontSize: "0.85rem",
-                cursor: "pointer",
-              }}
             >
               Cancel
             </button>
@@ -188,17 +183,18 @@ export const EocThresholdView: FC<EocThresholdViewProps> = ({ onNotification }) 
 
         {/* Template List Cards */}
         <div style={{ maxWidth: 840, margin: "0 auto", width: "100%" }}>
-          <div className="space-y-3">
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s3)" }}>
             {DEFAULT_EOC_TEMPLATES.map((tmpl, idx) => {
               const isSelected = eocField?.template === tmpl;
               return (
                 <div
                   key={idx}
-                  className={`p-4 rounded-xl border cursor-pointer transition ${
-                    isSelected
-                      ? "border-blue-500 bg-blue-50/50 shadow-xs"
-                      : "border-slate-200 hover:border-slate-300 bg-white"
-                  }`}
+                  className="ads-card ads-card--interactive"
+                  style={{
+                    padding: "var(--ads-s4)",
+                    borderColor: isSelected ? "var(--ads-blue)" : "var(--ads-hairline)",
+                    background: isSelected ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+                  }}
                   onClick={() => {
                     if (eocField) {
                       setEocField({ ...eocField, template: tmpl });
@@ -210,22 +206,39 @@ export const EocThresholdView: FC<EocThresholdViewProps> = ({ onNotification }) 
                     });
                   }}
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "var(--ads-s3)",
+                    }}
+                  >
                     <div>
-                      <span className="text-[11px] font-semibold text-slate-500 capitalize tracking-normal mb-1 block">
+                      <span className="ads-overline" style={{ display: "block", marginBottom: "var(--ads-s1)" }}>
                         Template option {idx + 1}
                       </span>
-                      <p className="text-xs text-slate-700 leading-relaxed font-medium">{tmpl}</p>
+                      <p
+                        style={{
+                          margin: 0,
+                          fontSize: "0.8125rem",
+                          lineHeight: 1.5,
+                          color: "var(--ads-ink-secondary)",
+                        }}
+                      >
+                        {tmpl}
+                      </p>
                     </div>
                     {isSelected ? (
-                      <span className="shrink-0 flex items-center gap-1 text-xs font-semibold text-blue-600 bg-blue-100/70 px-2.5 py-1 rounded-full">
+                      <span className="ads-badge ads-badge--blue" style={{ flexShrink: 0 }}>
                         <Check size={14} />
                         Active
                       </span>
                     ) : (
                       <button
                         type="button"
-                        className="shrink-0 text-xs font-semibold text-blue-600 hover:text-blue-700 px-3 py-1 rounded-lg border border-blue-200 hover:bg-blue-50 transition"
+                        className="ads-btn ads-btn--ghost ads-btn--sm"
+                        style={{ flexShrink: 0 }}
                       >
                         Select
                       </button>
@@ -245,7 +258,10 @@ export const EocThresholdView: FC<EocThresholdViewProps> = ({ onNotification }) 
       {/* Header */}
       <div className="threshold-view-header">
         <div>
-          <h3 className="threshold-view-title flex items-center gap-2">
+          <h3
+            className="threshold-view-title"
+            style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}
+          >
             <span>Set Threshold for Engine Off Compliance (EOC)</span>
             <span className="badge-custom blue">Live API</span>
           </h3>
@@ -282,29 +298,52 @@ export const EocThresholdView: FC<EocThresholdViewProps> = ({ onNotification }) 
 
       {/* Main Single Threshold Row */}
       <div className="threshold-standalone-card">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold text-slate-800">
-              Engine Off Compliance Cutoff:
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "var(--ads-s4)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
+            <span
+              style={{
+                fontSize: "0.875rem",
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+                color: "var(--ads-ink)",
+              }}
+            >
+              Engine Off Compliance Cutoff
             </span>
-            <div className="flex items-center gap-1.5">
-              <span className="text-base font-bold text-slate-500">&lt;</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+              <span style={{ fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink-tertiary)" }}>
+                &lt;
+              </span>
               <input
                 type="number"
                 min="0"
                 max="100"
                 step="1"
-                className="w-20 p-2 text-center text-sm font-bold border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="threshold-input single"
+                style={{ width: "5rem", maxWidth: "5rem", textAlign: "center", paddingLeft: 0 }}
+                aria-label="Engine off compliance cutoff percentage"
                 value={eocField?.values?.[0]?.value ?? 95}
                 disabled={!eocField?.enable || isSaving}
                 onChange={(e) => handlePercentageChange(e.target.value)}
               />
-              <span className="text-base font-bold text-slate-600">%</span>
+              <span style={{ fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink-secondary)" }}>
+                %
+              </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <span className="text-xs text-slate-500">
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+            <span
+              className={`ads-badge ${eocField?.enable ? "ads-badge--green" : "ads-badge--neutral"}`}
+            >
               {eocField?.enable ? "Active" : "Disabled"}
             </span>
             <label className="custom-blue-switch" title="Toggle EOC threshold rule">
@@ -321,10 +360,21 @@ export const EocThresholdView: FC<EocThresholdViewProps> = ({ onNotification }) 
 
       {/* Template Notification Box */}
       <div className="threshold-template-card">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-3">
-          <div className="flex items-start gap-2">
-            <Info size={16} className="text-blue-600 shrink-0 mt-0.5" />
-            <span className="text-xs text-blue-900 leading-relaxed">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "var(--ads-s3)",
+            marginBottom: "var(--ads-s3)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--ads-s2)" }}>
+            <Info size={16} style={{ color: "var(--ads-blue)", flexShrink: 0, marginTop: "2px" }} />
+            <span
+              style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "var(--ads-ink-secondary)" }}
+            >
               You can send bulk automated coaching notifications to DAs who fall below the {eocField?.values?.[0]?.value ?? 95}% threshold.
             </span>
           </div>
@@ -341,14 +391,27 @@ export const EocThresholdView: FC<EocThresholdViewProps> = ({ onNotification }) 
           </button>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-lg p-3.5">
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs font-semibold text-slate-500 capitalize tracking-normal">
-              Selected notification template
-            </span>
+        <div
+          style={{
+            padding: "var(--ads-s3) var(--ads-s4)",
+            background: "var(--ads-white)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-sm)",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "var(--ads-s3)",
+              marginBottom: "var(--ads-s2)",
+            }}
+          >
+            <span className="ads-overline">Selected notification template</span>
             <button
               type="button"
-              className="text-xs text-blue-600 hover:text-blue-700 flex items-center gap-1 font-medium"
+              className="ads-btn ads-btn--ghost ads-btn--sm"
               onClick={() => {
                 if (eocField) {
                   setEocField({
@@ -363,7 +426,14 @@ export const EocThresholdView: FC<EocThresholdViewProps> = ({ onNotification }) 
               <span>Reset to Default</span>
             </button>
           </div>
-          <p className="text-xs text-slate-700 leading-relaxed">
+          <p
+            style={{
+              margin: 0,
+              fontSize: "0.8125rem",
+              lineHeight: 1.5,
+              color: "var(--ads-ink-secondary)",
+            }}
+          >
             {eocField?.template || DEFAULT_EOC_TEMPLATES[0]}
           </p>
         </div>

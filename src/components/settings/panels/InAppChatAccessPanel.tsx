@@ -39,25 +39,17 @@ export const InAppChatAccessPanel: FC<InAppChatAccessPanelProps> = ({ onNotifica
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <MessageSquare size={20} className="text-blue-600" />
-            <span>In-App Chat Access</span>
-            <span className="badge-custom blue">Communications</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Manage driver-to-dispatch messaging channels, photo attachments, read receipts, and broadcast channels
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Manage driver-to-dispatch messaging channels, photo attachments, read receipts, and broadcast channels
+        </p>
       </div>
 
       {/* 1. Core Chat Permissions */}
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <MessageSquare size={17} className="text-blue-600" />
+            <MessageSquare size={17} />
             <span>In-App Driver Messaging & Dispatch Chat</span>
           </h3>
         </div>
@@ -65,7 +57,7 @@ export const InAppChatAccessPanel: FC<InAppChatAccessPanelProps> = ({ onNotifica
           Direct messaging between desk dispatchers and active on-road drivers through the mobile app.
         </p>
 
-        <div className="flex flex-col gap-2.5">
+        <div className="settings-stack">
           <div className="settings-toggle-row">
             <div className="settings-toggle-info">
               <span className="settings-toggle-title">Enable In-App Driver Communication</span>
@@ -149,7 +141,7 @@ export const InAppChatAccessPanel: FC<InAppChatAccessPanelProps> = ({ onNotifica
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Radio size={17} className="text-blue-600" />
+            <Radio size={17} />
             <span>Broadcast & Message Channels</span>
           </h3>
         </div>
@@ -157,7 +149,7 @@ export const InAppChatAccessPanel: FC<InAppChatAccessPanelProps> = ({ onNotifica
           Organize broadcast channels for all active drivers assigned to the delivery station.
         </p>
 
-        <div className="flex flex-col gap-2.5">
+        <div className="settings-stack">
           <div className="settings-toggle-row">
             <div className="settings-toggle-info">
               <span className="settings-toggle-title">Station Announcements Channel</span>

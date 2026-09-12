@@ -7,16 +7,16 @@ export type LegendType = "scorecard" | "lmd" | "scorecard_report" | "lmd_report"
 
 const baseLegends = {
   scorecard: [
-    { value: "Poor", color: "#F87171" },
-    { value: "No Data / Neutral", color: "#FBBF24" },
-    { value: "Good", color: "#34D399" },
+    { value: "Poor", color: "var(--ads-red)" },
+    { value: "No Data / Neutral", color: "var(--ads-amber)" },
+    { value: "Good", color: "var(--ads-green)" },
   ],
   lmd: [
-    { value: "Platinum", color: "#005C87" },
-    { value: "Gold", color: "#8A6800" },
-    { value: "Silver", color: "#5F6E7A" },
-    { value: "Bronze", color: "#AE4500" },
-    { value: "No Data", color: "#94A3B8" },
+    { value: "Platinum", color: "var(--ads-blue)" },
+    { value: "Gold", color: "var(--ads-amber)" },
+    { value: "Silver", color: "var(--ads-ink-tertiary)" },
+    { value: "Bronze", color: "var(--ads-red)" },
+    { value: "No Data", color: "var(--ads-ink-quaternary)" },
   ],
 } as const;
 
@@ -27,9 +27,9 @@ export const getColorLegend = (type: LegendType): readonly LegendItem[] => {
     case "lmd":
       return baseLegends.lmd;
     case "scorecard_report":
-      return [...baseLegends.scorecard, { value: "Non-color-coded data", color: "#334155" }];
+      return [...baseLegends.scorecard, { value: "Non-color-coded data", color: "var(--ads-ink-secondary)" }];
     case "lmd_report":
-      return [...baseLegends.lmd, { value: "Non-color-coded data", color: "#334155" }];
+      return [...baseLegends.lmd, { value: "Non-color-coded data", color: "var(--ads-ink-secondary)" }];
     default:
       return baseLegends.scorecard;
   }

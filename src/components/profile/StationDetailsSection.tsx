@@ -12,6 +12,60 @@ import type { CompanyAccess } from "../../types/profile";
 import AddStationModal from "./AddStationModal";
 import AuthAPI from "../../api/auth";
 
+const sectionCardStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-material-thick)",
+  backdropFilter: "var(--ads-blur-md)",
+  WebkitBackdropFilter: "var(--ads-blur-md)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-lg)",
+  boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+};
+
+const sectionHeaderStyle: React.CSSProperties = {
+  borderBottom: "1px solid var(--ads-hairline)",
+};
+
+const sectionIconBoxStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-blue-tint)",
+  border: "1px solid transparent",
+  color: "var(--ads-blue)",
+  borderRadius: "var(--ads-r-sm)",
+};
+
+const sectionHeadingStyle: React.CSSProperties = {
+  color: "var(--ads-ink)",
+  letterSpacing: "-0.015em",
+};
+
+const stationCodePillStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-blue-tint)",
+  border: "1px solid transparent",
+  color: "var(--ads-blue)",
+  borderRadius: "var(--ads-r-xs)",
+  letterSpacing: "-0.01em",
+};
+
+const pillBlueStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-blue-tint)",
+  color: "var(--ads-blue)",
+  border: "1px solid transparent",
+  borderRadius: "var(--ads-r-pill)",
+};
+
+const pillGoldStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-amber-tint)",
+  color: "var(--ads-amber)",
+  border: "1px solid transparent",
+  borderRadius: "var(--ads-r-pill)",
+};
+
+const pillSlateStyle: React.CSSProperties = {
+  backgroundColor: "var(--ads-canvas)",
+  color: "var(--ads-ink-tertiary)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-pill)",
+};
+
 interface StationDetailsSectionProps {
   isEditing: boolean;
   isOwner: boolean;
@@ -127,13 +181,15 @@ export const StationDetailsSection: FC<StationDetailsSectionProps> = ({
   };
 
   return (
-    <section className="profile-section-card">
-      <div className="section-card-header flex-between">
+    <section className="profile-section-card" style={sectionCardStyle}>
+      <div className="section-card-header flex-between" style={sectionHeaderStyle}>
         <div className="section-header-title-wrap">
-          <div className="section-header-icon-box">
-            <Layers size={15} />
+          <div className="section-header-icon-box" style={sectionIconBoxStyle}>
+            <Layers size={15} style={{ color: "var(--ads-blue)" }} />
           </div>
-          <h2 className="section-card-heading">Station Access</h2>
+          <h2 className="section-card-heading" style={sectionHeadingStyle}>
+            Station Access
+          </h2>
         </div>
 
         {isOwner && (
@@ -163,29 +219,55 @@ export const StationDetailsSection: FC<StationDetailsSectionProps> = ({
             <div
               key={station.company_id || station.station_code || index}
               className={`station-cell-card ${isActive ? "card-is-active" : ""}`}
+              style={{
+                backgroundColor: isActive
+                  ? "var(--ads-blue-tint)"
+                  : "var(--ads-canvas)",
+                border: isActive
+                  ? "1.5px solid var(--ads-blue)"
+                  : "1.5px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-md)",
+                boxShadow: "var(--ads-shadow-xs)",
+                transition:
+                  "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+              }}
             >
               <div className="station-cell-left">
-                <div className="station-code-pill">
-                  <Building2 size={14} />
-                  <span>{station.station_code || `Station ${index + 1}`}</span>
+                <div className="station-code-pill" style={stationCodePillStyle}>
+                  <Building2 size={14} style={{ color: "var(--ads-blue)" }} />
+                  <span style={{ color: "var(--ads-blue)" }}>
+                    {station.station_code || `Station ${index + 1}`}
+                  </span>
                 </div>
 
                 <div className="station-location-details">
-                  <span className="station-address-line">
-                    <MapPin size={12} className="text-blue-600" />{" "}
+                  <span
+                    className="station-address-line"
+                    style={{ color: "var(--ads-ink-secondary)" }}
+                  >
+                    <MapPin
+                      size={12}
+                      className="text-blue-600"
+                      style={{ color: "var(--ads-blue)", flexShrink: 0 }}
+                    />{" "}
                     {station.address || "—"}
                   </span>
                   {station.zipcode && (
-                    <span className="station-zip-line">ZIP: {station.zipcode}</span>
+                    <span
+                      className="station-zip-line"
+                      style={{ color: "var(--ads-ink-tertiary)" }}
+                    >
+                      ZIP: {station.zipcode}
+                    </span>
                   )}
                 </div>
               </div>
 
               <div className="station-cell-right">
                 {isPending ? (
-                  <span className="pill-badge pill-gold">
-                    <Clock size={11} />
-                    <span>Pending</span>
+                  <span className="pill-badge pill-gold" style={pillGoldStyle}>
+                    <Clock size={11} style={{ color: "var(--ads-amber)" }} />
+                    <span style={{ color: "var(--ads-amber)" }}>Pending</span>
                   </span>
                 ) : isEditing && isOwner ? (
                   <div className="station-toggle-wrapper">
@@ -193,12 +275,19 @@ export const StationDetailsSection: FC<StationDetailsSectionProps> = ({
                       className={`pill-badge ${
                         isActive ? "pill-blue" : "pill-slate"
                       }`}
+                      style={isActive ? pillBlueStyle : pillSlateStyle}
                     >
                       {isActive ? "Active" : "Inactive"}
                     </span>
-                    <label className="custom-blue-switch">
+                    <label
+                      className="custom-blue-switch"
+                      title={`Toggle station ${station.station_code || ""}`}
+                    >
                       <input
                         type="checkbox"
+                        aria-label={`Toggle station ${
+                          station.station_code || index + 1
+                        } active`}
                         checked={isActive}
                         disabled={
                           isUpdatingStatus ===
@@ -206,7 +295,17 @@ export const StationDetailsSection: FC<StationDetailsSectionProps> = ({
                         }
                         onChange={() => handleToggleStatus(station, isActive)}
                       />
-                      <span className="switch-slider" />
+                      <span
+                        className="switch-slider"
+                        style={{
+                          backgroundColor: isActive
+                            ? "var(--ads-blue)"
+                            : "var(--ads-hairline-strong)",
+                          borderRadius: "var(--ads-r-pill)",
+                          transition:
+                            "background-color var(--ads-dur-fast) var(--ads-ease)",
+                        }}
+                      />
                     </label>
                   </div>
                 ) : (
@@ -214,9 +313,20 @@ export const StationDetailsSection: FC<StationDetailsSectionProps> = ({
                     className={`pill-badge ${
                       isActive ? "pill-blue" : "pill-slate"
                     }`}
+                    style={isActive ? pillBlueStyle : pillSlateStyle}
                   >
-                    {isActive ? <CheckCircle size={11} /> : null}
-                    <span>{isActive ? "Active" : "Inactive"}</span>
+                    {isActive ? (
+                      <CheckCircle size={11} style={{ color: "var(--ads-blue)" }} />
+                    ) : null}
+                    <span
+                      style={{
+                        color: isActive
+                          ? "var(--ads-blue)"
+                          : "var(--ads-ink-tertiary)",
+                      }}
+                    >
+                      {isActive ? "Active" : "Inactive"}
+                    </span>
                   </span>
                 )}
               </div>
@@ -225,9 +335,21 @@ export const StationDetailsSection: FC<StationDetailsSectionProps> = ({
         })}
 
         {companyAccess.length === 0 && (
-          <div className="empty-station-notice">
-            <AlertCircle size={16} className="text-blue-600" />
-            <span>
+          <div
+            className="empty-station-notice"
+            style={{
+              backgroundColor: "var(--ads-blue-tint)",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-md)",
+              color: "var(--ads-ink-secondary)",
+            }}
+          >
+            <AlertCircle
+              size={16}
+              className="text-blue-600"
+              style={{ color: "var(--ads-blue)", flexShrink: 0 }}
+            />
+            <span style={{ color: "var(--ads-ink-secondary)" }}>
               No delivery stations assigned. Click "Add Station" to submit a request.
             </span>
           </div>

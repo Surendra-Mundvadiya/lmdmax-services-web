@@ -318,6 +318,8 @@ export const RescueManagementView: FC = () => {
             <button
               type="button"
               onClick={() => setSuccessToast(null)}
+              aria-label="Dismiss message"
+              title="Dismiss"
               style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}
             >
               <X size={14} />
@@ -334,6 +336,8 @@ export const RescueManagementView: FC = () => {
             <button
               type="button"
               onClick={() => setError(null)}
+              aria-label="Dismiss error"
+              title="Dismiss"
               style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}
             >
               <X size={14} />
@@ -359,6 +363,8 @@ export const RescueManagementView: FC = () => {
                   type="button"
                   onClick={() => setSearchQuery("")}
                   className="rescue-search-clear"
+                  aria-label="Clear search"
+                  title="Clear search"
                 >
                   <X size={12} />
                 </button>
@@ -372,6 +378,7 @@ export const RescueManagementView: FC = () => {
               disabled={isLoading}
               className="rescue-tool-btn"
               title="Refresh Rescues from Live Microservice"
+              aria-label="Refresh Rescues from Live Microservice"
             >
               <RefreshCw size={14} className={isLoading ? "animate-spin" : ""} />
             </button>
@@ -411,7 +418,7 @@ export const RescueManagementView: FC = () => {
         {pendingRescues.length > 0 && (
           <div className="rescue-pending-banner">
             <div className="rescue-pending-text">
-              <AlertCircle size={16} style={{ color: "#2563EB" }} />
+              <AlertCircle size={16} style={{ color: "var(--ads-blue)" }} />
               <span>
                 <strong>{pendingRescues.length}</strong> new rescue sweep{pendingRescues.length > 1 ? "s" : ""} pending — review details and click save
               </span>
@@ -430,7 +437,7 @@ export const RescueManagementView: FC = () => {
                 type="button"
                 onClick={handleAddPendingRescue}
                 disabled={isSavingPending}
-                className="callout-btn-secondary"
+                className="rescue-btn-secondary"
               >
                 <Plus size={14} />
                 <span>+ Add Another Rescue</span>
@@ -454,7 +461,7 @@ export const RescueManagementView: FC = () => {
         <div className="rescue-table-container">
           {isLoading ? (
             <div className="rescue-empty-state">
-              <RefreshCw size={26} className="animate-spin" style={{ color: "#2563EB" }} />
+              <RefreshCw size={26} className="animate-spin" style={{ color: "var(--ads-blue)" }} />
               <h3 className="rescue-empty-title">Loading Rescue Records...</h3>
               <p className="rescue-empty-desc">
                 Fetching dynamic delivery sweeps and rescue coordination logs for station {activeStationCode}.
@@ -598,6 +605,7 @@ export const RescueManagementView: FC = () => {
                             type="button"
                             onClick={() => handleRemovePendingRescue(pIdx)}
                             title="Remove Pending Rescue"
+                            aria-label="Remove Pending Rescue"
                             className="rescue-action-btn"
                           >
                             <Trash2 size={15} />
@@ -786,6 +794,7 @@ export const RescueManagementView: FC = () => {
                               type="button"
                               onClick={() => setEditingRescue(item)}
                               title="Edit Rescue Record"
+                              aria-label="Edit Rescue Record"
                               className="rescue-action-btn edit"
                             >
                               <Edit2 size={14} />
@@ -794,6 +803,7 @@ export const RescueManagementView: FC = () => {
                               type="button"
                               onClick={() => setDeleteConfirmItem(item)}
                               title="Delete Rescue Record"
+                              aria-label="Delete Rescue Record"
                               className="rescue-action-btn"
                             >
                               <Trash2 size={15} />
@@ -839,15 +849,15 @@ export const RescueManagementView: FC = () => {
               <p
                 style={{
                   fontSize: "0.8125rem",
-                  color: "#64748B",
-                  marginTop: "0.5rem",
-                  lineHeight: 1.4,
+                  color: "var(--ads-ink-tertiary)",
+                  marginTop: "var(--ads-s2)",
+                  lineHeight: 1.5,
                   textAlign: "center",
                 }}
               >
                 Are you sure you want to remove the rescue sweep record between{" "}
-                <strong style={{ color: "#0F172A" }}>{deleteConfirmItem.rescuer_name}</strong> and{" "}
-                <strong style={{ color: "#0F172A" }}>{deleteConfirmItem.caller_name}</strong> on{" "}
+                <strong style={{ color: "var(--ads-ink)" }}>{deleteConfirmItem.rescuer_name}</strong> and{" "}
+                <strong style={{ color: "var(--ads-ink)" }}>{deleteConfirmItem.caller_name}</strong> on{" "}
                 {selectedDate}?
               </p>
             </div>

@@ -18,6 +18,7 @@ import DriverExpandedRow from "./DriverExpandedRow";
 import DeleteDriverModal from "./DeleteDriverModal";
 import { formatDriverPhone } from "../../../utils/driverValidators";
 import { getAvatarColor, getInitials } from "../../../utils/avatarUtils";
+import "./drivers.css";
 
 type SortField = "name" | "phone" | "email" | "transporter_id" | "status";
 
@@ -77,14 +78,14 @@ export const DriverTable: FC<DriverTableProps> = ({
       return (
         <ArrowUpDown
           size={12}
-          className="text-slate-400 opacity-60 group-hover:opacity-100 transition-opacity flex-shrink-0"
+          style={{ color: "var(--ads-ink-quaternary)", flexShrink: 0 }}
         />
       );
     }
     return sortOrder === "asc" ? (
-      <ArrowUp size={12} className="text-blue-600 font-bold flex-shrink-0" />
+      <ArrowUp size={12} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
     ) : (
-      <ArrowDown size={12} className="text-blue-600 font-bold flex-shrink-0" />
+      <ArrowDown size={12} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
     );
   };
 
@@ -173,7 +174,7 @@ export const DriverTable: FC<DriverTableProps> = ({
     return (
       <div className="driver-table-empty-state">
         <div className="empty-state-icon-box">
-          <AlertCircle size={28} className="text-blue-500" />
+          <AlertCircle size={26} />
         </div>
         <h4 className="empty-state-heading">No Drivers Found</h4>
         <p className="empty-state-desc">
@@ -195,6 +196,7 @@ export const DriverTable: FC<DriverTableProps> = ({
                 checked={isAllSelected}
                 onChange={onSelectAll}
                 title="Select all visible drivers"
+                aria-label="Select all visible drivers"
               />
             </th>
             <th className="table-col-expand" />
@@ -207,7 +209,7 @@ export const DriverTable: FC<DriverTableProps> = ({
                   : "Click to sort by Driver Name"
               }
             >
-              <div className="flex items-center gap-1.5">
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <span>Driver Name</span>
                 {renderSortIcon("name")}
               </div>
@@ -221,7 +223,7 @@ export const DriverTable: FC<DriverTableProps> = ({
                   : "Click to sort by Phone Number"
               }
             >
-              <div className="flex items-center gap-1.5">
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <span>Phone Number</span>
                 {renderSortIcon("phone")}
               </div>
@@ -235,7 +237,7 @@ export const DriverTable: FC<DriverTableProps> = ({
                   : "Click to sort by Email Address"
               }
             >
-              <div className="flex items-center gap-1.5">
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <span>Email Address</span>
                 {renderSortIcon("email")}
               </div>
@@ -249,7 +251,7 @@ export const DriverTable: FC<DriverTableProps> = ({
                   : "Click to sort by Transporter ID"
               }
             >
-              <div className="flex items-center gap-1.5">
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <span>Transporter ID</span>
                 {renderSortIcon("transporter_id")}
               </div>
@@ -263,7 +265,7 @@ export const DriverTable: FC<DriverTableProps> = ({
                   : "Click to sort by Status"
               }
             >
-              <div className="flex items-center justify-center gap-1.5">
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px" }}>
                 <span>Status</span>
                 {renderSortIcon("status")}
               </div>
@@ -291,6 +293,7 @@ export const DriverTable: FC<DriverTableProps> = ({
                       className="custom-table-checkbox"
                       checked={isSelected}
                       onChange={() => onSelectDriver(driver.id)}
+                      aria-label={`Select ${driver.name}`}
                     />
                   </td>
 
@@ -301,6 +304,8 @@ export const DriverTable: FC<DriverTableProps> = ({
                       className="table-expand-btn"
                       onClick={() => toggleExpand(driver.id)}
                       title={isExpanded ? "Collapse details" : "Expand driver details"}
+                      aria-label={isExpanded ? `Collapse details for ${driver.name}` : `Expand details for ${driver.name}`}
+                      aria-expanded={isExpanded}
                     >
                       {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                     </button>
@@ -424,7 +429,7 @@ export const DriverTable: FC<DriverTableProps> = ({
                 if (onViewProfile) onViewProfile(d);
               }}
             >
-              <User size={15} className="driver-kebab-icon text-blue-600" />
+              <User size={15} className="driver-kebab-icon" />
               <span>Driver Details</span>
             </button>
 
@@ -440,7 +445,7 @@ export const DriverTable: FC<DriverTableProps> = ({
                 onEditDriver(d);
               }}
             >
-              <Edit2 size={15} className="driver-kebab-icon text-slate-600" />
+              <Edit2 size={15} className="driver-kebab-icon" />
               <span>Edit Driver</span>
             </button>
 
@@ -458,8 +463,8 @@ export const DriverTable: FC<DriverTableProps> = ({
                 setDeleteModalDriver(d);
               }}
             >
-              <Trash2 size={15} className="driver-kebab-icon text-red-600" />
-              <span className="font-semibold text-red-600">Delete Driver</span>
+              <Trash2 size={15} className="driver-kebab-icon" />
+              <span>Delete Driver</span>
             </button>
           </div>,
           document.body

@@ -6,7 +6,7 @@ export const ReportIcon: FC<{ id: string; active?: boolean; size?: string; color
   size = "1rem",
   color,
 }) => {
-  const strokeOrFill = color || (active ? "#2563EB" : "#64748B");
+  const strokeOrFill = color || (active ? "var(--ads-blue)" : "var(--ads-ink-tertiary)");
 
   switch (id) {
     case "all_alert_report":
@@ -222,8 +222,8 @@ export const ReportIcon: FC<{ id: string; active?: boolean; size?: string; color
             stroke={strokeOrFill}
             strokeWidth="1.2"
           />
-          <circle cx="4" cy="12.5" r="1.5" stroke={strokeOrFill} strokeWidth="1.2" fill="white" />
-          <circle cx="12.5" cy="12.5" r="1.5" stroke={strokeOrFill} strokeWidth="1.2" fill="white" />
+          <circle cx="4" cy="12.5" r="1.5" stroke={strokeOrFill} strokeWidth="1.2" fill="var(--ads-white)" />
+          <circle cx="12.5" cy="12.5" r="1.5" stroke={strokeOrFill} strokeWidth="1.2" fill="var(--ads-white)" />
         </svg>
       );
 

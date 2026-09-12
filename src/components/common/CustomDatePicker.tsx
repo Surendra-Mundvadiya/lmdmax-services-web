@@ -354,7 +354,7 @@ export const CustomDatePicker: FC<CustomDatePickerProps> = ({
               <button
                 type="button"
                 className="cal-footer-btn"
-                style={{ backgroundColor: "#F1F5F9", color: "#475569" }}
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.05)", color: "var(--ads-ink-secondary)" }}
                 onClick={handleYesterday}
               >
                 Yesterday
@@ -369,7 +369,7 @@ export const CustomDatePicker: FC<CustomDatePickerProps> = ({
               <button
                 type="button"
                 className="cal-footer-btn"
-                style={{ backgroundColor: "#F1F5F9", color: "#475569" }}
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.05)", color: "var(--ads-ink-secondary)" }}
                 onClick={handleTomorrow}
               >
                 Tomorrow

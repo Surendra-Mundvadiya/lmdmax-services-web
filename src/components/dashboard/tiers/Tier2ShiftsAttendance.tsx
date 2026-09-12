@@ -37,7 +37,7 @@ export const Tier2ShiftsAttendance: FC<Props> = ({
           <span className="uop-tier-tag">Tier 2</span>
           <h2 className="uop-tier-title">Shifts & Operational Attendance</h2>
         </div>
-        <span style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 500 }}>
+        <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-secondary)", fontWeight: 500 }}>
           Roster Execution & Coverage
         </span>
       </div>
@@ -55,7 +55,7 @@ export const Tier2ShiftsAttendance: FC<Props> = ({
           </div>
 
           <div style={{ marginBottom: "0.5rem" }}>
-            <span style={{ fontSize: "1.45rem", fontWeight: 800, color: "#0F172A" }}>
+            <span style={{ fontSize: "1.45rem", fontWeight: 700, letterSpacing: "-0.022em", color: "var(--ads-ink)" }}>
               {isLoading ? (
                 <div className="uop-skeleton" style={{ width: 60, height: 26 }} />
               ) : (
@@ -65,7 +65,7 @@ export const Tier2ShiftsAttendance: FC<Props> = ({
           </div>
 
           {isLoading ? (
-            <div className="uop-skeleton" style={{ width: "100%", height: 50, borderRadius: 8 }} />
+            <div className="uop-skeleton" style={{ width: "100%", height: 50, borderRadius: "var(--ads-r-sm)" }} />
           ) : (
             <ShiftPipelineBarChart data={shifts} />
           )}
@@ -98,7 +98,7 @@ export const Tier2ShiftsAttendance: FC<Props> = ({
             </div>
           </div>
 
-          <div className="uop-card-value" style={{ color: totalCallouts > 0 ? "#D97706" : "#0F172A" }}>
+          <div className="uop-card-value" style={{ color: totalCallouts > 0 ? "var(--ads-amber)" : "var(--ads-ink)" }}>
             {isLoading ? <div className="uop-skeleton" style={{ width: 60, height: 32 }} /> : totalCallouts}
           </div>
 
@@ -106,9 +106,9 @@ export const Tier2ShiftsAttendance: FC<Props> = ({
             <span
               className="uop-sub-badge"
               style={{
-                backgroundColor: "#EFF6FF",
-                color: "#1D4ED8",
-                border: "1px solid #BFDBFE",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "#0058B0",
+                border: "1px solid transparent",
               }}
             >
               <CheckCircle size={11} />
@@ -117,9 +117,9 @@ export const Tier2ShiftsAttendance: FC<Props> = ({
             <span
               className="uop-sub-badge"
               style={{
-                backgroundColor: unexcused > 0 ? "#FEF2F2" : "#F8FAFC",
-                color: unexcused > 0 ? "#DC2626" : "#64748B",
-                border: unexcused > 0 ? "1px solid #FECACA" : "1px solid #E2E8F0",
+                backgroundColor: unexcused > 0 ? "var(--ads-red-tint)" : "var(--uop-wash-strong)",
+                color: unexcused > 0 ? "var(--ads-red)" : "var(--ads-ink-secondary)",
+                border: "1px solid transparent",
               }}
             >
               <AlertTriangle size={11} />

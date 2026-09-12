@@ -49,7 +49,7 @@ export const PreviewNoteModal: FC<PreviewNoteModalProps> = ({
         <div
           className="notes-modal-header"
           style={{
-            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backgroundColor: "var(--ads-material-thin)",
             borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
           }}
         >
@@ -57,9 +57,9 @@ export const PreviewNoteModal: FC<PreviewNoteModalProps> = ({
             <h2 className="notes-modal-title" style={{ fontSize: "1.15rem", marginBottom: "0.25rem" }}>
               {note.title}
             </h2>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.725rem", color: "#64748B" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.725rem", color: "var(--ads-ink-tertiary)" }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}>
-                <Calendar size={13} style={{ color: "#2563EB" }} />
+                <Calendar size={13} style={{ color: "var(--ads-blue)" }} />
                 <span>{formattedDate}</span>
               </span>
 
@@ -69,7 +69,7 @@ export const PreviewNoteModal: FC<PreviewNoteModalProps> = ({
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "0.3rem",
-                    color: "#6D28D9",
+                    color: "var(--ads-purple)",
                     fontWeight: 600,
                   }}
                 >
@@ -82,7 +82,7 @@ export const PreviewNoteModal: FC<PreviewNoteModalProps> = ({
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "0.3rem",
-                    color: "#047857",
+                    color: "var(--ads-green)",
                     fontWeight: 600,
                   }}
                 >
@@ -93,7 +93,7 @@ export const PreviewNoteModal: FC<PreviewNoteModalProps> = ({
             </div>
           </div>
 
-          <button type="button" onClick={onClose} className="notes-modal-close-btn">
+          <button aria-label="Close" title="Close" type="button" onClick={onClose} className="notes-modal-close-btn">
             <X size={16} />
           </button>
         </div>
@@ -102,14 +102,14 @@ export const PreviewNoteModal: FC<PreviewNoteModalProps> = ({
         <div
           className="notes-modal-body"
           style={{
-            backgroundColor: "rgba(255, 255, 255, 0.4)",
+            backgroundColor: "var(--ads-material-ultrathin)",
             padding: "1.25rem 1.5rem",
           }}
         >
           <div
             style={{
               fontSize: "0.875rem",
-              color: "#1E293B",
+              color: "var(--ads-ink)",
               lineHeight: 1.65,
               whiteSpace: "pre-wrap",
               wordBreak: "break-word",
@@ -123,14 +123,14 @@ export const PreviewNoteModal: FC<PreviewNoteModalProps> = ({
         <div
           className="notes-modal-footer"
           style={{
-            backgroundColor: "rgba(255, 255, 255, 0.7)",
+            backgroundColor: "var(--ads-material-thin)",
             borderTop: "1px solid rgba(0, 0, 0, 0.08)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <div style={{ fontSize: "0.725rem", color: "#64748B" }}>
+          <div style={{ fontSize: "0.725rem", color: "var(--ads-ink-tertiary)" }}>
             {note.created_by && <span>Created by: {note.created_by}</span>}
           </div>
 

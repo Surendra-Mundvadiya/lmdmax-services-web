@@ -99,9 +99,9 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
     <div
       className={`esign-preview-card ${compact ? "compact" : "normal"}`}
       style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "10px",
-        border: "1px solid #E2E8F0",
+        backgroundColor: "var(--ads-material-thick)",
+        borderRadius: "var(--ads-r-md)",
+        border: "1px solid var(--ads-hairline)",
         padding: compact ? "1rem" : "1.5rem",
         display: "flex",
         flexDirection: "column",
@@ -115,7 +115,7 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          borderBottom: "1px solid #F1F5F9",
+          borderBottom: "1px solid var(--ads-hairline)",
           paddingBottom: "1rem",
           marginBottom: "1rem",
           gap: "1rem",
@@ -137,14 +137,14 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
                 display: "inline-flex",
                 alignItems: "center",
                 padding: "0.2rem 0.55rem",
-                borderRadius: "4px",
+                borderRadius: "var(--ads-r-pill)",
                 fontSize: "0.6875rem",
-                fontWeight: 700,
+                fontWeight: 600,
                 textTransform: "capitalize",
-                letterSpacing: "0.02em",
-                backgroundColor: isAck ? "#EFF6FF" : "#FAF5FF",
-                color: isAck ? "#1D4ED8" : "#7E22CE",
-                border: isAck ? "1px solid #BFDBFE" : "1px solid #E9D5FF",
+                letterSpacing: "-0.005em",
+                backgroundColor: isAck ? "var(--ads-blue-tint)" : "var(--ads-purple-tint)",
+                color: isAck ? "#0058B0" : "var(--ads-purple)",
+                border: isAck ? "1px solid transparent" : "1px solid transparent",
               }}
             >
               {isAck ? "Acknowledgement" : "Write-Up"}
@@ -154,9 +154,9 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
           <h2
             style={{
               fontSize: "1.15rem",
-              fontWeight: 700,
-              color: "#0F172A",
-              letterSpacing: "-0.01em",
+              fontWeight: 650,
+              color: "var(--ads-ink)",
+              letterSpacing: "-0.019em",
               margin: "0 0 0.25rem",
               lineHeight: 1.3,
             }}
@@ -168,11 +168,11 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
               display: "flex",
               alignItems: "center",
               gap: "0.35rem",
-              color: "#64748B",
+              color: "var(--ads-ink-tertiary)",
               fontSize: "0.75rem",
             }}
           >
-            <Building2 size={13} style={{ color: "#94A3B8" }} />
+            <Building2 size={13} style={{ color: "var(--ads-ink-quaternary)" }} />
             <span>{companyName}</span>
           </div>
         </div>
@@ -185,7 +185,7 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
               maxHeight: "44px",
               maxWidth: "120px",
               objectFit: "contain",
-              borderRadius: "6px",
+              borderRadius: "var(--ads-r-xs)",
             }}
           />
         ) : (
@@ -193,13 +193,13 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
             style={{
               width: "44px",
               height: "44px",
-              borderRadius: "8px",
-              backgroundColor: "#EFF6FF",
-              border: "1px solid #BFDBFE",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-blue-tint)",
+              border: "1px solid transparent",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#2563EB",
+              color: "var(--ads-blue)",
               flexShrink: 0,
             }}
           >
@@ -215,10 +215,10 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "0.75rem",
-          backgroundColor: "#F8FAFC",
+          backgroundColor: "rgba(0, 0, 0, 0.025)",
           padding: "0.75rem 1rem",
-          borderRadius: "8px",
-          border: "1px solid #E2E8F0",
+          borderRadius: "var(--ads-r-sm)",
+          border: "1px solid var(--ads-hairline)",
           marginBottom: "1rem",
         }}
       >
@@ -228,8 +228,8 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
               width: "32px",
               height: "32px",
               borderRadius: "50%",
-              backgroundColor: "#DBEAFE",
-              color: "#1D4ED8",
+              backgroundColor: "var(--ads-blue-tint-strong)",
+              color: "#0058B0",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -242,10 +242,10 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
             <div
               style={{
                 fontSize: "0.6875rem",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 fontWeight: 600,
-                textTransform: "capitalize",
-                letterSpacing: "0.02em",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
               }}
             >
               Employee name
@@ -253,8 +253,8 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
             <div
               style={{
                 fontSize: "0.8125rem",
-                fontWeight: 700,
-                color: "#0F172A",
+                fontWeight: 600,
+                color: "var(--ads-ink)",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
@@ -271,8 +271,8 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
               width: "32px",
               height: "32px",
               borderRadius: "50%",
-              backgroundColor: "#D1FAE5",
-              color: "#047857",
+              backgroundColor: "var(--ads-green-tint)",
+              color: "var(--ads-green)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -285,10 +285,10 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
             <div
               style={{
                 fontSize: "0.6875rem",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 fontWeight: 600,
-                textTransform: "capitalize",
-                letterSpacing: "0.02em",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
               }}
             >
               Date issued
@@ -296,8 +296,8 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
             <div
               style={{
                 fontSize: "0.8125rem",
-                fontWeight: 700,
-                color: "#0F172A",
+                fontWeight: 600,
+                color: "var(--ads-ink)",
               }}
             >
               {displayDate}
@@ -315,12 +315,12 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
               alignItems: "center",
               gap: "0.4rem",
               fontSize: "0.75rem",
-              fontWeight: 700,
-              color: "#334155",
+              fontWeight: 600,
+              color: "var(--ads-ink-secondary)",
               marginBottom: "0.4rem",
             }}
           >
-            <AlertTriangle size={13} style={{ color: "#F59E0B" }} />
+            <AlertTriangle size={13} style={{ color: "var(--ads-amber)" }} />
             <span>Infraction & Incident Categories:</span>
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
@@ -329,12 +329,12 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
                 key={idx}
                 style={{
                   padding: "0.25rem 0.6rem",
-                  borderRadius: "6px",
+                  borderRadius: "var(--ads-r-xs)",
                   fontSize: "0.75rem",
                   fontWeight: 500,
-                  backgroundColor: "#F1F5F9",
-                  color: "#334155",
-                  border: "1px solid #E2E8F0",
+                  backgroundColor: "rgba(0, 0, 0, 0.05)",
+                  color: "var(--ads-ink-secondary)",
+                  border: "1px solid var(--ads-hairline)",
                 }}
               >
                 {type}
@@ -349,8 +349,8 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
         <div
           style={{
             fontSize: "0.75rem",
-            fontWeight: 700,
-            color: "#334155",
+            fontWeight: 600,
+            color: "var(--ads-ink-secondary)",
             marginBottom: "0.4rem",
           }}
         >
@@ -359,10 +359,10 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
         <div
           style={{
             padding: "0.85rem 1rem",
-            backgroundColor: "#FAFAFA",
-            borderRadius: "8px",
-            border: "1px solid #E2E8F0",
-            color: "#334155",
+            backgroundColor: "rgba(0, 0, 0, 0.025)",
+            borderRadius: "var(--ads-r-sm)",
+            border: "1px solid var(--ads-hairline)",
+            color: "var(--ads-ink-secondary)",
             fontSize: "0.8125rem",
             lineHeight: 1.5,
             whiteSpace: "pre-wrap",
@@ -379,7 +379,7 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
               notes
             )
           ) : (
-            <span style={{ color: "#94A3B8", fontStyle: "italic" }}>
+            <span style={{ color: "var(--ads-ink-quaternary)", fontStyle: "italic" }}>
               No additional notes entered for this document.
             </span>
           )}
@@ -395,12 +395,12 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
               alignItems: "center",
               gap: "0.4rem",
               fontSize: "0.75rem",
-              fontWeight: 700,
-              color: "#334155",
+              fontWeight: 600,
+              color: "var(--ads-ink-secondary)",
               marginBottom: "0.4rem",
             }}
           >
-            <Paperclip size={13} style={{ color: "#64748B" }} />
+            <Paperclip size={13} style={{ color: "var(--ads-ink-tertiary)" }} />
             <span>Supporting Evidence & Attachments ({attachments.length}):</span>
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem" }}>
@@ -416,15 +416,15 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
                     alignItems: "center",
                     gap: "0.4rem",
                     padding: "0.35rem 0.65rem",
-                    borderRadius: "6px",
-                    border: "1px solid #E2E8F0",
-                    backgroundColor: "#FFFFFF",
+                    borderRadius: "var(--ads-r-xs)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
                     fontSize: "0.75rem",
-                    color: "#334155",
-                    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.03)",
+                    color: "var(--ads-ink-secondary)",
+                    boxShadow: "var(--ads-shadow-xs)",
                   }}
                 >
-                  <FileText size={13} style={{ color: "#2563EB", flexShrink: 0 }} />
+                  <FileText size={13} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
                   <span
                     style={{
                       maxWidth: "180px",
@@ -449,15 +449,15 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
         <div
           style={{
             padding: "0.75rem 1rem",
-            backgroundColor: "#FEF2F2",
-            border: "1px solid #FECACA",
-            borderRadius: "8px",
+            backgroundColor: "var(--ads-red-tint)",
+            border: "1px solid transparent",
+            borderRadius: "var(--ads-r-sm)",
             fontSize: "0.775rem",
-            color: "#991B1B",
+            color: "var(--ads-red)",
             marginBottom: "1rem",
           }}
         >
-          <div style={{ fontWeight: 700, marginBottom: "0.25rem" }}>
+          <div style={{ fontWeight: 600, marginBottom: "0.25rem" }}>
             Driver Refusal Reason:
           </div>
           <div>{refusalReason}</div>
@@ -468,7 +468,7 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
       <div
         style={{
           paddingTop: "1rem",
-          borderTop: "1px solid #F1F5F9",
+          borderTop: "1px solid var(--ads-hairline)",
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "space-between",
@@ -480,9 +480,9 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
           <div
             style={{
               fontSize: "0.6875rem",
-              color: "#64748B",
-              textTransform: "capitalize",
-              letterSpacing: "0.02em",
+              color: "var(--ads-ink-tertiary)",
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
               fontWeight: 600,
             }}
           >
@@ -497,11 +497,11 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
                   maxHeight: "48px",
                   maxWidth: "180px",
                   objectFit: "contain",
-                  borderBottom: "1px solid #94A3B8",
+                  borderBottom: "1px solid var(--ads-hairline-strong)",
                 }}
               />
               {signedDate && (
-                <div style={{ fontSize: "0.6875rem", color: "#64748B", marginTop: "0.25rem" }}>
+                <div style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)", marginTop: "0.25rem" }}>
                   Signed on: {new Date(signedDate).toLocaleString()}
                 </div>
               )}
@@ -511,7 +511,7 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
               style={{
                 marginTop: "0.4rem",
                 fontSize: "0.75rem",
-                color: "#94A3B8",
+                color: "var(--ads-ink-quaternary)",
                 fontStyle: "italic",
               }}
             >
@@ -524,9 +524,9 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
           <div
             style={{
               fontSize: "0.6875rem",
-              color: "#64748B",
-              textTransform: "capitalize",
-              letterSpacing: "0.02em",
+              color: "var(--ads-ink-tertiary)",
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
               fontWeight: 600,
             }}
           >
@@ -535,8 +535,8 @@ export const ESignatureDocumentPreview: React.FC<ESignatureDocumentPreviewProps>
           <div
             style={{
               fontSize: "0.8125rem",
-              fontWeight: 700,
-              color: "#334155",
+              fontWeight: 600,
+              color: "var(--ads-ink)",
               textTransform: "capitalize",
               marginTop: "0.25rem",
             }}

@@ -40,13 +40,13 @@ export const NotificationsPage: FC = () => {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case "alert":
-        return <AlertTriangle size={16} className="text-red-600" />;
+        return <AlertTriangle size={16} style={{ color: "var(--ads-red)" }} />;
       case "warning":
-        return <AlertTriangle size={16} className="text-amber-600" />;
+        return <AlertTriangle size={16} style={{ color: "var(--ads-amber)" }} />;
       case "success":
-        return <CheckCircle2 size={16} className="text-emerald-600" />;
+        return <CheckCircle2 size={16} style={{ color: "var(--ads-green)" }} />;
       default:
-        return <Info size={16} className="text-blue-600" />;
+        return <Info size={16} style={{ color: "var(--ads-blue)" }} />;
     }
   };
 
@@ -60,21 +60,51 @@ export const NotificationsPage: FC = () => {
         <div className="notifications-page-card">
           {/* Header */}
           <div className="notifications-page-header">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+            <div className="flex items-center gap-2.5" style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
+              <div
+                className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center"
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "var(--ads-r-sm)",
+                  background: "var(--ads-blue-tint)",
+                  color: "var(--ads-blue)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
                 <Bell size={18} />
               </div>
               <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-bold text-slate-900 m-0">
+                <div className="flex items-center gap-2" style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+                  <h2
+                    className="text-lg font-bold text-slate-900 m-0"
+                    style={{
+                      margin: 0,
+                      fontSize: "1.0625rem",
+                      fontWeight: 600,
+                      letterSpacing: "-0.014em",
+                      color: "var(--ads-ink)",
+                    }}
+                  >
                     Notifications & Operational Alerts
                   </h2>
                   {unreadCount > 0 && (
                     <span className="notif-badge-count">{unreadCount} unread</span>
                   )}
                 </div>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  Real-time RTS checkout, DVIC inspections, driver safety, and system events. (Will be refined further)
+                <p
+                  className="text-xs text-slate-500 mt-0.5"
+                  style={{
+                    margin: "2px 0 0",
+                    fontSize: "0.75rem",
+                    lineHeight: 1.4,
+                    color: "var(--ads-ink-tertiary)",
+                  }}
+                >
+                  Real-time RTS checkout, DVIC inspections, driver safety, and system events.
                 </p>
               </div>
             </div>
@@ -103,8 +133,9 @@ export const NotificationsPage: FC = () => {
               {notifications.length > 0 && (
                 <button
                   type="button"
-                  className="btn-outline-cancel text-xs flex items-center gap-1.5 text-red-600 hover:text-red-700"
+                  className="btn-outline-cancel text-xs flex items-center gap-1.5"
                   onClick={clearAll}
+                  style={{ color: "var(--ads-red)" }}
                 >
                   <Trash2 size={14} />
                   <span>Clear All</span>
@@ -163,7 +194,7 @@ export const NotificationsPage: FC = () => {
           {filtered.length === 0 ? (
             <div className="driver-table-empty-state" style={{ padding: "3.5rem 1rem" }}>
               <div className="empty-state-icon-box">
-                <Bell size={28} className="text-blue-500" />
+                <Bell size={28} style={{ color: "var(--ads-blue)" }} />
               </div>
               <h4 className="empty-state-heading">No Notifications</h4>
               <p className="empty-state-desc">
@@ -187,7 +218,22 @@ export const NotificationsPage: FC = () => {
                         <span className="notif-item-title">{item.title}</span>
                         {!item.read && <span className="notif-unread-dot" />}
                         {item.station_code && (
-                          <span className="station-code-chip">{item.station_code}</span>
+                          <span
+                            className="station-code-chip"
+                            style={{
+                              display: "inline-flex",
+                              alignItems: "center",
+                              padding: "3px 9px",
+                              borderRadius: "var(--ads-r-pill)",
+                              background: "var(--ads-blue-tint)",
+                              color: "#0058B0",
+                              fontSize: "0.6875rem",
+                              fontWeight: 600,
+                              letterSpacing: "-0.005em",
+                            }}
+                          >
+                            {item.station_code}
+                          </span>
                         )}
                       </div>
                       <p className="notif-item-message">{item.message}</p>
@@ -225,7 +271,31 @@ export const NotificationsPage: FC = () => {
                         e.stopPropagation();
                         deleteNotification(item.id);
                       }}
+                      aria-label={`Delete notification: ${item.title}`}
                       title="Delete notification"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "var(--ads-r-xs)",
+                        border: "1px solid transparent",
+                        background: "transparent",
+                        color: "var(--ads-ink-tertiary)",
+                        cursor: "pointer",
+                        flexShrink: 0,
+                        transition:
+                          "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "var(--ads-red)";
+                        e.currentTarget.style.background = "var(--ads-red-tint)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = "var(--ads-ink-tertiary)";
+                        e.currentTarget.style.background = "transparent";
+                      }}
                     >
                       <Trash2 size={14} />
                     </button>

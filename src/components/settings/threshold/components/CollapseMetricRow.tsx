@@ -36,13 +36,15 @@ export const CollapseMetricRow: FC<CollapseMetricRowProps> = ({
     <div className={`threshold-collapse-card ${!isActive ? "card-inactive" : ""}`}>
       {/* Header Row */}
       <div className="threshold-collapse-header">
-        <div className="flex items-center gap-2.5">
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
           <button
             type="button"
             className="threshold-collapse-trigger"
             onClick={() => setIsOpen(!isOpen)}
             disabled={!isActive || disabled}
             title={isOpen ? "Collapse metrics" : "Expand metrics"}
+            aria-label={`${isOpen ? "Collapse" : "Expand"} ${TYPE_TITLES[type] || type} metrics`}
+            aria-expanded={isOpen}
           >
             {isOpen ? <ChevronDown size={17} /> : <ChevronRight size={17} />}
           </button>

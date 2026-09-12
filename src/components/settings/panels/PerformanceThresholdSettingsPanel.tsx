@@ -101,18 +101,10 @@ export const PerformanceThresholdSettingsPanel: FC<PerformanceThresholdSettingsP
 
   return (
     <div className="settings-panel-scroll">
-      {/* Top Main Heading */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <BarChart3 size={20} className="text-blue-600" />
-            <span>Set Threshold Settings</span>
-            <span className="badge-custom blue">Performance Intelligence</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Live threshold targets and automated coaching rules across all 6 performance reports from the Performance microservice
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Live threshold targets and automated coaching rules across all 6 performance reports from the Performance microservice
+        </p>
       </div>
 
       {/* Active Report Threshold View Container */}

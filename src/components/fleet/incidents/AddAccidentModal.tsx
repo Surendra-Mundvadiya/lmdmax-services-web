@@ -309,23 +309,27 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
       style={
         embedded
           ? {
-              backgroundColor: "#FFFFFF",
-              borderRadius: "12px",
-              border: "1px solid #E2E8F0",
+              background: "var(--ads-material-thick)",
+              backdropFilter: "var(--ads-blur-lg)",
+              WebkitBackdropFilter: "var(--ads-blur-lg)",
+              borderRadius: "var(--ads-r-xl)",
+              border: "1px solid var(--ads-hairline)",
               overflow: "hidden",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+              boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
             }
           : {
-              backgroundColor: "#FFFFFF",
-              borderRadius: "16px",
+              background: "var(--ads-material-thick)",
+              backdropFilter: "var(--ads-blur-lg)",
+              WebkitBackdropFilter: "var(--ads-blur-lg)",
+              borderRadius: "var(--ads-r-xl)",
               width: "100%",
               maxWidth: "820px",
               maxHeight: "92vh",
               overflow: "hidden",
               display: "flex",
               flexDirection: "column",
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-              border: "1px solid #E2E8F0",
+              boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+              border: "1px solid var(--ads-hairline)",
             }
       }
       onClick={embedded ? undefined : (e) => e.stopPropagation()}
@@ -337,31 +341,31 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
-            backgroundColor: "#FFFFFF",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
+            background: "transparent",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
             <div
               style={{
                 width: 40,
                 height: 40,
-                borderRadius: "10px",
-                backgroundColor: "#FEF2F2",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-red-tint)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexShrink: 0,
               }}
             >
-              <ShieldAlert size={20} color="#DC2626" />
+              <ShieldAlert size={20} color="var(--ads-red)" />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 700, color: "#0F172A" }}>
+              <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 700, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                 Add Accident Report
               </h3>
-              <p style={{ margin: "0.15rem 0 0", fontSize: "0.75rem", color: "#64748B" }}>
+              <p style={{ margin: "0.15rem 0 0", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                 File a complete vehicle collision & property damage report
               </p>
             </div>
@@ -369,13 +373,18 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
           <button
             type="button"
             onClick={onClose}
+            aria-label="Close add accident report dialog"
             style={{
-              background: "none",
-              border: "none",
+              background: "transparent",
+              border: "1px solid var(--ads-hairline)",
               cursor: "pointer",
-              color: "#64748B",
+              color: "var(--ads-ink-tertiary)",
               padding: "6px",
-              borderRadius: "8px",
+              borderRadius: "var(--ads-r-sm)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <X size={20} />
@@ -387,10 +396,10 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
         <div
           style={{
             display: "flex",
-            borderBottom: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
-            padding: "0.6rem 1.5rem",
-            gap: "0.5rem",
+            borderBottom: "1px solid var(--ads-hairline)",
+            background: "transparent",
+            padding: "0.6rem var(--ads-s6)",
+            gap: "var(--ads-s2)",
             overflowX: "auto",
           }}
         >
@@ -408,18 +417,23 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                 }}
                 style={{
                   padding: "0.4rem 0.85rem",
-                  borderRadius: "8px",
+                  borderRadius: "var(--ads-r-pill)",
                   fontSize: "0.78rem",
-                  fontWeight: isCurrent ? 700 : 500,
+                  fontWeight: isCurrent ? 600 : 550,
+                  letterSpacing: "-0.01em",
                   cursor: "pointer",
-                  border: isCurrent ? "1px solid #2563EB" : "1px solid transparent",
-                  backgroundColor: isCurrent ? "#EFF6FF" : "transparent",
-                  color: isCurrent ? "#2563EB" : isDone ? "#059669" : "#64748B",
+                  border: isCurrent ? "1px solid var(--ads-blue)" : "1px solid transparent",
+                  backgroundColor: isCurrent ? "var(--ads-blue-tint)" : "transparent",
+                  color: isCurrent
+                    ? "var(--ads-blue)"
+                    : isDone
+                    ? "var(--ads-green)"
+                    : "var(--ads-ink-tertiary)",
                   display: "flex",
                   alignItems: "center",
                   gap: "0.4rem",
                   whiteSpace: "nowrap",
-                  transition: "all 0.15s ease",
+                  transition: "all var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 <span
@@ -431,9 +445,14 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "0.68rem",
-                    fontWeight: 700,
-                    backgroundColor: isCurrent ? "#2563EB" : isDone ? "#059669" : "#E2E8F0",
-                    color: isCurrent || isDone ? "#FFFFFF" : "#64748B",
+                    fontWeight: 600,
+                    backgroundColor: isCurrent
+                      ? "var(--ads-blue)"
+                      : isDone
+                      ? "var(--ads-green)"
+                      : "rgba(0,0,0,0.04)",
+                    color: isCurrent || isDone ? "#FFFFFF" : "var(--ads-ink-tertiary)",
+                    transition: "all var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 >
                   {isDone ? <Check size={11} /> : s.id}
@@ -451,10 +470,10 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
           style={{
             flex: 1,
             overflowY: "auto",
-            padding: "1.5rem",
+            padding: "var(--ads-s6)",
             display: "flex",
             flexDirection: "column",
-            gap: "1.25rem",
+            gap: "var(--ads-s5)",
           }}
         >
           {loadingInitial ? (
@@ -467,8 +486,8 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                 gap: "0.6rem",
               }}
             >
-              <Loader2 size={24} style={{ animation: "spin 0.8s linear infinite", color: "#2563EB" }} />
-              <span style={{ fontSize: "0.875rem", color: "#64748B" }}>
+              <Loader2 size={24} style={{ animation: "spin 0.8s linear infinite", color: "var(--ads-blue)" }} />
+              <span style={{ fontSize: "0.875rem", color: "var(--ads-ink-tertiary)" }}>
                 Loading fleet drivers & vehicles…
               </span>
             </div>
@@ -626,7 +645,7 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                           checked={hurt}
                           onChange={(e) => setHurt(e.target.checked)}
                         />
-                        <span style={{ fontWeight: 600, color: hurt ? "#DC2626" : "#0F172A" }}>
+                        <span style={{ fontWeight: 600, color: hurt ? "var(--ads-red)" : "var(--ads-ink)" }}>
                           Is anyone injured?
                         </span>
                       </label>
@@ -757,7 +776,7 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                   {/* Police Section */}
                   <div style={sectionBoxStyle}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
-                      <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A" }}>
+                      <span style={{ fontSize: "0.875rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                         Police Department Involvement
                       </span>
                       <label style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.8125rem", cursor: "pointer" }}>
@@ -805,7 +824,7 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                   {/* Lawsuit Section */}
                   <div style={sectionBoxStyle}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
-                      <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A" }}>
+                      <span style={{ fontSize: "0.875rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                         Third-Party Lawsuit Status
                       </span>
                       <label style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.8125rem", cursor: "pointer" }}>
@@ -849,7 +868,7 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                 <div style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
                   {/* Third party driver */}
                   <div style={sectionBoxStyle}>
-                    <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A", display: "block", marginBottom: "0.75rem" }}>
+                    <span style={{ fontSize: "0.875rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)", display: "block", marginBottom: "0.75rem" }}>
                       Other Driver's Information (Third-Party)
                     </span>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.75rem" }}>
@@ -882,7 +901,7 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
 
                   {/* Third party vehicle */}
                   <div style={sectionBoxStyle}>
-                    <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A", display: "block", marginBottom: "0.75rem" }}>
+                    <span style={{ fontSize: "0.875rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)", display: "block", marginBottom: "0.75rem" }}>
                       Other Vehicle & Insurance
                     </span>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.75rem" }}>
@@ -915,7 +934,7 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
 
                   {/* Witness info */}
                   <div style={sectionBoxStyle}>
-                    <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A", display: "block", marginBottom: "0.75rem" }}>
+                    <span style={{ fontSize: "0.875rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)", display: "block", marginBottom: "0.75rem" }}>
                       Witness Information
                     </span>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.75rem" }}>
@@ -962,8 +981,8 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              paddingTop: "1rem",
-              borderTop: "1px solid #E2E8F0",
+              paddingTop: "var(--ads-s4)",
+              borderTop: "1px solid var(--ads-hairline)",
               marginTop: "auto",
             }}
           >
@@ -971,36 +990,42 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
               type="button"
               onClick={onClose}
               style={{
-                padding: "0.55rem 1rem",
-                borderRadius: "8px",
-                border: "1px solid #CBD5E1",
-                backgroundColor: "#FFFFFF",
-                color: "#475569",
-                fontSize: "0.875rem",
+                padding: "9px 18px",
+                borderRadius: "var(--ads-r-pill)",
+                border: "1px solid var(--ads-hairline)",
+                background: "var(--ads-material-thick)",
+                color: "var(--ads-ink)",
+                boxShadow: "var(--ads-bevel)",
+                fontSize: "0.8125rem",
                 fontWeight: 600,
+                letterSpacing: "-0.01em",
                 cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               Cancel
             </button>
 
-            <div style={{ display: "flex", gap: "0.6rem" }}>
+            <div style={{ display: "flex", gap: "var(--ads-s3)" }}>
               {currentStep > 1 && (
                 <button
                   type="button"
                   onClick={handleBack}
                   style={{
-                    padding: "0.55rem 1.1rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    color: "#334155",
-                    fontSize: "0.875rem",
+                    padding: "9px 18px",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
+                    boxShadow: "var(--ads-bevel)",
+                    fontSize: "0.8125rem",
                     fontWeight: 600,
+                    letterSpacing: "-0.01em",
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
                     gap: "0.35rem",
+                    transition: "all var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 >
                   <ChevronLeft size={16} />
@@ -1013,17 +1038,19 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                   type="button"
                   onClick={handleNext}
                   style={{
-                    padding: "0.55rem 1.25rem",
-                    borderRadius: "8px",
-                    border: "none",
-                    backgroundColor: "#2563EB",
+                    padding: "9px 18px",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid transparent",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
-                    fontSize: "0.875rem",
+                    fontSize: "0.8125rem",
                     fontWeight: 600,
+                    letterSpacing: "-0.01em",
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
                     gap: "0.35rem",
+                    transition: "all var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 >
                   <span style={{ color: "#FFFFFF" }}>Next Step</span>
@@ -1034,18 +1061,19 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                   type="submit"
                   disabled={submitting}
                   style={{
-                    padding: "0.55rem 1.4rem",
-                    borderRadius: "8px",
-                    border: "none",
-                    backgroundColor: "#2563EB",
+                    padding: "9px 18px",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid transparent",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
-                    fontSize: "0.875rem",
+                    fontSize: "0.8125rem",
                     fontWeight: 600,
+                    letterSpacing: "-0.01em",
                     cursor: submitting ? "not-allowed" : "pointer",
                     display: "flex",
                     alignItems: "center",
                     gap: "0.45rem",
-                    boxShadow: "0 2px 6px rgba(37, 99, 235, 0.25)",
+                    transition: "all var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 >
                   {submitting ? (
@@ -1088,14 +1116,14 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
                   style={{
                     width: 32,
                     height: 32,
-                    borderRadius: "8px",
-                    backgroundColor: "#FEF2F2",
+                    borderRadius: "var(--ads-r-sm)",
+                    backgroundColor: "var(--ads-red-tint)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <ShieldAlert size={18} color="#DC2626" />
+                  <ShieldAlert size={18} color="var(--ads-red)" />
                 </div>
                 <h2 className="screen-heading">Add Accident Report</h2>
               </div>
@@ -1122,13 +1150,14 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
         style={{
           position: "fixed",
           inset: 0,
-          backgroundColor: "rgba(15, 23, 42, 0.55)",
-          backdropFilter: "blur(4px)",
+          background: "rgba(0,0,0,0.32)",
+          backdropFilter: "blur(6px)",
+          WebkitBackdropFilter: "blur(6px)",
           zIndex: 9999,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "1rem",
+          padding: "var(--ads-s4)",
         }}
         onClick={onClose}
       >
@@ -1140,17 +1169,17 @@ export const AddAccidentModal: FC<AddAccidentModalProps> = ({
 const labelStyle: React.CSSProperties = {
   display: "block",
   fontSize: "0.72rem",
-  fontWeight: 700,
-  color: "#334155",
+  fontWeight: 600,
+  color: "var(--ads-ink-secondary)",
   marginBottom: "0.3rem",
   textTransform: "uppercase",
-  letterSpacing: "0.03em",
+  letterSpacing: "0.04em",
 };
 
 const subLabelStyle: React.CSSProperties = {
   display: "block",
   fontSize: "0.68rem",
-  color: "#64748B",
+  color: "var(--ads-ink-tertiary)",
   marginBottom: "0.2rem",
 };
 
@@ -1158,12 +1187,14 @@ const inputStyle: React.CSSProperties = {
   width: "100%",
   height: "36px",
   padding: "0 0.75rem",
-  borderRadius: "8px",
-  border: "1px solid #CBD5E1",
+  borderRadius: "var(--ads-r-sm)",
+  border: "1px solid var(--ads-hairline-strong)",
   fontSize: "0.8125rem",
+  color: "var(--ads-ink)",
   boxSizing: "border-box",
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "var(--ads-material-thick)",
   outline: "none",
+  transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
 };
 
 const selectStyle: React.CSSProperties = {
@@ -1173,10 +1204,10 @@ const selectStyle: React.CSSProperties = {
 };
 
 const sectionBoxStyle: React.CSSProperties = {
-  backgroundColor: "#F8FAFC",
-  borderRadius: "10px",
-  border: "1px solid #E2E8F0",
-  padding: "1rem",
+  backgroundColor: "var(--ads-canvas)",
+  borderRadius: "var(--ads-r-md)",
+  border: "1px solid var(--ads-hairline)",
+  padding: "var(--ads-s4)",
 };
 
 export default AddAccidentModal;

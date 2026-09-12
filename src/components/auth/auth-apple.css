@@ -1,0 +1,467 @@
+/* ============================================================================
+   Auth screens — Apple design system surface.
+
+   Every selector here is namespaced under .company-auth-screen or
+   .company-auth-card-container so it cannot leak into the other screens that
+   share these legacy class names (.styled-input, .input-field-wrap,
+   .primary-submit-btn are also used by driver and e-signature modals).
+
+   Specificity is deliberately >= (0,2,0) so these rules win over both
+   index.css and apple-legacy-bridge.css regardless of import order.
+   ========================================================================= */
+
+/* ── Ambient backdrop ──────────────────────────────────────────────────── */
+.company-auth-screen .company-auth-overlay {
+  background:
+    radial-gradient(1100px 620px at 12% -10%, rgba(0, 113, 227, 0.20), transparent 62%),
+    radial-gradient(900px 560px at 92% 6%, rgba(110, 79, 196, 0.14), transparent 64%),
+    linear-gradient(135deg, rgba(245, 245, 247, 0.86) 0%, rgba(232, 242, 253, 0.78) 100%);
+}
+
+/* ── The glass card ────────────────────────────────────────────────────── */
+.company-auth-card-container {
+  max-width: 468px;
+}
+
+.company-auth-card-container .company-glass-card {
+  background: var(--ads-material-thick) !important;
+  -webkit-backdrop-filter: var(--ads-blur-lg) !important;
+  backdrop-filter: var(--ads-blur-lg) !important;
+  border: 1px solid var(--ads-hairline) !important;
+  border-radius: var(--ads-r-xl) !important;
+  box-shadow: var(--ads-shadow-lg), var(--ads-bevel) !important;
+  padding: var(--ads-s8) var(--ads-s8) var(--ads-s6);
+}
+
+/* ── Heading ───────────────────────────────────────────────────────────── */
+.company-auth-screen .form-header {
+  margin-bottom: var(--ads-s6);
+}
+
+.company-auth-screen .form-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.18;
+  color: var(--ads-ink);
+}
+
+/* ── Form rhythm ───────────────────────────────────────────────────────── */
+.company-auth-screen .auth-form {
+  gap: var(--ads-s4);
+}
+
+.company-auth-screen .form-row-2col {
+  gap: var(--ads-s4);
+}
+
+.company-auth-screen .input-group {
+  gap: var(--ads-s1);
+}
+
+.company-auth-screen .input-label {
+  font-size: 0.8125rem;
+  font-weight: 550;
+  letter-spacing: -0.005em;
+  color: var(--ads-ink-secondary);
+}
+
+/* ── Fields ────────────────────────────────────────────────────────────── */
+.company-auth-screen .input-field-wrap {
+  background: var(--ads-material-thick);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-sm);
+  box-shadow: var(--ads-bevel);
+  transition: border-color var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease),
+              background-color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .input-field-wrap:hover {
+  border-color: var(--ads-hairline-strong);
+}
+
+.company-auth-screen .input-field-wrap:focus-within {
+  background: var(--ads-white);
+  border-color: var(--ads-blue);
+  box-shadow: var(--ads-shadow-focus);
+}
+
+.company-auth-screen .input-field-wrap.has-error {
+  background: var(--ads-red-tint);
+  border-color: var(--ads-red);
+}
+
+.company-auth-screen .input-field-wrap.has-error:focus-within {
+  box-shadow: 0 0 0 4px rgba(215, 0, 21, 0.20);
+}
+
+/* Neutralise the global input skin so the wrapper is the only visible control
+   (otherwise the bridge paints a second bordered box inside this one). */
+.company-auth-screen .input-field-wrap .styled-input,
+.company-auth-screen .input-field-wrap .styled-input:focus {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 11px 13px 11px 2.25rem;
+  font-size: 0.875rem;
+  color: var(--ads-ink);
+}
+
+.company-auth-screen .input-field-wrap .styled-input::placeholder {
+  color: var(--ads-ink-quaternary);
+  font-size: 0.8125rem;
+}
+
+.company-auth-screen .input-icon {
+  color: var(--ads-ink-tertiary);
+}
+
+.company-auth-screen .input-field-wrap:focus-within .input-icon {
+  color: var(--ads-blue);
+}
+
+/* OTP code field has no leading icon */
+.company-auth-screen .input-field-wrap .styled-input.otp-code-input {
+  padding: 11px 13px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: var(--ads-blue);
+}
+
+.company-auth-screen .password-toggle-btn {
+  color: var(--ads-ink-tertiary);
+  border-radius: var(--ads-r-xs);
+  transition: color var(--ads-dur-fast) var(--ads-ease),
+              background-color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .password-toggle-btn:hover {
+  color: var(--ads-ink);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.company-auth-screen .field-error-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ads-red);
+}
+
+/* ── Alerts ────────────────────────────────────────────────────────────── */
+.company-auth-screen .error-alert,
+.company-auth-screen .success-alert {
+  gap: var(--ads-s2);
+  padding: var(--ads-s3) var(--ads-s4);
+  border-radius: var(--ads-r-sm);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  margin-bottom: var(--ads-s4);
+}
+
+.company-auth-screen .error-alert {
+  background: var(--ads-red-tint);
+  border: 1px solid rgba(215, 0, 21, 0.22);
+  color: var(--ads-red);
+}
+
+.company-auth-screen .success-alert {
+  background: var(--ads-green-tint);
+  border: 1px solid rgba(36, 138, 61, 0.22);
+  color: var(--ads-green);
+}
+
+/* ── The single prominent action ───────────────────────────────────────── */
+.company-auth-screen .primary-submit-btn {
+  width: 100%;
+  padding: 13px 22px !important;
+  margin-top: var(--ads-s2);
+  border-radius: var(--ads-r-pill) !important;
+  background: var(--ads-blue) !important;
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+  gap: var(--ads-s2);
+  box-shadow: 0 1px 3px rgba(0, 113, 227, 0.26) !important;
+}
+
+.company-auth-screen .primary-submit-btn,
+.company-auth-screen .primary-submit-btn * {
+  color: #FFFFFF !important;
+}
+
+.company-auth-screen .primary-submit-btn:hover:not(:disabled) {
+  background: var(--ads-blue-hover) !important;
+  box-shadow: 0 4px 14px rgba(0, 113, 227, 0.34) !important;
+  transform: translateY(-1px);
+}
+
+.company-auth-screen .primary-submit-btn:active:not(:disabled) {
+  background: var(--ads-blue-active) !important;
+  transform: scale(0.97);
+}
+
+.company-auth-screen .primary-submit-btn:disabled {
+  opacity: 0.4;
+  transform: none;
+}
+
+/* ── Divider ───────────────────────────────────────────────────────────── */
+.company-auth-screen .auth-divider {
+  margin: var(--ads-s5) 0 var(--ads-s4);
+}
+
+.company-auth-screen .auth-divider::before {
+  background: var(--ads-hairline);
+}
+
+.company-auth-screen .auth-divider span {
+  background: transparent;
+  padding: 0 var(--ads-s3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ads-ink-quaternary);
+}
+
+/* ── Secondary / social actions ────────────────────────────────────────── */
+.company-auth-screen .social-auth-group {
+  gap: var(--ads-s2);
+}
+
+.company-auth-screen .social-auth-btn {
+  padding: 11px 18px;
+  border-radius: var(--ads-r-pill);
+  background: var(--ads-material-thick);
+  -webkit-backdrop-filter: var(--ads-blur-sm);
+  backdrop-filter: var(--ads-blur-sm);
+  border: 1px solid var(--ads-hairline);
+  box-shadow: var(--ads-bevel);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ads-ink);
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              border-color var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .social-auth-btn:hover:not(:disabled) {
+  background: var(--ads-white);
+  border-color: var(--ads-hairline-strong);
+  color: var(--ads-ink);
+  transform: translateY(-1px);
+  box-shadow: var(--ads-shadow-sm);
+}
+
+.company-auth-screen .social-auth-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.company-auth-screen .social-auth-btn.otp-btn {
+  background: var(--ads-blue-tint);
+  border-color: rgba(0, 113, 227, 0.22);
+  color: var(--ads-blue);
+}
+
+.company-auth-screen .social-auth-btn.otp-btn:hover:not(:disabled) {
+  background: var(--ads-blue-tint-strong);
+  border-color: var(--ads-blue);
+  color: var(--ads-blue);
+}
+
+/* ── Text links ────────────────────────────────────────────────────────── */
+.company-auth-screen .text-link-button,
+.company-auth-screen .inline-action-btn {
+  color: var(--ads-blue);
+  font-weight: 600;
+  border-radius: var(--ads-r-xs);
+  transition: color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .text-link-button:hover,
+.company-auth-screen .inline-action-btn:hover {
+  color: var(--ads-blue-hover);
+}
+
+.company-auth-screen .back-nav-btn {
+  gap: var(--ads-s1);
+  margin-bottom: var(--ads-s4);
+  font-size: 0.8125rem;
+  font-weight: 550;
+  color: var(--ads-ink-tertiary);
+  border-radius: var(--ads-r-xs);
+  transition: color var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .back-nav-btn:hover {
+  color: var(--ads-blue);
+  transform: translateX(-2px);
+}
+
+/* ── Footers ───────────────────────────────────────────────────────────── */
+.company-auth-screen .form-footer-row {
+  margin-top: var(--ads-s5);
+  font-size: 0.8125rem;
+  color: var(--ads-ink-tertiary);
+}
+
+.company-auth-screen .legal-links-footer {
+  margin-top: var(--ads-s4);
+  font-size: 0.75rem;
+  color: var(--ads-ink-tertiary);
+}
+
+.company-auth-screen .legal-link {
+  transition: color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .legal-link:hover {
+  color: var(--ads-blue);
+}
+
+.company-auth-screen .bullet-sep {
+  color: var(--ads-ink-quaternary);
+}
+
+/* ── Password criteria pills ───────────────────────────────────────────── */
+.company-auth-screen .password-checklist-compact {
+  gap: var(--ads-s1);
+  margin-top: var(--ads-s1);
+}
+
+.company-auth-screen .pill-check {
+  gap: var(--ads-s1);
+  padding: 3px 9px;
+  border-radius: var(--ads-r-pill);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--ads-ink-tertiary);
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .pill-check.active {
+  background: var(--ads-green-tint);
+  color: var(--ads-green);
+}
+
+/* ── Access-code tooltip ───────────────────────────────────────────────── */
+.company-auth-screen .tooltip-trigger-btn {
+  color: var(--ads-ink-tertiary);
+  border-radius: var(--ads-r-xs);
+  transition: color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .tooltip-trigger-btn:hover {
+  color: var(--ads-blue);
+}
+
+.company-auth-screen .tooltip-popover {
+  background: var(--ads-ink);
+  color: var(--ads-white);
+  border-radius: var(--ads-r-sm);
+  padding: var(--ads-s2) var(--ads-s3);
+  font-size: 0.6875rem;
+  box-shadow: var(--ads-shadow-md);
+}
+
+/* ── OTP resend row ────────────────────────────────────────────────────── */
+.company-auth-screen .countdown-text {
+  font-size: 0.75rem;
+  color: var(--ads-ink-tertiary);
+}
+
+.company-auth-screen .resend-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ads-s1);
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ads-blue);
+  cursor: pointer;
+  border-radius: var(--ads-r-xs);
+  transition: color var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .resend-action-btn:hover:not(:disabled) {
+  color: var(--ads-blue-hover);
+}
+
+/* ── Account-link modal (these classes had no styles at all) ───────────── */
+.company-auth-screen .account-link-desc {
+  margin: 0 0 var(--ads-s5);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ads-ink-secondary);
+}
+
+.company-auth-screen .link-tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--ads-s1);
+  padding: var(--ads-s1);
+  border-radius: var(--ads-r-pill);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.company-auth-screen .link-tab {
+  flex: 1;
+  padding: 7px 15px;
+  border: 1px solid transparent;
+  border-radius: var(--ads-r-pill);
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 550;
+  letter-spacing: -0.005em;
+  color: var(--ads-ink-secondary);
+  cursor: pointer;
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              color var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease);
+}
+
+.company-auth-screen .link-tab:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--ads-ink);
+}
+
+.company-auth-screen .link-tab:active {
+  transform: scale(0.97);
+}
+
+.company-auth-screen .link-tab.active {
+  background: var(--ads-blue);
+  color: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 113, 227, 0.32);
+}
+
+.company-auth-screen .link-tab.active * {
+  color: #FFFFFF;
+}
+
+/* ── Brand corner ──────────────────────────────────────────────────────── */
+.company-auth-screen .brand-logo-link {
+  transition: transform var(--ads-dur-fast) var(--ads-ease),
+              opacity var(--ads-dur-fast) var(--ads-ease);
+}
+
+@media (max-width: 640px) {
+  .company-auth-card-container .company-glass-card {
+    padding: var(--ads-s6) var(--ads-s5) var(--ads-s5);
+  }
+
+  .company-auth-screen .form-title {
+    font-size: 1.5rem;
+  }
+}

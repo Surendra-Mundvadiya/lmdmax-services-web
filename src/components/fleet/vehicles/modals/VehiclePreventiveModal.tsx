@@ -183,23 +183,25 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.65)",
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
         backdropFilter: "blur(6px)",
         WebkitBackdropFilter: "blur(6px)",
         zIndex: 10050,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "1rem",
+        padding: "var(--ads-s4)",
       }}
       onClick={onClose}
     >
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "1rem",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-          border: "1px solid #E2E8F0",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          border: "1px solid var(--ads-hairline)",
           width: "100%",
           maxWidth: "850px",
           maxHeight: "90vh",
@@ -212,12 +214,12 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
         {/* Header */}
         <div
           style={{
-            padding: "1.25rem 1.75rem",
-            borderBottom: "1px solid #E2E8F0",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            background: "linear-gradient(to right, #F8FAFC, #FFFFFF)",
+            background: "transparent",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.875rem" }}>
@@ -225,37 +227,37 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
               style={{
                 width: "42px",
                 height: "42px",
-                borderRadius: "10px",
-                background: "#EFF6FF",
-                border: "1px solid #BFDBFE",
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-blue-tint)",
+                border: "1px solid var(--ads-blue-tint-strong)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#2563EB",
+                color: "var(--ads-blue)",
               }}
             >
               <Wrench size={22} />
             </div>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <h2 style={{ margin: 0, fontSize: "1.2rem", fontWeight: 700, color: "#1E293B" }}>
+                <h2 style={{ margin: 0, fontSize: "1.2rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                   Preventive Maintenance (PM)
                 </h2>
                 <span
                   style={{
-                    backgroundColor: "#EFF6FF",
-                    color: "#2563EB",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    color: "var(--ads-blue)",
                     fontSize: "0.75rem",
                     fontWeight: 700,
                     padding: "0.15rem 0.6rem",
-                    borderRadius: "9999px",
-                    border: "1px solid #BFDBFE",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid var(--ads-blue-tint-strong)",
                   }}
                 >
                   {records.length} Logs
                 </span>
               </div>
-              <p style={{ margin: "0.2rem 0 0", fontSize: "0.85rem", color: "#64748B" }}>
+              <p style={{ margin: "0.2rem 0 0", fontSize: "0.85rem", color: "var(--ads-ink-tertiary)" }}>
                 Vehicle: <strong>{vehicle.vin || "Vehicle #" + vehicle.id}</strong>
                 {(vehicle as any).license_plate ? ` (${(vehicle as any).license_plate})` : ""}
               </p>
@@ -270,42 +272,54 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.4rem",
-                  backgroundColor: "#2563EB",
+                  gap: "var(--ads-s2)",
+                  backgroundColor: "var(--ads-blue)",
                   color: "#FFFFFF",
-                  border: "none",
-                  borderRadius: "0.5rem",
-                  padding: "0.5rem 0.9rem",
-                  fontSize: "0.85rem",
+                  border: "1px solid transparent",
+                  borderRadius: "var(--ads-r-pill)",
+                  padding: "9px 18px",
+                  fontSize: "0.8125rem",
                   fontWeight: 600,
+                  letterSpacing: "-0.01em",
                   cursor: "pointer",
-                  transition: "background 0.2s",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue-hover)")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue)")}
+                onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
               >
-                <Plus size={16} />
-                Add PM Log
+                <Plus size={16} color="#FFFFFF" />
+                <span style={{ color: "#FFFFFF" }}>Add PM Log</span>
               </button>
             )}
             <button
               type="button"
               onClick={onClose}
+              aria-label="Close preventive maintenance"
               style={{
+                width: 32,
+                height: 32,
                 background: "transparent",
-                border: "none",
-                color: "#94A3B8",
+                border: "1px solid var(--ads-hairline)",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
-                padding: "0.4rem",
-                borderRadius: "0.375rem",
+                borderRadius: "var(--ads-r-sm)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#1E293B")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#94A3B8")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--ads-ink)";
+                e.currentTarget.style.background = "rgba(0,0,0,0.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--ads-ink-tertiary)";
+                e.currentTarget.style.background = "transparent";
+              }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
         </div>
@@ -314,9 +328,9 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
         {showForm && (
           <div
             style={{
-              padding: "1.25rem 1.75rem",
-              background: "#F8FAFC",
-              borderBottom: "1px solid #E2E8F0",
+              padding: "var(--ads-s5) var(--ads-s6)",
+              background: "rgba(0, 0, 0, 0.025)",
+              borderBottom: "1px solid var(--ads-hairline)",
             }}
           >
             <div
@@ -327,7 +341,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                 marginBottom: "1rem",
               }}
             >
-              <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "#1E293B" }}>
+              <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                 {editingRecord ? "Edit Maintenance Log" : "Add Preventive Maintenance Log"}
               </h3>
               <button
@@ -336,7 +350,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                 style={{
                   background: "transparent",
                   border: "none",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   fontSize: "0.82rem",
                   fontWeight: 600,
                   cursor: "pointer",
@@ -349,11 +363,11 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
             {errorMsg && (
               <div
                 style={{
-                  backgroundColor: "#FEF2F2",
-                  border: "1px solid #FCA5A5",
-                  color: "#DC2626",
+                  backgroundColor: "var(--ads-red-tint)",
+                  border: "1px solid var(--ads-red-tint)",
+                  color: "var(--ads-red)",
                   padding: "0.6rem 0.9rem",
-                  borderRadius: "0.5rem",
+                  borderRadius: "var(--ads-r-sm)",
                   fontSize: "0.82rem",
                   marginBottom: "1rem",
                   display: "flex",
@@ -382,7 +396,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                       display: "block",
                       fontSize: "0.8rem",
                       fontWeight: 600,
-                      color: "#475569",
+                      color: "var(--ads-ink-secondary)",
                       marginBottom: "0.35rem",
                     }}
                   >
@@ -394,10 +408,10 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                     style={{
                       width: "100%",
                       padding: "0.55rem 0.75rem",
-                      borderRadius: "0.5rem",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
-                      color: "#1E293B",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
+                      color: "var(--ads-ink)",
                       fontSize: "0.85rem",
                       outline: "none",
                     }}
@@ -417,7 +431,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                       display: "block",
                       fontSize: "0.8rem",
                       fontWeight: 600,
-                      color: "#475569",
+                      color: "var(--ads-ink-secondary)",
                       marginBottom: "0.35rem",
                     }}
                   >
@@ -432,10 +446,10 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                     style={{
                       width: "100%",
                       padding: "0.55rem 0.75rem",
-                      borderRadius: "0.5rem",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
-                      color: "#1E293B",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
+                      color: "var(--ads-ink)",
                       fontSize: "0.85rem",
                       outline: "none",
                       boxSizing: "border-box",
@@ -450,7 +464,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                       display: "block",
                       fontSize: "0.8rem",
                       fontWeight: 600,
-                      color: "#475569",
+                      color: "var(--ads-ink-secondary)",
                       marginBottom: "0.35rem",
                     }}
                   >
@@ -464,10 +478,10 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                     style={{
                       width: "100%",
                       padding: "0.55rem 0.75rem",
-                      borderRadius: "0.5rem",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
-                      color: "#1E293B",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
+                      color: "var(--ads-ink)",
                       fontSize: "0.85rem",
                       outline: "none",
                       boxSizing: "border-box",
@@ -482,7 +496,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                       display: "block",
                       fontSize: "0.8rem",
                       fontWeight: 600,
-                      color: "#475569",
+                      color: "var(--ads-ink-secondary)",
                       marginBottom: "0.35rem",
                     }}
                   >
@@ -496,10 +510,10 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                     style={{
                       width: "100%",
                       padding: "0.55rem 0.75rem",
-                      borderRadius: "0.5rem",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
-                      color: "#1E293B",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline-strong)",
+                      backgroundColor: "var(--ads-material-thick)",
+                      color: "var(--ads-ink)",
                       fontSize: "0.85rem",
                       outline: "none",
                       boxSizing: "border-box",
@@ -515,7 +529,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                     display: "block",
                     fontSize: "0.8rem",
                     fontWeight: 600,
-                    color: "#475569",
+                    color: "var(--ads-ink-secondary)",
                     marginBottom: "0.35rem",
                   }}
                 >
@@ -529,10 +543,10 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                   style={{
                     width: "100%",
                     padding: "0.55rem 0.75rem",
-                    borderRadius: "0.5rem",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    color: "#1E293B",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline-strong)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.85rem",
                     outline: "none",
                     boxSizing: "border-box",
@@ -541,18 +555,20 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                 />
               </div>
 
-              <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.75rem" }}>
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: "var(--ads-s3)" }}>
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
                   style={{
-                    padding: "0.5rem 1rem",
-                    borderRadius: "0.5rem",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    color: "#64748B",
-                    fontSize: "0.85rem",
+                    padding: "9px 18px",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    boxShadow: "var(--ads-bevel)",
+                    color: "var(--ads-ink)",
+                    fontSize: "0.8125rem",
                     fontWeight: 600,
+                    letterSpacing: "-0.01em",
                     cursor: "pointer",
                   }}
                 >
@@ -564,20 +580,23 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "0.4rem",
-                    padding: "0.5rem 1.25rem",
-                    borderRadius: "0.5rem",
-                    border: "none",
-                    backgroundColor: "#2563EB",
+                    gap: "var(--ads-s2)",
+                    padding: "9px 18px",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid transparent",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
-                    fontSize: "0.85rem",
+                    fontSize: "0.8125rem",
                     fontWeight: 600,
+                    letterSpacing: "-0.01em",
                     cursor: isSubmitting ? "not-allowed" : "pointer",
-                    opacity: isSubmitting ? 0.7 : 1,
+                    opacity: isSubmitting ? 0.4 : 1,
                   }}
                 >
-                  <Save size={16} />
-                  {isSubmitting ? "Saving..." : editingRecord ? "Update Log" : "Save PM Log"}
+                  <Save size={16} color="#FFFFFF" />
+                  <span style={{ color: "#FFFFFF" }}>
+                    {isSubmitting ? "Saving..." : editingRecord ? "Update Log" : "Save PM Log"}
+                  </span>
                 </button>
               </div>
             </form>
@@ -585,7 +604,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
         )}
 
         {/* Content Body */}
-        <div style={{ padding: "1.25rem 1.75rem", flex: 1, overflowY: "auto" }}>
+        <div style={{ padding: "var(--ads-s6)", flex: 1, overflowY: "auto" }}>
           {loading ? (
             <div
               style={{
@@ -594,7 +613,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                 alignItems: "center",
                 justifyContent: "center",
                 padding: "3rem",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
               }}
             >
               <LoadingSpinner size="lg" />
@@ -607,7 +626,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
               style={{
                 textAlign: "center",
                 padding: "3rem 1rem",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
               }}
             >
               <div
@@ -615,8 +634,8 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                   width: "56px",
                   height: "56px",
                   borderRadius: "50%",
-                  background: "#EFF6FF",
-                  color: "#3B82F6",
+                  background: "var(--ads-blue-tint)",
+                  color: "var(--ads-blue)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -625,10 +644,10 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
               >
                 <Wrench size={28} />
               </div>
-              <h4 style={{ margin: "0 0 0.4rem", fontSize: "1.05rem", fontWeight: 700, color: "#1E293B" }}>
+              <h4 style={{ margin: "0 0 0.4rem", fontSize: "1.05rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                 No Preventive Maintenance Records
               </h4>
-              <p style={{ margin: "0 0 1.25rem", fontSize: "0.85rem", color: "#64748B" }}>
+              <p style={{ margin: "0 0 1.25rem", fontSize: "0.85rem", color: "var(--ads-ink-tertiary)" }}>
                 No scheduled service or routine maintenance has been logged for this vehicle yet.
               </p>
               <button
@@ -637,33 +656,44 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.4rem",
-                  backgroundColor: "#2563EB",
+                  gap: "var(--ads-s2)",
+                  backgroundColor: "var(--ads-blue)",
                   color: "#FFFFFF",
-                  border: "none",
-                  borderRadius: "0.5rem",
-                  padding: "0.55rem 1rem",
-                  fontSize: "0.85rem",
+                  border: "1px solid transparent",
+                  borderRadius: "var(--ads-r-pill)",
+                  padding: "9px 18px",
+                  fontSize: "0.8125rem",
                   fontWeight: 600,
+                  letterSpacing: "-0.01em",
                   cursor: "pointer",
                 }}
               >
-                <Plus size={16} />
-                Add First PM Log
+                <Plus size={16} color="#FFFFFF" />
+                <span style={{ color: "#FFFFFF" }}>Add First PM Log</span>
               </button>
             </div>
           ) : (
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s3)" }}>
               {records.map((rec) => (
                 <div
                   key={rec.id}
                   style={{
-                    backgroundColor: "#FFFFFF",
-                    border: "1px solid #E2E8F0",
-                    borderRadius: "0.75rem",
-                    padding: "1rem 1.25rem",
-                    boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05)",
-                    transition: "all 0.15s ease",
+                    background: "var(--ads-material-thick)",
+                    border: "1px solid var(--ads-hairline)",
+                    borderRadius: "var(--ads-r-md)",
+                    padding: "var(--ads-s4) var(--ads-s5)",
+                    boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
+                    transition: "box-shadow var(--ads-dur) var(--ads-ease), transform var(--ads-dur) var(--ads-ease), border-color var(--ads-dur) var(--ads-ease)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+                    e.currentTarget.style.borderColor = "var(--ads-hairline-strong)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "var(--ads-shadow-xs), var(--ads-bevel)";
+                    e.currentTarget.style.borderColor = "var(--ads-hairline)";
                   }}
                 >
                   <div
@@ -689,7 +719,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                             margin: 0,
                             fontSize: "0.95rem",
                             fontWeight: 700,
-                            color: "#1E293B",
+                            color: "var(--ads-ink)",
                           }}
                         >
                           {rec.service_type_name || rec.service_type || "Preventive Maintenance"}
@@ -702,11 +732,11 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                             gap: "0.3rem",
                             fontSize: "0.75rem",
                             fontWeight: 600,
-                            color: "#059669",
-                            backgroundColor: "#ECFDF5",
-                            border: "1px solid #A7F3D0",
+                            color: "var(--ads-green)",
+                            backgroundColor: "var(--ads-green-tint)",
+                            border: "1px solid var(--ads-green-tint)",
                             padding: "0.15rem 0.55rem",
-                            borderRadius: "9999px",
+                            borderRadius: "var(--ads-r-pill)",
                           }}
                         >
                           <CheckCircle2 size={12} />
@@ -722,12 +752,12 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                           gap: "1.25rem",
                           flexWrap: "wrap",
                           fontSize: "0.82rem",
-                          color: "#64748B",
+                          color: "var(--ads-ink-tertiary)",
                           marginBottom: rec.notes ? "0.6rem" : 0,
                         }}
                       >
                         <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
-                          <Calendar size={14} color="#94A3B8" />
+                          <Calendar size={14} color="var(--ads-ink-quaternary)" />
                           <span>
                             Date: <strong>{rec.date ? rec.date.split("T")[0] : "N/A"}</strong>
                           </span>
@@ -735,7 +765,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
 
                         {rec.vendor && (
                           <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
-                            <Building size={14} color="#94A3B8" />
+                            <Building size={14} color="var(--ads-ink-quaternary)" />
                             <span>
                               Vendor: <strong>{rec.vendor}</strong>
                             </span>
@@ -744,7 +774,7 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
 
                         {rec.miles !== undefined && rec.miles !== null && (
                           <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
-                            <Gauge size={14} color="#94A3B8" />
+                            <Gauge size={14} color="var(--ads-ink-quaternary)" />
                             <span>
                               Odometer: <strong>{Number(rec.miles).toLocaleString()} mi</strong>
                             </span>
@@ -756,17 +786,17 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                       {rec.notes && (
                         <div
                           style={{
-                            backgroundColor: "#F8FAFC",
-                            border: "1px solid #F1F5F9",
-                            borderRadius: "0.5rem",
+                            backgroundColor: "var(--ads-canvas)",
+                            border: "1px solid rgba(0,0,0,0.04)",
+                            borderRadius: "var(--ads-r-sm)",
                             padding: "0.5rem 0.75rem",
                             fontSize: "0.82rem",
-                            color: "#334155",
+                            color: "var(--ads-ink-secondary)",
                             marginTop: "0.5rem",
                           }}
                         >
                           <div style={{ display: "flex", alignItems: "flex-start", gap: "0.4rem" }}>
-                            <FileText size={14} color="#64748B" style={{ marginTop: "2px" }} />
+                            <FileText size={14} color="var(--ads-ink-tertiary)" style={{ marginTop: "2px" }} />
                             <span>{rec.notes}</span>
                           </div>
                         </div>
@@ -774,29 +804,32 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                     </div>
 
                     {/* Action buttons */}
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s1)" }}>
                       <button
                         type="button"
                         onClick={() => handleOpenEdit(rec)}
                         title="Edit Log"
+                        aria-label="Edit maintenance log"
                         style={{
-                          background: "#F1F5F9",
-                          border: "none",
-                          borderRadius: "0.375rem",
-                          padding: "0.45rem",
-                          color: "#475569",
+                          width: 32,
+                          height: 32,
+                          background: "transparent",
+                          border: "1px solid var(--ads-hairline)",
+                          borderRadius: "var(--ads-r-sm)",
+                          color: "var(--ads-ink-tertiary)",
                           cursor: "pointer",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
+                          transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = "#E2E8F0";
-                          e.currentTarget.style.color = "#1E293B";
+                          e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)";
+                          e.currentTarget.style.color = "var(--ads-blue)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = "#F1F5F9";
-                          e.currentTarget.style.color = "#475569";
+                          e.currentTarget.style.backgroundColor = "transparent";
+                          e.currentTarget.style.color = "var(--ads-ink-tertiary)";
                         }}
                       >
                         <Edit2 size={15} />
@@ -806,22 +839,25 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
                         type="button"
                         onClick={() => handleDelete(rec.id)}
                         title="Delete Log"
+                        aria-label="Delete maintenance log"
                         style={{
-                          background: "#FEE2E2",
-                          border: "none",
-                          borderRadius: "0.375rem",
-                          padding: "0.45rem",
-                          color: "#DC2626",
+                          width: 32,
+                          height: 32,
+                          background: "var(--ads-red-tint)",
+                          border: "1px solid transparent",
+                          borderRadius: "var(--ads-r-sm)",
+                          color: "var(--ads-red)",
                           cursor: "pointer",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
+                          transition: "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = "#FECACA";
+                          e.currentTarget.style.backgroundColor = "#FBDDE1";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = "#FEE2E2";
+                          e.currentTarget.style.backgroundColor = "var(--ads-red-tint)";
                         }}
                       >
                         <Trash2 size={15} />
@@ -837,28 +873,31 @@ export const VehiclePreventiveModal: FC<VehiclePreventiveModalProps> = ({
         {/* Footer */}
         <div
           style={{
-            padding: "0.875rem 1.75rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            padding: "var(--ads-s4) var(--ads-s6)",
+            borderTop: "1px solid var(--ads-hairline)",
+            background: "transparent",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: "var(--ads-s3)",
           }}
         >
-          <span style={{ fontSize: "0.8rem", color: "#64748B" }}>
+          <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
             Showing live preventive maintenance logs from Fleet MS
           </span>
           <button
             type="button"
             onClick={onClose}
             style={{
-              padding: "0.45rem 1.1rem",
-              borderRadius: "0.5rem",
-              border: "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
-              color: "#334155",
-              fontSize: "0.85rem",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid var(--ads-hairline)",
+              background: "var(--ads-material-thick)",
+              boxShadow: "var(--ads-bevel)",
+              color: "var(--ads-ink)",
+              fontSize: "0.8125rem",
               fontWeight: 600,
+              letterSpacing: "-0.01em",
               cursor: "pointer",
             }}
           >

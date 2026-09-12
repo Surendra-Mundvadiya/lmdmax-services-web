@@ -278,50 +278,9 @@ export const ESignatureView: FC = () => {
         {/* Main Container */}
         <main className="esign-main-container">
         <div className="esign-card-container">
-          {/* 1. Top Header */}
-          <div className="esign-top-header">
-            <div className="esign-header-left">
-              <div className="esign-header-icon-wrap">
-                <FileCheck size={22} />
-              </div>
-              <div className="esign-header-text">
-                <div className="esign-title-row">
-                  <h1 className="esign-title">E-Signature Hub</h1>
-                  {activeStation && (
-                    <span className="esign-station-badge">Station: {activeStation}</span>
-                  )}
-                </div>
-                <p className="esign-subtitle">
-                  Digital policy sign-offs, driver write-ups, infraction notices, and verifiable signature audit trails
-                </p>
-              </div>
-            </div>
+          {/* No Second Header Card — the page title lives in the layout breadcrumb */}
 
-            {/* Action Buttons */}
-            <div className="esign-header-actions">
-              <button
-                type="button"
-                onClick={fetchReportsData}
-                disabled={isRefreshing}
-                className="esign-btn-secondary"
-                title="Refresh live reports"
-              >
-                <RefreshCw size={13} className={isRefreshing ? "animate-spin" : ""} />
-                <span>Refresh</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setIsSendModalOpen(true)}
-                className="esign-btn-primary"
-              >
-                <Plus size={15} strokeWidth={2.5} />
-                <span>Send Form</span>
-              </button>
-            </div>
-          </div>
-
-          {/* 2. Stats Bar */}
+          {/* 1. Stats Bar */}
           <div className="esign-stats-grid">
             <div className="esign-stat-card">
               <span className="esign-stat-label">Total Records</span>
@@ -349,59 +308,74 @@ export const ESignatureView: FC = () => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "0.6rem 1.25rem",
-                backgroundColor: "#ECFDF5",
-                borderBottom: "1px solid #A7F3D0",
-                color: "#065F46",
+                backgroundColor: "var(--ads-green-tint)",
+                borderBottom: "1px solid var(--ads-hairline)",
+                color: "var(--ads-green)",
                 fontSize: "0.775rem",
-                fontWeight: 600,
+                fontWeight: 550,
+                animation: "ads-fade var(--ads-dur) var(--ads-ease)",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <CheckCircle2 size={16} style={{ color: "#10B981" }} />
+                <CheckCircle2 size={16} style={{ color: "var(--ads-green)" }} />
                 <span>{successToast}</span>
               </div>
               <button
                 onClick={() => setSuccessToast(null)}
-                style={{ background: "none", border: "none", color: "#065F46", cursor: "pointer" }}
+                aria-label="Dismiss notification"
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "var(--ads-green)",
+                  cursor: "pointer",
+                  display: "flex",
+                  borderRadius: "var(--ads-r-pill)",
+                }}
               >
                 <X size={14} />
               </button>
             </div>
           )}
 
-          {/* 3. Toolbar: Tabs, Search, Status & Date Navigator */}
+          {/* 2. Toolbar: Tabs, Search, Status, Date Navigator & Actions */}
           <div className="esign-toolbar">
             {/* Tabs */}
-            <div className="esign-tabs-wrap">
-              <button
-                type="button"
-                onClick={() => handleTabChange("acknowledgement")}
-                className={`esign-tab-btn ${activeTab === "acknowledgement" ? "active" : ""}`}
-              >
-                Acknowledgement
-              </button>
-              <button
-                type="button"
-                onClick={() => handleTabChange("writeup")}
-                className={`esign-tab-btn ${activeTab === "writeup" ? "active" : ""}`}
-              >
-                Write-Up
-              </button>
-              <button
-                type="button"
-                onClick={() => handleTabChange("drafts")}
-                className={`esign-tab-btn ${activeTab === "drafts" ? "active" : ""}`}
-              >
-                <span>Drafts</span>
-                {stats.drafts > 0 && <span className="esign-tab-pill">{stats.drafts}</span>}
-              </button>
-              <button
-                type="button"
-                onClick={() => handleTabChange("all")}
-                className={`esign-tab-btn ${activeTab === "all" ? "active" : ""}`}
-              >
-                All Records
-              </button>
+            <div className="esign-toolbar-left">
+              <div className="esign-tabs-wrap">
+                <button
+                  type="button"
+                  onClick={() => handleTabChange("acknowledgement")}
+                  className={`esign-tab-btn ${activeTab === "acknowledgement" ? "active" : ""}`}
+                >
+                  <span>Acknowledgement</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleTabChange("writeup")}
+                  className={`esign-tab-btn ${activeTab === "writeup" ? "active" : ""}`}
+                >
+                  <span>Write-Up</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleTabChange("drafts")}
+                  className={`esign-tab-btn ${activeTab === "drafts" ? "active" : ""}`}
+                >
+                  <span>Drafts</span>
+                  {stats.drafts > 0 && <span className="esign-tab-pill">{stats.drafts}</span>}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleTabChange("all")}
+                  className={`esign-tab-btn ${activeTab === "all" ? "active" : ""}`}
+                >
+                  <span>All Records</span>
+                </button>
+              </div>
+
+              {activeStation && (
+                <span className="esign-station-badge">Station: {activeStation}</span>
+              )}
             </div>
 
             {/* Right Controls */}
@@ -421,6 +395,7 @@ export const ESignatureView: FC = () => {
                     type="button"
                     onClick={() => setSearchQuery("")}
                     className="esign-search-clear"
+                    aria-label="Clear search"
                   >
                     <X size={12} />
                   </button>
@@ -455,17 +430,40 @@ export const ESignatureView: FC = () => {
                     type="button"
                     onClick={() => setDateFilterMode("all")}
                     className="esign-btn-secondary"
-                    style={{ padding: "0.25rem 0.55rem", fontSize: "0.725rem", height: "30px" }}
+                    style={{ padding: "0.25rem 0.7rem", fontSize: "0.725rem", height: "30px" }}
                     title="Clear date filter"
                   >
                     All Dates
                   </button>
                 )}
               </div>
+
+              <span className="esign-toolbar-divider" aria-hidden="true" />
+
+              {/* Relocated page actions — this screen's title is rendered by the layout */}
+              <button
+                type="button"
+                onClick={fetchReportsData}
+                disabled={isRefreshing}
+                className="esign-btn-secondary"
+                title="Refresh live reports"
+              >
+                <RefreshCw size={13} className={isRefreshing ? "animate-spin" : ""} />
+                <span>Refresh</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsSendModalOpen(true)}
+                className="esign-btn-primary"
+              >
+                <Plus size={15} strokeWidth={2.5} />
+                <span>Send Form</span>
+              </button>
             </div>
           </div>
 
-          {/* 4. Data Table Area */}
+          {/* 3. Data Table Area */}
           <div className="esign-table-wrapper">
             {isLoading ? (
               <div
@@ -475,11 +473,11 @@ export const ESignatureView: FC = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   padding: "4rem 1.5rem",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   gap: "0.5rem",
                 }}
               >
-                <Loader2 size={24} className="animate-spin" style={{ color: "#2563EB" }} />
+                <Loader2 size={24} className="animate-spin" style={{ color: "var(--ads-blue)" }} />
                 <span style={{ fontSize: "0.8125rem" }}>Loading live E-Signature records…</span>
               </div>
             ) : filteredReports.length === 0 ? (
@@ -491,7 +489,7 @@ export const ESignatureView: FC = () => {
                   justifyContent: "center",
                   padding: "4rem 1.5rem",
                   textAlign: "center",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   gap: "0.75rem",
                 }}
               >
@@ -499,9 +497,9 @@ export const ESignatureView: FC = () => {
                   style={{
                     width: 50,
                     height: 50,
-                    borderRadius: 12,
-                    backgroundColor: "#EFF6FF",
-                    color: "#2563EB",
+                    borderRadius: "var(--ads-r-md)",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    color: "var(--ads-blue)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -510,10 +508,10 @@ export const ESignatureView: FC = () => {
                   <FileCheck size={26} />
                 </div>
                 <div>
-                  <h3 style={{ margin: 0, fontSize: "0.95rem", fontWeight: 700, color: "#0F172A" }}>
+                  <h3 style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                     No E-Signature documents found
                   </h3>
-                  <p style={{ margin: "0.25rem 0 0", fontSize: "0.775rem", color: "#64748B" }}>
+                  <p style={{ margin: "0.25rem 0 0", fontSize: "0.775rem", color: "var(--ads-ink-tertiary)" }}>
                     {searchQuery
                       ? `No documents match "${searchQuery}"`
                       : "Dispatch a new digital acknowledgement or write-up form using the button below"}
@@ -587,14 +585,14 @@ export const ESignatureView: FC = () => {
                               ))}
                             </div>
                           ) : (
-                            <span style={{ color: "#94A3B8", fontStyle: "italic", fontSize: "0.75rem" }}>
+                            <span style={{ color: "var(--ads-ink-tertiary)", fontStyle: "italic", fontSize: "0.75rem" }}>
                               General Notice
                             </span>
                           )}
                         </td>
 
                         {/* Date */}
-                        <td className="esign-td" style={{ color: "#475569", fontWeight: 500 }}>
+                        <td className="esign-td" style={{ color: "var(--ads-ink-secondary)", fontWeight: 500 }}>
                           {dateStr}
                         </td>
 
@@ -603,21 +601,21 @@ export const ESignatureView: FC = () => {
                           <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
                             {report.channels?.includes("inapp") && (
                               <span title="In-App Chat alert sent">
-                                <Smartphone size={14} style={{ color: "#2563EB" }} />
+                                <Smartphone size={14} style={{ color: "var(--ads-blue)" }} />
                               </span>
                             )}
                             {report.channels?.includes("sms") && (
                               <span title="SMS Message sent">
-                                <MessageSquare size={14} style={{ color: "#059669" }} />
+                                <MessageSquare size={14} style={{ color: "var(--ads-green)" }} />
                               </span>
                             )}
                             {report.channels?.includes("email") && (
                               <span title="Email notification sent">
-                                <Mail size={14} style={{ color: "#7C3AED" }} />
+                                <Mail size={14} style={{ color: "var(--ads-purple)" }} />
                               </span>
                             )}
                             {(!report.channels || report.channels.length === 0) && (
-                              <span style={{ color: "#94A3B8", fontSize: "0.75rem" }}>—</span>
+                              <span style={{ color: "var(--ads-ink-quaternary)", fontSize: "0.75rem" }}>—</span>
                             )}
                           </div>
                         </td>
@@ -656,6 +654,7 @@ export const ESignatureView: FC = () => {
                               onClick={() => setPreviewTarget(report)}
                               className="esign-icon-btn"
                               title="View Document Details & Signatures"
+                              aria-label="View document details and signatures"
                             >
                               <Eye size={14} />
                             </button>
@@ -668,11 +667,12 @@ export const ESignatureView: FC = () => {
                                 disabled={resendingId === report._id}
                                 className="esign-icon-btn"
                                 title="Resend digital sign-off notification"
+                                aria-label="Resend digital sign-off notification"
                               >
                                 {resendingId === report._id ? (
                                   <Loader2 size={14} className="animate-spin" />
                                 ) : (
-                                  <Send size={14} style={{ color: "#059669" }} />
+                                  <Send size={14} style={{ color: "var(--ads-green)" }} />
                                 )}
                               </button>
                             )}
@@ -684,6 +684,7 @@ export const ESignatureView: FC = () => {
                               disabled={downloadingId === report._id}
                               className="esign-icon-btn"
                               title="Download PDF"
+                              aria-label="Download PDF"
                             >
                               {downloadingId === report._id ? (
                                 <Loader2 size={14} className="animate-spin" />
@@ -698,6 +699,7 @@ export const ESignatureView: FC = () => {
                               onClick={() => setDeleteTarget(report)}
                               className="esign-icon-btn danger"
                               title="Delete Record"
+                              aria-label="Delete record"
                             >
                               <Trash2 size={14} />
                             </button>
@@ -747,6 +749,7 @@ export const ESignatureView: FC = () => {
                 onClick={() => setPreviewTarget(null)}
                 className="esign-icon-btn"
                 title="Close"
+                aria-label="Close document preview"
               >
                 <X size={18} />
               </button>
@@ -771,8 +774,8 @@ export const ESignatureView: FC = () => {
             </div>
 
             <div className="esign-modal-footer">
-              <div style={{ fontSize: "0.75rem", color: "#64748B" }}>
-                Status: <strong style={{ color: "#0F172A", textTransform: "capitalize" }}>{previewTarget.status.replace(/_/g, " ")}</strong>
+              <div style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
+                Status: <strong style={{ color: "var(--ads-ink)", textTransform: "capitalize" }}>{previewTarget.status.replace(/_/g, " ")}</strong>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <button
@@ -810,8 +813,8 @@ export const ESignatureView: FC = () => {
                   width: 44,
                   height: 44,
                   borderRadius: "50%",
-                  backgroundColor: "#FEF2F2",
-                  color: "#EF4444",
+                  backgroundColor: "var(--ads-red-tint)",
+                  color: "var(--ads-red)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -820,12 +823,12 @@ export const ESignatureView: FC = () => {
               >
                 <AlertTriangle size={22} />
               </div>
-              <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "#0F172A" }}>
+              <h3 style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 600, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                 Delete E-Signature Document?
               </h3>
-              <p style={{ margin: "0.35rem 0 0", fontSize: "0.775rem", color: "#64748B", lineHeight: 1.4 }}>
+              <p style={{ margin: "0.35rem 0 0", fontSize: "0.8125rem", color: "var(--ads-ink-secondary)", lineHeight: 1.5 }}>
                 Are you sure you want to permanently delete this document for{" "}
-                <strong style={{ color: "#0F172A" }}>{deleteTarget.driver_name}</strong>? This action cannot be undone.
+                <strong style={{ color: "var(--ads-ink)" }}>{deleteTarget.driver_name}</strong>? This action cannot be undone.
               </p>
               <div
                 style={{
@@ -849,17 +852,21 @@ export const ESignatureView: FC = () => {
                   onClick={handleDelete}
                   disabled={deletingId !== null}
                   style={{
-                    backgroundColor: "#DC2626",
+                    backgroundColor: "var(--ads-red)",
                     color: "#FFFFFF",
-                    border: "none",
-                    borderRadius: "8px",
-                    padding: "0.45rem 1rem",
+                    border: "1px solid transparent",
+                    borderRadius: "var(--ads-r-pill)",
+                    padding: "0.45rem 1.05rem",
                     fontSize: "0.8125rem",
-                    fontWeight: 700,
+                    fontWeight: 600,
+                    letterSpacing: "-0.01em",
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
                     gap: "0.4rem",
+                    opacity: deletingId !== null ? 0.4 : 1,
+                    transition:
+                      "opacity var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 >
                   {deletingId ? <Loader2 size={13} className="animate-spin" /> : null}

@@ -147,7 +147,9 @@ export const ChatMessageComposer: FC<ChatMessageComposerProps> = ({
             <button
               type="button"
               onClick={handleRemoveFile}
-              style={{ background: "none", border: "none", color: "#1D4ED8", cursor: "pointer", display: "flex", padding: 0 }}
+              aria-label={`Remove attachment ${selectedFile.name}`}
+              title="Remove attachment"
+              style={{ background: "none", border: "none", color: "var(--ads-blue)", cursor: "pointer", display: "flex", padding: 0 }}
             >
               <X size={13} />
             </button>
@@ -171,6 +173,7 @@ export const ChatMessageComposer: FC<ChatMessageComposerProps> = ({
           type="button"
           onClick={() => fileInputRef.current?.click()}
           className="chat-header-btn chat-composer-icon-btn"
+          aria-label="Attach image or document (max 5MB)"
           title="Attach image or document (max 5MB)"
         >
           <Paperclip size={17} />
@@ -181,6 +184,8 @@ export const ChatMessageComposer: FC<ChatMessageComposerProps> = ({
           <button
             type="button"
             className={`chat-header-btn chat-composer-icon-btn${showEmojiPicker ? " active" : ""}`}
+            aria-label="Insert emoji"
+            aria-expanded={showEmojiPicker}
             title="Insert emoji"
             onClick={() => {
               setShowEmojiPicker((v) => !v);
@@ -211,6 +216,8 @@ export const ChatMessageComposer: FC<ChatMessageComposerProps> = ({
           <button
             type="button"
             className={`chat-header-btn chat-composer-icon-btn${showTemplatePicker ? " active" : ""}`}
+            aria-label="Insert message template"
+            aria-expanded={showTemplatePicker}
             title="Insert message template"
             onClick={() => {
               setShowTemplatePicker((v) => !v);
@@ -223,7 +230,7 @@ export const ChatMessageComposer: FC<ChatMessageComposerProps> = ({
             <div className="chat-composer-popover template-popover">
               <div className="template-popover-header">Communication Templates</div>
               {loadingTemplates ? (
-                <div style={{ padding: "0.85rem", textAlign: "center", fontSize: "0.75rem", color: "#64748B" }}>
+                <div style={{ padding: "0.85rem", textAlign: "center", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                   Loading templates...
                 </div>
               ) : liveTemplates.length > 0 ? (
@@ -248,7 +255,7 @@ export const ChatMessageComposer: FC<ChatMessageComposerProps> = ({
                   </button>
                 ))
               ) : (
-                <div style={{ padding: "0.85rem", textAlign: "center", fontSize: "0.8rem", color: "#64748B" }}>
+                <div style={{ padding: "0.85rem", textAlign: "center", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                   No active templates found. Manage them in See More &gt; Templates.
                 </div>
               )}
@@ -260,6 +267,7 @@ export const ChatMessageComposer: FC<ChatMessageComposerProps> = ({
         <textarea
           ref={textareaRef}
           className="chat-composer-textarea"
+          aria-label={`Message to ${activeThread?.name || "recipient"}`}
           placeholder={`Type a message to ${activeThread?.name || "recipient"}... (Press Enter to send, Shift+Enter for new line)`}
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -273,6 +281,7 @@ export const ChatMessageComposer: FC<ChatMessageComposerProps> = ({
           className="chat-composer-send-btn"
           onClick={handleSubmit}
           disabled={(!text.trim() && !selectedFile) || sending}
+          aria-label="Send message"
           title="Send message (Enter)"
         >
           {sending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}

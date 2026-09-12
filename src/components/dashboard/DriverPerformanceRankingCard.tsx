@@ -49,18 +49,18 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
     const num = score && score > 100 ? (score / 850) * 100 : (score || 95);
 
     if (t.includes("plus") || num >= 99) {
-      return { label: tier || "Fantastic Plus", color: "#7C3AED", bg: "#F5F3FF", border: "#DDD6FE" };
+      return { label: tier || "Fantastic Plus", color: "var(--ads-purple)", bg: "var(--ads-purple-tint)" };
     }
     if (t.includes("fantastic") || num >= 96) {
-      return { label: tier || "Fantastic", color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" };
+      return { label: tier || "Fantastic", color: "#0058B0", bg: "var(--ads-blue-tint)" };
     }
     if (t.includes("great") || num >= 90) {
-      return { label: tier || "Great", color: "#059669", bg: "#ECFDF5", border: "#A7F3D0" };
+      return { label: tier || "Great", color: "var(--ads-green)", bg: "var(--ads-green-tint)" };
     }
     if (t.includes("fair") || num >= 80) {
-      return { label: tier || "Fair", color: "#EA580C", bg: "#FFFBEB", border: "#FED7AA" };
+      return { label: tier || "Fair", color: "var(--ads-amber)", bg: "var(--ads-amber-tint)" };
     }
-    return { label: tier || "Poor", color: "#DC2626", bg: "#FEF2F2", border: "#FECACA" };
+    return { label: tier || "Poor", color: "var(--ads-red)", bg: "var(--ads-red-tint)" };
   };
 
   const currentList = rankingTab === "top" ? topPerformers : bottomPerformers;
@@ -106,16 +106,16 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
               display: "inline-flex",
               alignItems: "center",
               gap: "0.35rem",
-              color: rankingTab === "top" ? "#059669" : "#DC2626",
-              fontWeight: 800,
+              color: rankingTab === "top" ? "var(--ads-green)" : "var(--ads-red)",
+              fontWeight: 600,
               fontSize: "0.725rem",
-              letterSpacing: "0.03em",
+              letterSpacing: "0.06em",
             }}
           >
             {rankingTab === "top" ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
             {rankingTab === "top" ? "TOP 5 PERFORMERS" : "NEEDS COACHING (BOTTOM 5)"}
           </span>
-          <span style={{ fontSize: "0.6875rem", fontWeight: 700, color: "#64748B", letterSpacing: "0.05em" }}>
+          <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--ads-ink-quaternary)", letterSpacing: "0.06em" }}>
             SCORE & STANDING
           </span>
         </div>
@@ -124,7 +124,7 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
         <div className="uop-ranking-list" style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
           {isLoading ? (
             Array.from({ length: 5 }).map((_, idx) => (
-              <div key={idx} className="uop-skeleton" style={{ height: 42, borderRadius: 8 }} />
+              <div key={idx} className="uop-skeleton" style={{ height: 42, borderRadius: "var(--ads-r-sm)" }} />
             ))
           ) : currentList.length === 0 ? (
             <div
@@ -133,9 +133,8 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#94A3B8",
+                color: "var(--ads-ink-tertiary)",
                 fontSize: "0.8125rem",
-                fontStyle: "italic",
                 textAlign: "center",
                 padding: "1rem",
               }}
@@ -160,11 +159,7 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
                     alignItems: "center",
                     justifyContent: "space-between",
                     padding: "0.52rem 0.65rem",
-                    borderRadius: "8px",
-                    backgroundColor: "#F8FAFC",
-                    border: "1px solid #F1F5F9",
                     cursor: "pointer",
-                    transition: "all 0.15s ease",
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", minWidth: 0 }}>
@@ -172,28 +167,24 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
                       style={{
                         width: 24,
                         height: 24,
-                        borderRadius: "6px",
+                        borderRadius: "var(--ads-r-xs)",
                         fontSize: "0.75rem",
-                        fontWeight: 800,
+                        fontWeight: 650,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         flexShrink: 0,
                         backgroundColor: isFirst
-                          ? "#FEF3C7"
+                          ? "var(--ads-amber-tint)"
                           : rankingTab === "top"
-                          ? "#ECFDF5"
-                          : "#FEF2F2",
+                          ? "var(--ads-green-tint)"
+                          : "var(--ads-red-tint)",
                         color: isFirst
-                          ? "#D97706"
+                          ? "var(--ads-amber)"
                           : rankingTab === "top"
-                          ? "#047857"
-                          : "#DC2626",
-                        border: isFirst
-                          ? "1px solid #FDE68A"
-                          : rankingTab === "top"
-                          ? "1px solid #A7F3D0"
-                          : "1px solid #FECACA",
+                          ? "var(--ads-green)"
+                          : "var(--ads-red)",
+                        border: "1px solid transparent",
                       }}
                     >
                       {rankNum}
@@ -201,8 +192,8 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
                     <span
                       style={{
                         fontSize: "0.8125rem",
-                        fontWeight: 700,
-                        color: "#0F172A",
+                        fontWeight: 600,
+                        color: "var(--ads-ink)",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
@@ -216,9 +207,9 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
                     <span
                       style={{
                         fontSize: "0.875rem",
-                        fontWeight: 800,
-                        color: "#0F172A",
-                        letterSpacing: "-0.01em",
+                        fontWeight: 650,
+                        color: "var(--ads-ink)",
+                        letterSpacing: "-0.022em",
                       }}
                     >
                       {scoreOutOf100}
@@ -227,12 +218,12 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
                     <span
                       style={{
                         fontSize: "0.725rem",
-                        fontWeight: 700,
-                        padding: "0.15rem 0.55rem",
-                        borderRadius: "5px",
+                        fontWeight: 600,
+                        padding: "0.18rem 0.6rem",
+                        borderRadius: "var(--ads-r-pill)",
                         backgroundColor: ratingInfo.bg,
                         color: ratingInfo.color,
-                        border: `1px solid ${ratingInfo.border}`,
+                        border: "1px solid transparent",
                         whiteSpace: "nowrap",
                       }}
                     >
@@ -247,7 +238,7 @@ export const DriverPerformanceRankingCard: FC<Props> = ({
       </div>
 
       <div className="uop-card-footer" style={{ marginTop: "auto" }}>
-        <span style={{ fontSize: "0.6875rem", color: "#64748B" }}>
+        <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)" }}>
           Scale: 0 - 100
         </span>
         <span

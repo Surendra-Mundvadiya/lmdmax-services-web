@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
-import { Clock, Plus, AlertCircle, Sparkles } from "lucide-react";
+import { Plus, AlertCircle } from "lucide-react";
+import { ShiftCard } from "./ShiftCard";
 import {
   SchedulerShiftItem,
   SchedulerDriverItem,
@@ -98,25 +99,30 @@ export const ShiftGridDayView: FC<ShiftGridDayViewProps> = ({
             <th
               style={{
                 padding: 0,
-                backgroundColor: "#FFFFFF",
-                borderBottom: "1.5px solid #E2E8F0",
+                background: "var(--ads-material-thick)",
+                WebkitBackdropFilter: "var(--ads-blur-sm)",
+                backdropFilter: "var(--ads-blur-sm)",
+                borderBottom: "1px solid var(--ads-hairline)",
                 position: "sticky",
                 top: 0,
                 zIndex: 30,
               }}
             >
-              <div style={{ display: "flex", width: "100%", minWidth: "800px" }}>
+              <div style={{ display: "flex", width: "100%", minWidth: "min(800px, 100%)" }}>
                 {hours.map((hr, idx) => (
                   <div
                     key={hr}
                     style={{
                       flex: 1,
-                      padding: "0.65rem 0",
+                      minWidth: 0,
+                      padding: "var(--ads-s2) 0",
                       textAlign: "center",
-                      fontSize: "0.6875rem",
+                      fontSize: "clamp(0.5rem, 1vw, 0.6875rem)",
                       fontWeight: 600,
-                      color: "#64748B",
-                      borderRight: idx === hours.length - 1 ? "none" : "1px solid #F1F5F9",
+                      color: "var(--ads-ink-tertiary)",
+                      letterSpacing: "-0.005em",
+                      borderRight:
+                        idx === hours.length - 1 ? "none" : "1px solid var(--ads-hairline)",
                     }}
                   >
                     {String(hr).padStart(2, "0")}:00
@@ -133,7 +139,12 @@ export const ShiftGridDayView: FC<ShiftGridDayViewProps> = ({
             <tr>
               <td
                 colSpan={2}
-                style={{ textAlign: "center", padding: "4rem 1rem", color: "#94A3B8", fontSize: "0.8125rem" }}
+                style={{
+                  textAlign: "center",
+                  padding: "var(--ads-s10) var(--ads-s4)",
+                  color: "var(--ads-ink-tertiary)",
+                  fontSize: "0.8125rem",
+                }}
               >
                 {loading ? "Loading timeline..." : "No drivers found."}
               </td>
@@ -171,12 +182,12 @@ export const ShiftGridDayView: FC<ShiftGridDayViewProps> = ({
                           <span
                             style={{
                               fontSize: "0.625rem",
-                              fontWeight: 700,
-                              color: "#DC2626",
+                              fontWeight: 600,
+                              color: "var(--ads-red)",
                               display: "flex",
                               alignItems: "center",
-                              gap: "0.2rem",
-                              marginTop: "0.2rem",
+                              gap: "var(--ads-s1)",
+                              marginTop: "var(--ads-s1)",
                             }}
                           >
                             <AlertCircle size={10} />
@@ -189,10 +200,10 @@ export const ShiftGridDayView: FC<ShiftGridDayViewProps> = ({
                             style={{
                               display: "inline-flex",
                               alignItems: "center",
-                              gap: "0.2rem",
+                              gap: "var(--ads-s1)",
                               fontSize: "0.625rem",
                               fontWeight: 600,
-                              color: "#2563EB",
+                              color: "var(--ads-blue)",
                               background: "none",
                               border: "none",
                               cursor: "pointer",
@@ -217,10 +228,10 @@ export const ShiftGridDayView: FC<ShiftGridDayViewProps> = ({
                       position: "relative",
                       verticalAlign: "middle",
                       height: "64px",
-                      borderBottom: "1px solid #F1F5F9",
-                      backgroundColor: isDragOver ? "#EFF6FF" : "#FFFFFF",
-                      outline: isDragOver ? "2px dashed #2563EB" : undefined,
-                      transition: "background-color 0.15s ease",
+                      borderBottom: "1px solid var(--ads-hairline)",
+                      backgroundColor: isDragOver ? "var(--ads-blue-tint)" : "transparent",
+                      outline: isDragOver ? "2px dashed var(--ads-blue)" : undefined,
+                      transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     <div
@@ -228,7 +239,7 @@ export const ShiftGridDayView: FC<ShiftGridDayViewProps> = ({
                         position: "relative",
                         width: "100%",
                         height: "100%",
-                        minWidth: "800px",
+                        minWidth: "min(800px, 100%)",
                         display: "flex",
                         alignItems: "center",
                       }}
@@ -247,7 +258,9 @@ export const ShiftGridDayView: FC<ShiftGridDayViewProps> = ({
                             key={hr}
                             style={{
                               flex: 1,
-                              borderRight: idx === hours.length - 1 ? "none" : "1px solid #F8FAFC",
+                              minWidth: 0,
+                              borderRight:
+                                idx === hours.length - 1 ? "none" : "1px solid var(--ads-hairline)",
                             }}
                           />
                         ))}
@@ -258,24 +271,24 @@ export const ShiftGridDayView: FC<ShiftGridDayViewProps> = ({
                         <div
                           style={{
                             position: "absolute",
-                            left: "8px",
-                            right: "8px",
-                            top: "8px",
-                            bottom: "8px",
-                            backgroundColor: "#FEF2F2",
-                            border: "1px solid #FECACA",
-                            borderRadius: "8px",
+                            left: "var(--ads-s2)",
+                            right: "var(--ads-s2)",
+                            top: "var(--ads-s2)",
+                            bottom: "var(--ads-s2)",
+                            background: "var(--ads-red-tint)",
+                            border: "1px solid rgba(215, 0, 21, 0.28)",
+                            borderRadius: "var(--ads-r-sm)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            color: "#B91C1C",
+                            color: "var(--ads-red)",
                             fontSize: "0.75rem",
                             fontWeight: 600,
-                            gap: "0.4rem",
+                            gap: "var(--ads-s1)",
                             zIndex: 10,
                           }}
                         >
-                          <AlertCircle size={14} style={{ color: "#DC2626" }} />
+                          <AlertCircle size={14} />
                           <span>Driver on Approved Leave</span>
                         </div>
                       )}
@@ -294,139 +307,22 @@ export const ShiftGridDayView: FC<ShiftGridDayViewProps> = ({
 
                           const leftPercent = ((startFloat - TIMELINE_START_HOUR) / TOTAL_HOURS) * 100;
                           const widthPercent = ((endFloat - startFloat) / TOTAL_HOURS) * 100;
-                          const isDraft = !shift.is_published;
-                          const isConflict = shift.isConflict;
-                          const isBackup = Boolean(shift.is_backup || shift.sch_status === "backup");
 
                           return (
-                            <div
+                            <ShiftCard
                               key={shift.id}
-                              onClick={() => onEditShift(shift)}
-                              draggable={true}
-                              onDragStart={(e) => {
-                                e.dataTransfer.setData(
-                                  "application/json",
-                                  JSON.stringify({
-                                    shiftId: shift.id,
-                                    assign_to: shift.assign_to,
-                                    schedule_date: shift.schedule_date,
-                                  })
-                                );
-                                e.dataTransfer.effectAllowed = "move";
-                              }}
+                              shift={shift}
+                              density="timeline"
+                              onEdit={onEditShift}
+                              title="Drag to reassign to another driver"
                               style={{
                                 position: "absolute",
                                 left: `${leftPercent}%`,
                                 width: `${widthPercent}%`,
                                 height: "38px",
-                                padding: "0 0.6rem",
-                                borderRadius: "8px",
-                                fontSize: "0.75rem",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                gap: "0.35rem",
-                                cursor: "grab",
                                 zIndex: 15,
-                                userSelect: "none",
-                                transition: "transform 0.15s ease",
-                                backgroundColor: isConflict
-                                  ? "#FEF2F2"
-                                  : isBackup
-                                  ? "#FAF5FF"
-                                  : isDraft
-                                  ? "#FFFBEB"
-                                  : "#2563EB",
-                                border: isConflict
-                                  ? "1.5px solid #F87171"
-                                  : isBackup
-                                  ? "1.5px solid #9333EA"
-                                  : isDraft
-                                  ? "1.5px dashed #F59E0B"
-                                  : "none",
-                                color: isConflict
-                                  ? "#991B1B"
-                                  : isBackup
-                                  ? "#6B21A8"
-                                  : isDraft
-                                  ? "#78350F"
-                                  : "#FFFFFF",
-                                boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
                               }}
-                              title={`Drag to reassign to another driver`}
-                            >
-                              <div style={{ display: "flex", alignItems: "center", gap: "0.3rem", overflow: "hidden" }}>
-                                <Clock size={12} style={{ flexShrink: 0 }} />
-                                <span style={{ fontWeight: 700, whiteSpace: "nowrap" }}>
-                                  {shift.shift_duration_start?.slice(0, 5)} - {shift.shift_duration_end?.slice(0, 5)}
-                                </span>
-                                {shift.route_code && (
-                                  <span
-                                    style={{
-                                      padding: "0.1rem 0.35rem",
-                                      borderRadius: "4px",
-                                      fontSize: "0.625rem",
-                                      fontWeight: 600,
-                                      backgroundColor: isDraft || isConflict || isBackup ? "#FFFFFF" : "#1D4ED8",
-                                      color: isDraft || isConflict ? "#475569" : isBackup ? "#9333EA" : "#FFFFFF",
-                                      border: isDraft || isConflict || isBackup ? "1px solid #E2E8F0" : "none",
-                                    }}
-                                  >
-                                    {shift.route_code}
-                                  </span>
-                                )}
-                              </div>
-
-                              <div>
-                                {isBackup ? (
-                                  <span
-                                    style={{
-                                      fontSize: "0.625rem",
-                                      fontWeight: 700,
-                                      padding: "0.1rem 0.35rem",
-                                      borderRadius: "9999px",
-                                      backgroundColor: "#F3E8FF",
-                                      color: "#6B21A8",
-                                      display: "inline-flex",
-                                      alignItems: "center",
-                                      gap: "2px",
-                                    }}
-                                  >
-                                    <Sparkles size={8} /> Extra
-                                  </span>
-                                ) : isDraft ? (
-                                  <span
-                                    style={{
-                                      fontSize: "0.625rem",
-                                      fontWeight: 700,
-                                      padding: "0.1rem 0.35rem",
-                                      borderRadius: "9999px",
-                                      backgroundColor: "#FEF3C7",
-                                      color: "#B45309",
-                                    }}
-                                  >
-                                    Draft
-                                  </span>
-                                ) : isConflict ? (
-                                  <span
-                                    style={{
-                                      fontSize: "0.625rem",
-                                      fontWeight: 700,
-                                      padding: "0.1rem 0.35rem",
-                                      borderRadius: "9999px",
-                                      backgroundColor: "#FEE2E2",
-                                      color: "#B91C1C",
-                                    }}
-                                  >
-                                    Conflict
-                                  </span>
-                                ) : (
-                                  <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "#BFDBFE" }}>
-                                    {shift.total_hours || "10"}h
-                                  </span>
-                                )}
-                              </div>
-                            </div>
+                            />
                           );
                         })}
 

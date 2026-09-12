@@ -342,6 +342,8 @@ export const CalloutManagementView: FC = () => {
             <button
               type="button"
               onClick={() => setSuccessToast(null)}
+              aria-label="Dismiss message"
+              title="Dismiss"
               style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}
             >
               <X size={14} />
@@ -358,6 +360,8 @@ export const CalloutManagementView: FC = () => {
             <button
               type="button"
               onClick={() => setError(null)}
+              aria-label="Dismiss error"
+              title="Dismiss"
               style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}
             >
               <X size={14} />
@@ -383,6 +387,8 @@ export const CalloutManagementView: FC = () => {
                   type="button"
                   onClick={() => setSearchQuery("")}
                   className="callout-search-clear"
+                  aria-label="Clear search"
+                  title="Clear search"
                 >
                   <X size={12} />
                 </button>
@@ -396,6 +402,7 @@ export const CalloutManagementView: FC = () => {
               disabled={isLoading}
               className="callout-tool-btn"
               title="Refresh Callouts from Live API"
+              aria-label="Refresh Callouts from Live API"
             >
               <RefreshCw size={14} className={isLoading ? "animate-spin" : ""} />
             </button>
@@ -501,14 +508,6 @@ export const CalloutManagementView: FC = () => {
                   type="button"
                   onClick={() => setIsDriverDrawerOpen(true)}
                   className="btn-add-callout-canvas"
-                  style={{
-                    backgroundColor: "#2563EB",
-                    color: "#FFFFFF !important",
-                    border: "1px solid #1D4ED8",
-                    padding: "0.42rem 0.95rem",
-                    borderRadius: "8px",
-                    fontWeight: 700,
-                  }}
                   title="Select drivers to add callout rows"
                 >
                   <Plus size={15} style={{ color: "#FFFFFF" }} />
@@ -523,7 +522,7 @@ export const CalloutManagementView: FC = () => {
         <div className="callout-table-container">
           {isLoading ? (
             <div className="callout-empty-state">
-              <RefreshCw size={26} className="animate-spin" style={{ color: "#2563EB" }} />
+              <RefreshCw size={26} className="animate-spin" style={{ color: "var(--ads-blue)" }} />
               <h3 className="callout-empty-title">Loading Callout Records...</h3>
               <p className="callout-empty-desc">
                 Fetching live callout attendance data from Performance microservice for station {activeStationCode}.
@@ -542,12 +541,7 @@ export const CalloutManagementView: FC = () => {
                 type="button"
                 onClick={() => setIsDriverDrawerOpen(true)}
                 className="btn-add-callout-canvas"
-                style={{
-                  marginTop: "0.5rem",
-                  backgroundColor: "#2563EB",
-                  color: "#FFFFFF !important",
-                  border: "1px solid #1D4ED8",
-                }}
+                style={{ marginTop: "var(--ads-s2)" }}
               >
                 <Users size={15} style={{ color: "#FFFFFF" }} />
                 <span style={{ color: "#FFFFFF" }}>Add Callouts</span>
@@ -577,7 +571,8 @@ export const CalloutManagementView: FC = () => {
                       <tr
                         key={rowKey}
                         style={{
-                          backgroundColor: isRowUnsaved ? "#F8FAFC" : undefined,
+                          backgroundColor: isRowUnsaved ? "rgba(0, 113, 227, 0.055)" : undefined,
+                          boxShadow: isRowUnsaved ? "inset 3px 0 0 0 var(--ads-blue)" : undefined,
                         }}
                       >
                         {/* 1. Driver Name */}
@@ -586,8 +581,8 @@ export const CalloutManagementView: FC = () => {
                             <div
                               className="callout-driver-avatar"
                               style={{
-                                backgroundColor: item.excused === "Yes" ? "#EFF6FF" : "#FFF1F2",
-                                color: item.excused === "Yes" ? "#2563EB" : "#E11D48",
+                                backgroundColor: item.excused === "Yes" ? "var(--ads-green-tint)" : "var(--ads-red-tint)",
+                                color: item.excused === "Yes" ? "var(--ads-green)" : "var(--ads-red)",
                               }}
                             >
                               {(item.name || "D").charAt(0).toUpperCase()}
@@ -598,13 +593,15 @@ export const CalloutManagementView: FC = () => {
                                 {isRowUnsaved && (
                                   <span
                                     style={{
-                                      fontSize: "0.625rem",
-                                      padding: "0.1rem 0.35rem",
-                                      backgroundColor: "#EFF6FF",
-                                      color: "#2563EB",
-                                      fontWeight: 700,
-                                      borderRadius: "4px",
-                                      border: "1px solid #BFDBFE",
+                                      fontSize: "0.6875rem",
+                                      padding: "3px 9px",
+                                      backgroundColor: "var(--ads-amber-tint)",
+                                      color: "var(--ads-amber)",
+                                      fontWeight: 600,
+                                      letterSpacing: "-0.005em",
+                                      lineHeight: 1.4,
+                                      borderRadius: "var(--ads-r-pill)",
+                                      border: "1px solid transparent",
                                     }}
                                   >
                                     Pending
@@ -640,9 +637,9 @@ export const CalloutManagementView: FC = () => {
                               <option
                                 value="add_option"
                                 style={{
-                                  color: "#2563EB",
-                                  fontWeight: 700,
-                                  backgroundColor: "#EFF6FF",
+                                  color: "var(--ads-blue)",
+                                  fontWeight: 600,
+                                  backgroundColor: "var(--ads-blue-tint)",
                                 }}
                               >
                                 + Add option
@@ -709,7 +706,7 @@ export const CalloutManagementView: FC = () => {
                           {isRowUnsaved ? (
                             <span
                               className="callout-msg-badge unsent"
-                              style={{ color: "#64748B", backgroundColor: "#F1F5F9", borderColor: "#E2E8F0" }}
+                              style={{ color: "var(--ads-ink-secondary)", backgroundColor: "rgba(0, 0, 0, 0.05)", borderColor: "transparent" }}
                             >
                               Not Saved
                             </span>
@@ -717,7 +714,7 @@ export const CalloutManagementView: FC = () => {
                             <span className={`callout-msg-badge ${item.msg_sent ? "sent" : "unsent"}`}>
                               {item.msg_sent ? (
                                 <>
-                                  <CheckCircle2 size={12} style={{ color: "#047857" }} />
+                                  <CheckCircle2 size={12} style={{ color: "var(--ads-green)" }} />
                                   <span>Sent</span>
                                 </>
                               ) : (
@@ -738,6 +735,7 @@ export const CalloutManagementView: FC = () => {
                                 disabled={isEditMode}
                                 className="callout-action-btn send"
                                 title={item.msg_sent ? "Resend Callout Message" : "Send Callout Message"}
+                                aria-label={item.msg_sent ? "Resend Callout Message" : "Send Callout Message"}
                               >
                                 <Send size={15} />
                               </button>
@@ -749,6 +747,7 @@ export const CalloutManagementView: FC = () => {
                               onClick={() => handleDeleteRow(item, index)}
                               className="callout-action-btn"
                               title={isRowUnsaved ? "Remove Pending Row" : "Delete Callout Record"}
+                              aria-label={isRowUnsaved ? "Remove Pending Row" : "Delete Callout Record"}
                             >
                               <Trash2 size={15} />
                             </button>
@@ -805,7 +804,7 @@ export const CalloutManagementView: FC = () => {
             <p
               style={{
                 fontSize: "0.8125rem",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 textAlign: "center",
                 margin: 0,
                 lineHeight: 1.5,

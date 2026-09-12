@@ -14,6 +14,7 @@ import {
   WEEKLY_ROSTER_REPORTS,
   ARCHIVED_REPORTS,
 } from "./reports/reportsConfig";
+import "./performance-glass.css";
 
 export type ReportCategoryTab = "daily" | "weekly" | "weekly_roster" | "archive";
 
@@ -102,6 +103,7 @@ export const PerformancePage: FC = () => {
       ) : (
         /* VIEW 2: SEE REPORTS DATA (/performance/reports & /performance) */
         <div
+          className="perf-catalog"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -120,9 +122,9 @@ export const PerformancePage: FC = () => {
               >
                 Reports
               </span>
-              <ChevronRight size={14} style={{ color: "#64748B" }} />
+              <ChevronRight size={14} style={{ color: "var(--ads-ink-quaternary)" }} />
               <span className="upload-breadcrumb-current">Reports Data</span>
-              <ChevronRight size={14} style={{ color: "#64748B" }} />
+              <ChevronRight size={14} style={{ color: "var(--ads-ink-quaternary)" }} />
               <span className="upload-breadcrumb-active-report">
                 {formatReportName(activeReport.label)}
               </span>
@@ -193,24 +195,31 @@ export const PerformancePage: FC = () => {
                         style={{
                           width: "32px",
                           height: "32px",
-                          borderRadius: "8px",
-                          backgroundColor: isActive ? "#EFF6FF" : "#F1F5F9",
-                          border: isActive ? "1px solid #BFDBFE" : "1px solid #E2E8F0",
+                          borderRadius: "var(--ads-r-xs)",
+                          backgroundColor: isActive ? "var(--ads-blue-tint-strong)" : "rgba(0, 0, 0, 0.04)",
+                          border: "1px solid var(--ads-hairline)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                           flexShrink: 0,
+                          transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                         }}
                       >
-                        <ReportIcon id={r.key} active={isActive} color={isActive ? "#2563EB" : "#64748B"} size="1.05rem" />
+                        <ReportIcon
+                          id={r.key}
+                          active={isActive}
+                          color={isActive ? "var(--ads-blue)" : "var(--ads-ink-tertiary)"}
+                          size="1.05rem"
+                        />
                       </div>
 
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div
                           style={{
                             fontSize: "0.8125rem",
-                            fontWeight: isActive ? 700 : 550,
-                            color: isActive ? "#1D4ED8" : "#1E293B",
+                            fontWeight: isActive ? 650 : 550,
+                            letterSpacing: "-0.01em",
+                            color: isActive ? "#0058B0" : "var(--ads-ink)",
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
@@ -223,7 +232,7 @@ export const PerformancePage: FC = () => {
                       <ChevronRight
                         size={14}
                         style={{
-                          color: isActive ? "#2563EB" : "#CBD5E1",
+                          color: isActive ? "var(--ads-blue)" : "var(--ads-ink-quaternary)",
                           flexShrink: 0,
                         }}
                       />

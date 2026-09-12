@@ -108,71 +108,71 @@ export const SchedulerPage: FC = () => {
               {/* In-Card Header */}
               <div
                 style={{
-                  padding: "0.85rem 1.25rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  padding: "var(--ads-s3) var(--ads-s5)",
+                  borderBottom: "1px solid var(--ads-hairline)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                   flexWrap: "wrap",
-                  gap: "0.75rem",
-                  backgroundColor: "rgba(255, 255, 255, 0.98)",
+                  gap: "var(--ads-s3)",
+                  background: "var(--ads-material-thin)",
+                  WebkitBackdropFilter: "var(--ads-blur-lg)",
+                  backdropFilter: "var(--ads-blur-lg)",
                   flexShrink: 0,
                 }}
               >
                 {/* Left: Icon + Title + Count */}
-                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
                   <div
                     style={{
                       width: "38px",
                       height: "38px",
-                      borderRadius: "10px",
-                      backgroundColor: "#EFF6FF",
-                      color: "#2563EB",
+                      borderRadius: "var(--ads-r-sm)",
+                      background: "var(--ads-blue-tint)",
+                      color: "var(--ads-blue)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      border: "1px solid #DBEAFE",
+                      border: "1px solid rgba(0, 113, 227, 0.22)",
                       flexShrink: 0,
                     }}
                   >
                     <Clock size={19} />
                   </div>
                   <div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                      <h3
-                        style={{
-                          margin: 0,
-                          fontSize: "0.9375rem",
-                          fontWeight: 700,
-                          color: "#0F172A",
-                          letterSpacing: "-0.01em",
-                        }}
-                      >
+                    <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+                      <h3 className="ads-h3" style={{ margin: 0 }}>
                         Time Off Requests
                       </h3>
                       <span
                         style={{
                           fontSize: "0.6875rem",
-                          fontWeight: 700,
-                          padding: "0.15rem 0.55rem",
-                          borderRadius: "9999px",
-                          backgroundColor: "#EFF6FF",
-                          color: "#2563EB",
-                          border: "1px solid #BFDBFE",
+                          fontWeight: 600,
+                          padding: "2px var(--ads-s2)",
+                          borderRadius: "var(--ads-r-pill)",
+                          background: "var(--ads-blue-tint)",
+                          color: "var(--ads-blue)",
+                          border: "1px solid rgba(0, 113, 227, 0.22)",
                         }}
                       >
                         {filteredTimeOff.length}{" "}
                         {filteredTimeOff.length === 1 ? "request" : "requests"}
                       </span>
                     </div>
-                    <p style={{ margin: "2px 0 0", fontSize: "0.75rem", color: "#64748B" }}>
+                    <p
+                      style={{
+                        margin: "2px 0 0",
+                        fontSize: "0.75rem",
+                        color: "var(--ads-ink-tertiary)",
+                      }}
+                    >
                       Driver leave and time off submissions requiring review or approval
                     </p>
                   </div>
                 </div>
 
                 {/* Right: In-Card Search and Refresh */}
-                <div style={{ display: "flex", alignItems: "center", gap: "0.65rem", flexWrap: "wrap" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)", flexWrap: "wrap" }}>
                   <div className="standard-search-wrap">
                     <Search size={15} className="standard-search-icon" />
                     <input
@@ -187,12 +187,13 @@ export const SchedulerPage: FC = () => {
                     type="button"
                     onClick={loadTimeOffData}
                     className="upload-action-pill-btn"
+                    aria-label="Refresh time off requests"
                     title="Refresh Time Off Requests"
                   >
                     <RefreshCw
                       size={13}
                       className={loading ? "animate-spin" : ""}
-                      style={{ color: "#2563EB" }}
+                      style={{ color: "var(--ads-blue)" }}
                     />
                     <span>Refresh</span>
                   </button>
@@ -203,8 +204,8 @@ export const SchedulerPage: FC = () => {
               <div
                 className="driver-table-wrapper"
                 style={{
-                  borderBottomLeftRadius: "18px",
-                  borderBottomRightRadius: "18px",
+                  borderBottomLeftRadius: "var(--ads-r-lg)",
+                  borderBottomRightRadius: "var(--ads-r-lg)",
                   flex: 1,
                   overflowY: "auto",
                 }}
@@ -223,9 +224,16 @@ export const SchedulerPage: FC = () => {
                   <tbody>
                     {loading ? (
                       <tr>
-                        <td colSpan={6} style={{ textAlign: "center", padding: "3rem", color: "#64748B" }}>
-                          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                            <RefreshCw size={24} className="animate-spin" style={{ color: "#2563EB" }} />
+                        <td
+                          colSpan={6}
+                          style={{
+                            textAlign: "center",
+                            padding: "var(--ads-s10)",
+                            color: "var(--ads-ink-tertiary)",
+                          }}
+                        >
+                          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--ads-s2)" }}>
+                            <RefreshCw size={24} className="animate-spin" style={{ color: "var(--ads-blue)" }} />
                             <span style={{ fontSize: "0.875rem", fontWeight: 600 }}>
                               Loading time-off requests...
                             </span>
@@ -234,13 +242,20 @@ export const SchedulerPage: FC = () => {
                       </tr>
                     ) : filteredTimeOff.length === 0 ? (
                       <tr>
-                        <td colSpan={6} style={{ textAlign: "center", padding: "3.5rem 1rem", color: "#64748B" }}>
-                          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                            <Clock size={32} style={{ color: "#94A3B8" }} />
-                            <h4 style={{ fontSize: "1rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+                        <td
+                          colSpan={6}
+                          style={{
+                            textAlign: "center",
+                            padding: "var(--ads-s10) var(--ads-s4)",
+                            color: "var(--ads-ink-tertiary)",
+                          }}
+                        >
+                          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--ads-s2)" }}>
+                            <Clock size={32} style={{ color: "var(--ads-ink-quaternary)" }} />
+                            <h4 className="ads-h4" style={{ margin: 0 }}>
                               No Time Off Requests
                             </h4>
-                            <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: 0 }}>
+                            <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: 0 }}>
                               All driver PTO and absence requests will appear here for manager review and approval.
                             </p>
                           </div>
@@ -250,75 +265,50 @@ export const SchedulerPage: FC = () => {
                       filteredTimeOff.map((req) => (
                         <tr key={req.id}>
                           <td>
-                            <span style={{ fontWeight: 650, color: "#0F172A", fontSize: "0.8125rem" }}>
+                            <span style={{ fontWeight: 600, color: "var(--ads-ink)", fontSize: "0.8125rem" }}>
                               {req.driver_name}
                             </span>
                           </td>
                           <td>
-                            <span style={{ fontSize: "0.8125rem", color: "#475569" }}>
+                            <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-secondary)" }}>
                               {req.start_date}
                             </span>
                           </td>
                           <td>
-                            <span style={{ fontSize: "0.8125rem", color: "#475569" }}>
+                            <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-secondary)" }}>
                               {req.end_date}
                             </span>
                           </td>
                           <td>
-                            <span style={{ fontSize: "0.8125rem", color: "#475569" }}>
+                            <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-secondary)" }}>
                               {req.reason || "Personal Leave / PTO"}
                             </span>
                           </td>
                           <td>
                             <span
-                              style={{
-                                display: "inline-block",
-                                padding: "0.2rem 0.55rem",
-                                borderRadius: "9999px",
-                                fontSize: "0.6875rem",
-                                fontWeight: 700,
-                                backgroundColor:
-                                  req.status === "approved"
-                                    ? "#ECFDF5"
-                                    : req.status === "rejected"
-                                    ? "#FEF2F2"
-                                    : "#FFFBEB",
-                                color:
-                                  req.status === "approved"
-                                    ? "#059669"
-                                    : req.status === "rejected"
-                                    ? "#DC2626"
-                                    : "#D97706",
-                                border:
-                                  req.status === "approved"
-                                    ? "1px solid #A7F3D0"
-                                    : req.status === "rejected"
-                                    ? "1px solid #FECACA"
-                                    : "1px solid #FDE68A",
-                                textTransform: "capitalize",
-                              }}
+                              className={`ads-badge ${
+                                req.status === "approved"
+                                  ? "ads-badge--green"
+                                  : req.status === "rejected"
+                                  ? "ads-badge--red"
+                                  : "ads-badge--amber"
+                              }`}
+                              style={{ textTransform: "capitalize" }}
                             >
                               {req.status}
                             </span>
                           </td>
                           <td style={{ textAlign: "right" }}>
                             {req.status === "pending" ? (
-                              <div style={{ display: "flex", gap: "0.35rem", justifyContent: "flex-end" }}>
+                              <div style={{ display: "flex", gap: "var(--ads-s1)", justifyContent: "flex-end" }}>
                                 <button
                                   type="button"
                                   onClick={() => handleTimeOffAction(req.id, "approved")}
+                                  className="ads-btn ads-btn--sm"
                                   style={{
-                                    background: "#ECFDF5",
-                                    border: "1px solid #A7F3D0",
-                                    borderRadius: "8px",
-                                    color: "#059669",
-                                    padding: "0.3rem 0.65rem",
-                                    fontSize: "0.75rem",
-                                    fontWeight: 650,
-                                    cursor: "pointer",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.25rem",
+                                    background: "var(--ads-green-tint)",
+                                    border: "1px solid rgba(36, 138, 61, 0.28)",
+                                    color: "var(--ads-green)",
                                   }}
                                 >
                                   <CheckCircle2 size={13} />
@@ -327,18 +317,11 @@ export const SchedulerPage: FC = () => {
                                 <button
                                   type="button"
                                   onClick={() => handleTimeOffAction(req.id, "rejected")}
+                                  className="ads-btn ads-btn--sm"
                                   style={{
-                                    background: "#FEF2F2",
-                                    border: "1px solid #FECACA",
-                                    borderRadius: "8px",
-                                    color: "#DC2626",
-                                    padding: "0.3rem 0.65rem",
-                                    fontSize: "0.75rem",
-                                    fontWeight: 650,
-                                    cursor: "pointer",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.25rem",
+                                    background: "var(--ads-red-tint)",
+                                    border: "1px solid rgba(215, 0, 21, 0.28)",
+                                    color: "var(--ads-red)",
                                   }}
                                 >
                                   <XCircle size={13} />
@@ -346,7 +329,9 @@ export const SchedulerPage: FC = () => {
                                 </button>
                               </div>
                             ) : (
-                              <span style={{ fontSize: "0.75rem", color: "#94A3B8" }}>Reviewed</span>
+                              <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
+                                Reviewed
+                              </span>
                             )}
                           </td>
                         </tr>

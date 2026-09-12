@@ -95,8 +95,8 @@ export const AccountLinkModal: FC<AccountLinkModalProps> = ({
         </p>
 
         {error && (
-          <div className="error-alert" style={{ marginBottom: "1rem" }}>
-            <AlertCircle size={18} />
+          <div className="error-alert">
+            <AlertCircle size={16} />
             <span>{error}</span>
           </div>
         )}
@@ -120,10 +120,13 @@ export const AccountLinkModal: FC<AccountLinkModalProps> = ({
 
         <form onSubmit={handleLinkAccount} className="auth-form" style={{ marginTop: "1rem" }}>
           <div className="input-group">
-            <label className="input-label">Existing Account Email or Phone</label>
+            <label htmlFor="link-identifier" className="input-label">
+              Existing Account Email or Phone
+            </label>
             <div className="input-field-wrap">
-              <Mail className="input-icon" size={18} />
+              <Mail className="input-icon" size={16} />
               <input
+                id="link-identifier"
                 type="text"
                 className="styled-input"
                 placeholder="name@company.com"
@@ -136,10 +139,13 @@ export const AccountLinkModal: FC<AccountLinkModalProps> = ({
 
           {verificationMethod === "PASSWORD" ? (
             <div className="input-group">
-              <label className="input-label">Account Password</label>
+              <label htmlFor="link-password" className="input-label">
+                Account Password
+              </label>
               <div className="input-field-wrap">
-                <Lock className="input-icon" size={18} />
+                <Lock className="input-icon" size={16} />
                 <input
+                  id="link-password"
                   type="password"
                   className="styled-input"
                   placeholder="••••••••"
@@ -150,9 +156,12 @@ export const AccountLinkModal: FC<AccountLinkModalProps> = ({
             </div>
           ) : (
             <div className="input-group">
-              <label className="input-label">Verification OTP</label>
+              <label htmlFor="link-otp" className="input-label">
+                Verification OTP
+              </label>
               <div className="input-field-wrap">
                 <input
+                  id="link-otp"
                   type="text"
                   maxLength={6}
                   className="styled-input otp-code-input"
@@ -168,14 +177,13 @@ export const AccountLinkModal: FC<AccountLinkModalProps> = ({
             type="submit"
             disabled={isLoading}
             className="primary-submit-btn"
-            style={{ marginTop: "1rem" }}
           >
             {isLoading ? (
               <LoadingSpinner size="sm" color="#FFFFFF" label="Linking..." />
             ) : (
               <>
                 <span>Link & Sign In</span>
-                <ArrowRight size={18} />
+                <ArrowRight size={16} />
               </>
             )}
           </button>

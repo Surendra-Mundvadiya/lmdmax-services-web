@@ -253,6 +253,7 @@ export const DriversPage: FC = () => {
               className="close-notif-btn"
               onClick={() => setNotification(null)}
               title="Dismiss"
+              aria-label="Dismiss"
             >
               <X size={15} />
             </button>
@@ -341,9 +342,9 @@ export const DriversPage: FC = () => {
               >
                 Operations
               </span>
-              <ChevronRight size={14} style={{ color: "#64748B" }} />
+              <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
               <span className="upload-breadcrumb-current">Delivery Associate</span>
-              <ChevronRight size={14} style={{ color: "#64748B" }} />
+              <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
               <span className="upload-breadcrumb-active-report">
                 {activeStationCode} • {statusFilter === "all" ? "All Drivers" : statusFilter === "active" ? "Active Drivers" : "Inactive Drivers"}
               </span>
@@ -406,14 +407,16 @@ export const DriversPage: FC = () => {
             {/* In-Card Header */}
             <div
               style={{
-                padding: "0.85rem 1.25rem",
-                borderBottom: "1px solid #F1F5F9",
+                padding: "var(--ads-s4) var(--ads-s5)",
+                borderBottom: "1px solid var(--ads-hairline)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 flexWrap: "wrap",
-                gap: "0.75rem",
-                backgroundColor: "rgba(255, 255, 255, 0.98)",
+                gap: "var(--ads-s3)",
+                background: "var(--ads-material-thin)",
+                backdropFilter: "var(--ads-blur-sm)",
+                WebkitBackdropFilter: "var(--ads-blur-sm)",
                 flexShrink: 0,
               }}
             >
@@ -423,13 +426,13 @@ export const DriversPage: FC = () => {
                   style={{
                     width: "38px",
                     height: "38px",
-                    borderRadius: "10px",
-                    backgroundColor: "#EFF6FF",
-                    color: "#2563EB",
+                    borderRadius: "var(--ads-r-sm)",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    color: "var(--ads-blue)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    border: "1px solid #DBEAFE",
+                    border: "1px solid transparent",
                     flexShrink: 0,
                   }}
                 >
@@ -440,10 +443,10 @@ export const DriversPage: FC = () => {
                     <h3
                       style={{
                         margin: 0,
-                        fontSize: "0.9375rem",
-                        fontWeight: 700,
-                        color: "#0F172A",
-                        letterSpacing: "-0.01em",
+                        fontSize: "1.0625rem",
+                        fontWeight: 600,
+                        color: "var(--ads-ink)",
+                        letterSpacing: "-0.014em",
                       }}
                     >
                       Delivery Associates
@@ -451,18 +454,20 @@ export const DriversPage: FC = () => {
                     <span
                       style={{
                         fontSize: "0.6875rem",
-                        fontWeight: 700,
-                        padding: "0.15rem 0.55rem",
-                        borderRadius: "9999px",
-                        backgroundColor: "#EFF6FF",
-                        color: "#2563EB",
-                        border: "1px solid #BFDBFE",
+                        fontWeight: 600,
+                        letterSpacing: "-0.005em",
+                        lineHeight: 1.4,
+                        padding: "3px 9px",
+                        borderRadius: "var(--ads-r-pill)",
+                        backgroundColor: "var(--ads-blue-tint)",
+                        color: "#0058B0",
+                        border: "1px solid transparent",
                       }}
                     >
                       {filteredDrivers.length} {filteredDrivers.length === 1 ? "driver" : "drivers"}
                     </span>
                   </div>
-                  <p style={{ margin: "2px 0 0", fontSize: "0.75rem", color: "#64748B" }}>
+                  <p style={{ margin: "2px 0 0", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                     Roster of active and registered delivery associates for station {activeStationCode}
                   </p>
                 </div>
@@ -485,6 +490,7 @@ export const DriversPage: FC = () => {
                       className="standard-search-clear"
                       onClick={() => setSearchQuery("")}
                       title="Clear search"
+                      aria-label="Clear search"
                     >
                       <X size={13} />
                     </button>

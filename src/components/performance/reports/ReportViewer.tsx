@@ -165,11 +165,11 @@ function fmtCell(val: unknown): string {
 
 function tierStyle(val: string) {
   const v = val.toLowerCase();
-  if (v.includes("fantastic plus")) return { bg: "#ECFDF5", fg: "#065F46" };
-  if (v.includes("fantastic")) return { bg: "#D1FAE5", fg: "#047857" };
-  if (v.includes("great")) return { bg: "#EFF6FF", fg: "#1D4ED8" };
-  if (v.includes("fair")) return { bg: "#FFFBEB", fg: "#92400E" };
-  return { bg: "#FEF2F2", fg: "#991B1B" };
+  if (v.includes("fantastic plus")) return { bg: "var(--ads-green-tint)", fg: "var(--ads-green)" };
+  if (v.includes("fantastic")) return { bg: "var(--ads-green-tint)", fg: "var(--ads-green)" };
+  if (v.includes("great")) return { bg: "var(--ads-blue-tint)", fg: "#0058B0" };
+  if (v.includes("fair")) return { bg: "var(--ads-amber-tint)", fg: "var(--ads-amber)" };
+  return { bg: "var(--ads-red-tint)", fg: "var(--ads-red)" };
 }
 
 const HIDDEN = new Set([
@@ -411,20 +411,22 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
         flexDirection: "column",
         height: "100%",
         overflow: "hidden",
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "transparent",
       }}
     >
       {/* ── Workspace Card Header (Matching Upload Reports Layout) ── */}
       <div
         style={{
           padding: "0.85rem 1.25rem",
-          borderBottom: "1px solid #F1F5F9",
+          borderBottom: "1px solid var(--ads-hairline)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           flexWrap: "wrap",
           gap: "0.75rem",
-          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          backgroundColor: "var(--ads-material-thin)",
+          backdropFilter: "var(--ads-blur-sm)",
+          WebkitBackdropFilter: "var(--ads-blur-sm)",
           flexShrink: 0,
         }}
       >
@@ -434,17 +436,17 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
             style={{
               width: "38px",
               height: "38px",
-              borderRadius: "10px",
-              backgroundColor: "#EFF6FF",
-              border: "1px solid #BFDBFE",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-blue-tint)",
+              border: "1px solid var(--ads-hairline)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               flexShrink: 0,
-              boxShadow: "0 2px 6px rgba(37, 99, 235, 0.08)",
+              boxShadow: "var(--ads-shadow-xs)",
             }}
           >
-            <ReportIcon id={report.key} active color="#2563EB" size="1.2rem" />
+            <ReportIcon id={report.key} active color="var(--ads-blue)" size="1.2rem" />
           </div>
 
           <div>
@@ -453,9 +455,9 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                 style={{
                   margin: 0,
                   fontSize: "1.05rem",
-                  fontWeight: 700,
-                  color: "#0F172A",
-                  letterSpacing: "-0.01em",
+                  fontWeight: 650,
+                  color: "var(--ads-ink)",
+                  letterSpacing: "-0.019em",
                 }}
               >
                 {formatReportName(report.label)}
@@ -463,12 +465,12 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
               <span
                 style={{
                   fontSize: "0.6875rem",
-                  fontWeight: 700,
+                  fontWeight: 600,
                   padding: "0.15rem 0.5rem",
-                  borderRadius: "6px",
-                  backgroundColor: "#EFF6FF",
-                  color: "#2563EB",
-                  border: "1px solid #DBEAFE",
+                  borderRadius: "var(--ads-r-pill)",
+                  backgroundColor: "var(--ads-blue-tint)",
+                  color: "#0058B0",
+                  border: "1px solid transparent",
                 }}
               >
                 {report.category === "weekly_roster"
@@ -488,7 +490,7 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
           {/* Calendar Controls */}
           {report.type === "daily" ? (
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "#64748B" }}>
+              <span style={{ fontSize: "0.78rem", fontWeight: 550, color: "var(--ads-ink-tertiary)" }}>
                 Report date:
               </span>
               <AppDateNavigator
@@ -506,9 +508,10 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "0.25rem",
-                  backgroundColor: "#FFFFFF",
-                  border: "1px solid #CBD5E1",
-                  borderRadius: "8px",
+                  backgroundColor: "var(--ads-material-thick)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-sm)",
+                  boxShadow: "var(--ads-bevel)",
                   padding: "0.2rem 0.35rem",
                   position: "relative",
                 }}
@@ -521,12 +524,13 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                     border: "none",
                     cursor: "pointer",
                     padding: "0.25rem",
-                    borderRadius: "6px",
-                    color: "#475569",
+                    borderRadius: "var(--ads-r-xs)",
+                    color: "var(--ads-ink-secondary)",
                     display: "flex",
                     alignItems: "center",
                   }}
                   title="Previous week"
+                  aria-label="Previous week"
                 >
                   <ChevronLeft size={15} />
                 </button>
@@ -539,20 +543,20 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                     border: "none",
                     cursor: "pointer",
                     padding: "0.2rem 0.5rem",
-                    fontWeight: 650,
+                    fontWeight: 600,
                     fontSize: "0.8125rem",
-                    color: "#0F172A",
+                    color: "var(--ads-ink)",
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "0.45rem",
                   }}
                 >
-                  <Calendar size={14} style={{ color: "#2563EB" }} />
+                  <Calendar size={14} style={{ color: "var(--ads-blue)" }} />
                   <span>{currentWeekDetails.label}</span>
-                  <span style={{ fontSize: "0.72rem", color: "#64748B", fontWeight: 500 }}>
+                  <span style={{ fontSize: "0.72rem", color: "var(--ads-ink-tertiary)", fontWeight: 500 }}>
                     ({currentWeekDetails.rangeStr})
                   </span>
-                  <ChevronDown size={13} style={{ color: "#94A3B8" }} />
+                  <ChevronDown size={13} style={{ color: "var(--ads-ink-quaternary)" }} />
                 </button>
 
                 <button
@@ -563,12 +567,13 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                     border: "none",
                     cursor: "pointer",
                     padding: "0.25rem",
-                    borderRadius: "6px",
-                    color: "#475569",
+                    borderRadius: "var(--ads-r-xs)",
+                    color: "var(--ads-ink-secondary)",
                     display: "flex",
                     alignItems: "center",
                   }}
                   title="Next week"
+                  aria-label="Next week"
                 >
                   <ChevronRight size={15} />
                 </button>
@@ -583,12 +588,15 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                       width: "280px",
                       maxHeight: "260px",
                       overflowY: "auto",
-                      backgroundColor: "#FFFFFF",
-                      border: "1px solid #CBD5E1",
-                      borderRadius: "10px",
-                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.15)",
+                      backgroundColor: "var(--ads-material-thick)",
+                      backdropFilter: "var(--ads-blur-lg)",
+                      WebkitBackdropFilter: "var(--ads-blur-lg)",
+                      border: "1px solid var(--ads-hairline)",
+                      borderRadius: "var(--ads-r-md)",
+                      boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
                       zIndex: 100,
                       padding: "0.35rem",
+                      animation: "ads-sheet-in var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     {recentWeeks.map((w) => (
@@ -603,13 +611,13 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                           width: "100%",
                           padding: "0.45rem 0.65rem",
                           textAlign: "left",
-                          background: String(w.code) === String(weekNumber) ? "#EFF6FF" : "transparent",
-                          color: String(w.code) === String(weekNumber) ? "#2563EB" : "#1E293B",
+                          background: String(w.code) === String(weekNumber) ? "var(--ads-blue-tint)" : "transparent",
+                          color: String(w.code) === String(weekNumber) ? "#0058B0" : "var(--ads-ink)",
                           border: "none",
-                          borderRadius: "6px",
+                          borderRadius: "var(--ads-r-xs)",
                           cursor: "pointer",
                           fontSize: "0.8rem",
-                          fontWeight: String(w.code) === String(weekNumber) ? 700 : 500,
+                          fontWeight: String(w.code) === String(weekNumber) ? 650 : 500,
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "space-between",
@@ -617,7 +625,7 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                         }}
                       >
                         <span>{w.label}</span>
-                        <span style={{ fontSize: "0.72rem", color: String(w.code) === String(weekNumber) ? "#2563EB" : "#64748B" }}>
+                        <span style={{ fontSize: "0.72rem", color: String(w.code) === String(weekNumber) ? "#0058B0" : "var(--ads-ink-tertiary)" }}>
                           {w.rangeStr}
                         </span>
                       </button>
@@ -636,14 +644,17 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                 style={{
                   padding: "0.3rem 0.65rem",
                   fontSize: "0.78rem",
-                  fontWeight: isLastWeek(Number(weekNumber)) ? 650 : 500,
-                  borderRadius: "6px",
+                  fontWeight: isLastWeek(Number(weekNumber)) ? 650 : 550,
+                  borderRadius: "var(--ads-r-pill)",
                   border: "1px solid",
                   cursor: "pointer",
-                  backgroundColor: isLastWeek(Number(weekNumber)) ? "#EFF6FF" : "#FFFFFF",
-                  borderColor: isLastWeek(Number(weekNumber)) ? "#BFDBFE" : "#CBD5E1",
-                  color: isLastWeek(Number(weekNumber)) ? "#2563EB" : "#475569",
-                  transition: "all 0.15s ease",
+                  backgroundColor: isLastWeek(Number(weekNumber))
+                    ? "var(--ads-blue-tint)"
+                    : "var(--ads-material-thick)",
+                  borderColor: isLastWeek(Number(weekNumber)) ? "transparent" : "var(--ads-hairline)",
+                  color: isLastWeek(Number(weekNumber)) ? "#0058B0" : "var(--ads-ink-secondary)",
+                  transition:
+                    "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 Last week
@@ -655,14 +666,17 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                 style={{
                   padding: "0.3rem 0.65rem",
                   fontSize: "0.78rem",
-                  fontWeight: isCurrentWeek(Number(weekNumber)) ? 650 : 500,
-                  borderRadius: "6px",
+                  fontWeight: isCurrentWeek(Number(weekNumber)) ? 650 : 550,
+                  borderRadius: "var(--ads-r-pill)",
                   border: "1px solid",
                   cursor: "pointer",
-                  backgroundColor: isCurrentWeek(Number(weekNumber)) ? "#EFF6FF" : "#FFFFFF",
-                  borderColor: isCurrentWeek(Number(weekNumber)) ? "#BFDBFE" : "#CBD5E1",
-                  color: isCurrentWeek(Number(weekNumber)) ? "#2563EB" : "#475569",
-                  transition: "all 0.15s ease",
+                  backgroundColor: isCurrentWeek(Number(weekNumber))
+                    ? "var(--ads-blue-tint)"
+                    : "var(--ads-material-thick)",
+                  borderColor: isCurrentWeek(Number(weekNumber)) ? "transparent" : "var(--ads-hairline)",
+                  color: isCurrentWeek(Number(weekNumber)) ? "#0058B0" : "var(--ads-ink-secondary)",
+                  transition:
+                    "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 Current week
@@ -679,7 +693,7 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                 left: "0.55rem",
                 top: "50%",
                 transform: "translateY(-50%)",
-                color: "#94A3B8",
+                color: "var(--ads-ink-quaternary)",
                 pointerEvents: "none",
               }}
             />
@@ -692,16 +706,24 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                 width: "100%",
                 height: "30px",
                 padding: "0 1.5rem 0 1.8rem",
-                borderRadius: "8px",
-                border: "1px solid #CBD5E1",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
                 fontSize: "0.78rem",
                 outline: "none",
-                backgroundColor: "#F8FAFC",
-                color: "#0F172A",
+                backgroundColor: "var(--ads-material-thick)",
+                color: "var(--ads-ink)",
                 boxSizing: "border-box",
+                transition:
+                  "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
               }}
-              onFocus={(e) => (e.target.style.borderColor = "#2563EB")}
-              onBlur={(e) => (e.target.style.borderColor = "#CBD5E1")}
+              onFocus={(e) => {
+                e.target.style.borderColor = "var(--ads-blue)";
+                e.target.style.boxShadow = "var(--ads-shadow-focus)";
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = "var(--ads-hairline)";
+                e.target.style.boxShadow = "none";
+              }}
             />
             {searchQuery && (
               <button
@@ -714,11 +736,12 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                   transform: "translateY(-50%)",
                   background: "none",
                   border: "none",
-                  color: "#94A3B8",
+                  color: "var(--ads-ink-tertiary)",
                   cursor: "pointer",
                   padding: 0,
                   display: "flex",
                 }}
+                aria-label="Clear table search"
               >
                 <X size={12} />
               </button>
@@ -735,20 +758,32 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                 alignItems: "center",
                 gap: "0.35rem",
                 height: "30px",
-                padding: "0 0.8rem",
-                borderRadius: "8px",
-                backgroundColor: "#2563EB",
+                padding: "0 0.9rem",
+                borderRadius: "var(--ads-r-pill)",
+                backgroundColor: "var(--ads-blue)",
                 color: "#FFFFFF",
                 border: "none",
                 fontSize: "0.78rem",
-                fontWeight: 700,
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
                 cursor: "pointer",
                 whiteSpace: "nowrap",
-                transition: "all 0.12s ease",
-                boxShadow: "0 1px 2px 0 rgba(37, 99, 235, 0.2)",
+                transition:
+                  "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+                boxShadow: "0 1px 3px rgba(0, 113, 227, 0.24)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "var(--ads-blue-hover)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+                e.currentTarget.style.boxShadow = "0 2px 8px rgba(0, 113, 227, 0.32)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "var(--ads-blue)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 1px 3px rgba(0, 113, 227, 0.24)";
+              }}
+              onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+              onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
               title="Dispatch new E-Signature Form"
             >
               <FileCheck size={13} style={{ color: "#FFFFFF" }} />
@@ -766,22 +801,31 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
               alignItems: "center",
               gap: "0.35rem",
               height: "30px",
-              padding: "0 0.75rem",
-              borderRadius: "8px",
-              border: "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
-              color: filteredRows.length === 0 ? "#94A3B8" : "#334155",
+              padding: "0 0.85rem",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid var(--ads-hairline)",
+              backgroundColor: "var(--ads-material-thick)",
+              boxShadow: "var(--ads-bevel)",
+              color: "var(--ads-ink)",
+              opacity: filteredRows.length === 0 ? 0.4 : 1,
               fontSize: "0.78rem",
               fontWeight: 600,
               cursor: filteredRows.length === 0 ? "not-allowed" : "pointer",
               whiteSpace: "nowrap",
-              transition: "all 0.12s ease",
+              transition:
+                "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
             }}
             onMouseEnter={(e) => {
-              if (filteredRows.length > 0) e.currentTarget.style.backgroundColor = "#F8FAFC";
+              if (filteredRows.length > 0) {
+                e.currentTarget.style.backgroundColor = "var(--ads-white)";
+                e.currentTarget.style.borderColor = "var(--ads-hairline-strong)";
+              }
             }}
             onMouseLeave={(e) => {
-              if (filteredRows.length > 0) e.currentTarget.style.backgroundColor = "#FFFFFF";
+              if (filteredRows.length > 0) {
+                e.currentTarget.style.backgroundColor = "var(--ads-material-thick)";
+                e.currentTarget.style.borderColor = "var(--ads-hairline)";
+              }
             }}
           >
             <Download size={13} />
@@ -795,11 +839,11 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
       {!loading && rows.length > 0 && (
         <div
           style={{
-            padding: "0.25rem 1rem",
+            padding: "0.3rem 1rem",
             fontSize: "0.72rem",
-            color: "#64748B",
-            backgroundColor: "#F8FAFC",
-            borderBottom: "1px solid #F1F5F9",
+            color: "var(--ads-ink-tertiary)",
+            backgroundColor: "rgba(0, 0, 0, 0.02)",
+            borderBottom: "1px solid var(--ads-hairline)",
             flexShrink: 0,
             display: "flex",
             alignItems: "center",
@@ -821,27 +865,27 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
           overflowY: "auto",
           overflowX: "auto",
           position: "relative",
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "transparent",
         }}
       >
         {loading ? (
           /* Initial load spinner */
           <div style={CENTERED}>
             <div style={SPINNER} />
-            <span style={{ fontSize: "0.875rem", fontWeight: 600, color: "#475569", marginTop: "0.75rem" }}>
+            <span style={{ fontSize: "0.875rem", fontWeight: 550, color: "var(--ads-ink-secondary)", marginTop: "0.75rem" }}>
               Loading live data…
             </span>
           </div>
         ) : error && rows.length === 0 ? (
           /* Error state */
           <div style={CENTERED}>
-            <div style={{ ...ICON_BOX, backgroundColor: "#FEF2F2", color: "#DC2626" }}>
+            <div style={{ ...ICON_BOX, backgroundColor: "var(--ads-red-tint)", color: "var(--ads-red)" }}>
               <FileSpreadsheet size={22} />
             </div>
-            <p style={{ margin: "0.5rem 0 0", fontSize: "0.875rem", fontWeight: 700, color: "#0F172A" }}>
+            <p style={{ margin: "0.5rem 0 0", fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink)" }}>
               Unable to load data
             </p>
-            <p style={{ margin: "0.25rem 0 0", fontSize: "0.8125rem", color: "#64748B", maxWidth: 360, textAlign: "center", lineHeight: 1.6 }}>
+            <p style={{ margin: "0.25rem 0 0", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", maxWidth: 360, textAlign: "center", lineHeight: 1.6 }}>
               {error}
             </p>
             <button
@@ -855,15 +899,15 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
         ) : filteredRows.length === 0 ? (
           /* Empty state */
           <div style={CENTERED}>
-            <div style={{ ...ICON_BOX, backgroundColor: "#EFF6FF", color: "#2563EB" }}>
+            <div style={{ ...ICON_BOX, backgroundColor: "var(--ads-blue-tint)", color: "var(--ads-blue)" }}>
               <FileSpreadsheet size={22} />
             </div>
-            <p style={{ margin: "0.5rem 0 0", fontSize: "0.875rem", fontWeight: 700, color: "#0F172A" }}>
+            <p style={{ margin: "0.5rem 0 0", fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink)" }}>
               {searchQuery
                 ? `No rows match "${searchQuery}"`
                 : `No data for ${report.type === "weekly" ? `${weekLabel} (${weekRange})` : dateStr}`}
             </p>
-            <p style={{ margin: "0.25rem 0 0", fontSize: "0.8125rem", color: "#64748B", maxWidth: 360, textAlign: "center", lineHeight: 1.6 }}>
+            <p style={{ margin: "0.25rem 0 0", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", maxWidth: 360, textAlign: "center", lineHeight: 1.6 }}>
               {searchQuery
                 ? "Try a different keyword."
                 : "Uploaded reports will appear here automatically."}
@@ -880,7 +924,7 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
               style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.8125rem" }}
             >
               <thead>
-                <tr style={{ position: "sticky", top: 0, backgroundColor: "#F8FAFC", zIndex: 10 }}>
+                <tr style={{ position: "sticky", top: 0, backgroundColor: "var(--ads-material-thick)", zIndex: 10 }}>
                   <th style={TH_NUM}>#</th>
                   {columns.map((col) => (
                     <th key={col} style={TH}>
@@ -893,8 +937,11 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                 {filteredRows.map((row, idx) => (
                   <tr
                     key={row._rowId || idx}
-                    style={{ borderBottom: "1px solid #F1F5F9", transition: "background 0.1s" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F8FAFC")}
+                    style={{
+                      borderBottom: "1px solid var(--ads-hairline)",
+                      transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0, 113, 227, 0.045)")}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                   >
                     <td style={TD_NUM}>{idx + 1}</td>
@@ -908,8 +955,8 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                           key={col}
                           style={{
                             padding: "0.55rem 0.85rem",
-                            color: isName ? "#0F172A" : "#334155",
-                            fontWeight: isName ? 650 : 400,
+                            color: isName ? "var(--ads-ink)" : "var(--ads-ink-secondary)",
+                            fontWeight: isName ? 600 : 400,
                             whiteSpace: "nowrap",
                           }}
                         >
@@ -921,9 +968,9 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                                   style={{
                                     display: "inline-block",
                                     padding: "0.15rem 0.55rem",
-                                    borderRadius: "9999px",
+                                    borderRadius: "var(--ads-r-pill)",
                                     fontSize: "0.6875rem",
-                                    fontWeight: 700,
+                                    fontWeight: 600,
                                     textTransform: "capitalize",
                                     backgroundColor: ts.bg,
                                     color: ts.fg,
@@ -934,7 +981,7 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                               );
                             })()
                           ) : val === "—" ? (
-                            <span style={{ color: "#CBD5E1" }}>—</span>
+                            <span style={{ color: "var(--ads-ink-quaternary)" }}>—</span>
                           ) : (
                             val
                           )}
@@ -958,7 +1005,7 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                   justifyContent: "center",
                   gap: "0.5rem",
                   padding: "1rem",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   fontSize: "0.8125rem",
                 }}
               >
@@ -974,8 +1021,8 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
                   textAlign: "center",
                   padding: "0.75rem",
                   fontSize: "0.72rem",
-                  color: "#94A3B8",
-                  borderTop: "1px solid #F1F5F9",
+                  color: "var(--ads-ink-tertiary)",
+                  borderTop: "1px solid var(--ads-hairline)",
                 }}
               >
                 All {rows.length} records loaded
@@ -1006,17 +1053,17 @@ export const ReportViewer: FC<ReportViewerProps> = ({ report }) => {
 // ── Shared styles ─────────────────────────────────────────────────────────────
 
 const NAV_BTN: React.CSSProperties = {
-  border: "1px solid #CBD5E1",
-  backgroundColor: "#FFFFFF",
-  borderRadius: "8px",
+  border: "1px solid var(--ads-hairline)",
+  backgroundColor: "var(--ads-material-thick)",
+  borderRadius: "var(--ads-r-sm)",
   width: "30px",
   height: "30px",
   cursor: "pointer",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: "#475569",
-  transition: "all 0.12s ease",
+  color: "var(--ads-ink-secondary)",
+  transition: "all var(--ads-dur-fast) var(--ads-ease)",
   padding: 0,
   flexShrink: 0,
 };
@@ -1028,11 +1075,11 @@ const WEEK_PILL: React.CSSProperties = {
   gap: "0.4rem",
   height: "30px",
   padding: "0 0.7rem",
-  backgroundColor: "#EFF6FF",
-  border: "1px solid #BFDBFE",
-  borderRadius: "8px",
+  backgroundColor: "var(--ads-blue-tint)",
+  border: "1px solid transparent",
+  borderRadius: "var(--ads-r-pill)",
   fontSize: "0.8rem",
-  color: "#1D4ED8",
+  color: "#0058B0",
   whiteSpace: "nowrap",
   cursor: "pointer",
   userSelect: "none",
@@ -1045,28 +1092,28 @@ const DATE_PILL: React.CSSProperties = {
   gap: "0.4rem",
   height: "30px",
   padding: "0 0.7rem",
-  backgroundColor: "#F0FDF4",
-  border: "1px solid #BBF7D0",
-  borderRadius: "8px",
+  backgroundColor: "var(--ads-green-tint)",
+  border: "1px solid transparent",
+  borderRadius: "var(--ads-r-pill)",
   fontSize: "0.8rem",
-  fontWeight: 700,
-  color: "#047857",
+  fontWeight: 600,
+  color: "var(--ads-green)",
   whiteSpace: "nowrap",
   cursor: "pointer",
   userSelect: "none",
 };
 
 const TODAY_BTN: React.CSSProperties = {
-  border: "1px solid #BFDBFE",
-  backgroundColor: "#EFF6FF",
-  borderRadius: "8px",
+  border: "1px solid transparent",
+  backgroundColor: "var(--ads-blue-tint)",
+  borderRadius: "var(--ads-r-pill)",
   height: "30px",
   padding: "0 0.65rem",
   cursor: "pointer",
   fontSize: "0.75rem",
-  fontWeight: 700,
-  color: "#2563EB",
-  transition: "all 0.12s ease",
+  fontWeight: 600,
+  color: "#0058B0",
+  transition: "all var(--ads-dur-fast) var(--ads-ease)",
   whiteSpace: "nowrap",
 };
 
@@ -1082,7 +1129,7 @@ const CENTERED: React.CSSProperties = {
 const ICON_BOX: React.CSSProperties = {
   width: 48,
   height: 48,
-  borderRadius: "12px",
+  borderRadius: "var(--ads-r-md)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -1092,63 +1139,70 @@ const SPINNER: React.CSSProperties = {
   width: 40,
   height: 40,
   borderRadius: "50%",
-  border: "3px solid #EFF6FF",
-  borderTopColor: "#2563EB",
+  border: "3px solid var(--ads-blue-tint)",
+  borderTopColor: "var(--ads-blue)",
   animation: "spin 0.7s linear infinite",
 };
 
 const RETRY_BTN: React.CSSProperties = {
   marginTop: "0.75rem",
-  padding: "0.4rem 1rem",
-  borderRadius: "8px",
+  padding: "0.45rem 1.1rem",
+  borderRadius: "var(--ads-r-pill)",
   border: "none",
-  backgroundColor: "#2563EB",
+  backgroundColor: "var(--ads-blue)",
   color: "#FFFFFF",
   fontWeight: 600,
+  letterSpacing: "-0.01em",
   fontSize: "0.8125rem",
   cursor: "pointer",
+  boxShadow: "0 1px 3px rgba(0, 113, 227, 0.24)",
+  transition:
+    "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
 };
 
 const CLEAR_BTN: React.CSSProperties = {
   marginTop: "0.6rem",
-  padding: "0.35rem 0.9rem",
-  borderRadius: "8px",
-  border: "1px solid #CBD5E1",
-  backgroundColor: "#FFFFFF",
-  color: "#334155",
+  padding: "0.4rem 1rem",
+  borderRadius: "var(--ads-r-pill)",
+  border: "1px solid var(--ads-hairline)",
+  backgroundColor: "var(--ads-material-thick)",
+  boxShadow: "var(--ads-bevel)",
+  color: "var(--ads-ink)",
   fontSize: "0.8125rem",
   fontWeight: 600,
   cursor: "pointer",
+  transition:
+    "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
 };
 
 const TH_NUM: React.CSSProperties = {
   width: "44px",
   textAlign: "center",
   padding: "0.55rem 0.5rem",
-  borderBottom: "2px solid #E2E8F0",
-  fontSize: "0.75rem",
-  fontWeight: 700,
-  color: "#94A3B8",
-  textTransform: "capitalize",
-  letterSpacing: "0.02em",
+  borderBottom: "1px solid var(--ads-hairline)",
+  fontSize: "0.6875rem",
+  fontWeight: 600,
+  color: "var(--ads-ink-tertiary)",
+  textTransform: "uppercase",
+  letterSpacing: "0.04em",
 };
 
 const TH: React.CSSProperties = {
   textAlign: "left",
   padding: "0.55rem 0.85rem",
-  borderBottom: "2px solid #E2E8F0",
-  fontSize: "0.75rem",
-  fontWeight: 700,
-  color: "#475569",
-  textTransform: "capitalize",
-  letterSpacing: "0.02em",
+  borderBottom: "1px solid var(--ads-hairline)",
+  fontSize: "0.6875rem",
+  fontWeight: 600,
+  color: "var(--ads-ink-tertiary)",
+  textTransform: "uppercase",
+  letterSpacing: "0.04em",
   whiteSpace: "nowrap",
 };
 
 const TD_NUM: React.CSSProperties = {
   textAlign: "center",
   padding: "0.55rem 0.5rem",
-  color: "#CBD5E1",
+  color: "var(--ads-ink-quaternary)",
   fontWeight: 600,
   fontSize: "0.72rem",
 };

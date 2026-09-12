@@ -25,6 +25,7 @@ import {
   UpdateTemplatePayload,
 } from "../../api/templatesApi";
 import { useAdminStore } from "../../store/adminStore";
+import "./templates-apple.css";
 
 export const TemplatesPage: FC = () => {
   const navigate = useNavigate();
@@ -256,9 +257,9 @@ export const TemplatesPage: FC = () => {
               >
                 Utilities
               </span>
-              <ChevronRight size={14} style={{ color: "#64748B" }} />
+              <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
               <span className="upload-breadcrumb-current">Templates</span>
-              <ChevronRight size={14} style={{ color: "#64748B" }} />
+              <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
               <span className="upload-breadcrumb-active-report">
                 {statusFilter === "all"
                   ? "All Templates"
@@ -325,7 +326,7 @@ export const TemplatesPage: FC = () => {
                   disabled={isCopyingDefaults}
                   title="Copy standard boilerplate templates"
                 >
-                  <Copy size={14} style={{ color: "#2563EB" }} />
+                  <Copy size={14} style={{ color: "var(--ads-blue)" }} />
                   <span>{isCopyingDefaults ? "Copying..." : "Copy Defaults"}</span>
                 </button>
               )}
@@ -346,6 +347,7 @@ export const TemplatesPage: FC = () => {
                   type="button"
                   className="close-notif-btn"
                   onClick={() => setNotification(null)}
+                  aria-label="Dismiss notification"
                   title="Dismiss"
                 >
                   <X size={15} />
@@ -359,30 +361,32 @@ export const TemplatesPage: FC = () => {
             {/* In-Card Top Header */}
             <div
               style={{
-                padding: "0.85rem 1.25rem",
-                borderBottom: "1px solid #F1F5F9",
+                padding: "var(--ads-s3) var(--ads-s5)",
+                borderBottom: "1px solid var(--ads-hairline)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 flexWrap: "wrap",
-                gap: "0.75rem",
-                backgroundColor: "rgba(255, 255, 255, 0.98)",
+                gap: "var(--ads-s3)",
+                background: "var(--ads-material-thin)",
+                backdropFilter: "var(--ads-blur-lg)",
+                WebkitBackdropFilter: "var(--ads-blur-lg)",
                 flexShrink: 0,
               }}
             >
               {/* Left: Squircle Icon + Title + Count Pill */}
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
                 <div
                   style={{
                     width: "38px",
                     height: "38px",
-                    borderRadius: "10px",
-                    backgroundColor: "#EFF6FF",
-                    color: "#2563EB",
+                    borderRadius: "var(--ads-r-sm)",
+                    background: "var(--ads-blue-tint)",
+                    color: "var(--ads-blue)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    border: "1px solid #DBEAFE",
+                    border: "1px solid transparent",
                     flexShrink: 0,
                   }}
                 >
@@ -394,8 +398,8 @@ export const TemplatesPage: FC = () => {
                       style={{
                         margin: 0,
                         fontSize: "0.9375rem",
-                        fontWeight: 700,
-                        color: "#0F172A",
+                        fontWeight: 600,
+                        color: "var(--ads-ink)",
                         letterSpacing: "-0.01em",
                       }}
                     >
@@ -404,12 +408,12 @@ export const TemplatesPage: FC = () => {
                     <span
                       style={{
                         fontSize: "0.6875rem",
-                        fontWeight: 700,
-                        padding: "0.15rem 0.55rem",
-                        borderRadius: "9999px",
-                        backgroundColor: "#EFF6FF",
-                        color: "#2563EB",
-                        border: "1px solid #BFDBFE",
+                        fontWeight: 600,
+                        padding: "3px 9px",
+                        borderRadius: "var(--ads-r-pill)",
+                        background: "var(--ads-blue-tint)",
+                        color: "#0058B0",
+                        border: "1px solid transparent",
                       }}
                     >
                       {statusFilter === "active"
@@ -419,7 +423,7 @@ export const TemplatesPage: FC = () => {
                         : `${filteredTemplates.length} total`}
                     </span>
                   </div>
-                  <p style={{ margin: "2px 0 0", fontSize: "0.75rem", color: "#64748B" }}>
+                  <p style={{ margin: "2px 0 0", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                     Company standardized communication and operational templates
                   </p>
                 </div>
@@ -431,6 +435,7 @@ export const TemplatesPage: FC = () => {
                 <input
                   type="text"
                   className="standard-search-input"
+                  aria-label="Search templates"
                   placeholder="Search Templates..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -440,6 +445,7 @@ export const TemplatesPage: FC = () => {
                     type="button"
                     className="standard-search-clear"
                     onClick={() => setSearchQuery("")}
+                    aria-label="Clear search"
                     title="Clear search"
                   >
                     <X size={13} />
@@ -450,15 +456,42 @@ export const TemplatesPage: FC = () => {
 
             {/* Optional Service Notice */}
             {serviceNotice && (
-              <div className="mx-6 mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-between text-xs text-amber-800">
-                <div className="flex items-center gap-2">
-                  <AlertCircle size={16} className="text-amber-600 shrink-0" />
+              <div
+                style={{
+                  margin: "var(--ads-s3) var(--ads-s5) 0",
+                  padding: "var(--ads-s3) var(--ads-s4)",
+                  background: "var(--ads-amber-tint)",
+                  border: "1px solid rgba(178, 80, 0, 0.22)",
+                  borderRadius: "var(--ads-r-md)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "var(--ads-s3)",
+                  fontSize: "0.75rem",
+                  lineHeight: 1.45,
+                  color: "var(--ads-amber)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+                  <AlertCircle size={16} style={{ color: "var(--ads-amber)", flexShrink: 0 }} />
                   <span>{serviceNotice}</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => loadTemplates()}
-                  className="px-2.5 py-1 text-xs font-semibold text-amber-900 bg-amber-100 hover:bg-amber-200 rounded border border-amber-300 transition-colors shrink-0 ml-3"
+                  style={{
+                    flexShrink: 0,
+                    padding: "5px 13px",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid rgba(178, 80, 0, 0.28)",
+                    background: "var(--ads-white)",
+                    fontSize: "0.75rem",
+                    fontWeight: 600,
+                    color: "var(--ads-amber)",
+                    cursor: "pointer",
+                    transition:
+                      "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+                  }}
                 >
                   Retry
                 </button>

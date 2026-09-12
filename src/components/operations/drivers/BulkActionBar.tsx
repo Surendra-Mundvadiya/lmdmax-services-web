@@ -43,7 +43,7 @@ export const BulkActionBar: FC<BulkActionBarProps> = ({
   return (
     <div className="bulk-action-bar-container">
       <div className="bulk-bar-left">
-        <CheckSquare size={16} className="text-blue-600" />
+        <CheckSquare size={16} style={{ color: "var(--ads-blue)" }} />
         <span className="bulk-selected-count">
           <strong>{count}</strong> of {totalCount} drivers selected
         </span>

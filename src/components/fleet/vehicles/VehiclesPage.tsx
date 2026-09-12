@@ -31,6 +31,175 @@ interface VehiclesPageProps {
   mode?: "list" | "add" | "edit";
 }
 
+interface VehicleActionMenuProps {
+  vehicle: Vehicle;
+  isOpen: boolean;
+  placement: "below" | "above";
+  onToggle: () => void;
+  onViewDetails: () => void;
+  onEdit: () => void;
+  onBodyDamage: () => void;
+  onMechanicalIssues: () => void;
+  onPreventive: () => void;
+  onTimeline: () => void;
+  onDelete: (e: React.MouseEvent) => void;
+}
+
+const actionMenuItemStyle: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  gap: "var(--ads-s3)",
+  width: "100%",
+  padding: "8px 12px",
+  border: "1px solid transparent",
+  borderRadius: "var(--ads-r-sm)",
+  background: "transparent",
+  color: "var(--ads-ink-secondary)",
+  fontSize: "0.8125rem",
+  fontWeight: 550,
+  letterSpacing: "-0.005em",
+  textAlign: "left",
+  cursor: "pointer",
+  transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
+};
+
+const actionMenuDivider = (
+  <div
+    style={{
+      height: "1px",
+      backgroundColor: "var(--ads-hairline)",
+      margin: "var(--ads-s1) 6px",
+    }}
+  />
+);
+
+const VehicleActionMenu: FC<VehicleActionMenuProps> = ({
+  vehicle,
+  isOpen,
+  placement,
+  onToggle,
+  onViewDetails,
+  onEdit,
+  onBodyDamage,
+  onMechanicalIssues,
+  onPreventive,
+  onTimeline,
+  onDelete,
+}) => {
+  const items: Array<{
+    key: string;
+    label: string;
+    icon: React.ReactNode;
+    danger?: boolean;
+    dividerBefore?: boolean;
+    onSelect: (e: React.MouseEvent) => void;
+  }> = [
+    { key: "view", label: "View Details", icon: <Eye size={15} color="var(--ads-blue)" />, onSelect: onViewDetails },
+    { key: "edit", label: "Edit Vehicle", icon: <Edit2 size={15} color="var(--ads-green)" />, onSelect: onEdit },
+    { key: "body", label: "Body Damage", icon: <ShieldAlert size={15} color="var(--ads-red)" />, dividerBefore: true, onSelect: onBodyDamage },
+    { key: "mechanical", label: "Mechanical Issues", icon: <AlertTriangle size={15} color="var(--ads-amber)" />, onSelect: onMechanicalIssues },
+    { key: "preventive", label: "Preventive Maintenance", icon: <Wrench size={15} color="var(--ads-blue)" />, onSelect: onPreventive },
+    { key: "timeline", label: "Vehicle Timeline", icon: <Clock size={15} color="var(--ads-purple)" />, onSelect: onTimeline },
+    { key: "delete", label: "Delete Vehicle", icon: <Trash2 size={15} color="var(--ads-red)" />, danger: true, dividerBefore: true, onSelect: onDelete },
+  ];
+
+  return (
+    <div
+      style={{ position: "relative", display: "inline-block" }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={isOpen}
+        aria-label={`Actions for ${vehicle.name}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          onToggle();
+        }}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "var(--ads-s2)",
+          padding: "6px 13px",
+          borderRadius: "var(--ads-r-pill)",
+          border: "1px solid " + (isOpen ? "transparent" : "var(--ads-hairline)"),
+          background: isOpen ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+          color: isOpen ? "var(--ads-blue)" : "var(--ads-ink-secondary)",
+          fontSize: "0.75rem",
+          fontWeight: 600,
+          letterSpacing: "-0.01em",
+          cursor: "pointer",
+          boxShadow: isOpen ? "none" : "var(--ads-bevel)",
+          transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+        }}
+        onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+        onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+      >
+        <span>Actions</span>
+        <MoreVertical size={14} />
+      </button>
+
+      {isOpen && (
+        <div
+          role="menu"
+          style={{
+            position: "absolute",
+            right: 0,
+            ...(placement === "above"
+              ? { bottom: "calc(100% + var(--ads-s2))" }
+              : { top: "calc(100% + var(--ads-s2))" }),
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-lg)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            borderRadius: "var(--ads-r-md)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+            border: "1px solid var(--ads-hairline)",
+            padding: "var(--ads-s1)",
+            zIndex: 9999,
+            minWidth: "220px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "2px",
+            animation: "ads-sheet-in var(--ads-dur-fast) var(--ads-ease)",
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {items.map((item) => (
+            <React.Fragment key={item.key}>
+              {item.dividerBefore && actionMenuDivider}
+              <button
+                type="button"
+                role="menuitem"
+                onClick={item.onSelect}
+                style={{
+                  ...actionMenuItemStyle,
+                  color: item.danger ? "var(--ads-red)" : "var(--ads-ink-secondary)",
+                  fontWeight: item.danger ? 600 : 550,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = item.danger
+                    ? "var(--ads-red-tint)"
+                    : "rgba(0, 0, 0, 0.05)";
+                  if (!item.danger) e.currentTarget.style.color = "var(--ads-ink)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  if (!item.danger) e.currentTarget.style.color = "var(--ads-ink-secondary)";
+                }}
+              >
+                {item.icon}
+                <span>{item.label}</span>
+              </button>
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -189,7 +358,7 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
     >
       <div
         className="operations-main-content scrollable"
-        style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0, gap: "0.85rem" }}
+        style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0, gap: "var(--ads-s3)" }}
       >
         {/* ADD VEHICLE SCREEN */}
         {screenMode === "add" && (
@@ -225,9 +394,9 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                 >
                   Global Utilities
                 </span>
-                <ChevronRight size={14} style={{ color: "#64748B" }} />
+                <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
                 <span className="upload-breadcrumb-current">Vehicles</span>
-                <ChevronRight size={14} style={{ color: "#64748B" }} />
+                <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
                 <span className="upload-breadcrumb-active-report">
                   {statusFilter === "all"
                     ? "All Vehicles"
@@ -242,7 +411,7 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
               </div>
 
               {/* Right: View by Capsule Pills + Add Vehicle Primary Action */}
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)", flexWrap: "wrap" }}>
                 <div className="upload-view-by-wrap">
                   <span className="upload-view-by-label">View by</span>
                   <div className="upload-segmented-capsule">
@@ -302,7 +471,7 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "0.4rem",
-                    backgroundColor: "#2563EB",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
                     fontWeight: 600,
                   }}
@@ -319,13 +488,13 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.75rem",
-                  backgroundColor: "#FEF2F2",
-                  border: "1px solid #FCA5A5",
-                  color: "#991B1B",
-                  padding: "0.85rem 1.25rem",
-                  borderRadius: "10px",
-                  fontSize: "0.875rem",
+                  gap: "var(--ads-s3)",
+                  backgroundColor: "var(--ads-red-tint)",
+                  border: "1px solid transparent",
+                  color: "var(--ads-red)",
+                  padding: "var(--ads-s3) var(--ads-s5)",
+                  borderRadius: "var(--ads-r-md)",
+                  fontSize: "0.8125rem",
                 }}
               >
                 <AlertCircle size={18} />
@@ -337,7 +506,7 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                     marginLeft: "auto",
                     background: "none",
                     border: "none",
-                    color: "#2563EB",
+                    color: "var(--ads-blue)",
                     fontWeight: 700,
                     cursor: "pointer",
                     textDecoration: "underline",
@@ -351,14 +520,16 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
             {/* ── 2. White Card Container with In-Card Search & Table/Grid ── */}
             <div
               style={{
-                backgroundColor: "#FFFFFF",
-                borderRadius: "14px",
-                border: "1px solid #E2E8F0",
-                boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
-                padding: "1rem 1.25rem",
+                background: "var(--ads-material-thick)",
+                backdropFilter: "var(--ads-blur-md)",
+                WebkitBackdropFilter: "var(--ads-blur-md)",
+                borderRadius: "var(--ads-r-lg)",
+                border: "1px solid var(--ads-hairline)",
+                boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
+                padding: "var(--ads-s4) var(--ads-s5)",
                 display: "flex",
                 flexDirection: "column",
-                gap: "1rem",
+                gap: "var(--ads-s4)",
               }}
             >
               {/* In-Card Search Toolbar & View Toggles */}
@@ -375,7 +546,7 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                 <div style={{ position: "relative", flex: 1, minWidth: "260px", maxWidth: "420px" }}>
                   <Search
                     size={16}
-                    color="#94A3B8"
+                    color="var(--ads-ink-quaternary)"
                     style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)" }}
                   />
                   <input
@@ -383,16 +554,19 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                     placeholder="Search Van #, VIN, Plate, Make..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    aria-label="Search vehicles"
+                    className="ads-input"
                     style={{
                       width: "100%",
-                      padding: "0.55rem 0.75rem 0.55rem 2.25rem",
-                      borderRadius: "8px",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
-                      fontSize: "0.875rem",
-                      color: "#0F172A",
+                      padding: "9px 13px 9px 34px",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline)",
+                      background: "var(--ads-material-thick)",
+                      fontSize: "0.8125rem",
+                      color: "var(--ads-ink)",
                       outline: "none",
                       boxSizing: "border-box",
+                      transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   />
                 </div>
@@ -402,24 +576,30 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    backgroundColor: "#F1F5F9",
+                    gap: "3px",
+                    backgroundColor: "rgba(0,0,0,0.04)",
+                    border: "1px solid var(--ads-hairline)",
                     padding: "3px",
-                    borderRadius: "8px",
+                    borderRadius: "var(--ads-r-pill)",
                   }}
                 >
                   <button
                     type="button"
                     onClick={() => setViewMode("table")}
                     title="Table View"
+                    aria-label="Switch to table view"
+                    aria-pressed={viewMode === "table"}
                     style={{
-                      padding: "0.35rem 0.6rem",
-                      border: "none",
-                      borderRadius: "6px",
-                      backgroundColor: viewMode === "table" ? "#FFFFFF" : "transparent",
-                      color: viewMode === "table" ? "#2563EB" : "#64748B",
+                      padding: "6px 12px",
+                      border: "1px solid " + (viewMode === "table" ? "var(--ads-hairline)" : "transparent"),
+                      borderRadius: "var(--ads-r-pill)",
+                      background: viewMode === "table" ? "var(--ads-material-thick)" : "transparent",
+                      color: viewMode === "table" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+                      boxShadow: viewMode === "table" ? "var(--ads-shadow-xs), var(--ads-bevel)" : "none",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
+                      transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     <List size={16} />
@@ -428,15 +608,19 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                     type="button"
                     onClick={() => setViewMode("grid")}
                     title="Card Grid View"
+                    aria-label="Switch to card grid view"
+                    aria-pressed={viewMode === "grid"}
                     style={{
-                      padding: "0.35rem 0.6rem",
-                      border: "none",
-                      borderRadius: "6px",
-                      backgroundColor: viewMode === "grid" ? "#FFFFFF" : "transparent",
-                      color: viewMode === "grid" ? "#2563EB" : "#64748B",
+                      padding: "6px 12px",
+                      border: "1px solid " + (viewMode === "grid" ? "var(--ads-hairline)" : "transparent"),
+                      borderRadius: "var(--ads-r-pill)",
+                      background: viewMode === "grid" ? "var(--ads-material-thick)" : "transparent",
+                      color: viewMode === "grid" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+                      boxShadow: viewMode === "grid" ? "var(--ads-shadow-xs), var(--ads-bevel)" : "none",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
+                      transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     <LayoutGrid size={16} />
@@ -452,8 +636,8 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                     textAlign: "center",
                   }}
                 >
-                  <LoadingSpinner size="lg" color="#2563EB" />
-                  <p style={{ marginTop: "1rem", color: "#64748B", fontSize: "0.875rem" }}>
+                  <LoadingSpinner size="lg" color="var(--ads-blue)" />
+                  <p style={{ marginTop: "var(--ads-s4)", color: "var(--ads-ink-tertiary)", fontSize: "0.8125rem" }}>
                     Loading fleet vehicles from microservice...
                   </p>
                 </div>
@@ -464,11 +648,11 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                     textAlign: "center",
                   }}
                 >
-                  <Truck size={48} color="#CBD5E1" style={{ margin: "0 auto 1rem" }} />
-                  <h3 style={{ margin: "0 0 0.5rem", fontSize: "1.125rem", fontWeight: 700, color: "#1E293B" }}>
+                  <Truck size={48} color="var(--ads-hairline-strong)" style={{ margin: "0 auto 1rem" }} />
+                  <h3 style={{ margin: "0 0 var(--ads-s2)", fontSize: "1.0625rem", fontWeight: 600, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                     No Vehicles Found
                   </h3>
-                  <p style={{ margin: "0 0 1.5rem", color: "#64748B", fontSize: "0.875rem" }}>
+                  <p style={{ margin: "0 0 var(--ads-s5)", color: "var(--ads-ink-tertiary)", fontSize: "0.8125rem" }}>
                     {searchQuery
                       ? `No vehicles matched "${searchQuery}".`
                       : "No fleet vehicles registered for the selected filter."}
@@ -479,14 +663,15 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
-                      gap: "0.45rem",
-                      padding: "0.55rem 1.25rem",
-                      borderRadius: "8px",
-                      backgroundColor: "#2563EB",
-                      border: "none",
+                      gap: "var(--ads-s2)",
+                      padding: "9px 18px",
+                      borderRadius: "var(--ads-r-pill)",
+                      backgroundColor: "var(--ads-blue)",
+                      border: "1px solid transparent",
                       color: "#FFFFFF",
-                      fontSize: "0.875rem",
+                      fontSize: "0.8125rem",
                       fontWeight: 600,
+                      letterSpacing: "-0.01em",
                       cursor: "pointer",
                     }}
                   >
@@ -496,68 +681,92 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                 </div>
               ) : viewMode === "table" ? (
                 /* TABLE VIEW (Assigned Driver column removed, Station filter removed) */
-                <div style={{ overflowX: "auto" }}>
-                  <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", fontSize: "0.875rem" }}>
+                <div style={{ overflowX: "auto", overflowY: "auto", maxHeight: "62vh" }}>
+                  <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: 0, textAlign: "left", fontSize: "0.8125rem" }}>
                     <thead>
-                      <tr style={{ backgroundColor: "#F8FAFC", borderBottom: "1px solid #E2E8F0" }}>
-                        <th style={{ padding: "0.85rem 1.25rem", fontWeight: 700, color: "#475569" }}>Van / Unit #</th>
-                        <th style={{ padding: "0.85rem 1rem", fontWeight: 700, color: "#475569" }}>VIN &amp; Plate</th>
-                        <th style={{ padding: "0.85rem 1rem", fontWeight: 700, color: "#475569" }}>Make / Model</th>
-                        <th style={{ padding: "0.85rem 1rem", fontWeight: 700, color: "#475569" }}>Classification</th>
-                        <th style={{ padding: "0.85rem 1rem", fontWeight: 700, color: "#475569" }}>Status</th>
-                        <th style={{ padding: "0.85rem 1.25rem", fontWeight: 700, color: "#475569", textAlign: "right" }}>Actions</th>
+                      <tr>
+                        {[
+                          { label: "Van / Unit #", pad: "var(--ads-s3) var(--ads-s5)", align: "left" as const },
+                          { label: "VIN & Plate", pad: "var(--ads-s3) var(--ads-s4)", align: "left" as const },
+                          { label: "Make / Model", pad: "var(--ads-s3) var(--ads-s4)", align: "left" as const },
+                          { label: "Classification", pad: "var(--ads-s3) var(--ads-s4)", align: "left" as const },
+                          { label: "Status", pad: "var(--ads-s3) var(--ads-s4)", align: "left" as const },
+                          { label: "Actions", pad: "var(--ads-s3) var(--ads-s5)", align: "right" as const },
+                        ].map((col) => (
+                          <th
+                            key={col.label}
+                            style={{
+                              position: "sticky",
+                              top: 0,
+                              zIndex: 2,
+                              padding: col.pad,
+                              textAlign: col.align,
+                              background: "rgba(255, 255, 255, 0.80)",
+                              backdropFilter: "var(--ads-blur-sm)",
+                              WebkitBackdropFilter: "var(--ads-blur-sm)",
+                              color: "var(--ads-ink-tertiary)",
+                              fontSize: "0.6875rem",
+                              fontWeight: 600,
+                              letterSpacing: "0.04em",
+                              textTransform: "uppercase",
+                              whiteSpace: "nowrap",
+                              borderBottom: "1px solid var(--ads-hairline)",
+                            }}
+                          >
+                            {col.label}
+                          </th>
+                        ))}
                       </tr>
                     </thead>
                     <tbody>
                       {filteredVehicles.map((veh) => {
                         const statusPill = {
-                          active: { label: "In Service", bg: "#ECFDF5", text: "#065F46", border: "#A7F3D0" },
-                          grounded: { label: "Grounded", bg: "#FEF2F2", text: "#991B1B", border: "#FCA5A5" },
-                          maintenance: { label: "Maintenance", bg: "#FFFBEB", text: "#92400E", border: "#FDE68A" },
-                          inactive: { label: "Inactive", bg: "#F1F5F9", text: "#475569", border: "#CBD5E1" },
-                        }[veh.status] || { label: veh.status, bg: "#F1F5F9", text: "#475569", border: "#CBD5E1" };
+                          active: { label: "In Service", bg: "var(--ads-green-tint)", text: "var(--ads-green)", border: "var(--ads-green-tint)" },
+                          grounded: { label: "Grounded", bg: "var(--ads-red-tint)", text: "var(--ads-red)", border: "var(--ads-red-tint)" },
+                          maintenance: { label: "Maintenance", bg: "var(--ads-amber-tint)", text: "var(--ads-amber)", border: "var(--ads-amber-tint)" },
+                          inactive: { label: "Inactive", bg: "rgba(0,0,0,0.04)", text: "var(--ads-ink-secondary)", border: "var(--ads-hairline-strong)" },
+                        }[veh.status] || { label: veh.status, bg: "rgba(0,0,0,0.04)", text: "var(--ads-ink-secondary)", border: "var(--ads-hairline-strong)" };
 
                         return (
                           <tr
                             key={veh.id}
                             onClick={() => setSelectedVehicleForDrawer(veh)}
                             style={{
-                              borderBottom: "1px solid #F1F5F9",
                               cursor: "pointer",
-                              transition: "background-color 0.15s ease",
+                              transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor = "#F8FAFC";
+                              e.currentTarget.style.backgroundColor = "rgba(0, 113, 227, 0.045)";
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.backgroundColor = "transparent";
                             }}
                           >
                             {/* Van Name & Icon */}
-                            <td style={{ padding: "0.85rem 1.25rem" }}>
-                              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                            <td style={{ padding: "var(--ads-s3) var(--ads-s5)", borderBottom: "1px solid var(--ads-hairline)" }}>
+                              <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
                                 <div
                                   style={{
                                     width: "36px",
                                     height: "36px",
-                                    borderRadius: "8px",
-                                    backgroundColor: "#EFF6FF",
-                                    border: "1px solid #BFDBFE",
+                                    borderRadius: "var(--ads-r-sm)",
+                                    backgroundColor: "var(--ads-blue-tint)",
+                                    border: "1px solid var(--ads-blue-tint-strong)",
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
-                                    color: "#2563EB",
+                                    color: "var(--ads-blue)",
                                     flexShrink: 0,
                                   }}
                                 >
                                   <Truck size={18} />
                                 </div>
                                 <div>
-                                  <span style={{ fontWeight: 750, color: "#0F172A", display: "block" }}>
+                                  <span style={{ fontWeight: 650, letterSpacing: "-0.01em", color: "var(--ads-ink)", display: "block" }}>
                                     {veh.name}
                                   </span>
                                   {veh.vendor && (
-                                    <span style={{ fontSize: "0.75rem", color: "#64748B" }}>
+                                    <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                                       {veh.vendor}
                                     </span>
                                   )}
@@ -566,44 +775,46 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                             </td>
 
                             {/* VIN & Plate */}
-                            <td style={{ padding: "0.85rem 1rem" }}>
-                              <span style={{ fontWeight: 600, color: "#1E293B", display: "block", fontFamily: "monospace", fontSize: "0.8125rem" }}>
+                            <td style={{ padding: "var(--ads-s3) var(--ads-s4)", borderBottom: "1px solid var(--ads-hairline)" }}>
+                              <span style={{ fontWeight: 600, color: "var(--ads-ink)", display: "block", fontFamily: "monospace", fontSize: "0.8125rem" }}>
                                 {veh.vin}
                               </span>
-                              <span style={{ fontSize: "0.75rem", color: "#64748B" }}>
+                              <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                                 {veh.plate} ({veh.state || "US"})
                               </span>
                             </td>
 
                             {/* Make / Model / Year */}
-                            <td style={{ padding: "0.85rem 1rem" }}>
-                              <span style={{ fontWeight: 600, color: "#1E293B", display: "block" }}>
+                            <td style={{ padding: "var(--ads-s3) var(--ads-s4)", borderBottom: "1px solid var(--ads-hairline)" }}>
+                              <span style={{ fontWeight: 600, color: "var(--ads-ink)", display: "block" }}>
                                 {veh.make} {veh.model}
                               </span>
-                              <span style={{ fontSize: "0.75rem", color: "#64748B" }}>
+                              <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                                 {veh.year || "2024"} {veh.trim ? `• ${veh.trim}` : ""}
                               </span>
                             </td>
 
                             {/* Classification */}
-                            <td style={{ padding: "0.85rem 1rem" }}>
-                              <span style={{ fontSize: "0.8125rem", color: "#334155", display: "block" }}>
+                            <td style={{ padding: "var(--ads-s3) var(--ads-s4)", borderBottom: "1px solid var(--ads-hairline)" }}>
+                              <span style={{ fontSize: "0.8125rem", color: "var(--ads-ink-secondary)", display: "block" }}>
                                 {String(veh.vehicle_type || "Cargo Van")}
                               </span>
-                              <span style={{ fontSize: "0.75rem", color: "#64748B" }}>
+                              <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                                 {String(veh.vehicle_sub_type || "Prime")}
                               </span>
                             </td>
 
                             {/* Status Pill */}
-                            <td style={{ padding: "0.85rem 1rem" }}>
+                            <td style={{ padding: "var(--ads-s3) var(--ads-s4)", borderBottom: "1px solid var(--ads-hairline)" }}>
                               <span
                                 style={{
-                                  display: "inline-block",
-                                  padding: "0.2rem 0.6rem",
-                                  borderRadius: "6px",
-                                  fontSize: "0.75rem",
-                                  fontWeight: 700,
+                                  display: "inline-flex",
+                                  alignItems: "center",
+                                  padding: "3px 9px",
+                                  borderRadius: "var(--ads-r-pill)",
+                                  fontSize: "0.6875rem",
+                                  fontWeight: 600,
+                                  letterSpacing: "-0.005em",
                                   backgroundColor: statusPill.bg,
                                   color: statusPill.text,
                                   border: `1px solid ${statusPill.border}`,
@@ -614,266 +825,44 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                             </td>
 
                             {/* Actions Dropdown Button */}
-                            <td style={{ padding: "0.85rem 1.25rem", textAlign: "right" }}>
-                              <div
-                                style={{ position: "relative", display: "inline-block" }}
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <button
-                                  type="button"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    setActiveActionMenuId((prev) => (prev === veh.id ? null : veh.id));
-                                  }}
-                                  style={{
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    gap: "0.35rem",
-                                    padding: "0.4rem 0.75rem",
-                                    borderRadius: "0.5rem",
-                                    border: "1px solid #E2E8F0",
-                                    backgroundColor: activeActionMenuId === veh.id ? "#EFF6FF" : "#FFFFFF",
-                                    color: activeActionMenuId === veh.id ? "#2563EB" : "#475569",
-                                    fontSize: "0.8125rem",
-                                    fontWeight: 600,
-                                    cursor: "pointer",
-                                    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.05)",
-                                  }}
-                                >
-                                  <span>Actions</span>
-                                  <MoreVertical size={14} />
-                                </button>
-
-                                {/* Solid Dropdown Popover */}
-                                {activeActionMenuId === veh.id && (
-                                  <div
-                                    style={{
-                                      position: "absolute",
-                                      right: 0,
-                                      top: "calc(100% + 4px)",
-                                      backgroundColor: "#FFFFFF",
-                                      borderRadius: "0.75rem",
-                                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.18), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
-                                      border: "1px solid #CBD5E1",
-                                      padding: "0.35rem",
-                                      zIndex: 9999,
-                                      minWidth: "215px",
-                                      display: "flex",
-                                      flexDirection: "column",
-                                      gap: "0.15rem",
-                                    }}
-                                    onClick={(e) => e.stopPropagation()}
-                                  >
-                                    {/* View Details */}
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        setSelectedVehicleForDrawer(veh);
-                                        setActiveActionMenuId(null);
-                                      }}
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "0.6rem",
-                                        width: "100%",
-                                        padding: "0.5rem 0.75rem",
-                                        border: "none",
-                                        borderRadius: "0.375rem",
-                                        backgroundColor: "#FFFFFF",
-                                        color: "#334155",
-                                        fontSize: "0.82rem",
-                                        fontWeight: 500,
-                                        textAlign: "left",
-                                        cursor: "pointer",
-                                      }}
-                                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                    >
-                                      <Eye size={15} color="#2563EB" />
-                                      <span>View Details</span>
-                                    </button>
-
-                                    {/* Edit Vehicle */}
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        setSelectedVehicleForEdit(veh);
-                                        setScreenMode("edit");
-                                        setActiveActionMenuId(null);
-                                      }}
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "0.6rem",
-                                        width: "100%",
-                                        padding: "0.5rem 0.75rem",
-                                        border: "none",
-                                        borderRadius: "0.375rem",
-                                        backgroundColor: "#FFFFFF",
-                                        color: "#334155",
-                                        fontSize: "0.82rem",
-                                        fontWeight: 500,
-                                        textAlign: "left",
-                                        cursor: "pointer",
-                                      }}
-                                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                    >
-                                      <Edit2 size={15} color="#059669" />
-                                      <span>Edit Vehicle</span>
-                                    </button>
-
-                                    <div style={{ height: "1px", backgroundColor: "#F1F5F9", margin: "0.2rem 0" }} />
-
-                                    {/* Body Damage */}
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        setDamageModalConfig({ isOpen: true, vehicle: veh, type: "body" });
-                                        setActiveActionMenuId(null);
-                                      }}
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "0.6rem",
-                                        width: "100%",
-                                        padding: "0.5rem 0.75rem",
-                                        border: "none",
-                                        borderRadius: "0.375rem",
-                                        backgroundColor: "#FFFFFF",
-                                        color: "#334155",
-                                        fontSize: "0.82rem",
-                                        fontWeight: 500,
-                                        textAlign: "left",
-                                        cursor: "pointer",
-                                      }}
-                                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                    >
-                                      <ShieldAlert size={15} color="#DC2626" />
-                                      <span>Body Damage</span>
-                                    </button>
-
-                                    {/* Mechanical Issues */}
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        setDamageModalConfig({ isOpen: true, vehicle: veh, type: "mechanical" });
-                                        setActiveActionMenuId(null);
-                                      }}
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "0.6rem",
-                                        width: "100%",
-                                        padding: "0.5rem 0.75rem",
-                                        border: "none",
-                                        borderRadius: "0.375rem",
-                                        backgroundColor: "#FFFFFF",
-                                        color: "#334155",
-                                        fontSize: "0.82rem",
-                                        fontWeight: 500,
-                                        textAlign: "left",
-                                        cursor: "pointer",
-                                      }}
-                                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                    >
-                                      <AlertTriangle size={15} color="#D97706" />
-                                      <span>Mechanical Issues</span>
-                                    </button>
-
-                                    {/* Preventive Maintenance */}
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        setPreventiveModalConfig({ isOpen: true, vehicle: veh });
-                                        setActiveActionMenuId(null);
-                                      }}
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "0.6rem",
-                                        width: "100%",
-                                        padding: "0.5rem 0.75rem",
-                                        border: "none",
-                                        borderRadius: "0.375rem",
-                                        backgroundColor: "#FFFFFF",
-                                        color: "#334155",
-                                        fontSize: "0.82rem",
-                                        fontWeight: 500,
-                                        textAlign: "left",
-                                        cursor: "pointer",
-                                      }}
-                                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                    >
-                                      <Wrench size={15} color="#2563EB" />
-                                      <span>Preventive Maintenance</span>
-                                    </button>
-
-                                    {/* Vehicle Timeline */}
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        setTimelineModalConfig({ isOpen: true, vehicle: veh });
-                                        setActiveActionMenuId(null);
-                                      }}
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "0.6rem",
-                                        width: "100%",
-                                        padding: "0.5rem 0.75rem",
-                                        border: "none",
-                                        borderRadius: "0.375rem",
-                                        backgroundColor: "#FFFFFF",
-                                        color: "#334155",
-                                        fontSize: "0.82rem",
-                                        fontWeight: 500,
-                                        textAlign: "left",
-                                        cursor: "pointer",
-                                      }}
-                                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                    >
-                                      <Clock size={15} color="#7C3AED" />
-                                      <span>Vehicle Timeline</span>
-                                    </button>
-
-                                    <div style={{ height: "1px", backgroundColor: "#F1F5F9", margin: "0.2rem 0" }} />
-
-                                    {/* Delete Vehicle */}
-                                    <button
-                                      type="button"
-                                      onClick={(e) => {
-                                        setActiveActionMenuId(null);
-                                        handleDeleteVehicle(veh, e);
-                                      }}
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "0.6rem",
-                                        width: "100%",
-                                        padding: "0.5rem 0.75rem",
-                                        border: "none",
-                                        borderRadius: "0.375rem",
-                                        backgroundColor: "#FFFFFF",
-                                        color: "#DC2626",
-                                        fontSize: "0.82rem",
-                                        fontWeight: 600,
-                                        textAlign: "left",
-                                        cursor: "pointer",
-                                      }}
-                                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FEF2F2")}
-                                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                    >
-                                      <Trash2 size={15} color="#DC2626" />
-                                      <span>Delete Vehicle</span>
-                                    </button>
-                                  </div>
-                                )}
-                              </div>
+                            <td style={{ padding: "var(--ads-s3) var(--ads-s5)", textAlign: "right", borderBottom: "1px solid var(--ads-hairline)" }}>
+                              <VehicleActionMenu
+                                vehicle={veh}
+                                isOpen={activeActionMenuId === veh.id}
+                                placement="below"
+                                onToggle={() =>
+                                  setActiveActionMenuId((prev) => (prev === veh.id ? null : veh.id))
+                                }
+                                onViewDetails={() => {
+                                  setSelectedVehicleForDrawer(veh);
+                                  setActiveActionMenuId(null);
+                                }}
+                                onEdit={() => {
+                                  setSelectedVehicleForEdit(veh);
+                                  setScreenMode("edit");
+                                  setActiveActionMenuId(null);
+                                }}
+                                onBodyDamage={() => {
+                                  setDamageModalConfig({ isOpen: true, vehicle: veh, type: "body" });
+                                  setActiveActionMenuId(null);
+                                }}
+                                onMechanicalIssues={() => {
+                                  setDamageModalConfig({ isOpen: true, vehicle: veh, type: "mechanical" });
+                                  setActiveActionMenuId(null);
+                                }}
+                                onPreventive={() => {
+                                  setPreventiveModalConfig({ isOpen: true, vehicle: veh });
+                                  setActiveActionMenuId(null);
+                                }}
+                                onTimeline={() => {
+                                  setTimelineModalConfig({ isOpen: true, vehicle: veh });
+                                  setActiveActionMenuId(null);
+                                }}
+                                onDelete={(e) => {
+                                  setActiveActionMenuId(null);
+                                  handleDeleteVehicle(veh, e);
+                                }}
+                              />
                             </td>
                           </tr>
                         );
@@ -887,40 +876,44 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                   style={{
                     display: "grid",
                     gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-                    gap: "1.25rem",
+                    gap: "var(--ads-s5)",
                   }}
                 >
                   {filteredVehicles.map((veh) => {
                     const statusPill = {
-                      active: { label: "In Service", bg: "#ECFDF5", text: "#065F46", border: "#A7F3D0" },
-                      grounded: { label: "Grounded", bg: "#FEF2F2", text: "#991B1B", border: "#FCA5A5" },
-                      maintenance: { label: "Maintenance", bg: "#FFFBEB", text: "#92400E", border: "#FDE68A" },
-                      inactive: { label: "Inactive", bg: "#F1F5F9", text: "#475569", border: "#CBD5E1" },
-                    }[veh.status] || { label: veh.status, bg: "#F1F5F9", text: "#475569", border: "#CBD5E1" };
+                      active: { label: "In Service", bg: "var(--ads-green-tint)", text: "var(--ads-green)", border: "var(--ads-green-tint)" },
+                      grounded: { label: "Grounded", bg: "var(--ads-red-tint)", text: "var(--ads-red)", border: "var(--ads-red-tint)" },
+                      maintenance: { label: "Maintenance", bg: "var(--ads-amber-tint)", text: "var(--ads-amber)", border: "var(--ads-amber-tint)" },
+                      inactive: { label: "Inactive", bg: "rgba(0,0,0,0.04)", text: "var(--ads-ink-secondary)", border: "var(--ads-hairline-strong)" },
+                    }[veh.status] || { label: veh.status, bg: "rgba(0,0,0,0.04)", text: "var(--ads-ink-secondary)", border: "var(--ads-hairline-strong)" };
 
                     return (
                       <div
                         key={veh.id}
                         onClick={() => setSelectedVehicleForDrawer(veh)}
                         style={{
-                          backgroundColor: "#FFFFFF",
-                          border: "1px solid #E2E8F0",
-                          borderRadius: "14px",
-                          padding: "1.25rem",
-                          boxShadow: "0 2px 6px rgba(15, 23, 42, 0.04)",
+                          background: "var(--ads-material-thick)",
+                          backdropFilter: "var(--ads-blur-md)",
+                          WebkitBackdropFilter: "var(--ads-blur-md)",
+                          border: "1px solid var(--ads-hairline)",
+                          borderRadius: "var(--ads-r-lg)",
+                          padding: "var(--ads-s5)",
+                          boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
                           cursor: "pointer",
                           display: "flex",
                           flexDirection: "column",
-                          gap: "1rem",
-                          transition: "transform 0.15s ease, box-shadow 0.15s ease",
+                          gap: "var(--ads-s4)",
+                          transition: "transform var(--ads-dur) var(--ads-ease), box-shadow var(--ads-dur) var(--ads-ease), border-color var(--ads-dur) var(--ads-ease)",
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.transform = "translateY(-2px)";
-                          e.currentTarget.style.boxShadow = "0 8px 18px rgba(15, 23, 42, 0.08)";
+                          e.currentTarget.style.boxShadow = "var(--ads-shadow-md), var(--ads-bevel)";
+                          e.currentTarget.style.borderColor = "var(--ads-hairline-strong)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = "none";
-                          e.currentTarget.style.boxShadow = "0 2px 6px rgba(15, 23, 42, 0.04)";
+                          e.currentTarget.style.transform = "translateY(0)";
+                          e.currentTarget.style.boxShadow = "var(--ads-shadow-sm), var(--ads-bevel)";
+                          e.currentTarget.style.borderColor = "var(--ads-hairline)";
                         }}
                       >
                         {/* Top Row: Icon, Title & Status */}
@@ -930,22 +923,22 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                               style={{
                                 width: "40px",
                                 height: "40px",
-                                borderRadius: "10px",
-                                backgroundColor: "#EFF6FF",
-                                border: "1px solid #BFDBFE",
+                                borderRadius: "var(--ads-r-sm)",
+                                backgroundColor: "var(--ads-blue-tint)",
+                                border: "1px solid var(--ads-blue-tint-strong)",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                color: "#2563EB",
+                                color: "var(--ads-blue)",
                               }}
                             >
                               <Truck size={20} />
                             </div>
                             <div>
-                              <h4 style={{ margin: 0, fontSize: "1rem", fontWeight: 750, color: "#0F172A" }}>
+                              <h4 style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                                 {veh.name}
                               </h4>
-                              <span style={{ fontSize: "0.75rem", color: "#64748B" }}>
+                              <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                                 {veh.make} {veh.model}
                               </span>
                             </div>
@@ -953,10 +946,13 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
 
                           <span
                             style={{
-                              padding: "0.15rem 0.55rem",
-                              borderRadius: "6px",
-                              fontSize: "0.75rem",
-                              fontWeight: 700,
+                              display: "inline-flex",
+                              alignItems: "center",
+                              padding: "3px 9px",
+                              borderRadius: "var(--ads-r-pill)",
+                              fontSize: "0.6875rem",
+                              fontWeight: 600,
+                              letterSpacing: "-0.005em",
                               backgroundColor: statusPill.bg,
                               color: statusPill.text,
                               border: `1px solid ${statusPill.border}`,
@@ -969,27 +965,27 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                         {/* Specs */}
                         <div
                           style={{
-                            backgroundColor: "#F8FAFC",
-                            border: "1px solid #F1F5F9",
-                            borderRadius: "8px",
-                            padding: "0.75rem",
+                            background: "rgba(0, 0, 0, 0.03)",
+                            border: "1px solid var(--ads-hairline)",
+                            borderRadius: "var(--ads-r-md)",
+                            padding: "var(--ads-s3)",
                             fontSize: "0.8125rem",
                             display: "grid",
                             gridTemplateColumns: "1fr 1fr",
-                            gap: "0.5rem",
+                            gap: "var(--ads-s2)",
                           }}
                         >
                           <div>
-                            <span style={{ color: "#64748B", fontSize: "0.75rem", display: "block" }}>Plate</span>
-                            <strong style={{ color: "#1E293B" }}>{veh.plate} ({veh.state || "US"})</strong>
+                            <span style={{ color: "var(--ads-ink-tertiary)", fontSize: "0.75rem", display: "block" }}>Plate</span>
+                            <strong style={{ color: "var(--ads-ink)" }}>{veh.plate} ({veh.state || "US"})</strong>
                           </div>
                           <div>
-                            <span style={{ color: "#64748B", fontSize: "0.75rem", display: "block" }}>Type</span>
-                            <strong style={{ color: "#1E293B" }}>{String(veh.vehicle_type || "Cargo Van")}</strong>
+                            <span style={{ color: "var(--ads-ink-tertiary)", fontSize: "0.75rem", display: "block" }}>Type</span>
+                            <strong style={{ color: "var(--ads-ink)" }}>{String(veh.vehicle_type || "Cargo Van")}</strong>
                           </div>
                           <div style={{ gridColumn: "span 2" }}>
-                            <span style={{ color: "#64748B", fontSize: "0.75rem", display: "block" }}>VIN</span>
-                            <code style={{ color: "#334155", fontWeight: 600, fontSize: "0.75rem" }}>{veh.vin}</code>
+                            <span style={{ color: "var(--ads-ink-tertiary)", fontSize: "0.75rem", display: "block" }}>VIN</span>
+                            <code style={{ color: "var(--ads-ink-secondary)", fontWeight: 600, fontSize: "0.75rem" }}>{veh.vin}</code>
                           </div>
                         </div>
 
@@ -999,259 +995,47 @@ export const VehiclesPage: FC<VehiclesPageProps> = ({ mode = "list" }) => {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "flex-end",
-                            paddingTop: "0.5rem",
-                            borderTop: "1px solid #F1F5F9",
+                            paddingTop: "var(--ads-s2)",
+                            borderTop: "1px solid var(--ads-hairline)",
                           }}
                         >
-                          <div
-                            style={{ position: "relative", display: "inline-block" }}
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setActiveActionMenuId((prev) => (prev === veh.id ? null : veh.id));
-                              }}
-                              style={{
-                                display: "inline-flex",
-                                alignItems: "center",
-                                gap: "0.35rem",
-                                padding: "0.35rem 0.75rem",
-                                borderRadius: "0.5rem",
-                                border: "1px solid #E2E8F0",
-                                backgroundColor: activeActionMenuId === veh.id ? "#EFF6FF" : "#FFFFFF",
-                                color: activeActionMenuId === veh.id ? "#2563EB" : "#475569",
-                                fontSize: "0.8125rem",
-                                fontWeight: 600,
-                                cursor: "pointer",
-                              }}
-                            >
-                              <span>Actions</span>
-                              <MoreVertical size={14} />
-                            </button>
-
-                            {/* Dropdown Menu in Grid Card */}
-                            {activeActionMenuId === veh.id && (
-                              <div
-                                style={{
-                                  position: "absolute",
-                                  right: 0,
-                                  bottom: "calc(100% + 4px)",
-                                  backgroundColor: "#FFFFFF",
-                                  borderRadius: "0.75rem",
-                                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.18), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
-                                  border: "1px solid #CBD5E1",
-                                  padding: "0.35rem",
-                                  zIndex: 9999,
-                                  minWidth: "215px",
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  gap: "0.15rem",
-                                }}
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setSelectedVehicleForDrawer(veh);
-                                    setActiveActionMenuId(null);
-                                  }}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.6rem",
-                                    width: "100%",
-                                    padding: "0.5rem 0.75rem",
-                                    border: "none",
-                                    borderRadius: "0.375rem",
-                                    backgroundColor: "#FFFFFF",
-                                    color: "#334155",
-                                    fontSize: "0.82rem",
-                                    fontWeight: 500,
-                                    textAlign: "left",
-                                    cursor: "pointer",
-                                  }}
-                                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                >
-                                  <Eye size={15} color="#2563EB" />
-                                  <span>View Details</span>
-                                </button>
-
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setSelectedVehicleForEdit(veh);
-                                    setScreenMode("edit");
-                                    setActiveActionMenuId(null);
-                                  }}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.6rem",
-                                    width: "100%",
-                                    padding: "0.5rem 0.75rem",
-                                    border: "none",
-                                    borderRadius: "0.375rem",
-                                    backgroundColor: "#FFFFFF",
-                                    color: "#334155",
-                                    fontSize: "0.82rem",
-                                    fontWeight: 500,
-                                    textAlign: "left",
-                                    cursor: "pointer",
-                                  }}
-                                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                >
-                                  <Edit2 size={15} color="#059669" />
-                                  <span>Edit Vehicle</span>
-                                </button>
-
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setDamageModalConfig({ isOpen: true, vehicle: veh, type: "body" });
-                                    setActiveActionMenuId(null);
-                                  }}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.6rem",
-                                    width: "100%",
-                                    padding: "0.5rem 0.75rem",
-                                    border: "none",
-                                    borderRadius: "0.375rem",
-                                    backgroundColor: "#FFFFFF",
-                                    color: "#334155",
-                                    fontSize: "0.82rem",
-                                    fontWeight: 500,
-                                    textAlign: "left",
-                                    cursor: "pointer",
-                                  }}
-                                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                >
-                                  <ShieldAlert size={15} color="#DC2626" />
-                                  <span>Body Damage</span>
-                                </button>
-
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setDamageModalConfig({ isOpen: true, vehicle: veh, type: "mechanical" });
-                                    setActiveActionMenuId(null);
-                                  }}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.6rem",
-                                    width: "100%",
-                                    padding: "0.5rem 0.75rem",
-                                    border: "none",
-                                    borderRadius: "0.375rem",
-                                    backgroundColor: "#FFFFFF",
-                                    color: "#334155",
-                                    fontSize: "0.82rem",
-                                    fontWeight: 500,
-                                    textAlign: "left",
-                                    cursor: "pointer",
-                                  }}
-                                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                >
-                                  <AlertTriangle size={15} color="#D97706" />
-                                  <span>Mechanical Issues</span>
-                                </button>
-
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setPreventiveModalConfig({ isOpen: true, vehicle: veh });
-                                    setActiveActionMenuId(null);
-                                  }}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.6rem",
-                                    width: "100%",
-                                    padding: "0.5rem 0.75rem",
-                                    border: "none",
-                                    borderRadius: "0.375rem",
-                                    backgroundColor: "#FFFFFF",
-                                    color: "#334155",
-                                    fontSize: "0.82rem",
-                                    fontWeight: 500,
-                                    textAlign: "left",
-                                    cursor: "pointer",
-                                  }}
-                                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                >
-                                  <Wrench size={15} color="#2563EB" />
-                                  <span>Preventive Maintenance</span>
-                                </button>
-
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setTimelineModalConfig({ isOpen: true, vehicle: veh });
-                                    setActiveActionMenuId(null);
-                                  }}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.6rem",
-                                    width: "100%",
-                                    padding: "0.5rem 0.75rem",
-                                    border: "none",
-                                    borderRadius: "0.375rem",
-                                    backgroundColor: "#FFFFFF",
-                                    color: "#334155",
-                                    fontSize: "0.82rem",
-                                    fontWeight: 500,
-                                    textAlign: "left",
-                                    cursor: "pointer",
-                                  }}
-                                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
-                                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                >
-                                  <Clock size={15} color="#7C3AED" />
-                                  <span>Vehicle Timeline</span>
-                                </button>
-
-                                <div style={{ height: "1px", backgroundColor: "#F1F5F9", margin: "0.2rem 0" }} />
-
-                                <button
-                                  type="button"
-                                  onClick={(e) => {
-                                    setActiveActionMenuId(null);
-                                    handleDeleteVehicle(veh, e);
-                                  }}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.6rem",
-                                    width: "100%",
-                                    padding: "0.5rem 0.75rem",
-                                    border: "none",
-                                    borderRadius: "0.375rem",
-                                    backgroundColor: "#FFFFFF",
-                                    color: "#DC2626",
-                                    fontSize: "0.82rem",
-                                    fontWeight: 600,
-                                    textAlign: "left",
-                                    cursor: "pointer",
-                                  }}
-                                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FEF2F2")}
-                                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
-                                >
-                                  <Trash2 size={15} color="#DC2626" />
-                                  <span>Delete Vehicle</span>
-                                </button>
-                              </div>
-                            )}
-                          </div>
+                          <VehicleActionMenu
+                            vehicle={veh}
+                            isOpen={activeActionMenuId === veh.id}
+                            placement="above"
+                            onToggle={() =>
+                              setActiveActionMenuId((prev) => (prev === veh.id ? null : veh.id))
+                            }
+                            onViewDetails={() => {
+                              setSelectedVehicleForDrawer(veh);
+                              setActiveActionMenuId(null);
+                            }}
+                            onEdit={() => {
+                              setSelectedVehicleForEdit(veh);
+                              setScreenMode("edit");
+                              setActiveActionMenuId(null);
+                            }}
+                            onBodyDamage={() => {
+                              setDamageModalConfig({ isOpen: true, vehicle: veh, type: "body" });
+                              setActiveActionMenuId(null);
+                            }}
+                            onMechanicalIssues={() => {
+                              setDamageModalConfig({ isOpen: true, vehicle: veh, type: "mechanical" });
+                              setActiveActionMenuId(null);
+                            }}
+                            onPreventive={() => {
+                              setPreventiveModalConfig({ isOpen: true, vehicle: veh });
+                              setActiveActionMenuId(null);
+                            }}
+                            onTimeline={() => {
+                              setTimelineModalConfig({ isOpen: true, vehicle: veh });
+                              setActiveActionMenuId(null);
+                            }}
+                            onDelete={(e) => {
+                              setActiveActionMenuId(null);
+                              handleDeleteVehicle(veh, e);
+                            }}
+                          />
                         </div>
                       </div>
                     );

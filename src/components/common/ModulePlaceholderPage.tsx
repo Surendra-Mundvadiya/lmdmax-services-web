@@ -39,8 +39,8 @@ const MODULE_CONFIGS: Record<string, ModuleConfig> = {
     description:
       "Send real-time dispatch alerts, route changes, emergency notifications, and receive driver check-ins directly via dedicated station numbers.",
     icon: MessageSquare,
-    color: "#2563EB",
-    bgColor: "#EFF6FF",
+    color: "var(--ads-blue)",
+    bgColor: "var(--ads-blue-tint)",
     stats: [
       { label: "Active Threads", value: "24", change: "+4 today" },
       { label: "Delivery Alerts Sent", value: "158", change: "100% delivered" },
@@ -61,8 +61,8 @@ const MODULE_CONFIGS: Record<string, ModuleConfig> = {
     description:
       "Track Fantastic Plus metrics, CDF (Customer Delivery Feedback), DPMO, Netradyne camera safety events, and driver tier rankings across all stations.",
     icon: BarChart3,
-    color: "#1D4ED8",
-    bgColor: "#EFF6FF",
+    color: "var(--ads-blue)",
+    bgColor: "var(--ads-blue-tint)",
     stats: [
       { label: "Station Tier", value: "Fantastic Plus", change: "Top 5% DSP" },
       { label: "Safe Driving Score", value: "942 / 1000", change: "+18 pts" },
@@ -83,8 +83,8 @@ const MODULE_CONFIGS: Record<string, ModuleConfig> = {
     description:
       "Full vehicle compliance tracking, mandatory pre/post-trip DVIC inspections, AI damage scan history, maintenance repair logs, and registration renewals.",
     icon: Truck,
-    color: "#059669",
-    bgColor: "#ECFDF5",
+    color: "var(--ads-green)",
+    bgColor: "var(--ads-green-tint)",
     stats: [
       { label: "Vans in Service", value: "38 / 42", change: "4 under maintenance" },
       { label: "DVIC Completed Today", value: "36", change: "100% compliance" },
@@ -105,8 +105,8 @@ const MODULE_CONFIGS: Record<string, ModuleConfig> = {
     description:
       "Generate weekly schedules tailored to forecasted package volumes, handle driver availability, manage shift swaps, and track overtime.",
     icon: CalendarDays,
-    color: "#7C3AED",
-    bgColor: "#F5F3FF",
+    color: "var(--ads-purple)",
+    bgColor: "var(--ads-purple-tint)",
     stats: [
       { label: "Scheduled Shifts", value: "184", change: "This week" },
       { label: "Roster Coverage", value: "100%", change: "0 open shifts" },
@@ -127,8 +127,8 @@ const MODULE_CONFIGS: Record<string, ModuleConfig> = {
     description:
       "Centralized cloud repository for station agreements, vehicle lease contracts, compliance certs, and operational documentation.",
     icon: Cloud,
-    color: "#0284C7",
-    bgColor: "#F0F9FF",
+    color: "var(--ads-blue)",
+    bgColor: "var(--ads-blue-tint)",
     stats: [
       { label: "Stored Files", value: "342", change: "+12 this month" },
       { label: "Storage Used", value: "2.4 GB", change: "Encrypted" },
@@ -149,8 +149,8 @@ const MODULE_CONFIGS: Record<string, ModuleConfig> = {
     description:
       "Track handheld Rabbit scanners, gas cards, safety vests, van keys, and station hardware with automated driver assignment logs.",
     icon: Package,
-    color: "#7C3AED",
-    bgColor: "#F5F3FF",
+    color: "var(--ads-purple)",
+    bgColor: "var(--ads-purple-tint)",
     stats: [
       { label: "Active Devices", value: "54 / 60", change: "6 in charging dock" },
       { label: "Gas Cards", value: "42", change: "Assigned" },
@@ -184,14 +184,16 @@ export const ModulePlaceholderPage: FC<ModulePlaceholderPageProps> = ({ moduleKe
         {/* Top Hero Banner */}
         <div
           style={{
-            background: "#FFFFFF",
-            border: "1px solid #E2E8F0",
-            borderRadius: "10px",
-            padding: "1.5rem",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-md)",
+            WebkitBackdropFilter: "var(--ads-blur-md)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-lg)",
+            padding: "var(--ads-s6)",
             display: "flex",
             flexDirection: "column",
             gap: "1rem",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.03)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem" }}>
@@ -200,20 +202,20 @@ export const ModulePlaceholderPage: FC<ModulePlaceholderPageProps> = ({ moduleKe
                 style={{
                   width: "44px",
                   height: "44px",
-                  borderRadius: "10px",
+                  borderRadius: "var(--ads-r-sm)",
                   backgroundColor: config.bgColor,
                   color: config.color,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
+                  boxShadow: "var(--ads-shadow-xs)",
                 }}
               >
                 <Icon size={22} />
               </div>
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#0F172A", margin: 0 }}>
+                  <h2 style={{ fontSize: "1.375rem", fontWeight: 650, letterSpacing: "-0.019em", color: "var(--ads-ink)", margin: 0 }}>
                     {config.title}
                   </h2>
                   <span
@@ -223,14 +225,14 @@ export const ModulePlaceholderPage: FC<ModulePlaceholderPageProps> = ({ moduleKe
                       backgroundColor: config.bgColor,
                       color: config.color,
                       padding: "0.15rem 0.5rem",
-                      borderRadius: "9999px",
-                      border: `1px solid ${config.color}33`,
+                      borderRadius: "var(--ads-r-pill)",
+                      border: "1px solid var(--ads-hairline)",
                     }}
                   >
                     {config.badge}
                   </span>
                 </div>
-                <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.2rem 0 0" }}>
+                <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: "0.2rem 0 0" }}>
                   {config.subtitle}
                 </p>
               </div>
@@ -244,12 +246,12 @@ export const ModulePlaceholderPage: FC<ModulePlaceholderPageProps> = ({ moduleKe
                   alignItems: "center",
                   gap: "0.4rem",
                   padding: "0.35rem 0.75rem",
-                  backgroundColor: "#EFF6FF",
-                  border: "1px solid #BFDBFE",
-                  borderRadius: "6px",
+                  backgroundColor: "var(--ads-blue-tint)",
+                  border: "1px solid var(--ads-blue-tint-strong)",
+                  borderRadius: "var(--ads-r-pill)",
                   fontSize: "0.8125rem",
-                  fontWeight: 700,
-                  color: "#1D4ED8",
+                  fontWeight: 600,
+                  color: "var(--ads-blue)",
                 }}
               >
                 <Building size={14} />
@@ -276,7 +278,7 @@ export const ModulePlaceholderPage: FC<ModulePlaceholderPageProps> = ({ moduleKe
             </div>
           </div>
 
-          <p style={{ fontSize: "0.875rem", color: "#334155", lineHeight: 1.5, margin: 0 }}>
+          <p style={{ fontSize: "0.875rem", color: "var(--ads-ink-secondary)", lineHeight: 1.5, margin: 0 }}>
             {config.description}
           </p>
 
@@ -294,22 +296,22 @@ export const ModulePlaceholderPage: FC<ModulePlaceholderPageProps> = ({ moduleKe
                 key={i}
                 style={{
                   padding: "0.85rem 1rem",
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "8px",
+                  backgroundColor: "rgba(0, 0, 0, 0.04)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-md)",
                   display: "flex",
                   flexDirection: "column",
                   gap: "0.2rem",
                 }}
               >
-                <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "#64748B", textTransform: "uppercase" }}>
+                <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--ads-ink-tertiary)", textTransform: "uppercase" }}>
                   {st.label}
                 </span>
-                <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#0F172A" }}>
+                <span style={{ fontSize: "1.375rem", fontWeight: 650, letterSpacing: "-0.019em", color: "var(--ads-ink)" }}>
                   {st.value}
                 </span>
                 {st.change && (
-                  <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "#059669" }}>
+                  <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--ads-green)" }}>
                     {st.change}
                   </span>
                 )}
@@ -329,18 +331,20 @@ export const ModulePlaceholderPage: FC<ModulePlaceholderPageProps> = ({ moduleKe
         >
           <div
             style={{
-              background: "#FFFFFF",
-              border: "1px solid #E2E8F0",
-              borderRadius: "10px",
-              padding: "1.25rem",
+              background: "var(--ads-material-thick)",
+              backdropFilter: "var(--ads-blur-md)",
+              WebkitBackdropFilter: "var(--ads-blur-md)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-lg)",
+              padding: "var(--ads-s5)",
             }}
           >
-            <h4 style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A", margin: "0 0 0.75rem" }}>
+            <h4 style={{ fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)", margin: "0 0 0.75rem" }}>
               Key System Capabilities
             </h4>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               {config.highlights.map((h, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem", fontSize: "0.8125rem", color: "#334155" }}>
+                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem", fontSize: "0.8125rem", color: "var(--ads-ink-secondary)" }}>
                   <ShieldCheck size={15} style={{ color: config.color, marginTop: "0.15rem", flexShrink: 0 }} />
                   <span>{h}</span>
                 </div>
@@ -350,20 +354,22 @@ export const ModulePlaceholderPage: FC<ModulePlaceholderPageProps> = ({ moduleKe
 
           <div
             style={{
-              background: "#FFFFFF",
-              border: "1px solid #E2E8F0",
-              borderRadius: "10px",
-              padding: "1.25rem",
+              background: "var(--ads-material-thick)",
+              backdropFilter: "var(--ads-blur-md)",
+              WebkitBackdropFilter: "var(--ads-blur-md)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-lg)",
+              padding: "var(--ads-s5)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
             }}
           >
             <div>
-              <h4 style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A", margin: "0 0 0.5rem" }}>
+              <h4 style={{ fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)", margin: "0 0 0.5rem" }}>
                 Multi-Station Shared Operations
               </h4>
-              <p style={{ fontSize: "0.8125rem", color: "#64748B", margin: 0, lineHeight: 1.45 }}>
+              <p style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: 0, lineHeight: 1.45 }}>
                 Drivers, vehicles, and delivery station inventory are synchronized across all modules. Manage roster entries once in Operations and access them everywhere.
               </p>
             </div>

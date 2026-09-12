@@ -134,8 +134,9 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.5)",
-        backdropFilter: "blur(3px)",
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         zIndex: 9999,
         display: "flex",
         alignItems: "center",
@@ -148,15 +149,17 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
     >
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "14px",
+          backgroundColor: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
           width: "100%",
           maxWidth: "580px",
           maxHeight: "90vh",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 20px 40px -15px rgba(15, 23, 42, 0.2)",
-          border: "1px solid #E2E8F0",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          border: "1px solid var(--ads-hairline)",
           overflow: "hidden",
         }}
         onClick={(e) => e.stopPropagation()}
@@ -165,11 +168,11 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
         <div
           style={{
             padding: "1.1rem 1.4rem",
-            borderBottom: "1px solid #E2E8F0",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "var(--ads-material-thick)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
@@ -177,9 +180,9 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
               style={{
                 width: "36px",
                 height: "36px",
-                borderRadius: "10px",
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -188,24 +191,24 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
               <Send size={18} />
             </div>
             <div>
-              <h2 style={{ fontSize: "1.05rem", fontWeight: 700, color: "#0F172A", margin: 0 }}>
+              <h2 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0 }}>
                 Send Callout Notifications
               </h2>
-              <p style={{ fontSize: "0.75rem", color: "#64748B", margin: "0.15rem 0 0 0" }}>
+              <p style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", margin: "0.15rem 0 0 0" }}>
                 Dispatch real-time SMS or in-app notifications to {activeRecipients.length} driver{activeRecipients.length === 1 ? "" : "s"}
               </p>
             </div>
           </div>
-          <button
+          <button aria-label="Close" title="Close"
             type="button"
             onClick={onClose}
             style={{
               border: "none",
               background: "transparent",
-              color: "#64748B",
+              color: "var(--ads-ink-tertiary)",
               cursor: "pointer",
               padding: "0.35rem",
-              borderRadius: "8px",
+              borderRadius: "var(--ads-r-sm)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -229,10 +232,10 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
             <div
               style={{
                 padding: "0.75rem 0.9rem",
-                borderRadius: "10px",
-                backgroundColor: "#FEF2F2",
-                border: "1px solid #FECACA",
-                color: "#991B1B",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-red-tint)",
+                border: "1px solid transparent",
+                color: "var(--ads-red)",
                 fontSize: "0.8125rem",
                 display: "flex",
                 alignItems: "center",
@@ -246,7 +249,7 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
 
           {/* Delivery Channels */}
           <div>
-            <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B", display: "block", marginBottom: "0.45rem" }}>
+            <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)", display: "block", marginBottom: "0.45rem" }}>
               Delivery Channels
             </label>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.65rem" }}>
@@ -255,9 +258,9 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                 onClick={() => toggleChannel("sms")}
                 style={{
                   padding: "0.75rem 0.9rem",
-                  borderRadius: "10px",
-                  border: channels.includes("sms") ? "2px solid #2563EB" : "1px solid #E2E8F0",
-                  backgroundColor: channels.includes("sms") ? "#EFF6FF" : "#FFFFFF",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: channels.includes("sms") ? "2px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                  backgroundColor: channels.includes("sms") ? "var(--ads-blue-tint)" : "#FFFFFF",
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
@@ -266,15 +269,15 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <MessageSquare size={16} style={{ color: channels.includes("sms") ? "#2563EB" : "#64748B" }} />
+                  <MessageSquare size={16} style={{ color: channels.includes("sms") ? "var(--ads-blue)" : "var(--ads-ink-tertiary)" }} />
                   <div>
-                    <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: channels.includes("sms") ? "#1D4ED8" : "#1E293B", display: "block" }}>
+                    <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: channels.includes("sms") ? "var(--ads-blue)" : "var(--ads-ink)", display: "block" }}>
                       SMS Text
                     </span>
-                    <span style={{ fontSize: "0.7rem", color: "#64748B" }}>Twilio Gateway</span>
+                    <span style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)" }}>Twilio Gateway</span>
                   </div>
                 </div>
-                {channels.includes("sms") && <CheckCircle2 size={16} style={{ color: "#2563EB" }} />}
+                {channels.includes("sms") && <CheckCircle2 size={16} style={{ color: "var(--ads-blue)" }} />}
               </div>
 
               {/* In-App Option */}
@@ -282,9 +285,9 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                 onClick={() => toggleChannel("inapp")}
                 style={{
                   padding: "0.75rem 0.9rem",
-                  borderRadius: "10px",
-                  border: channels.includes("inapp") ? "2px solid #2563EB" : "1px solid #E2E8F0",
-                  backgroundColor: channels.includes("inapp") ? "#EFF6FF" : "#FFFFFF",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: channels.includes("inapp") ? "2px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                  backgroundColor: channels.includes("inapp") ? "var(--ads-blue-tint)" : "#FFFFFF",
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
@@ -293,15 +296,15 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <Smartphone size={16} style={{ color: channels.includes("inapp") ? "#2563EB" : "#64748B" }} />
+                  <Smartphone size={16} style={{ color: channels.includes("inapp") ? "var(--ads-blue)" : "var(--ads-ink-tertiary)" }} />
                   <div>
-                    <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: channels.includes("inapp") ? "#1D4ED8" : "#1E293B", display: "block" }}>
+                    <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: channels.includes("inapp") ? "var(--ads-blue)" : "var(--ads-ink)", display: "block" }}>
                       In-App Chat
                     </span>
-                    <span style={{ fontSize: "0.7rem", color: "#64748B" }}>Driver Mobile App</span>
+                    <span style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)" }}>Driver Mobile App</span>
                   </div>
                 </div>
-                {channels.includes("inapp") && <CheckCircle2 size={16} style={{ color: "#2563EB" }} />}
+                {channels.includes("inapp") && <CheckCircle2 size={16} style={{ color: "var(--ads-blue)" }} />}
               </div>
             </div>
           </div>
@@ -309,10 +312,10 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
           {/* Recipients List */}
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.45rem" }}>
-              <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B" }}>
+              <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                 Target Recipients ({activeRecipients.length} of {recipients.length})
               </label>
-              <span style={{ fontSize: "0.75rem", color: "#64748B" }}>
+              <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                 Click to toggle driver
               </span>
             </div>
@@ -324,9 +327,9 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                 maxHeight: "90px",
                 overflowY: "auto",
                 padding: "0.5rem",
-                backgroundColor: "#F8FAFC",
-                borderRadius: "10px",
-                border: "1px solid #E2E8F0",
+                backgroundColor: "rgba(0, 0, 0, 0.025)",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
               }}
             >
               {recipients.map((r) => {
@@ -341,19 +344,19 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                       alignItems: "center",
                       gap: "0.35rem",
                       padding: "0.25rem 0.6rem",
-                      borderRadius: "6px",
+                      borderRadius: "var(--ads-r-xs)",
                       fontSize: "0.75rem",
                       fontWeight: 600,
                       cursor: "pointer",
-                      border: isSelected ? "1px solid #93C5FD" : "1px solid #E2E8F0",
-                      backgroundColor: isSelected ? "#EFF6FF" : "#FFFFFF",
-                      color: isSelected ? "#1D4ED8" : "#94A3B8",
+                      border: isSelected ? "1px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                      backgroundColor: isSelected ? "var(--ads-blue-tint)" : "#FFFFFF",
+                      color: isSelected ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
                       transition: "all 0.15s ease",
                     }}
                   >
                     <span>{r.name}</span>
                     {r.msg_sent && (
-                      <span style={{ fontSize: "0.6875rem", color: "#10B981" }} title="Already sent message">
+                      <span style={{ fontSize: "0.6875rem", color: "var(--ads-green)" }} title="Already sent message">
                         ✓
                       </span>
                     )}
@@ -367,7 +370,7 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
           <div
             style={{
               display: "flex",
-              borderBottom: "1px solid #E2E8F0",
+              borderBottom: "1px solid var(--ads-hairline)",
               gap: "1.5rem",
             }}
           >
@@ -380,8 +383,8 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                 padding: "0.5rem 0",
                 fontSize: "0.8125rem",
                 fontWeight: 700,
-                color: activeTab === "compose" ? "#2563EB" : "#64748B",
-                borderBottom: activeTab === "compose" ? "2px solid #2563EB" : "2px solid transparent",
+                color: activeTab === "compose" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+                borderBottom: activeTab === "compose" ? "2px solid var(--ads-blue)" : "2px solid transparent",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
@@ -400,8 +403,8 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                 padding: "0.5rem 0",
                 fontSize: "0.8125rem",
                 fontWeight: 700,
-                color: activeTab === "preview" ? "#2563EB" : "#64748B",
-                borderBottom: activeTab === "preview" ? "2px solid #2563EB" : "2px solid transparent",
+                color: activeTab === "preview" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
+                borderBottom: activeTab === "preview" ? "2px solid var(--ads-blue)" : "2px solid transparent",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
@@ -417,17 +420,17 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
           {activeTab === "compose" && (
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               <div>
-                <label style={{ fontSize: "0.75rem", fontWeight: 600, color: "#64748B", display: "block", marginBottom: "0.3rem" }}>
+                <label style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-tertiary)", display: "block", marginBottom: "0.3rem" }}>
                   Standard Template Body (Automated)
                 </label>
                 <div
                   style={{
-                    backgroundColor: "#F8FAFC",
-                    border: "1px solid #E2E8F0",
-                    borderRadius: "8px",
+                    backgroundColor: "rgba(0, 0, 0, 0.025)",
+                    border: "1px solid var(--ads-hairline)",
+                    borderRadius: "var(--ads-r-sm)",
                     padding: "0.65rem 0.85rem",
                     fontSize: "0.75rem",
-                    color: "#475569",
+                    color: "var(--ads-ink-secondary)",
                     whiteSpace: "pre-line",
                     lineHeight: 1.5,
                   }}
@@ -438,10 +441,10 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
 
               <div>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.3rem" }}>
-                  <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B" }}>
+                  <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                     Additional Message Notes (Optional)
                   </label>
-                  <span style={{ fontSize: "0.7rem", color: "#94A3B8" }}>
+                  <span style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)" }}>
                     Appended to driver notification
                   </span>
                 </div>
@@ -453,11 +456,11 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                   style={{
                     width: "100%",
                     padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
                     fontSize: "0.8125rem",
-                    color: "#1E293B",
+                    color: "var(--ads-ink)",
                     fontFamily: "inherit",
                     resize: "vertical",
                     outline: "none",
@@ -473,7 +476,7 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
             <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
               {activeRecipients.length > 1 && (
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <span style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 600 }}>
+                  <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", fontWeight: 600 }}>
                     Previewing message for:
                   </span>
                   <select
@@ -481,12 +484,12 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
                     onChange={(e) => setPreviewDriverIndex(Number(e.target.value))}
                     style={{
                       padding: "0.25rem 0.6rem",
-                      borderRadius: "6px",
-                      border: "1px solid #CBD5E1",
+                      borderRadius: "var(--ads-r-xs)",
+                      border: "1px solid var(--ads-hairline)",
                       fontSize: "0.75rem",
                       fontWeight: 600,
-                      color: "#1E293B",
-                      backgroundColor: "#FFFFFF",
+                      color: "var(--ads-ink)",
+                      backgroundColor: "var(--ads-material-thick)",
                     }}
                   >
                     {activeRecipients.map((r, i) => (
@@ -500,25 +503,25 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
 
               <div
                 style={{
-                  backgroundColor: "#FFFFFF",
-                  border: "1px solid #BFDBFE",
-                  borderRadius: "10px",
+                  backgroundColor: "var(--ads-material-thick)",
+                  border: "1px solid transparent",
+                  borderRadius: "var(--ads-r-sm)",
                   padding: "0.85rem 1rem",
-                  boxShadow: "0 2px 8px rgba(37, 99, 235, 0.05)",
+                  boxShadow: "var(--ads-shadow-xs)",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem", borderBottom: "1px solid #EFF6FF", paddingBottom: "0.4rem" }}>
-                  <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#1D4ED8" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem", borderBottom: "1px solid transparent", paddingBottom: "0.4rem" }}>
+                  <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-blue)" }}>
                     To: {currentPreviewRecipient.name}
                   </span>
-                  <span style={{ fontSize: "0.7rem", color: "#64748B" }}>
+                  <span style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)" }}>
                     via {channels.map((c) => (c === "sms" ? "SMS" : "In-App Chat")).join(" & ")}
                   </span>
                 </div>
                 <div
                   style={{
                     fontSize: "0.8125rem",
-                    color: "#1E293B",
+                    color: "var(--ads-ink)",
                     whiteSpace: "pre-line",
                     lineHeight: 1.6,
                   }}
@@ -534,8 +537,8 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
         <div
           style={{
             padding: "0.85rem 1.4rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            borderTop: "1px solid var(--ads-hairline)",
+            backgroundColor: "rgba(0, 0, 0, 0.025)",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
@@ -547,13 +550,16 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
             onClick={onClose}
             disabled={isSending}
             style={{
-              padding: "0.55rem 1.1rem",
-              borderRadius: "8px",
-              border: "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
-              color: "#475569",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid var(--ads-hairline)",
+              backgroundColor: "var(--ads-material-thick)",
+              color: "var(--ads-ink)",
               fontSize: "0.8125rem",
               fontWeight: 600,
+              letterSpacing: "-0.01em",
+              lineHeight: 1,
+              boxShadow: "var(--ads-bevel)",
               cursor: "pointer",
             }}
           >
@@ -564,18 +570,22 @@ export const SendCalloutMessageModal: FC<SendCalloutMessageModalProps> = ({
             onClick={handleSend}
             disabled={isSending || activeRecipients.length === 0}
             style={{
-              padding: "0.55rem 1.25rem",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: isSending || activeRecipients.length === 0 ? "#93C5FD" : "#2563EB",
-              color: "#FFFFFF !important",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid transparent",
+              backgroundColor: "var(--ads-blue)",
+              opacity: isSending || activeRecipients.length === 0 ? 0.4 : 1,
+              color: "#FFFFFF",
               fontSize: "0.8125rem",
-              fontWeight: 700,
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
+              lineHeight: 1,
+              transition: "background-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
               cursor: isSending || activeRecipients.length === 0 ? "not-allowed" : "pointer",
               display: "flex",
               alignItems: "center",
               gap: "0.45rem",
-              boxShadow: "0 2px 6px rgba(37, 99, 235, 0.25)",
+              boxShadow: "0 1px 3px rgba(0, 113, 227, 0.24)",
             }}
           >
             {isSending ? (

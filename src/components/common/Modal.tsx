@@ -43,27 +43,29 @@ export const Modal: FC<ModalProps> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(15, 23, 42, 0.65)",
-        backdropFilter: "var(--glass-blur-vercel)",
-        WebkitBackdropFilter: "var(--glass-blur-vercel)",
-        padding: "1rem",
-        animation: "modalBackdropFadeIn 0.2s var(--ease-spring)",
+        background: "rgba(0, 0, 0, 0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
+        padding: "var(--ads-s4)",
+        animation: "modalBackdropFadeIn var(--ads-dur) var(--ads-ease)",
       }}
       onClick={onClose}
     >
       <div
+        role="dialog"
+        aria-modal="true"
         style={{
           width: "100%",
           maxWidth,
-          backgroundColor: "var(--surface-bg-elevated)",
-          backdropFilter: "var(--glass-blur-vercel-lg)",
-          WebkitBackdropFilter: "var(--glass-blur-vercel-lg)",
-          border: "1px solid var(--surface-border)",
-          borderRadius: "var(--radius-2xl)",
-          boxShadow: "var(--shadow-ambient-lg), var(--surface-bevel)",
-          padding: "1.75rem",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          border: "1px solid var(--ads-hairline)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          padding: "var(--ads-s6)",
           position: "relative",
-          animation: "modalSpringScaleUp 0.25s var(--ease-spring)",
+          animation: "modalSpringScaleUp var(--ads-dur) var(--ads-ease)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -71,31 +73,32 @@ export const Modal: FC<ModalProps> = ({
           onClick={onClose}
           style={{
             position: "absolute",
-            top: "1.25rem",
-            right: "1.25rem",
+            top: "var(--ads-s5)",
+            right: "var(--ads-s5)",
             background: "transparent",
             border: "1px solid transparent",
-            color: "var(--text-muted)",
+            color: "var(--ads-ink-tertiary)",
             cursor: "pointer",
             padding: "0.35rem",
-            borderRadius: "0.5rem",
+            borderRadius: "var(--ads-r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            transition: "all 0.18s var(--ease-spring)",
+            transition:
+              "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = "var(--text-primary)";
-            e.currentTarget.style.backgroundColor = "var(--surface-bg-hover)";
-            e.currentTarget.style.borderColor = "var(--surface-border)";
+            e.currentTarget.style.color = "var(--ads-ink)";
+            e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
+            e.currentTarget.style.borderColor = "var(--ads-hairline)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = "var(--text-muted)";
+            e.currentTarget.style.color = "var(--ads-ink-tertiary)";
             e.currentTarget.style.backgroundColor = "transparent";
             e.currentTarget.style.borderColor = "transparent";
           }}
           onMouseDown={(e) => {
-            e.currentTarget.style.transform = "scale(0.92)";
+            e.currentTarget.style.transform = "scale(0.97)";
           }}
           onMouseUp={(e) => {
             e.currentTarget.style.transform = "scale(1)";
@@ -108,19 +111,19 @@ export const Modal: FC<ModalProps> = ({
         {title && (
           <h3
             style={{
-              fontSize: "1.25rem",
-              fontWeight: 700,
-              color: "var(--text-primary)",
-              marginBottom: "1rem",
-              paddingRight: "2rem",
-              letterSpacing: "-0.015em",
+              fontSize: "1.375rem",
+              fontWeight: 650,
+              color: "var(--ads-ink)",
+              marginBottom: "var(--ads-s4)",
+              paddingRight: "var(--ads-s8)",
+              letterSpacing: "-0.019em",
             }}
           >
             {title}
           </h3>
         )}
 
-        <div style={{ color: "var(--text-primary)" }}>{children}</div>
+        <div style={{ color: "var(--ads-ink-secondary)" }}>{children}</div>
       </div>
     </div>
   );

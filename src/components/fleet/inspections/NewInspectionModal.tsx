@@ -25,6 +25,73 @@ interface NewInspectionModalProps {
   embedded?: boolean;
 }
 
+const labelStyle: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+  fontSize: "0.6875rem",
+  fontWeight: 600,
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+  color: "var(--ads-ink-tertiary)",
+  marginBottom: "var(--ads-s1)",
+};
+
+const controlStyle: React.CSSProperties = {
+  width: "100%",
+  padding: "9px 13px",
+  fontFamily: "inherit",
+  fontSize: "0.8125rem",
+  fontWeight: 600,
+  color: "var(--ads-ink)",
+  background: "var(--ads-material-thick)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-sm)",
+  outline: "none",
+  transition: "all var(--ads-dur-fast) var(--ads-ease)",
+};
+
+const secondaryButtonStyle: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "var(--ads-s2)",
+  padding: "9px 18px",
+  fontSize: "0.8125rem",
+  fontWeight: 600,
+  letterSpacing: "-0.01em",
+  color: "var(--ads-ink)",
+  background: "var(--ads-material-thick)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-pill)",
+  boxShadow: "var(--ads-bevel)",
+  cursor: "pointer",
+  transition: "all var(--ads-dur-fast) var(--ads-ease)",
+};
+
+const choiceStyle = (
+  active: boolean,
+  tint: string,
+  accent: string
+): React.CSSProperties => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "6px",
+  padding: "9px 10px",
+  fontSize: "0.75rem",
+  fontWeight: 600,
+  letterSpacing: "-0.005em",
+  textAlign: "center",
+  color: active ? accent : "var(--ads-ink-secondary)",
+  background: active ? tint : "rgba(0,0,0,0.04)",
+  border: `1px solid ${active ? accent : "var(--ads-hairline)"}`,
+  borderRadius: "var(--ads-r-sm)",
+  boxShadow: active ? "var(--ads-shadow-xs)" : "none",
+  cursor: "pointer",
+  transition: "all var(--ads-dur-fast) var(--ads-ease)",
+});
+
 export const NewInspectionModal: FC<NewInspectionModalProps> = ({
   isOpen,
   onClose,
@@ -83,18 +150,21 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
   };
 
   const formContent = (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s4)" }}
+    >
       {/* Vehicle Selection */}
       <div>
-        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-          <Truck size={13} className="text-blue-600" />
+        <label style={labelStyle}>
+          <Truck size={13} style={{ color: "var(--ads-blue)" }} />
           Select Fleet Vehicle
         </label>
         <select
           value={vehicleId}
           onChange={(e) => setVehicleId(e.target.value)}
           required
-          className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:bg-white focus:outline-hidden focus:border-blue-500"
+          style={controlStyle}
         >
           {vehicles.map((v) => (
             <option key={v.id} value={v.id}>
@@ -106,15 +176,15 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
 
       {/* Driver Selection */}
       <div>
-        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-          <User size={13} className="text-blue-600" />
+        <label style={labelStyle}>
+          <User size={13} style={{ color: "var(--ads-blue)" }} />
           Assigning Driver
         </label>
         <select
           value={driverId}
           onChange={(e) => setDriverId(e.target.value)}
           required
-          className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:bg-white focus:outline-hidden focus:border-blue-500"
+          style={controlStyle}
         >
           {drivers.map((d) => (
             <option key={d.id} value={d.id}>
@@ -126,10 +196,10 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
 
       {/* Inspection Type Buttons */}
       <div>
-        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+        <label style={{ ...labelStyle, marginBottom: "var(--ads-s2)" }}>
           Inspection Type
         </label>
-        <div className="grid grid-cols-3 gap-2">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--ads-s2)" }}>
           {[
             { id: "pre", label: "Pre-Trip DVIC" },
             { id: "post", label: "Post-Trip (Return)" },
@@ -142,11 +212,11 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
                 setInspectionType(t.id as any);
                 setShiftType(t.id === "post" ? "Evening RTS" : "Morning Pre-Trip");
               }}
-              className={`px-2.5 py-2 rounded-xl text-xs font-bold border transition-all text-center ${
-                inspectionType === t.id
-                  ? "bg-blue-50 border-blue-500 text-blue-700 shadow-xs"
-                  : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100"
-              }`}
+              style={choiceStyle(
+                inspectionType === t.id,
+                "var(--ads-blue-tint)",
+                "var(--ads-blue)"
+              )}
             >
               {t.label}
             </button>
@@ -156,56 +226,56 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
 
       {/* Overall Result Status */}
       <div>
-        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+        <label style={{ ...labelStyle, marginBottom: "var(--ads-s2)" }}>
           Inspection Checklist Result
         </label>
-        <div className="grid grid-cols-3 gap-2">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--ads-s2)" }}>
           <button
             type="button"
             onClick={() => setStatus("passed")}
-            className={`px-2.5 py-2 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all ${
-              status === "passed"
-                ? "bg-emerald-50 border-emerald-500 text-emerald-700 shadow-xs"
-                : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100"
-            }`}
+            style={choiceStyle(
+              status === "passed",
+              "var(--ads-green-tint)",
+              "var(--ads-green)"
+            )}
           >
-            <CheckCircle2 size={13} className="text-emerald-600" />
+            <CheckCircle2 size={13} style={{ color: "var(--ads-green)" }} />
             PASS
           </button>
 
           <button
             type="button"
             onClick={() => setStatus("caution")}
-            className={`px-2.5 py-2 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all ${
-              status === "caution"
-                ? "bg-amber-50 border-amber-500 text-amber-700 shadow-xs"
-                : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100"
-            }`}
+            style={choiceStyle(
+              status === "caution",
+              "var(--ads-amber-tint)",
+              "var(--ads-amber)"
+            )}
           >
-            <AlertTriangle size={13} className="text-amber-600" />
+            <AlertTriangle size={13} style={{ color: "var(--ads-amber)" }} />
             CAUTION
           </button>
 
           <button
             type="button"
             onClick={() => setStatus("failed")}
-            className={`px-2.5 py-2 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all ${
-              status === "failed"
-                ? "bg-rose-50 border-rose-500 text-rose-700 shadow-xs"
-                : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100"
-            }`}
+            style={choiceStyle(
+              status === "failed",
+              "var(--ads-red-tint)",
+              "var(--ads-red)"
+            )}
           >
-            <XCircle size={13} className="text-rose-600" />
+            <XCircle size={13} style={{ color: "var(--ads-red)" }} />
             FAIL
           </button>
         </div>
       </div>
 
       {/* Odometer & Fuel */}
-      <div className="grid grid-cols-2 gap-3">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "var(--ads-s3)" }}>
         <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-            <Gauge size={12} className="text-blue-600" />
+          <label style={labelStyle}>
+            <Gauge size={12} style={{ color: "var(--ads-blue)" }} />
             Odometer (Miles)
           </label>
           <input
@@ -213,19 +283,19 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
             value={odometer}
             onChange={(e) => setOdometer(e.target.value)}
             required
-            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-semibold text-slate-900 focus:bg-white focus:outline-hidden focus:border-blue-500"
+            style={{ ...controlStyle, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}
           />
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-            <Fuel size={12} className="text-blue-600" />
+          <label style={labelStyle}>
+            <Fuel size={12} style={{ color: "var(--ads-blue)" }} />
             Fuel / Battery Level
           </label>
           <select
             value={fuelLevel}
             onChange={(e) => setFuelLevel(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:bg-white focus:outline-hidden focus:border-blue-500"
+            style={controlStyle}
           >
             <option value="100% Full">100% Full</option>
             <option value="85% (3/4 Tank)">85% (3/4 Tank)</option>
@@ -237,7 +307,7 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
 
       {/* Notes / Failure Comments */}
       <div>
-        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+        <label style={labelStyle}>
           Inspection Notes / Failure Reason
         </label>
         <textarea
@@ -245,17 +315,26 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           placeholder="Itemized observations, defect notes, or tire/body conditions..."
-          className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:bg-white focus:outline-hidden focus:border-blue-500 resize-none"
+          style={{ ...controlStyle, fontWeight: 500, resize: "none" }}
         />
       </div>
 
       {/* Footer Buttons */}
-      <div className="pt-2 border-t border-slate-200 flex items-center justify-end gap-3">
+      <div
+        style={{
+          paddingTop: "var(--ads-s4)",
+          borderTop: "1px solid var(--ads-hairline)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          gap: "var(--ads-s3)",
+        }}
+      >
         <button
           type="button"
           onClick={onClose}
           disabled={isSubmitting}
-          className="btn-outline-secondary btn-sm"
+          style={secondaryButtonStyle}
         >
           Cancel
         </button>
@@ -263,8 +342,13 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="btn-blue-primary btn-sm flex items-center gap-1.5"
-          style={{ color: "#FFFFFF" }}
+          className="btn-blue-primary btn-sm"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "var(--ads-s2)",
+            color: "#FFFFFF",
+          }}
         >
           {isSubmitting ? (
             <>
@@ -303,9 +387,10 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
           <div className="screen-nav-right">
             <button
               type="button"
-              className="btn-outline-secondary btn-sm"
+              className="btn-sm"
               onClick={onClose}
               disabled={isSubmitting}
+              style={secondaryButtonStyle}
             >
               Cancel
             </button>
@@ -313,8 +398,13 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
               type="button"
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="btn-blue-primary btn-sm flex items-center gap-1.5"
-              style={{ color: "#FFFFFF" }}
+              className="btn-blue-primary btn-sm"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "var(--ads-s2)",
+                color: "#FFFFFF",
+              }}
             >
               {isSubmitting ? (
                 <>
@@ -334,11 +424,13 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
         {/* Card Form Container */}
         <div
           style={{
-            backgroundColor: "#FFFFFF",
-            borderRadius: "12px",
-            border: "1px solid #E2E8F0",
-            padding: "1.75rem",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-md)",
+            WebkitBackdropFilter: "var(--ads-blur-md)",
+            borderRadius: "var(--ads-r-lg)",
+            border: "1px solid var(--ads-hairline)",
+            padding: "var(--ads-s6)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
           }}
         >
           {formContent}
@@ -348,24 +440,90 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
   }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex items-center justify-center min-h-screen px-4 py-6 text-center sm:p-0">
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 50,
+        background: "rgba(0,0,0,0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "var(--ads-s4)",
+        overflowY: "auto",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
         <div
-          className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs transition-opacity"
+          style={{ position: "fixed", inset: 0, background: "transparent" }}
           onClick={onClose}
         />
 
-        <div className="relative inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-2 border-slate-200 animate-in fade-in zoom-in-95 duration-150">
-          <div className="p-5 border-b-2 border-slate-200 bg-slate-50/70 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center">
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            maxWidth: "32rem",
+            textAlign: "left",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-lg)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-xl)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              padding: "var(--ads-s5) var(--ads-s6)",
+              background: "transparent",
+              borderBottom: "1px solid var(--ads-hairline)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "var(--ads-s3)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
+              <div
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  flexShrink: 0,
+                  borderRadius: "var(--ads-r-md)",
+                  background: "var(--ads-blue-tint)",
+                  border: "1px solid var(--ads-blue-tint-strong)",
+                  color: "var(--ads-blue)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <ClipboardCheck size={20} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-slate-900">
+                <h3
+                  style={{
+                    margin: 0,
+                    fontSize: "1.0625rem",
+                    fontWeight: 600,
+                    letterSpacing: "-0.014em",
+                    color: "var(--ads-ink)",
+                  }}
+                >
                   Log Inspection Form
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p style={{ margin: "2px 0 0 0", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                   Record real-time Pre-Trip or RTS Return Inspection checklist
                 </p>
               </div>
@@ -374,13 +532,27 @@ export const NewInspectionModal: FC<NewInspectionModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors"
+              aria-label="Close inspection form"
+              style={{
+                width: "32px",
+                height: "32px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
+                background: "transparent",
+                color: "var(--ads-ink-tertiary)",
+                cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
+              }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
 
-          <div className="p-5">
+          <div style={{ padding: "var(--ads-s6)" }}>
             {formContent}
           </div>
         </div>

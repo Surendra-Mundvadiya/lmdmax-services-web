@@ -424,9 +424,9 @@ export const AddAdminScreen: FC<AddAdminScreenProps> = ({
           alignItems: "center",
           justifyContent: "space-between",
           width: "100%",
-          paddingBottom: "0.85rem",
-          borderBottom: "1px solid #E2E8F0",
-          marginBottom: "0.25rem",
+          paddingBottom: "var(--ads-s4)",
+          borderBottom: "1px solid var(--ads-hairline)",
+          marginBottom: "var(--ads-s1)",
         }}
       >
         <div
@@ -443,6 +443,7 @@ export const AddAdminScreen: FC<AddAdminScreenProps> = ({
             className="back-btn"
             onClick={onBack}
             title="Back to All Administrators"
+            aria-label="Back to all administrators"
             disabled={isSubmitting}
           >
             <ArrowLeft size={16} />
@@ -450,11 +451,17 @@ export const AddAdminScreen: FC<AddAdminScreenProps> = ({
           </button>
           <div
             className="screen-title-divider"
-            style={{ width: "1px", height: "20px", backgroundColor: "#CBD5E1" }}
+            style={{ width: "1px", height: "20px", backgroundColor: "var(--ads-hairline-strong)" }}
           />
           <h2
             className="screen-heading"
-            style={{ margin: 0, fontSize: "1.15rem", fontWeight: 700, color: "#0F172A" }}
+            style={{
+              margin: 0,
+              fontSize: "1.0625rem",
+              fontWeight: 600,
+              letterSpacing: "-0.014em",
+              color: "var(--ads-ink)",
+            }}
           >
             {isEditMode ? "Edit Admin" : "Add Admin"}
           </h2>
@@ -655,7 +662,7 @@ export const AddAdminScreen: FC<AddAdminScreenProps> = ({
                     className="text-slate-400 flex-shrink-0"
                     style={{
                       transform: stationDropdownOpen ? "rotate(180deg)" : "none",
-                      transition: "transform 0.15s ease",
+                      transition: "transform var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   />
                 </button>
@@ -711,10 +718,10 @@ export const AddAdminScreen: FC<AddAdminScreenProps> = ({
                       {filteredStations.length === 0 && (
                         <div
                           style={{
-                            padding: "0.6rem",
+                            padding: "var(--ads-s3)",
                             textAlign: "center",
                             fontSize: "0.75rem",
-                            color: "#94A3B8",
+                            color: "var(--ads-ink-quaternary)",
                           }}
                         >
                           No active stations found
@@ -766,11 +773,12 @@ export const AddAdminScreen: FC<AddAdminScreenProps> = ({
                       background: "none",
                       border: "none",
                       cursor: "pointer",
-                      color: "#64748B",
+                      color: "var(--ads-ink-tertiary)",
                       padding: 0,
                     }}
                     onClick={() => setShowPassword(!showPassword)}
                     title={showPassword ? "Hide password" : "Show password"}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -813,11 +821,12 @@ export const AddAdminScreen: FC<AddAdminScreenProps> = ({
                       background: "none",
                       border: "none",
                       cursor: "pointer",
-                      color: "#64748B",
+                      color: "var(--ads-ink-tertiary)",
                       padding: 0,
                     }}
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     title={showConfirmPassword ? "Hide password" : "Show password"}
+                    aria-label={showConfirmPassword ? "Hide confirmed password" : "Show confirmed password"}
                   >
                     {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>

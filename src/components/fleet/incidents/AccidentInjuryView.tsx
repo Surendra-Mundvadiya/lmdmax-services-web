@@ -60,20 +60,20 @@ function statusStyle(s: string): React.CSSProperties {
   const lower = (s || "").toLowerCase();
   if (lower === "open")
     return {
-      backgroundColor: "#FEF2F2",
-      color: "#DC2626",
-      border: "1px solid #FECACA",
+      backgroundColor: "var(--ads-red-tint)",
+      color: "var(--ads-red)",
+      border: "1px solid var(--ads-hairline)",
     };
   if (lower === "resolved")
     return {
-      backgroundColor: "#ECFDF5",
-      color: "#065F46",
-      border: "1px solid #A7F3D0",
+      backgroundColor: "var(--ads-green-tint)",
+      color: "var(--ads-green)",
+      border: "1px solid var(--ads-hairline)",
     };
   return {
-    backgroundColor: "#F1F5F9",
-    color: "#475569",
-    border: "1px solid #CBD5E1",
+    backgroundColor: "rgba(0,0,0,0.04)",
+    color: "var(--ads-ink-secondary)",
+    border: "1px solid var(--ads-hairline-strong)",
   };
 }
 
@@ -430,22 +430,23 @@ export const AccidentInjuryView: FC = () => {
               top: "70px",
               right: "24px",
               zIndex: 99999,
-              backgroundColor: toast.type === "success" ? "#065F46" : "#991B1B",
+              backgroundColor:
+                toast.type === "success" ? "var(--ads-green)" : "var(--ads-red)",
               color: "#FFFFFF",
-              padding: "0.75rem 1.25rem",
-              borderRadius: "10px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              borderRadius: "var(--ads-r-md)",
+              boxShadow: "var(--ads-shadow-lg)",
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
+              gap: "var(--ads-s2)",
               fontSize: "0.875rem",
               fontWeight: 500,
             }}
           >
             {toast.type === "success" ? (
-              <CheckCircle2 size={16} />
+              <CheckCircle2 size={16} color="#FFFFFF" />
             ) : (
-              <AlertCircle size={16} />
+              <AlertCircle size={16} color="#FFFFFF" />
             )}
             {toast.message}
           </div>
@@ -478,22 +479,23 @@ export const AccidentInjuryView: FC = () => {
               top: "70px",
               right: "24px",
               zIndex: 99999,
-              backgroundColor: toast.type === "success" ? "#065F46" : "#991B1B",
+              backgroundColor:
+                toast.type === "success" ? "var(--ads-green)" : "var(--ads-red)",
               color: "#FFFFFF",
-              padding: "0.75rem 1.25rem",
-              borderRadius: "10px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              borderRadius: "var(--ads-r-md)",
+              boxShadow: "var(--ads-shadow-lg)",
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
+              gap: "var(--ads-s2)",
               fontSize: "0.875rem",
               fontWeight: 500,
             }}
           >
             {toast.type === "success" ? (
-              <CheckCircle2 size={16} />
+              <CheckCircle2 size={16} color="#FFFFFF" />
             ) : (
-              <AlertCircle size={16} />
+              <AlertCircle size={16} color="#FFFFFF" />
             )}
             {toast.message}
           </div>
@@ -535,22 +537,23 @@ export const AccidentInjuryView: FC = () => {
               top: "70px",
               right: "24px",
               zIndex: 99999,
-              backgroundColor: toast.type === "success" ? "#065F46" : "#991B1B",
+              backgroundColor:
+                toast.type === "success" ? "var(--ads-green)" : "var(--ads-red)",
               color: "#FFFFFF",
-              padding: "0.75rem 1.25rem",
-              borderRadius: "10px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              borderRadius: "var(--ads-r-md)",
+              boxShadow: "var(--ads-shadow-lg)",
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
+              gap: "var(--ads-s2)",
               fontSize: "0.875rem",
               fontWeight: 500,
             }}
           >
             {toast.type === "success" ? (
-              <CheckCircle2 size={16} />
+              <CheckCircle2 size={16} color="#FFFFFF" />
             ) : (
-              <AlertCircle size={16} />
+              <AlertCircle size={16} color="#FFFFFF" />
             )}
             {toast.message}
           </div>
@@ -585,19 +588,20 @@ export const AccidentInjuryView: FC = () => {
               top: "70px",
               right: "24px",
               zIndex: 99999,
-              backgroundColor: toast.type === "success" ? "#065F46" : "#991B1B",
+              backgroundColor:
+                toast.type === "success" ? "var(--ads-green)" : "var(--ads-red)",
               color: "#FFFFFF",
-              padding: "0.75rem 1.25rem",
-              borderRadius: "10px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              borderRadius: "var(--ads-r-md)",
+              boxShadow: "var(--ads-shadow-lg)",
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
+              gap: "var(--ads-s2)",
               fontSize: "0.875rem",
               fontWeight: 500,
             }}
           >
-            {toast.type === "success" ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
+            {toast.type === "success" ? <CheckCircle2 size={16} color="#FFFFFF" /> : <AlertCircle size={16} color="#FFFFFF" />}
             {toast.message}
           </div>
         )}
@@ -626,19 +630,20 @@ export const AccidentInjuryView: FC = () => {
               top: "70px",
               right: "24px",
               zIndex: 99999,
-              backgroundColor: toast.type === "success" ? "#065F46" : "#991B1B",
+              backgroundColor:
+                toast.type === "success" ? "var(--ads-green)" : "var(--ads-red)",
               color: "#FFFFFF",
-              padding: "0.75rem 1.25rem",
-              borderRadius: "10px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              borderRadius: "var(--ads-r-md)",
+              boxShadow: "var(--ads-shadow-lg)",
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
+              gap: "var(--ads-s2)",
               fontSize: "0.875rem",
               fontWeight: 500,
             }}
           >
-            {toast.type === "success" ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
+            {toast.type === "success" ? <CheckCircle2 size={16} color="#FFFFFF" /> : <AlertCircle size={16} color="#FFFFFF" />}
             {toast.message}
           </div>
         )}
@@ -666,22 +671,23 @@ export const AccidentInjuryView: FC = () => {
             top: "70px",
             right: "24px",
             zIndex: 99999,
-            backgroundColor: toast.type === "success" ? "#065F46" : "#991B1B",
+            backgroundColor:
+              toast.type === "success" ? "var(--ads-green)" : "var(--ads-red)",
             color: "#FFFFFF",
-            padding: "0.75rem 1.25rem",
-            borderRadius: "10px",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+            padding: "var(--ads-s3) var(--ads-s5)",
+            borderRadius: "var(--ads-r-md)",
+            boxShadow: "var(--ads-shadow-lg)",
             display: "flex",
             alignItems: "center",
-            gap: "0.5rem",
+            gap: "var(--ads-s2)",
             fontSize: "0.875rem",
             fontWeight: 500,
           }}
         >
           {toast.type === "success" ? (
-            <CheckCircle2 size={16} />
+            <CheckCircle2 size={16} color="#FFFFFF" />
           ) : (
-            <AlertCircle size={16} />
+            <AlertCircle size={16} color="#FFFFFF" />
           )}
           {toast.message}
         </div>
@@ -736,7 +742,14 @@ export const AccidentInjuryView: FC = () => {
             })}
           </div>
         ) : (
-          <div style={{ fontSize: "1rem", fontWeight: 700, color: "#0F172A" }}>
+          <div
+            style={{
+              fontSize: "1rem",
+              fontWeight: 700,
+              letterSpacing: "-0.014em",
+              color: "var(--ads-ink)",
+            }}
+          >
             Accident Reports ({incidents.length})
           </div>
         )}
@@ -772,15 +785,17 @@ export const AccidentInjuryView: FC = () => {
                 style={{
                   position: "absolute",
                   right: 0,
-                  top: "calc(100% + 4px)",
-                  backgroundColor: "#FFFFFF",
-                  borderRadius: "10px",
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
-                  border: "1px solid #E2E8F0",
+                  top: "calc(100% + var(--ads-s1))",
+                  backgroundColor: "var(--ads-material-thick)",
+                  backdropFilter: "var(--ads-blur-lg)",
+                  WebkitBackdropFilter: "var(--ads-blur-lg)",
+                  borderRadius: "var(--ads-r-md)",
+                  boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+                  border: "1px solid var(--ads-hairline)",
                   zIndex: 99999,
                   minWidth: "210px",
                   overflow: "hidden",
-                  padding: "0.25rem 0",
+                  padding: "var(--ads-s1) 0",
                 }}
               >
                 <button
@@ -798,15 +813,18 @@ export const AccidentInjuryView: FC = () => {
                     cursor: "pointer",
                     fontSize: "0.8125rem",
                     fontWeight: 600,
-                    color: "#0F172A",
+                    color: "var(--ads-ink)",
                     display: "flex",
                     alignItems: "center",
-                    gap: "0.5rem",
+                    gap: "var(--ads-s2)",
+                    transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#EFF6FF")}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)")
+                  }
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                 >
-                  <ShieldAlert size={15} color="#DC2626" />
+                  <ShieldAlert size={15} color="var(--ads-red)" />
                   <span>Accident Report</span>
                 </button>
                 {isLMD && (
@@ -825,16 +843,19 @@ export const AccidentInjuryView: FC = () => {
                       cursor: "pointer",
                       fontSize: "0.8125rem",
                       fontWeight: 600,
-                      color: "#0F172A",
+                      color: "var(--ads-ink)",
                       display: "flex",
                       alignItems: "center",
-                      gap: "0.5rem",
-                      borderTop: "1px solid #F1F5F9",
+                      gap: "var(--ads-s2)",
+                      borderTop: "1px solid var(--ads-hairline)",
+                      transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#EFF6FF")}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)")
+                    }
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                   >
-                    <Plus size={15} color="#2563EB" />
+                    <Plus size={15} color="var(--ads-blue)" />
                     <span>Injury Report</span>
                   </button>
                 )}
@@ -895,6 +916,7 @@ export const AccidentInjuryView: FC = () => {
                 className="incident-search-clear"
                 onClick={() => setSearchText("")}
                 title="Clear search"
+                aria-label="Clear search"
               >
                 <X size={13} />
               </button>
@@ -922,7 +944,7 @@ export const AccidentInjuryView: FC = () => {
                   top: "50%",
                   transform: "translateY(-50%)",
                   pointerEvents: "none",
-                  color: "#94A3B8",
+                  color: "var(--ads-ink-quaternary)",
                 }}
               />
             </div>
@@ -964,14 +986,20 @@ export const AccidentInjuryView: FC = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 height: "280px",
-                gap: "0.75rem",
+                gap: "var(--ads-s3)",
               }}
             >
               <Loader2
                 size={32}
-                style={{ animation: "spin 0.8s linear infinite", color: "#2563EB" }}
+                style={{ animation: "spin 0.8s linear infinite", color: "var(--ads-blue)" }}
               />
-              <span style={{ fontSize: "0.875rem", fontWeight: 600, color: "#64748B" }}>
+              <span
+                style={{
+                  fontSize: "0.875rem",
+                  fontWeight: 600,
+                  color: "var(--ads-ink-tertiary)",
+                }}
+              >
                 Loading {activeTab === "accident" ? "accident" : "injury"} records…
               </span>
             </div>
@@ -990,24 +1018,32 @@ export const AccidentInjuryView: FC = () => {
                 style={{
                   width: 52,
                   height: 52,
-                  borderRadius: "14px",
-                  backgroundColor: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
+                  borderRadius: "var(--ads-r-md)",
+                  backgroundColor: "var(--ads-canvas)",
+                  border: "1px solid var(--ads-hairline)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                <ShieldAlert size={24} color="#94A3B8" />
+                <ShieldAlert size={24} color="var(--ads-ink-quaternary)" />
               </div>
-              <h4 style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "#1E293B" }}>
+              <h4
+                style={{
+                  margin: 0,
+                  fontSize: "1rem",
+                  fontWeight: 700,
+                  letterSpacing: "-0.014em",
+                  color: "var(--ads-ink)",
+                }}
+              >
                 No {activeTab === "accident" ? "Accident" : "Injury"} Records
               </h4>
               <p
                 style={{
                   margin: 0,
                   fontSize: "0.8125rem",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   textAlign: "center",
                   maxWidth: 360,
                   lineHeight: 1.6,
@@ -1058,7 +1094,7 @@ export const AccidentInjuryView: FC = () => {
                   >
                     <td
                       style={{
-                        color: "#94A3B8",
+                        color: "var(--ads-ink-quaternary)",
                         fontWeight: 600,
                         fontSize: "0.75rem",
                         textAlign: "center",
@@ -1068,8 +1104,14 @@ export const AccidentInjuryView: FC = () => {
                     </td>
                     <td>
                       <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                        <Calendar size={13} color="#64748B" />
-                        <span style={{ fontSize: "0.8125rem", color: "#334155", fontWeight: 500 }}>
+                        <Calendar size={13} color="var(--ads-ink-tertiary)" />
+                        <span
+                          style={{
+                            fontSize: "0.8125rem",
+                            color: "var(--ads-ink-secondary)",
+                            fontWeight: 500,
+                          }}
+                        >
                           {fmtDate(inc.date)}
                         </span>
                       </div>
@@ -1081,8 +1123,8 @@ export const AccidentInjuryView: FC = () => {
                             width: "24px",
                             height: "24px",
                             borderRadius: "50%",
-                            background: "#EFF6FF",
-                            color: "#2563EB",
+                            background: "var(--ads-blue-tint)",
+                            color: "var(--ads-blue)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -1096,7 +1138,7 @@ export const AccidentInjuryView: FC = () => {
                         <span
                           style={{
                             fontWeight: 650,
-                            color: "#0F172A",
+                            color: "var(--ads-ink)",
                             fontSize: "0.8125rem",
                           }}
                         >
@@ -1106,11 +1148,11 @@ export const AccidentInjuryView: FC = () => {
                     </td>
                     <td>
                       <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                        <Car size={13} color="#64748B" />
+                        <Car size={13} color="var(--ads-ink-tertiary)" />
                         <span
                           style={{
                             fontWeight: 600,
-                            color: "#334155",
+                            color: "var(--ads-ink-secondary)",
                             fontSize: "0.8125rem",
                           }}
                         >
@@ -1123,10 +1165,10 @@ export const AccidentInjuryView: FC = () => {
                         style={{
                           fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
                           fontSize: "0.75rem",
-                          color: "#475569",
-                          background: "#F1F5F9",
+                          color: "var(--ads-ink-secondary)",
+                          background: "rgba(0,0,0,0.04)",
                           padding: "2px 6px",
-                          borderRadius: "5px",
+                          borderRadius: "var(--ads-r-xs)",
                         }}
                       >
                         {inc.vin || "—"}
@@ -1137,7 +1179,7 @@ export const AccidentInjuryView: FC = () => {
                         style={{
                           fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
                           fontSize: "0.75rem",
-                          color: "#475569",
+                          color: "var(--ads-ink-secondary)",
                         }}
                       >
                         {inc.plateNumber || "—"}
@@ -1150,7 +1192,7 @@ export const AccidentInjuryView: FC = () => {
                     </td>
                     <td>
                       <div>
-                        <span style={{ fontSize: "0.8125rem", fontWeight: 500, color: "#334155" }}>
+                        <span style={{ fontSize: "0.8125rem", fontWeight: 500, color: "var(--ads-ink-secondary)" }}>
                           {inc.addedByName || "—"}
                         </span>
                         {inc.addedByType === "4" && (
@@ -1158,7 +1200,7 @@ export const AccidentInjuryView: FC = () => {
                             style={{
                               display: "block",
                               fontSize: "0.6875rem",
-                              color: "#2563EB",
+                              color: "var(--ads-blue)",
                               fontWeight: 700,
                             }}
                           >
@@ -1191,6 +1233,7 @@ export const AccidentInjuryView: FC = () => {
                           type="button"
                           className="incident-action-btn"
                           title="View Incident Details"
+                          aria-label="View incident details"
                           onClick={() => setDetailAccidentId(inc.id)}
                         >
                           <Eye size={14} />
@@ -1209,6 +1252,7 @@ export const AccidentInjuryView: FC = () => {
                           type="button"
                           className="incident-action-btn delete"
                           title="Delete Report"
+                          aria-label="Delete accident report"
                           onClick={() =>
                             setDeleteTarget({
                               id: inc.id,
@@ -1224,8 +1268,13 @@ export const AccidentInjuryView: FC = () => {
                             type="button"
                             className="incident-action-btn"
                             title={`Linked injury report: #${inc.otherFormId}`}
+                            aria-label={`Open linked injury report ${inc.otherFormId}`}
                             onClick={() => setDetailInjuryId(inc.otherFormId)}
-                            style={{ color: "#2563EB", borderColor: "#BFDBFE", background: "#EFF6FF" }}
+                            style={{
+                              color: "var(--ads-blue)",
+                              borderColor: "var(--ads-blue-tint-strong)",
+                              background: "var(--ads-blue-tint)",
+                            }}
                           >
                             <Paperclip size={14} />
                           </button>
@@ -1262,7 +1311,7 @@ export const AccidentInjuryView: FC = () => {
                   >
                     <td
                       style={{
-                        color: "#94A3B8",
+                        color: "var(--ads-ink-quaternary)",
                         fontWeight: 600,
                         fontSize: "0.75rem",
                         textAlign: "center",
@@ -1272,8 +1321,14 @@ export const AccidentInjuryView: FC = () => {
                     </td>
                     <td>
                       <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                        <Calendar size={13} color="#64748B" />
-                        <span style={{ fontSize: "0.8125rem", color: "#334155", fontWeight: 500 }}>
+                        <Calendar size={13} color="var(--ads-ink-tertiary)" />
+                        <span
+                          style={{
+                            fontSize: "0.8125rem",
+                            color: "var(--ads-ink-secondary)",
+                            fontWeight: 500,
+                          }}
+                        >
                           {fmtDate(inj.date)}
                         </span>
                       </div>
@@ -1285,8 +1340,8 @@ export const AccidentInjuryView: FC = () => {
                             width: "24px",
                             height: "24px",
                             borderRadius: "50%",
-                            background: "#EFF6FF",
-                            color: "#2563EB",
+                            background: "var(--ads-blue-tint)",
+                            color: "var(--ads-blue)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -1300,7 +1355,7 @@ export const AccidentInjuryView: FC = () => {
                         <span
                           style={{
                             fontWeight: 650,
-                            color: "#0F172A",
+                            color: "var(--ads-ink)",
                             fontSize: "0.8125rem",
                           }}
                         >
@@ -1310,11 +1365,11 @@ export const AccidentInjuryView: FC = () => {
                     </td>
                     <td>
                       <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                        <Car size={13} color="#64748B" />
+                        <Car size={13} color="var(--ads-ink-tertiary)" />
                         <span
                           style={{
                             fontWeight: 600,
-                            color: "#334155",
+                            color: "var(--ads-ink-secondary)",
                             fontSize: "0.8125rem",
                           }}
                         >
@@ -1327,10 +1382,10 @@ export const AccidentInjuryView: FC = () => {
                         style={{
                           fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
                           fontSize: "0.75rem",
-                          color: "#475569",
-                          background: "#F1F5F9",
+                          color: "var(--ads-ink-secondary)",
+                          background: "rgba(0,0,0,0.04)",
                           padding: "2px 6px",
-                          borderRadius: "5px",
+                          borderRadius: "var(--ads-r-xs)",
                         }}
                       >
                         {inj.vin || "—"}
@@ -1341,7 +1396,7 @@ export const AccidentInjuryView: FC = () => {
                         style={{
                           fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
                           fontSize: "0.75rem",
-                          color: "#475569",
+                          color: "var(--ads-ink-secondary)",
                         }}
                       >
                         {inj.plateNumber || "—"}
@@ -1352,19 +1407,19 @@ export const AccidentInjuryView: FC = () => {
                         style={{
                           display: "inline-block",
                           padding: "0.15rem 0.55rem",
-                          borderRadius: "6px",
+                          borderRadius: "var(--ads-r-pill)",
                           fontSize: "0.72rem",
                           fontWeight: 650,
-                          backgroundColor: "#F1F5F9",
-                          color: "#334155",
-                          border: "1px solid #E2E8F0",
+                          backgroundColor: "rgba(0,0,0,0.04)",
+                          color: "var(--ads-ink-secondary)",
+                          border: "1px solid var(--ads-hairline)",
                         }}
                       >
                         {injuryTypeLabel(inj.injuryType)}
                       </span>
                     </td>
                     <td>
-                      <span style={{ fontSize: "0.8125rem", fontWeight: 500, color: "#334155" }}>
+                      <span style={{ fontSize: "0.8125rem", fontWeight: 500, color: "var(--ads-ink-secondary)" }}>
                         {inj.addedByName || "—"}
                       </span>
                     </td>
@@ -1392,6 +1447,7 @@ export const AccidentInjuryView: FC = () => {
                           type="button"
                           className="incident-action-btn"
                           title="View Injury Details"
+                          aria-label="View injury details"
                           onClick={() => setDetailInjuryId(inj.id)}
                         >
                           <Eye size={14} />
@@ -1410,6 +1466,7 @@ export const AccidentInjuryView: FC = () => {
                           type="button"
                           className="incident-action-btn delete"
                           title="Delete Injury Report"
+                          aria-label="Delete injury report"
                           onClick={() =>
                             setDeleteTarget({
                               id: inj.id,
@@ -1425,8 +1482,13 @@ export const AccidentInjuryView: FC = () => {
                             type="button"
                             className="incident-action-btn"
                             title={`Linked accident report: #${inj.otherFormId}`}
+                            aria-label={`Open linked accident report ${inj.otherFormId}`}
                             onClick={() => setDetailAccidentId(inj.otherFormId)}
-                            style={{ color: "#2563EB", borderColor: "#BFDBFE", background: "#EFF6FF" }}
+                            style={{
+                              color: "var(--ads-blue)",
+                              borderColor: "var(--ads-blue-tint-strong)",
+                              background: "var(--ads-blue-tint)",
+                            }}
                           >
                             <Paperclip size={14} />
                           </button>

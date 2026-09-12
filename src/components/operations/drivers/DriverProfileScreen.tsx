@@ -25,6 +25,7 @@ import {
 import type { Driver } from "../../../types/driver";
 import { useDriverStore, AVAILABLE_STATIONS } from "../../../store/driverStore";
 import { getAvatarColor, getInitials } from "../../../utils/avatarUtils";
+import "./drivers.css";
 
 interface DriverProfileScreenProps {
   driver: Driver;

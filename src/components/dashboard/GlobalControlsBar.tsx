@@ -230,10 +230,13 @@ export const GlobalControlsBar: FC<Props> = ({
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.25rem",
-                backgroundColor: "#F8FAFC",
+                background: "var(--ads-material-thick)",
+                backdropFilter: "var(--ads-blur-sm)",
+                WebkitBackdropFilter: "var(--ads-blur-sm)",
                 padding: "0.2rem 0.3rem",
-                borderRadius: "7px",
-                border: "1px solid #E2E8F0",
+                borderRadius: "var(--ads-r-pill)",
+                border: "1px solid var(--ads-hairline)",
+                boxShadow: "var(--ads-bevel)",
                 boxSizing: "border-box",
               }}
             >
@@ -249,11 +252,13 @@ export const GlobalControlsBar: FC<Props> = ({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  borderRadius: "5px",
+                  borderRadius: "var(--ads-r-pill)",
                   border: "none",
                   backgroundColor: "transparent",
-                  color: weekNumber <= 1 ? "#CBD5E1" : "#475569",
+                  color: weekNumber <= 1 ? "var(--ads-ink-quaternary)" : "var(--ads-ink-secondary)",
+                  opacity: weekNumber <= 1 ? 0.5 : 1,
                   cursor: weekNumber <= 1 ? "not-allowed" : "pointer",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 <ChevronLeft size={14} />
@@ -268,28 +273,31 @@ export const GlobalControlsBar: FC<Props> = ({
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "0.4rem",
-                  padding: "0 0.55rem",
+                  padding: "0 0.7rem",
                   height: "28px",
-                  backgroundColor: "#FFFFFF",
-                  border: "1px solid #CBD5E1",
-                  borderRadius: "5px",
+                  backgroundColor: "var(--ads-material-thick)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-pill)",
+                  boxShadow: "var(--ads-bevel)",
                   fontSize: "0.8125rem",
-                  fontWeight: 700,
-                  color: "#1E293B",
+                  fontWeight: 600,
+                  letterSpacing: "-0.005em",
+                  color: "var(--ads-ink)",
                   cursor: "pointer",
                   whiteSpace: "nowrap",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
-                <Calendar size={13} style={{ color: "#2563EB" }} />
+                <Calendar size={13} style={{ color: "var(--ads-blue)" }} />
                 <span>
                   Week {weekNumber} &middot; {weekInfo.rangeLabel}
                 </span>
                 <ChevronDown
                   size={12}
                   style={{
-                    color: "#64748B",
+                    color: "var(--ads-ink-tertiary)",
                     transform: isWeekMenuOpen ? "rotate(180deg)" : "none",
-                    transition: "transform 0.15s ease",
+                    transition: "transform var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 />
               </button>
@@ -306,11 +314,13 @@ export const GlobalControlsBar: FC<Props> = ({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  borderRadius: "5px",
+                  borderRadius: "var(--ads-r-pill)",
                   border: "none",
                   backgroundColor: "transparent",
-                  color: weekNumber >= 53 ? "#CBD5E1" : "#475569",
+                  color: weekNumber >= 53 ? "var(--ads-ink-quaternary)" : "var(--ads-ink-secondary)",
+                  opacity: weekNumber >= 53 ? 0.5 : 1,
                   cursor: weekNumber >= 53 ? "not-allowed" : "pointer",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 <ChevronRight size={14} />
@@ -322,15 +332,19 @@ export const GlobalControlsBar: FC<Props> = ({
                 onClick={handleCurrentWeek}
                 style={{
                   height: "28px",
-                  padding: "0 0.55rem",
-                  borderRadius: "5px",
-                  border: "1px solid #BFDBFE",
-                  backgroundColor: weekNumber === currentWeek ? "#EFF6FF" : "#FFFFFF",
-                  color: "#2563EB",
+                  padding: "0 0.7rem",
+                  borderRadius: "var(--ads-r-pill)",
+                  border: "1px solid transparent",
+                  backgroundColor:
+                    weekNumber === currentWeek ? "var(--ads-blue)" : "var(--ads-blue-tint)",
+                  color: weekNumber === currentWeek ? "#FFFFFF" : "#0058B0",
+                  boxShadow:
+                    weekNumber === currentWeek ? "0 1px 4px rgba(0, 113, 227, 0.32)" : "none",
                   fontSize: "0.75rem",
-                  fontWeight: 700,
+                  fontWeight: 600,
                   cursor: "pointer",
                   whiteSpace: "nowrap",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 This Week
@@ -346,10 +360,13 @@ export const GlobalControlsBar: FC<Props> = ({
                   right: 0,
                   width: "280px",
                   maxHeight: "340px",
-                  backgroundColor: "#FFFFFF",
-                  border: "1px solid #CBD5E1",
-                  borderRadius: "10px",
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.08)",
+                  background: "var(--ads-material-thick)",
+                  backdropFilter: "var(--ads-blur-lg)",
+                  WebkitBackdropFilter: "var(--ads-blur-lg)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-lg)",
+                  boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+                  animation: "ads-sheet-in var(--ads-dur) var(--ads-ease)",
                   zIndex: 2000,
                   padding: "0.5rem",
                   display: "flex",
@@ -360,16 +377,16 @@ export const GlobalControlsBar: FC<Props> = ({
                 <div
                   style={{
                     padding: "0.3rem 0.5rem 0.5rem",
-                    borderBottom: "1px solid #E2E8F0",
+                    borderBottom: "1px solid var(--ads-hairline)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
                   }}
                 >
-                  <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#1E293B" }}>
+                  <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                     Select Performance Week
                   </span>
-                  <span style={{ fontSize: "0.6875rem", color: "#64748B" }}>
+                  <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)" }}>
                     Year {currentYear}
                   </span>
                 </div>
@@ -393,29 +410,29 @@ export const GlobalControlsBar: FC<Props> = ({
                         alignItems: "center",
                         justifyContent: "space-between",
                         padding: "0.4rem 0.6rem",
-                        borderRadius: "6px",
-                        border: item.isSelected ? "1px solid #BFDBFE" : "1px solid transparent",
+                        borderRadius: "var(--ads-r-sm)",
+                        border: "1px solid transparent",
                         backgroundColor: item.isSelected
-                          ? "#EFF6FF"
+                          ? "var(--ads-blue-tint)"
                           : item.isCurrent
-                          ? "#F8FAFC"
+                          ? "var(--uop-wash)"
                           : "transparent",
                         cursor: "pointer",
                         textAlign: "left",
-                        transition: "background-color 0.12s ease",
+                        transition: "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
                         <span
                           style={{
                             fontSize: "0.8125rem",
-                            fontWeight: item.isSelected ? 800 : item.isCurrent ? 700 : 500,
-                            color: item.isSelected ? "#2563EB" : "#1E293B",
+                            fontWeight: item.isSelected ? 650 : item.isCurrent ? 600 : 500,
+                            color: item.isSelected ? "#0058B0" : "var(--ads-ink)",
                           }}
                         >
                           {item.label}
                         </span>
-                        <span style={{ fontSize: "0.7rem", color: "#64748B" }}>
+                        <span style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)" }}>
                           ({item.rangeLabel})
                         </span>
                       </div>
@@ -425,18 +442,18 @@ export const GlobalControlsBar: FC<Props> = ({
                           <span
                             style={{
                               fontSize: "0.625rem",
-                              fontWeight: 700,
-                              color: "#059669",
-                              backgroundColor: "#ECFDF5",
-                              padding: "0.1rem 0.35rem",
-                              borderRadius: "4px",
+                              fontWeight: 600,
+                              color: "var(--ads-green)",
+                              backgroundColor: "var(--ads-green-tint)",
+                              padding: "0.12rem 0.45rem",
+                              borderRadius: "var(--ads-r-pill)",
                             }}
                           >
                             Current
                           </span>
                         )}
                         {item.isSelected && (
-                          <Check size={14} style={{ color: "#2563EB" }} />
+                          <Check size={14} style={{ color: "var(--ads-blue)" }} />
                         )}
                       </div>
                     </button>

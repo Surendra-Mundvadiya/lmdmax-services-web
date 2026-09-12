@@ -387,12 +387,12 @@ export const AppSidebar: FC = () => {
                 style={{
                   width: "36px",
                   height: "36px",
-                  borderRadius: "10px",
-                  backgroundColor: "#EFF6FF",
+                  borderRadius: "var(--ads-r-sm)",
+                  backgroundColor: "var(--ads-blue-tint)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 2px 6px rgba(37, 99, 235, 0.12)",
+                  boxShadow: "var(--ads-shadow-xs)",
                   flexShrink: 0,
                 }}
               >
@@ -405,7 +405,7 @@ export const AppSidebar: FC = () => {
                   style={{
                     fontSize: "1.05rem",
                     fontWeight: 800,
-                    color: "#0F172A",
+                    color: "var(--ads-ink)",
                     letterSpacing: "-0.02em",
                     lineHeight: 1.15,
                     whiteSpace: "nowrap",
@@ -413,7 +413,7 @@ export const AppSidebar: FC = () => {
                     textOverflow: "ellipsis",
                   }}
                 >
-                  LMD<span style={{ color: "#2563EB" }}>max</span>
+                  LMD<span style={{ color: "var(--ads-blue)" }}>max</span>
                 </span>
               </div>
             </div>
@@ -432,12 +432,12 @@ export const AppSidebar: FC = () => {
                 style={{
                   width: "36px",
                   height: "36px",
-                  borderRadius: "10px",
-                  backgroundColor: "#EFF6FF",
+                  borderRadius: "var(--ads-r-sm)",
+                  backgroundColor: "var(--ads-blue-tint)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 2px 6px rgba(37, 99, 235, 0.12)",
+                  boxShadow: "var(--ads-shadow-xs)",
                 }}
               >
                 <Logo variant="iconOnly" width={22} height={15} />
@@ -451,27 +451,30 @@ export const AppSidebar: FC = () => {
             className="sidebar-collapse-toggle-btn"
             onClick={toggleCollapse}
             title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            aria-expanded={!isCollapsed}
             style={{
               background: "transparent",
               border: "none",
-              color: "#64748B",
+              color: "var(--ads-ink-tertiary)",
               cursor: "pointer",
               width: "28px",
               height: "28px",
-              borderRadius: "8px",
+              borderRadius: "var(--ads-r-sm)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              transition: "all 0.15s ease",
+              transition:
+                "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
               flexShrink: 0,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#F1F5F9";
-              e.currentTarget.style.color = "#1E293B";
+              e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
+              e.currentTarget.style.color = "var(--ads-ink)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = "transparent";
-              e.currentTarget.style.color = "#64748B";
+              e.currentTarget.style.color = "var(--ads-ink-tertiary)";
             }}
           >
             {isCollapsed ? <ChevronRight size={17} /> : <ChevronLeft size={17} />}
@@ -483,13 +486,15 @@ export const AppSidebar: FC = () => {
               type="button"
               className="sidebar-mobile-close-btn"
               onClick={() => setMobileOpen(false)}
+              title="Close navigation menu"
+              aria-label="Close navigation menu"
               style={{
                 background: "transparent",
                 border: "none",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
                 padding: "0.35rem",
-                borderRadius: "6px",
+                borderRadius: "var(--ads-r-xs)",
                 display: "none",
                 alignItems: "center",
                 justifyContent: "center",
@@ -516,7 +521,7 @@ export const AppSidebar: FC = () => {
                 <div
                   style={{
                     height: "1px",
-                    backgroundColor: "#F1F5F9",
+                    backgroundColor: "rgba(0, 0, 0, 0.05)",
                     margin: "6px 8px",
                   }}
                 />
@@ -540,6 +545,8 @@ export const AppSidebar: FC = () => {
                       type="button"
                       onClick={() => handleNavigate(item.path!)}
                       title={isCollapsed ? item.title : undefined}
+                      aria-label={item.title}
+                      aria-current={isGroupActive ? "page" : undefined}
                       className={`app-sidebar-nav-item-btn ${isGroupActive ? "active" : ""}`}
                     >
                       <div
@@ -555,7 +562,7 @@ export const AppSidebar: FC = () => {
                         <Icon
                           size={17}
                           style={{
-                            color: isGroupActive ? "#FFFFFF" : "#64748B",
+                            color: isGroupActive ? "#FFFFFF" : "var(--ads-ink-tertiary)",
                             flexShrink: 0,
                             transition: "color 0.15s ease",
                           }}
@@ -589,6 +596,8 @@ export const AppSidebar: FC = () => {
                         toggleSubmenu(item.id);
                       }}
                       title={isCollapsed ? item.title : undefined}
+                      aria-label={item.title}
+                      aria-expanded={isSubOpen}
                       className={`app-sidebar-nav-item-btn ${
                         isGroupActive && !isSubOpen ? "active" : ""
                       }`}
@@ -607,7 +616,7 @@ export const AppSidebar: FC = () => {
                         <Icon
                           size={17}
                           style={{
-                            color: isGroupActive && !isSubOpen ? "#FFFFFF" : "#64748B",
+                            color: isGroupActive && !isSubOpen ? "#FFFFFF" : "var(--ads-ink-tertiary)",
                             flexShrink: 0,
                           }}
                         />
@@ -628,7 +637,7 @@ export const AppSidebar: FC = () => {
                       {!isCollapsed && (
                         <div
                           style={{
-                            color: isGroupActive && !isSubOpen ? "#FFFFFF" : "#94A3B8",
+                            color: isGroupActive && !isSubOpen ? "#FFFFFF" : "var(--ads-ink-quaternary)",
                             display: "flex",
                             alignItems: "center",
                             transition: "transform 0.2s ease",
@@ -646,7 +655,7 @@ export const AppSidebar: FC = () => {
                           display: "flex",
                           flexDirection: "column",
                           paddingLeft: "1.1rem",
-                          borderLeft: "2px solid #E2E8F0",
+                          borderLeft: "2px solid var(--ads-hairline)",
                           marginLeft: "1.1rem",
                           marginTop: "2px",
                           marginBottom: "4px",
@@ -662,40 +671,42 @@ export const AppSidebar: FC = () => {
                               key={sub.id}
                               type="button"
                               onClick={() => handleNavigate(sub.path)}
+                              aria-current={isSubActive ? "page" : undefined}
                               style={{
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "0.55rem",
                                 width: "100%",
                                 padding: "6px 10px",
-                                borderRadius: "8px",
+                                borderRadius: "var(--ads-r-sm)",
                                 border: "none",
-                                backgroundColor: isSubActive ? "#EFF6FF" : "transparent",
-                                color: isSubActive ? "#2563EB" : "#475569",
-                                fontWeight: isSubActive ? 700 : 500,
+                                backgroundColor: isSubActive ? "var(--ads-blue-tint)" : "transparent",
+                                color: isSubActive ? "var(--ads-blue)" : "var(--ads-ink-secondary)",
+                                fontWeight: isSubActive ? 650 : 500,
                                 fontSize: "0.8rem",
                                 cursor: "pointer",
                                 textAlign: "left",
-                                transition: "all 0.15s ease",
+                                transition:
+                                  "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
                                 fontFamily: "var(--font-sans)",
                               }}
                               onMouseEnter={(e) => {
                                 if (!isSubActive) {
-                                  e.currentTarget.style.backgroundColor = "#F8FAFC";
-                                  e.currentTarget.style.color = "#0F172A";
+                                  e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.04)";
+                                  e.currentTarget.style.color = "var(--ads-ink)";
                                 }
                               }}
                               onMouseLeave={(e) => {
                                 if (!isSubActive) {
                                   e.currentTarget.style.backgroundColor = "transparent";
-                                  e.currentTarget.style.color = "#475569";
+                                  e.currentTarget.style.color = "var(--ads-ink-secondary)";
                                 }
                               }}
                             >
                               <SubIcon
                                 size={14}
                                 style={{
-                                  color: isSubActive ? "#2563EB" : "#94A3B8",
+                                  color: isSubActive ? "var(--ads-blue)" : "var(--ads-ink-quaternary)",
                                   flexShrink: 0,
                                 }}
                               />
@@ -726,6 +737,9 @@ export const AppSidebar: FC = () => {
           ref={profileCardRef}
           onClick={() => setProfileMenuOpen(!profileMenuOpen)}
           title={`Signed in as ${userName}`}
+          role="button"
+          aria-label={`Account menu for ${userName}`}
+          aria-expanded={profileMenuOpen}
         >
           <div
             style={{
@@ -748,7 +762,7 @@ export const AppSidebar: FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0 2px 6px rgba(0, 0, 0, 0.12)",
+                boxShadow: "var(--ads-shadow-xs)",
                 flexShrink: 0,
               }}
             >
@@ -761,7 +775,7 @@ export const AppSidebar: FC = () => {
                   style={{
                     fontSize: "0.82rem",
                     fontWeight: 700,
-                    color: "#0F172A",
+                    color: "var(--ads-ink)",
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
@@ -774,7 +788,7 @@ export const AppSidebar: FC = () => {
                   style={{
                     fontSize: "0.68rem",
                     fontWeight: 550,
-                    color: "#64748B",
+                    color: "var(--ads-ink-tertiary)",
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
@@ -789,7 +803,7 @@ export const AppSidebar: FC = () => {
           </div>
 
           {!isCollapsed && (
-            <div style={{ color: "#94A3B8" }}>
+            <div style={{ color: "var(--ads-ink-quaternary)" }}>
               <MoreVertical size={16} />
             </div>
           )}
@@ -797,34 +811,39 @@ export const AppSidebar: FC = () => {
           {/* Profile Dropdown Popover */}
           {profileMenuOpen && (
             <div
+              role="menu"
               style={{
                 position: "absolute",
                 bottom: "calc(100% + 8px)",
-                left: isCollapsed ? "0" : "0",
-                backgroundColor: "#FFFFFF",
-                borderRadius: "14px",
-                boxShadow: "0 14px 35px -5px rgba(0, 0, 0, 0.18), 0 8px 16px -6px rgba(0, 0, 0, 0.1)",
-                border: "1px solid #CBD5E1",
+                left: 0,
+                background: "var(--ads-material-thick)",
+                backdropFilter: "var(--ads-blur-lg)",
+                WebkitBackdropFilter: "var(--ads-blur-lg)",
+                borderRadius: "var(--ads-r-lg)",
+                boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+                border: "1px solid var(--ads-hairline)",
                 width: "240px",
+                maxWidth: "calc(100vw - 32px)",
                 zIndex: 10060,
                 padding: "6px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "2px",
                 fontFamily: "var(--font-sans)",
+                animation: "ads-sheet-in var(--ads-dur) var(--ads-ease)",
               }}
               onClick={(e) => e.stopPropagation()}
             >
               <div
                 style={{
                   padding: "8px 10px",
-                  borderBottom: "1px solid #F1F5F9",
+                  borderBottom: "1px solid rgba(0, 0, 0, 0.05)",
                 }}
               >
-                <div style={{ fontSize: "0.84rem", fontWeight: 700, color: "#0F172A" }}>
+                <div style={{ fontSize: "0.84rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                   {userName}
                 </div>
-                <div style={{ fontSize: "0.72rem", color: "#64748B" }}>
+                <div style={{ fontSize: "0.72rem", color: "var(--ads-ink-tertiary)" }}>
                   {activeStation} Delivery Station
                 </div>
               </div>
@@ -841,19 +860,19 @@ export const AppSidebar: FC = () => {
                   gap: "0.6rem",
                   width: "100%",
                   padding: "8px 10px",
-                  borderRadius: "8px",
-                  border: "none",
-                  backgroundColor: "#FFFFFF",
-                  color: "#334155",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid transparent",
+                  backgroundColor: "transparent",
+                  color: "var(--ads-ink-secondary)",
                   fontSize: "0.82rem",
                   fontWeight: 500,
                   cursor: "pointer",
                   textAlign: "left",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F8FAFC")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.04)")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
               >
-                <User size={15} color="#2563EB" />
+                <User size={15} color="#0071E3" />
                 <span>My Profile &amp; Company</span>
               </button>
 
@@ -869,19 +888,19 @@ export const AppSidebar: FC = () => {
                   gap: "0.6rem",
                   width: "100%",
                   padding: "8px 10px",
-                  borderRadius: "8px",
-                  border: "none",
-                  backgroundColor: "#FFFFFF",
-                  color: "#334155",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid transparent",
+                  backgroundColor: "transparent",
+                  color: "var(--ads-ink-secondary)",
                   fontSize: "0.82rem",
                   fontWeight: 500,
                   cursor: "pointer",
                   textAlign: "left",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F8FAFC")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.04)")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
               >
-                <Settings size={15} color="#64748B" />
+                <Settings size={15} color="#6E6E73" />
                 <span>Settings</span>
               </button>
 
@@ -897,23 +916,23 @@ export const AppSidebar: FC = () => {
                   gap: "0.6rem",
                   width: "100%",
                   padding: "8px 10px",
-                  borderRadius: "8px",
-                  border: "none",
-                  backgroundColor: "#EFF6FF",
-                  color: "#2563EB",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid transparent",
+                  backgroundColor: "var(--ads-blue-tint)",
+                  color: "var(--ads-blue)",
                   fontSize: "0.82rem",
                   fontWeight: 700,
                   cursor: "pointer",
                   textAlign: "left",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#DBEAFE")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#EFF6FF")}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue-tint-strong)")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)")}
               >
-                <Layout size={15} color="#2563EB" />
+                <Layout size={15} color="#0071E3" />
                 <span>Choose App Layout</span>
               </button>
 
-              <div style={{ height: "1px", backgroundColor: "#F1F5F9", margin: "4px 0" }} />
+              <div style={{ height: "1px", backgroundColor: "rgba(0, 0, 0, 0.05)", margin: "4px 0" }} />
 
               <button
                 type="button"
@@ -924,19 +943,19 @@ export const AppSidebar: FC = () => {
                   gap: "0.6rem",
                   width: "100%",
                   padding: "8px 10px",
-                  borderRadius: "8px",
-                  border: "none",
-                  backgroundColor: "#FFFFFF",
-                  color: "#DC2626",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid transparent",
+                  backgroundColor: "transparent",
+                  color: "var(--ads-red)",
                   fontSize: "0.82rem",
                   fontWeight: 600,
                   cursor: "pointer",
                   textAlign: "left",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FEF2F2")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-red-tint)")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
               >
-                <LogOut size={15} color="#DC2626" />
+                <LogOut size={15} color="#D70015" />
                 <span>Sign Out</span>
               </button>
             </div>

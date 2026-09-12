@@ -33,9 +33,7 @@ export const ThresholdMetricRow: FC<ThresholdMetricRowProps> = ({
       {/* Metric Label */}
       <div className="threshold-metric-label-wrap">
         <span className="threshold-metric-name">{getMetricLabel(field.field)}</span>
-        <span className="threshold-metric-key text-[11px] text-slate-400 font-mono">
-          {field.field}
-        </span>
+        <span className="threshold-metric-key">{field.field}</span>
       </div>
 
       {/* Input Controls (when active) */}
@@ -95,6 +93,7 @@ export const ThresholdMetricRow: FC<ThresholdMetricRowProps> = ({
                 type="button"
                 className="threshold-swap-order-btn"
                 title="Change preference order (invert good vs bad directions)"
+                aria-label={`Invert good and bad direction for ${getMetricLabel(field.field)}`}
                 disabled={disabled || !field.enable}
                 onClick={() =>
                   onChange({

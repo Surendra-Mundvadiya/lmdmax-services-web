@@ -124,7 +124,10 @@ export const DvicThresholdView: FC<DvicThresholdViewProps> = ({ onNotification }
       {/* Header */}
       <div className="threshold-view-header">
         <div>
-          <h3 className="threshold-view-title flex items-center gap-2">
+          <h3
+            className="threshold-view-title"
+            style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}
+          >
             <span>Set Threshold for DVIC Report</span>
             <span className="badge-custom blue">Live API</span>
           </h3>
@@ -161,29 +164,52 @@ export const DvicThresholdView: FC<DvicThresholdViewProps> = ({ onNotification }
 
       {/* Main Single Threshold Row */}
       <div className="threshold-standalone-card">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold text-slate-800">
-              Inspection Duration Threshold:
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "var(--ads-s4)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
+            <span
+              style={{
+                fontSize: "0.875rem",
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+                color: "var(--ads-ink)",
+              }}
+            >
+              Inspection Duration Threshold
             </span>
-            <div className="flex items-center gap-1.5">
-              <span className="text-base font-bold text-slate-500">&lt;</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+              <span style={{ fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink-tertiary)" }}>
+                &lt;
+              </span>
               <input
                 type="number"
                 min="10"
                 max="9999"
                 step="5"
-                className="w-24 p-2 text-center text-sm font-bold border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="threshold-input single"
+                style={{ width: "6rem", maxWidth: "6rem", textAlign: "center", paddingLeft: 0 }}
+                aria-label="Inspection duration threshold in seconds"
                 value={currentDuration}
                 disabled={!dvicField?.enable || isSaving}
                 onChange={(e) => handleDurationChange(e.target.value)}
               />
-              <span className="text-sm font-medium text-slate-600">Seconds</span>
+              <span style={{ fontSize: "0.8125rem", fontWeight: 550, color: "var(--ads-ink-secondary)" }}>
+                Seconds
+              </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <span className="text-xs text-slate-500">
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+            <span
+              className={`ads-badge ${dvicField?.enable ? "ads-badge--green" : "ads-badge--neutral"}`}
+            >
               {dvicField?.enable ? "Active" : "Disabled"}
             </span>
             <label className="custom-blue-switch" title="Toggle DVIC threshold">
@@ -200,8 +226,8 @@ export const DvicThresholdView: FC<DvicThresholdViewProps> = ({ onNotification }
 
       {/* Info Callout */}
       <div className="threshold-info-banner">
-        <Info size={16} className="text-blue-600 shrink-0 mt-0.5" />
-        <span className="text-xs text-blue-900 leading-relaxed">
+        <Info size={16} style={{ color: "var(--ads-blue)", flexShrink: 0, marginTop: "2px" }} />
+        <span style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "var(--ads-ink-secondary)" }}>
           As per the configured threshold, any DA who completes their vehicle inspection under{" "}
           <strong>{currentDuration} seconds</strong> will be flagged and will receive an audit image.
         </span>

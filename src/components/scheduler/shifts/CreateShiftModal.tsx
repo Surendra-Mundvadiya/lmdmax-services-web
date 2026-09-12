@@ -186,19 +186,51 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
   };
 
   return (
-    <div className="sch-modal-backdrop">
-      <div className="sch-modal-dialog">
+    <div
+      className="sch-modal-backdrop"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        WebkitBackdropFilter: "blur(6px)",
+        backdropFilter: "blur(6px)",
+        padding: "var(--ads-s4)",
+      }}
+    >
+      <div
+        className="sch-modal-dialog"
+        style={{
+          background: "var(--ads-material-thick)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          backdropFilter: "var(--ads-blur-lg)",
+          border: "1px solid var(--ads-hairline)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+        }}
+      >
         {/* Header */}
-        <div className="sch-modal-header">
+        <div
+          className="sch-modal-header"
+          style={{
+            background: "transparent",
+            borderBottom: "1px solid var(--ads-hairline)",
+            padding: "var(--ads-s4) var(--ads-s5)",
+          }}
+        >
           <div className="sch-modal-title-group">
-            <div className="sch-modal-icon-badge">
+            <div
+              className="sch-modal-icon-badge"
+              style={{
+                background: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
+                borderRadius: "var(--ads-r-sm)",
+              }}
+            >
               {editingShift ? <FileEdit size={18} /> : <Clock size={18} />}
             </div>
             <div>
-              <h2 className="sch-modal-title">
+              <h2 className="sch-modal-title" style={{ color: "var(--ads-ink)" }}>
                 {editingShift ? "Edit Shift Details" : "Create New Shift"}
               </h2>
-              <p className="sch-modal-subtitle">
+              <p className="sch-modal-subtitle" style={{ color: "var(--ads-ink-tertiary)" }}>
                 Assign driver, schedule window, route & wave
               </p>
             </div>
@@ -208,6 +240,9 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
             type="button"
             onClick={onClose}
             className="sch-modal-close-btn"
+            style={{ color: "var(--ads-ink-tertiary)", borderRadius: "var(--ads-r-sm)" }}
+            aria-label="Close shift dialog"
+            title="Close"
           >
             <X size={18} />
           </button>
@@ -215,11 +250,23 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
 
         {/* Conflict Warning Banner */}
         {conflict && (
-          <div style={{ margin: "1rem 1.25rem 0", padding: "0.65rem 0.85rem", borderRadius: "8px", backgroundColor: "#FEF2F2", border: "1px solid #FECACA", color: "#991B1B", fontSize: "0.75rem", display: "flex", gap: "0.5rem" }}>
-            <AlertTriangle size={16} style={{ color: "#DC2626", flexShrink: 0, marginTop: "2px" }} />
+          <div
+            style={{
+              margin: "var(--ads-s4) var(--ads-s5) 0",
+              padding: "var(--ads-s3)",
+              borderRadius: "var(--ads-r-sm)",
+              background: "var(--ads-red-tint)",
+              border: "1px solid rgba(215, 0, 21, 0.28)",
+              color: "var(--ads-red)",
+              fontSize: "0.75rem",
+              display: "flex",
+              gap: "var(--ads-s2)",
+            }}
+          >
+            <AlertTriangle size={16} style={{ flexShrink: 0, marginTop: "2px" }} />
             <div>
-              <p style={{ fontWeight: 700 }}>Time-Off Conflict Warning</p>
-              <p style={{ marginTop: "2px", color: "#B91C1C" }}>
+              <p style={{ fontWeight: 600 }}>Time-Off Conflict Warning</p>
+              <p style={{ marginTop: "2px" }}>
                 {selectedDriver?.name || "This driver"} has approved leave from{" "}
                 <strong>{conflict.start_date}</strong> to <strong>{conflict.end_date}</strong>.
               </p>
@@ -229,24 +276,39 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
 
         {/* Error Alert */}
         {errorMsg && (
-          <div style={{ margin: "1rem 1.25rem 0", padding: "0.65rem 0.85rem", borderRadius: "8px", backgroundColor: "#FEF2F2", border: "1px solid #FECACA", color: "#B91C1C", fontSize: "0.75rem", fontWeight: 600 }}>
+          <div
+            style={{
+              margin: "var(--ads-s4) var(--ads-s5) 0",
+              padding: "var(--ads-s3)",
+              borderRadius: "var(--ads-r-sm)",
+              background: "var(--ads-red-tint)",
+              border: "1px solid rgba(215, 0, 21, 0.28)",
+              color: "var(--ads-red)",
+              fontSize: "0.75rem",
+              fontWeight: 600,
+            }}
+          >
             {errorMsg}
           </div>
         )}
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="sch-modal-body">
+        <form
+          onSubmit={handleSubmit}
+          className="sch-modal-body"
+          style={{ padding: "var(--ads-s5)", gap: "var(--ads-s4)" }}
+        >
           {/* Driver Selection */}
           <div className="sch-form-field">
             <label className="sch-form-label">Assign to Driver</label>
             <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
-              <User size={15} style={{ position: "absolute", left: "0.75rem", color: "#94A3B8", pointerEvents: "none" }} />
+              <User size={15} style={{ position: "absolute", left: "0.75rem", color: "var(--ads-ink-quaternary)", pointerEvents: "none" }} />
               <select
                 value={driverId}
                 onChange={(e) =>
                   setDriverId(e.target.value === "unassigned" ? "unassigned" : Number(e.target.value))
                 }
-                className="sch-form-select"
+                className="sch-form-select ads-select"
                 style={{ width: "100%", paddingLeft: "2.2rem" }}
               >
                 <option value="unassigned">— Unassigned (Open Shift) —</option>
@@ -266,7 +328,7 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
               <select
                 value={scheduleRuleId}
                 onChange={(e) => handleRuleChange(e.target.value)}
-                className="sch-form-select"
+                className="sch-form-select ads-select"
                 style={{ width: "100%" }}
               >
                 <option value="none">— Custom / Default Timing —</option>
@@ -287,7 +349,16 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setScheduleDate(new Date().toISOString().split("T")[0])}
-                  style={{ fontSize: "0.6875rem", fontWeight: 600, color: "#2563EB", background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: "6px", padding: "0.15rem 0.45rem", cursor: "pointer" }}
+                  style={{
+                    fontSize: "0.6875rem",
+                    fontWeight: 600,
+                    color: "var(--ads-blue)",
+                    background: "var(--ads-blue-tint)",
+                    border: "1px solid rgba(0, 113, 227, 0.22)",
+                    borderRadius: "var(--ads-r-pill)",
+                    padding: "2px var(--ads-s2)",
+                    cursor: "pointer",
+                  }}
                 >
                   Today
                 </button>
@@ -298,20 +369,29 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
                     tomorrow.setDate(tomorrow.getDate() + 1);
                     setScheduleDate(tomorrow.toISOString().split("T")[0]);
                   }}
-                  style={{ fontSize: "0.6875rem", fontWeight: 600, color: "#475569", background: "#F1F5F9", border: "1px solid #CBD5E1", borderRadius: "6px", padding: "0.15rem 0.45rem", cursor: "pointer" }}
+                  style={{
+                    fontSize: "0.6875rem",
+                    fontWeight: 600,
+                    color: "var(--ads-ink-secondary)",
+                    background: "var(--ads-material-thick)",
+                    border: "1px solid var(--ads-hairline)",
+                    borderRadius: "var(--ads-r-pill)",
+                    padding: "2px var(--ads-s2)",
+                    cursor: "pointer",
+                  }}
                 >
                   Tomorrow
                 </button>
               </div>
             </div>
             <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
-              <Calendar size={15} style={{ position: "absolute", left: "0.75rem", color: "#94A3B8", pointerEvents: "none" }} />
+              <Calendar size={15} style={{ position: "absolute", left: "0.75rem", color: "var(--ads-ink-quaternary)", pointerEvents: "none" }} />
               <input
                 type="date"
                 value={scheduleDate}
                 onChange={(e) => setScheduleDate(e.target.value)}
                 required
-                className="sch-form-input"
+                className="sch-form-input ads-input"
                 style={{ width: "100%", paddingLeft: "2.2rem" }}
               />
             </div>
@@ -326,7 +406,7 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
                 required
-                className="sch-form-input"
+                className="sch-form-input ads-input"
               />
             </div>
 
@@ -337,7 +417,7 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
                 required
-                className="sch-form-input"
+                className="sch-form-input ads-input"
               />
             </div>
           </div>
@@ -349,7 +429,7 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
               <select
                 value={breakMinutes}
                 onChange={(e) => setBreakMinutes(Number(e.target.value))}
-                className="sch-form-select"
+                className="sch-form-select ads-select"
               >
                 <option value={0}>No Break</option>
                 <option value={15}>15 Minutes</option>
@@ -359,11 +439,27 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
               </select>
             </div>
 
-            <div style={{ padding: "0.6rem 0.75rem", borderRadius: "8px", backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0", textAlign: "center" }}>
-              <span style={{ fontSize: "0.625rem", color: "#64748B", textTransform: "capitalize", fontWeight: 600, display: "block" }}>
+            <div
+              style={{
+                padding: "var(--ads-s2) var(--ads-s3)",
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-material-thin)",
+                border: "1px solid var(--ads-hairline)",
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "0.625rem",
+                  color: "var(--ads-ink-tertiary)",
+                  textTransform: "capitalize",
+                  fontWeight: 600,
+                  display: "block",
+                }}
+              >
                 Total duration
               </span>
-              <span style={{ fontSize: "0.9375rem", fontWeight: 700, color: "#2563EB" }}>
+              <span style={{ fontSize: "0.9375rem", fontWeight: 650, color: "var(--ads-blue)" }}>
                 {calculatedHours} hours
               </span>
             </div>
@@ -374,13 +470,13 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
             <div className="sch-form-field">
               <label className="sch-form-label">Route Code</label>
               <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
-                <Route size={14} style={{ position: "absolute", left: "0.75rem", color: "#94A3B8", pointerEvents: "none" }} />
+                <Route size={14} style={{ position: "absolute", left: "0.75rem", color: "var(--ads-ink-quaternary)", pointerEvents: "none" }} />
                 <input
                   type="text"
                   placeholder="e.g. CX101"
                   value={routeCode}
                   onChange={(e) => setRouteCode(e.target.value)}
-                  className="sch-form-input"
+                  className="sch-form-input ads-input"
                   style={{ width: "100%", paddingLeft: "2.1rem" }}
                 />
               </div>
@@ -391,7 +487,7 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
               <select
                 value={wave}
                 onChange={(e) => setWave(e.target.value)}
-                className="sch-form-select"
+                className="sch-form-select ads-select"
               >
                 <option value="Wave 1">Wave 1 (09:45 AM)</option>
                 <option value="Wave 2">Wave 2 (10:15 AM)</option>
@@ -406,11 +502,11 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
           <div className="sch-form-field">
             <label className="sch-form-label">Vehicle Type</label>
             <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
-              <Truck size={14} style={{ position: "absolute", left: "0.75rem", color: "#94A3B8", pointerEvents: "none" }} />
+              <Truck size={14} style={{ position: "absolute", left: "0.75rem", color: "var(--ads-ink-quaternary)", pointerEvents: "none" }} />
               <select
                 value={vehicleType}
                 onChange={(e) => setVehicleType(e.target.value)}
-                className="sch-form-select"
+                className="sch-form-select ads-select"
                 style={{ width: "100%", paddingLeft: "2.1rem" }}
               >
                 <option value="Cargo Van">Cargo Van (Standard)</option>
@@ -422,12 +518,21 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
           </div>
 
           {/* Save as Draft vs Publish Immediately */}
-          <div style={{ paddingTop: "0.5rem", borderTop: "1px solid #F1F5F9", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div
+            style={{
+              paddingTop: "var(--ads-s2)",
+              borderTop: "1px solid var(--ads-hairline)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "var(--ads-s3)",
+            }}
+          >
             <div>
-              <p style={{ fontSize: "0.75rem", fontWeight: 700, color: "#0F172A" }}>
+              <p style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                 Publish Immediately
               </p>
-              <p style={{ fontSize: "0.6875rem", color: "#64748B", marginTop: "2px" }}>
+              <p style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)", marginTop: "2px" }}>
                 {isPublished
                   ? "Shift will be live and active immediately."
                   : "Save as draft with dashed amber border for review."}
@@ -439,17 +544,32 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
                 type="checkbox"
                 checked={isPublished}
                 onChange={(e) => setIsPublished(e.target.checked)}
-                style={{ width: "18px", height: "18px", accentColor: "#2563EB", cursor: "pointer" }}
+                aria-label="Publish shift immediately"
+                style={{
+                  width: "18px",
+                  height: "18px",
+                  accentColor: "var(--ads-blue)",
+                  cursor: "pointer",
+                }}
               />
             </label>
           </div>
 
           {/* Footer */}
-          <div className="sch-modal-footer" style={{ padding: "0.75rem 0 0", margin: "0" }}>
+          <div
+            className="sch-modal-footer"
+            style={{
+              background: "transparent",
+              borderTop: "1px solid var(--ads-hairline)",
+              padding: "var(--ads-s4) 0 0",
+              margin: "0",
+              gap: "var(--ads-s2)",
+            }}
+          >
             <button
               type="button"
               onClick={onClose}
-              className="sch-btn-secondary"
+              className="sch-btn-secondary ads-btn ads-btn--secondary"
             >
               Cancel
             </button>
@@ -457,7 +577,7 @@ export const CreateShiftModal: FC<CreateShiftModalProps> = ({
             <button
               type="submit"
               disabled={loading}
-              className="sch-btn-primary"
+              className="sch-btn-primary ads-btn ads-btn--primary"
             >
               {loading ? (
                 <span>Saving...</span>

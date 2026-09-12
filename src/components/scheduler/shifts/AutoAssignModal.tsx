@@ -72,17 +72,51 @@ export const AutoAssignModal: FC<AutoAssignModalProps> = ({
   const totalRoutes = Object.values(routeCounts).reduce((a, b) => a + b, 0);
 
   return (
-    <div className="sch-modal-backdrop">
-      <div className="sch-modal-dialog">
+    <div
+      className="sch-modal-backdrop"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        WebkitBackdropFilter: "blur(6px)",
+        backdropFilter: "blur(6px)",
+        padding: "var(--ads-s4)",
+      }}
+    >
+      <div
+        className="sch-modal-dialog"
+        style={{
+          background: "var(--ads-material-thick)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          backdropFilter: "var(--ads-blur-lg)",
+          border: "1px solid var(--ads-hairline)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+        }}
+      >
         {/* Header */}
-        <div className="sch-modal-header">
+        <div
+          className="sch-modal-header"
+          style={{
+            background: "transparent",
+            borderBottom: "1px solid var(--ads-hairline)",
+            padding: "var(--ads-s4) var(--ads-s5)",
+          }}
+        >
           <div className="sch-modal-title-group">
-            <div className="sch-modal-icon-badge">
+            <div
+              className="sch-modal-icon-badge"
+              style={{
+                background: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
+                borderRadius: "var(--ads-r-sm)",
+              }}
+            >
               <Wand2 size={16} />
             </div>
             <div>
-              <h2 className="sch-modal-title">Auto-Assign / Fill Roster</h2>
-              <p className="sch-modal-subtitle">
+              <h2 className="sch-modal-title" style={{ color: "var(--ads-ink)" }}>
+                Auto-Assign / Fill Roster
+              </h2>
+              <p className="sch-modal-subtitle" style={{ color: "var(--ads-ink-tertiary)" }}>
                 Match driver availability, ratings & target hours automatically
               </p>
             </div>
@@ -92,39 +126,103 @@ export const AutoAssignModal: FC<AutoAssignModalProps> = ({
             type="button"
             onClick={onClose}
             className="sch-modal-close-btn"
+            style={{ color: "var(--ads-ink-tertiary)", borderRadius: "var(--ads-r-sm)" }}
+            aria-label="Close auto-assign dialog"
+            title="Close"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Content Form */}
-        <form onSubmit={handleRun} className="sch-modal-body">
-          <div style={{ padding: "0.75rem", borderRadius: "12px", backgroundColor: "#EFF6FF", border: "1px solid #BFDBFE", fontSize: "0.75rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <form
+          onSubmit={handleRun}
+          className="sch-modal-body"
+          style={{ padding: "var(--ads-s5)", gap: "var(--ads-s4)" }}
+        >
+          <div
+            style={{
+              padding: "var(--ads-s3)",
+              borderRadius: "var(--ads-r-md)",
+              background: "var(--ads-blue-tint)",
+              border: "1px solid rgba(0, 113, 227, 0.22)",
+              fontSize: "0.75rem",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "var(--ads-s3)",
+            }}
+          >
             <div>
-              <span style={{ fontWeight: 700, color: "#1E3A8A", display: "block" }}>Scheduling Window</span>
-              <span style={{ color: "#2563EB" }}>{startDate} to {endDate}</span>
+              <span style={{ fontWeight: 600, color: "var(--ads-ink)", display: "block" }}>
+                Scheduling Window
+              </span>
+              <span style={{ color: "var(--ads-ink-secondary)" }}>
+                {startDate} to {endDate}
+              </span>
             </div>
             <div style={{ textAlign: "right" }}>
-              <span style={{ fontWeight: 700, color: "#1E3A8A", display: "block" }}>Total Target</span>
-              <span style={{ fontSize: "0.9375rem", fontWeight: 800, color: "#1D4ED8" }}>{totalRoutes} Routes</span>
+              <span style={{ fontWeight: 600, color: "var(--ads-ink)", display: "block" }}>
+                Total Target
+              </span>
+              <span style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--ads-blue)" }}>
+                {totalRoutes} Routes
+              </span>
             </div>
           </div>
 
           {errorMsg && (
-            <div style={{ padding: "0.65rem", borderRadius: "8px", backgroundColor: "#FEF2F2", border: "1px solid #FECACA", color: "#B91C1C", fontSize: "0.75rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
-              <AlertCircle size={14} style={{ color: "#DC2626", flexShrink: 0 }} />
+            <div
+              style={{
+                padding: "var(--ads-s3)",
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-red-tint)",
+                border: "1px solid rgba(215, 0, 21, 0.28)",
+                color: "var(--ads-red)",
+                fontSize: "0.75rem",
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--ads-s2)",
+              }}
+            >
+              <AlertCircle size={14} style={{ flexShrink: 0 }} />
               <span>{errorMsg}</span>
             </div>
           )}
 
           <div>
-            <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 700, color: "#334155", marginBottom: "0.5rem" }}>
+            <label
+              style={{
+                display: "block",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                color: "var(--ads-ink-secondary)",
+                marginBottom: "var(--ads-s2)",
+              }}
+            >
               Daily Route Targets
             </label>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))", gap: "0.5rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))", gap: "var(--ads-s2)" }}>
               {days.map((d) => (
-                <div key={d.key} style={{ padding: "0.5rem", borderRadius: "8px", border: "1px solid #E2E8F0", backgroundColor: "#F8FAFC", textAlign: "center" }}>
-                  <span style={{ display: "block", fontSize: "0.6875rem", fontWeight: 600, color: "#475569", marginBottom: "0.25rem" }}>
+                <div
+                  key={d.key}
+                  style={{
+                    padding: "var(--ads-s2)",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thin)",
+                    textAlign: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      display: "block",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      color: "var(--ads-ink-secondary)",
+                      marginBottom: "var(--ads-s1)",
+                    }}
+                  >
                     {d.label}
                   </span>
                   <input
@@ -133,31 +231,56 @@ export const AutoAssignModal: FC<AutoAssignModalProps> = ({
                     max={100}
                     value={routeCounts[d.key] || 0}
                     onChange={(e) => handleCountChange(d.key, parseInt(e.target.value, 10) || 0)}
-                    className="sch-form-input"
-                    style={{ height: "32px", textAlign: "center", fontWeight: 700, padding: 0 }}
+                    className="sch-form-input ads-input"
+                    aria-label={`${d.label} route target`}
+                    style={{
+                      height: "32px",
+                      textAlign: "center",
+                      fontWeight: 600,
+                      padding: 0,
+                      borderRadius: "var(--ads-r-sm)",
+                      borderColor: "var(--ads-hairline)",
+                      color: "var(--ads-ink)",
+                    }}
                   />
                 </div>
               ))}
             </div>
           </div>
 
-          <div style={{ fontSize: "0.6875rem", color: "#64748B", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-            <p style={{ display: "flex", alignItems: "center", gap: "0.3rem", margin: 0 }}>
-              <Check size={12} style={{ color: "#10B981" }} />
+          <div
+            style={{
+              fontSize: "0.6875rem",
+              color: "var(--ads-ink-tertiary)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--ads-s1)",
+            }}
+          >
+            <p style={{ display: "flex", alignItems: "center", gap: "var(--ads-s1)", margin: 0 }}>
+              <Check size={12} style={{ color: "var(--ads-green)" }} />
               Honors approved driver leaves and PTO unavailabilities.
             </p>
-            <p style={{ display: "flex", alignItems: "center", gap: "0.3rem", margin: 0 }}>
-              <Check size={12} style={{ color: "#10B981" }} />
+            <p style={{ display: "flex", alignItems: "center", gap: "var(--ads-s1)", margin: 0 }}>
+              <Check size={12} style={{ color: "var(--ads-green)" }} />
               Prioritizes top scorecard performers and avoids 6th day overtime.
             </p>
           </div>
 
           {/* Footer */}
-          <div className="sch-modal-footer">
+          <div
+            className="sch-modal-footer"
+            style={{
+              background: "transparent",
+              borderTop: "1px solid var(--ads-hairline)",
+              padding: "var(--ads-s4) 0 0",
+              gap: "var(--ads-s2)",
+            }}
+          >
             <button
               type="button"
               onClick={onClose}
-              className="sch-btn-secondary"
+              className="sch-btn-secondary ads-btn ads-btn--secondary"
             >
               Cancel
             </button>
@@ -165,7 +288,7 @@ export const AutoAssignModal: FC<AutoAssignModalProps> = ({
             <button
               type="submit"
               disabled={loading}
-              className="sch-btn-primary"
+              className="sch-btn-primary ads-btn ads-btn--primary"
             >
               <Sparkles size={14} style={{ color: "#FFFFFF" }} />
               <span>{loading ? "Running Auto-Schedule..." : "Run Auto-Assign"}</span>

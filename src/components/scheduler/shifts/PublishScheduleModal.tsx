@@ -41,17 +41,52 @@ export const PublishScheduleModal: FC<PublishScheduleModalProps> = ({
   };
 
   return (
-    <div className="sch-modal-backdrop">
-      <div className="sch-modal-dialog" style={{ maxWidth: "560px" }}>
+    <div
+      className="sch-modal-backdrop"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        WebkitBackdropFilter: "blur(6px)",
+        backdropFilter: "blur(6px)",
+        padding: "var(--ads-s4)",
+      }}
+    >
+      <div
+        className="sch-modal-dialog"
+        style={{
+          maxWidth: "560px",
+          background: "var(--ads-material-thick)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          backdropFilter: "var(--ads-blur-lg)",
+          border: "1px solid var(--ads-hairline)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+        }}
+      >
         {/* Header */}
-        <div className="sch-modal-header" style={{ backgroundColor: "#FFFBEB" }}>
+        <div
+          className="sch-modal-header"
+          style={{
+            background: "transparent",
+            borderBottom: "1px solid var(--ads-hairline)",
+            padding: "var(--ads-s4) var(--ads-s5)",
+          }}
+        >
           <div className="sch-modal-title-group">
-            <div className="sch-modal-icon-badge" style={{ backgroundColor: "#FEF3C7", color: "#D97706" }}>
+            <div
+              className="sch-modal-icon-badge"
+              style={{
+                background: "var(--ads-amber-tint)",
+                color: "var(--ads-amber)",
+                borderRadius: "var(--ads-r-sm)",
+              }}
+            >
               <Send size={16} />
             </div>
             <div>
-              <h2 className="sch-modal-title">Publish Shift Schedule</h2>
-              <p className="sch-modal-subtitle">
+              <h2 className="sch-modal-title" style={{ color: "var(--ads-ink)" }}>
+                Publish Shift Schedule
+              </h2>
+              <p className="sch-modal-subtitle" style={{ color: "var(--ads-ink-tertiary)" }}>
                 Review and release unpublished draft shifts to drivers
               </p>
             </div>
@@ -61,79 +96,235 @@ export const PublishScheduleModal: FC<PublishScheduleModalProps> = ({
             type="button"
             onClick={onClose}
             className="sch-modal-close-btn"
+            style={{ color: "var(--ads-ink-tertiary)", borderRadius: "var(--ads-r-sm)" }}
+            aria-label="Close publish schedule dialog"
+            title="Close"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Content Body */}
-        <div className="sch-modal-body">
+        <div className="sch-modal-body" style={{ padding: "var(--ads-s5)", gap: "var(--ads-s4)" }}>
           {/* Stat Cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.65rem" }}>
-            <div style={{ padding: "0.75rem", borderRadius: "12px", backgroundColor: "#FFFBEB", border: "1px solid #FDE68A", textAlign: "center" }}>
-              <span style={{ fontSize: "0.625rem", fontWeight: 700, color: "#B45309", textTransform: "capitalize", display: "block" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "var(--ads-s2)" }}>
+            <div
+              style={{
+                padding: "var(--ads-s3)",
+                borderRadius: "var(--ads-r-md)",
+                background: "var(--ads-amber-tint)",
+                border: "1px solid rgba(178, 80, 0, 0.24)",
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "0.625rem",
+                  fontWeight: 600,
+                  color: "var(--ads-amber)",
+                  textTransform: "capitalize",
+                  display: "block",
+                }}
+              >
                 Draft shifts
               </span>
-              <span style={{ fontSize: "1.25rem", fontWeight: 800, color: "#78350F", marginTop: "0.2rem", display: "block" }}>
+              <span
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: 700,
+                  color: "var(--ads-ink)",
+                  marginTop: "var(--ads-s1)",
+                  display: "block",
+                }}
+              >
                 {draftShifts.length}
               </span>
             </div>
 
-            <div style={{ padding: "0.75rem", borderRadius: "12px", backgroundColor: "#EFF6FF", border: "1px solid #BFDBFE", textAlign: "center" }}>
-              <span style={{ fontSize: "0.625rem", fontWeight: 700, color: "#1D4ED8", textTransform: "capitalize", display: "block" }}>
+            <div
+              style={{
+                padding: "var(--ads-s3)",
+                borderRadius: "var(--ads-r-md)",
+                background: "var(--ads-blue-tint)",
+                border: "1px solid rgba(0, 113, 227, 0.22)",
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "0.625rem",
+                  fontWeight: 600,
+                  color: "var(--ads-blue)",
+                  textTransform: "capitalize",
+                  display: "block",
+                }}
+              >
                 Drivers
               </span>
-              <span style={{ fontSize: "1.25rem", fontWeight: 800, color: "#1E3A8A", marginTop: "0.2rem", display: "block" }}>
+              <span
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: 700,
+                  color: "var(--ads-ink)",
+                  marginTop: "var(--ads-s1)",
+                  display: "block",
+                }}
+              >
                 {uniqueDriverCount}
               </span>
             </div>
 
-            <div style={{ padding: "0.75rem", borderRadius: "12px", backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0", textAlign: "center" }}>
-              <span style={{ fontSize: "0.625rem", fontWeight: 700, color: "#64748B", textTransform: "capitalize", display: "block" }}>
+            <div
+              style={{
+                padding: "var(--ads-s3)",
+                borderRadius: "var(--ads-r-md)",
+                background: "var(--ads-material-thin)",
+                border: "1px solid var(--ads-hairline)",
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "0.625rem",
+                  fontWeight: 600,
+                  color: "var(--ads-ink-tertiary)",
+                  textTransform: "capitalize",
+                  display: "block",
+                }}
+              >
                 Date window
               </span>
-              <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#0F172A", marginTop: "0.4rem", display: "block", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={dateRangeLabel}>
+              <span
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "var(--ads-ink)",
+                  marginTop: "var(--ads-s2)",
+                  display: "block",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+                title={dateRangeLabel}
+              >
                 {dateRangeLabel}
               </span>
             </div>
           </div>
 
           {errorMsg && (
-            <div style={{ padding: "0.65rem 0.85rem", borderRadius: "8px", backgroundColor: "#FEF2F2", border: "1px solid #FECACA", color: "#B91C1C", fontSize: "0.75rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
-              <AlertCircle size={14} style={{ color: "#DC2626", flexShrink: 0 }} />
+            <div
+              style={{
+                padding: "var(--ads-s3)",
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-red-tint)",
+                border: "1px solid rgba(215, 0, 21, 0.28)",
+                color: "var(--ads-red)",
+                fontSize: "0.75rem",
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--ads-s2)",
+              }}
+            >
+              <AlertCircle size={14} style={{ flexShrink: 0 }} />
               <span>{errorMsg}</span>
             </div>
           )}
 
           {/* Draft shifts list */}
           <div>
-            <h3 style={{ fontSize: "0.75rem", fontWeight: 700, color: "#334155", marginBottom: "0.5rem" }}>
+            <h3
+              style={{
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                color: "var(--ads-ink-secondary)",
+                marginBottom: "var(--ads-s2)",
+              }}
+            >
               Draft Shifts Ready to Publish ({draftShifts.length})
             </h3>
 
-            <div style={{ border: "1px solid #E2E8F0", borderRadius: "12px", overflow: "hidden", maxHeight: "200px", overflowY: "auto", backgroundColor: "#F8FAFC" }}>
+            <div
+              style={{
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-md)",
+                overflow: "hidden",
+                maxHeight: "200px",
+                overflowY: "auto",
+                background: "var(--ads-material-thin)",
+              }}
+            >
               {draftShifts.map((shift) => (
                 <div
                   key={shift.id}
-                  style={{ padding: "0.5rem 0.75rem", borderBottom: "1px solid #F1F5F9", display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "0.75rem", backgroundColor: "#FFFFFF" }}
+                  style={{
+                    padding: "var(--ads-s2) var(--ads-s3)",
+                    borderBottom: "1px solid var(--ads-hairline)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    fontSize: "0.75rem",
+                    background: "var(--ads-material-thick)",
+                  }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", overflow: "hidden" }}>
-                    <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#F59E0B", flexShrink: 0 }} />
-                    <span style={{ fontWeight: 600, color: "#0F172A", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)", overflow: "hidden" }}>
+                    <span
+                      style={{
+                        width: "8px",
+                        height: "8px",
+                        borderRadius: "var(--ads-r-pill)",
+                        backgroundColor: "var(--ads-amber)",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        color: "var(--ads-ink)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
                       {shift.driver_name || "Unassigned"}
                     </span>
-                    <span style={{ fontSize: "0.6875rem", color: "#64748B", fontFamily: "monospace" }}>
+                    <span
+                      style={{
+                        fontSize: "0.6875rem",
+                        color: "var(--ads-ink-tertiary)",
+                        fontFamily: "monospace",
+                      }}
+                    >
                       {shift.schedule_date}
                     </span>
                   </div>
 
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", color: "#64748B", fontSize: "0.6875rem", flexShrink: 0 }}>
-                    <span style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
-                      <Clock size={11} style={{ color: "#94A3B8" }} />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "var(--ads-s2)",
+                      color: "var(--ads-ink-tertiary)",
+                      fontSize: "0.6875rem",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <span style={{ display: "flex", alignItems: "center", gap: "var(--ads-s1)" }}>
+                      <Clock size={11} style={{ color: "var(--ads-ink-quaternary)" }} />
                       {shift.shift_duration_start?.slice(0, 5)} - {shift.shift_duration_end?.slice(0, 5)}
                     </span>
                     {shift.route_code && (
-                      <span style={{ padding: "0.1rem 0.35rem", borderRadius: "4px", backgroundColor: "#F1F5F9", color: "#334155", fontWeight: 600, fontSize: "0.625rem" }}>
+                      <span
+                        style={{
+                          padding: "2px var(--ads-s1)",
+                          borderRadius: "var(--ads-r-xs)",
+                          background: "var(--ads-material-thick)",
+                          border: "1px solid var(--ads-hairline)",
+                          color: "var(--ads-ink-secondary)",
+                          fontWeight: 600,
+                          fontSize: "0.625rem",
+                        }}
+                      >
                         {shift.route_code}
                       </span>
                     )}
@@ -143,17 +334,25 @@ export const PublishScheduleModal: FC<PublishScheduleModalProps> = ({
             </div>
           </div>
 
-          <p style={{ fontSize: "0.6875rem", color: "#64748B", fontStyle: "italic", margin: 0 }}>
-            Published shifts will instantly update to solid blue status and be dispatched to driver rosters.
+          <p style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)", margin: 0 }}>
+            Published shifts are dispatched to driver rosters and switch to the published status colour.
           </p>
         </div>
 
         {/* Footer */}
-        <div className="sch-modal-footer">
+        <div
+          className="sch-modal-footer"
+          style={{
+            background: "transparent",
+            borderTop: "1px solid var(--ads-hairline)",
+            padding: "var(--ads-s4) var(--ads-s5)",
+            gap: "var(--ads-s2)",
+          }}
+        >
           <button
             type="button"
             onClick={onClose}
-            className="sch-btn-secondary"
+            className="sch-btn-secondary ads-btn ads-btn--secondary"
           >
             Cancel
           </button>
@@ -162,8 +361,8 @@ export const PublishScheduleModal: FC<PublishScheduleModalProps> = ({
             type="button"
             onClick={handlePublish}
             disabled={loading || draftShifts.length === 0}
-            className="sch-btn-publish active"
-            style={{ height: "36px", padding: "0 1.25rem", fontSize: "0.8125rem", color: "#FFFFFF" }}
+            className="sch-btn-primary ads-btn ads-btn--primary"
+            style={{ height: "36px", fontSize: "0.8125rem", color: "#FFFFFF" }}
           >
             <Send size={14} style={{ color: "#FFFFFF" }} />
             <span>{loading ? "Publishing..." : `Publish ${draftShifts.length} Shifts Now`}</span>

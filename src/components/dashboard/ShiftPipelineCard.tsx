@@ -34,10 +34,9 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
       key: "accepted",
       label: "Accepted",
       count: accepted,
-      color: "#059669",
-      bg: "#F0FDF4",
-      border: "#BBF7D0",
-      accent: "#10B981",
+      color: "var(--ads-green)",
+      bg: "var(--ads-green-tint)",
+      accent: "var(--ads-green)",
       icon: CheckCircle2,
       pct: total > 0 ? Math.round((accepted / total) * 100) : 0,
     },
@@ -45,10 +44,9 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
       key: "auto_accepted",
       label: "Auto-Accepted",
       count: autoAccepted,
-      color: "#0D9488",
-      bg: "#F0FDFA",
-      border: "#99F6E4",
-      accent: "#14B8A6",
+      color: "var(--uop-teal)",
+      bg: "var(--uop-teal-tint)",
+      accent: "var(--uop-teal)",
       icon: Zap,
       pct: total > 0 ? Math.round((autoAccepted / total) * 100) : 0,
     },
@@ -56,10 +54,9 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
       key: "extra_shift",
       label: "Extra Shift",
       count: extraShift,
-      color: "#7C3AED",
-      bg: "#FAF5FF",
-      border: "#E9D5FF",
-      accent: "#8B5CF6",
+      color: "var(--ads-purple)",
+      bg: "var(--ads-purple-tint)",
+      accent: "var(--ads-purple)",
       icon: PlusCircle,
       pct: total > 0 ? Math.round((extraShift / total) * 100) : 0,
     },
@@ -67,10 +64,9 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
       key: "pending",
       label: "Pending",
       count: pending,
-      color: "#D97706",
-      bg: "#FFFBEB",
-      border: "#FDE68A",
-      accent: "#F59E0B",
+      color: "var(--ads-amber)",
+      bg: "var(--ads-amber-tint)",
+      accent: "var(--ads-amber)",
       icon: Clock,
       pct: total > 0 ? Math.round((pending / total) * 100) : 0,
     },
@@ -78,10 +74,9 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
       key: "open",
       label: "Open Shifts",
       count: open,
-      color: "#2563EB",
-      bg: "#EFF6FF",
-      border: "#BFDBFE",
-      accent: "#3B82F6",
+      color: "#0058B0",
+      bg: "var(--ads-blue-tint)",
+      accent: "var(--ads-blue)",
       icon: AlertCircle,
       pct: total > 0 ? Math.round((open / total) * 100) : 0,
     },
@@ -89,10 +84,9 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
       key: "declined",
       label: "Declined",
       count: declined,
-      color: "#DC2626",
-      bg: "#FEF2F2",
-      border: "#FECACA",
-      accent: "#EF4444",
+      color: "var(--ads-red)",
+      bg: "var(--ads-red-tint)",
+      accent: "var(--ads-red)",
       icon: XCircle,
       pct: total > 0 ? Math.round((declined / total) * 100) : 0,
     },
@@ -125,20 +119,20 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
 
       {/* Top Shift Coverage Distribution Header (Total shift number removed) */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-        <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#475569" }}>
+        <span style={{ fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.005em", color: "var(--ads-ink-secondary)" }}>
           Shift Coverage Distribution
         </span>
 
         <small
           style={{
             fontSize: "var(--text-caption)",
-            fontWeight: "var(--font-weight-medium)",
+            fontWeight: 600,
             lineHeight: "var(--line-height-caption)",
             padding: "0.22rem 0.65rem",
-            borderRadius: "9999px",
-            backgroundColor: "#ECFDF5",
-            color: "#059669",
-            border: "1px solid #A7F3D0",
+            borderRadius: "var(--ads-r-pill)",
+            backgroundColor: "var(--ads-green-tint)",
+            color: "var(--ads-green)",
+            border: "1px solid transparent",
             display: "inline-flex",
             alignItems: "center",
             gap: "0.3rem",
@@ -149,13 +143,13 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
         </small>
       </div>
 
-      {/* Multi-Segment Rainbow Track with Rounded Segment Separators */}
+      {/* Multi-Segment Coverage Track */}
       <div
         style={{
           width: "100%",
           height: 8,
-          borderRadius: 9999,
-          backgroundColor: "#E2E8F0",
+          borderRadius: "var(--ads-r-pill)",
+          backgroundColor: "var(--uop-wash-strong)",
           overflow: "hidden",
           display: "flex",
           gap: 1.5,
@@ -170,8 +164,7 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
               width: `${s.pct}%`,
               height: "100%",
               backgroundColor: s.accent,
-              borderRadius: 2,
-              transition: "width 0.4s ease",
+              borderRadius: "var(--ads-r-pill)",
             }}
             title={`${s.label}: ${s.count} (${s.pct}%)`}
           />
@@ -200,11 +193,8 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
                 flexDirection: "column",
                 justifyContent: "space-between",
                 padding: "0.7rem 0.8rem",
-                borderRadius: "9px",
                 backgroundColor: s.bg,
-                border: `1px solid ${s.border}`,
                 cursor: "pointer",
-                transition: "all 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
               }}
               title={`Click to filter ${s.label} shifts (${s.count})`}
             >
@@ -220,7 +210,8 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
                 <span
                   style={{
                     fontSize: "0.75rem",
-                    fontWeight: 700,
+                    fontWeight: 600,
+                    letterSpacing: "-0.005em",
                     color: s.color,
                     whiteSpace: "nowrap",
                     overflow: "hidden",
@@ -234,7 +225,8 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
                     width: 22,
                     height: 22,
                     borderRadius: "50%",
-                    backgroundColor: "rgba(255, 255, 255, 0.85)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    boxShadow: "var(--ads-shadow-xs)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -249,11 +241,11 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
               <div
                 style={{
                   fontSize: "1.45rem",
-                  fontWeight: 800,
-                  color: "#0F172A",
+                  fontWeight: 700,
+                  color: "var(--ads-ink)",
                   margin: "0.25rem 0 0.2rem",
                   lineHeight: 1,
-                  letterSpacing: "-0.01em",
+                  letterSpacing: "-0.022em",
                 }}
               >
                 {isLoading ? <div className="uop-skeleton" style={{ width: 30, height: 24 }} /> : s.count}
@@ -265,22 +257,24 @@ export const ShiftPipelineCard: FC<Props> = ({ shifts, isLoading }) => {
                   style={{
                     flex: 1,
                     height: 5,
-                    borderRadius: 9999,
-                    backgroundColor: "rgba(0, 0, 0, 0.08)",
+                    borderRadius: "var(--ads-r-pill)",
+                    backgroundColor: "var(--uop-wash-strong)",
                     overflow: "hidden",
                   }}
                 >
                   <div
                     style={{
-                      width: `${Math.min(s.pct, 100)}%`,
+                      width: "100%",
                       height: "100%",
                       backgroundColor: s.accent,
-                      borderRadius: 9999,
-                      transition: "width 0.4s ease",
+                      borderRadius: "var(--ads-r-pill)",
+                      transformOrigin: "left center",
+                      transform: `scaleX(${Math.min(s.pct, 100) / 100})`,
+                      transition: "transform var(--ads-dur) var(--ads-ease)",
                     }}
                   />
                 </div>
-                <span style={{ fontSize: "0.6875rem", fontWeight: 700, color: s.color, minWidth: "26px", textAlign: "right" }}>
+                <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: s.color, minWidth: "26px", textAlign: "right" }}>
                   {s.pct}%
                 </span>
               </div>

@@ -604,11 +604,11 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
           style={{
             display: "flex",
             alignItems: "center",
-            padding: "0.75rem 1.5rem",
-            backgroundColor: "#F8FAFC",
-            borderBottom: "1px solid #E2E8F0",
+            padding: "var(--ads-s3) var(--ads-s6)",
+            background: "transparent",
+            borderBottom: "1px solid var(--ads-hairline)",
             overflowX: "auto",
-            gap: "0.5rem",
+            gap: "var(--ads-s2)",
           }}
         >
           {availableSteps.map((s, idx) => {
@@ -621,8 +621,9 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                     style={{
                       flex: 1,
                       height: 2,
-                      backgroundColor: isCompleted ? "#2563EB" : "#E2E8F0",
+                      backgroundColor: isCompleted ? "var(--ads-blue)" : "var(--ads-hairline)",
                       minWidth: 16,
+                      transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   />
                 )}
@@ -642,16 +643,17 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                       height: 24,
                       borderRadius: "50%",
                       backgroundColor: isActive
-                        ? "#2563EB"
+                        ? "var(--ads-blue)"
                         : isCompleted
-                        ? "#10B981"
-                        : "#E2E8F0",
-                      color: isActive || isCompleted ? "#FFFFFF" : "#64748B",
+                        ? "var(--ads-green)"
+                        : "rgba(0,0,0,0.04)",
+                      color: isActive || isCompleted ? "#FFFFFF" : "var(--ads-ink-tertiary)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       fontSize: "0.6875rem",
-                      fontWeight: 700,
+                      fontWeight: 600,
+                      transition: "all var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     {isCompleted ? <Check size={13} color="#FFFFFF" /> : idx + 1}
@@ -659,12 +661,13 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                   <span
                     style={{
                       fontSize: "0.75rem",
-                      fontWeight: isActive ? 700 : 500,
+                      fontWeight: isActive ? 600 : 550,
+                      letterSpacing: "-0.01em",
                       color: isActive
-                        ? "#2563EB"
+                        ? "var(--ads-blue)"
                         : isCompleted
-                        ? "#10B981"
-                        : "#64748B",
+                        ? "var(--ads-green)"
+                        : "var(--ads-ink-tertiary)",
                       whiteSpace: "nowrap",
                     }}
                   >
@@ -679,12 +682,12 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
         {/* Modal Body */}
         <div
           style={{
-            padding: "1.5rem",
+            padding: "var(--ads-s6)",
             overflowY: "auto",
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            gap: "1.25rem",
+            gap: "var(--ads-s5)",
           }}
         >
           {loadingInitial ? (
@@ -696,10 +699,10 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                 justifyContent: "center",
                 padding: "3rem",
                 gap: "0.75rem",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
               }}
             >
-              <Loader2 size={32} className="animate-spin" color="#2563EB" />
+              <Loader2 size={32} className="animate-spin" color="var(--ads-blue)" />
               <span>Loading drivers & fleet vehicles...</span>
             </div>
           ) : (
@@ -710,19 +713,20 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                   {/* Incident Classification */}
                   <div
                     style={{
-                      padding: "1rem",
-                      borderRadius: "10px",
-                      border: "1px solid #BFDBFE",
-                      backgroundColor: "#EFF6FF",
+                      padding: "var(--ads-s4)",
+                      borderRadius: "var(--ads-r-md)",
+                      border: "1px solid var(--ads-blue-tint-strong)",
+                      backgroundColor: "var(--ads-blue-tint)",
                     }}
                   >
                     <label
                       style={{
                         display: "block",
                         fontSize: "0.8125rem",
-                        fontWeight: 700,
-                        color: "#1E3A8A",
-                        marginBottom: "0.5rem",
+                        fontWeight: 600,
+                        letterSpacing: "-0.01em",
+                        color: "var(--ads-blue)",
+                        marginBottom: "var(--ads-s2)",
                       }}
                     >
                       Incident Type / Classification *
@@ -749,23 +753,27 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                             onClick={() => setIncidentType(typeOpt)}
                             style={{
                               padding: "0.65rem 0.85rem",
-                              borderRadius: "8px",
+                              borderRadius: "var(--ads-r-sm)",
                               border: checked
-                                ? "2px solid #2563EB"
-                                : "1px solid #CBD5E1",
-                              backgroundColor: checked ? "#FFFFFF" : "#F8FAFC",
-                              color: checked ? "#2563EB" : "#334155",
+                                ? "1px solid var(--ads-blue)"
+                                : "1px solid var(--ads-hairline)",
+                              backgroundColor: checked
+                                ? "var(--ads-material-thick)"
+                                : "var(--ads-canvas)",
+                              color: checked ? "var(--ads-blue)" : "var(--ads-ink-secondary)",
                               fontSize: "0.8125rem",
-                              fontWeight: checked ? 700 : 500,
+                              fontWeight: checked ? 600 : 550,
+                              letterSpacing: "-0.01em",
                               textAlign: "left",
                               cursor: "pointer",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "space-between",
+                              transition: "all var(--ads-dur-fast) var(--ads-ease)",
                             }}
                           >
                             <span>{typeOpt}</span>
-                            {checked && <CheckCircle2 size={16} color="#2563EB" />}
+                            {checked && <CheckCircle2 size={16} color="var(--ads-blue)" />}
                           </button>
                         );
                       })}
@@ -910,12 +918,12 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                       alignItems: "center",
                       justifyContent: "space-between",
                       padding: "0.85rem 1rem",
-                      borderRadius: "8px",
-                      backgroundColor: "#F8FAFC",
-                      border: "1px solid #E2E8F0",
+                      borderRadius: "var(--ads-r-sm)",
+                      backgroundColor: "var(--ads-canvas)",
+                      border: "1px solid var(--ads-hairline)",
                     }}
                   >
-                    <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                    <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                       Is driver safety training up to date?
                     </span>
                     <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -926,15 +934,15 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                           onClick={() => setIsDriverTrainingUpToDate(val)}
                           style={{
                             padding: "0.35rem 0.85rem",
-                            borderRadius: "6px",
+                            borderRadius: "var(--ads-r-pill)",
                             border:
                               isDriverTrainingUpToDate === val
-                                ? "1px solid #2563EB"
-                                : "1px solid #CBD5E1",
+                                ? "1px solid var(--ads-blue)"
+                                : "1px solid var(--ads-hairline-strong)",
                             backgroundColor:
-                              isDriverTrainingUpToDate === val ? "#2563EB" : "#FFFFFF",
+                              isDriverTrainingUpToDate === val ? "var(--ads-blue)" : "var(--ads-material-thick)",
                             color:
-                              isDriverTrainingUpToDate === val ? "#FFFFFF" : "#475569",
+                              isDriverTrainingUpToDate === val ? "#FFFFFF" : "var(--ads-ink-secondary)",
                             fontSize: "0.75rem",
                             fontWeight: 700,
                             cursor: "pointer",
@@ -1043,13 +1051,18 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                             }}
                             style={{
                               padding: "0.3rem 0.65rem",
-                              borderRadius: "6px",
+                              borderRadius: "var(--ads-r-pill)",
                               fontSize: "0.75rem",
                               fontWeight: 600,
                               cursor: "pointer",
-                              border: sel ? "1px solid #2563EB" : "1px solid #E2E8F0",
-                              backgroundColor: sel ? "#EFF6FF" : "#FFFFFF",
-                              color: sel ? "#1D4ED8" : "#475569",
+                              border: sel
+                                ? "1px solid var(--ads-blue)"
+                                : "1px solid var(--ads-hairline)",
+                              backgroundColor: sel
+                                ? "var(--ads-blue-tint)"
+                                : "var(--ads-material-thick)",
+                              color: sel ? "var(--ads-blue)" : "var(--ads-ink-secondary)",
+                              transition: "all var(--ads-dur-fast) var(--ads-ease)",
                             }}
                           >
                             {resOpt}
@@ -1078,12 +1091,12 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                       alignItems: "center",
                       justifyContent: "space-between",
                       padding: "0.75rem 1rem",
-                      borderRadius: "8px",
-                      backgroundColor: "#F8FAFC",
-                      border: "1px solid #E2E8F0",
+                      borderRadius: "var(--ads-r-sm)",
+                      backgroundColor: "var(--ads-canvas)",
+                      border: "1px solid var(--ads-hairline)",
                     }}
                   >
-                    <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                    <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                       Did anyone observe or witness the incident?
                     </span>
                     <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -1094,14 +1107,14 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                           onClick={() => setIsAnyoneObserve(v)}
                           style={{
                             padding: "0.35rem 0.85rem",
-                            borderRadius: "6px",
+                            borderRadius: "var(--ads-r-pill)",
                             border:
                               isAnyoneObserve === v
-                                ? "1px solid #2563EB"
-                                : "1px solid #CBD5E1",
+                                ? "1px solid var(--ads-blue)"
+                                : "1px solid var(--ads-hairline-strong)",
                             backgroundColor:
-                              isAnyoneObserve === v ? "#2563EB" : "#FFFFFF",
-                            color: isAnyoneObserve === v ? "#FFFFFF" : "#475569",
+                              isAnyoneObserve === v ? "var(--ads-blue)" : "var(--ads-material-thick)",
+                            color: isAnyoneObserve === v ? "#FFFFFF" : "var(--ads-ink-secondary)",
                             fontSize: "0.75rem",
                             fontWeight: 700,
                             cursor: "pointer",
@@ -1167,12 +1180,12 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                           alignItems: "center",
                           justifyContent: "space-between",
                           padding: "0.6rem 0.85rem",
-                          borderRadius: "8px",
-                          border: "1px solid #E2E8F0",
-                          backgroundColor: "#F8FAFC",
+                          borderRadius: "var(--ads-r-sm)",
+                          border: "1px solid var(--ads-hairline)",
+                          backgroundColor: "var(--ads-canvas)",
                         }}
                       >
-                        <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#334155" }}>
+                        <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)" }}>
                           {row.label}
                         </span>
                         <div style={{ display: "flex", gap: "0.25rem" }}>
@@ -1183,14 +1196,14 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                               onClick={() => row.set(ans)}
                               style={{
                                 padding: "0.25rem 0.55rem",
-                                borderRadius: "4px",
+                                borderRadius: "var(--ads-r-pill)",
                                 border:
                                   row.val === ans
-                                    ? "1px solid #2563EB"
-                                    : "1px solid #CBD5E1",
+                                    ? "1px solid var(--ads-blue)"
+                                    : "1px solid var(--ads-hairline-strong)",
                                 backgroundColor:
-                                  row.val === ans ? "#2563EB" : "#FFFFFF",
-                                color: row.val === ans ? "#FFFFFF" : "#475569",
+                                  row.val === ans ? "var(--ads-blue)" : "var(--ads-material-thick)",
+                                color: row.val === ans ? "#FFFFFF" : "var(--ads-ink-secondary)",
                                 fontSize: "0.6875rem",
                                 fontWeight: 700,
                                 cursor: "pointer",
@@ -1209,9 +1222,9 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                   <div
                     style={{
                       padding: "0.85rem 1rem",
-                      borderRadius: "8px",
-                      border: "1px solid #E2E8F0",
-                      backgroundColor: "#FAFAFA",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline)",
+                      backgroundColor: "var(--ads-canvas)",
                     }}
                   >
                     <div
@@ -1221,7 +1234,7 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                         justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#0F172A" }}>
+                      <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                         Was injury related to holding or delivering a package?
                       </span>
                       <div style={{ display: "flex", gap: "0.4rem" }}>
@@ -1232,19 +1245,19 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                             onClick={() => setWasInjuryRelatedToHoldingPkg(v)}
                             style={{
                               padding: "0.25rem 0.6rem",
-                              borderRadius: "4px",
+                              borderRadius: "var(--ads-r-pill)",
                               border:
                                 wasInjuryRelatedToHoldingPkg === v
-                                  ? "1px solid #2563EB"
-                                  : "1px solid #CBD5E1",
+                                  ? "1px solid var(--ads-blue)"
+                                  : "1px solid var(--ads-hairline-strong)",
                               backgroundColor:
                                 wasInjuryRelatedToHoldingPkg === v
-                                  ? "#2563EB"
-                                  : "#FFFFFF",
+                                  ? "var(--ads-blue)"
+                                  : "var(--ads-material-thick)",
                               color:
                                 wasInjuryRelatedToHoldingPkg === v
                                   ? "#FFFFFF"
-                                  : "#475569",
+                                  : "var(--ads-ink-secondary)",
                               fontSize: "0.6875rem",
                               fontWeight: 700,
                               cursor: "pointer",
@@ -1302,9 +1315,9 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                   <div
                     style={{
                       padding: "0.85rem 1rem",
-                      borderRadius: "8px",
-                      border: "1px solid #E2E8F0",
-                      backgroundColor: "#FAFAFA",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline)",
+                      backgroundColor: "var(--ads-canvas)",
                     }}
                   >
                     <div
@@ -1314,7 +1327,7 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                         justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#0F172A" }}>
+                      <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                         Was injury related to a slip, trip, or fall?
                       </span>
                       <div style={{ display: "flex", gap: "0.4rem" }}>
@@ -1325,19 +1338,19 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                             onClick={() => setIsRelatedToSlipFallEvent(v)}
                             style={{
                               padding: "0.25rem 0.6rem",
-                              borderRadius: "4px",
+                              borderRadius: "var(--ads-r-pill)",
                               border:
                                 isRelatedToSlipFallEvent === v
-                                  ? "1px solid #2563EB"
-                                  : "1px solid #CBD5E1",
+                                  ? "1px solid var(--ads-blue)"
+                                  : "1px solid var(--ads-hairline-strong)",
                               backgroundColor:
                                 isRelatedToSlipFallEvent === v
-                                  ? "#2563EB"
-                                  : "#FFFFFF",
+                                  ? "var(--ads-blue)"
+                                  : "var(--ads-material-thick)",
                               color:
                                 isRelatedToSlipFallEvent === v
                                   ? "#FFFFFF"
-                                  : "#475569",
+                                  : "var(--ads-ink-secondary)",
                               fontSize: "0.6875rem",
                               fontWeight: 700,
                               cursor: "pointer",
@@ -1496,12 +1509,12 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                         alignItems: "center",
                         justifyContent: "space-between",
                         padding: "0.75rem 1rem",
-                        borderRadius: "8px",
-                        backgroundColor: "#F8FAFC",
-                        border: "1px solid #E2E8F0",
+                        borderRadius: "var(--ads-r-sm)",
+                        backgroundColor: "var(--ads-canvas)",
+                        border: "1px solid var(--ads-hairline)",
                       }}
                     >
-                      <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                      <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                         Vehicle Branded?
                       </span>
                       <div style={{ display: "flex", gap: "0.3rem" }}>
@@ -1512,14 +1525,14 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                             onClick={() => setIsBranded(v)}
                             style={{
                               padding: "0.25rem 0.6rem",
-                              borderRadius: "4px",
+                              borderRadius: "var(--ads-r-pill)",
                               border:
                                 isBranded === v
-                                  ? "1px solid #2563EB"
-                                  : "1px solid #CBD5E1",
+                                  ? "1px solid var(--ads-blue)"
+                                  : "1px solid var(--ads-hairline-strong)",
                               backgroundColor:
-                                isBranded === v ? "#2563EB" : "#FFFFFF",
-                              color: isBranded === v ? "#FFFFFF" : "#475569",
+                                isBranded === v ? "var(--ads-blue)" : "var(--ads-material-thick)",
+                              color: isBranded === v ? "#FFFFFF" : "var(--ads-ink-secondary)",
                               fontSize: "0.6875rem",
                               fontWeight: 700,
                               cursor: "pointer",
@@ -1537,12 +1550,12 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                         alignItems: "center",
                         justifyContent: "space-between",
                         padding: "0.75rem 1rem",
-                        borderRadius: "8px",
-                        backgroundColor: "#F8FAFC",
-                        border: "1px solid #E2E8F0",
+                        borderRadius: "var(--ads-r-sm)",
+                        backgroundColor: "var(--ads-canvas)",
+                        border: "1px solid var(--ads-hairline)",
                       }}
                     >
-                      <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                      <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                         Netradyne Installed?
                       </span>
                       <div style={{ display: "flex", gap: "0.3rem" }}>
@@ -1553,15 +1566,15 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                             onClick={() => setIsNetradyneInstalled(v)}
                             style={{
                               padding: "0.25rem 0.6rem",
-                              borderRadius: "4px",
+                              borderRadius: "var(--ads-r-pill)",
                               border:
                                 isNetradyneInstalled === v
-                                  ? "1px solid #2563EB"
-                                  : "1px solid #CBD5E1",
+                                  ? "1px solid var(--ads-blue)"
+                                  : "1px solid var(--ads-hairline-strong)",
                               backgroundColor:
-                                isNetradyneInstalled === v ? "#2563EB" : "#FFFFFF",
+                                isNetradyneInstalled === v ? "var(--ads-blue)" : "var(--ads-material-thick)",
                               color:
-                                isNetradyneInstalled === v ? "#FFFFFF" : "#475569",
+                                isNetradyneInstalled === v ? "#FFFFFF" : "var(--ads-ink-secondary)",
                               fontSize: "0.6875rem",
                               fontWeight: 700,
                               cursor: "pointer",
@@ -1577,18 +1590,19 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                   {/* 4-Week Trailing Performance Data */}
                   <div
                     style={{
-                      padding: "1rem",
-                      borderRadius: "10px",
-                      border: "1px solid #E2E8F0",
-                      backgroundColor: "#F8FAFC",
+                      padding: "var(--ads-s4)",
+                      borderRadius: "var(--ads-r-md)",
+                      border: "1px solid var(--ads-hairline)",
+                      backgroundColor: "var(--ads-canvas)",
                     }}
                   >
                     <h4
                       style={{
-                        margin: "0 0 0.75rem 0",
+                        margin: "0 0 var(--ads-s3) 0",
                         fontSize: "0.8125rem",
-                        fontWeight: 700,
-                        color: "#0F172A",
+                        fontWeight: 600,
+                        letterSpacing: "0.04em",
+                        color: "var(--ads-ink)",
                         textTransform: "uppercase",
                       }}
                     >
@@ -1669,9 +1683,9 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                     <div
                       style={{
                         padding: "0.85rem",
-                        borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
-                        backgroundColor: "#FFFFFF",
+                        borderRadius: "var(--ads-r-sm)",
+                        border: "1px solid var(--ads-hairline)",
+                        backgroundColor: "var(--ads-material-thick)",
                       }}
                     >
                       <div
@@ -1682,7 +1696,7 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                           marginBottom: "0.5rem",
                         }}
                       >
-                        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#1E293B" }}>
+                        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                           Drug & Alcohol Tested?
                         </span>
                         <div style={{ display: "flex", gap: "0.3rem" }}>
@@ -1693,14 +1707,14 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                               onClick={() => setIsTestedDrug(v)}
                               style={{
                                 padding: "0.2rem 0.5rem",
-                                borderRadius: "4px",
+                                borderRadius: "var(--ads-r-pill)",
                                 border:
                                   isTestedDrug === v
-                                    ? "1px solid #2563EB"
-                                    : "1px solid #CBD5E1",
+                                    ? "1px solid var(--ads-blue)"
+                                    : "1px solid var(--ads-hairline-strong)",
                                 backgroundColor:
-                                  isTestedDrug === v ? "#2563EB" : "#FFFFFF",
-                                color: isTestedDrug === v ? "#FFFFFF" : "#475569",
+                                  isTestedDrug === v ? "var(--ads-blue)" : "var(--ads-material-thick)",
+                                color: isTestedDrug === v ? "#FFFFFF" : "var(--ads-ink-secondary)",
                                 fontSize: "0.6875rem",
                                 fontWeight: 700,
                               }}
@@ -1723,9 +1737,9 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                     <div
                       style={{
                         padding: "0.85rem",
-                        borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
-                        backgroundColor: "#FFFFFF",
+                        borderRadius: "var(--ads-r-sm)",
+                        border: "1px solid var(--ads-hairline)",
+                        backgroundColor: "var(--ads-material-thick)",
                       }}
                     >
                       <div
@@ -1736,7 +1750,7 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                           marginBottom: "0.5rem",
                         }}
                       >
-                        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#1E293B" }}>
+                        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                           Prior Incidents in 3 Years?
                         </span>
                         <div style={{ display: "flex", gap: "0.3rem" }}>
@@ -1747,15 +1761,15 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                               onClick={() => setIsIncidentIn3Years(v)}
                               style={{
                                 padding: "0.2rem 0.5rem",
-                                borderRadius: "4px",
+                                borderRadius: "var(--ads-r-pill)",
                                 border:
                                   isIncidentIn3Years === v
-                                    ? "1px solid #2563EB"
-                                    : "1px solid #CBD5E1",
+                                    ? "1px solid var(--ads-blue)"
+                                    : "1px solid var(--ads-hairline-strong)",
                                 backgroundColor:
-                                  isIncidentIn3Years === v ? "#2563EB" : "#FFFFFF",
+                                  isIncidentIn3Years === v ? "var(--ads-blue)" : "var(--ads-material-thick)",
                                 color:
-                                  isIncidentIn3Years === v ? "#FFFFFF" : "#475569",
+                                  isIncidentIn3Years === v ? "#FFFFFF" : "var(--ads-ink-secondary)",
                                 fontSize: "0.6875rem",
                                 fontWeight: 700,
                               }}
@@ -1838,9 +1852,9 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                     <div
                       style={{
                         padding: "0.85rem",
-                        borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
-                        backgroundColor: "#F8FAFC",
+                        borderRadius: "var(--ads-r-sm)",
+                        border: "1px solid var(--ads-hairline)",
+                        backgroundColor: "var(--ads-canvas)",
                       }}
                     >
                       <div
@@ -1851,7 +1865,7 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                           marginBottom: "0.5rem",
                         }}
                       >
-                        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#1E293B" }}>
+                        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                           Daily Vehicle Inspection Checklist Done?
                         </span>
                         <div style={{ display: "flex", gap: "0.3rem" }}>
@@ -1862,15 +1876,15 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                               onClick={() => setIsChecklistComplete(v)}
                               style={{
                                 padding: "0.2rem 0.5rem",
-                                borderRadius: "4px",
+                                borderRadius: "var(--ads-r-pill)",
                                 border:
                                   isChecklistComplete === v
-                                    ? "1px solid #2563EB"
-                                    : "1px solid #CBD5E1",
+                                    ? "1px solid var(--ads-blue)"
+                                    : "1px solid var(--ads-hairline-strong)",
                                 backgroundColor:
-                                  isChecklistComplete === v ? "#2563EB" : "#FFFFFF",
+                                  isChecklistComplete === v ? "var(--ads-blue)" : "var(--ads-material-thick)",
                                 color:
-                                  isChecklistComplete === v ? "#FFFFFF" : "#475569",
+                                  isChecklistComplete === v ? "#FFFFFF" : "var(--ads-ink-secondary)",
                                 fontSize: "0.6875rem",
                                 fontWeight: 700,
                               }}
@@ -1892,9 +1906,9 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                     <div
                       style={{
                         padding: "0.85rem",
-                        borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
-                        backgroundColor: "#F8FAFC",
+                        borderRadius: "var(--ads-r-sm)",
+                        border: "1px solid var(--ads-hairline)",
+                        backgroundColor: "var(--ads-canvas)",
                       }}
                     >
                       <div
@@ -1905,7 +1919,7 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                           marginBottom: "0.5rem",
                         }}
                       >
-                        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#1E293B" }}>
+                        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                           Resulted in Police Report?
                         </span>
                         <div style={{ display: "flex", gap: "0.3rem" }}>
@@ -1916,14 +1930,14 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                               onClick={() => setIsPoliceReported(v)}
                               style={{
                                 padding: "0.2rem 0.5rem",
-                                borderRadius: "4px",
+                                borderRadius: "var(--ads-r-pill)",
                                 border:
                                   isPoliceReported === v
-                                    ? "1px solid #2563EB"
-                                    : "1px solid #CBD5E1",
+                                    ? "1px solid var(--ads-blue)"
+                                    : "1px solid var(--ads-hairline-strong)",
                                 backgroundColor:
-                                  isPoliceReported === v ? "#2563EB" : "#FFFFFF",
-                                color: isPoliceReported === v ? "#FFFFFF" : "#475569",
+                                  isPoliceReported === v ? "var(--ads-blue)" : "var(--ads-material-thick)",
+                                color: isPoliceReported === v ? "#FFFFFF" : "var(--ads-ink-secondary)",
                                 fontSize: "0.6875rem",
                                 fontWeight: 700,
                               }}
@@ -2003,12 +2017,12 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                           alignItems: "center",
                           justifyContent: "space-between",
                           padding: "0.55rem 0.75rem",
-                          borderRadius: "6px",
-                          border: "1px solid #E2E8F0",
-                          backgroundColor: "#FFFFFF",
+                          borderRadius: "var(--ads-r-xs)",
+                          border: "1px solid var(--ads-hairline)",
+                          backgroundColor: "var(--ads-material-thick)",
                         }}
                       >
-                        <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#334155" }}>
+                        <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)" }}>
                           {item.label}
                         </span>
                         <div style={{ display: "flex", gap: "0.25rem" }}>
@@ -2019,14 +2033,14 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                               onClick={() => item.set(ans)}
                               style={{
                                 padding: "0.2rem 0.5rem",
-                                borderRadius: "4px",
+                                borderRadius: "var(--ads-r-pill)",
                                 border:
                                   item.val === ans
-                                    ? "1px solid #2563EB"
-                                    : "1px solid #CBD5E1",
+                                    ? "1px solid var(--ads-blue)"
+                                    : "1px solid var(--ads-hairline-strong)",
                                 backgroundColor:
-                                  item.val === ans ? "#2563EB" : "#FFFFFF",
-                                color: item.val === ans ? "#FFFFFF" : "#475569",
+                                  item.val === ans ? "var(--ads-blue)" : "var(--ads-material-thick)",
+                                color: item.val === ans ? "#FFFFFF" : "var(--ads-ink-secondary)",
                                 fontSize: "0.6875rem",
                                 fontWeight: 700,
                               }}
@@ -2089,29 +2103,33 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
         {/* Modal Footer */}
         <div
           style={{
-            padding: "1rem 1.5rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            padding: "var(--ads-s4) var(--ads-s6)",
+            borderTop: "1px solid var(--ads-hairline)",
+            background: "transparent",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: "var(--ads-s3)",
           }}
         >
           <button
             type="button"
             onClick={stepIndex === 0 ? onClose : handlePrev}
             style={{
-              padding: "0.55rem 1.1rem",
-              borderRadius: "8px",
-              border: "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
-              color: "#475569",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid var(--ads-hairline)",
+              background: "var(--ads-material-thick)",
+              color: "var(--ads-ink)",
+              boxShadow: "var(--ads-bevel)",
               fontSize: "0.8125rem",
-              fontWeight: 650,
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
               gap: "0.35rem",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             {stepIndex > 0 && <ChevronLeft size={16} />}
@@ -2123,18 +2141,20 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
             disabled={submitting}
             onClick={handleNext}
             style={{
-              padding: "0.55rem 1.3rem",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: submitting ? "#93C5FD" : "#2563EB",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid transparent",
+              backgroundColor: "var(--ads-blue)",
+              opacity: submitting ? 0.55 : 1,
               color: "#FFFFFF",
               fontSize: "0.8125rem",
-              fontWeight: 700,
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
               cursor: submitting ? "not-allowed" : "pointer",
               display: "flex",
               alignItems: "center",
               gap: "0.4rem",
-              boxShadow: "0 2px 6px rgba(37, 99, 235, 0.25)",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             {submitting ? (
@@ -2179,14 +2199,14 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                 style={{
                   width: 32,
                   height: 32,
-                  borderRadius: "8px",
-                  backgroundColor: "#EFF6FF",
+                  borderRadius: "var(--ads-r-sm)",
+                  backgroundColor: "var(--ads-blue-tint)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                <HeartPulse size={18} color="#2563EB" />
+                <HeartPulse size={18} color="var(--ads-blue)" />
               </div>
               <h2 className="screen-heading">Add Injury / Illness Report</h2>
             </div>
@@ -2206,11 +2226,13 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
         {/* Wizard Card Container */}
         <div
           style={{
-            backgroundColor: "#FFFFFF",
-            borderRadius: "12px",
-            border: "1px solid #E2E8F0",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-lg)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            borderRadius: "var(--ads-r-xl)",
+            border: "1px solid var(--ads-hairline)",
             overflow: "hidden",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
           }}
         >
           {wizardContent}
@@ -2224,28 +2246,31 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.55)",
-        backdropFilter: "blur(4px)",
+        background: "rgba(0,0,0,0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         zIndex: 9999,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "1rem",
+        padding: "var(--ads-s4)",
       }}
       onClick={onClose}
     >
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "16px",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
           width: "100%",
           maxWidth: "860px",
           maxHeight: "92vh",
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-          border: "1px solid #E2E8F0",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          border: "1px solid var(--ads-hairline)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -2255,25 +2280,25 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
-            backgroundColor: "#FFFFFF",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
+            background: "transparent",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
             <div
               style={{
                 width: 40,
                 height: 40,
-                borderRadius: "10px",
-                backgroundColor: "#EFF6FF",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-blue-tint)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexShrink: 0,
               }}
             >
-              <HeartPulse size={22} color="#2563EB" />
+              <HeartPulse size={22} color="var(--ads-blue)" />
             </div>
             <div>
               <h2
@@ -2281,12 +2306,13 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
                   margin: 0,
                   fontSize: "1.125rem",
                   fontWeight: 700,
-                  color: "#0F172A",
+                  letterSpacing: "-0.019em",
+                  color: "var(--ads-ink)",
                 }}
               >
                 Add Injury / Illness Report
               </h2>
-              <p style={{ margin: 0, fontSize: "0.75rem", color: "#64748B" }}>
+              <p style={{ margin: 0, fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                 Complete OSHA, DA incident, and fleet safety documentation
               </p>
             </div>
@@ -2294,13 +2320,18 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
           <button
             type="button"
             onClick={onClose}
+            aria-label="Close add injury report dialog"
             style={{
               padding: "0.5rem",
-              borderRadius: "8px",
-              border: "1px solid #E2E8F0",
-              backgroundColor: "#F8FAFC",
-              color: "#64748B",
+              borderRadius: "var(--ads-r-sm)",
+              border: "1px solid var(--ads-hairline)",
+              background: "transparent",
+              color: "var(--ads-ink-tertiary)",
               cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <X size={18} />
@@ -2316,8 +2347,8 @@ export const AddInjuryModal: FC<AddInjuryModalProps> = ({
 const labelStyle: React.CSSProperties = {
   display: "block",
   fontSize: "0.6875rem",
-  fontWeight: 700,
-  color: "#475569",
+  fontWeight: 600,
+  color: "var(--ads-ink-secondary)",
   textTransform: "uppercase",
   letterSpacing: "0.04em",
   marginBottom: "0.35rem",
@@ -2326,13 +2357,14 @@ const labelStyle: React.CSSProperties = {
 const inputStyle: React.CSSProperties = {
   width: "100%",
   padding: "0.55rem 0.75rem",
-  borderRadius: "8px",
-  border: "1px solid #CBD5E1",
-  backgroundColor: "#FFFFFF",
+  borderRadius: "var(--ads-r-sm)",
+  border: "1px solid var(--ads-hairline-strong)",
+  backgroundColor: "var(--ads-material-thick)",
   fontSize: "0.8125rem",
-  color: "#0F172A",
+  color: "var(--ads-ink)",
   outline: "none",
   boxSizing: "border-box",
+  transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
 };
 
 export default AddInjuryModal;

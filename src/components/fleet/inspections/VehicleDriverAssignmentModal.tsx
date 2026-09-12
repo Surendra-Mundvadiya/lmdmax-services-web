@@ -30,6 +30,71 @@ interface VehicleDriverAssignmentModalProps {
   ) => Promise<void>;
 }
 
+const stepLabelStyle: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+  fontSize: "0.6875rem",
+  fontWeight: 600,
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+  color: "var(--ads-ink-tertiary)",
+};
+
+const searchInputStyle: React.CSSProperties = {
+  width: "100%",
+  padding: "9px 13px 9px 34px",
+  fontFamily: "inherit",
+  fontSize: "0.8125rem",
+  color: "var(--ads-ink)",
+  background: "var(--ads-material-thick)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-sm)",
+  outline: "none",
+  transition: "all var(--ads-dur-fast) var(--ads-ease)",
+};
+
+const listWrapStyle: React.CSSProperties = {
+  maxHeight: "14rem",
+  overflowY: "auto",
+  display: "flex",
+  flexDirection: "column",
+  gap: "6px",
+  padding: "6px",
+  background: "var(--ads-canvas)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-md)",
+};
+
+const listItemStyle = (selected: boolean): React.CSSProperties => ({
+  padding: "10px",
+  borderRadius: "var(--ads-r-sm)",
+  background: selected ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+  border: `1px solid ${selected ? "var(--ads-blue)" : "var(--ads-hairline)"}`,
+  boxShadow: selected ? "var(--ads-shadow-xs)" : "none",
+  cursor: "pointer",
+  transition: "all var(--ads-dur-fast) var(--ads-ease)",
+});
+
+const miniBadgeStyle = (bg: string, fg: string): React.CSSProperties => ({
+  fontSize: "0.625rem",
+  fontWeight: 600,
+  letterSpacing: "0.02em",
+  padding: "2px 8px",
+  borderRadius: "var(--ads-r-pill)",
+  textTransform: "uppercase",
+  background: bg,
+  color: fg,
+  flexShrink: 0,
+});
+
+const emptyListStyle: React.CSSProperties = {
+  padding: "var(--ads-s3)",
+  textAlign: "center",
+  fontSize: "0.75rem",
+  color: "var(--ads-ink-quaternary)",
+};
+
 export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps> = ({
   isOpen,
   onClose,
@@ -137,27 +202,113 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
     }
   };
 
+  const segmentStyle = (active: boolean): React.CSSProperties => ({
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    padding: "7px 14px",
+    fontSize: "0.75rem",
+    fontWeight: 600,
+    letterSpacing: "-0.005em",
+    borderRadius: "var(--ads-r-pill)",
+    border: "1px solid transparent",
+    background: active ? "var(--ads-blue)" : "transparent",
+    color: active ? "#FFFFFF" : "var(--ads-ink-secondary)",
+    boxShadow: active ? "0 1px 4px rgba(0,113,227,0.30)" : "none",
+    cursor: "pointer",
+    transition: "all var(--ads-dur-fast) var(--ads-ease)",
+  });
+
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex items-center justify-center min-h-screen px-4 py-6 text-center sm:p-0">
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 50,
+        background: "rgba(0,0,0,0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "var(--ads-s4)",
+        overflowY: "auto",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
         {/* Backdrop */}
         <div
-          className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs transition-opacity"
+          style={{ position: "fixed", inset: 0, background: "transparent" }}
           onClick={onClose}
         />
 
-        <div className="relative inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full border-2 border-slate-200 animate-in fade-in zoom-in-95 duration-150">
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            maxWidth: "42rem",
+            maxHeight: "calc(100vh - var(--ads-s8))",
+            display: "flex",
+            flexDirection: "column",
+            textAlign: "left",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-lg)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-xl)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+            overflow: "hidden",
+          }}
+        >
           {/* Header */}
-          <div className="p-5 border-b-2 border-slate-200 bg-slate-50/70 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center">
+          <div
+            style={{
+              padding: "var(--ads-s5) var(--ads-s6)",
+              background: "transparent",
+              borderBottom: "1px solid var(--ads-hairline)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "var(--ads-s3)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
+              <div
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  flexShrink: 0,
+                  borderRadius: "var(--ads-r-md)",
+                  background: "var(--ads-blue-tint)",
+                  border: "1px solid var(--ads-blue-tint-strong)",
+                  color: "var(--ads-blue)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <ArrowLeftRight size={20} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-slate-900">
+                <h3
+                  style={{
+                    margin: 0,
+                    fontSize: "1.0625rem",
+                    fontWeight: 600,
+                    letterSpacing: "-0.014em",
+                    color: "var(--ads-ink)",
+                  }}
+                >
                   Vehicle-Driver Two-Way Assignment
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p style={{ margin: "2px 0 0 0", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                   Link or reassign active fleet vehicles and drivers with real-time sync
                 </p>
               </div>
@@ -166,80 +317,153 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors"
+              aria-label="Close assignment dialog"
+              style={{
+                width: "32px",
+                height: "32px",
+                flexShrink: 0,
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
+                background: "transparent",
+                color: "var(--ads-ink-tertiary)",
+                cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
+              }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
 
           {/* Mode Switcher Tabs */}
-          <div className="px-5 pt-4 pb-2 border-b border-slate-200 flex items-center justify-between bg-white">
-            <div className="flex items-center gap-2 p-1 bg-slate-100 rounded-xl">
+          <div
+            style={{
+              padding: "var(--ads-s3) var(--ads-s6)",
+              borderBottom: "1px solid var(--ads-hairline)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "var(--ads-s3)",
+              background: "transparent",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--ads-s1)",
+                padding: "4px",
+                background: "rgba(0,0,0,0.04)",
+                borderRadius: "var(--ads-r-pill)",
+              }}
+            >
               <button
                 type="button"
                 onClick={() => setMode("vehicle-to-driver")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                  mode === "vehicle-to-driver"
-                    ? "bg-white text-blue-700 shadow-xs"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
+                style={segmentStyle(mode === "vehicle-to-driver")}
               >
-                <Truck size={14} />
-                <span>Vehicle → Driver</span>
+                <Truck
+                  size={14}
+                  style={{ color: mode === "vehicle-to-driver" ? "#FFFFFF" : "var(--ads-ink-tertiary)" }}
+                />
+                <span style={{ color: mode === "vehicle-to-driver" ? "#FFFFFF" : undefined }}>
+                  Vehicle → Driver
+                </span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setMode("driver-to-vehicle")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                  mode === "driver-to-vehicle"
-                    ? "bg-white text-blue-700 shadow-xs"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
+                style={segmentStyle(mode === "driver-to-vehicle")}
               >
-                <User size={14} />
-                <span>Driver → Vehicle</span>
+                <User
+                  size={14}
+                  style={{ color: mode === "driver-to-vehicle" ? "#FFFFFF" : "var(--ads-ink-tertiary)" }}
+                />
+                <span style={{ color: mode === "driver-to-vehicle" ? "#FFFFFF" : undefined }}>
+                  Driver → Vehicle
+                </span>
               </button>
             </div>
 
-            <div className="text-[11px] font-semibold text-slate-500">
+            <div style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--ads-ink-tertiary)" }}>
               Two-Way Binding Active
             </div>
           </div>
 
           {/* Error Banner if any */}
           {errorMsg && (
-            <div className="mx-5 mt-4 p-3 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2 text-xs text-rose-700 font-medium">
-              <AlertCircle size={16} className="text-rose-600 flex-shrink-0" />
+            <div
+              style={{
+                margin: "var(--ads-s4) var(--ads-s6) 0 var(--ads-s6)",
+                padding: "var(--ads-s3)",
+                background: "var(--ads-red-tint)",
+                border: "1px solid var(--ads-red)",
+                borderRadius: "var(--ads-r-sm)",
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--ads-s2)",
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                color: "var(--ads-red)",
+              }}
+            >
+              <AlertCircle size={16} style={{ color: "var(--ads-red)", flexShrink: 0 }} />
               <span>{errorMsg}</span>
             </div>
           )}
 
           {/* Modal Body */}
-          <div className="p-5 space-y-4">
+          <div
+            style={{
+              padding: "var(--ads-s6)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--ads-s4)",
+              overflowY: "auto",
+            }}
+          >
             {mode === "vehicle-to-driver" ? (
               /* Vehicle -> Driver Workflow */
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                  gap: "var(--ads-s4)",
+                }}
+              >
                 {/* Step 1: Select Vehicle */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <Truck size={13} className="text-blue-600" />
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s2)" }}>
+                  <label style={stepLabelStyle}>
+                    <Truck size={13} style={{ color: "var(--ads-blue)" }} />
                     1. Select Vehicle
                   </label>
-                  <div className="relative">
-                    <Search size={14} className="absolute left-3 top-2.5 text-slate-400" />
+                  <div style={{ position: "relative" }}>
+                    <Search
+                      size={14}
+                      style={{
+                        position: "absolute",
+                        left: "12px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        color: "var(--ads-ink-quaternary)",
+                        pointerEvents: "none",
+                      }}
+                    />
                     <input
                       type="text"
                       placeholder="Search Vehicle Unit #, Make, Model..."
                       value={vehicleSearch}
                       onChange={(e) => setVehicleSearch(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-hidden focus:border-blue-500"
+                      style={searchInputStyle}
                     />
                   </div>
 
-                  <div className="max-h-56 overflow-y-auto space-y-1.5 pr-1 border border-slate-200 rounded-xl p-1.5 bg-slate-50/50">
+                  <div style={listWrapStyle}>
                     {filteredVehicles.length === 0 ? (
-                      <div className="p-3 text-center text-xs text-slate-400">
+                      <div style={emptyListStyle}>
                         No vehicles matching filter.
                       </div>
                     ) : (
@@ -249,29 +473,44 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
                           <div
                             key={v.id}
                             onClick={() => setSelectedVehicleId(v.id)}
-                            className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
-                              isSelected
-                                ? "bg-blue-50 border-blue-400 shadow-xs"
-                                : "bg-white border-slate-200 hover:border-slate-300"
-                            }`}
+                            style={listItemStyle(isSelected)}
                           >
-                            <div className="flex items-center justify-between">
-                              <span className="text-xs font-bold text-slate-900">
+                            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--ads-s2)" }}>
+                              <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                                 {v.unit_number || `VAN-${v.id}`}
                               </span>
                               <span
-                                className={`text-[10px] font-bold px-1.5 py-0.5 rounded uppercase ${
+                                style={
                                   v.status === "grounded"
-                                    ? "bg-rose-100 text-rose-700"
-                                    : "bg-emerald-100 text-emerald-700"
-                                }`}
+                                    ? miniBadgeStyle("var(--ads-red-tint)", "var(--ads-red)")
+                                    : miniBadgeStyle("var(--ads-green-tint)", "var(--ads-green)")
+                                }
                               >
                                 {v.status || "in_service"}
                               </span>
                             </div>
-                            <div className="text-[11px] text-slate-600 mt-1 flex items-center justify-between">
-                              <span className="text-slate-500">{v.make || v.model || "Fleet Vehicle"}</span>
-                              <span className="font-semibold text-slate-700 truncate max-w-[120px]">
+                            <div
+                              style={{
+                                fontSize: "0.6875rem",
+                                color: "var(--ads-ink-tertiary)",
+                                marginTop: "var(--ads-s1)",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                gap: "var(--ads-s2)",
+                              }}
+                            >
+                              <span style={{ color: "var(--ads-ink-tertiary)" }}>{v.make || v.model || "Fleet Vehicle"}</span>
+                              <span
+                                style={{
+                                  fontWeight: 600,
+                                  color: "var(--ads-ink-secondary)",
+                                  maxWidth: "120px",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  whiteSpace: "nowrap",
+                                }}
+                              >
                                 {v.assigned_driver_name ? `👤 ${v.assigned_driver_name}` : "⚪ Unassigned"}
                               </span>
                             </div>
@@ -283,25 +522,35 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
                 </div>
 
                 {/* Step 2: Choose Available Driver */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <User size={13} className="text-blue-600" />
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s2)" }}>
+                  <label style={stepLabelStyle}>
+                    <User size={13} style={{ color: "var(--ads-blue)" }} />
                     2. Choose Driver to Assign
                   </label>
-                  <div className="relative">
-                    <Search size={14} className="absolute left-3 top-2.5 text-slate-400" />
+                  <div style={{ position: "relative" }}>
+                    <Search
+                      size={14}
+                      style={{
+                        position: "absolute",
+                        left: "12px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        color: "var(--ads-ink-quaternary)",
+                        pointerEvents: "none",
+                      }}
+                    />
                     <input
                       type="text"
                       placeholder="Search Driver Name..."
                       value={driverSearch}
                       onChange={(e) => setDriverSearch(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-hidden focus:border-blue-500"
+                      style={searchInputStyle}
                     />
                   </div>
 
-                  <div className="max-h-56 overflow-y-auto space-y-1.5 pr-1 border border-slate-200 rounded-xl p-1.5 bg-slate-50/50">
+                  <div style={listWrapStyle}>
                     {filteredDrivers.length === 0 ? (
-                      <div className="p-3 text-center text-xs text-slate-400">
+                      <div style={emptyListStyle}>
                         No drivers matching filter.
                       </div>
                     ) : (
@@ -311,27 +560,32 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
                           <div
                             key={d.id}
                             onClick={() => setSelectedDriverId(d.id)}
-                            className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
-                              isSelected
-                                ? "bg-blue-50 border-blue-400 shadow-xs"
-                                : "bg-white border-slate-200 hover:border-slate-300"
-                            }`}
+                            style={listItemStyle(isSelected)}
                           >
-                            <div className="flex items-center justify-between">
-                              <span className="text-xs font-bold text-slate-900">
+                            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--ads-s2)" }}>
+                              <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                                 {d.name}
                               </span>
                               <span
-                                className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                                style={
                                   d.status === "active"
-                                    ? "bg-emerald-100 text-emerald-700"
-                                    : "bg-slate-100 text-slate-600"
-                                }`}
+                                    ? miniBadgeStyle("var(--ads-green-tint)", "var(--ads-green)")
+                                    : miniBadgeStyle("rgba(0,0,0,0.05)", "var(--ads-ink-secondary)")
+                                }
                               >
                                 {d.status?.toUpperCase() || "ACTIVE"}
                               </span>
                             </div>
-                            <div className="text-[11px] text-slate-500 mt-0.5 truncate">
+                            <div
+                              style={{
+                                fontSize: "0.6875rem",
+                                color: "var(--ads-ink-tertiary)",
+                                marginTop: "2px",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                whiteSpace: "nowrap",
+                              }}
+                            >
                               Station: {d.stations?.[0]?.station_code || "Primary"}
                             </div>
                           </div>
@@ -343,42 +597,54 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
               </div>
             ) : (
               /* Driver -> Vehicle Workflow */
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                  gap: "var(--ads-s4)",
+                }}
+              >
                 {/* Step 1: Select Driver */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <User size={13} className="text-blue-600" />
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s2)" }}>
+                  <label style={stepLabelStyle}>
+                    <User size={13} style={{ color: "var(--ads-blue)" }} />
                     1. Select Driver
                   </label>
-                  <div className="relative">
-                    <Search size={14} className="absolute left-3 top-2.5 text-slate-400" />
+                  <div style={{ position: "relative" }}>
+                    <Search
+                      size={14}
+                      style={{
+                        position: "absolute",
+                        left: "12px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        color: "var(--ads-ink-quaternary)",
+                        pointerEvents: "none",
+                      }}
+                    />
                     <input
                       type="text"
                       placeholder="Search Driver Name..."
                       value={driverSearch}
                       onChange={(e) => setDriverSearch(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-hidden focus:border-blue-500"
+                      style={searchInputStyle}
                     />
                   </div>
 
-                  <div className="max-h-56 overflow-y-auto space-y-1.5 pr-1 border border-slate-200 rounded-xl p-1.5 bg-slate-50/50">
+                  <div style={listWrapStyle}>
                     {filteredDrivers.map((d) => {
                       const isSelected = String(d.id) === String(selectedDriverId);
                       return (
                         <div
                           key={d.id}
                           onClick={() => setSelectedDriverId(d.id)}
-                          className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
-                            isSelected
-                              ? "bg-blue-50 border-blue-400 shadow-xs"
-                              : "bg-white border-slate-200 hover:border-slate-300"
-                          }`}
+                          style={listItemStyle(isSelected)}
                         >
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-bold text-slate-900">
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--ads-s2)" }}>
+                            <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                               {d.name}
                             </span>
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-100 text-blue-700">
+                            <span style={miniBadgeStyle("var(--ads-blue-tint)", "var(--ads-blue)")}>
                               Driver
                             </span>
                           </div>
@@ -389,44 +655,57 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
                 </div>
 
                 {/* Step 2: Choose Vehicle to Assign */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <Truck size={13} className="text-blue-600" />
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s2)" }}>
+                  <label style={stepLabelStyle}>
+                    <Truck size={13} style={{ color: "var(--ads-blue)" }} />
                     2. Choose Vehicle to Assign
                   </label>
-                  <div className="relative">
-                    <Search size={14} className="absolute left-3 top-2.5 text-slate-400" />
+                  <div style={{ position: "relative" }}>
+                    <Search
+                      size={14}
+                      style={{
+                        position: "absolute",
+                        left: "12px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        color: "var(--ads-ink-quaternary)",
+                        pointerEvents: "none",
+                      }}
+                    />
                     <input
                       type="text"
                       placeholder="Search Vehicle Unit #, Make, Model..."
                       value={vehicleSearch}
                       onChange={(e) => setVehicleSearch(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-hidden focus:border-blue-500"
+                      style={searchInputStyle}
                     />
                   </div>
 
-                  <div className="max-h-56 overflow-y-auto space-y-1.5 pr-1 border border-slate-200 rounded-xl p-1.5 bg-slate-50/50">
+                  <div style={listWrapStyle}>
                     {filteredVehicles.map((v) => {
                       const isSelected = String(v.id) === String(selectedVehicleId);
                       return (
                         <div
                           key={v.id}
                           onClick={() => setSelectedVehicleId(v.id)}
-                          className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
-                            isSelected
-                              ? "bg-blue-50 border-blue-400 shadow-xs"
-                              : "bg-white border-slate-200 hover:border-slate-300"
-                          }`}
+                          style={listItemStyle(isSelected)}
                         >
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-bold text-slate-900">
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--ads-s2)" }}>
+                            <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                               {v.unit_number || `VAN-${v.id}`}
                             </span>
-                            <span className="text-[10px] font-semibold text-slate-500">
+                            <span style={{ fontSize: "0.625rem", fontWeight: 600, color: "var(--ads-ink-tertiary)" }}>
                               {v.make || v.model || "Fleet"}
                             </span>
                           </div>
-                          <div className="text-[11px] text-slate-600 mt-1 font-medium">
+                          <div
+                            style={{
+                              fontSize: "0.6875rem",
+                              color: "var(--ads-ink-tertiary)",
+                              marginTop: "var(--ads-s1)",
+                              fontWeight: 500,
+                            }}
+                          >
                             {v.assigned_driver_name ? `Assigned to: ${v.assigned_driver_name}` : "Available for assignment"}
                           </div>
                         </div>
@@ -438,49 +717,143 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
             )}
 
             {/* Live Binding Preview Card */}
-            <div className="p-3.5 bg-blue-50/70 border-2 border-blue-200 rounded-xl">
-              <div className="flex items-center justify-between text-xs mb-2">
-                <span className="font-bold text-blue-900 uppercase tracking-wider text-[11px]">
+            <div
+              style={{
+                padding: "var(--ads-s3)",
+                background: "var(--ads-blue-tint)",
+                border: "1px solid var(--ads-blue-tint-strong)",
+                borderRadius: "var(--ads-r-md)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "var(--ads-s2)",
+                  marginBottom: "var(--ads-s2)",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "0.6875rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.04em",
+                    textTransform: "uppercase",
+                    color: "var(--ads-blue)",
+                  }}
+                >
                   Pending Assignment Preview
                 </span>
-                <span className="text-[11px] text-blue-700 font-medium">
+                <span style={{ fontSize: "0.6875rem", fontWeight: 500, color: "var(--ads-blue)" }}>
                   Two-Way Live Sync
                 </span>
               </div>
 
-              <div className="flex items-center justify-between gap-3 text-xs bg-white p-3 rounded-lg border border-blue-200">
-                <div className="flex items-center gap-2 min-w-0">
-                  <Truck size={16} className="text-blue-600 flex-shrink-0" />
-                  <div className="min-w-0">
-                    <span className="font-bold text-slate-900 block truncate">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "var(--ads-s3)",
+                  padding: "var(--ads-s3)",
+                  background: "var(--ads-material-thick)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-sm)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)", minWidth: 0 }}>
+                  <Truck size={16} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
+                  <div style={{ minWidth: 0 }}>
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "0.75rem",
+                        fontWeight: 600,
+                        color: "var(--ads-ink)",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {currentVehicle?.unit_number || `Vehicle #${selectedVehicleId}`}
                     </span>
-                    <span className="text-[10px] text-slate-500 block truncate">
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "0.625rem",
+                        color: "var(--ads-ink-tertiary)",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {currentVehicle?.make || currentVehicle?.model || "Active Fleet"}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 text-blue-600 font-bold">
-                  <ArrowLeftRight size={14} />
-                  <span className="text-[11px]">LINKED</span>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    color: "var(--ads-blue)",
+                    fontWeight: 600,
+                  }}
+                >
+                  <ArrowLeftRight size={14} style={{ color: "var(--ads-blue)" }} />
+                  <span style={{ fontSize: "0.6875rem" }}>LINKED</span>
                 </div>
 
-                <div className="flex items-center gap-2 min-w-0 text-right">
-                  <div className="min-w-0">
-                    <span className="font-bold text-slate-900 block truncate">
+                <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)", minWidth: 0, textAlign: "right" }}>
+                  <div style={{ minWidth: 0 }}>
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "0.75rem",
+                        fontWeight: 600,
+                        color: "var(--ads-ink)",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {currentDriver?.name || `Driver #${selectedDriverId}`}
                     </span>
-                    <span className="text-[10px] text-slate-500 block truncate">
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "0.625rem",
+                        color: "var(--ads-ink-tertiary)",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {currentDriver?.status || "Active Driver"}
                     </span>
                   </div>
-                  <User size={16} className="text-blue-600 flex-shrink-0" />
+                  <User size={16} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
                 </div>
               </div>
 
               {currentVehicle?.assigned_driver_name && (
-                <div className="mt-2 text-[11px] text-amber-800 bg-amber-50 p-2 rounded border border-amber-200 flex items-center justify-between">
+                <div
+                  style={{
+                    marginTop: "var(--ads-s2)",
+                    fontSize: "0.6875rem",
+                    color: "var(--ads-amber)",
+                    background: "var(--ads-amber-tint)",
+                    padding: "var(--ads-s2)",
+                    borderRadius: "var(--ads-r-xs)",
+                    border: "1px solid var(--ads-amber)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "var(--ads-s2)",
+                  }}
+                >
                   <span>
                     Currently assigned to: <strong>{currentVehicle.assigned_driver_name}</strong>
                   </span>
@@ -488,7 +861,17 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
                     type="button"
                     onClick={handleUnassign}
                     disabled={isSubmitting}
-                    className="text-[11px] font-bold text-rose-600 hover:text-rose-800 underline ml-2"
+                    style={{
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      color: "var(--ads-red)",
+                      background: "transparent",
+                      border: "none",
+                      textDecoration: "underline",
+                      marginLeft: "var(--ads-s2)",
+                      cursor: "pointer",
+                      transition: "all var(--ads-dur-fast) var(--ads-ease)",
+                    }}
                   >
                     Unassign Now
                   </button>
@@ -498,25 +881,61 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
           </div>
 
           {/* Footer Actions */}
-          <div className="p-4 border-t-2 border-slate-200 bg-slate-50/50 flex items-center justify-between gap-3">
+          <div
+            style={{
+              padding: "var(--ads-s4) var(--ads-s6)",
+              background: "transparent",
+              borderTop: "1px solid var(--ads-hairline)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "var(--ads-s3)",
+            }}
+          >
             <button
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 rounded-xl transition-colors"
+              style={{
+                padding: "9px 18px",
+                fontSize: "0.8125rem",
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+                color: "var(--ads-ink)",
+                background: "var(--ads-material-thick)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-pill)",
+                boxShadow: "var(--ads-bevel)",
+                cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
+              }}
             >
               Cancel
             </button>
 
-            <div className="flex items-center gap-2">
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
               {currentVehicle?.assigned_driver_name && (
                 <button
                   type="button"
                   onClick={handleUnassign}
                   disabled={isSubmitting}
-                  className="px-3.5 py-2 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-xl transition-colors flex items-center gap-1.5"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: "9px 18px",
+                    fontSize: "0.8125rem",
+                    fontWeight: 600,
+                    letterSpacing: "-0.01em",
+                    color: "var(--ads-red)",
+                    background: "var(--ads-red-tint)",
+                    border: "1px solid transparent",
+                    borderRadius: "var(--ads-r-pill)",
+                    cursor: "pointer",
+                    transition: "all var(--ads-dur-fast) var(--ads-ease)",
+                  }}
                 >
-                  <Unlink size={14} />
+                  <Unlink size={14} style={{ color: "var(--ads-red)" }} />
                   <span>Unassign Driver</span>
                 </button>
               )}
@@ -525,18 +944,32 @@ export const VehicleDriverAssignmentModal: FC<VehicleDriverAssignmentModalProps>
                 type="button"
                 onClick={handleConfirmAssignment}
                 disabled={isSubmitting}
-                className="px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all shadow-xs flex items-center gap-1.5 disabled:opacity-50"
-                style={{ color: "#FFFFFF" }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "9px 18px",
+                  fontSize: "0.8125rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.01em",
+                  color: "#FFFFFF",
+                  background: "var(--ads-blue)",
+                  border: "1px solid transparent",
+                  borderRadius: "var(--ads-r-pill)",
+                  cursor: "pointer",
+                  opacity: isSubmitting ? 0.5 : 1,
+                  transition: "all var(--ads-dur-fast) var(--ads-ease)",
+                }}
               >
                 {isSubmitting ? (
                   <>
                     <Loader2 size={14} className="animate-spin" style={{ color: "#FFFFFF" }} />
-                    <span>Syncing Assignment...</span>
+                    <span style={{ color: "#FFFFFF" }}>Syncing Assignment...</span>
                   </>
                 ) : (
                   <>
                     <Link size={14} style={{ color: "#FFFFFF" }} />
-                    <span>Confirm Two-Way Assignment</span>
+                    <span style={{ color: "#FFFFFF" }}>Confirm Two-Way Assignment</span>
                   </>
                 )}
               </button>

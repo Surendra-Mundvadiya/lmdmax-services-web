@@ -63,6 +63,7 @@ export const DeleteDriverModal: FC<DeleteDriverModalProps> = ({
             onClick={onClose}
             disabled={isSubmitting}
             title="Close dialog"
+            aria-label="Close dialog"
           >
             <X size={18} />
           </button>
@@ -94,7 +95,7 @@ export const DeleteDriverModal: FC<DeleteDriverModalProps> = ({
             justifyContent: "flex-end",
             marginTop: "1rem",
             paddingTop: "0.85rem",
-            borderTop: "1px solid #E2E8F0",
+            borderTop: "1px solid var(--ads-hairline)",
           }}
         >
           <button
@@ -114,24 +115,28 @@ export const DeleteDriverModal: FC<DeleteDriverModalProps> = ({
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "0.45rem",
-              backgroundColor: "#DC2626",
+              gap: "var(--ads-s2)",
+              backgroundColor: "var(--ads-red)",
               color: "#FFFFFF",
-              border: "none",
-              padding: "0.5rem 1.25rem",
-              borderRadius: "6px",
+              border: "1px solid transparent",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
               fontWeight: 600,
-              fontSize: "0.875rem",
+              fontSize: "0.8125rem",
+              letterSpacing: "-0.01em",
+              lineHeight: 1,
+              boxShadow: "0 1px 3px rgba(215, 0, 21, 0.24)",
               cursor: "pointer",
+              transition: "background-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             {isSubmitting ? (
               <>
-                <Loader2 size={15} className="animate-spin text-white" />
-                <span className="text-white">Deleting...</span>
+                <Loader2 size={15} style={{ color: "#FFFFFF" }} className="animate-spin" />
+                <span style={{ color: "#FFFFFF" }}>Deleting...</span>
               </>
             ) : (
-              <span className="text-white">Delete Driver</span>
+              <span style={{ color: "#FFFFFF" }}>Delete Driver</span>
             )}
           </button>
         </div>

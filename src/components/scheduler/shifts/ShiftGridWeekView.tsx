@@ -101,7 +101,9 @@ export const ShiftGridWeekView: FC<ShiftGridWeekViewProps> = ({
             <th className="sch-th-pinned">
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <span>DRIVERS ROSTER ({drivers.length})</span>
-                <span style={{ fontSize: "0.625rem", fontWeight: 500, color: "#64748B" }}>
+                <span
+                  style={{ fontSize: "0.625rem", fontWeight: 550, color: "var(--ads-ink-tertiary)" }}
+                >
                   Target: 40h/wk
                 </span>
               </div>
@@ -139,7 +141,12 @@ export const ShiftGridWeekView: FC<ShiftGridWeekViewProps> = ({
             <tr>
               <td
                 colSpan={days.length + 1}
-                style={{ textAlign: "center", padding: "4rem 1rem", color: "#94A3B8", fontSize: "0.8125rem" }}
+                style={{
+                  textAlign: "center",
+                  padding: "var(--ads-s10) var(--ads-s4)",
+                  color: "var(--ads-ink-tertiary)",
+                  fontSize: "0.8125rem",
+                }}
               >
                 {loading ? "Loading drivers and shift schedules..." : "No drivers match your current filter."}
               </td>
@@ -176,7 +183,7 @@ export const ShiftGridWeekView: FC<ShiftGridWeekViewProps> = ({
                         {/* Hours tally */}
                         <div className="sch-driver-hours-tally">
                           <span className={`sch-driver-hours-text ${isOvertime ? "overtime" : ""}`}>
-                            <Clock size={11} style={{ color: "#64748B", flexShrink: 0 }} />
+                            <Clock size={11} style={{ color: "var(--ads-ink-quaternary)", flexShrink: 0 }} />
                             <span>{weeklyHours.toFixed(1)}h / {targetHours}h</span>
                           </span>
                         </div>
@@ -201,16 +208,24 @@ export const ShiftGridWeekView: FC<ShiftGridWeekViewProps> = ({
                         onDragLeave={() => handleDragLeave(cellKey)}
                         onDrop={(e) => handleDrop(e, driver.id, day.dateStr)}
                         style={{
-                          backgroundColor: isDragOver ? "#EFF6FF" : undefined,
-                          outline: isDragOver ? "2px dashed #2563EB" : undefined,
-                          transition: "background-color 0.15s ease",
+                          backgroundColor: isDragOver ? "var(--ads-blue-tint)" : undefined,
+                          outline: isDragOver ? "2px dashed var(--ads-blue)" : undefined,
+                          transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                         }}
                       >
                         <div className="sch-cell-content">
                           {/* Approved Leave Alert */}
                           {timeOff && (
-                            <div className="sch-timeoff-banner">
-                              <AlertCircle size={11} style={{ color: "#DC2626", flexShrink: 0 }} />
+                            <div
+                              className="sch-timeoff-banner"
+                              style={{
+                                background: "var(--ads-red-tint)",
+                                border: "1px solid rgba(215, 0, 21, 0.28)",
+                                borderRadius: "var(--ads-r-xs)",
+                                color: "var(--ads-red)",
+                              }}
+                            >
+                              <AlertCircle size={11} style={{ flexShrink: 0 }} />
                               <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                                 Approved Leave
                               </span>
@@ -238,6 +253,8 @@ export const ShiftGridWeekView: FC<ShiftGridWeekViewProps> = ({
                               type="button"
                               onClick={() => onCellClick(driver.id, day.dateStr)}
                               className="sch-empty-slot-btn"
+                              style={{ borderRadius: "var(--ads-r-sm)" }}
+                              aria-label={`Create shift for ${driver.name} on ${day.dateStr}`}
                               title={`Create shift for ${driver.name} on ${day.dateStr}`}
                             >
                               <Plus size={16} />
@@ -253,29 +270,34 @@ export const ShiftGridWeekView: FC<ShiftGridWeekViewProps> = ({
                                 display: "inline-flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                gap: "0.25rem",
+                                gap: "var(--ads-s1)",
                                 width: "100%",
-                                padding: "0.2rem 0.4rem",
-                                marginTop: "0.25rem",
-                                borderRadius: "6px",
-                                border: "1px dashed #CBD5E1",
-                                backgroundColor: "#FFFFFF",
-                                color: "#64748B",
+                                padding: "var(--ads-s1) var(--ads-s2)",
+                                marginTop: "var(--ads-s1)",
+                                borderRadius: "var(--ads-r-xs)",
+                                border: "1px dashed var(--ads-hairline-strong)",
+                                background: "var(--ads-material-thick)",
+                                color: "var(--ads-ink-tertiary)",
                                 fontSize: "0.6875rem",
-                                fontWeight: 500,
+                                fontWeight: 550,
                                 cursor: "pointer",
-                                transition: "all 0.15s ease",
+                                transition:
+                                  "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                               }}
                               onMouseEnter={(e) => {
-                                e.currentTarget.style.borderColor = "#2563EB";
-                                e.currentTarget.style.color = "#2563EB";
-                                e.currentTarget.style.backgroundColor = "#F8FAFC";
+                                e.currentTarget.style.borderColor = "var(--ads-blue)";
+                                e.currentTarget.style.color = "var(--ads-blue)";
+                                e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)";
                               }}
                               onMouseLeave={(e) => {
-                                e.currentTarget.style.borderColor = "#CBD5E1";
-                                e.currentTarget.style.color = "#64748B";
-                                e.currentTarget.style.backgroundColor = "#FFFFFF";
+                                e.currentTarget.style.borderColor = "var(--ads-hairline-strong)";
+                                e.currentTarget.style.color = "var(--ads-ink-tertiary)";
+                                e.currentTarget.style.backgroundColor = "var(--ads-material-thick)";
+                                e.currentTarget.style.transform = "scale(1)";
                               }}
+                              onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                              onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                              aria-label={`Add another shift for ${driver.name}`}
                               title={`Add another shift for ${driver.name}`}
                             >
                               <Plus size={11} />

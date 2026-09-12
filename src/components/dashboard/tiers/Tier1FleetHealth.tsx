@@ -57,7 +57,7 @@ export const Tier1FleetHealth: FC<Props> = ({
           <span className="uop-tier-tag">Tier 1</span>
           <h2 className="uop-tier-title">Real-Time Fleet & Inspection Health</h2>
         </div>
-        <span style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 500 }}>
+        <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-secondary)", fontWeight: 500 }}>
           Live Asset Telemetry
         </span>
       </div>
@@ -161,7 +161,7 @@ export const Tier1FleetHealth: FC<Props> = ({
             {/* Right: Active Vehicle Condition Breakdown */}
             <div className="uop-combined-condition-section">
               <div className="uop-condition-header-label">
-                <Wrench size={12} style={{ color: "#D97706" }} />
+                <Wrench size={12} style={{ color: "var(--ads-amber)" }} />
                 <span>Active Vehicle Condition</span>
               </div>
               <div className="uop-condition-grid">
@@ -218,8 +218,8 @@ export const Tier1FleetHealth: FC<Props> = ({
               <span>
                 {totalVehicles > 0 ? `${Math.round((activeVehicles / totalVehicles) * 100)}% Operational` : "Fleet Ready"}
               </span>
-              <span style={{ color: "#CBD5E1" }}>•</span>
-              <span style={{ color: grounded + inShop + severelyDamaged > 0 ? "#DC2626" : "#64748B", fontWeight: 600 }}>
+              <span style={{ color: "var(--ads-ink-quaternary)" }}>•</span>
+              <span style={{ color: grounded + inShop + severelyDamaged > 0 ? "var(--ads-red)" : "var(--ads-ink-secondary)", fontWeight: 600 }}>
                 {grounded + inShop + severelyDamaged} Need Attention
               </span>
             </div>
@@ -232,17 +232,13 @@ export const Tier1FleetHealth: FC<Props> = ({
 
         {/* 4. Inspection Alerts (Critical Action Card) */}
         <div
-          className="uop-card clickable"
+          className={`uop-card clickable${criticalFailures > 0 ? " uop-card--alert" : ""}`}
           onClick={() => navigate("/fleet/driver-inspection")}
           title="Click to resolve pending inspection alerts"
-          style={{
-            borderColor: criticalFailures > 0 ? "#FECACA" : "#E2E8F0",
-            backgroundColor: criticalFailures > 0 ? "#FFF5F5" : "#FFFFFF",
-          }}
         >
           <div className="uop-card-header">
             <h3 className="uop-card-title">
-              <span style={{ color: criticalFailures > 0 ? "#DC2626" : "inherit" }}>
+              <span style={{ color: criticalFailures > 0 ? "var(--ads-red)" : "inherit" }}>
                 Inspection Alerts
               </span>
             </h3>
@@ -251,7 +247,7 @@ export const Tier1FleetHealth: FC<Props> = ({
             </div>
           </div>
 
-          <div className="uop-card-value" style={{ color: criticalFailures > 0 ? "#DC2626" : "#0F172A" }}>
+          <div className="uop-card-value" style={{ color: criticalFailures > 0 ? "var(--ads-red)" : "var(--ads-ink)" }}>
             {isLoading ? <div className="uop-skeleton" style={{ width: 60, height: 32 }} /> : totalAlerts}
           </div>
 
@@ -259,24 +255,24 @@ export const Tier1FleetHealth: FC<Props> = ({
             <span
               style={{
                 fontSize: "0.725rem",
-                fontWeight: 700,
-                padding: "0.15rem 0.5rem",
-                borderRadius: "4px",
-                backgroundColor: criticalFailures > 0 ? "#FEE2E2" : "#ECFDF5",
-                color: criticalFailures > 0 ? "#991B1B" : "#065F46",
-                border: criticalFailures > 0 ? "1px solid #FECACA" : "1px solid #A7F3D0",
+                fontWeight: 600,
+                padding: "0.2rem 0.6rem",
+                borderRadius: "var(--ads-r-pill)",
+                backgroundColor: criticalFailures > 0 ? "var(--ads-red-tint)" : "var(--ads-green-tint)",
+                color: criticalFailures > 0 ? "var(--ads-red)" : "var(--ads-green)",
+                border: "1px solid transparent",
               }}
             >
               {criticalFailures} Critical Failures
             </span>
-            <span style={{ fontSize: "0.725rem", color: "#64748B" }}>
+            <span style={{ fontSize: "0.725rem", color: "var(--ads-ink-secondary)" }}>
               {pendingReviews} In Review
             </span>
           </div>
 
           <div className="uop-card-footer">
             <span>Daily DVIC Compliance</span>
-            <span className="uop-card-link-hint" style={{ color: criticalFailures > 0 ? "#DC2626" : "#2563EB" }}>
+            <span className="uop-card-link-hint" style={{ color: criticalFailures > 0 ? "var(--ads-red)" : "var(--ads-blue)" }}>
               <span>Action Alerts</span>
               <ChevronRight size={13} />
             </span>

@@ -38,26 +38,22 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
 
   return (
     <div
+      className="ads-scrim"
       style={{
-        position: "fixed",
-        inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.65)",
-        backdropFilter: "blur(6px)",
-        WebkitBackdropFilter: "blur(6px)",
         zIndex: 10060,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "1rem",
+        padding: "var(--ads-s4)",
       }}
       onClick={onClose}
     >
       <div
+        className="ads-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Choose application layout"
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "1rem",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-          border: "1px solid #E2E8F0",
           width: "100%",
           maxWidth: "680px",
           display: "flex",
@@ -69,12 +65,12 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
         {/* Header */}
         <div
           style={{
-            padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            background: "linear-gradient(to right, #F8FAFC, #FFFFFF)",
+            background: "transparent",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
@@ -82,22 +78,22 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
               style={{
                 width: "40px",
                 height: "40px",
-                borderRadius: "10px",
-                backgroundColor: "#EFF6FF",
-                border: "1px solid #BFDBFE",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-blue-tint)",
+                border: "1px solid var(--ads-blue-tint-strong)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#2563EB",
+                color: "var(--ads-blue)",
               }}
             >
               <Layout size={20} />
             </div>
             <div>
-              <h2 style={{ margin: 0, fontSize: "1.15rem", fontWeight: 700, color: "#0F172A" }}>
+              <h2 style={{ margin: 0, fontSize: "1.375rem", fontWeight: 650, letterSpacing: "-0.019em", color: "var(--ads-ink)" }}>
                 Choose Application Layout
               </h2>
-              <p style={{ margin: "0.15rem 0 0", fontSize: "0.82rem", color: "#64748B" }}>
+              <p style={{ margin: "0.15rem 0 0", fontSize: "0.8125rem", lineHeight: 1.5, color: "var(--ads-ink-secondary)" }}>
                 Select how you want to navigate and interact with LMDmax Unified App
               </p>
             </div>
@@ -106,42 +102,46 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
           <button
             type="button"
             onClick={onClose}
+            title="Close"
+            aria-label="Close layout picker"
             style={{
               background: "transparent",
               border: "none",
-              color: "#94A3B8",
+              color: "var(--ads-ink-tertiary)",
               cursor: "pointer",
               padding: "0.4rem",
-              borderRadius: "0.375rem",
+              borderRadius: "var(--ads-r-sm)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              transition:
+                "color var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#0F172A")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#94A3B8")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--ads-ink)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ads-ink-tertiary)")}
           >
             <X size={20} />
           </button>
         </div>
 
         {/* Layout Cards Body */}
-        <div style={{ padding: "1.5rem", display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+        <div style={{ padding: "var(--ads-s6)", display: "flex", flexDirection: "column", gap: "var(--ads-s5)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "var(--ads-s4)" }}>
             {/* 1. Top Navigation Card (Existing) */}
             <div
               onClick={() => setSelectedMode("top-nav")}
               style={{
-                border: selectedMode === "top-nav" ? "2px solid #2563EB" : "1px solid #E2E8F0",
-                backgroundColor: selectedMode === "top-nav" ? "#EFF6FF" : "#FFFFFF",
-                borderRadius: "0.75rem",
-                padding: "1.25rem",
+                border: selectedMode === "top-nav" ? "1px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                background: selectedMode === "top-nav" ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+                borderRadius: "var(--ads-r-md)",
+                padding: "var(--ads-s5)",
                 cursor: "pointer",
                 position: "relative",
                 display: "flex",
                 flexDirection: "column",
-                gap: "0.85rem",
-                transition: "all 0.15s ease",
-                boxShadow: selectedMode === "top-nav" ? "0 4px 12px rgba(37, 99, 235, 0.12)" : "0 1px 3px rgba(0,0,0,0.04)",
+                gap: "var(--ads-s3)",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+                boxShadow: selectedMode === "top-nav" ? "var(--ads-shadow-md), var(--ads-bevel)" : "var(--ads-shadow-xs), var(--ads-bevel)",
               }}
             >
               {selectedMode === "top-nav" && (
@@ -153,7 +153,7 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
                     width: "22px",
                     height: "22px",
                     borderRadius: "50%",
-                    backgroundColor: "#2563EB",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
                     display: "flex",
                     alignItems: "center",
@@ -168,9 +168,9 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
               <div
                 style={{
                   height: "90px",
-                  borderRadius: "6px",
-                  backgroundColor: "#F1F5F9",
-                  border: "1px solid #CBD5E1",
+                  borderRadius: "var(--ads-r-xs)",
+                  backgroundColor: "rgba(0, 0, 0, 0.04)",
+                  border: "1px solid var(--ads-hairline)",
                   padding: "6px",
                   display: "flex",
                   flexDirection: "column",
@@ -181,8 +181,8 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
                 <div
                   style={{
                     height: "18px",
-                    borderRadius: "4px",
-                    backgroundColor: "#2563EB",
+                    borderRadius: "var(--ads-r-xs)",
+                    backgroundColor: "var(--ads-blue)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
@@ -202,24 +202,24 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
                   style={{
                     flex: 1,
                     backgroundColor: "#FFFFFF",
-                    borderRadius: "4px",
-                    border: "1px dashed #CBD5E1",
+                    borderRadius: "var(--ads-r-xs)",
+                    border: "1px dashed var(--ads-hairline-strong)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <span style={{ fontSize: "0.68rem", color: "#94A3B8", fontWeight: 600 }}>
+                  <span style={{ fontSize: "0.68rem", color: "var(--ads-ink-quaternary)", fontWeight: 600 }}>
                     Full Width Content
                   </span>
                 </div>
               </div>
 
               <div>
-                <h4 style={{ margin: "0 0 0.3rem", fontSize: "0.95rem", fontWeight: 700, color: "#0F172A" }}>
+                <h4 style={{ margin: "0 0 0.3rem", fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                   Top Navigation
                 </h4>
-                <p style={{ margin: 0, fontSize: "0.78rem", color: "#64748B", lineHeight: 1.4 }}>
+                <p style={{ margin: 0, fontSize: "0.8125rem", color: "var(--ads-ink-secondary)", lineHeight: 1.5 }}>
                   Header at the top with Global Utilities dropdown, maximum screen width for tables & dashboards.
                 </p>
               </div>
@@ -229,17 +229,17 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
             <div
               onClick={() => setSelectedMode("sidebar-nav")}
               style={{
-                border: selectedMode === "sidebar-nav" ? "2px solid #2563EB" : "1px solid #E2E8F0",
-                backgroundColor: selectedMode === "sidebar-nav" ? "#EFF6FF" : "#FFFFFF",
-                borderRadius: "0.75rem",
-                padding: "1.25rem",
+                border: selectedMode === "sidebar-nav" ? "1px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                background: selectedMode === "sidebar-nav" ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+                borderRadius: "var(--ads-r-md)",
+                padding: "var(--ads-s5)",
                 cursor: "pointer",
                 position: "relative",
                 display: "flex",
                 flexDirection: "column",
-                gap: "0.85rem",
-                transition: "all 0.15s ease",
-                boxShadow: selectedMode === "sidebar-nav" ? "0 4px 12px rgba(37, 99, 235, 0.12)" : "0 1px 3px rgba(0,0,0,0.04)",
+                gap: "var(--ads-s3)",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+                boxShadow: selectedMode === "sidebar-nav" ? "var(--ads-shadow-md), var(--ads-bevel)" : "var(--ads-shadow-xs), var(--ads-bevel)",
               }}
             >
               {selectedMode === "sidebar-nav" && (
@@ -251,7 +251,7 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
                     width: "22px",
                     height: "22px",
                     borderRadius: "50%",
-                    backgroundColor: "#2563EB",
+                    backgroundColor: "var(--ads-blue)",
                     color: "#FFFFFF",
                     display: "flex",
                     alignItems: "center",
@@ -266,9 +266,9 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
               <div
                 style={{
                   height: "90px",
-                  borderRadius: "6px",
-                  backgroundColor: "#F1F5F9",
-                  border: "1px solid #CBD5E1",
+                  borderRadius: "var(--ads-r-xs)",
+                  backgroundColor: "rgba(0, 0, 0, 0.04)",
+                  border: "1px solid var(--ads-hairline)",
                   padding: "5px",
                   display: "flex",
                   gap: "5px",
@@ -278,15 +278,15 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
                 <div
                   style={{
                     width: "38px",
-                    backgroundColor: "#1E293B",
-                    borderRadius: "4px",
+                    backgroundColor: "var(--ads-ink)",
+                    borderRadius: "var(--ads-r-xs)",
                     padding: "4px 3px",
                     display: "flex",
                     flexDirection: "column",
                     gap: "3px",
                   }}
                 >
-                  <div style={{ width: "16px", height: "4px", backgroundColor: "#3B82F6", borderRadius: "2px", marginBottom: "2px" }} />
+                  <div style={{ width: "16px", height: "4px", backgroundColor: "var(--ads-blue)", borderRadius: "2px", marginBottom: "2px" }} />
                   <div style={{ width: "100%", height: "3px", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: "1px" }} />
                   <div style={{ width: "100%", height: "3px", backgroundColor: "rgba(255,255,255,0.4)", borderRadius: "1px" }} />
                   <div style={{ width: "100%", height: "3px", backgroundColor: "rgba(255,255,255,0.4)", borderRadius: "1px" }} />
@@ -301,17 +301,17 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
                       height: "14px",
                       borderRadius: "3px",
                       backgroundColor: "#FFFFFF",
-                      border: "1px solid #E2E8F0",
+                      border: "1px solid var(--ads-hairline)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
                       padding: "0 4px",
                     }}
                   >
-                    <div style={{ width: "24px", height: "3px", backgroundColor: "#94A3B8", borderRadius: "1px" }} />
+                    <div style={{ width: "24px", height: "3px", backgroundColor: "var(--ads-ink-quaternary)", borderRadius: "1px" }} />
                     <div style={{ display: "flex", gap: "2px" }}>
-                      <div style={{ width: "6px", height: "6px", backgroundColor: "#EFF6FF", borderRadius: "50%", border: "1px solid #BFDBFE" }} />
-                      <div style={{ width: "6px", height: "6px", backgroundColor: "#2563EB", borderRadius: "50%" }} />
+                      <div style={{ width: "6px", height: "6px", backgroundColor: "var(--ads-blue-tint)", borderRadius: "50%", border: "1px solid var(--ads-blue-tint-strong)" }} />
+                      <div style={{ width: "6px", height: "6px", backgroundColor: "var(--ads-blue)", borderRadius: "50%" }} />
                     </div>
                   </div>
                   {/* Content */}
@@ -320,13 +320,13 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
                       flex: 1,
                       backgroundColor: "#FFFFFF",
                       borderRadius: "3px",
-                      border: "1px dashed #CBD5E1",
+                      border: "1px dashed var(--ads-hairline-strong)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <span style={{ fontSize: "0.68rem", color: "#94A3B8", fontWeight: 600 }}>
+                    <span style={{ fontSize: "0.68rem", color: "var(--ads-ink-quaternary)", fontWeight: 600 }}>
                       App Workspace
                     </span>
                   </div>
@@ -334,10 +334,10 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
               </div>
 
               <div>
-                <h4 style={{ margin: "0 0 0.3rem", fontSize: "0.95rem", fontWeight: 700, color: "#0F172A" }}>
+                <h4 style={{ margin: "0 0 0.3rem", fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink)" }}>
                   Left Sidebar + Top Header
                 </h4>
-                <p style={{ margin: 0, fontSize: "0.78rem", color: "#64748B", lineHeight: 1.4 }}>
+                <p style={{ margin: 0, fontSize: "0.8125rem", color: "var(--ads-ink-secondary)", lineHeight: 1.5 }}>
                   Sidebar navigation with grouped Inspections, Reports, and Utilities + sleek top action bar.
                 </p>
               </div>
@@ -346,18 +346,18 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
 
           <div
             style={{
-              padding: "0.75rem 1rem",
-              borderRadius: "0.5rem",
-              backgroundColor: "#F8FAFC",
-              border: "1px solid #E2E8F0",
+              padding: "var(--ads-s3) var(--ads-s4)",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "rgba(0, 0, 0, 0.04)",
+              border: "1px solid var(--ads-hairline)",
               fontSize: "0.8rem",
-              color: "#475569",
+              color: "var(--ads-ink-secondary)",
               display: "flex",
               alignItems: "center",
               gap: "0.6rem",
             }}
           >
-            <Sparkles size={16} color="#2563EB" />
+            <Sparkles size={16} color="#0071E3" />
             <span>
               Your layout choice is saved automatically and applies immediately across all pages.
             </span>
@@ -367,46 +367,19 @@ export const LayoutSwitcherModal: FC<LayoutSwitcherModalProps> = ({
         {/* Footer */}
         <div
           style={{
-            padding: "1rem 1.5rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            padding: "var(--ads-s4) var(--ads-s6)",
+            borderTop: "1px solid var(--ads-hairline)",
+            background: "transparent",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
-            gap: "0.75rem",
+            gap: "var(--ads-s3)",
           }}
         >
-          <button
-            type="button"
-            onClick={onClose}
-            style={{
-              padding: "0.5rem 1.1rem",
-              borderRadius: "0.5rem",
-              border: "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
-              color: "#334155",
-              fontSize: "0.85rem",
-              fontWeight: 600,
-              cursor: "pointer",
-            }}
-          >
+          <button type="button" onClick={onClose} className="ads-btn ads-btn--secondary">
             Cancel
           </button>
-          <button
-            type="button"
-            onClick={handleApply}
-            style={{
-              padding: "0.5rem 1.35rem",
-              borderRadius: "0.5rem",
-              border: "none",
-              backgroundColor: "#2563EB",
-              color: "#FFFFFF",
-              fontSize: "0.85rem",
-              fontWeight: 600,
-              cursor: "pointer",
-              boxShadow: "0 2px 4px rgba(37, 99, 235, 0.2)",
-            }}
-          >
+          <button type="button" onClick={handleApply} className="ads-btn ads-btn--primary">
             Apply Layout
           </button>
         </div>

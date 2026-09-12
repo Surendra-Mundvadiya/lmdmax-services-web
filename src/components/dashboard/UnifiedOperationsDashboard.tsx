@@ -70,15 +70,16 @@ export const UnifiedOperationsDashboard: FC = () => {
               alignItems: "center",
               justifyContent: "space-between",
               padding: "0.75rem 1rem",
-              borderRadius: "8px",
-              backgroundColor: "#FFFBEB",
-              border: "1px solid #FDE68A",
-              color: "#92400E",
+              borderRadius: "var(--ads-r-lg)",
+              backgroundColor: "var(--ads-amber-tint)",
+              border: "1px solid var(--ads-hairline)",
+              boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
+              color: "var(--ads-amber)",
               fontSize: "0.8125rem",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <AlertCircle size={16} style={{ color: "#D97706" }} />
+              <AlertCircle size={16} style={{ color: "var(--ads-amber)" }} />
               <span>
                 One or more live microservices took longer to respond. Cached telemetry is currently displayed.
               </span>
@@ -89,12 +90,15 @@ export const UnifiedOperationsDashboard: FC = () => {
               style={{
                 background: "none",
                 border: "none",
-                color: "#2563EB",
-                fontWeight: 700,
+                color: "var(--ads-blue)",
+                fontWeight: 600,
                 cursor: "pointer",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.25rem",
+                padding: "0.2rem 0.5rem",
+                borderRadius: "var(--ads-r-pill)",
+                transition: "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               <RefreshCw size={12} />

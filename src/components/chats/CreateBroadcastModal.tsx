@@ -104,8 +104,9 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.5)",
-        backdropFilter: "blur(2px)",
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -114,12 +115,18 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
       }}
     >
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="broadcast-modal-title"
         style={{
           width: "100%",
           maxWidth: "600px",
-          backgroundColor: "#FFFFFF",
-          borderRadius: "12px",
-          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          border: "1px solid var(--ads-hairline)",
+          borderRadius: "var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
           display: "flex",
           flexDirection: "column",
           maxHeight: "90vh",
@@ -129,47 +136,65 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
         {/* Modal Header */}
         <div
           style={{
-            padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
             <div
               style={{
                 width: "32px",
                 height: "32px",
-                borderRadius: "8px",
-                backgroundColor: "#EFF6FF",
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-blue-tint)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#2563EB",
+                color: "var(--ads-blue)",
+                flexShrink: 0,
               }}
             >
               <Radio size={18} />
             </div>
             <div>
-              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#0F172A", margin: 0 }}>
+              <h3
+                id="broadcast-modal-title"
+                style={{
+                  fontSize: "1.0625rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.014em",
+                  color: "var(--ads-ink)",
+                  margin: 0,
+                }}
+              >
                 Create SMS Broadcast
               </h3>
-              <p style={{ fontSize: "0.75rem", color: "#64748B", margin: 0 }}>
+              <p style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", margin: 0 }}>
                 Send a real-time mass SMS announcement to selected drivers
               </p>
             </div>
           </div>
 
           <button
+            type="button"
             onClick={onClose}
+            aria-label="Close broadcast dialog"
+            title="Close"
             style={{
               background: "none",
-              border: "none",
-              color: "#94A3B8",
+              border: "1px solid transparent",
+              color: "var(--ads-ink-tertiary)",
               cursor: "pointer",
-              padding: "0.25rem",
-              borderRadius: "6px",
+              padding: "0.35rem",
+              borderRadius: "var(--ads-r-xs)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition:
+                "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <X size={20} />
@@ -178,15 +203,15 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
 
         {/* Modal Body */}
         <form onSubmit={handleSubmit} style={{ display: "flex", flex: 1, flexDirection: "column", overflow: "hidden" }}>
-          <div style={{ padding: "1.25rem 1.5rem", overflowY: "auto", display: "flex", flexDirection: "column", gap: "1rem" }}>
+          <div style={{ padding: "var(--ads-s5) var(--ads-s6)", overflowY: "auto", display: "flex", flexDirection: "column", gap: "var(--ads-s4)" }}>
             {errorMsg && (
               <div
                 style={{
-                  padding: "0.75rem 1rem",
-                  borderRadius: "8px",
-                  backgroundColor: "#FEF2F2",
-                  border: "1px solid #FCA5A5",
-                  color: "#B91C1C",
+                  padding: "var(--ads-s3) var(--ads-s4)",
+                  borderRadius: "var(--ads-r-sm)",
+                  background: "var(--ads-red-tint)",
+                  border: "1px solid rgba(215, 0, 21, 0.22)",
+                  color: "var(--ads-red)",
                   fontSize: "0.8125rem",
                 }}
               >
@@ -196,10 +221,14 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
 
             {/* Campaign Name */}
             <div>
-              <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+              <label
+                htmlFor="broadcast-name"
+                style={{ display: "block", fontSize: "0.8125rem", fontWeight: 550, color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s2)" }}
+              >
                 Broadcast / Campaign Name (Optional)
               </label>
               <input
+                id="broadcast-name"
                 type="text"
                 placeholder="e.g. Inclement Weather Alert, Morning Standup Reminder"
                 value={broadcastName}
@@ -207,11 +236,14 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
                 style={{
                   width: "100%",
                   height: "38px",
-                  padding: "0 0.75rem",
+                  padding: "0 var(--ads-s3)",
                   fontSize: "0.875rem",
-                  border: "1px solid #CBD5E1",
-                  borderRadius: "8px",
+                  color: "var(--ads-ink)",
+                  background: "var(--ads-material-thick)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-sm)",
                   outline: "none",
+                  boxSizing: "border-box",
                 }}
               />
             </div>
@@ -219,7 +251,7 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
             {/* Recipient Selection */}
             <div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.4rem" }}>
-                <label style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#334155" }}>
+                <label style={{ fontSize: "0.8125rem", fontWeight: 550, color: "var(--ads-ink-secondary)" }}>
                   Select Drivers ({selectedDriverIds.size} selected)
                 </label>
                 <button
@@ -228,10 +260,11 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
                   style={{
                     background: "none",
                     border: "none",
-                    color: "#2563EB",
+                    color: "var(--ads-blue)",
                     fontSize: "0.75rem",
                     fontWeight: 600,
                     cursor: "pointer",
+                    padding: 0,
                   }}
                 >
                   {selectedDriverIds.size === filteredDrivers.length ? "Deselect All" : "Select All"}
@@ -240,9 +273,10 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
 
               {/* Driver search box */}
               <div style={{ position: "relative", marginBottom: "0.5rem" }}>
-                <Search size={14} style={{ position: "absolute", left: "0.75rem", top: "11px", color: "#94A3B8" }} />
+                <Search size={14} style={{ position: "absolute", left: "0.75rem", top: "11px", color: "var(--ads-ink-tertiary)" }} />
                 <input
                   type="text"
+                  aria-label="Filter drivers by name or phone"
                   placeholder="Filter drivers by name or phone..."
                   value={driverSearch}
                   onChange={(e) => setDriverSearch(e.target.value)}
@@ -251,10 +285,12 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
                     height: "34px",
                     padding: "0 0.75rem 0 2.25rem",
                     fontSize: "0.8125rem",
-                    border: "1px solid #E2E8F0",
-                    borderRadius: "6px",
-                    backgroundColor: "#F8FAFC",
+                    color: "var(--ads-ink)",
+                    border: "1px solid var(--ads-hairline)",
+                    borderRadius: "var(--ads-r-sm)",
+                    background: "var(--ads-material-thick)",
                     outline: "none",
+                    boxSizing: "border-box",
                   }}
                 />
               </div>
@@ -264,17 +300,17 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
                 style={{
                   maxHeight: "150px",
                   overflowY: "auto",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "8px",
-                  padding: "0.4rem",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-md)",
+                  padding: "var(--ads-s1)",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "0.25rem",
-                  backgroundColor: "#F8FAFC",
+                  gap: "var(--ads-s1)",
+                  background: "rgba(0, 0, 0, 0.025)",
                 }}
               >
                 {filteredDrivers.length === 0 ? (
-                  <div style={{ padding: "1rem", textAlign: "center", fontSize: "0.775rem", color: "#94A3B8" }}>
+                  <div style={{ padding: "1rem", textAlign: "center", fontSize: "0.775rem", color: "var(--ads-ink-tertiary)" }}>
                     No drivers available
                   </div>
                 ) : (
@@ -284,22 +320,26 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
                       <div
                         key={driver.id}
                         onClick={() => handleToggleDriver(driver.id)}
+                        role="checkbox"
+                        aria-checked={isChecked}
                         style={{
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "space-between",
-                          padding: "0.4rem 0.6rem",
-                          borderRadius: "6px",
-                          backgroundColor: isChecked ? "#EFF6FF" : "#FFFFFF",
-                          border: `1px solid ${isChecked ? "#BFDBFE" : "#F1F5F9"}`,
+                          padding: "var(--ads-s2) var(--ads-s3)",
+                          borderRadius: "var(--ads-r-sm)",
+                          background: isChecked ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+                          border: `1px solid ${isChecked ? "rgba(0, 113, 227, 0.24)" : "var(--ads-hairline)"}`,
                           cursor: "pointer",
                           fontSize: "0.8125rem",
+                          transition:
+                            "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
                         }}
                       >
                         <div>
-                          <span style={{ fontWeight: 600, color: "#1E293B" }}>{driver.name}</span>
+                          <span style={{ fontWeight: 600, color: "var(--ads-ink)" }}>{driver.name}</span>
                           {driver.phone && (
-                            <span style={{ fontSize: "0.75rem", color: "#64748B", marginLeft: "0.5rem" }}>
+                            <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", marginLeft: "0.5rem" }}>
                               {driver.phone}
                             </span>
                           )}
@@ -308,13 +348,16 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
                           style={{
                             width: "18px",
                             height: "18px",
-                            borderRadius: "4px",
-                            border: `1.5px solid ${isChecked ? "#2563EB" : "#CBD5E1"}`,
-                            backgroundColor: isChecked ? "#2563EB" : "#FFFFFF",
+                            borderRadius: "var(--ads-r-xs)",
+                            border: `1.5px solid ${isChecked ? "var(--ads-blue)" : "var(--ads-hairline-strong)"}`,
+                            background: isChecked ? "var(--ads-blue)" : "var(--ads-white)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                             color: "#FFFFFF",
+                            flexShrink: 0,
+                            transition:
+                              "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
                           }}
                         >
                           {isChecked && <Check size={12} strokeWidth={3} />}
@@ -328,30 +371,40 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
 
             {/* Announcement Message */}
             <div>
-              <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+              <label
+                htmlFor="broadcast-message"
+                style={{ display: "block", fontSize: "0.8125rem", fontWeight: 550, color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s2)" }}
+              >
                 Announcement Message (Use {"${name}"} for driver's name)
               </label>
               <textarea
+                id="broadcast-message"
                 rows={4}
                 placeholder="Type your broadcast message here..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 style={{
                   width: "100%",
-                  padding: "0.75rem",
+                  padding: "var(--ads-s3)",
                   fontSize: "0.875rem",
-                  border: "1px solid #CBD5E1",
-                  borderRadius: "8px",
+                  color: "var(--ads-ink)",
+                  background: "var(--ads-material-thick)",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-md)",
                   resize: "vertical",
                   outline: "none",
                   fontFamily: "inherit",
+                  boxSizing: "border-box",
                 }}
               />
             </div>
 
             {/* File Attachment */}
             <div>
-              <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+              <label
+                htmlFor="broadcast-file"
+                style={{ display: "block", fontSize: "0.8125rem", fontWeight: 550, color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s2)" }}
+              >
                 Attachment (Optional, max 5MB)
               </label>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
@@ -370,22 +423,25 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "0.4rem",
-                    padding: "0.45rem 0.85rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#F8FAFC",
+                    gap: "var(--ads-s2)",
+                    padding: "7px 15px",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    boxShadow: "var(--ads-bevel)",
                     fontSize: "0.8125rem",
-                    fontWeight: 500,
+                    fontWeight: 550,
                     cursor: "pointer",
-                    color: "#475569",
+                    color: "var(--ads-ink)",
+                    transition:
+                      "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 >
                   <Paperclip size={14} />
                   <span>Choose File</span>
                 </label>
                 {file && (
-                  <span style={{ fontSize: "0.8125rem", color: "#2563EB", fontWeight: 500 }}>
+                  <span style={{ fontSize: "0.8125rem", color: "var(--ads-blue)", fontWeight: 550 }}>
                     {file.name} ({(file.size / 1024).toFixed(0)} KB)
                   </span>
                 )}
@@ -396,13 +452,13 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
           {/* Modal Footer */}
           <div
             style={{
-              padding: "1rem 1.5rem",
-              borderTop: "1px solid #E2E8F0",
-              backgroundColor: "#F8FAFC",
+              padding: "var(--ads-s4) var(--ads-s6)",
+              borderTop: "1px solid var(--ads-hairline)",
+              background: "rgba(0, 0, 0, 0.02)",
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-end",
-              gap: "0.75rem",
+              gap: "var(--ads-s3)",
             }}
           >
             <button
@@ -410,14 +466,18 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
               onClick={onClose}
               style={{
                 height: "36px",
-                padding: "0 1rem",
-                borderRadius: "8px",
-                border: "1px solid #CBD5E1",
-                backgroundColor: "#FFFFFF",
+                padding: "0 18px",
+                borderRadius: "var(--ads-r-pill)",
+                border: "1px solid var(--ads-hairline)",
+                background: "var(--ads-material-thick)",
+                boxShadow: "var(--ads-bevel)",
                 fontSize: "0.8125rem",
                 fontWeight: 600,
-                color: "#475569",
+                letterSpacing: "-0.01em",
+                color: "var(--ads-ink)",
                 cursor: "pointer",
+                transition:
+                  "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               Cancel
@@ -428,28 +488,32 @@ export const CreateBroadcastModal: FC<CreateBroadcastModalProps> = ({
               disabled={isSubmitting || selectedDriverIds.size === 0 || (!message.trim() && !file)}
               style={{
                 height: "36px",
-                padding: "0 1.25rem",
-                borderRadius: "8px",
-                border: "none",
-                backgroundColor: "#2563EB",
+                padding: "0 22px",
+                borderRadius: "var(--ads-r-pill)",
+                border: "1px solid transparent",
+                background: "var(--ads-blue)",
                 color: "#FFFFFF",
                 fontSize: "0.8125rem",
                 fontWeight: 600,
+                letterSpacing: "-0.01em",
                 cursor: isSubmitting ? "not-allowed" : "pointer",
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.4rem",
-                opacity: isSubmitting || selectedDriverIds.size === 0 || (!message.trim() && !file) ? 0.6 : 1,
+                gap: "var(--ads-s2)",
+                boxShadow: "0 1px 3px rgba(0, 113, 227, 0.26)",
+                opacity: isSubmitting || selectedDriverIds.size === 0 || (!message.trim() && !file) ? 0.4 : 1,
+                transition:
+                  "background-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 size={16} className="animate-spin" />
-                  <span>Sending...</span>
+                  <Loader2 size={16} className="animate-spin" style={{ color: "#FFFFFF" }} />
+                  <span style={{ color: "#FFFFFF" }}>Sending...</span>
                 </>
               ) : (
                 <>
-                  <Radio size={15} />
+                  <Radio size={15} style={{ color: "#FFFFFF" }} />
                   <span style={{ color: "#FFFFFF" }}>Send Broadcast</span>
                 </>
               )}

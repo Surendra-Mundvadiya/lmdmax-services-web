@@ -163,6 +163,7 @@ export const CalloutTypeManagerModal: FC<CalloutTypeManagerModalProps> = ({
                   disabled={isSaving}
                   onClick={() => handleDeleteType(opt)}
                   title="Delete / Archive Type"
+                  aria-label="Delete / Archive Type"
                   className="p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition"
                 >
                   <Trash2 size={14} />
@@ -213,10 +214,10 @@ export const CalloutTypeManagerModal: FC<CalloutTypeManagerModalProps> = ({
                 alignItems: "center",
                 gap: "0.5rem",
                 padding: "0.5rem 0.85rem",
-                borderRadius: "8px",
-                border: "1px solid #E2E8F0",
-                backgroundColor: "#FFFFFF",
-                color: "#1E293B",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
+                backgroundColor: "var(--ads-material-thick)",
+                color: "var(--ads-ink)",
                 fontWeight: 600,
                 fontSize: "0.85rem",
                 cursor: "pointer",
@@ -226,10 +227,10 @@ export const CalloutTypeManagerModal: FC<CalloutTypeManagerModalProps> = ({
               <span>Back to Callouts</span>
             </button>
             <div className="screen-heading">
-              <h1 className="screen-title" style={{ fontSize: "1.25rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+              <h1 className="screen-title" style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0 }}>
                 Manage Callout Types & Templates
               </h1>
-              <p className="screen-subtitle" style={{ fontSize: "0.8125rem", color: "#64748B", margin: "0.2rem 0 0 0" }}>
+              <p className="screen-subtitle" style={{ fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", margin: "0.2rem 0 0 0" }}>
                 Customize and configure categories and reason templates available for driver callouts
               </p>
             </div>
@@ -239,13 +240,16 @@ export const CalloutTypeManagerModal: FC<CalloutTypeManagerModalProps> = ({
               type="button"
               onClick={onClose}
               style={{
-                padding: "0.55rem 1.25rem",
-                borderRadius: "8px",
-                border: "none",
-                backgroundColor: "#2563EB",
+                padding: "9px 18px",
+                borderRadius: "var(--ads-r-pill)",
+                border: "1px solid transparent",
+                backgroundColor: "var(--ads-blue)",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: "0.85rem",
+                letterSpacing: "-0.01em",
+                lineHeight: 1,
+                boxShadow: "0 1px 3px rgba(0, 113, 227, 0.24)",
+                fontSize: "0.8125rem",
                 cursor: "pointer",
               }}
             >
@@ -258,10 +262,10 @@ export const CalloutTypeManagerModal: FC<CalloutTypeManagerModalProps> = ({
         <div style={{ maxWidth: 740, margin: "0 auto", width: "100%" }}>
           <div
             style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: "12px",
-              border: "1px solid #E2E8F0",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+              backgroundColor: "var(--ads-material-thick)",
+              borderRadius: "var(--ads-r-md)",
+              border: "1px solid var(--ads-hairline)",
+              boxShadow: "var(--ads-shadow-xs)",
               overflow: "hidden",
             }}
           >
@@ -272,12 +276,15 @@ export const CalloutTypeManagerModal: FC<CalloutTypeManagerModalProps> = ({
                 type="button"
                 onClick={onClose}
                 style={{
-                  padding: "0.45rem 1.15rem",
-                  borderRadius: "7px",
-                  border: "none",
-                  backgroundColor: "#2563EB",
+                  padding: "9px 18px",
+                  borderRadius: "var(--ads-r-pill)",
+                  border: "1px solid transparent",
+                  backgroundColor: "var(--ads-blue)",
                   color: "#FFFFFF",
                   fontWeight: 600,
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1,
+                  boxShadow: "0 1px 3px rgba(0, 113, 227, 0.24)",
                   fontSize: "0.8125rem",
                   cursor: "pointer",
                 }}
@@ -300,7 +307,7 @@ export const CalloutTypeManagerModal: FC<CalloutTypeManagerModalProps> = ({
             <h3 className="text-base font-semibold text-slate-900">Manage Callout Types</h3>
             <p className="text-xs text-slate-500 mt-0.5">Customize categories available for driver callouts</p>
           </div>
-          <button
+          <button aria-label="Close" title="Close"
             type="button"
             onClick={onClose}
             className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition"

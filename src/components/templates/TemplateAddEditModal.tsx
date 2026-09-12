@@ -202,6 +202,7 @@ export const TemplateAddEditModal: FC<TemplateAddEditModalProps> = ({
                 type="button"
                 className="toolbar-action-btn"
                 onClick={() => execFormat("bold")}
+                aria-label="Bold"
                 title="Bold (Ctrl+B)"
               >
                 <Bold size={14} />
@@ -210,6 +211,7 @@ export const TemplateAddEditModal: FC<TemplateAddEditModalProps> = ({
                 type="button"
                 className="toolbar-action-btn"
                 onClick={() => execFormat("italic")}
+                aria-label="Italic"
                 title="Italic (Ctrl+I)"
               >
                 <Italic size={14} />
@@ -218,6 +220,7 @@ export const TemplateAddEditModal: FC<TemplateAddEditModalProps> = ({
                 type="button"
                 className="toolbar-action-btn"
                 onClick={() => execFormat("underline")}
+                aria-label="Underline"
                 title="Underline (Ctrl+U)"
               >
                 <Underline size={14} />
@@ -227,6 +230,7 @@ export const TemplateAddEditModal: FC<TemplateAddEditModalProps> = ({
                 type="button"
                 className="toolbar-action-btn"
                 onClick={() => execFormat("insertUnorderedList")}
+                aria-label="Bullet list"
                 title="Bullet List"
               >
                 <List size={14} />
@@ -235,6 +239,7 @@ export const TemplateAddEditModal: FC<TemplateAddEditModalProps> = ({
                 type="button"
                 className="toolbar-action-btn"
                 onClick={() => execFormat("insertOrderedList")}
+                aria-label="Numbered list"
                 title="Numbered List"
               >
                 <ListOrdered size={14} />
@@ -244,6 +249,7 @@ export const TemplateAddEditModal: FC<TemplateAddEditModalProps> = ({
                 type="button"
                 className="toolbar-action-btn"
                 onClick={() => execFormat("removeFormat")}
+                aria-label="Clear formatting"
                 title="Clear Formatting"
               >
                 <RotateCcw size={14} />
@@ -394,6 +400,7 @@ export const TemplateAddEditModal: FC<TemplateAddEditModalProps> = ({
             type="button"
             className="modal-close-icon-btn"
             onClick={onClose}
+            aria-label="Close template dialog"
             title="Close"
             disabled={isSubmitting}
           >

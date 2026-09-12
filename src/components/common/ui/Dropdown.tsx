@@ -78,21 +78,23 @@ export const Dropdown: FC<DropdownProps> = ({
 
       {open && (
         <div
+          role="menu"
           style={{
             position: "absolute",
             minWidth,
-            backgroundColor: "var(--surface-bg-elevated)",
-            backdropFilter: "var(--glass-blur-vercel-lg)",
-            WebkitBackdropFilter: "var(--glass-blur-vercel-lg)",
-            border: "1px solid var(--surface-border)",
-            borderRadius: "14px",
-            boxShadow: "var(--shadow-ambient-lg), var(--surface-bevel)",
-            padding: "0.45rem",
+            maxWidth: "calc(100vw - 32px)",
+            background: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-lg)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-md)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+            padding: "var(--ads-s1)",
             display: "flex",
             flexDirection: "column",
-            gap: "0.2rem",
+            gap: "2px",
             zIndex: 100,
-            animation: "dropdownSpringMount 0.22s var(--ease-spring)",
+            animation: "dropdownSpringMount var(--ads-dur) var(--ads-ease)",
             boxSizing: "border-box",
             ...getPlacementStyles(),
           }}
@@ -126,44 +128,47 @@ export const DropdownItem: FC<DropdownItemProps> = ({
       type="button"
       disabled={disabled}
       onClick={onClick}
+      role="menuitem"
       style={{
         display: "flex",
         alignItems: "center",
-        gap: "0.65rem",
-        padding: "0.5rem 0.75rem",
-        borderRadius: "9px",
+        gap: "var(--ads-s2)",
+        padding: "8px 12px",
+        borderRadius: "var(--ads-r-sm)",
         fontSize: "0.8125rem",
-        fontWeight: 600,
-        color: danger ? "#EF4444" : "var(--text-primary)",
+        fontWeight: 550,
+        letterSpacing: "-0.005em",
+        color: danger ? "var(--ads-red)" : "var(--ads-ink)",
         background: "transparent",
         border: "none",
         cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.5 : 1,
+        opacity: disabled ? 0.4 : 1,
         textDecoration: "none",
         width: "100%",
         textAlign: "left",
         userSelect: "none",
         boxSizing: "border-box",
-        transition: "all 0.15s var(--ease-spring)",
+        transition:
+          "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
         ...style,
       }}
       className={`dropdown-item ${danger ? "danger" : ""} ${className}`}
       onMouseEnter={(e) => {
         if (!disabled) {
-          e.currentTarget.style.backgroundColor = danger ? "rgba(239, 68, 68, 0.1)" : "var(--surface-bg-hover)";
-          e.currentTarget.style.color = danger ? "#DC2626" : "var(--color-glass-blue)";
-          e.currentTarget.style.transform = "translateX(2px)";
+          e.currentTarget.style.backgroundColor = danger
+            ? "var(--ads-red-tint)"
+            : "var(--ads-blue-tint)";
+          e.currentTarget.style.color = danger ? "var(--ads-red)" : "var(--ads-blue)";
         }
       }}
       onMouseLeave={(e) => {
         if (!disabled) {
           e.currentTarget.style.backgroundColor = "transparent";
-          e.currentTarget.style.color = danger ? "#EF4444" : "var(--text-primary)";
-          e.currentTarget.style.transform = "none";
+          e.currentTarget.style.color = danger ? "var(--ads-red)" : "var(--ads-ink)";
         }
       }}
       onMouseDown={(e) => {
-        if (!disabled) e.currentTarget.style.transform = "scale(0.98)";
+        if (!disabled) e.currentTarget.style.transform = "scale(0.97)";
       }}
       onMouseUp={(e) => {
         if (!disabled) e.currentTarget.style.transform = "none";
@@ -178,10 +183,11 @@ export const DropdownItem: FC<DropdownItemProps> = ({
 
 export const DropdownDivider: FC = () => (
   <div
+    role="separator"
     style={{
       height: "1px",
-      backgroundColor: "var(--surface-border-subtle)",
-      margin: "0.35rem 0",
+      backgroundColor: "var(--ads-hairline)",
+      margin: "var(--ads-s1) 0",
       width: "100%",
     }}
   />

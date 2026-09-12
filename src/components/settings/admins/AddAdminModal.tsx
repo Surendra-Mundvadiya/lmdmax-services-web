@@ -94,8 +94,8 @@ export const AddAdminModal: FC<AddAdminModalProps> = ({
   };
 
   return (
-    <div className="custom-modal-overlay">
-      <div className="custom-modal-dialog max-w-xl">
+    <div className="custom-modal-overlay ads-admin-modal-overlay">
+      <div className="custom-modal-dialog max-w-xl ads-admin-modal">
         {/* Modal Header */}
         <div className="custom-modal-header">
           <div className="flex items-center gap-2">
@@ -310,7 +310,7 @@ export const AddAdminModal: FC<AddAdminModalProps> = ({
           </div>
 
           {/* Modal Footer with strict 0.85rem button gap */}
-          <div className="modal-footer" style={{ display: "flex", gap: "0.85rem", justifyContent: "flex-end", marginTop: "1rem" }}>
+          <div className="modal-footer" style={{ display: "flex", gap: "var(--ads-s3)", justifyContent: "flex-end", marginTop: "var(--ads-s4)" }}>
             <button
               type="button"
               className="btn-outline-cancel"

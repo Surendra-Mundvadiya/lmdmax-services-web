@@ -105,10 +105,10 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
         <div
           style={{
             padding: "0.6rem 0.85rem",
-            backgroundColor: "#FEF2F2",
-            border: "1px solid #FECACA",
-            borderRadius: "8px",
-            color: "#991B1B",
+            backgroundColor: "var(--ads-red-tint)",
+            border: "1px solid transparent",
+            borderRadius: "var(--ads-r-sm)",
+            color: "var(--ads-red)",
             fontSize: "0.775rem",
             display: "flex",
             alignItems: "center",
@@ -124,7 +124,7 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
       {/* Title */}
       <div className="notes-form-group">
         <label className="notes-form-label">
-          Note Title <span style={{ color: "#EF4444" }}>*</span>
+          Note Title <span style={{ color: "var(--ads-red)" }}>*</span>
         </label>
         <input
           type="text"
@@ -159,10 +159,10 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
                 padding: "0.55rem 0.75rem",
                 fontSize: "0.8rem",
                 fontWeight: 600,
-                borderRadius: "7px",
-                border: viewAll ? "1.5px solid #2563EB" : "1px solid #E2E8F0",
-                backgroundColor: viewAll ? "#EFF6FF" : "#FFFFFF",
-                color: viewAll ? "#1D4ED8" : "#475569",
+                borderRadius: "var(--ads-r-sm)",
+                border: viewAll ? "1.5px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                backgroundColor: viewAll ? "var(--ads-blue-tint)" : "#FFFFFF",
+                color: viewAll ? "var(--ads-blue)" : "var(--ads-ink-secondary)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -182,10 +182,10 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
                 padding: "0.55rem 0.75rem",
                 fontSize: "0.8rem",
                 fontWeight: 600,
-                borderRadius: "7px",
-                border: !viewAll ? "1.5px solid #7C3AED" : "1px solid #E2E8F0",
-                backgroundColor: !viewAll ? "#FAF5FF" : "#FFFFFF",
-                color: !viewAll ? "#6D28D9" : "#475569",
+                borderRadius: "var(--ads-r-sm)",
+                border: !viewAll ? "1.5px solid var(--ads-purple)" : "1px solid var(--ads-hairline)",
+                backgroundColor: !viewAll ? "var(--ads-purple-tint)" : "#FFFFFF",
+                color: !viewAll ? "var(--ads-purple)" : "var(--ads-ink-secondary)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -203,7 +203,7 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
       {/* Note Body */}
       <div className="notes-form-group">
         <label className="notes-form-label">
-          Note Content <span style={{ color: "#EF4444" }}>*</span>
+          Note Content <span style={{ color: "var(--ads-red)" }}>*</span>
         </label>
         <textarea
           rows={6}
@@ -228,11 +228,11 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
               style={{
                 width: 32,
                 height: 32,
-                borderRadius: "8px",
+                borderRadius: "var(--ads-r-sm)",
                 backgroundColor: c.hex,
-                border: colour === c.hex ? "2px solid #2563EB" : "1px solid rgba(0,0,0,0.15)",
+                border: colour === c.hex ? "2px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
                 cursor: "pointer",
-                boxShadow: colour === c.hex ? "0 0 0 2px rgba(37,99,235,0.2)" : "none",
+                boxShadow: colour === c.hex ? "var(--ads-shadow-focus)" : "none",
               }}
             />
           ))}
@@ -329,9 +329,9 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
               style={{
                 width: 28,
                 height: 28,
-                borderRadius: 6,
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-xs)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -343,12 +343,12 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
               <h2 className="notes-modal-title">
                 {isEditing ? "Edit Note" : "Create New Note"}
               </h2>
-              <div style={{ fontSize: "0.725rem", color: "#64748B" }}>
+              <div style={{ fontSize: "0.725rem", color: "var(--ads-ink-tertiary)" }}>
                 Keep your team in sync with daily shift handovers
               </div>
             </div>
           </div>
-          <button
+          <button aria-label="Close" title="Close"
             type="button"
             onClick={onClose}
             disabled={isSubmitting}
@@ -365,10 +365,10 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
               <div
                 style={{
                   padding: "0.6rem 0.85rem",
-                  backgroundColor: "#FEF2F2",
-                  border: "1px solid #FECACA",
-                  borderRadius: "8px",
-                  color: "#991B1B",
+                  backgroundColor: "var(--ads-red-tint)",
+                  border: "1px solid transparent",
+                  borderRadius: "var(--ads-r-sm)",
+                  color: "var(--ads-red)",
                   fontSize: "0.775rem",
                   display: "flex",
                   alignItems: "center",
@@ -383,7 +383,7 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
             {/* Title */}
             <div className="notes-form-group">
               <label className="notes-form-label">
-                Note Title <span style={{ color: "#EF4444" }}>*</span>
+                Note Title <span style={{ color: "var(--ads-red)" }}>*</span>
               </label>
               <input
                 type="text"
@@ -418,10 +418,10 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
                       padding: "0.45rem",
                       fontSize: "0.75rem",
                       fontWeight: 600,
-                      borderRadius: "7px",
-                      border: viewAll ? "1.5px solid #2563EB" : "1px solid #E2E8F0",
-                      backgroundColor: viewAll ? "#EFF6FF" : "#FFFFFF",
-                      color: viewAll ? "#1D4ED8" : "#475569",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: viewAll ? "1.5px solid var(--ads-blue)" : "1px solid var(--ads-hairline)",
+                      backgroundColor: viewAll ? "var(--ads-blue-tint)" : "#FFFFFF",
+                      color: viewAll ? "var(--ads-blue)" : "var(--ads-ink-secondary)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -441,10 +441,10 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
                       padding: "0.45rem",
                       fontSize: "0.75rem",
                       fontWeight: 600,
-                      borderRadius: "7px",
-                      border: !viewAll ? "1.5px solid #7C3AED" : "1px solid #E2E8F0",
-                      backgroundColor: !viewAll ? "#FAF5FF" : "#FFFFFF",
-                      color: !viewAll ? "#6D28D9" : "#475569",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: !viewAll ? "1.5px solid var(--ads-purple)" : "1px solid var(--ads-hairline)",
+                      backgroundColor: !viewAll ? "var(--ads-purple-tint)" : "#FFFFFF",
+                      color: !viewAll ? "var(--ads-purple)" : "var(--ads-ink-secondary)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -462,7 +462,7 @@ export const AddEditNoteModal: FC<AddEditNoteModalProps> = ({
             {/* Note Body */}
             <div className="notes-form-group">
               <label className="notes-form-label">
-                Note Content <span style={{ color: "#EF4444" }}>*</span>
+                Note Content <span style={{ color: "var(--ads-red)" }}>*</span>
               </label>
               <textarea
                 rows={5}

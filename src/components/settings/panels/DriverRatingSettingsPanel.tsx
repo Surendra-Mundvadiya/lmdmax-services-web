@@ -76,10 +76,10 @@ const formatNumber = (value: number): string => {
 };
 
 const RATING_SCALE_BANDS = [
-  { scale_10: "0.0 - 4.0", scale_100: "00 - 40", color: "#DF353C" },
-  { scale_10: "4.1 - 6.0", scale_100: "41 - 60", color: "#D4780C" },
-  { scale_10: "6.1 - 8.0", scale_100: "61 - 80", color: "#348118" },
-  { scale_10: "8.1 - 10",  scale_100: "81 - 100", color: "#077398" },
+  { scale_10: "0.0 - 4.0", scale_100: "00 - 40", color: "var(--ads-red)" },
+  { scale_10: "4.1 - 6.0", scale_100: "41 - 60", color: "var(--ads-amber)" },
+  { scale_10: "6.1 - 8.0", scale_100: "61 - 80", color: "var(--ads-green)" },
+  { scale_10: "8.1 - 10",  scale_100: "81 - 100", color: "var(--ads-blue)" },
 ];
 
 const DEFAULT_CALLOUT_OPTIONS = [
@@ -336,30 +336,41 @@ export const DriverRatingSettingsPanel: FC<Props> = ({ onNotification }) => {
 
   return (
     <div className="settings-panel-scroll">
-      {/* Top Header Block */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <Star size={20} className="text-blue-600" />
-            <span>Driver Rating Settings</span>
-            <span className="badge-custom blue">Performance Intelligence</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Decide how much each performance metric contributes to create driver tier ratings and scorecards
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Decide how much each performance metric contributes to create driver tier ratings and scorecards
+        </p>
 
         {/* Header Action Buttons */}
-        <div className="settings-header-actions flex items-center gap-3">
+        <div className="settings-panel-intro-actions">
           {/* Driver Rating Enable/Disable Switch */}
-          <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg">
-            <span className="text-xs font-semibold text-slate-700">Driver Rating:</span>
-            <label className="relative inline-flex items-center cursor-pointer">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--ads-s2)",
+              padding: "5px var(--ads-s3)",
+              background: "rgba(0, 0, 0, 0.03)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-pill)",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                letterSpacing: "-0.005em",
+                color: "var(--ads-ink-secondary)",
+              }}
+            >
+              Driver Rating
+            </span>
+            <label className="custom-blue-switch" title="Enable or disable driver rating">
               <input
                 type="checkbox"
-                className="sr-only peer"
                 checked={isDriverRatingEnabled}
                 disabled={ratingPermissionLoading}
+                aria-label="Enable driver rating"
                 onChange={(e) => {
                   const isChecked = e.target.checked;
                   if (!isChecked) {
@@ -369,7 +380,7 @@ export const DriverRatingSettingsPanel: FC<Props> = ({ onNotification }) => {
                   }
                 }}
               />
-              <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600" />
+              <span className="switch-slider" />
             </label>
           </div>
 
@@ -401,8 +412,21 @@ export const DriverRatingSettingsPanel: FC<Props> = ({ onNotification }) => {
       ) : (
         <>
           {/* Info Banner */}
-          <div className="flex items-center gap-2 text-xs text-blue-800 bg-blue-50 border border-blue-200 px-3.5 py-2.5 rounded-lg mt-3">
-            <Info size={15} className="text-blue-600 flex-shrink-0" />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--ads-s2)",
+              padding: "var(--ads-s3) var(--ads-s4)",
+              fontSize: "0.75rem",
+              lineHeight: 1.5,
+              color: "var(--ads-ink-secondary)",
+              background: "var(--ads-blue-tint)",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-md)",
+            }}
+          >
+            <Info size={15} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
             <span>
               You can decide how much each metric should contribute to create ratings for drivers. Adjust individual weightages, scales, and conditions below.
             </span>
@@ -455,8 +479,15 @@ export const DriverRatingSettingsPanel: FC<Props> = ({ onNotification }) => {
                     {RATING_SCALE_BANDS.map((band, i) => (
                       <span
                         key={i}
-                        className="text-xs font-bold text-white px-2.5 py-1 rounded-md shadow-xs"
-                        style={{ backgroundColor: band.color }}
+                        style={{
+                          backgroundColor: band.color,
+                          color: "#FFFFFF",
+                          fontSize: "0.6875rem",
+                          fontWeight: 600,
+                          letterSpacing: "-0.005em",
+                          padding: "3px 9px",
+                          borderRadius: "var(--ads-r-pill)",
+                        }}
                       >
                         {scaleRating ? band.scale_10 : band.scale_100}
                       </span>
@@ -499,7 +530,17 @@ export const DriverRatingSettingsPanel: FC<Props> = ({ onNotification }) => {
               {/* 3. Driver Metrics Table */}
               <div className="settings-card mt-3 overflow-hidden">
                 {/* Table Header Strip */}
-                <div className="p-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-4">
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "var(--ads-s4)",
+                    padding: "var(--ads-s3) var(--ads-s4)",
+                    background: "rgba(0, 0, 0, 0.02)",
+                    borderBottom: "1px solid var(--ads-hairline)",
+                  }}
+                >
                   <div className="grid grid-cols-12 gap-4 flex-1 items-center">
                     <span className="col-span-4 text-xs font-bold text-slate-500 capitalize tracking-normal">
                       Metrics
@@ -569,7 +610,19 @@ export const DriverRatingSettingsPanel: FC<Props> = ({ onNotification }) => {
 
                                 {/* Callout Multi-select Dropdown Popover */}
                                 {calloutMenuAnchorIndex === idx && (
-                                  <div className="absolute left-0 top-full mt-1 w-64 bg-white rounded-xl shadow-xl border border-slate-200 z-30 p-2.5 text-xs animate-in fade-in zoom-in-95">
+                                  <div
+                                    className="ads-sheet"
+                                    style={{
+                                      position: "absolute",
+                                      left: 0,
+                                      top: "100%",
+                                      marginTop: "var(--ads-s1)",
+                                      width: "16rem",
+                                      zIndex: 30,
+                                      padding: "var(--ads-s3)",
+                                      fontSize: "0.75rem",
+                                    }}
+                                  >
                                     <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
                                       <span className="font-bold text-slate-800">
                                         Included Callout Types
@@ -802,32 +855,92 @@ export const DriverRatingSettingsPanel: FC<Props> = ({ onNotification }) => {
 
       {/* Disable Driver Rating Confirmation Modal */}
       {disableModalOpen && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200">
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-              <div className="flex items-center gap-2">
-                <AlertTriangle size={18} className="text-amber-600" />
-                <h3 className="font-bold text-slate-900 text-sm">Disable Driver Rating</h3>
+        <div
+          className="ads-scrim"
+          style={{
+            zIndex: 50,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "var(--ads-s4)",
+          }}
+        >
+          <div
+            className="ads-sheet"
+            style={{ maxWidth: "460px", width: "100%", overflow: "hidden" }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "var(--ads-s3)",
+                padding: "var(--ads-s5) var(--ads-s6) var(--ads-s4)",
+                borderBottom: "1px solid var(--ads-hairline)",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+                <AlertTriangle size={18} style={{ color: "var(--ads-amber)" }} />
+                <h3
+                  style={{
+                    margin: 0,
+                    fontSize: "1.0625rem",
+                    fontWeight: 600,
+                    letterSpacing: "-0.014em",
+                    color: "var(--ads-ink)",
+                  }}
+                >
+                  Disable Driver Rating
+                </h3>
               </div>
               <button
                 type="button"
-                className="text-slate-400 hover:text-slate-600"
+                aria-label="Close dialog"
+                title="Close"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "32px",
+                  height: "32px",
+                  border: "none",
+                  background: "transparent",
+                  borderRadius: "var(--ads-r-sm)",
+                  color: "var(--ads-ink-tertiary)",
+                  cursor: "pointer",
+                }}
                 onClick={() => setDisableModalOpen(false)}
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div className="p-5 text-xs text-slate-700 leading-relaxed">
-              <p>
+            <div
+              style={{
+                padding: "var(--ads-s5) var(--ads-s6)",
+                fontSize: "0.8125rem",
+                lineHeight: 1.55,
+                color: "var(--ads-ink-secondary)",
+              }}
+            >
+              <p style={{ margin: 0 }}>
                 Disabling the driver rating system will remove rating tiers and ranking calculations from the Scorecard and Scheduler platforms.
               </p>
-              <p className="mt-2 text-slate-500">
+              <p style={{ margin: "var(--ads-s2) 0 0", color: "var(--ads-ink-tertiary)" }}>
                 Are you sure you want to disable driver ratings for your company?
               </p>
             </div>
 
-            <div className="p-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-2">
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                gap: "var(--ads-s2)",
+                padding: "var(--ads-s4) var(--ads-s6) var(--ads-s5)",
+                borderTop: "1px solid var(--ads-hairline)",
+              }}
+            >
               <button
                 type="button"
                 className="btn-gray-secondary btn-sm"

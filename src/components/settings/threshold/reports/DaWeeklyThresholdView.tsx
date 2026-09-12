@@ -138,7 +138,10 @@ export const DaWeeklyThresholdView: FC<DaWeeklyThresholdViewProps> = ({
       {/* Header */}
       <div className="threshold-view-header">
         <div>
-          <h3 className="threshold-view-title flex items-center gap-2">
+          <h3
+            className="threshold-view-title"
+            style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}
+          >
             <span>Set Threshold for DA Weekly Overview Report</span>
             <span className="badge-custom blue">Live API</span>
           </h3>
@@ -175,15 +178,15 @@ export const DaWeeklyThresholdView: FC<DaWeeklyThresholdViewProps> = ({
 
       {/* Info Callout */}
       <div className="threshold-info-banner">
-        <Info size={16} className="text-blue-600 shrink-0 mt-0.5" />
-        <span className="text-xs text-blue-900 leading-relaxed">
+        <Info size={16} style={{ color: "var(--ads-blue)", flexShrink: 0, marginTop: "2px" }} />
+        <span style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "var(--ads-ink-secondary)" }}>
           Select metrics from the DA Weekly Overview Report and send it in the scorecard report as
           per the color key selected below.
         </span>
       </div>
 
       {/* Color Code Legend */}
-      <ColorLegendBar type="lmd_report" className="my-3" />
+      <ColorLegendBar type="lmd_report" />
 
       {/* Metrics List */}
       {visibleMetrics.length > 0 ? (
@@ -200,9 +203,19 @@ export const DaWeeklyThresholdView: FC<DaWeeklyThresholdViewProps> = ({
         </div>
       ) : (
         <div className="threshold-empty-state">
-          <AlertCircle size={32} className="text-slate-400 mb-2" />
-          <h4 className="text-sm font-semibold text-slate-700">No Overview Data Available</h4>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm text-center">
+          <AlertCircle size={32} style={{ color: "var(--ads-ink-quaternary)", marginBottom: "var(--ads-s2)" }} />
+          <h4 style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink)" }}>
+            No Overview Data Available
+          </h4>
+          <p
+            style={{
+              margin: "var(--ads-s1) 0 0",
+              maxWidth: "24rem",
+              textAlign: "center",
+              fontSize: "0.8125rem",
+              color: "var(--ads-ink-tertiary)",
+            }}
+          >
             Please upload the DA Weekly Overview report to populate metric threshold options.
           </p>
         </div>
@@ -210,23 +223,72 @@ export const DaWeeklyThresholdView: FC<DaWeeklyThresholdViewProps> = ({
 
       {/* Duplicate Metric Conflict Modal */}
       {pendingConflictField && (
-        <div className="modal-backdrop-custom">
-          <div className="modal-container-custom max-w-md">
-            <div className="modal-header-custom flex items-center gap-2">
-              <AlertTriangle size={20} className="text-amber-500" />
-              <h3 className="modal-title-custom">Duplicate Metric Warning</h3>
+        <div
+          className="ads-scrim"
+          style={{
+            zIndex: 50,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "var(--ads-s4)",
+          }}
+        >
+          <div className="ads-sheet" style={{ maxWidth: "460px", width: "100%" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--ads-s2)",
+                padding: "var(--ads-s5) var(--ads-s6) var(--ads-s4)",
+                borderBottom: "1px solid var(--ads-hairline)",
+              }}
+            >
+              <AlertTriangle size={20} style={{ color: "var(--ads-amber)" }} />
+              <h3
+                style={{
+                  margin: 0,
+                  fontSize: "1.0625rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.014em",
+                  color: "var(--ads-ink)",
+                }}
+              >
+                Duplicate Metric Warning
+              </h3>
             </div>
-            <div className="modal-body-custom p-5">
-              <p className="text-sm text-slate-600 leading-relaxed">
+            <div style={{ padding: "var(--ads-s5) var(--ads-s6)" }}>
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: "0.8125rem",
+                  lineHeight: 1.55,
+                  color: "var(--ads-ink-secondary)",
+                }}
+              >
                 The metric <strong>{pendingConflictField}</strong> is already enabled in the Weekly
                 Scorecard threshold. Enabling it here will result in duplicate data in the scorecard
                 sent to the driver.
               </p>
-              <p className="text-xs text-slate-500 mt-2">
+              <p
+                style={{
+                  margin: "var(--ads-s2) 0 0",
+                  fontSize: "0.75rem",
+                  color: "var(--ads-ink-tertiary)",
+                }}
+              >
                 Are you sure you want to proceed and enable this metric in DA Weekly Overview?
               </p>
             </div>
-            <div className="modal-footer-custom flex items-center justify-end gap-2.5 p-4 border-t border-slate-100 bg-slate-50 rounded-b-xl">
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                gap: "var(--ads-s2)",
+                padding: "var(--ads-s4) var(--ads-s6) var(--ads-s5)",
+                borderTop: "1px solid var(--ads-hairline)",
+              }}
+            >
               <button
                 type="button"
                 className="btn-outline-secondary btn-sm"

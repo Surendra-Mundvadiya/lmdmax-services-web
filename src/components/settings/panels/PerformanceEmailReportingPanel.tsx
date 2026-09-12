@@ -21,6 +21,42 @@ import {
 } from "lucide-react";
 import { perfAxiosInstance } from "../../../api/axiosClient";
 
+const TOOLBAR_CHIP_STYLE: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "var(--ads-s1)",
+  padding: "5px var(--ads-s3)",
+  background: "var(--ads-material-thick)",
+  border: "1px solid var(--ads-hairline)",
+  borderRadius: "var(--ads-r-pill)",
+  boxShadow: "var(--ads-bevel)",
+};
+
+const EDITOR_TOOL_STYLE: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  minWidth: "28px",
+  height: "28px",
+  padding: "0 6px",
+  border: "none",
+  background: "transparent",
+  borderRadius: "var(--ads-r-xs)",
+  color: "var(--ads-ink-secondary)",
+  cursor: "pointer",
+};
+
+const TOOLBAR_FIELD_STYLE: React.CSSProperties = {
+  fontFamily: "inherit",
+  fontSize: "0.75rem",
+  color: "var(--ads-ink)",
+  background: "transparent",
+  border: "none",
+  outline: "none",
+  boxShadow: "none",
+  padding: 0,
+};
+
 interface EmailEntry {
   email: string;
   from: "already_added" | "user_added";
@@ -408,8 +444,19 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
         </div>
 
         <div className="settings-card mt-4" style={{ maxWidth: "640px" }}>
-          <div className="p-4 border-b border-slate-100 flex items-center gap-2 text-xs text-slate-500 bg-slate-50 rounded-t-xl">
-            <Info size={14} className="text-blue-600 flex-shrink-0" />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--ads-s2)",
+              padding: "var(--ads-s3) var(--ads-s4)",
+              fontSize: "0.75rem",
+              color: "var(--ads-ink-secondary)",
+              background: "var(--ads-blue-tint)",
+              borderRadius: "var(--ads-r-md)",
+            }}
+          >
+            <Info size={14} style={{ color: "var(--ads-blue)", flexShrink: 0 }} />
             <span>Enable or disable specific Netradyne camera safety alerts below.</span>
           </div>
 
@@ -417,19 +464,22 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
             {ndViolations.map((v) => (
               <div
                 key={v.alert}
-                className="flex items-center justify-between p-3.5 hover:bg-slate-50 transition-colors"
+                className="settings-toggle-row"
               >
-                <div>
-                  <span className="text-sm font-semibold text-slate-800">
+                <div className="settings-toggle-info">
+                  <span className="settings-toggle-title">
                     {formatAlertName(v.alert)}
                   </span>
-                  <p className="text-xs text-slate-400 mt-0.5">Camera safety alert event</p>
+                  <span className="settings-toggle-desc">Camera safety alert event</span>
                 </div>
-                <label className="relative inline-flex items-center cursor-pointer">
+                <label
+                  className="custom-blue-switch"
+                  title={`Toggle ${formatAlertName(v.alert)}`}
+                >
                   <input
                     type="checkbox"
-                    className="sr-only peer"
                     checked={v.active}
+                    aria-label={`Toggle ${formatAlertName(v.alert)}`}
                     onChange={(e) => {
                       const checked = e.target.checked;
                       setNdViolations((prev) =>
@@ -437,7 +487,7 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
                       );
                     }}
                   />
-                  <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600" />
+                  <span className="switch-slider" />
                 </label>
               </div>
             ))}
@@ -455,44 +505,36 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header Toolbar */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <Mail size={20} className="text-blue-600" />
-            <span>{isNetradyne ? "Netradyne Email Reporting" : "Scorecard Email Reporting"}</span>
-            <span className="badge-custom blue">
-              {isNetradyne ? "Safety & Camera" : "Scorecard Analytics"}
-            </span>
-          </h2>
-          <p className="settings-panel-subheading">
-            {isNetradyne
-              ? "Preview, customize, and dispatch daily Netradyne camera safety violation digests to management"
-              : "Review, customize, and send weekly bottom & overall scorecard performance reports to management"}
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          {isNetradyne
+            ? "Preview, customize, and dispatch daily Netradyne camera safety violation digests to management"
+            : "Review, customize, and send weekly bottom & overall scorecard performance reports to management"}
+        </p>
 
         {/* Right Toolbar Actions */}
-        <div className="settings-header-actions flex items-center gap-2 flex-wrap">
+        <div className="settings-panel-intro-actions">
           {isNetradyne && (
             <>
               {/* Date Filters */}
-              <div className="flex items-center gap-1 bg-white border border-slate-200 rounded-lg px-2 py-1">
-                <Calendar size={14} className="text-slate-400" />
+              <div style={TOOLBAR_CHIP_STYLE}>
+                <Calendar size={14} style={{ color: "var(--ads-ink-quaternary)" }} />
                 <input
                   type="date"
-                  className="text-xs text-slate-700 outline-none bg-transparent"
+                  style={TOOLBAR_FIELD_STYLE}
                   value={ndStartDate}
                   onChange={(e) => setNdStartDate(e.target.value)}
                   title="Start Date"
+                  aria-label="Report start date"
                 />
-                <span className="text-slate-400 text-xs">-</span>
+                <span style={{ color: "var(--ads-ink-quaternary)", fontSize: "0.75rem" }}>-</span>
                 <input
                   type="date"
-                  className="text-xs text-slate-700 outline-none bg-transparent"
+                  style={TOOLBAR_FIELD_STYLE}
                   value={ndEndDate}
                   onChange={(e) => setNdEndDate(e.target.value)}
                   title="End Date"
+                  aria-label="Report end date"
                 />
               </div>
 
@@ -509,17 +551,22 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
           )}
 
           {!isNetradyne && (
-            <div className="flex items-center gap-1 bg-white border border-slate-200 rounded-lg px-2.5 py-1">
-              <span className="text-xs font-medium text-slate-500">Week #:</span>
+            <div style={TOOLBAR_CHIP_STYLE}>
+              <span
+                style={{ fontSize: "0.75rem", fontWeight: 550, color: "var(--ads-ink-tertiary)" }}
+              >
+                Week #
+              </span>
               <input
                 type="number"
                 min={1}
                 max={53}
-                className="text-xs text-slate-800 font-semibold outline-none bg-transparent w-12 text-center"
+                style={{ ...TOOLBAR_FIELD_STYLE, width: "3rem", textAlign: "center", fontWeight: 600 }}
                 value={scWeekNumber}
                 onChange={(e) => setScWeekNumber(e.target.value)}
                 placeholder="Auto"
                 title="Scorecard Week Number"
+                aria-label="Scorecard week number"
               />
             </div>
           )}
@@ -550,25 +597,25 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
 
       {/* Scorecard Sub-Tab Navigation */}
       {!isNetradyne && (
-        <div className="flex items-center gap-2 mt-3 pb-2 border-b border-slate-100">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "var(--ads-s2)",
+            paddingBottom: "var(--ads-s2)",
+            borderBottom: "1px solid var(--ads-hairline)",
+          }}
+        >
           <button
             type="button"
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              scTab === "per_metric"
-                ? "bg-blue-600 text-white shadow-sm"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-            }`}
+            className={`ads-pill ${scTab === "per_metric" ? "ads-pill--active" : ""}`}
             onClick={() => setScTab("per_metric")}
           >
             Per Metric Low Performers
           </button>
           <button
             type="button"
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              scTab === "overall"
-                ? "bg-blue-600 text-white shadow-sm"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-            }`}
+            className={`ads-pill ${scTab === "overall" ? "ads-pill--active" : ""}`}
             onClick={() => setScTab("overall")}
           >
             Overall Low Performers
@@ -579,17 +626,19 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
       {/* Recipients Management Card */}
       <div className="settings-card mt-3">
         <div
-          className="flex items-center justify-between p-3 cursor-pointer select-none bg-slate-50 border-b border-slate-100 rounded-t-xl"
+          className="settings-card-title-row"
+          style={{ cursor: "pointer", userSelect: "none" }}
           onClick={() => setRecipientsExpanded((p) => !p)}
         >
-          <div className="flex items-center gap-2">
-            <Users size={16} className="text-blue-600" />
-            <span className="text-xs font-bold text-slate-800 capitalize tracking-normal">
-              Email recipients ({activeEmailCount})
-            </span>
-          </div>
+          <h3 className="settings-card-title">
+            <Users size={16} />
+            <span>Email recipients ({activeEmailCount})</span>
+          </h3>
 
-          <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+          <div
+            style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               type="button"
               className="btn-gray-secondary btn-sm"
@@ -602,7 +651,20 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
             </button>
             <button
               type="button"
-              className="text-slate-400 hover:text-slate-600 p-1"
+              aria-label={recipientsExpanded ? "Collapse recipients" : "Expand recipients"}
+              title={recipientsExpanded ? "Collapse recipients" : "Expand recipients"}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "28px",
+                height: "28px",
+                border: "none",
+                background: "transparent",
+                borderRadius: "var(--ads-r-xs)",
+                color: "var(--ads-ink-tertiary)",
+                cursor: "pointer",
+              }}
               onClick={() => setRecipientsExpanded((p) => !p)}
             >
               {recipientsExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -611,32 +673,47 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
         </div>
 
         {recipientsExpanded && (
-          <div className="p-3.5">
-            <div className="flex flex-wrap items-center gap-2">
+          <div>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                gap: "var(--ads-s2)",
+              }}
+            >
               {currentEmails
                 .filter((e) => !e.is_removed)
                 .map((entry) => (
-                  <span
-                    key={entry.email}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
-                  >
+                  <span key={entry.email} className="ads-badge ads-badge--blue">
                     <span>{entry.email}</span>
                     <button
                       type="button"
-                      className="hover:bg-blue-200 rounded-full p-0.5 text-blue-500 hover:text-blue-800 transition-colors"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        border: "none",
+                        background: "transparent",
+                        padding: 0,
+                        color: "inherit",
+                        cursor: "pointer",
+                      }}
                       onClick={() => handleRemoveEmail(entry.email)}
                       title="Remove recipient"
+                      aria-label={`Remove recipient ${entry.email}`}
                     >
                       <X size={12} />
                     </button>
                   </span>
                 ))}
 
-              <div className="flex items-center gap-1 flex-1 min-w-[220px]">
+              <div style={{ display: "flex", alignItems: "center", flex: 1, minWidth: "220px" }}>
                 <input
                   type="email"
-                  className="w-full text-xs px-2.5 py-1.5 border border-slate-200 rounded-lg outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="ads-input"
                   placeholder="Enter email and press Enter or comma..."
+                  aria-label="Add email recipient"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
@@ -656,14 +733,15 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
       </div>
 
       {/* Email Subject Line */}
-      <div className="settings-card mt-3 p-3">
-        <div className="flex items-center gap-3">
-          <label className="text-xs font-bold text-slate-700 capitalize tracking-normal flex-shrink-0">
-            Subject:
+      <div className="settings-card mt-3">
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
+          <label className="settings-form-label" style={{ flexShrink: 0 }}>
+            Subject
           </label>
           <input
             type="text"
-            className="flex-1 text-xs font-medium text-slate-800 border border-slate-200 rounded-lg px-3 py-1.5 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="ads-input"
+            aria-label="Email subject line"
             value={isNetradyne ? ndSubject : scSubject}
             onChange={(e) =>
               isNetradyne ? setNdSubject(e.target.value) : setScSubject(e.target.value)
@@ -676,52 +754,78 @@ export const PerformanceEmailReportingPanel: FC<Props> = ({ onNotification }) =>
       {/* Rich Editor & Preview Card */}
       <div className="settings-card mt-3">
         {/* Editor Toolbar */}
-        <div className="p-2 border-b border-slate-100 flex items-center justify-between bg-slate-50 rounded-t-xl flex-wrap gap-2">
-          <div className="flex items-center gap-1">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "var(--ads-s2)",
+            padding: "var(--ads-s2) var(--ads-s3)",
+            background: "rgba(0, 0, 0, 0.02)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-sm)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s1)" }}>
             <button
               type="button"
-              className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors"
+              style={EDITOR_TOOL_STYLE}
               onClick={() => formatDoc("bold")}
               title="Bold"
+              aria-label="Bold"
             >
               <Bold size={14} />
             </button>
             <button
               type="button"
-              className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors"
+              style={EDITOR_TOOL_STYLE}
               onClick={() => formatDoc("italic")}
               title="Italic"
+              aria-label="Italic"
             >
               <Italic size={14} />
             </button>
             <button
               type="button"
-              className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors"
+              style={EDITOR_TOOL_STYLE}
               onClick={() => formatDoc("underline")}
               title="Underline"
+              aria-label="Underline"
             >
               <Underline size={14} />
             </button>
-            <span className="w-px h-4 bg-slate-300 mx-1" />
+            <span
+              style={{
+                width: "1px",
+                height: "16px",
+                margin: "0 var(--ads-s1)",
+                background: "var(--ads-hairline-strong)",
+              }}
+            />
             <button
               type="button"
-              className="p-1.5 rounded hover:bg-slate-200 text-slate-600 text-xs font-semibold"
+              style={{ ...EDITOR_TOOL_STYLE, fontSize: "0.75rem", fontWeight: 600 }}
               onClick={() => formatDoc("formatBlock", "<h2>")}
               title="Heading 2"
+              aria-label="Heading 2"
             >
               H2
             </button>
             <button
               type="button"
-              className="p-1.5 rounded hover:bg-slate-200 text-slate-600 text-xs font-semibold"
+              style={{ ...EDITOR_TOOL_STYLE, fontSize: "0.75rem", fontWeight: 600 }}
               onClick={() => formatDoc("formatBlock", "<p>")}
               title="Normal Paragraph"
+              aria-label="Normal paragraph"
             >
               P
             </button>
           </div>
 
-          <span className="text-xs text-slate-400 italic">
+          <span
+            style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", fontStyle: "italic" }}
+          >
             Content is live-editable. Click text or table to modify before dispatching.
           </span>
         </div>

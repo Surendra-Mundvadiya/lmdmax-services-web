@@ -4,6 +4,80 @@ import AuthAPI from "../../api/auth";
 import { validatePasswordCriteria, validateConfirmPassword } from "../../utils/validators";
 import LoadingSpinner from "../common/LoadingSpinner";
 
+const fieldWrapStyle = (
+  isFocused: boolean,
+  hasError: boolean,
+  isValid = false,
+  isDisabled = false
+): React.CSSProperties => ({
+  backgroundColor: isDisabled
+    ? "var(--ads-canvas)"
+    : "var(--ads-material-thick)",
+  border: `1px solid ${
+    hasError
+      ? "var(--ads-red)"
+      : isFocused
+      ? "var(--ads-blue)"
+      : isValid
+      ? "var(--ads-green)"
+      : "var(--ads-hairline)"
+  }`,
+  borderRadius: "var(--ads-r-sm)",
+  boxShadow: isFocused ? "var(--ads-shadow-focus)" : "var(--ads-bevel)",
+  opacity: isDisabled ? 0.6 : 1,
+  transition:
+    "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
+});
+
+const fieldInputStyle: React.CSSProperties = {
+  background: "transparent",
+  border: "none",
+  boxShadow: "none",
+  borderRadius: 0,
+  color: "var(--ads-ink)",
+};
+
+const fieldIconStyle: React.CSSProperties = {
+  color: "var(--ads-ink-tertiary)",
+};
+
+const toggleBtnStyle: React.CSSProperties = {
+  color: "var(--ads-ink-tertiary)",
+  borderRadius: "var(--ads-r-pill)",
+  transition:
+    "color var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
+};
+
+const criteriaRowStyle: React.CSSProperties = {
+  marginTop: "0.5rem",
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "var(--ads-s2)",
+};
+
+const criteriaChipStyle = (met: boolean): React.CSSProperties => ({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "var(--ads-s1)",
+  padding: "0.15rem 0.5rem",
+  fontSize: "0.6875rem",
+  fontWeight: 600,
+  borderRadius: "var(--ads-r-pill)",
+  border: "1px solid transparent",
+  backgroundColor: met ? "var(--ads-green-tint)" : "var(--ads-canvas)",
+  color: met ? "var(--ads-green)" : "var(--ads-ink-tertiary)",
+  transition:
+    "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
+});
+
+const chipDotStyle: React.CSSProperties = {
+  display: "inline-block",
+  width: "5px",
+  height: "5px",
+  borderRadius: "50%",
+  backgroundColor: "var(--ads-ink-quaternary)",
+};
+
 interface ChangePasswordModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -30,6 +104,7 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
   const [confirmError, setConfirmError] = useState("");
   const [generalError, setGeneralError] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [focusedField, setFocusedField] = useState<string>("");
 
   // Real-time criteria for new password
   const criteria = validatePasswordCriteria(newPassword);
@@ -119,22 +194,60 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
       <div className="modal-dialog">
         <div className="modal-header">
           <div className="modal-title-wrap">
-            <Lock className="modal-icon" size={20} />
-            <h3 className="modal-title">Change Password</h3>
+            <Lock
+              className="modal-icon"
+              size={20}
+              style={{ color: "var(--ads-blue)" }}
+            />
+            <h3
+              className="modal-title"
+              style={{ color: "var(--ads-ink)", letterSpacing: "-0.02em" }}
+            >
+              Change Password
+            </h3>
           </div>
-          <button type="button" onClick={onClose} className="modal-close-btn" aria-label="Close modal">
+          <button
+            type="button"
+            onClick={onClose}
+            className="modal-close-btn"
+            aria-label="Close modal"
+            title="Close"
+            style={{
+              color: "var(--ads-ink-tertiary)",
+              borderRadius: "var(--ads-r-pill)",
+              transition:
+                "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+            }}
+          >
             <X size={18} />
           </button>
         </div>
 
-        <div className="modal-notice-banner">
+        <div
+          className="modal-notice-banner"
+          style={{
+            backgroundColor: "var(--ads-blue-tint)",
+            borderBottom: "1px solid var(--ads-hairline)",
+            color: "var(--ads-ink-secondary)",
+          }}
+        >
           <span>You will need to sign in again after updating your password.</span>
         </div>
 
         {generalError && (
-          <div className="error-alert" style={{ margin: "0 1.5rem 1rem" }}>
-            <AlertCircle size={16} />
-            <span>{generalError}</span>
+          <div
+            className="error-alert"
+            role="alert"
+            style={{
+              margin: "0 1.5rem 1rem",
+              backgroundColor: "var(--ads-red-tint)",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-sm)",
+              color: "var(--ads-red)",
+            }}
+          >
+            <AlertCircle size={16} style={{ color: "var(--ads-red)", flexShrink: 0 }} />
+            <span style={{ color: "var(--ads-red)" }}>{generalError}</span>
           </div>
         )}
 
@@ -144,17 +257,45 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
             <div className="input-label-row">
               <label htmlFor="old_pwd" className="input-label">Current Password</label>
               {isVerifyingOld ? (
-                <span className="verify-badge verifying">Checking...</span>
+                <span
+                  className="verify-badge verifying"
+                  style={{
+                    backgroundColor: "var(--ads-amber-tint)",
+                    color: "var(--ads-amber)",
+                    borderRadius: "var(--ads-r-pill)",
+                  }}
+                >
+                  Checking...
+                </span>
               ) : oldPasswordVerified ? (
-                <span className="verify-badge verified">Verified</span>
+                <span
+                  className="verify-badge verified"
+                  style={{
+                    backgroundColor: "var(--ads-green-tint)",
+                    color: "var(--ads-green)",
+                    borderRadius: "var(--ads-r-pill)",
+                  }}
+                >
+                  Verified
+                </span>
               ) : null}
             </div>
-            <div className={`input-field-wrap ${oldPasswordError ? "has-error" : oldPasswordVerified ? "is-valid" : ""}`}>
-              <Lock className="input-icon" size={16} />
+            <div
+              className={`input-field-wrap ${oldPasswordError ? "has-error" : oldPasswordVerified ? "is-valid" : ""}`}
+              style={fieldWrapStyle(
+                focusedField === "old",
+                Boolean(oldPasswordError),
+                oldPasswordVerified
+              )}
+              onFocus={() => setFocusedField("old")}
+              onBlur={() => setFocusedField("")}
+            >
+              <Lock className="input-icon" size={16} style={fieldIconStyle} />
               <input
                 id="old_pwd"
                 type={showOldPassword ? "text" : "password"}
                 className="styled-input"
+                style={fieldInputStyle}
                 placeholder="Enter current password"
                 value={oldPassword}
                 onChange={(e) => {
@@ -167,6 +308,13 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
                 className="password-toggle-btn"
                 onClick={() => setShowOldPassword(!showOldPassword)}
                 tabIndex={-1}
+                aria-label={
+                  showOldPassword
+                    ? "Hide current password"
+                    : "Show current password"
+                }
+                title={showOldPassword ? "Hide password" : "Show password"}
+                style={toggleBtnStyle}
               >
                 {showOldPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
@@ -177,12 +325,23 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
           {/* New Password */}
           <div className="input-group">
             <label htmlFor="new_pwd" className="input-label">New Password</label>
-            <div className={`input-field-wrap ${!oldPasswordVerified ? "is-disabled" : ""}`}>
-              <Lock className="input-icon" size={16} />
+            <div
+              className={`input-field-wrap ${!oldPasswordVerified ? "is-disabled" : ""}`}
+              style={fieldWrapStyle(
+                focusedField === "new",
+                false,
+                false,
+                !oldPasswordVerified
+              )}
+              onFocus={() => setFocusedField("new")}
+              onBlur={() => setFocusedField("")}
+            >
+              <Lock className="input-icon" size={16} style={fieldIconStyle} />
               <input
                 id="new_pwd"
                 type={showNewPassword ? "text" : "password"}
                 className="styled-input"
+                style={fieldInputStyle}
                 placeholder="Enter new password"
                 disabled={!oldPasswordVerified}
                 value={newPassword}
@@ -201,6 +360,11 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
                 onClick={() => setShowNewPassword(!showNewPassword)}
                 tabIndex={-1}
                 disabled={!oldPasswordVerified}
+                aria-label={
+                  showNewPassword ? "Hide new password" : "Show new password"
+                }
+                title={showNewPassword ? "Hide password" : "Show password"}
+                style={toggleBtnStyle}
               >
                 {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
@@ -208,18 +372,50 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
 
             {/* Criteria Checklist */}
             {oldPasswordVerified && (
-              <div className="criteria-pill-row" style={{ marginTop: "0.5rem" }}>
-                <span className={`criteria-chip ${criteria.minLength ? "met" : ""}`}>
-                  {criteria.minLength ? <Check size={12} /> : <span className="chip-dot" />} 6+ chars
+              <div className="criteria-pill-row" style={criteriaRowStyle}>
+                <span
+                  className={`criteria-chip ${criteria.minLength ? "met" : ""}`}
+                  style={criteriaChipStyle(criteria.minLength)}
+                >
+                  {criteria.minLength ? (
+                    <Check size={12} style={{ color: "var(--ads-green)" }} />
+                  ) : (
+                    <span className="chip-dot" style={chipDotStyle} />
+                  )}{" "}
+                  6+ chars
                 </span>
-                <span className={`criteria-chip ${criteria.hasLetter ? "met" : ""}`}>
-                  {criteria.hasLetter ? <Check size={12} /> : <span className="chip-dot" />} Letters
+                <span
+                  className={`criteria-chip ${criteria.hasLetter ? "met" : ""}`}
+                  style={criteriaChipStyle(criteria.hasLetter)}
+                >
+                  {criteria.hasLetter ? (
+                    <Check size={12} style={{ color: "var(--ads-green)" }} />
+                  ) : (
+                    <span className="chip-dot" style={chipDotStyle} />
+                  )}{" "}
+                  Letters
                 </span>
-                <span className={`criteria-chip ${criteria.hasNumber ? "met" : ""}`}>
-                  {criteria.hasNumber ? <Check size={12} /> : <span className="chip-dot" />} Number
+                <span
+                  className={`criteria-chip ${criteria.hasNumber ? "met" : ""}`}
+                  style={criteriaChipStyle(criteria.hasNumber)}
+                >
+                  {criteria.hasNumber ? (
+                    <Check size={12} style={{ color: "var(--ads-green)" }} />
+                  ) : (
+                    <span className="chip-dot" style={chipDotStyle} />
+                  )}{" "}
+                  Number
                 </span>
-                <span className={`criteria-chip ${criteria.hasSpecial ? "met" : ""}`}>
-                  {criteria.hasSpecial ? <Check size={12} /> : <span className="chip-dot" />} Special symbol
+                <span
+                  className={`criteria-chip ${criteria.hasSpecial ? "met" : ""}`}
+                  style={criteriaChipStyle(criteria.hasSpecial)}
+                >
+                  {criteria.hasSpecial ? (
+                    <Check size={12} style={{ color: "var(--ads-green)" }} />
+                  ) : (
+                    <span className="chip-dot" style={chipDotStyle} />
+                  )}{" "}
+                  Special symbol
                 </span>
               </div>
             )}
@@ -228,12 +424,23 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
           {/* Confirm Password */}
           <div className="input-group">
             <label htmlFor="confirm_pwd" className="input-label">Confirm New Password</label>
-            <div className={`input-field-wrap ${confirmError ? "has-error" : ""} ${!oldPasswordVerified ? "is-disabled" : ""}`}>
-              <Lock className="input-icon" size={16} />
+            <div
+              className={`input-field-wrap ${confirmError ? "has-error" : ""} ${!oldPasswordVerified ? "is-disabled" : ""}`}
+              style={fieldWrapStyle(
+                focusedField === "confirm",
+                Boolean(confirmError),
+                false,
+                !oldPasswordVerified
+              )}
+              onFocus={() => setFocusedField("confirm")}
+              onBlur={() => setFocusedField("")}
+            >
+              <Lock className="input-icon" size={16} style={fieldIconStyle} />
               <input
                 id="confirm_pwd"
                 type={showConfirmPassword ? "text" : "password"}
                 className="styled-input"
+                style={fieldInputStyle}
                 placeholder="Re-enter new password"
                 disabled={!oldPasswordVerified}
                 value={confirmPassword}
@@ -252,6 +459,13 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 tabIndex={-1}
                 disabled={!oldPasswordVerified}
+                aria-label={
+                  showConfirmPassword
+                    ? "Hide confirmed password"
+                    : "Show confirmed password"
+                }
+                title={showConfirmPassword ? "Hide password" : "Show password"}
+                style={toggleBtnStyle}
               >
                 {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>

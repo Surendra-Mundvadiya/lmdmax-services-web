@@ -310,13 +310,15 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "1.25rem",
+        gap: "var(--ads-s5)",
         width: "100%",
-        backgroundColor: "#FFFFFF",
-        borderRadius: "14px",
-        border: "1px solid #E2E8F0",
+        backgroundColor: "var(--ads-material-thick)",
+        backdropFilter: "var(--ads-blur-md)",
+        WebkitBackdropFilter: "var(--ads-blur-md)",
+        borderRadius: "var(--ads-r-md)",
+        border: "1px solid var(--ads-hairline)",
         padding: "1.5rem 1.75rem",
-        boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
+        boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
       }}
     >
       {/* ── 1. Screen Top Header with Back Navigation ── */}
@@ -325,30 +327,34 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          borderBottom: "1px solid #F1F5F9",
+          borderBottom: "1px solid var(--ads-hairline)",
           paddingBottom: "1.15rem",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s4)" }}>
           <button
             type="button"
             onClick={onClose}
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "0.45rem",
-              padding: "0.5rem 0.85rem",
-              borderRadius: "8px",
-              border: "1px solid #E2E8F0",
-              backgroundColor: "#FFFFFF",
-              color: "#334155",
-              fontSize: "0.85rem",
+              gap: "var(--ads-s2)",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid var(--ads-hairline)",
+              backgroundColor: "var(--ads-material-thick)",
+              boxShadow: "var(--ads-bevel)",
+              color: "var(--ads-ink)",
+              fontSize: "0.8125rem",
               fontWeight: 600,
+              letterSpacing: "-0.01em",
               cursor: "pointer",
-              transition: "all 0.15s ease",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F8FAFC")}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-white)")}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "var(--ads-material-thick)")
+            }
           >
             <ArrowLeft size={16} />
             <span>Back to Reports</span>
@@ -359,16 +365,23 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                 margin: 0,
                 fontSize: "1.25rem",
                 fontWeight: 700,
-                color: "#0F172A",
+                letterSpacing: "-0.019em",
+                color: "var(--ads-ink)",
                 display: "flex",
                 alignItems: "center",
-                gap: "0.5rem",
+                gap: "var(--ads-s2)",
               }}
             >
-              <Send size={20} color="#2563EB" />
+              <Send size={20} color="var(--ads-blue)" />
               Send Report Link
             </h2>
-            <p style={{ margin: "0.2rem 0 0", fontSize: "0.82rem", color: "#64748B" }}>
+            <p
+              style={{
+                margin: "0.2rem 0 0",
+                fontSize: "0.82rem",
+                color: "var(--ads-ink-tertiary)",
+              }}
+            >
               Generate secure accident and injury report links and dispatch them directly to drivers
             </p>
           </div>
@@ -380,14 +393,18 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.5rem 1rem",
-              borderRadius: "8px",
+              gap: "var(--ads-s2)",
+              padding: "var(--ads-s2) var(--ads-s4)",
+              borderRadius: "var(--ads-r-pill)",
               fontSize: "0.84rem",
               fontWeight: 600,
-              backgroundColor: statusMessage.type === "success" ? "#ECFDF5" : "#FEF2F2",
-              color: statusMessage.type === "success" ? "#065F46" : "#DC2626",
-              border: `1px solid ${statusMessage.type === "success" ? "#A7F3D0" : "#FECACA"}`,
+              backgroundColor:
+                statusMessage.type === "success"
+                  ? "var(--ads-green-tint)"
+                  : "var(--ads-red-tint)",
+              color:
+                statusMessage.type === "success" ? "var(--ads-green)" : "var(--ads-red)",
+              border: "1px solid var(--ads-hairline)",
             }}
           >
             {statusMessage.type === "success" ? (
@@ -406,14 +423,14 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
           style={{
             fontSize: "0.88rem",
             fontWeight: 700,
-            color: "#1E293B",
+            color: "var(--ads-ink)",
             display: "flex",
             alignItems: "center",
             gap: "0.4rem",
           }}
         >
           <span>1. Select Report Type</span>
-          <span style={{ color: "#DC2626" }}>*</span>
+          <span style={{ color: "var(--ads-red)" }}>*</span>
         </label>
         <div
           style={{
@@ -430,26 +447,36 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               alignItems: "flex-start",
               gap: "1rem",
               padding: "1rem 1.25rem",
-              borderRadius: "12px",
-              border: reportType === "accident" ? "2px solid #2563EB" : "1px solid #E2E8F0",
-              backgroundColor: reportType === "accident" ? "#EFF6FF" : "#FFFFFF",
+              borderRadius: "var(--ads-r-md)",
+              border:
+                reportType === "accident"
+                  ? "2px solid var(--ads-blue)"
+                  : "1px solid var(--ads-hairline)",
+              backgroundColor:
+                reportType === "accident"
+                  ? "var(--ads-blue-tint)"
+                  : "var(--ads-material-thick)",
+              boxShadow: reportType === "accident" ? "var(--ads-shadow-sm)" : "var(--ads-bevel)",
               cursor: "pointer",
-              transition: "all 0.15s ease",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <div
               style={{
                 width: 40,
                 height: 40,
-                borderRadius: "10px",
-                backgroundColor: reportType === "accident" ? "#DBEAFE" : "#F1F5F9",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor:
+                  reportType === "accident"
+                    ? "var(--ads-blue-tint-strong)"
+                    : "rgba(0,0,0,0.04)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexShrink: 0,
               }}
             >
-              <Car size={20} color={reportType === "accident" ? "#2563EB" : "#64748B"} />
+              <Car size={20} color={reportType === "accident" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)"} />
             </div>
             <div style={{ flex: 1 }}>
               <div
@@ -464,7 +491,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                   style={{
                     fontSize: "0.95rem",
                     fontWeight: 700,
-                    color: reportType === "accident" ? "#1E40AF" : "#0F172A",
+                    color: reportType === "accident" ? "var(--ads-blue)" : "var(--ads-ink)",
                   }}
                 >
                   Accident Report
@@ -478,17 +505,17 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                       fontSize: "0.72rem",
                       fontWeight: 700,
                       color: "#FFFFFF",
-                      backgroundColor: "#2563EB",
+                      backgroundColor: "var(--ads-blue)",
                       padding: "0.15rem 0.5rem",
-                      borderRadius: "12px",
+                      borderRadius: "var(--ads-r-pill)",
                     }}
                   >
-                    <Check size={11} />
+                    <Check size={11} color="#FFFFFF" />
                     Selected
                   </span>
                 )}
               </div>
-              <p style={{ margin: 0, fontSize: "0.8rem", color: "#64748B", lineHeight: 1.4 }}>
+              <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--ads-ink-tertiary)", lineHeight: 1.4 }}>
                 Vehicle collision, property damage, police report, or roadside equipment incident form.
               </p>
             </div>
@@ -502,26 +529,36 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               alignItems: "flex-start",
               gap: "1rem",
               padding: "1rem 1.25rem",
-              borderRadius: "12px",
-              border: reportType === "injury" ? "2px solid #2563EB" : "1px solid #E2E8F0",
-              backgroundColor: reportType === "injury" ? "#EFF6FF" : "#FFFFFF",
+              borderRadius: "var(--ads-r-md)",
+              border:
+                reportType === "injury"
+                  ? "2px solid var(--ads-blue)"
+                  : "1px solid var(--ads-hairline)",
+              backgroundColor:
+                reportType === "injury"
+                  ? "var(--ads-blue-tint)"
+                  : "var(--ads-material-thick)",
+              boxShadow: reportType === "injury" ? "var(--ads-shadow-sm)" : "var(--ads-bevel)",
               cursor: "pointer",
-              transition: "all 0.15s ease",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <div
               style={{
                 width: 40,
                 height: 40,
-                borderRadius: "10px",
-                backgroundColor: reportType === "injury" ? "#DBEAFE" : "#F1F5F9",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor:
+                  reportType === "injury"
+                    ? "var(--ads-blue-tint-strong)"
+                    : "rgba(0,0,0,0.04)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexShrink: 0,
               }}
             >
-              <Activity size={20} color={reportType === "injury" ? "#2563EB" : "#64748B"} />
+              <Activity size={20} color={reportType === "injury" ? "var(--ads-blue)" : "var(--ads-ink-tertiary)"} />
             </div>
             <div style={{ flex: 1 }}>
               <div
@@ -536,7 +573,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                   style={{
                     fontSize: "0.95rem",
                     fontWeight: 700,
-                    color: reportType === "injury" ? "#1E40AF" : "#0F172A",
+                    color: reportType === "injury" ? "var(--ads-blue)" : "var(--ads-ink)",
                   }}
                 >
                   Injury Report
@@ -550,17 +587,17 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                       fontSize: "0.72rem",
                       fontWeight: 700,
                       color: "#FFFFFF",
-                      backgroundColor: "#2563EB",
+                      backgroundColor: "var(--ads-blue)",
                       padding: "0.15rem 0.5rem",
-                      borderRadius: "12px",
+                      borderRadius: "var(--ads-r-pill)",
                     }}
                   >
-                    <Check size={11} />
+                    <Check size={11} color="#FFFFFF" />
                     Selected
                   </span>
                 )}
               </div>
-              <p style={{ margin: 0, fontSize: "0.8rem", color: "#64748B", lineHeight: 1.4 }}>
+              <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--ads-ink-tertiary)", lineHeight: 1.4 }}>
                 Occupational bodily injury, animal encounter, package slip/fall, or medical incident form.
               </p>
             </div>
@@ -583,17 +620,17 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               style={{
                 fontSize: "0.88rem",
                 fontWeight: 700,
-                color: "#1E293B",
+                color: "var(--ads-ink)",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.4rem",
               }}
             >
-              <Users size={16} color="#2563EB" />
+              <Users size={16} color="var(--ads-blue)" />
               <span>2. Select Drivers</span>
-              <span style={{ color: "#DC2626" }}>*</span>
+              <span style={{ color: "var(--ads-red)" }}>*</span>
             </label>
-            <span style={{ fontSize: "0.78rem", color: "#64748B", fontWeight: 600 }}>
+            <span style={{ fontSize: "0.78rem", color: "var(--ads-ink-tertiary)", fontWeight: 600 }}>
               {selectedDriverIds.length} driver(s) selected
             </span>
           </div>
@@ -604,9 +641,13 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
             style={{
               minHeight: "44px",
               padding: "0.4rem 0.75rem",
-              borderRadius: "10px",
-              border: isDriverDropdownOpen ? "1.5px solid #2563EB" : "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
+              borderRadius: "var(--ads-r-sm)",
+              border: isDriverDropdownOpen
+                ? "1.5px solid var(--ads-blue)"
+                : "1px solid var(--ads-hairline-strong)",
+              backgroundColor: "var(--ads-material-thick)",
+              boxShadow: isDriverDropdownOpen ? "var(--ads-shadow-focus)" : "var(--ads-bevel)",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
@@ -617,7 +658,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
           >
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", flex: 1, alignItems: "center" }}>
               {selectedDrivers.length === 0 ? (
-                <span style={{ color: "#94A3B8", fontSize: "0.85rem" }}>
+                <span style={{ color: "var(--ads-ink-quaternary)", fontSize: "0.85rem" }}>
                   {loadingDrivers ? "Loading drivers..." : "Click to select drivers from dropdown..."}
                 </span>
               ) : (
@@ -629,12 +670,12 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                       alignItems: "center",
                       gap: "0.35rem",
                       padding: "0.2rem 0.55rem",
-                      borderRadius: "6px",
-                      backgroundColor: "#EFF6FF",
-                      color: "#1D4ED8",
+                      borderRadius: "var(--ads-r-pill)",
+                      backgroundColor: "var(--ads-blue-tint)",
+                      color: "var(--ads-blue)",
                       fontSize: "0.78rem",
                       fontWeight: 600,
-                      border: "1px solid #BFDBFE",
+                      border: "1px solid var(--ads-blue-tint-strong)",
                     }}
                   >
                     <span>{d.name}</span>
@@ -651,17 +692,17 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                   style={{
                     fontSize: "0.75rem",
                     fontWeight: 700,
-                    color: "#2563EB",
-                    backgroundColor: "#DBEAFE",
+                    color: "var(--ads-blue)",
+                    backgroundColor: "var(--ads-blue-tint-strong)",
                     padding: "0.2rem 0.5rem",
-                    borderRadius: "6px",
+                    borderRadius: "var(--ads-r-pill)",
                   }}
                 >
                   +{selectedDrivers.length - 4} more
                 </span>
               )}
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", color: "#64748B" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", color: "var(--ads-ink-tertiary)" }}>
               {loadingDrivers && <Loader2 size={15} className="animate-spin" />}
               <ChevronDown
                 size={16}
@@ -678,10 +719,12 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
             <div
               style={{
                 marginTop: "0.25rem",
-                borderRadius: "10px",
-                border: "1px solid #E2E8F0",
-                backgroundColor: "#FFFFFF",
-                boxShadow: "0 10px 25px rgba(0,0,0,0.12)",
+                borderRadius: "var(--ads-r-md)",
+                border: "1px solid var(--ads-hairline)",
+                backgroundColor: "var(--ads-material-thick)",
+                backdropFilter: "var(--ads-blur-lg)",
+                WebkitBackdropFilter: "var(--ads-blur-lg)",
+                boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
                 zIndex: 9999,
                 overflow: "hidden",
                 display: "flex",
@@ -693,8 +736,8 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               <div
                 style={{
                   padding: "0.6rem 0.75rem",
-                  borderBottom: "1px solid #F1F5F9",
-                  backgroundColor: "#F8FAFC",
+                  borderBottom: "1px solid var(--ads-hairline)",
+                  backgroundColor: "transparent",
                   display: "flex",
                   alignItems: "center",
                   gap: "0.5rem",
@@ -705,14 +748,14 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                     display: "flex",
                     alignItems: "center",
                     gap: "0.4rem",
-                    backgroundColor: "#FFFFFF",
-                    border: "1px solid #CBD5E1",
-                    borderRadius: "6px",
+                    backgroundColor: "var(--ads-material-thick)",
+                    border: "1px solid var(--ads-hairline-strong)",
+                    borderRadius: "var(--ads-r-xs)",
                     padding: "0.3rem 0.6rem",
                     flex: 1,
                   }}
                 >
-                  <Search size={14} color="#94A3B8" />
+                  <Search size={14} color="var(--ads-ink-quaternary)" />
                   <input
                     type="text"
                     placeholder="Search by driver name or phone..."
@@ -724,13 +767,14 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                       outline: "none",
                       fontSize: "0.82rem",
                       width: "100%",
-                      color: "#0F172A",
+                      background: "transparent",
+                      color: "var(--ads-ink)",
                     }}
                   />
                   {driverSearch && (
                     <X
                       size={13}
-                      color="#94A3B8"
+                      color="var(--ads-ink-quaternary)"
                       style={{ cursor: "pointer" }}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -747,14 +791,16 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                   }}
                   style={{
                     padding: "0.35rem 0.65rem",
-                    borderRadius: "6px",
-                    border: "1px solid #2563EB",
-                    backgroundColor: "#EFF6FF",
-                    color: "#2563EB",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid transparent",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    color: "var(--ads-blue)",
                     fontSize: "0.74rem",
                     fontWeight: 600,
+                    letterSpacing: "-0.01em",
                     cursor: "pointer",
                     whiteSpace: "nowrap",
+                    transition: "all var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 >
                   {selectedDriverIds.length === filteredDrivers.length && filteredDrivers.length > 0
@@ -770,7 +816,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                     style={{
                       padding: "1.25rem",
                       textAlign: "center",
-                      color: "#64748B",
+                      color: "var(--ads-ink-tertiary)",
                       fontSize: "0.82rem",
                     }}
                   >
@@ -792,25 +838,25 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                           justifyContent: "space-between",
                           padding: "0.5rem 0.85rem",
                           cursor: "pointer",
-                          backgroundColor: isChecked ? "#EFF6FF" : "transparent",
-                          transition: "background-color 0.1s ease",
+                          backgroundColor: isChecked ? "var(--ads-blue-tint)" : "transparent",
+                          transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                         }}
                         onMouseEnter={(e) => {
-                          if (!isChecked) e.currentTarget.style.backgroundColor = "#F8FAFC";
+                          if (!isChecked) e.currentTarget.style.backgroundColor = "var(--ads-canvas)";
                         }}
                         onMouseLeave={(e) => {
                           if (!isChecked) e.currentTarget.style.backgroundColor = "transparent";
                         }}
                       >
                         <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-                          <span style={{ color: isChecked ? "#2563EB" : "#94A3B8" }}>
+                          <span style={{ color: isChecked ? "var(--ads-blue)" : "var(--ads-ink-quaternary)" }}>
                             {isChecked ? <CheckSquare size={16} /> : <Square size={16} />}
                           </span>
                           <span
                             style={{
                               fontSize: "0.84rem",
                               fontWeight: isChecked ? 700 : 500,
-                              color: isChecked ? "#1E40AF" : "#1E293B",
+                              color: isChecked ? "var(--ads-blue)" : "var(--ads-ink)",
                             }}
                           >
                             {d.name}
@@ -818,7 +864,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                         </div>
                         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                           {d.phone && (
-                            <span style={{ fontSize: "0.75rem", color: "#64748B" }}>
+                            <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                               {d.phone}
                             </span>
                           )}
@@ -838,13 +884,13 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
             style={{
               fontSize: "0.88rem",
               fontWeight: 700,
-              color: "#1E293B",
+              color: "var(--ads-ink)",
               display: "flex",
               alignItems: "center",
               gap: "0.4rem",
             }}
           >
-            <Smartphone size={16} color="#2563EB" />
+            <Smartphone size={16} color="var(--ads-blue)" />
             <span>3. Delivery Channel</span>
           </label>
           <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
@@ -858,13 +904,19 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                 alignItems: "center",
                 gap: "0.65rem",
                 padding: "0.65rem 0.95rem",
-                borderRadius: "10px",
-                border: channels.includes("sms") ? "1.5px solid #2563EB" : "1px solid #E2E8F0",
-                backgroundColor: channels.includes("sms") ? "#EFF6FF" : "#FFFFFF",
+                borderRadius: "var(--ads-r-sm)",
+                border: channels.includes("sms")
+                  ? "1.5px solid var(--ads-blue)"
+                  : "1px solid var(--ads-hairline)",
+                backgroundColor: channels.includes("sms")
+                  ? "var(--ads-blue-tint)"
+                  : "var(--ads-material-thick)",
+                boxShadow: "var(--ads-bevel)",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
                 cursor: "pointer",
               }}
             >
-              <span style={{ color: channels.includes("sms") ? "#2563EB" : "#94A3B8" }}>
+              <span style={{ color: channels.includes("sms") ? "var(--ads-blue)" : "var(--ads-ink-quaternary)" }}>
                 {channels.includes("sms") ? <CheckSquare size={16} /> : <Square size={16} />}
               </span>
               <div>
@@ -872,12 +924,12 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                   style={{
                     fontSize: "0.85rem",
                     fontWeight: 700,
-                    color: channels.includes("sms") ? "#1E40AF" : "#1E293B",
+                    color: channels.includes("sms") ? "var(--ads-blue)" : "var(--ads-ink)",
                   }}
                 >
                   SMS Text
                 </div>
-                <div style={{ fontSize: "0.72rem", color: "#64748B" }}>Mobile message</div>
+                <div style={{ fontSize: "0.72rem", color: "var(--ads-ink-tertiary)" }}>Mobile message</div>
               </div>
             </div>
 
@@ -891,15 +943,19 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                 alignItems: "center",
                 gap: "0.65rem",
                 padding: "0.65rem 0.95rem",
-                borderRadius: "10px",
+                borderRadius: "var(--ads-r-sm)",
                 border: channels.includes("in_app_chat")
-                  ? "1.5px solid #2563EB"
-                  : "1px solid #E2E8F0",
-                backgroundColor: channels.includes("in_app_chat") ? "#EFF6FF" : "#FFFFFF",
+                  ? "1.5px solid var(--ads-blue)"
+                  : "1px solid var(--ads-hairline)",
+                backgroundColor: channels.includes("in_app_chat")
+                  ? "var(--ads-blue-tint)"
+                  : "var(--ads-material-thick)",
+                boxShadow: "var(--ads-bevel)",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
                 cursor: "pointer",
               }}
             >
-              <span style={{ color: channels.includes("in_app_chat") ? "#2563EB" : "#94A3B8" }}>
+              <span style={{ color: channels.includes("in_app_chat") ? "var(--ads-blue)" : "var(--ads-ink-quaternary)" }}>
                 {channels.includes("in_app_chat") ? <CheckSquare size={16} /> : <Square size={16} />}
               </span>
               <div>
@@ -907,12 +963,12 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                   style={{
                     fontSize: "0.85rem",
                     fontWeight: 700,
-                    color: channels.includes("in_app_chat") ? "#1E40AF" : "#1E293B",
+                    color: channels.includes("in_app_chat") ? "var(--ads-blue)" : "var(--ads-ink)",
                   }}
                 >
                   In-App Chat
                 </div>
-                <div style={{ fontSize: "0.72rem", color: "#64748B" }}>DSP driver thread</div>
+                <div style={{ fontSize: "0.72rem", color: "var(--ads-ink-tertiary)" }}>DSP driver thread</div>
               </div>
             </div>
           </div>
@@ -934,9 +990,9 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
             display: "flex",
             flexDirection: "column",
             gap: "0.5rem",
-            backgroundColor: "#F8FAFC",
-            borderRadius: "12px",
-            border: "1px solid #E2E8F0",
+            backgroundColor: "var(--ads-canvas)",
+            borderRadius: "var(--ads-r-md)",
+            border: "1px solid var(--ads-hairline)",
             padding: "1rem 1.15rem",
           }}
         >
@@ -945,13 +1001,13 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               style={{
                 fontSize: "0.88rem",
                 fontWeight: 700,
-                color: "#1E293B",
+                color: "var(--ads-ink)",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.4rem",
               }}
             >
-              <MessageSquare size={16} color="#2563EB" />
+              <MessageSquare size={16} color="var(--ads-blue)" />
               <span>4. Message Template (Customizable)</span>
             </label>
             <button
@@ -960,7 +1016,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               style={{
                 background: "none",
                 border: "none",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 fontSize: "0.75rem",
                 fontWeight: 600,
                 cursor: "pointer",
@@ -977,7 +1033,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
 
           {/* Variable Insertion Pills */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", alignItems: "center" }}>
-            <span style={{ fontSize: "0.74rem", color: "#64748B", fontWeight: 600 }}>
+            <span style={{ fontSize: "0.74rem", color: "var(--ads-ink-tertiary)", fontWeight: 600 }}>
               Insert Variable:
             </span>
             {[
@@ -992,22 +1048,24 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                 onClick={() => insertVariable(v.label)}
                 style={{
                   padding: "0.2rem 0.55rem",
-                  borderRadius: "6px",
-                  border: "1px solid #CBD5E1",
-                  backgroundColor: "#FFFFFF",
-                  color: "#2563EB",
+                  borderRadius: "var(--ads-r-pill)",
+                  border: "1px solid var(--ads-hairline)",
+                  backgroundColor: "var(--ads-material-thick)",
+                  boxShadow: "var(--ads-bevel)",
+                  color: "var(--ads-blue)",
                   fontSize: "0.74rem",
                   fontWeight: 600,
+                  letterSpacing: "-0.01em",
                   cursor: "pointer",
-                  transition: "all 0.1s ease",
+                  transition: "all var(--ads-dur-fast) var(--ads-ease)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#EFF6FF";
-                  e.currentTarget.style.borderColor = "#2563EB";
+                  e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)";
+                  e.currentTarget.style.borderColor = "var(--ads-blue)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#FFFFFF";
-                  e.currentTarget.style.borderColor = "#CBD5E1";
+                  e.currentTarget.style.backgroundColor = "var(--ads-material-thick)";
+                  e.currentTarget.style.borderColor = "var(--ads-hairline)";
                 }}
               >
                 + {v.label}
@@ -1023,14 +1081,15 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
             style={{
               width: "100%",
               padding: "0.75rem",
-              borderRadius: "8px",
-              border: "1px solid #CBD5E1",
+              borderRadius: "var(--ads-r-sm)",
+              border: "1px solid var(--ads-hairline-strong)",
               fontSize: "0.85rem",
-              color: "#0F172A",
+              color: "var(--ads-ink)",
               fontFamily: "inherit",
               resize: "vertical",
               outline: "none",
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "var(--ads-material-thick)",
+              transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
               lineHeight: 1.5,
               boxSizing: "border-box",
             }}
@@ -1042,7 +1101,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               display: "flex",
               justifyContent: "space-between",
               fontSize: "0.72rem",
-              color: "#64748B",
+              color: "var(--ads-ink-tertiary)",
             }}
           >
             <span>Variables will be replaced dynamically for each recipient.</span>
@@ -1056,9 +1115,9 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
             display: "flex",
             flexDirection: "column",
             gap: "0.5rem",
-            backgroundColor: "#F8FAFC",
-            borderRadius: "12px",
-            border: "1px solid #E2E8F0",
+            backgroundColor: "var(--ads-canvas)",
+            borderRadius: "var(--ads-r-md)",
+            border: "1px solid var(--ads-hairline)",
             padding: "1rem 1.15rem",
           }}
         >
@@ -1067,24 +1126,24 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               style={{
                 fontSize: "0.88rem",
                 fontWeight: 700,
-                color: "#1E293B",
+                color: "var(--ads-ink)",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.4rem",
               }}
             >
-              <Smartphone size={16} color="#2563EB" />
+              <Smartphone size={16} color="var(--ads-blue)" />
               <span>5. Live Message Preview</span>
             </label>
             <span
               style={{
                 fontSize: "0.72rem",
                 fontWeight: 600,
-                color: "#059669",
-                backgroundColor: "#ECFDF5",
+                color: "var(--ads-green)",
+                backgroundColor: "var(--ads-green-tint)",
                 padding: "0.15rem 0.5rem",
-                borderRadius: "10px",
-                border: "1px solid #A7F3D0",
+                borderRadius: "var(--ads-r-pill)",
+                border: "1px solid var(--ads-hairline)",
               }}
             >
               Interactive Preview
@@ -1094,11 +1153,11 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
           {/* Device Mockup Shell */}
           <div
             style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: "12px",
-              border: "1px solid #CBD5E1",
-              padding: "1rem",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
+              backgroundColor: "var(--ads-material-thick)",
+              borderRadius: "var(--ads-r-md)",
+              border: "1px solid var(--ads-hairline)",
+              padding: "var(--ads-s4)",
+              boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
               display: "flex",
               flexDirection: "column",
               gap: "0.75rem",
@@ -1112,7 +1171,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                 alignItems: "center",
                 gap: "0.5rem",
                 paddingBottom: "0.5rem",
-                borderBottom: "1px solid #F1F5F9",
+                borderBottom: "1px solid var(--ads-hairline)",
               }}
             >
               <div
@@ -1120,7 +1179,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                   width: 28,
                   height: 28,
                   borderRadius: "50%",
-                  backgroundColor: "#2563EB",
+                  backgroundColor: "var(--ads-blue)",
                   color: "#FFFFFF",
                   display: "flex",
                   alignItems: "center",
@@ -1132,10 +1191,10 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                 FM
               </div>
               <div>
-                <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "#0F172A" }}>
+                <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                   Fleet Operations ({stationCode})
                 </div>
-                <div style={{ fontSize: "0.68rem", color: "#64748B" }}>
+                <div style={{ fontSize: "0.68rem", color: "var(--ads-ink-tertiary)" }}>
                   To: {selectedDrivers[0]?.name || "Selected Driver"} • SMS / In-App
                 </div>
               </div>
@@ -1144,13 +1203,13 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
             {/* Chat Bubble with formatted message */}
             <div
               style={{
-                backgroundColor: "#EFF6FF",
-                border: "1px solid #BFDBFE",
-                borderRadius: "12px",
+                backgroundColor: "var(--ads-blue-tint)",
+                border: "1px solid var(--ads-blue-tint-strong)",
+                borderRadius: "var(--ads-r-md)",
                 borderTopLeftRadius: "2px",
                 padding: "0.85rem 1rem",
                 fontSize: "0.82rem",
-                color: "#1E293B",
+                color: "var(--ads-ink)",
                 lineHeight: 1.5,
                 whiteSpace: "pre-wrap",
                 wordBreak: "break-word",
@@ -1159,7 +1218,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               {previewMessage}
             </div>
 
-            <div style={{ fontSize: "0.7rem", color: "#94A3B8", textAlign: "right" }}>
+            <div style={{ fontSize: "0.7rem", color: "var(--ads-ink-quaternary)", textAlign: "right" }}>
               Now • Verified Link Token
             </div>
           </div>
@@ -1172,7 +1231,7 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          borderTop: "1px solid #F1F5F9",
+          borderTop: "1px solid var(--ads-hairline)",
           paddingTop: "1.15rem",
           marginTop: "0.25rem",
         }}
@@ -1181,20 +1240,23 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
           type="button"
           onClick={onClose}
           style={{
-            padding: "0.6rem 1.25rem",
-            borderRadius: "8px",
-            border: "1px solid #CBD5E1",
-            backgroundColor: "#FFFFFF",
-            color: "#475569",
-            fontSize: "0.88rem",
+            padding: "9px 18px",
+            borderRadius: "var(--ads-r-pill)",
+            border: "1px solid var(--ads-hairline)",
+            backgroundColor: "var(--ads-material-thick)",
+            boxShadow: "var(--ads-bevel)",
+            color: "var(--ads-ink)",
+            fontSize: "0.8125rem",
             fontWeight: 600,
+            letterSpacing: "-0.01em",
             cursor: "pointer",
+            transition: "all var(--ads-dur-fast) var(--ads-ease)",
           }}
         >
           Cancel
         </button>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
           {generatedLinks.length > 0 && (
             <button
               type="button"
@@ -1202,15 +1264,18 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.45rem",
-                padding: "0.6rem 1rem",
-                borderRadius: "8px",
-                border: "1px solid #CBD5E1",
-                backgroundColor: "#FFFFFF",
-                color: copyAllSuccess ? "#059669" : "#334155",
-                fontSize: "0.88rem",
+                gap: "var(--ads-s2)",
+                padding: "9px 18px",
+                borderRadius: "var(--ads-r-pill)",
+                border: "1px solid var(--ads-hairline)",
+                backgroundColor: "var(--ads-material-thick)",
+                boxShadow: "var(--ads-bevel)",
+                color: copyAllSuccess ? "var(--ads-green)" : "var(--ads-ink)",
+                fontSize: "0.8125rem",
                 fontWeight: 600,
+                letterSpacing: "-0.01em",
                 cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               {copyAllSuccess ? <Check size={16} /> : <Copy size={16} />}
@@ -1225,28 +1290,31 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.65rem 1.5rem",
-              borderRadius: "8px",
-              border: "none",
+              gap: "var(--ads-s2)",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid transparent",
               backgroundColor:
-                selectedDriverIds.length === 0 || isSending ? "#94A3B8" : "#2563EB",
+                selectedDriverIds.length === 0 || isSending
+                  ? "var(--ads-ink-quaternary)"
+                  : "var(--ads-blue)",
               color: "#FFFFFF",
-              fontSize: "0.9rem",
-              fontWeight: 700,
+              fontSize: "0.8125rem",
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
               cursor: selectedDriverIds.length === 0 || isSending ? "not-allowed" : "pointer",
-              boxShadow: "0 2px 6px rgba(37, 99, 235, 0.25)",
-              transition: "all 0.15s ease",
+              boxShadow: "var(--ads-shadow-sm)",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             {isSending ? (
               <>
-                <Loader2 size={16} className="animate-spin" />
-                <span>Sending Links...</span>
+                <Loader2 size={16} className="animate-spin" color="#FFFFFF" />
+                <span style={{ color: "#FFFFFF" }}>Sending Links...</span>
               </>
             ) : (
               <>
-                <Send size={16} />
+                <Send size={16} color="#FFFFFF" />
                 <span>
                   Send {reportType === "injury" ? "Injury" : "Accident"} Link (
                   {selectedDriverIds.length})
@@ -1262,10 +1330,10 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
         <div
           style={{
             marginTop: "0.75rem",
-            padding: "1.25rem",
-            backgroundColor: "#F8FAFC",
-            borderRadius: "12px",
-            border: "1px solid #E2E8F0",
+            padding: "var(--ads-s5)",
+            backgroundColor: "var(--ads-canvas)",
+            borderRadius: "var(--ads-r-md)",
+            border: "1px solid var(--ads-hairline)",
             display: "flex",
             flexDirection: "column",
             gap: "0.75rem",
@@ -1277,17 +1345,17 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                 margin: 0,
                 fontSize: "0.95rem",
                 fontWeight: 700,
-                color: "#0F172A",
+                color: "var(--ads-ink)",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.5rem",
               }}
             >
-              <CheckCircle2 size={18} color="#059669" />
+              <CheckCircle2 size={18} color="var(--ads-green)" />
               Generated {reportType === "injury" ? "Injury" : "Accident"} Form Links (
               {generatedLinks.length})
             </h4>
-            <span style={{ fontSize: "0.78rem", color: "#64748B" }}>
+            <span style={{ fontSize: "0.78rem", color: "var(--ads-ink-tertiary)" }}>
               Links are active and ready for manual sharing if needed
             </span>
           </div>
@@ -1310,15 +1378,16 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                   justifyContent: "space-between",
                   gap: "1rem",
                   padding: "0.6rem 0.85rem",
-                  backgroundColor: "#FFFFFF",
-                  borderRadius: "8px",
-                  border: "1px solid #E2E8F0",
+                  backgroundColor: "var(--ads-material-thick)",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid var(--ads-hairline)",
+                  boxShadow: "var(--ads-bevel)",
                   fontSize: "0.82rem",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", minWidth: 160 }}>
-                  <span style={{ fontWeight: 700, color: "#1E293B" }}>{item.driver_name}</span>
-                  <span style={{ color: "#94A3B8", fontSize: "0.72rem" }}>
+                  <span style={{ fontWeight: 700, color: "var(--ads-ink)" }}>{item.driver_name}</span>
+                  <span style={{ color: "var(--ads-ink-quaternary)", fontSize: "0.72rem" }}>
                     (ID: {item.driver_id})
                   </span>
                 </div>
@@ -1329,11 +1398,11 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
-                    color: "#2563EB",
+                    color: "var(--ads-blue)",
                     fontSize: "0.78rem",
-                    backgroundColor: "#EFF6FF",
+                    backgroundColor: "var(--ads-blue-tint)",
                     padding: "0.3rem 0.6rem",
-                    borderRadius: "6px",
+                    borderRadius: "var(--ads-r-xs)",
                   }}
                 >
                   {item.link}
@@ -1347,14 +1416,20 @@ export const SendReportLinkScreen: FC<SendReportLinkScreenProps> = ({
                     alignItems: "center",
                     gap: "0.35rem",
                     padding: "0.35rem 0.7rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: copiedToken === item.token ? "#ECFDF5" : "#FFFFFF",
-                    color: copiedToken === item.token ? "#059669" : "#334155",
+                    borderRadius: "var(--ads-r-pill)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor:
+                      copiedToken === item.token
+                        ? "var(--ads-green-tint)"
+                        : "var(--ads-material-thick)",
+                    color:
+                      copiedToken === item.token ? "var(--ads-green)" : "var(--ads-ink)",
                     fontSize: "0.75rem",
                     fontWeight: 600,
+                    letterSpacing: "-0.01em",
                     cursor: "pointer",
                     flexShrink: 0,
+                    transition: "all var(--ads-dur-fast) var(--ads-ease)",
                   }}
                 >
                   {copiedToken === item.token ? <Check size={13} /> : <Copy size={13} />}

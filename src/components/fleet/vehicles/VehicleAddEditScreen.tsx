@@ -219,9 +219,10 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
           alignItems: "center",
           justifyContent: "space-between",
           width: "100%",
-          paddingBottom: "0.85rem",
-          borderBottom: "1px solid #E2E8F0",
-          marginBottom: "1.25rem",
+          paddingBottom: "var(--ads-s3)",
+          borderBottom: "1px solid var(--ads-hairline)",
+          marginBottom: "var(--ads-s5)",
+          background: "transparent",
         }}
       >
         <div
@@ -245,11 +246,11 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
           </button>
           <div
             className="screen-title-divider"
-            style={{ width: "1px", height: "20px", backgroundColor: "#CBD5E1" }}
+            style={{ width: "1px", height: "20px", backgroundColor: "var(--ads-hairline-strong)" }}
           />
           <h2
             className="screen-heading"
-            style={{ margin: 0, fontSize: "1.15rem", fontWeight: 700, color: "#0F172A" }}
+            style={{ margin: 0, fontSize: "1.15rem", fontWeight: 650, letterSpacing: "-0.019em", color: "var(--ads-ink)" }}
           >
             {isEditMode ? `Edit Vehicle: ${initialVehicle?.name || ""}` : "Add New Vehicle"}
           </h2>
@@ -261,7 +262,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            gap: "0.75rem",
+            gap: "var(--ads-s3)",
           }}
         >
           <button
@@ -270,14 +271,18 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
             onClick={onBack}
             disabled={isSubmitting}
             style={{
-              padding: "0.5rem 1rem",
-              borderRadius: "8px",
-              border: "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
-              color: "#475569",
-              fontSize: "0.875rem",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid var(--ads-hairline)",
+              backgroundColor: "var(--ads-material-thick)",
+              boxShadow: "var(--ads-bevel)",
+              color: "var(--ads-ink)",
+              fontSize: "0.8125rem",
               fontWeight: 600,
+              letterSpacing: "-0.01em",
               cursor: isSubmitting ? "not-allowed" : "pointer",
+              opacity: isSubmitting ? 0.4 : 1,
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             Cancel
@@ -290,16 +295,18 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.5rem 1.25rem",
-              borderRadius: "8px",
-              backgroundColor: "#2563EB",
-              border: "none",
+              gap: "var(--ads-s2)",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              backgroundColor: "var(--ads-blue)",
+              border: "1px solid transparent",
               color: "#FFFFFF",
-              fontSize: "0.875rem",
+              fontSize: "0.8125rem",
               fontWeight: 600,
+              letterSpacing: "-0.01em",
               cursor: isSubmitting ? "not-allowed" : "pointer",
-              boxShadow: "0 2px 4px rgba(37, 99, 235, 0.2)",
+              opacity: isSubmitting ? 0.4 : 1,
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             {isSubmitting ? (
@@ -322,17 +329,17 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "0.75rem",
-            backgroundColor: "#FEF2F2",
-            border: "1px solid #FCA5A5",
-            color: "#991B1B",
-            padding: "0.75rem 1rem",
-            borderRadius: "8px",
-            marginBottom: "1.25rem",
+            gap: "var(--ads-s3)",
+            backgroundColor: "var(--ads-red-tint)",
+            border: "1px solid var(--ads-hairline)",
+            color: "var(--ads-red)",
+            padding: "var(--ads-s3) var(--ads-s4)",
+            borderRadius: "var(--ads-r-sm)",
+            marginBottom: "var(--ads-s5)",
             fontSize: "0.875rem",
           }}
         >
-          <AlertCircle size={18} />
+          <AlertCircle size={18} color="var(--ads-red)" />
           <span>{submitError}</span>
         </div>
       )}
@@ -342,14 +349,16 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
         <div
           className="add-driver-card"
           style={{
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E2E8F0",
-            borderRadius: "14px",
-            padding: "1.75rem",
-            boxShadow: "0 4px 12px rgba(15, 23, 42, 0.04)",
+            backgroundColor: "var(--ads-material-thick)",
+            backdropFilter: "var(--ads-blur-md)",
+            WebkitBackdropFilter: "var(--ads-blur-md)",
+            border: "1px solid var(--ads-hairline)",
+            borderRadius: "var(--ads-r-md)",
+            padding: "var(--ads-s6)",
+            boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
             display: "flex",
             flexDirection: "column",
-            gap: "2rem",
+            gap: "var(--ads-s8)",
           }}
         >
           {/* Section 1: Basic Identification */}
@@ -358,14 +367,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.5rem",
-                paddingBottom: "0.6rem",
-                borderBottom: "1px solid #F1F5F9",
-                marginBottom: "1.25rem",
+                gap: "var(--ads-s2)",
+                paddingBottom: "var(--ads-s2)",
+                borderBottom: "1px solid var(--ads-hairline)",
+                marginBottom: "var(--ads-s5)",
               }}
             >
-              <Truck size={18} color="#2563EB" />
-              <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "#1E293B" }}>
+              <Truck size={18} color="var(--ads-blue)" />
+              <h3 style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 600, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                 Basic Vehicle Identification
               </h3>
             </div>
@@ -374,13 +383,13 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-                gap: "1.25rem",
+                gap: "var(--ads-s5)",
               }}
             >
               {/* Unit Number */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                  Van / Unit Number <span style={{ color: "#DC2626" }}>*</span>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
+                  Van / Unit Number <span style={{ color: "var(--ads-red)" }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -389,22 +398,24 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("name", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: errors.name ? "1px solid #EF4444" : "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: errors.name ? "1px solid var(--ads-red)" : "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
-                {errors.name && <span style={{ color: "#EF4444", fontSize: "0.75rem", marginTop: "0.25rem", display: "block" }}>{errors.name}</span>}
+                {errors.name && <span style={{ color: "var(--ads-red)", fontSize: "0.75rem", marginTop: "var(--ads-s1)", display: "block" }}>{errors.name}</span>}
               </div>
 
               {/* VIN */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                  VIN (17 Characters) <span style={{ color: "#DC2626" }}>*</span>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
+                  VIN (17 Characters) <span style={{ color: "var(--ads-red)" }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -414,24 +425,26 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("vin", e.target.value.toUpperCase())}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: errors.vin ? "1px solid #EF4444" : "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: errors.vin ? "1px solid var(--ads-red)" : "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     letterSpacing: "0.05em",
                     textTransform: "uppercase",
                     outline: "none",
                   }}
                 />
-                {errors.vin && <span style={{ color: "#EF4444", fontSize: "0.75rem", marginTop: "0.25rem", display: "block" }}>{errors.vin}</span>}
+                {errors.vin && <span style={{ color: "var(--ads-red)", fontSize: "0.75rem", marginTop: "var(--ads-s1)", display: "block" }}>{errors.vin}</span>}
               </div>
 
               {/* License Plate */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                  License Plate <span style={{ color: "#DC2626" }}>*</span>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
+                  License Plate <span style={{ color: "var(--ads-red)" }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -440,35 +453,39 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("plate", e.target.value.toUpperCase())}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: errors.plate ? "1px solid #EF4444" : "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: errors.plate ? "1px solid var(--ads-red)" : "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     textTransform: "uppercase",
                     outline: "none",
                   }}
                 />
-                {errors.plate && <span style={{ color: "#EF4444", fontSize: "0.75rem", marginTop: "0.25rem", display: "block" }}>{errors.plate}</span>}
+                {errors.plate && <span style={{ color: "var(--ads-red)", fontSize: "0.75rem", marginTop: "var(--ads-s1)", display: "block" }}>{errors.plate}</span>}
               </div>
 
               {/* State */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                  Registered State <span style={{ color: "#DC2626" }}>*</span>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
+                  Registered State <span style={{ color: "var(--ads-red)" }}>*</span>
                 </label>
                 <select
                   value={formData.state}
                   onChange={(e) => handleChange("state", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 >
@@ -482,8 +499,8 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* Make */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                  Make <span style={{ color: "#DC2626" }}>*</span>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
+                  Make <span style={{ color: "var(--ads-red)" }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -492,22 +509,24 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("make", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: errors.make ? "1px solid #EF4444" : "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: errors.make ? "1px solid var(--ads-red)" : "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
-                {errors.make && <span style={{ color: "#EF4444", fontSize: "0.75rem", marginTop: "0.25rem", display: "block" }}>{errors.make}</span>}
+                {errors.make && <span style={{ color: "var(--ads-red)", fontSize: "0.75rem", marginTop: "var(--ads-s1)", display: "block" }}>{errors.make}</span>}
               </div>
 
               {/* Model */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
-                  Model <span style={{ color: "#DC2626" }}>*</span>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
+                  Model <span style={{ color: "var(--ads-red)" }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -516,21 +535,23 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("model", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: errors.model ? "1px solid #EF4444" : "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: errors.model ? "1px solid var(--ads-red)" : "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
-                {errors.model && <span style={{ color: "#EF4444", fontSize: "0.75rem", marginTop: "0.25rem", display: "block" }}>{errors.model}</span>}
+                {errors.model && <span style={{ color: "var(--ads-red)", fontSize: "0.75rem", marginTop: "var(--ads-s1)", display: "block" }}>{errors.model}</span>}
               </div>
 
               {/* Year */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Year
                 </label>
                 <input
@@ -542,12 +563,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("year", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
@@ -555,7 +578,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* Trim */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Trim / Body Style
                 </label>
                 <input
@@ -565,12 +588,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("trim", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
@@ -584,14 +609,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.5rem",
-                paddingBottom: "0.6rem",
-                borderBottom: "1px solid #F1F5F9",
-                marginBottom: "1.25rem",
+                gap: "var(--ads-s2)",
+                paddingBottom: "var(--ads-s2)",
+                borderBottom: "1px solid var(--ads-hairline)",
+                marginBottom: "var(--ads-s5)",
               }}
             >
-              <Building size={18} color="#2563EB" />
-              <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "#1E293B" }}>
+              <Building size={18} color="var(--ads-blue)" />
+              <h3 style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 600, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                 Fleet Classification & Station Assignment
               </h3>
             </div>
@@ -600,12 +625,12 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-                gap: "1.25rem",
+                gap: "var(--ads-s5)",
               }}
             >
               {/* Vehicle Type */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Vehicle Type
                 </label>
                 <select
@@ -613,12 +638,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("vehicle_type", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 >
@@ -632,7 +659,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* Van Sub-Type */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Van Sub-Type
                 </label>
                 <select
@@ -640,12 +667,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("vehicle_sub_type", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 >
@@ -659,7 +688,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* Ownership Type */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Ownership Type
                 </label>
                 <select
@@ -667,12 +696,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("ownership_type", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 >
@@ -686,7 +717,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* Leasing Vendor */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Leasing / Fleet Vendor
                 </label>
                 <select
@@ -694,12 +725,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("vendor", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 >
@@ -713,7 +746,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* Operational Status */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Operational Status
                 </label>
                 <select
@@ -721,12 +754,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("status", e.target.value as VehicleStatus)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 >
@@ -739,7 +774,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* Station Code */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Assigned Delivery Station
                 </label>
                 <select
@@ -747,12 +782,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("station_code", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 >
@@ -772,14 +809,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.5rem",
-                paddingBottom: "0.6rem",
-                borderBottom: "1px solid #F1F5F9",
-                marginBottom: "1.25rem",
+                gap: "var(--ads-s2)",
+                paddingBottom: "var(--ads-s2)",
+                borderBottom: "1px solid var(--ads-hairline)",
+                marginBottom: "var(--ads-s5)",
               }}
             >
-              <Calendar size={18} color="#2563EB" />
-              <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "#1E293B" }}>
+              <Calendar size={18} color="var(--ads-blue)" />
+              <h3 style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 600, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                 Compliance &amp; Key Dates
               </h3>
             </div>
@@ -788,12 +825,12 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-                gap: "1.25rem",
+                gap: "var(--ads-s5)",
               }}
             >
               {/* Received Date */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Date Received
                 </label>
                 <input
@@ -802,12 +839,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("recieved", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
@@ -815,7 +854,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* Insured Date */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Date Insured
                 </label>
                 <input
@@ -824,12 +863,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("insured", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
@@ -837,7 +878,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* Insurance Expires */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Insurance Expiration
                 </label>
                 <input
@@ -846,12 +887,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("insurance_expires", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
@@ -859,7 +902,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* State Inspection Renewal */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Inspection Renewal Date
                 </label>
                 <input
@@ -868,12 +911,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("insp_renewal_date", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
@@ -887,14 +932,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.5rem",
-                paddingBottom: "0.6rem",
-                borderBottom: "1px solid #F1F5F9",
-                marginBottom: "1.25rem",
+                gap: "var(--ads-s2)",
+                paddingBottom: "var(--ads-s2)",
+                borderBottom: "1px solid var(--ads-hairline)",
+                marginBottom: "var(--ads-s5)",
               }}
             >
-              <CreditCard size={18} color="#2563EB" />
-              <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "#1E293B" }}>
+              <CreditCard size={18} color="var(--ads-blue)" />
+              <h3 style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 600, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                 Fuel Cards &amp; Toll Equipment
               </h3>
             </div>
@@ -903,12 +948,12 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-                gap: "1.25rem",
+                gap: "var(--ads-s5)",
               }}
             >
               {/* Gas Card */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   Gas / Fuel Card ID
                 </label>
                 <input
@@ -918,12 +963,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("gas_card_id", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />
@@ -931,7 +978,7 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
 
               {/* EZ Pass */}
               <div>
-                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "#334155", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.01em", color: "var(--ads-ink-secondary)", marginBottom: "var(--ads-s1)" }}>
                   EZ-Pass / Toll Transponder #
                 </label>
                 <input
@@ -941,12 +988,14 @@ export const VehicleAddEditScreen: FC<VehicleAddEditScreenProps> = ({
                   onChange={(e) => handleChange("ez_pass", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    color: "#0F172A",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    backgroundColor: "var(--ads-material-thick)",
+                    fontSize: "0.8125rem",
+                    fontFamily: "inherit",
+                    color: "var(--ads-ink)",
+                    transition: "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                     outline: "none",
                   }}
                 />

@@ -87,16 +87,20 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
   const innerCard = (
     <div
       style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "16px",
+        background: "var(--ads-material-thick)",
+        backdropFilter: "var(--ads-blur-lg)",
+        WebkitBackdropFilter: "var(--ads-blur-lg)",
+        borderRadius: "var(--ads-r-xl)",
         width: "100%",
         maxWidth: embedded ? "100%" : "760px",
         maxHeight: embedded ? "none" : "90vh",
         overflow: embedded ? "visible" : "hidden",
         display: "flex",
         flexDirection: "column",
-        boxShadow: embedded ? "0 1px 3px 0 rgba(0, 0, 0, 0.1)" : "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-        border: embedded ? "2px solid #E2E8F0" : "1px solid #E2E8F0",
+        boxShadow: embedded
+          ? "var(--ads-shadow-sm), var(--ads-bevel)"
+          : "var(--ads-shadow-lg), var(--ads-bevel)",
+        border: "1px solid var(--ads-hairline)",
       }}
       onClick={(e) => e.stopPropagation()}
     >
@@ -106,11 +110,11 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "1.25rem 1.5rem",
-          borderBottom: "1px solid #E2E8F0",
-          backgroundColor: "#FFFFFF",
+          padding: "var(--ads-s5) var(--ads-s6)",
+          borderBottom: "1px solid var(--ads-hairline)",
+          background: "transparent",
           flexWrap: "wrap",
-          gap: "0.75rem",
+          gap: "var(--ads-s3)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
@@ -121,16 +125,19 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.5rem",
+                gap: "var(--ads-s2)",
                 padding: "0.5rem 0.85rem",
-                borderRadius: "10px",
+                borderRadius: "var(--ads-r-pill)",
                 fontSize: "0.75rem",
-                fontWeight: 700,
-                backgroundColor: "#F1F5F9",
-                color: "#334155",
-                border: "1px solid #E2E8F0",
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+                background: "var(--ads-material-thick)",
+                color: "var(--ads-ink)",
+                border: "1px solid var(--ads-hairline)",
+                boxShadow: "var(--ads-bevel)",
                 cursor: "pointer",
-                marginRight: "0.25rem",
+                marginRight: "var(--ads-s1)",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               <ArrowLeft size={16} />
@@ -141,19 +148,19 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
             style={{
               width: 40,
               height: 40,
-              borderRadius: "10px",
-              backgroundColor: "#FEF2F2",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-red-tint)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               flexShrink: 0,
             }}
           >
-            <ShieldAlert size={20} color="#DC2626" />
+            <ShieldAlert size={20} color="var(--ads-red)" />
           </div>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 700, color: "#0F172A" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
+                <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 700, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                   Accident Report Details
                 </h3>
                 {detail && (
@@ -164,17 +171,21 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
                     title="Click to toggle Open / Resolved"
                     style={{
                       padding: "0.2rem 0.65rem",
-                      borderRadius: "9999px",
+                      borderRadius: "var(--ads-r-pill)",
                       fontSize: "0.75rem",
-                      fontWeight: 700,
+                      fontWeight: 600,
                       cursor: "pointer",
-                      border: isResolved ? "1px solid #A7F3D0" : "1px solid #FECACA",
-                      backgroundColor: isResolved ? "#ECFDF5" : "#FEF2F2",
-                      color: isResolved ? "#065F46" : "#DC2626",
+                      border: isResolved
+                        ? "1px solid var(--ads-green-tint)"
+                        : "1px solid var(--ads-red-tint)",
+                      backgroundColor: isResolved
+                        ? "var(--ads-green-tint)"
+                        : "var(--ads-red-tint)",
+                      color: isResolved ? "var(--ads-green)" : "var(--ads-red)",
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "0.3rem",
-                      transition: "all 0.15s ease",
+                      transition: "all var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     {statusUpdating ? (
@@ -190,7 +201,7 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
                   </button>
                 )}
               </div>
-              <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "#64748B" }}>
+              <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                 ID: {incidentId} {detail?.date ? `· ${fmtDate(detail.date)}` : ""}
               </p>
             </div>
@@ -210,18 +221,20 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
             <button
               type="button"
               onClick={onClose}
+              aria-label="Close accident report details"
               style={{
-                background: "none",
-                border: "none",
+                background: "transparent",
+                border: "1px solid var(--ads-hairline)",
                 cursor: "pointer",
-                color: "#64748B",
+                color: "var(--ads-ink-tertiary)",
                 padding: "6px",
-                borderRadius: "8px",
+                borderRadius: "var(--ads-r-sm)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F1F5F9")}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.04)")}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
             >
               <X size={20} />
@@ -230,7 +243,7 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="scrollable" style={{ flex: 1, overflowY: "auto", padding: "1.5rem" }}>
+        <div className="scrollable" style={{ flex: 1, overflowY: "auto", padding: "var(--ads-s6)" }}>
           {loading ? (
             <div
               style={{
@@ -242,13 +255,13 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
                 gap: "0.75rem",
               }}
             >
-              <Loader2 size={28} style={{ animation: "spin 0.8s linear infinite", color: "#2563EB" }} />
-              <span style={{ fontSize: "0.875rem", color: "#64748B", fontWeight: 500 }}>
+              <Loader2 size={28} style={{ animation: "spin 0.8s linear infinite", color: "var(--ads-blue)" }} />
+              <span style={{ fontSize: "0.875rem", color: "var(--ads-ink-tertiary)", fontWeight: 500 }}>
                 Loading accident report…
               </span>
             </div>
           ) : !detail ? (
-            <div style={{ textAlign: "center", padding: "3rem", color: "#94A3B8" }}>
+            <div style={{ textAlign: "center", padding: "3rem", color: "var(--ads-ink-quaternary)" }}>
               <AlertCircle size={36} style={{ marginBottom: "0.5rem" }} />
               <p style={{ margin: 0, fontWeight: 500 }}>Unable to load accident details.</p>
             </div>
@@ -258,18 +271,18 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
               {detail.injury_form_id && (
                 <div
                   style={{
-                    padding: "0.75rem 1rem",
-                    borderRadius: "10px",
-                    backgroundColor: "#EFF6FF",
-                    border: "1px solid #BFDBFE",
+                    padding: "var(--ads-s3) var(--ads-s4)",
+                    borderRadius: "var(--ads-r-sm)",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    border: "1px solid var(--ads-blue-tint-strong)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                    <Paperclip size={16} color="#2563EB" />
-                    <span style={{ fontSize: "0.8125rem", color: "#1D4ED8", fontWeight: 600 }}>
+                    <Paperclip size={16} color="var(--ads-blue)" />
+                    <span style={{ fontSize: "0.8125rem", color: "var(--ads-blue)", fontWeight: 600 }}>
                       Linked Injury Report: #{detail.injury_form_id}
                     </span>
                   </div>
@@ -279,13 +292,15 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
                       onClick={() => onViewLinkedInjury(detail.injury_form_id!)}
                       style={{
                         padding: "0.3rem 0.75rem",
-                        borderRadius: "6px",
-                        border: "none",
-                        backgroundColor: "#2563EB",
+                        borderRadius: "var(--ads-r-pill)",
+                        border: "1px solid transparent",
+                        backgroundColor: "var(--ads-blue)",
                         color: "#FFFFFF",
                         fontSize: "0.75rem",
                         fontWeight: 600,
+                        letterSpacing: "-0.01em",
                         cursor: "pointer",
+                        transition: "all var(--ads-dur-fast) var(--ads-ease)",
                       }}
                     >
                       View Injury
@@ -314,8 +329,8 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
                       style={{
                         margin: "0 0 0.35rem",
                         fontSize: "0.72rem",
-                        fontWeight: 700,
-                        color: "#64748B",
+                        fontWeight: 600,
+                        color: "var(--ads-ink-tertiary)",
                         textTransform: "uppercase",
                         letterSpacing: "0.04em",
                       }}
@@ -324,12 +339,12 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
                     </p>
                     <div
                       style={{
-                        backgroundColor: "#FFFFFF",
+                        backgroundColor: "var(--ads-material-thick)",
                         padding: "0.85rem",
-                        borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
+                        borderRadius: "var(--ads-r-sm)",
+                        border: "1px solid var(--ads-hairline)",
                         fontSize: "0.875rem",
-                        color: "#334155",
+                        color: "var(--ads-ink-secondary)",
                         lineHeight: 1.6,
                       }}
                     >
@@ -375,12 +390,12 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
                 <Section title="Vehicle Damage">
                   <div
                     style={{
-                      backgroundColor: "#FFFFFF",
+                      backgroundColor: "var(--ads-material-thick)",
                       padding: "0.85rem",
-                      borderRadius: "8px",
-                      border: "1px solid #E2E8F0",
+                      borderRadius: "var(--ads-r-sm)",
+                      border: "1px solid var(--ads-hairline)",
                       fontSize: "0.875rem",
-                      color: "#334155",
+                      color: "var(--ads-ink-secondary)",
                       lineHeight: 1.6,
                     }}
                   >
@@ -424,9 +439,10 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
                             width: 90,
                             height: 90,
                             objectFit: "cover",
-                            borderRadius: "10px",
-                            border: "1px solid #CBD5E1",
-                            boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
+                            borderRadius: "var(--ads-r-sm)",
+                            border: "1px solid var(--ads-hairline-strong)",
+                            boxShadow: "var(--ads-shadow-xs)",
+                            transition: "all var(--ads-dur-fast) var(--ads-ease)",
                           }}
                         />
                       </a>
@@ -449,13 +465,14 @@ export const AccidentDetailModal: FC<AccidentDetailModalProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.55)",
-        backdropFilter: "blur(4px)",
+        background: "rgba(0,0,0,0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         zIndex: 9999,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "1rem",
+        padding: "var(--ads-s4)",
       }}
       onClick={onClose}
     >
@@ -468,10 +485,10 @@ const Section: FC<{ title: string; children: React.ReactNode }> = ({ title, chil
   <div>
     <p
       style={{
-        margin: "0 0 0.5rem",
+        margin: "0 0 var(--ads-s2)",
         fontSize: "0.72rem",
-        fontWeight: 700,
-        color: "#2563EB",
+        fontWeight: 600,
+        color: "var(--ads-blue)",
         textTransform: "uppercase",
         letterSpacing: "0.06em",
       }}
@@ -480,10 +497,10 @@ const Section: FC<{ title: string; children: React.ReactNode }> = ({ title, chil
     </p>
     <div
       style={{
-        backgroundColor: "#F8FAFC",
-        border: "1px solid #E2E8F0",
-        borderRadius: "10px",
-        padding: "0.9rem",
+        backgroundColor: "var(--ads-canvas)",
+        border: "1px solid var(--ads-hairline)",
+        borderRadius: "var(--ads-r-md)",
+        padding: "var(--ads-s4)",
       }}
     >
       {children}
@@ -514,7 +531,7 @@ const FieldItem: FC<{ label: string; value?: any; icon?: React.ReactNode }> = ({
         margin: "0 0 0.2rem",
         fontSize: "0.68rem",
         fontWeight: 600,
-        color: "#94A3B8",
+        color: "var(--ads-ink-quaternary)",
         textTransform: "uppercase",
         letterSpacing: "0.04em",
         display: "flex",
@@ -529,7 +546,7 @@ const FieldItem: FC<{ label: string; value?: any; icon?: React.ReactNode }> = ({
       style={{
         margin: 0,
         fontSize: "0.8125rem",
-        color: "#0F172A",
+        color: "var(--ads-ink)",
         fontWeight: 600,
       }}
     >

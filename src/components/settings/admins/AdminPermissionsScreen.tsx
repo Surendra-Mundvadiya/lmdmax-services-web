@@ -308,23 +308,29 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
           type="button"
           onClick={onBack}
           title="Return to Administrators"
+          aria-label="Return to administrators"
           style={{
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.45rem",
-            padding: "0.45rem 0.85rem",
-            borderRadius: "6px",
-            border: "1px solid #CBD5E1",
-            backgroundColor: "#FFFFFF",
-            color: "#2563EB",
+            gap: "var(--ads-s2)",
+            padding: "9px 18px",
+            borderRadius: "var(--ads-r-pill)",
+            border: "1px solid var(--ads-hairline)",
+            background: "var(--ads-material-thick)",
+            color: "var(--ads-blue)",
+            fontFamily: "inherit",
             fontSize: "0.8125rem",
-            fontWeight: 650,
+            fontWeight: 600,
+            letterSpacing: "-0.01em",
             cursor: "pointer",
-            boxShadow: "0 1px 2px rgba(0, 0, 0, 0.04)",
-            transition: "all 0.15s ease",
+            boxShadow: "var(--ads-bevel)",
+            transition:
+              "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#EFF6FF")}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFFFFF")}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)")}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "var(--ads-material-thick)")
+          }
         >
           <ArrowLeft size={16} />
           <span>Back to Admins</span>
@@ -337,8 +343,8 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
               alignItems: "center",
               gap: "0.4rem",
               fontSize: "0.75rem",
-              color: "#64748B",
-              fontWeight: 500,
+              color: "var(--ads-ink-tertiary)",
+              fontWeight: 550,
             }}
           >
             <Loader2 size={13} className="animate-spin text-blue-600" />
@@ -354,13 +360,13 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
             display: "flex",
             alignItems: "center",
             gap: "0.5rem",
-            padding: "0.75rem 1rem",
-            backgroundColor: "#FEF2F2",
-            border: "1px solid #FCA5A5",
-            borderRadius: "8px",
+            padding: "var(--ads-s3) var(--ads-s4)",
+            background: "var(--ads-red-tint)",
+            border: "1px solid transparent",
+            borderRadius: "var(--ads-r-md)",
             fontSize: "0.8125rem",
-            color: "#B91C1C",
-            marginBottom: "1rem",
+            color: "var(--ads-red)",
+            marginBottom: "var(--ads-s4)",
           }}
         >
           <AlertCircle size={16} style={{ flexShrink: 0 }} />
@@ -375,16 +381,16 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
             display: "flex",
             alignItems: "center",
             gap: "0.6rem",
-            padding: "0.75rem 1rem",
-            backgroundColor: "#EFF6FF",
-            border: "1px solid #BFDBFE",
-            borderRadius: "8px",
+            padding: "var(--ads-s3) var(--ads-s4)",
+            background: "var(--ads-blue-tint)",
+            border: "1px solid transparent",
+            borderRadius: "var(--ads-r-md)",
             fontSize: "0.8125rem",
-            color: "#1E40AF",
-            marginBottom: "1rem",
+            color: "var(--ads-ink-secondary)",
+            marginBottom: "var(--ads-s4)",
           }}
         >
-          <AlertCircle size={16} style={{ flexShrink: 0, color: "#2563EB" }} />
+          <AlertCircle size={16} style={{ flexShrink: 0, color: "var(--ads-blue)" }} />
           <span>
             <strong>Account Owner</strong> has full administrative access and permissions across all modules by default.
           </span>
@@ -394,10 +400,12 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
       {/* 4. Clean Table Card (No View column, No subtitles) */}
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          border: "1px solid #E2E8F0",
-          borderRadius: "10px",
-          boxShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
+          background: "var(--ads-material-thick)",
+          WebkitBackdropFilter: "var(--ads-blur-md)",
+          backdropFilter: "var(--ads-blur-md)",
+          border: "1px solid var(--ads-hairline)",
+          borderRadius: "var(--ads-r-lg)",
+          boxShadow: "var(--ads-shadow-sm), var(--ads-bevel)",
           overflow: "hidden",
         }}
       >
@@ -413,7 +421,7 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
             }}
           >
             <Loader2 size={30} className="animate-spin text-blue-600" />
-            <span style={{ fontSize: "0.875rem", color: "#64748B", fontWeight: 500 }}>
+            <span style={{ fontSize: "0.875rem", color: "var(--ads-ink-tertiary)", fontWeight: 550 }}>
               Loading permissions...
             </span>
           </div>
@@ -429,18 +437,18 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
               <thead>
                 <tr
                   style={{
-                    backgroundColor: "#F8FAFC",
-                    borderBottom: "1px solid #E2E8F0",
+                    background: "rgba(255, 255, 255, 0.72)",
+                    borderBottom: "1px solid var(--ads-hairline)",
                   }}
                 >
                   <th
                     style={{
                       padding: "0.85rem 1.25rem",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "#475569",
-                      textTransform: "capitalize",
-                      letterSpacing: "0.02em",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      color: "var(--ads-ink-tertiary)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
                       width: "35%",
                     }}
                   >
@@ -449,11 +457,11 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                   <th
                     style={{
                       padding: "0.85rem 0.75rem",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "#475569",
-                      textTransform: "capitalize",
-                      letterSpacing: "0.02em",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      color: "var(--ads-ink-tertiary)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
                       textAlign: "center",
                       width: "13%",
                     }}
@@ -463,11 +471,11 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                   <th
                     style={{
                       padding: "0.85rem 0.75rem",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "#475569",
-                      textTransform: "capitalize",
-                      letterSpacing: "0.02em",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      color: "var(--ads-ink-tertiary)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
                       textAlign: "center",
                       width: "13%",
                     }}
@@ -477,11 +485,11 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                   <th
                     style={{
                       padding: "0.85rem 0.75rem",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "#475569",
-                      textTransform: "capitalize",
-                      letterSpacing: "0.02em",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      color: "var(--ads-ink-tertiary)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
                       textAlign: "center",
                       width: "13%",
                     }}
@@ -491,11 +499,11 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                   <th
                     style={{
                       padding: "0.85rem 0.75rem",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "#475569",
-                      textTransform: "capitalize",
-                      letterSpacing: "0.02em",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      color: "var(--ads-ink-tertiary)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
                       textAlign: "center",
                       width: "13%",
                     }}
@@ -505,11 +513,11 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                   <th
                     style={{
                       padding: "0.85rem 0.75rem",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "#475569",
-                      textTransform: "capitalize",
-                      letterSpacing: "0.02em",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
+                      color: "var(--ads-ink-tertiary)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
                       textAlign: "center",
                       width: "13%",
                     }}
@@ -535,13 +543,17 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                     <tr
                       key={mod.key}
                       style={{
-                        borderBottom: isLastRow ? "none" : "1px solid #F1F5F9",
-                        backgroundColor: p.enabled ? "#FFFFFF" : "#FBFDFF",
-                        transition: "background-color 0.15s ease",
+                        borderBottom: isLastRow ? "none" : "1px solid var(--ads-hairline)",
+                        backgroundColor: p.enabled ? "transparent" : "rgba(0, 0, 0, 0.02)",
+                        transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F8FAFC")}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor = "rgba(0, 113, 227, 0.045)")
+                      }
                       onMouseLeave={(e) =>
-                        (e.currentTarget.style.backgroundColor = p.enabled ? "#FFFFFF" : "#FBFDFF")
+                        (e.currentTarget.style.backgroundColor = p.enabled
+                          ? "transparent"
+                          : "rgba(0, 0, 0, 0.02)")
                       }
                     >
                       {/* 1. Feature Module Name (Clean: No Subtitle/Descriptions) */}
@@ -551,14 +563,17 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                             style={{
                               width: "32px",
                               height: "32px",
-                              borderRadius: "7px",
-                              backgroundColor: p.enabled ? "#EFF6FF" : "#F1F5F9",
-                              color: p.enabled ? "#2563EB" : "#94A3B8",
+                              borderRadius: "var(--ads-r-sm)",
+                              backgroundColor: p.enabled
+                                ? "var(--ads-blue-tint)"
+                                : "rgba(0, 0, 0, 0.04)",
+                              color: p.enabled ? "var(--ads-blue)" : "var(--ads-ink-quaternary)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
                               flexShrink: 0,
-                              transition: "all 0.15s ease",
+                              transition:
+                                "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
                             }}
                           >
                             <Icon size={16} />
@@ -567,7 +582,8 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                             style={{
                               fontSize: "0.875rem",
                               fontWeight: 600,
-                              color: p.enabled ? "#0F172A" : "#64748B",
+                              letterSpacing: "-0.01em",
+                              color: p.enabled ? "var(--ads-ink)" : "var(--ads-ink-tertiary)",
                               lineHeight: "1.3",
                             }}
                           >
@@ -579,10 +595,9 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                       {/* 2. Active Toggle Switch */}
                       <td style={{ padding: "0.75rem", textAlign: "center" }}>
                         <label
-                          className="driver-status-toggle"
+                          className="custom-blue-switch"
                           style={{
                             margin: "0 auto",
-                            display: "inline-block",
                             opacity: isOwner ? 0.75 : 1,
                             cursor: isOwner ? "not-allowed" : "pointer",
                           }}
@@ -592,9 +607,10 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                             type="checkbox"
                             checked={p.enabled}
                             disabled={isOwner}
+                            aria-label={`Toggle ${mod.label} module access`}
                             onChange={() => handleToggleModule(mod.key)}
                           />
-                          <span className="driver-toggle-slider round" />
+                          <span className="switch-slider" />
                         </label>
                       </td>
 
@@ -610,8 +626,8 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                             width: "18px",
                             height: "18px",
                             cursor: isOwner || !p.enabled ? "not-allowed" : "pointer",
-                            accentColor: "#2563EB",
-                            borderRadius: "4px",
+                            accentColor: "var(--ads-blue)",
+                            borderRadius: "var(--ads-r-xs)",
                             opacity: p.enabled ? 1 : 0.35,
                           }}
                         />
@@ -629,8 +645,8 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                             width: "18px",
                             height: "18px",
                             cursor: isOwner || !p.enabled ? "not-allowed" : "pointer",
-                            accentColor: "#2563EB",
-                            borderRadius: "4px",
+                            accentColor: "var(--ads-blue)",
+                            borderRadius: "var(--ads-r-xs)",
                             opacity: p.enabled ? 1 : 0.35,
                           }}
                         />
@@ -648,8 +664,8 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                             width: "18px",
                             height: "18px",
                             cursor: isOwner || !p.enabled ? "not-allowed" : "pointer",
-                            accentColor: "#2563EB",
-                            borderRadius: "4px",
+                            accentColor: "var(--ads-blue)",
+                            borderRadius: "var(--ads-r-xs)",
                             opacity: p.enabled ? 1 : 0.35,
                           }}
                         />
@@ -667,8 +683,8 @@ export const AdminPermissionsScreen: FC<AdminPermissionsScreenProps> = ({
                             width: "18px",
                             height: "18px",
                             cursor: isOwner || !p.enabled ? "not-allowed" : "pointer",
-                            accentColor: "#2563EB",
-                            borderRadius: "4px",
+                            accentColor: "var(--ads-blue)",
+                            borderRadius: "var(--ads-r-xs)",
                             opacity: p.enabled ? 1 : 0.35,
                           }}
                         />

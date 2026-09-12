@@ -221,8 +221,9 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.5)",
-        backdropFilter: "blur(3px)",
+        backgroundColor: "rgba(0, 0, 0, 0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         zIndex: 9999,
         display: "flex",
         alignItems: "center",
@@ -235,15 +236,17 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
     >
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "14px",
+          backgroundColor: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
           width: "100%",
           maxWidth: "680px",
           maxHeight: "90vh",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 20px 40px -15px rgba(15, 23, 42, 0.2)",
-          border: "1px solid #E2E8F0",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          border: "1px solid var(--ads-hairline)",
           overflow: "hidden",
         }}
         onClick={(e) => e.stopPropagation()}
@@ -252,11 +255,11 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
         <div
           style={{
             padding: "1.1rem 1.4rem",
-            borderBottom: "1px solid #E2E8F0",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "var(--ads-material-thick)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
@@ -264,9 +267,9 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
               style={{
                 width: "36px",
                 height: "36px",
-                borderRadius: "10px",
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -275,26 +278,26 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
               <Users size={19} />
             </div>
             <div>
-              <h2 style={{ fontSize: "1.05rem", fontWeight: 700, color: "#0F172A", margin: 0 }}>
+              <h2 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0 }}>
                 {isEditMode ? "Edit Driver Callout" : "Add Driver Callouts"}
               </h2>
-              <p style={{ fontSize: "0.75rem", color: "#64748B", margin: "0.15rem 0 0 0" }}>
+              <p style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", margin: "0.15rem 0 0 0" }}>
                 {isEditMode
                   ? "Update callout details for the driver"
                   : "Select one or multiple drivers to batch record shift callouts"}
               </p>
             </div>
           </div>
-          <button
+          <button aria-label="Close" title="Close"
             type="button"
             onClick={onClose}
             style={{
               border: "none",
               background: "transparent",
-              color: "#64748B",
+              color: "var(--ads-ink-tertiary)",
               cursor: "pointer",
               padding: "0.35rem",
-              borderRadius: "8px",
+              borderRadius: "var(--ads-r-sm)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -310,10 +313,10 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
             <div
               style={{
                 padding: "0.75rem 0.9rem",
-                borderRadius: "10px",
-                backgroundColor: "#FEF2F2",
-                border: "1px solid #FECACA",
-                color: "#991B1B",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-red-tint)",
+                border: "1px solid transparent",
+                color: "var(--ads-red)",
                 fontSize: "0.8125rem",
                 display: "flex",
                 alignItems: "center",
@@ -329,16 +332,16 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
           {!isEditMode && (
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem" }}>
-                <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B" }}>
-                  Select Drivers <span style={{ color: "#EF4444" }}>*</span>
+                <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)" }}>
+                  Select Drivers <span style={{ color: "var(--ads-red)" }}>*</span>
                   {selectedDriverIds.length > 0 && (
                     <span
                       style={{
                         marginLeft: "0.5rem",
                         padding: "0.15rem 0.5rem",
-                        borderRadius: "9999px",
-                        backgroundColor: "#EFF6FF",
-                        color: "#2563EB",
+                        borderRadius: "var(--ads-r-pill)",
+                        backgroundColor: "var(--ads-blue-tint)",
+                        color: "var(--ads-blue)",
                         fontSize: "0.75rem",
                         fontWeight: 700,
                       }}
@@ -354,7 +357,7 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                     style={{
                       border: "none",
                       background: "none",
-                      color: "#2563EB",
+                      color: "var(--ads-blue)",
                       fontSize: "0.75rem",
                       fontWeight: 600,
                       cursor: "pointer",
@@ -363,14 +366,14 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                   >
                     Select All
                   </button>
-                  <span style={{ color: "#CBD5E1" }}>|</span>
+                  <span style={{ color: "var(--ads-ink-quaternary)" }}>|</span>
                   <button
                     type="button"
                     onClick={handleClearAll}
                     style={{
                       border: "none",
                       background: "none",
-                      color: "#64748B",
+                      color: "var(--ads-ink-tertiary)",
                       fontSize: "0.75rem",
                       fontWeight: 600,
                       cursor: "pointer",
@@ -389,12 +392,12 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                   alignItems: "center",
                   gap: "0.5rem",
                   padding: "0.45rem 0.75rem",
-                  borderRadius: "8px",
-                  border: "1px solid #CBD5E1",
-                  backgroundColor: "#F8FAFC",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid var(--ads-hairline)",
+                  backgroundColor: "rgba(0, 0, 0, 0.025)",
                 }}
               >
-                <Search size={14} style={{ color: "#64748B", flexShrink: 0 }} />
+                <Search size={14} style={{ color: "var(--ads-ink-tertiary)", flexShrink: 0 }} />
                 <input
                   type="text"
                   placeholder="Search driver by name or phone..."
@@ -406,14 +409,16 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                     background: "transparent",
                     fontSize: "0.8125rem",
                     width: "100%",
-                    color: "#1E293B",
+                    color: "var(--ads-ink)",
                   }}
                 />
                 {driverSearch && (
                   <button
                     type="button"
                     onClick={() => setDriverSearch("")}
-                    style={{ border: "none", background: "none", cursor: "pointer", color: "#64748B" }}
+                    aria-label="Clear driver search"
+                    title="Clear search"
+                    style={{ border: "none", background: "none", cursor: "pointer", color: "var(--ads-ink-tertiary)" }}
                   >
                     <X size={12} />
                   </button>
@@ -428,9 +433,9 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                     flexWrap: "wrap",
                     gap: "0.35rem",
                     padding: "0.4rem 0.5rem",
-                    backgroundColor: "#F0F6FF",
-                    borderRadius: "8px",
-                    border: "1px solid #BFDBFE",
+                    backgroundColor: "var(--ads-blue-tint)",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid transparent",
                     maxHeight: "80px",
                     overflowY: "auto",
                   }}
@@ -443,10 +448,10 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                         alignItems: "center",
                         gap: "0.35rem",
                         padding: "0.2rem 0.5rem",
-                        borderRadius: "6px",
-                        backgroundColor: "#FFFFFF",
-                        border: "1px solid #93C5FD",
-                        color: "#1E40AF",
+                        borderRadius: "var(--ads-r-xs)",
+                        backgroundColor: "var(--ads-material-thick)",
+                        border: "1px solid var(--ads-blue)",
+                        color: "var(--ads-blue-active)",
                         fontSize: "0.75rem",
                         fontWeight: 600,
                       }}
@@ -455,11 +460,13 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                       <button
                         type="button"
                         onClick={() => toggleDriver(d.id)}
+                        aria-label={`Remove ${d.name}`}
+                        title={`Remove ${d.name}`}
                         style={{
                           border: "none",
                           background: "none",
                           cursor: "pointer",
-                          color: "#1E40AF",
+                          color: "var(--ads-blue-active)",
                           padding: 0,
                           display: "flex",
                           alignItems: "center",
@@ -475,15 +482,15 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
               {/* Drivers Checkbox List */}
               <div
                 style={{
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "8px",
+                  border: "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-sm)",
                   maxHeight: "160px",
                   overflowY: "auto",
-                  backgroundColor: "#FFFFFF",
+                  backgroundColor: "var(--ads-material-thick)",
                 }}
               >
                 {filteredDrivers.length === 0 ? (
-                  <div style={{ padding: "1rem", textAlign: "center", color: "#94A3B8", fontSize: "0.8125rem" }}>
+                  <div style={{ padding: "1rem", textAlign: "center", color: "var(--ads-ink-tertiary)", fontSize: "0.8125rem" }}>
                     No drivers found matching your search.
                   </div>
                 ) : (
@@ -500,9 +507,9 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                           alignItems: "center",
                           justifyContent: "space-between",
                           padding: "0.45rem 0.75rem",
-                          borderBottom: "1px solid #F1F5F9",
+                          borderBottom: "1px solid var(--ads-hairline)",
                           cursor: "pointer",
-                          backgroundColor: isSelected ? "#EFF6FF" : "#FFFFFF",
+                          backgroundColor: isSelected ? "var(--ads-blue-tint)" : "#FFFFFF",
                           transition: "background 0.15s ease",
                         }}
                       >
@@ -511,15 +518,15 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                             type="checkbox"
                             checked={isSelected}
                             onChange={() => {}}
-                            style={{ cursor: "pointer", accentColor: "#2563EB", width: "15px", height: "15px" }}
+                            style={{ cursor: "pointer", accentColor: "var(--ads-blue)", width: "15px", height: "15px" }}
                           />
                           <div
                             style={{
                               width: "26px",
                               height: "26px",
                               borderRadius: "50%",
-                              backgroundColor: isSelected ? "#2563EB" : "#E2E8F0",
-                              color: isSelected ? "#FFFFFF" : "#475569",
+                              backgroundColor: isSelected ? "var(--ads-blue)" : "rgba(0, 0, 0, 0.06)",
+                              color: isSelected ? "#FFFFFF" : "var(--ads-ink-secondary)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
@@ -530,11 +537,11 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                             {d.name.charAt(0).toUpperCase()}
                           </div>
                           <div>
-                            <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#1E293B" }}>
+                            <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                               {d.name}
                             </span>
                             {d.phone && (
-                              <span style={{ fontSize: "0.7rem", color: "#64748B", marginLeft: "0.5rem" }}>
+                              <span style={{ fontSize: "0.7rem", color: "var(--ads-ink-tertiary)", marginLeft: "0.5rem" }}>
                                 {d.phone}
                               </span>
                             )}
@@ -546,10 +553,10 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                             style={{
                               fontSize: "0.6875rem",
                               fontWeight: 600,
-                              color: "#F59E0B",
-                              backgroundColor: "#FEF3C7",
+                              color: "var(--ads-amber)",
+                              backgroundColor: "var(--ads-amber-tint)",
                               padding: "0.15rem 0.45rem",
-                              borderRadius: "9999px",
+                              borderRadius: "var(--ads-r-pill)",
                             }}
                           >
                             Already on callout
@@ -571,9 +578,9 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                 alignItems: "center",
                 gap: "0.65rem",
                 padding: "0.65rem 0.85rem",
-                backgroundColor: "#EFF6FF",
-                borderRadius: "8px",
-                border: "1px solid #BFDBFE",
+                backgroundColor: "var(--ads-blue-tint)",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid transparent",
               }}
             >
               <div
@@ -581,7 +588,7 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                   width: "32px",
                   height: "32px",
                   borderRadius: "50%",
-                  backgroundColor: "#2563EB",
+                  backgroundColor: "var(--ads-blue)",
                   color: "#FFFFFF",
                   display: "flex",
                   alignItems: "center",
@@ -593,10 +600,10 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                 {initialCallout.name.charAt(0).toUpperCase()}
               </div>
               <div>
-                <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#1E293B" }}>
+                <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                   {initialCallout.name}
                 </span>
-                <span style={{ fontSize: "0.75rem", color: "#64748B", marginLeft: "0.5rem" }}>
+                <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", marginLeft: "0.5rem" }}>
                   (ID: {initialCallout.driver_id})
                 </span>
               </div>
@@ -607,8 +614,8 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1rem" }}>
             {/* Date Input */}
             <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-              <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B" }}>
-                Callout Date <span style={{ color: "#EF4444" }}>*</span>
+              <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)" }}>
+                Callout Date <span style={{ color: "var(--ads-red)" }}>*</span>
               </label>
               <div
                 style={{
@@ -616,12 +623,12 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                   alignItems: "center",
                   gap: "0.5rem",
                   padding: "0.5rem 0.75rem",
-                  borderRadius: "8px",
-                  border: "1px solid #CBD5E1",
-                  backgroundColor: "#FFFFFF",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid var(--ads-hairline)",
+                  backgroundColor: "var(--ads-material-thick)",
                 }}
               >
-                <Calendar size={15} style={{ color: "#64748B" }} />
+                <Calendar size={15} style={{ color: "var(--ads-ink-tertiary)" }} />
                 <input
                   type="date"
                   value={date}
@@ -630,7 +637,7 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                     border: "none",
                     outline: "none",
                     fontSize: "0.8125rem",
-                    color: "#1E293B",
+                    color: "var(--ads-ink)",
                     width: "100%",
                     background: "transparent",
                     fontFamily: "inherit",
@@ -642,19 +649,19 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
 
             {/* Callout Type Dropdown */}
             <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-              <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B" }}>
-                Callout Type <span style={{ color: "#EF4444" }}>*</span>
+              <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)" }}>
+                Callout Type <span style={{ color: "var(--ads-red)" }}>*</span>
               </label>
               <select
                 value={calloutType}
                 onChange={(e) => handleTypeChange(e.target.value)}
                 style={{
                   padding: "0.55rem 0.75rem",
-                  borderRadius: "8px",
-                  border: "1px solid #CBD5E1",
-                  backgroundColor: "#FFFFFF",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid var(--ads-hairline)",
+                  backgroundColor: "var(--ads-material-thick)",
                   fontSize: "0.8125rem",
-                  color: "#1E293B",
+                  color: "var(--ads-ink)",
                   fontWeight: 600,
                   fontFamily: "inherit",
                   outline: "none",
@@ -672,7 +679,7 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
 
           {/* Excused Toggle */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-            <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B" }}>
+            <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)" }}>
               Excused?
             </label>
             <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -682,13 +689,13 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                 style={{
                   flex: 1,
                   padding: "0.5rem",
-                  borderRadius: "8px",
+                  borderRadius: "var(--ads-r-sm)",
                   fontSize: "0.8125rem",
                   fontWeight: 700,
                   cursor: "pointer",
-                  border: excused === "No" ? "2px solid #F43F5E" : "1px solid #E2E8F0",
-                  backgroundColor: excused === "No" ? "#FFF1F2" : "#FFFFFF",
-                  color: excused === "No" ? "#BE123C" : "#64748B",
+                  border: excused === "No" ? "2px solid var(--ads-red)" : "1px solid var(--ads-hairline)",
+                  backgroundColor: excused === "No" ? "var(--ads-red-tint)" : "#FFFFFF",
+                  color: excused === "No" ? "var(--ads-red)" : "var(--ads-ink-tertiary)",
                   transition: "all 0.15s ease",
                 }}
               >
@@ -700,13 +707,13 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
                 style={{
                   flex: 1,
                   padding: "0.5rem",
-                  borderRadius: "8px",
+                  borderRadius: "var(--ads-r-sm)",
                   fontSize: "0.8125rem",
                   fontWeight: 700,
                   cursor: "pointer",
-                  border: excused === "Yes" ? "2px solid #10B981" : "1px solid #E2E8F0",
-                  backgroundColor: excused === "Yes" ? "#ECFDF5" : "#FFFFFF",
-                  color: excused === "Yes" ? "#047857" : "#64748B",
+                  border: excused === "Yes" ? "2px solid var(--ads-green)" : "1px solid var(--ads-hairline)",
+                  backgroundColor: excused === "Yes" ? "var(--ads-green-tint)" : "#FFFFFF",
+                  color: excused === "Yes" ? "var(--ads-green)" : "var(--ads-ink-tertiary)",
                   transition: "all 0.15s ease",
                 }}
               >
@@ -718,10 +725,10 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
           {/* Reason / Notes */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "#1E293B" }}>
+              <label style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                 Reason / Notes
               </label>
-              <span style={{ fontSize: "0.7rem", color: reason.length >= 240 ? "#EF4444" : "#94A3B8" }}>
+              <span style={{ fontSize: "0.7rem", color: reason.length >= 240 ? "var(--ads-red)" : "var(--ads-ink-tertiary)" }}>
                 {reason.length}/250
               </span>
             </div>
@@ -733,11 +740,11 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
               rows={3}
               style={{
                 padding: "0.55rem 0.75rem",
-                borderRadius: "8px",
-                border: "1px solid #CBD5E1",
-                backgroundColor: "#FFFFFF",
+                borderRadius: "var(--ads-r-sm)",
+                border: "1px solid var(--ads-hairline)",
+                backgroundColor: "var(--ads-material-thick)",
                 fontSize: "0.8125rem",
-                color: "#1E293B",
+                color: "var(--ads-ink)",
                 fontFamily: "inherit",
                 resize: "vertical",
                 outline: "none",
@@ -750,8 +757,8 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
         <div
           style={{
             padding: "0.85rem 1.4rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            borderTop: "1px solid var(--ads-hairline)",
+            backgroundColor: "rgba(0, 0, 0, 0.025)",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
@@ -763,13 +770,16 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
             onClick={onClose}
             disabled={isSubmitting}
             style={{
-              padding: "0.55rem 1.1rem",
-              borderRadius: "8px",
-              border: "1px solid #CBD5E1",
-              backgroundColor: "#FFFFFF",
-              color: "#475569",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid var(--ads-hairline)",
+              backgroundColor: "var(--ads-material-thick)",
+              color: "var(--ads-ink)",
               fontSize: "0.8125rem",
               fontWeight: 600,
+              letterSpacing: "-0.01em",
+              lineHeight: 1,
+              boxShadow: "var(--ads-bevel)",
               cursor: "pointer",
             }}
           >
@@ -780,18 +790,22 @@ export const AddCalloutModal: FC<AddCalloutModalProps> = ({
             onClick={handleSubmit}
             disabled={isSubmitting || (!isEditMode && selectedDriverIds.length === 0)}
             style={{
-              padding: "0.55rem 1.25rem",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: isSubmitting || (!isEditMode && selectedDriverIds.length === 0) ? "#93C5FD" : "#2563EB",
-              color: "#FFFFFF !important",
+              padding: "9px 18px",
+              borderRadius: "var(--ads-r-pill)",
+              border: "1px solid transparent",
+              backgroundColor: "var(--ads-blue)",
+              opacity: isSubmitting || (!isEditMode && selectedDriverIds.length === 0) ? 0.4 : 1,
+              color: "#FFFFFF",
               fontSize: "0.8125rem",
-              fontWeight: 700,
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
+              lineHeight: 1,
+              transition: "background-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
               cursor: isSubmitting || (!isEditMode && selectedDriverIds.length === 0) ? "not-allowed" : "pointer",
               display: "flex",
               alignItems: "center",
               gap: "0.45rem",
-              boxShadow: "0 2px 6px rgba(37, 99, 235, 0.25)",
+              boxShadow: "0 1px 3px rgba(0, 113, 227, 0.24)",
             }}
           >
             {isSubmitting ? (

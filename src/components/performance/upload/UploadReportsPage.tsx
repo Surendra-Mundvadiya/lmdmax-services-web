@@ -23,6 +23,7 @@ import {
 import { ReportIcon } from "./ReportIcons";
 import { AppDateNavigator } from "../../common/AppDateNavigator";
 import { useAuthStore } from "../../../store/authStore";
+import "../performance-glass.css";
 
 const formatReportName = (name?: string): string => {
   if (!name) return "";
@@ -472,7 +473,7 @@ export const UploadReportsPage: FC = () => {
 
   return (
     <div
-      className="upload-reports-shell"
+      className="upload-reports-shell perf-catalog"
       style={{ position: "relative" }}
     >
       {/* Toast Notification */}
@@ -484,16 +485,22 @@ export const UploadReportsPage: FC = () => {
             right: "24px",
             zIndex: 9999,
             backgroundColor:
-              toastMessage.type === "success" ? "#065F46" : toastMessage.type === "error" ? "#991B1B" : "#1E40AF",
+              toastMessage.type === "success"
+                ? "var(--ads-green)"
+                : toastMessage.type === "error"
+                ? "var(--ads-red)"
+                : "var(--ads-blue)",
             color: "#FFFFFF",
             padding: "0.75rem 1.25rem",
-            borderRadius: "8px",
-            boxShadow: "0 10px 15px -3px rgba(0,0,0,0.15)",
+            borderRadius: "var(--ads-r-md)",
+            boxShadow: "var(--ads-shadow-lg)",
             display: "flex",
             alignItems: "center",
             gap: "0.6rem",
             fontSize: "0.875rem",
-            fontWeight: 500,
+            fontWeight: 550,
+            letterSpacing: "-0.01em",
+            animation: "ads-sheet-in var(--ads-dur) var(--ads-ease)",
           }}
         >
           {toastMessage.type === "success" ? (
@@ -504,6 +511,7 @@ export const UploadReportsPage: FC = () => {
           <span>{toastMessage.text}</span>
           <button
             onClick={() => setToastMessage(null)}
+            aria-label="Dismiss notification"
             style={{
               background: "none",
               border: "none",
@@ -511,6 +519,8 @@ export const UploadReportsPage: FC = () => {
               cursor: "pointer",
               marginLeft: "0.5rem",
               display: "flex",
+              borderRadius: "var(--ads-r-xs)",
+              transition: "transform var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <X size={16} />
@@ -528,9 +538,9 @@ export const UploadReportsPage: FC = () => {
           >
             Reports
           </span>
-          <ChevronRight size={14} style={{ color: "#64748B" }} />
+          <ChevronRight size={14} style={{ color: "var(--ads-ink-quaternary)" }} />
           <span className="upload-breadcrumb-current">Upload Reports</span>
-          <ChevronRight size={14} style={{ color: "#64748B" }} />
+          <ChevronRight size={14} style={{ color: "var(--ads-ink-quaternary)" }} />
           <span className="upload-breadcrumb-active-report">
             {formatReportName(activeReport.name)}
           </span>
@@ -572,7 +582,7 @@ export const UploadReportsPage: FC = () => {
                 className="upload-action-pill-btn"
                 title="Download bulk template"
               >
-                <FileDown size={15} style={{ color: "#2563EB" }} />
+                <FileDown size={15} style={{ color: "var(--ads-blue)" }} />
                 <span>Export Template</span>
               </button>
             )}
@@ -607,11 +617,11 @@ export const UploadReportsPage: FC = () => {
                 style={{
                   padding: "2rem 1rem",
                   textAlign: "center",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   fontSize: "0.8125rem",
                 }}
               >
-                <AlertCircle size={28} style={{ margin: "0 auto 0.5rem", color: "#94A3B8" }} />
+                <AlertCircle size={28} style={{ margin: "0 auto 0.5rem", color: "var(--ads-ink-quaternary)" }} />
                 <p style={{ margin: 0, fontWeight: 600 }}>No reports available</p>
               </div>
             ) : (
@@ -629,24 +639,31 @@ export const UploadReportsPage: FC = () => {
                       style={{
                         width: "32px",
                         height: "32px",
-                        borderRadius: "8px",
-                        backgroundColor: isActive ? "#EFF6FF" : "#F1F5F9",
-                        border: isActive ? "1px solid #BFDBFE" : "1px solid #E2E8F0",
+                        borderRadius: "var(--ads-r-xs)",
+                        backgroundColor: isActive ? "var(--ads-blue-tint-strong)" : "rgba(0, 0, 0, 0.04)",
+                        border: "1px solid var(--ads-hairline)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         flexShrink: 0,
+                        transition: "background-color var(--ads-dur-fast) var(--ads-ease)",
                       }}
                     >
-                      <ReportIcon id={r.id} active={isActive} color={isActive ? "#2563EB" : "#64748B"} size="1.05rem" />
+                      <ReportIcon
+                        id={r.id}
+                        active={isActive}
+                        color={isActive ? "var(--ads-blue)" : "var(--ads-ink-tertiary)"}
+                        size="1.05rem"
+                      />
                     </div>
 
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div
                         style={{
                           fontSize: "0.8125rem",
-                          fontWeight: isActive ? 700 : 550,
-                          color: isActive ? "#1D4ED8" : "#1E293B",
+                          fontWeight: isActive ? 650 : 550,
+                          letterSpacing: "-0.01em",
+                          color: isActive ? "#0058B0" : "var(--ads-ink)",
                           whiteSpace: "nowrap",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
@@ -659,7 +676,7 @@ export const UploadReportsPage: FC = () => {
                     <ChevronRight
                       size={14}
                       style={{
-                        color: isActive ? "#2563EB" : "#CBD5E1",
+                        color: isActive ? "var(--ads-blue)" : "var(--ads-ink-quaternary)",
                         flexShrink: 0,
                       }}
                     />
@@ -676,13 +693,15 @@ export const UploadReportsPage: FC = () => {
           <div
             style={{
               padding: "1rem 1.5rem",
-              borderBottom: "1px solid #F1F5F9",
+              borderBottom: "1px solid var(--ads-hairline)",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
               flexWrap: "wrap",
               gap: "1rem",
-              backgroundColor: "rgba(255, 255, 255, 0.95)",
+              backgroundColor: "var(--ads-material-thin)",
+              backdropFilter: "var(--ads-blur-sm)",
+              WebkitBackdropFilter: "var(--ads-blur-sm)",
             }}
           >
             {/* Left: Active Report Info */}
@@ -691,17 +710,17 @@ export const UploadReportsPage: FC = () => {
                 style={{
                   width: "40px",
                   height: "40px",
-                  borderRadius: "10px",
-                  backgroundColor: "#EFF6FF",
-                  border: "1px solid #BFDBFE",
+                  borderRadius: "var(--ads-r-sm)",
+                  backgroundColor: "var(--ads-blue-tint)",
+                  border: "1px solid var(--ads-hairline)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
-                  boxShadow: "0 2px 6px rgba(37, 99, 235, 0.08)",
+                  boxShadow: "var(--ads-shadow-xs)",
                 }}
               >
-                <ReportIcon id={activeReport.id} active color="#2563EB" size="1.25rem" />
+                <ReportIcon id={activeReport.id} active color="var(--ads-blue)" size="1.25rem" />
               </div>
 
               <div>
@@ -710,9 +729,9 @@ export const UploadReportsPage: FC = () => {
                     style={{
                       margin: 0,
                       fontSize: "1.125rem",
-                      fontWeight: 700,
-                      color: "#0F172A",
-                      letterSpacing: "-0.01em",
+                      fontWeight: 650,
+                      color: "var(--ads-ink)",
+                      letterSpacing: "-0.019em",
                     }}
                   >
                     {formatReportName(activeReport.name)}
@@ -720,12 +739,12 @@ export const UploadReportsPage: FC = () => {
                   <span
                     style={{
                       fontSize: "0.6875rem",
-                      fontWeight: 700,
+                      fontWeight: 600,
                       padding: "0.18rem 0.55rem",
-                      borderRadius: "6px",
-                      backgroundColor: "#EFF6FF",
-                      color: "#2563EB",
-                      border: "1px solid #DBEAFE",
+                      borderRadius: "var(--ads-r-pill)",
+                      backgroundColor: "var(--ads-blue-tint)",
+                      color: "#0058B0",
+                      border: "1px solid transparent",
                     }}
                   >
                     {activeReport.id === "weekly_roster_report" || activeCategoryTab === "WEEKLY_ROSTER"
@@ -743,7 +762,7 @@ export const UploadReportsPage: FC = () => {
             {/* Right: Date Navigation Controls */}
             {activeCategoryTab === "DAILY" && (
               <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-                <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#475569" }}>
+                <span style={{ fontSize: "0.8125rem", fontWeight: 550, color: "var(--ads-ink-tertiary)" }}>
                   Report date:
                 </span>
                 <AppDateNavigator
@@ -765,9 +784,10 @@ export const UploadReportsPage: FC = () => {
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "0.25rem",
-                    backgroundColor: "#FFFFFF",
-                    border: "1px solid #CBD5E1",
-                    borderRadius: "8px",
+                    backgroundColor: "var(--ads-material-thick)",
+                    border: "1px solid var(--ads-hairline)",
+                    borderRadius: "var(--ads-r-sm)",
+                    boxShadow: "var(--ads-bevel)",
                     padding: "0.2rem 0.35rem",
                     position: "relative",
                   }}
@@ -780,12 +800,13 @@ export const UploadReportsPage: FC = () => {
                       border: "none",
                       cursor: "pointer",
                       padding: "0.3rem",
-                      borderRadius: "6px",
-                      color: "#475569",
+                      borderRadius: "var(--ads-r-xs)",
+                      color: "var(--ads-ink-secondary)",
                       display: "flex",
                       alignItems: "center",
                     }}
                     title="Previous week"
+                    aria-label="Previous week"
                   >
                     <ChevronLeft size={16} />
                   </button>
@@ -800,18 +821,18 @@ export const UploadReportsPage: FC = () => {
                       padding: "0.25rem 0.65rem",
                       fontWeight: 600,
                       fontSize: "0.875rem",
-                      color: "#0F172A",
+                      color: "var(--ads-ink)",
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "0.5rem",
                     }}
                   >
-                    <Calendar size={15} style={{ color: "#2563EB" }} />
+                    <Calendar size={15} style={{ color: "var(--ads-blue)" }} />
                     <span>{currentWeekDetails.label}</span>
-                    <span style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 500 }}>
+                    <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", fontWeight: 500 }}>
                       ({currentWeekDetails.rangeStr})
                     </span>
-                    <ChevronDown size={14} className="text-slate-400" />
+                    <ChevronDown size={14} style={{ color: "var(--ads-ink-quaternary)" }} />
                   </button>
 
                   <button
@@ -822,12 +843,13 @@ export const UploadReportsPage: FC = () => {
                       border: "none",
                       cursor: "pointer",
                       padding: "0.3rem",
-                      borderRadius: "6px",
-                      color: "#475569",
+                      borderRadius: "var(--ads-r-xs)",
+                      color: "var(--ads-ink-secondary)",
                       display: "flex",
                       alignItems: "center",
                     }}
                     title="Next week"
+                    aria-label="Next week"
                   >
                     <ChevronRight size={16} />
                   </button>
@@ -842,12 +864,15 @@ export const UploadReportsPage: FC = () => {
                         width: "290px",
                         maxHeight: "280px",
                         overflowY: "auto",
-                        backgroundColor: "#FFFFFF",
-                        border: "1px solid #CBD5E1",
-                        borderRadius: "10px",
-                        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.15)",
+                        backgroundColor: "var(--ads-material-thick)",
+                        backdropFilter: "var(--ads-blur-lg)",
+                        WebkitBackdropFilter: "var(--ads-blur-lg)",
+                        border: "1px solid var(--ads-hairline)",
+                        borderRadius: "var(--ads-r-md)",
+                        boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
                         zIndex: 100,
                         padding: "0.35rem",
+                        animation: "ads-sheet-in var(--ads-dur-fast) var(--ads-ease)",
                       }}
                     >
                       {recentWeeks.map((w) => (
@@ -862,13 +887,13 @@ export const UploadReportsPage: FC = () => {
                             width: "100%",
                             padding: "0.5rem 0.75rem",
                             textAlign: "left",
-                            background: w.code === selectedWeek ? "#EFF6FF" : "transparent",
-                            color: w.code === selectedWeek ? "#2563EB" : "#1E293B",
+                            background: w.code === selectedWeek ? "var(--ads-blue-tint)" : "transparent",
+                            color: w.code === selectedWeek ? "#0058B0" : "var(--ads-ink)",
                             border: "none",
-                            borderRadius: "6px",
+                            borderRadius: "var(--ads-r-xs)",
                             cursor: "pointer",
                             fontSize: "0.8125rem",
-                            fontWeight: w.code === selectedWeek ? 700 : 500,
+                            fontWeight: w.code === selectedWeek ? 650 : 500,
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "space-between",
@@ -876,7 +901,7 @@ export const UploadReportsPage: FC = () => {
                           }}
                         >
                           <span>{w.label}</span>
-                          <span style={{ fontSize: "0.75rem", color: w.code === selectedWeek ? "#2563EB" : "#64748B" }}>
+                          <span style={{ fontSize: "0.75rem", color: w.code === selectedWeek ? "#0058B0" : "var(--ads-ink-tertiary)" }}>
                             {w.rangeStr}
                           </span>
                         </button>
@@ -896,14 +921,17 @@ export const UploadReportsPage: FC = () => {
                     style={{
                       padding: "0.35rem 0.75rem",
                       fontSize: "0.8125rem",
-                      fontWeight: isLastWeek(selectedWeek) ? 650 : 500,
-                      borderRadius: "6px",
+                      fontWeight: isLastWeek(selectedWeek) ? 650 : 550,
+                      borderRadius: "var(--ads-r-pill)",
                       border: "1px solid",
                       cursor: "pointer",
-                      backgroundColor: isLastWeek(selectedWeek) ? "#EFF6FF" : "#FFFFFF",
-                      borderColor: isLastWeek(selectedWeek) ? "#BFDBFE" : "#CBD5E1",
-                      color: isLastWeek(selectedWeek) ? "#2563EB" : "#475569",
-                      transition: "all 0.15s ease",
+                      backgroundColor: isLastWeek(selectedWeek)
+                        ? "var(--ads-blue-tint)"
+                        : "var(--ads-material-thick)",
+                      borderColor: isLastWeek(selectedWeek) ? "transparent" : "var(--ads-hairline)",
+                      color: isLastWeek(selectedWeek) ? "#0058B0" : "var(--ads-ink-secondary)",
+                      transition:
+                        "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     Last week
@@ -916,14 +944,17 @@ export const UploadReportsPage: FC = () => {
                     style={{
                       padding: "0.35rem 0.75rem",
                       fontSize: "0.8125rem",
-                      fontWeight: isCurrentWeek(selectedWeek) ? 650 : 500,
-                      borderRadius: "6px",
+                      fontWeight: isCurrentWeek(selectedWeek) ? 650 : 550,
+                      borderRadius: "var(--ads-r-pill)",
                       border: "1px solid",
                       cursor: "pointer",
-                      backgroundColor: isCurrentWeek(selectedWeek) ? "#EFF6FF" : "#FFFFFF",
-                      borderColor: isCurrentWeek(selectedWeek) ? "#BFDBFE" : "#E2E8F0",
-                      color: isCurrentWeek(selectedWeek) ? "#2563EB" : "#475569",
-                      transition: "all 0.15s ease",
+                      backgroundColor: isCurrentWeek(selectedWeek)
+                        ? "var(--ads-blue-tint)"
+                        : "var(--ads-material-thick)",
+                      borderColor: isCurrentWeek(selectedWeek) ? "transparent" : "var(--ads-hairline)",
+                      color: isCurrentWeek(selectedWeek) ? "#0058B0" : "var(--ads-ink-secondary)",
+                      transition:
+                        "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     Current week
@@ -944,7 +975,7 @@ export const UploadReportsPage: FC = () => {
               alignItems: "center",
               justifyContent: "center",
               padding: "2rem 1.5rem",
-              backgroundColor: "#FAFBFD",
+              backgroundColor: "transparent",
             }}
           >
             <div
@@ -960,19 +991,22 @@ export const UploadReportsPage: FC = () => {
               <div
                 className={`upload-dropzone-wrap ${isDragOver ? "drag-over" : ""}`}
                 style={{
-                  border: isDragOver ? "2px dashed #2563EB" : "2px dashed #CBD5E1",
-                  borderRadius: "16px",
+                  border: isDragOver
+                    ? "2px dashed var(--ads-blue)"
+                    : "2px dashed var(--ads-hairline-strong)",
+                  borderRadius: "var(--ads-r-lg)",
                   padding: "2.75rem 2rem",
                   textAlign: "center",
-                  backgroundColor: isDragOver ? "#EFF6FF" : "#FFFFFF",
+                  backgroundColor: isDragOver ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
                   cursor: "pointer",
-                  transition: "all 0.2s cubic-bezier(0.25, 1, 0.5, 1)",
+                  transition:
+                    "background-color var(--ads-dur) var(--ads-ease), border-color var(--ads-dur) var(--ads-ease), box-shadow var(--ads-dur) var(--ads-ease), transform var(--ads-dur) var(--ads-ease)",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
                   minHeight: "220px",
-                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)",
+                  boxShadow: isDragOver ? "var(--ads-shadow-md)" : "var(--ads-shadow-xs)",
                 }}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
@@ -1001,24 +1035,24 @@ export const UploadReportsPage: FC = () => {
                       style={{
                         width: "62px",
                         height: "62px",
-                        borderRadius: "16px",
-                        backgroundColor: "#EFF6FF",
-                        border: "1px solid #BFDBFE",
+                        borderRadius: "var(--ads-r-lg)",
+                        backgroundColor: "var(--ads-blue)",
+                        border: "1px solid transparent",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        boxShadow: "0 4px 14px rgba(37, 99, 235, 0.12)",
-                        color: "#2563EB",
+                        boxShadow: "0 4px 14px rgba(0, 113, 227, 0.24)",
+                        color: "#FFFFFF",
                       }}
                     >
-                      <UploadCloud size={32} />
+                      <UploadCloud size={32} style={{ color: "#FFFFFF" }} />
                     </div>
 
                     <div>
-                      <p style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 700, color: "#0F172A" }}>
+                      <p style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 600, letterSpacing: "-0.014em", color: "var(--ads-ink)" }}>
                         Drag & drop your report here
                       </p>
-                      <p style={{ margin: "0.35rem 0 0 0", fontSize: "0.8125rem", color: "#64748B" }}>
+                      <p style={{ margin: "0.35rem 0 0 0", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                         Files will be automatically processed upon upload
                       </p>
                     </div>
@@ -1035,15 +1069,16 @@ export const UploadReportsPage: FC = () => {
                         alignItems: "center",
                         gap: "0.5rem",
                         padding: "0.5rem 1.25rem",
-                        borderRadius: "8px",
-                        backgroundColor: "#EFF6FF",
-                        border: "1px solid #BFDBFE",
-                        color: "#1D4ED8",
-                        fontWeight: 650,
+                        borderRadius: "var(--ads-r-pill)",
+                        backgroundColor: "var(--ads-blue-tint)",
+                        border: "1px solid transparent",
+                        color: "#0058B0",
+                        fontWeight: 600,
                         fontSize: "0.875rem",
                         cursor: "pointer",
-                        transition: "all 0.15s ease",
-                        boxShadow: "0 1px 3px rgba(37, 99, 235, 0.08)",
+                        transition:
+                          "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
+                        boxShadow: "var(--ads-shadow-xs)",
                       }}
                     >
                       <FileUp size={16} />
@@ -1057,13 +1092,15 @@ export const UploadReportsPage: FC = () => {
                       flexDirection: "column",
                       gap: "0.85rem",
                       padding: "1.15rem 1.35rem",
-                      backgroundColor: "#FFFFFF",
-                      border: "1px solid #BFDBFE",
-                      borderRadius: "12px",
+                      backgroundColor: "var(--ads-material-thick)",
+                      backdropFilter: "var(--ads-blur-md)",
+                      WebkitBackdropFilter: "var(--ads-blur-md)",
+                      border: "1px solid var(--ads-hairline)",
+                      borderRadius: "var(--ads-r-md)",
                       width: "100%",
                       maxWidth: "560px",
                       boxSizing: "border-box",
-                      boxShadow: "0 4px 16px rgba(37, 99, 235, 0.08)",
+                      boxShadow: "var(--ads-shadow-md), var(--ads-bevel)",
                     }}
                     onClick={(e) => e.stopPropagation()}
                   >
@@ -1073,23 +1110,23 @@ export const UploadReportsPage: FC = () => {
                           style={{
                             width: "44px",
                             height: "44px",
-                            borderRadius: "10px",
-                            backgroundColor: "#EFF6FF",
-                            border: "1px solid #DBEAFE",
+                            borderRadius: "var(--ads-r-sm)",
+                            backgroundColor: "var(--ads-blue-tint)",
+                            border: "1px solid var(--ads-hairline)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                             flexShrink: 0,
-                            color: "#2563EB",
+                            color: "var(--ads-blue)",
                           }}
                         >
                           <FileSpreadsheet size={24} />
                         </div>
                         <div style={{ textAlign: "left", minWidth: 0 }}>
-                          <p style={{ margin: 0, fontSize: "0.875rem", fontWeight: 700, color: "#0F172A", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                          <p style={{ margin: 0, fontSize: "0.875rem", fontWeight: 600, color: "var(--ads-ink)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                             {selectedFile.name}
                           </p>
-                          <p style={{ margin: "0.2rem 0 0 0", fontSize: "0.75rem", color: "#64748B" }}>
+                          <p style={{ margin: "0.2rem 0 0 0", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                             {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB • {isUploading ? "Uploading & processing..." : "Ready to ingest"}
                           </p>
                         </div>
@@ -1104,14 +1141,15 @@ export const UploadReportsPage: FC = () => {
                           style={{
                             background: "none",
                             border: "none",
-                            color: "#64748B",
+                            color: "var(--ads-ink-tertiary)",
                             cursor: "pointer",
                             padding: "0.45rem",
-                            borderRadius: "6px",
+                            borderRadius: "var(--ads-r-xs)",
                             display: "flex",
                             alignItems: "center",
                           }}
                           title="Remove file"
+                          aria-label="Remove selected file"
                         >
                           <X size={18} />
                         </button>
@@ -1119,17 +1157,18 @@ export const UploadReportsPage: FC = () => {
                     </div>
                     {isUploading && (
                       <div style={{ width: "100%", marginTop: "0.25rem" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "#64748B", marginBottom: "0.35rem" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", marginBottom: "0.35rem" }}>
                           <span>Uploading and processing...</span>
-                          <span style={{ fontWeight: 600, color: "#2563EB" }}>{uploadProgress > 0 ? `${uploadProgress}%` : "Processing"}</span>
+                          <span style={{ fontWeight: 600, color: "#0058B0" }}>{uploadProgress > 0 ? `${uploadProgress}%` : "Processing"}</span>
                         </div>
-                        <div style={{ width: "100%", height: "6px", backgroundColor: "#E2E8F0", borderRadius: "9999px", overflow: "hidden" }}>
+                        <div style={{ width: "100%", height: "6px", backgroundColor: "rgba(0, 0, 0, 0.08)", borderRadius: "var(--ads-r-pill)", overflow: "hidden" }}>
                           <div
                             style={{
                               width: `${uploadProgress > 0 ? uploadProgress : 100}%`,
                               height: "100%",
-                              backgroundColor: "#2563EB",
-                              transition: "width 0.2s ease",
+                              backgroundColor: "var(--ads-blue)",
+                              borderRadius: "var(--ads-r-pill)",
+                              transition: "width var(--ads-dur) var(--ads-ease)",
                             }}
                           />
                         </div>
@@ -1151,13 +1190,13 @@ export const UploadReportsPage: FC = () => {
                 }}
               >
                 {selectedFile ? (
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.8125rem", color: "#64748B" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                     <div
                       style={{
                         width: "8px",
                         height: "8px",
                         borderRadius: "50%",
-                        backgroundColor: "#10B981",
+                        backgroundColor: "var(--ads-green)",
                       }}
                     />
                     <span>Ready to upload: {selectedFile.name}</span>
@@ -1178,12 +1217,14 @@ export const UploadReportsPage: FC = () => {
                         padding: "0.55rem 1.15rem",
                         fontSize: "0.8125rem",
                         fontWeight: 600,
-                        color: "#475569",
-                        backgroundColor: "#FFFFFF",
-                        border: "1px solid #CBD5E1",
-                        borderRadius: "8px",
+                        color: "var(--ads-ink)",
+                        backgroundColor: "var(--ads-material-thick)",
+                        border: "1px solid var(--ads-hairline)",
+                        borderRadius: "var(--ads-r-pill)",
+                        boxShadow: "var(--ads-bevel)",
                         cursor: "pointer",
-                        transition: "all 0.15s ease",
+                        transition:
+                          "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                       }}
                     >
                       Clear file
@@ -1202,16 +1243,19 @@ export const UploadReportsPage: FC = () => {
                       alignItems: "center",
                       justifyContent: "center",
                       gap: "0.5rem",
-                      backgroundColor: !selectedFile || isUploading ? "#94A3B8" : "#2563EB",
+                      backgroundColor: "var(--ads-blue)",
                       color: "#FFFFFF",
-                      borderRadius: "8px",
+                      borderRadius: "var(--ads-r-pill)",
                       fontSize: "0.875rem",
                       fontWeight: 600,
+                      letterSpacing: "-0.01em",
+                      opacity: !selectedFile || isUploading ? 0.4 : 1,
                       cursor: !selectedFile || isUploading ? "not-allowed" : "pointer",
-                      boxShadow: !selectedFile || isUploading ? "none" : "0 2px 8px rgba(37, 99, 235, 0.25)",
+                      boxShadow: !selectedFile || isUploading ? "none" : "0 2px 8px rgba(0, 113, 227, 0.28)",
                       border: "none",
                       padding: "0 1.5rem",
-                      transition: "all 0.15s ease",
+                      transition:
+                        "background-color var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     {isUploading ? (

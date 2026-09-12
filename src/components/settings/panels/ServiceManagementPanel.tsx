@@ -36,25 +36,17 @@ export const ServiceManagementPanel: FC<ServiceManagementPanelProps> = ({ onNoti
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <Wrench size={20} className="text-blue-600" />
-            <span>Schedule Service Management</span>
-            <span className="badge-custom blue">Fleet</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Configure preventive maintenance (PM) service intervals, routine inspection rules, and annual DOT safety thresholds
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Configure preventive maintenance (PM) service intervals, routine inspection rules, and annual DOT safety thresholds
+        </p>
       </div>
 
       {/* 1. Preventive Maintenance (PM) Intervals */}
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Wrench size={17} className="text-blue-600" />
+            <Wrench size={17} />
             <span>Preventive Maintenance (PM) Schedules & Mileage Intervals</span>
           </h3>
         </div>
@@ -121,7 +113,7 @@ export const ServiceManagementPanel: FC<ServiceManagementPanelProps> = ({ onNoti
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Calendar size={17} className="text-blue-600" />
+            <Calendar size={17} />
             <span>Annual DOT & Registration Compliance Alerts</span>
           </h3>
         </div>
@@ -145,7 +137,7 @@ export const ServiceManagementPanel: FC<ServiceManagementPanelProps> = ({ onNoti
           </div>
         </div>
 
-        <div className="settings-toggle-row mt-3 pt-3 border-t border-slate-100">
+        <div className="settings-toggle-row">
           <div className="settings-toggle-info">
             <span className="settings-toggle-title">Automated PM Work Order Generation</span>
             <span className="settings-toggle-desc">

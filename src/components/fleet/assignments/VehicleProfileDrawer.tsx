@@ -65,10 +65,10 @@ const OWNERSHIP_TYPES = [
 ];
 
 const STATUS_OPTIONS = [
-  { value: "in_service", label: "In Service (Active)", color: "#059669", bg: "#ECFDF5" },
-  { value: "grounded", label: "Grounded (Out of Service)", color: "#DC2626", bg: "#FEF2F2" },
-  { value: "maintenance", label: "Maintenance / In Shop", color: "#D97706", bg: "#FFFBEB" },
-  { value: "inactive", label: "Inactive / Decommissioned", color: "#64748B", bg: "#F1F5F9" },
+  { value: "in_service", label: "In Service (Active)", color: "var(--ads-green)", bg: "var(--ads-green-tint)" },
+  { value: "grounded", label: "Grounded (Out of Service)", color: "var(--ads-red)", bg: "var(--ads-red-tint)" },
+  { value: "maintenance", label: "Maintenance / In Shop", color: "var(--ads-amber)", bg: "var(--ads-amber-tint)" },
+  { value: "inactive", label: "Inactive / Decommissioned", color: "var(--ads-ink-tertiary)", bg: "rgba(0,0,0,0.04)" },
 ];
 
 export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
@@ -260,8 +260,9 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.4)",
-        backdropFilter: "blur(3px)",
+        background: "rgba(0,0,0,0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         zIndex: 1000,
         display: "flex",
         justifyContent: "flex-end",
@@ -274,8 +275,12 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
           width: "100%",
           maxWidth: "720px",
           height: "100%",
-          backgroundColor: "#FFFFFF",
-          boxShadow: "-8px 0 25px rgba(15, 23, 42, 0.15)",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          border: "1px solid var(--ads-hairline)",
+          borderRadius: "var(--ads-r-xl) 0 0 var(--ads-r-xl)",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
@@ -285,12 +290,12 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
         {/* Drawer Header */}
         <div
           style={{
-            padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            background: "#F8FAFC",
+            background: "transparent",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
@@ -298,9 +303,9 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               style={{
                 width: 40,
                 height: 40,
-                borderRadius: "8px",
-                background: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -309,10 +314,10 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               <Truck size={20} />
             </div>
             <div>
-              <h2 style={{ fontSize: "1.125rem", fontWeight: 700, color: "#0F172A", margin: 0 }}>
+              <h2 style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.019em" }}>
                 {isEdit ? `Vehicle Profile: ${formData.unit_number || "Unit"}` : "Add New Fleet Vehicle"}
               </h2>
-              <span style={{ fontSize: "0.75rem", color: "#64748B" }}>
+              <span style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                 {isEdit ? `VIN: ${formData.vin}` : "Enter full vehicle specifications & driver assignment"}
               </span>
             </div>
@@ -321,16 +326,19 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
           <button
             type="button"
             onClick={onClose}
+            aria-label="Close vehicle profile"
             style={{
+              width: "32px",
+              height: "32px",
               background: "transparent",
-              border: "none",
-              color: "#64748B",
+              border: "1px solid var(--ads-hairline)",
+              color: "var(--ads-ink-tertiary)",
               cursor: "pointer",
-              padding: "0.35rem",
-              borderRadius: "6px",
+              borderRadius: "var(--ads-r-sm)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <X size={20} />
@@ -338,15 +346,15 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
         </div>
 
         {/* Form Body - Scrollable */}
-        <form onSubmit={handleSubmit} style={{ flex: 1, overflowY: "auto", padding: "1.5rem" }}>
+        <form onSubmit={handleSubmit} style={{ flex: 1, overflowY: "auto", padding: "var(--ads-s6)" }}>
           {errorMsg && (
             <div
               style={{
-                backgroundColor: "#FEF2F2",
-                border: "1px solid #FECACA",
-                borderRadius: "8px",
-                padding: "0.75rem 1rem",
-                color: "#B91C1C",
+                backgroundColor: "var(--ads-red-tint)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-sm)",
+                padding: "var(--ads-s3) var(--ads-s4)",
+                color: "var(--ads-red)",
                 fontSize: "0.8125rem",
                 display: "flex",
                 alignItems: "center",
@@ -362,17 +370,17 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
           {/* Section 1: Live Driver Assignment Card */}
           <div
             style={{
-              background: "#F0F9FF",
-              border: "1px solid #BAE6FD",
-              borderRadius: "10px",
-              padding: "1.1rem 1.25rem",
-              marginBottom: "1.5rem",
+              background: "var(--ads-blue-tint)",
+              border: "1px solid var(--ads-blue-tint-strong)",
+              borderRadius: "var(--ads-r-md)",
+              padding: "var(--ads-s4) var(--ads-s5)",
+              marginBottom: "var(--ads-s6)",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <UserCheck size={18} style={{ color: "#0284C7" }} />
-                <h4 style={{ margin: 0, fontSize: "0.875rem", fontWeight: 700, color: "#0369A1" }}>
+                <UserCheck size={18} style={{ color: "var(--ads-blue)" }} />
+                <h4 style={{ margin: 0, fontSize: "0.875rem", fontWeight: 700, color: "var(--ads-ink)" }}>
                   Vehicle Assignment Status
                 </h4>
               </div>
@@ -381,14 +389,16 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   type="button"
                   onClick={handleUnassignDriver}
                   style={{
-                    background: "#FFFFFF",
-                    border: "1px solid #BAE6FD",
-                    color: "#0369A1",
+                    background: "var(--ads-material-thick)",
+                    border: "1px solid var(--ads-hairline)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.75rem",
                     fontWeight: 600,
-                    borderRadius: "6px",
-                    padding: "0.25rem 0.5rem",
+                    borderRadius: "var(--ads-r-pill)",
+                    boxShadow: "var(--ads-bevel)",
+                    padding: "6px 13px",
                     cursor: "pointer",
+                    transition: "all var(--ads-dur-fast) var(--ads-ease)",
                     display: "flex",
                     alignItems: "center",
                     gap: "0.3rem",
@@ -402,7 +412,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "0.75rem", alignItems: "center" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#0F172A", marginBottom: "0.35rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink)", marginBottom: "0.35rem" }}>
                   Assigned Driver
                 </label>
                 <select
@@ -410,12 +420,12 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={handleDriverChange}
                   style={{
                     width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #94A3B8",
-                    background: "#FFFFFF",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline-strong)",
+                    background: "var(--ads-material-thick)",
                     fontSize: "0.8125rem",
-                    color: "#0F172A",
+                    color: "var(--ads-ink)",
                     fontWeight: 600,
                   }}
                 >
@@ -433,12 +443,12 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   style={{
                     display: "inline-block",
                     padding: "0.45rem 0.75rem",
-                    borderRadius: "6px",
+                    borderRadius: "var(--ads-r-pill)",
                     fontSize: "0.75rem",
                     fontWeight: 700,
-                    backgroundColor: formData.assigned_driver_name ? "#ECFDF5" : "#F1F5F9",
-                    color: formData.assigned_driver_name ? "#059669" : "#64748B",
-                    border: formData.assigned_driver_name ? "1px solid #A7F3D0" : "1px solid #CBD5E1",
+                    backgroundColor: formData.assigned_driver_name ? "var(--ads-green-tint)" : "rgba(0,0,0,0.04)",
+                    color: formData.assigned_driver_name ? "var(--ads-green)" : "var(--ads-ink-tertiary)",
+                    border: formData.assigned_driver_name ? "1px solid var(--ads-hairline)" : "1px solid var(--ads-hairline)",
                   }}
                 >
                   {formData.assigned_driver_name ? `Assigned to: ${formData.assigned_driver_name}` : "Unassigned"}
@@ -451,14 +461,14 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
           <div style={{ marginBottom: "1.5rem" }}>
             <h4
               style={{
-                fontSize: "0.8125rem",
-                fontWeight: 700,
-                color: "#1E293B",
+                fontSize: "0.6875rem",
+                fontWeight: 600,
+                color: "var(--ads-ink-tertiary)",
                 textTransform: "uppercase",
                 letterSpacing: "0.04em",
                 marginBottom: "0.85rem",
                 paddingBottom: "0.4rem",
-                borderBottom: "1px solid #E2E8F0",
+                borderBottom: "1px solid var(--ads-hairline)",
               }}
             >
               1. Identification & Status
@@ -466,7 +476,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem", marginBottom: "0.85rem" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Unit # *
                 </label>
                 <input
@@ -477,16 +487,18 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("unit_number", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   VIN (17 chars) *
                 </label>
                 <input
@@ -498,9 +510,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("vin", e.target.value.toUpperCase())}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                     fontFamily: "monospace",
                     fontWeight: 600,
@@ -509,7 +523,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Vehicle Status
                 </label>
                 <select
@@ -517,9 +531,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("status", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                     fontWeight: 600,
                   }}
@@ -535,7 +551,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr", gap: "1rem" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   License Plate
                 </label>
                 <input
@@ -545,9 +561,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("license_plate", e.target.value.toUpperCase())}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                     fontWeight: 600,
                   }}
@@ -555,7 +573,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Registered State
                 </label>
                 <select
@@ -563,9 +581,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("registered_state", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 >
@@ -578,7 +598,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Current Odometer (Miles)
                 </label>
                 <input
@@ -588,9 +608,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("odometer", Number(e.target.value))}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
@@ -602,14 +624,14 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
           <div style={{ marginBottom: "1.5rem" }}>
             <h4
               style={{
-                fontSize: "0.8125rem",
-                fontWeight: 700,
-                color: "#1E293B",
+                fontSize: "0.6875rem",
+                fontWeight: 600,
+                color: "var(--ads-ink-tertiary)",
                 textTransform: "uppercase",
                 letterSpacing: "0.04em",
                 marginBottom: "0.85rem",
                 paddingBottom: "0.4rem",
-                borderBottom: "1px solid #E2E8F0",
+                borderBottom: "1px solid var(--ads-hairline)",
               }}
             >
               2. Vehicle Make, Model & Type
@@ -617,7 +639,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "1rem", marginBottom: "0.85rem" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Make
                 </label>
                 <input
@@ -627,16 +649,18 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("make", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Model
                 </label>
                 <input
@@ -646,16 +670,18 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("model", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Model Year
                 </label>
                 <input
@@ -665,16 +691,18 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("year", Number(e.target.value))}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Trim / Wheelbase
                 </label>
                 <input
@@ -684,9 +712,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("trim", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
@@ -695,7 +725,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Vehicle Classification
                 </label>
                 <select
@@ -703,9 +733,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("vehicle_type", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 >
@@ -718,7 +750,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Van Subtype
                 </label>
                 <select
@@ -726,9 +758,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("van_subtype", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 >
@@ -746,14 +780,14 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
           <div style={{ marginBottom: "1.5rem" }}>
             <h4
               style={{
-                fontSize: "0.8125rem",
-                fontWeight: 700,
-                color: "#1E293B",
+                fontSize: "0.6875rem",
+                fontWeight: 600,
+                color: "var(--ads-ink-tertiary)",
                 textTransform: "uppercase",
                 letterSpacing: "0.04em",
                 marginBottom: "0.85rem",
                 paddingBottom: "0.4rem",
-                borderBottom: "1px solid #E2E8F0",
+                borderBottom: "1px solid var(--ads-hairline)",
               }}
             >
               3. Fleet Operations, Fuel & Toll Cards
@@ -761,7 +795,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "0.85rem" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Ownership Structure
                 </label>
                 <select
@@ -769,9 +803,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("ownership_type", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 >
@@ -784,7 +820,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Vendor / Leasing Partner
                 </label>
                 <input
@@ -794,9 +830,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("vendor", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
@@ -805,7 +843,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem", marginBottom: "0.85rem" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Gas Card # (WEX)
                 </label>
                 <input
@@ -815,16 +853,18 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("gas_card_number", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Gas Card Vehicle ID
                 </label>
                 <input
@@ -834,16 +874,18 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("gas_card_id", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   EZPass / Toll Tag #
                 </label>
                 <input
@@ -853,9 +895,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("ezpass_number", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
@@ -864,7 +908,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Driver Side
                 </label>
                 <select
@@ -872,9 +916,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("driver_side", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 >
@@ -884,7 +930,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Operating Timezone
                 </label>
                 <select
@@ -892,9 +938,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("timezone", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 >
@@ -906,7 +954,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   GVWR Weight Rating
                 </label>
                 <input
@@ -916,9 +964,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("weight", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
@@ -930,14 +980,14 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
           <div style={{ marginBottom: "1.5rem" }}>
             <h4
               style={{
-                fontSize: "0.8125rem",
-                fontWeight: 700,
-                color: "#1E293B",
+                fontSize: "0.6875rem",
+                fontWeight: 600,
+                color: "var(--ads-ink-tertiary)",
                 textTransform: "uppercase",
                 letterSpacing: "0.04em",
                 marginBottom: "0.85rem",
                 paddingBottom: "0.4rem",
-                borderBottom: "1px solid #E2E8F0",
+                borderBottom: "1px solid var(--ads-hairline)",
               }}
             >
               4. Compliance, Registration & Renewals
@@ -945,7 +995,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "0.85rem" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Date Received into Fleet
                 </label>
                 <input
@@ -954,16 +1004,18 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("date_received", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Policy Effective Date
                 </label>
                 <input
@@ -972,9 +1024,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("date_insured", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
@@ -983,7 +1037,7 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   Insurance Expiration Date
                 </label>
                 <input
@@ -992,16 +1046,18 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("insurance_expiry", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.3rem" }}>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--ads-ink-secondary)", marginBottom: "0.3rem" }}>
                   State Inspection Renewal Date
                 </label>
                 <input
@@ -1010,9 +1066,11 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                   onChange={(e) => handleChange("inspection_renewal", e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    border: "1px solid #CBD5E1",
+                    padding: "9px 13px",
+                    borderRadius: "var(--ads-r-sm)",
+                    border: "1px solid var(--ads-hairline)",
+                    background: "var(--ads-material-thick)",
+                    color: "var(--ads-ink)",
                     fontSize: "0.8125rem",
                   }}
                 />
@@ -1024,12 +1082,13 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
         {/* Drawer Footer Actions */}
         <div
           style={{
-            padding: "1rem 1.5rem",
-            borderTop: "1px solid #E2E8F0",
+            padding: "var(--ads-s4) var(--ads-s6)",
+            borderTop: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            background: "#F8FAFC",
+            gap: "var(--ads-s3)",
+            background: "transparent",
           }}
         >
           {isEdit && onDeleteSuccess && vehicle?.id ? (
@@ -1043,13 +1102,15 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
               }}
               style={{
                 background: "transparent",
-                border: "1px solid #FCA5A5",
-                color: "#DC2626",
-                borderRadius: "6px",
-                padding: "0.55rem 1rem",
+                border: "1px solid var(--ads-hairline)",
+                color: "var(--ads-red)",
+                borderRadius: "var(--ads-r-pill)",
+                padding: "9px 18px",
                 fontWeight: 600,
+                letterSpacing: "-0.01em",
                 fontSize: "0.8125rem",
                 cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.4rem",
@@ -1062,19 +1123,22 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
             <div />
           )}
 
-          <div style={{ display: "flex", gap: "0.75rem" }}>
+          <div style={{ display: "flex", gap: "var(--ads-s3)" }}>
             <button
               type="button"
               onClick={onClose}
               style={{
-                background: "#FFFFFF",
-                border: "1px solid #CBD5E1",
-                borderRadius: "6px",
-                padding: "0.55rem 1.25rem",
+                background: "var(--ads-material-thick)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-pill)",
+                boxShadow: "var(--ads-bevel)",
+                padding: "9px 18px",
                 fontWeight: 600,
+                letterSpacing: "-0.01em",
                 fontSize: "0.8125rem",
-                color: "#475569",
+                color: "var(--ads-ink)",
                 cursor: "pointer",
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               Cancel
@@ -1088,13 +1152,21 @@ export const VehicleProfileDrawer: FC<VehicleProfileDrawerProps> = ({
                 display: "flex",
                 alignItems: "center",
                 gap: "0.45rem",
-                padding: "0.55rem 1.25rem",
+                padding: "9px 18px",
                 fontSize: "0.8125rem",
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+                background: "var(--ads-blue)",
+                border: "1px solid transparent",
+                borderRadius: "var(--ads-r-pill)",
+                cursor: isSubmitting ? "not-allowed" : "pointer",
+                opacity: isSubmitting ? 0.4 : 1,
+                transition: "all var(--ads-dur-fast) var(--ads-ease)",
                 color: "#FFFFFF",
               }}
             >
-              <Save size={15} />
-              <span>{isSubmitting ? "Saving..." : isEdit ? "Save Changes" : "Create Vehicle"}</span>
+              <Save size={15} color="#FFFFFF" />
+              <span style={{ color: "#FFFFFF" }}>{isSubmitting ? "Saving..." : isEdit ? "Save Changes" : "Create Vehicle"}</span>
             </button>
           </div>
         </div>

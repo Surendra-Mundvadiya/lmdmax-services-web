@@ -4,6 +4,36 @@ import AuthAPI from "../../api/auth";
 import { validateStationCode, validateZipCode, validateRequired } from "../../utils/validators";
 import LoadingSpinner from "../common/LoadingSpinner";
 
+const fieldWrapStyle = (
+  isFocused: boolean,
+  hasError: boolean
+): React.CSSProperties => ({
+  backgroundColor: "var(--ads-material-thick)",
+  border: `1px solid ${
+    hasError
+      ? "var(--ads-red)"
+      : isFocused
+      ? "var(--ads-blue)"
+      : "var(--ads-hairline)"
+  }`,
+  borderRadius: "var(--ads-r-sm)",
+  boxShadow: isFocused ? "var(--ads-shadow-focus)" : "var(--ads-bevel)",
+  transition:
+    "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
+});
+
+const fieldInputStyle: React.CSSProperties = {
+  background: "transparent",
+  border: "none",
+  boxShadow: "none",
+  borderRadius: 0,
+  color: "var(--ads-ink)",
+};
+
+const fieldIconStyle: React.CSSProperties = {
+  color: "var(--ads-ink-tertiary)",
+};
+
 interface AddStationModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -22,6 +52,7 @@ export const AddStationModal: FC<AddStationModalProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [generalError, setGeneralError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [focusedField, setFocusedField] = useState<string>("");
 
   if (!isOpen) return null;
 
@@ -74,22 +105,60 @@ export const AddStationModal: FC<AddStationModalProps> = ({
       <div className="modal-dialog">
         <div className="modal-header">
           <div className="modal-title-wrap">
-            <Building2 className="modal-icon" size={20} />
-            <h3 className="modal-title">Request Station Addition</h3>
+            <Building2
+              className="modal-icon"
+              size={20}
+              style={{ color: "var(--ads-blue)" }}
+            />
+            <h3
+              className="modal-title"
+              style={{ color: "var(--ads-ink)", letterSpacing: "-0.02em" }}
+            >
+              Request Station Addition
+            </h3>
           </div>
-          <button type="button" onClick={onClose} className="modal-close-btn" aria-label="Close modal">
+          <button
+            type="button"
+            onClick={onClose}
+            className="modal-close-btn"
+            aria-label="Close modal"
+            title="Close"
+            style={{
+              color: "var(--ads-ink-tertiary)",
+              borderRadius: "var(--ads-r-pill)",
+              transition:
+                "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
+            }}
+          >
             <X size={18} />
           </button>
         </div>
 
-        <div className="modal-notice-banner">
+        <div
+          className="modal-notice-banner"
+          style={{
+            backgroundColor: "var(--ads-blue-tint)",
+            borderBottom: "1px solid var(--ads-hairline)",
+            color: "var(--ads-ink-secondary)",
+          }}
+        >
           <span>New station requests require Super Admin verification before activation.</span>
         </div>
 
         {generalError && (
-          <div className="error-alert" style={{ margin: "0 1.5rem 1rem" }}>
-            <AlertCircle size={16} />
-            <span>{generalError}</span>
+          <div
+            className="error-alert"
+            role="alert"
+            style={{
+              margin: "0 1.5rem 1rem",
+              backgroundColor: "var(--ads-red-tint)",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-sm)",
+              color: "var(--ads-red)",
+            }}
+          >
+            <AlertCircle size={16} style={{ color: "var(--ads-red)", flexShrink: 0 }} />
+            <span style={{ color: "var(--ads-red)" }}>{generalError}</span>
           </div>
         )}
 
@@ -97,8 +166,16 @@ export const AddStationModal: FC<AddStationModalProps> = ({
           {/* Station Code */}
           <div className="input-group">
             <label htmlFor="modal_station_code" className="input-label">Station Code</label>
-            <div className={`input-field-wrap ${errors.stationCode ? "has-error" : ""}`}>
-              <Building2 className="input-icon" size={16} />
+            <div
+              className={`input-field-wrap ${errors.stationCode ? "has-error" : ""}`}
+              style={fieldWrapStyle(
+                focusedField === "stationCode",
+                Boolean(errors.stationCode)
+              )}
+              onFocus={() => setFocusedField("stationCode")}
+              onBlur={() => setFocusedField("")}
+            >
+              <Building2 className="input-icon" size={16} style={fieldIconStyle} />
               <input
                 id="modal_station_code"
                 type="text"
@@ -106,7 +183,7 @@ export const AddStationModal: FC<AddStationModalProps> = ({
                 placeholder="e.g. DDF4, DHO1"
                 value={stationCode}
                 maxLength={8}
-                style={{ textTransform: "uppercase" }}
+                style={{ ...fieldInputStyle, textTransform: "uppercase" }}
                 onChange={(e) => {
                   setStationCode(e.target.value.toUpperCase());
                   if (errors.stationCode) setErrors({ ...errors, stationCode: "" });
@@ -119,12 +196,21 @@ export const AddStationModal: FC<AddStationModalProps> = ({
           {/* Zipcode */}
           <div className="input-group">
             <label htmlFor="modal_zipcode" className="input-label">Zip Code</label>
-            <div className={`input-field-wrap ${errors.zipcode ? "has-error" : ""}`}>
-              <Hash className="input-icon" size={16} />
+            <div
+              className={`input-field-wrap ${errors.zipcode ? "has-error" : ""}`}
+              style={fieldWrapStyle(
+                focusedField === "zipcode",
+                Boolean(errors.zipcode)
+              )}
+              onFocus={() => setFocusedField("zipcode")}
+              onBlur={() => setFocusedField("")}
+            >
+              <Hash className="input-icon" size={16} style={fieldIconStyle} />
               <input
                 id="modal_zipcode"
                 type="text"
                 className="styled-input"
+                style={fieldInputStyle}
                 placeholder="e.g. 75001"
                 value={zipcode}
                 maxLength={10}
@@ -140,12 +226,21 @@ export const AddStationModal: FC<AddStationModalProps> = ({
           {/* Address */}
           <div className="input-group">
             <label htmlFor="modal_address" className="input-label">Station Address</label>
-            <div className={`input-field-wrap ${errors.address ? "has-error" : ""}`}>
-              <MapPin className="input-icon" size={16} />
+            <div
+              className={`input-field-wrap ${errors.address ? "has-error" : ""}`}
+              style={fieldWrapStyle(
+                focusedField === "address",
+                Boolean(errors.address)
+              )}
+              onFocus={() => setFocusedField("address")}
+              onBlur={() => setFocusedField("")}
+            >
+              <MapPin className="input-icon" size={16} style={fieldIconStyle} />
               <input
                 id="modal_address"
                 type="text"
                 className="styled-input"
+                style={fieldInputStyle}
                 placeholder="e.g. 1200 Logistics Blvd, Suite 100"
                 value={address}
                 onChange={(e) => {

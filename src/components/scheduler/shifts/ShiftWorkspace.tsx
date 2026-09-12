@@ -636,28 +636,36 @@ export const ShiftWorkspace: FC = () => {
       {notification && (
         <div
           className={`sch-toast ${notification.type}`}
+          role="status"
           style={{
             position: "fixed",
-            bottom: "1.5rem",
-            right: "1.5rem",
+            bottom: "var(--ads-s6)",
+            right: "var(--ads-s6)",
             zIndex: 9999,
-            padding: "0.75rem 1.25rem",
-            borderRadius: "10px",
-            backgroundColor: notification.type === "success" ? "#0F172A" : "#FEF2F2",
-            color: notification.type === "success" ? "#FFFFFF" : "#991B1B",
-            border: notification.type === "success" ? "1px solid #334155" : "1px solid #FECACA",
-            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+            padding: "var(--ads-s3) var(--ads-s5)",
+            borderRadius: "var(--ads-r-md)",
+            background:
+              notification.type === "success" ? "var(--ads-material-thick)" : "var(--ads-red-tint)",
+            WebkitBackdropFilter: "var(--ads-blur-lg)",
+            backdropFilter: "var(--ads-blur-lg)",
+            color: notification.type === "success" ? "var(--ads-ink)" : "var(--ads-red)",
+            border:
+              notification.type === "success"
+                ? "1px solid var(--ads-hairline)"
+                : "1px solid rgba(215, 0, 21, 0.28)",
+            boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
             display: "flex",
             alignItems: "center",
-            gap: "0.5rem",
+            gap: "var(--ads-s2)",
             fontSize: "0.8125rem",
             fontWeight: 600,
+            animation: "ads-sheet-in var(--ads-dur) var(--ads-ease)",
           }}
         >
           {notification.type === "success" ? (
-            <CheckCircle2 size={16} style={{ color: "#10B981" }} />
+            <CheckCircle2 size={16} style={{ color: "var(--ads-green)" }} />
           ) : (
-            <AlertCircle size={16} style={{ color: "#EF4444" }} />
+            <AlertCircle size={16} style={{ color: "var(--ads-red)" }} />
           )}
           <span>{notification.message}</span>
         </div>

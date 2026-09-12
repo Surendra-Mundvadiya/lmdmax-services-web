@@ -99,7 +99,7 @@ export const DriverStatusFilterComponent: FC = () => {
         onClick={() => setIsOpen(!isOpen)}
         title="Filter by status and sign-in permissions"
       >
-        <Filter size={13} className="text-blue-600" />
+        <Filter size={13} style={{ color: "var(--ads-blue)" }} />
         <span className="filter-btn-text">{getFilterLabel()}</span>
         <ChevronDown size={14} className="filter-btn-chevron" />
       </button>
@@ -117,12 +117,12 @@ export const DriverStatusFilterComponent: FC = () => {
             onClick={() => handleSelect("all", "all")}
           >
             <div className="option-title-group">
-              <Users size={14} className="text-blue-600" />
+              <Users size={14} style={{ color: "var(--ads-blue)" }} />
               <span className="option-title">All Drivers</span>
             </div>
             <div className="option-right">
               <span className="option-count">{totalCount}</span>
-              {isOptionSelected("all") && <Check size={14} className="text-blue-600" />}
+              {isOptionSelected("all") && <Check size={14} style={{ color: "var(--ads-blue)" }} />}
             </div>
           </button>
 
@@ -135,12 +135,12 @@ export const DriverStatusFilterComponent: FC = () => {
             onClick={() => handleSelect("active", "all")}
           >
             <div className="option-title-group">
-              <UserCheck size={14} className="text-emerald-600" />
+              <UserCheck size={14} style={{ color: "var(--ads-green)" }} />
               <span className="option-title">All Active Drivers</span>
             </div>
             <div className="option-right">
               <span className="option-count count-emerald">{activeCount}</span>
-              {isOptionSelected("active", "all") && <Check size={14} className="text-blue-600" />}
+              {isOptionSelected("active", "all") && <Check size={14} style={{ color: "var(--ads-blue)" }} />}
             </div>
           </button>
 
@@ -151,12 +151,12 @@ export const DriverStatusFilterComponent: FC = () => {
             onClick={() => handleSelect("active", "signin_enabled")}
           >
             <div className="option-title-group">
-              <Smartphone size={13} className="text-blue-600" />
+              <Smartphone size={13} style={{ color: "var(--ads-blue)" }} />
               <span className="option-title">Sign-in Enabled (LMD Drive)</span>
             </div>
             <div className="option-right">
               <span className="option-count count-blue">{signinEnabledCount}</span>
-              {isOptionSelected("active", "signin_enabled") && <Check size={14} className="text-blue-600" />}
+              {isOptionSelected("active", "signin_enabled") && <Check size={14} style={{ color: "var(--ads-blue)" }} />}
             </div>
           </button>
 
@@ -167,12 +167,12 @@ export const DriverStatusFilterComponent: FC = () => {
             onClick={() => handleSelect("active", "signin_disabled")}
           >
             <div className="option-title-group">
-              <SmartphoneNfc size={13} className="text-slate-400" />
+              <SmartphoneNfc size={13} style={{ color: "var(--ads-ink-quaternary)" }} />
               <span className="option-title">Sign-in Disabled</span>
             </div>
             <div className="option-right">
               <span className="option-count">{signinDisabledCount}</span>
-              {isOptionSelected("active", "signin_disabled") && <Check size={14} className="text-blue-600" />}
+              {isOptionSelected("active", "signin_disabled") && <Check size={14} style={{ color: "var(--ads-blue)" }} />}
             </div>
           </button>
 
@@ -185,12 +185,12 @@ export const DriverStatusFilterComponent: FC = () => {
             onClick={() => handleSelect("inactive", "all")}
           >
             <div className="option-title-group">
-              <UserX size={14} className="text-red-500" />
+              <UserX size={14} style={{ color: "var(--ads-red)" }} />
               <span className="option-title">Inactive Drivers</span>
             </div>
             <div className="option-right">
               <span className="option-count count-red">{inactiveCount}</span>
-              {isOptionSelected("inactive") && <Check size={14} className="text-blue-600" />}
+              {isOptionSelected("inactive") && <Check size={14} style={{ color: "var(--ads-blue)" }} />}
             </div>
           </button>
         </div>

@@ -1,0 +1,202 @@
+/* ==========================================================================
+   PERFORMANCE — split-catalog glass treatment
+
+   The `upload-*` split-catalog classes live in the shared global stylesheet
+   and are reused by several other modules. These rules re-skin that pattern
+   onto the Apple design tokens *only* inside `.perf-catalog`, so sibling
+   screens keep their own treatment. Layout geometry (320px rail, split flex,
+   scroll behaviour) is inherited untouched — colour, material, radius,
+   elevation and motion only.
+   ========================================================================== */
+
+/* ── Toolbar row ──────────────────────────────────────────────────────── */
+.perf-catalog .upload-breadcrumb-root {
+  color: var(--ads-ink-tertiary);
+  font-weight: 550;
+}
+
+.perf-catalog .upload-breadcrumb-root:hover {
+  color: var(--ads-blue);
+}
+
+.perf-catalog .upload-breadcrumb-current {
+  color: var(--ads-ink);
+  font-weight: 650;
+}
+
+.perf-catalog .upload-breadcrumb-active-report {
+  color: #0058B0;
+  background: var(--ads-blue-tint);
+  border: 1px solid transparent;
+  border-radius: var(--ads-r-xs);
+  box-shadow: none;
+}
+
+.perf-catalog .upload-view-by-label {
+  color: var(--ads-ink-tertiary);
+}
+
+.perf-catalog .upload-segmented-capsule {
+  background: var(--ads-material-thin);
+  -webkit-backdrop-filter: var(--ads-blur-sm);
+  backdrop-filter: var(--ads-blur-sm);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-pill);
+  box-shadow: var(--ads-bevel);
+}
+
+.perf-catalog .upload-segmented-btn {
+  color: var(--ads-ink-secondary);
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              color var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease);
+}
+
+.perf-catalog .upload-segmented-btn:hover:not(.active) {
+  color: var(--ads-ink);
+  background: rgba(0, 0, 0, 0.045);
+}
+
+.perf-catalog .upload-segmented-btn:active {
+  transform: scale(0.97);
+}
+
+.perf-catalog .upload-segmented-count {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.perf-catalog .upload-action-pill-btn {
+  background: var(--ads-material-thick);
+  -webkit-backdrop-filter: var(--ads-blur-sm);
+  backdrop-filter: var(--ads-blur-sm);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-pill);
+  color: var(--ads-ink);
+  box-shadow: var(--ads-bevel);
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              border-color var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease);
+}
+
+.perf-catalog .upload-action-pill-btn:hover {
+  background: var(--ads-white);
+  border-color: var(--ads-hairline-strong);
+  color: var(--ads-ink);
+  transform: translateY(-1px);
+  box-shadow: var(--ads-shadow-sm), var(--ads-bevel);
+}
+
+.perf-catalog .upload-action-pill-btn:active {
+  transform: scale(0.97);
+}
+
+.perf-catalog .upload-filter-badge {
+  background: var(--ads-blue);
+  border-radius: var(--ads-r-pill);
+}
+
+/* ── Left catalog rail — translucent chrome ───────────────────────────── */
+.perf-catalog .upload-reports-sidebar {
+  background: var(--ads-material-regular);
+  -webkit-backdrop-filter: var(--ads-blur-lg);
+  backdrop-filter: var(--ads-blur-lg);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-lg);
+  box-shadow: var(--ads-shadow-sm), var(--ads-bevel);
+}
+
+.perf-catalog .upload-sidebar-header {
+  background: var(--ads-material-thin);
+  -webkit-backdrop-filter: var(--ads-blur-sm);
+  backdrop-filter: var(--ads-blur-sm);
+  border-bottom: 1px solid var(--ads-hairline);
+}
+
+.perf-catalog .upload-sidebar-title {
+  color: var(--ads-ink);
+  font-weight: 650;
+}
+
+.perf-catalog .upload-sidebar-badge {
+  color: #0058B0;
+  background: var(--ads-blue-tint);
+  border: 1px solid transparent;
+  border-radius: var(--ads-r-pill);
+}
+
+.perf-catalog .upload-report-sidebar-item {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--ads-r-sm);
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              border-color var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease);
+}
+
+.perf-catalog .upload-report-sidebar-item:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--ads-hairline);
+  transform: translateX(2px);
+}
+
+.perf-catalog .upload-report-sidebar-item:active {
+  transform: scale(0.985);
+}
+
+.perf-catalog .upload-report-sidebar-item.active {
+  background: var(--ads-blue-tint);
+  border-color: transparent;
+  box-shadow: var(--ads-shadow-xs);
+}
+
+.perf-catalog .upload-report-sidebar-item.active .upload-item-indicator {
+  background: var(--ads-blue);
+  border-radius: var(--ads-r-pill);
+}
+
+/* ── Right workspace — glass card ─────────────────────────────────────── */
+.perf-catalog .upload-workspace-container {
+  background: var(--ads-material-thick);
+  -webkit-backdrop-filter: var(--ads-blur-md);
+  backdrop-filter: var(--ads-blur-md);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-lg);
+  box-shadow: var(--ads-shadow-sm), var(--ads-bevel);
+}
+
+/* ── Dropzone ─────────────────────────────────────────────────────────── */
+.perf-catalog .upload-dropzone-wrap {
+  transition: background-color var(--ads-dur) var(--ads-ease),
+              border-color var(--ads-dur) var(--ads-ease),
+              box-shadow var(--ads-dur) var(--ads-ease),
+              transform var(--ads-dur) var(--ads-ease);
+}
+
+/* `!important` here only because the dropzone's border/shadow are set inline,
+   which a plain rule cannot reach. */
+.perf-catalog .upload-dropzone-wrap:hover {
+  border-color: var(--ads-blue) !important;
+  box-shadow: var(--ads-shadow-md) !important;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .perf-catalog .upload-reports-sidebar,
+  .perf-catalog .upload-workspace-container,
+  .perf-catalog .upload-segmented-capsule,
+  .perf-catalog .upload-action-pill-btn {
+    background: var(--ads-white);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .perf-catalog .upload-reports-sidebar,
+  .perf-catalog .upload-workspace-container {
+    background: var(--ads-white);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: var(--ads-hairline-strong);
+  }
+}

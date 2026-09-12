@@ -103,24 +103,27 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.6)",
-        backdropFilter: "blur(4px)",
+        background: "rgba(0,0,0,0.32)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         zIndex: 9999,
-        padding: "1rem",
+        padding: "var(--ads-s4)",
       }}
       onClick={onClose}
     >
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "12px",
+          background: "var(--ads-material-thick)",
+          backdropFilter: "var(--ads-blur-lg)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
           width: "100%",
           maxWidth: "540px",
-          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
-          border: "1px solid #E2E8F0",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          border: "1px solid var(--ads-hairline)",
           overflow: "hidden",
         }}
         onClick={(e) => e.stopPropagation()}
@@ -131,9 +134,9 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            padding: "var(--ads-s5) var(--ads-s6)",
+            borderBottom: "1px solid var(--ads-hairline)",
+            background: "transparent",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
@@ -141,22 +144,22 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
               style={{
                 width: "36px",
                 height: "36px",
-                borderRadius: "8px",
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                border: "1px solid #DBEAFE",
+                border: "1px solid var(--ads-blue-tint-strong)",
               }}
             >
               <FileSpreadsheet size={18} />
             </div>
             <div>
-              <h2 style={{ fontSize: "1.125rem", fontWeight: 700, color: "#1E293B", margin: 0 }}>
+              <h2 style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--ads-ink)", margin: 0, letterSpacing: "-0.019em" }}>
                 Upload Daily Operation Report
               </h2>
-              <p style={{ fontSize: "0.75rem", color: "#64748B", margin: "0.15rem 0 0 0" }}>
+              <p style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", margin: "0.15rem 0 0 0" }}>
                 Autofill driver and vehicle assignments for {date}
               </p>
             </div>
@@ -164,13 +167,19 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
           <button
             type="button"
             onClick={onClose}
+            aria-label="Close upload dialog"
             style={{
-              background: "none",
-              border: "none",
-              color: "#94A3B8",
+              width: "32px",
+              height: "32px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "transparent",
+              border: "1px solid var(--ads-hairline)",
+              color: "var(--ads-ink-tertiary)",
               cursor: "pointer",
-              padding: "0.25rem",
-              borderRadius: "4px",
+              borderRadius: "var(--ads-r-sm)",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             <X size={18} />
@@ -178,15 +187,15 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
         </div>
 
         {/* Content */}
-        <div style={{ padding: "1.5rem", display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+        <div style={{ padding: "var(--ads-s6)", display: "flex", flexDirection: "column", gap: "var(--ads-s5)" }}>
           {errorMsg && (
             <div
               style={{
-                padding: "0.75rem 1rem",
-                borderRadius: "6px",
-                backgroundColor: "#FEF2F2",
-                border: "1px solid #FCA5A5",
-                color: "#DC2626",
+                padding: "var(--ads-s3) var(--ads-s4)",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-red-tint)",
+                border: "1px solid var(--ads-hairline)",
+                color: "var(--ads-red)",
                 fontSize: "0.8125rem",
                 display: "flex",
                 alignItems: "center",
@@ -201,11 +210,11 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
           {isSuccess && (
             <div
               style={{
-                padding: "0.75rem 1rem",
-                borderRadius: "6px",
-                backgroundColor: "#ECFDF5",
-                border: "1px solid #A7F3D0",
-                color: "#059669",
+                padding: "var(--ads-s3) var(--ads-s4)",
+                borderRadius: "var(--ads-r-sm)",
+                backgroundColor: "var(--ads-green-tint)",
+                border: "1px solid var(--ads-hairline)",
+                color: "var(--ads-green)",
                 fontSize: "0.8125rem",
                 display: "flex",
                 alignItems: "center",
@@ -223,21 +232,21 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
             onDrop={handleDrop}
             onClick={() => fileInputRef.current?.click()}
             style={{
-              border: "2px dashed #BFDBFE",
-              borderRadius: "10px",
-              padding: "2rem 1.5rem",
+              border: "2px dashed var(--ads-blue-tint-strong)",
+              borderRadius: "var(--ads-r-md)",
+              padding: "var(--ads-s8) var(--ads-s6)",
               textAlign: "center",
-              backgroundColor: "#F8FAFC",
+              backgroundColor: "var(--ads-canvas)",
               cursor: "pointer",
-              transition: "border-color 0.2s ease, background-color 0.2s ease",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "#2563EB";
-              e.currentTarget.style.backgroundColor = "#EFF6FF";
+              e.currentTarget.style.borderColor = "var(--ads-blue)";
+              e.currentTarget.style.backgroundColor = "var(--ads-blue-tint)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "#BFDBFE";
-              e.currentTarget.style.backgroundColor = "#F8FAFC";
+              e.currentTarget.style.borderColor = "var(--ads-blue-tint-strong)";
+              e.currentTarget.style.backgroundColor = "var(--ads-canvas)";
             }}
           >
             <input
@@ -252,8 +261,8 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
                 width: "48px",
                 height: "48px",
                 borderRadius: "50%",
-                backgroundColor: "#DBEAFE",
-                color: "#2563EB",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -262,10 +271,10 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
             >
               <UploadCloud size={24} />
             </div>
-            <div style={{ fontSize: "0.9375rem", fontWeight: 700, color: "#1E293B" }}>
+            <div style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--ads-ink)", letterSpacing: "-0.01em" }}>
               {selectedFile ? selectedFile.name : "Click to select or drag & drop spreadsheet"}
             </div>
-            <p style={{ fontSize: "0.75rem", color: "#64748B", margin: "0.35rem 0 0 0" }}>
+            <p style={{ fontSize: "0.75rem", color: "var(--ads-ink-tertiary)", margin: "0.35rem 0 0 0" }}>
               Supported formats: .XLSX, .XLS, .CSV (Maximum file size: 15MB)
             </p>
             {selectedFile && (
@@ -276,11 +285,11 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
                   gap: "0.35rem",
                   marginTop: "0.75rem",
                   fontSize: "0.75rem",
-                  color: "#059669",
+                  color: "var(--ads-green)",
                   fontWeight: 600,
-                  backgroundColor: "#ECFDF5",
+                  backgroundColor: "var(--ads-green-tint)",
                   padding: "0.25rem 0.65rem",
-                  borderRadius: "9999px",
+                  borderRadius: "var(--ads-r-pill)",
                 }}
               >
                 <CheckCircle2 size={13} />
@@ -292,12 +301,12 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
           {/* Guidelines Box */}
           <div
             style={{
-              padding: "0.85rem 1rem",
-              borderRadius: "8px",
-              backgroundColor: "#EFF6FF",
-              border: "1px solid #DBEAFE",
+              padding: "var(--ads-s3) var(--ads-s4)",
+              borderRadius: "var(--ads-r-sm)",
+              backgroundColor: "var(--ads-blue-tint)",
+              border: "1px solid var(--ads-blue-tint-strong)",
               fontSize: "0.75rem",
-              color: "#1E40AF",
+              color: "var(--ads-blue)",
               lineHeight: 1.5,
             }}
           >
@@ -311,24 +320,27 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
-            gap: "0.75rem",
-            padding: "1rem 1.5rem",
-            borderTop: "1px solid #E2E8F0",
-            backgroundColor: "#F8FAFC",
+            gap: "var(--ads-s3)",
+            padding: "var(--ads-s4) var(--ads-s6)",
+            borderTop: "1px solid var(--ads-hairline)",
+            background: "transparent",
           }}
         >
           <button
             type="button"
             onClick={onClose}
             style={{
-              padding: "0.5rem 1rem",
+              padding: "9px 18px",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              backgroundColor: "#FFFFFF",
-              color: "#475569",
-              border: "1px solid #CBD5E1",
-              borderRadius: "6px",
+              letterSpacing: "-0.01em",
+              background: "var(--ads-material-thick)",
+              color: "var(--ads-ink)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-pill)",
+              boxShadow: "var(--ads-bevel)",
               cursor: "pointer",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             Cancel
@@ -342,20 +354,22 @@ export const DailyOperationReportModal: FC<DailyOperationReportModalProps> = ({
               display: "flex",
               alignItems: "center",
               gap: "0.4rem",
-              padding: "0.5rem 1.25rem",
+              padding: "9px 18px",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              backgroundColor: !selectedFile || isUploading ? "#93C5FD" : "#2563EB",
+              letterSpacing: "-0.01em",
+              background: "var(--ads-blue)",
+              opacity: !selectedFile || isUploading ? 0.4 : 1,
               color: "#FFFFFF",
-              border: "none",
-              borderRadius: "6px",
+              border: "1px solid transparent",
+              borderRadius: "var(--ads-r-pill)",
               cursor: !selectedFile || isUploading ? "not-allowed" : "pointer",
-              boxShadow: "0 1px 2px rgba(37, 99, 235, 0.2)",
+              transition: "all var(--ads-dur-fast) var(--ads-ease)",
             }}
           >
             {isUploading ? (
               <>
-                <Loader2 size={14} className="animate-spin text-white" />
+                <Loader2 size={14} color="#FFFFFF" className="animate-spin text-white" />
                 <span style={{ color: "#FFFFFF" }}>Uploading...</span>
               </>
             ) : (

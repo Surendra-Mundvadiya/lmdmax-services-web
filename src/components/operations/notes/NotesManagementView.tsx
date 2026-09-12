@@ -175,21 +175,25 @@ export const NotesManagementView: FC = () => {
     return (
       <div className="notes-main-container">
         <div className="notes-card-container">
-          <div className="notes-top-header" style={{ borderBottom: "1px solid #E2E8F0" }}>
+          <div className="notes-top-header" style={{ borderBottom: "1px solid var(--ads-hairline)" }}>
             <div className="notes-header-left">
               <button
                 type="button"
                 onClick={() => setPreviewNote(null)}
-                className="tasks-tool-btn"
+                className="notes-tool-btn"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.5rem",
-                  padding: "0.5rem 0.85rem",
+                  gap: "var(--ads-s2)",
+                  width: "auto",
+                  height: "auto",
+                  borderRadius: "var(--ads-r-pill)",
+                  padding: "7px 15px",
                   fontSize: "0.75rem",
-                  fontWeight: 700,
+                  fontWeight: 600,
+                  letterSpacing: "-0.005em",
                   cursor: "pointer",
-                  marginBottom: "0.5rem",
+                  marginBottom: "var(--ads-s2)",
                 }}
               >
                 <ArrowLeft size={16} />
@@ -237,18 +241,18 @@ export const NotesManagementView: FC = () => {
 
           <div
             style={{
-              padding: "1.5rem",
+              padding: "var(--ads-s6)",
               backgroundColor: cardBg,
               flex: 1,
-              borderRadius: "0 0 16px 16px",
+              borderRadius: "0 0 var(--ads-r-lg) var(--ads-r-lg)",
               display: "flex",
               flexDirection: "column",
               gap: "1.25rem",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem", fontSize: "0.8rem", color: "#64748B", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s4)", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)", flexWrap: "wrap" }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}>
-                <Calendar size={14} style={{ color: "#2563EB" }} />
+                <Calendar size={14} style={{ color: "var(--ads-blue)" }} />
                 <span>{formattedDate}</span>
               </span>
 
@@ -258,12 +262,12 @@ export const NotesManagementView: FC = () => {
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "0.3rem",
-                    color: "#6D28D9",
-                    backgroundColor: "#F5F3FF",
-                    padding: "0.25rem 0.65rem",
-                    borderRadius: "9999px",
+                    color: "var(--ads-purple)",
+                    backgroundColor: "var(--ads-purple-tint)",
+                    padding: "3px 9px",
+                    borderRadius: "var(--ads-r-pill)",
                     fontWeight: 600,
-                    fontSize: "0.75rem",
+                    fontSize: "0.6875rem",
                   }}
                 >
                   <Lock size={12} />
@@ -275,12 +279,12 @@ export const NotesManagementView: FC = () => {
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "0.3rem",
-                    color: "#047857",
-                    backgroundColor: "#ECFDF5",
-                    padding: "0.25rem 0.65rem",
-                    borderRadius: "9999px",
+                    color: "var(--ads-green)",
+                    backgroundColor: "var(--ads-green-tint)",
+                    padding: "3px 9px",
+                    borderRadius: "var(--ads-r-pill)",
                     fontWeight: 600,
-                    fontSize: "0.75rem",
+                    fontSize: "0.6875rem",
                   }}
                 >
                   <Globe size={12} />
@@ -289,21 +293,24 @@ export const NotesManagementView: FC = () => {
               )}
 
               {previewNote.created_by && (
-                <span style={{ marginLeft: "auto", fontSize: "0.75rem", color: "#94A3B8" }}>
-                  Created by: <strong style={{ color: "#475569" }}>{previewNote.created_by}</strong>
+                <span style={{ marginLeft: "auto", fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
+                  Created by: <strong style={{ color: "var(--ads-ink-secondary)" }}>{previewNote.created_by}</strong>
                 </span>
               )}
             </div>
 
             <div
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.8)",
-                border: "1px solid rgba(0, 0, 0, 0.08)",
-                borderRadius: "12px",
-                padding: "1.5rem",
-                fontSize: "0.95rem",
+                backgroundColor: "var(--ads-material-thick)",
+                backdropFilter: "var(--ads-blur-sm)",
+                WebkitBackdropFilter: "var(--ads-blur-sm)",
+                border: "1px solid var(--ads-hairline)",
+                borderRadius: "var(--ads-r-md)",
+                boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
+                padding: "var(--ads-s6)",
+                fontSize: "0.9375rem",
                 lineHeight: 1.7,
-                color: "#0F172A",
+                color: "var(--ads-ink)",
                 whiteSpace: "pre-wrap",
                 wordBreak: "break-word",
                 minHeight: "220px",
@@ -399,12 +406,15 @@ export const NotesManagementView: FC = () => {
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                  title="Clear search"
+                  className="notes-search-clear"
                   style={{
                     position: "absolute",
                     right: 6,
                     background: "none",
                     border: "none",
-                    color: "#94A3B8",
+                    color: "var(--ads-ink-tertiary)",
                     cursor: "pointer",
                   }}
                 >
@@ -419,8 +429,9 @@ export const NotesManagementView: FC = () => {
               type="button"
               onClick={fetchNotes}
               disabled={isLoading}
-              className="tasks-tool-btn"
+              className="notes-tool-btn"
               title="Refresh notes"
+              aria-label="Refresh notes"
             >
               <RefreshCw size={13} className={isLoading ? "animate-spin" : ""} />
             </button>
@@ -434,8 +445,8 @@ export const NotesManagementView: FC = () => {
               <FileText size={16} />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "#64748B" }}>TOTAL NOTES</span>
-              <span style={{ fontSize: "1.15rem", fontWeight: 700, color: "#0F172A" }}>{totalNotes}</span>
+              <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--ads-ink-tertiary)", letterSpacing: "0.06em", lineHeight: 1.4 }}>TOTAL NOTES</span>
+              <span style={{ fontSize: "1.375rem", fontWeight: 650, color: "var(--ads-ink)", letterSpacing: "-0.019em", lineHeight: 1.22 }}>{totalNotes}</span>
             </div>
           </div>
 
@@ -444,8 +455,8 @@ export const NotesManagementView: FC = () => {
               <Globe size={16} />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "#64748B" }}>TEAM SHARED</span>
-              <span style={{ fontSize: "1.15rem", fontWeight: 700, color: "#0F172A" }}>{sharedCount}</span>
+              <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--ads-ink-tertiary)", letterSpacing: "0.06em", lineHeight: 1.4 }}>TEAM SHARED</span>
+              <span style={{ fontSize: "1.375rem", fontWeight: 650, color: "var(--ads-ink)", letterSpacing: "-0.019em", lineHeight: 1.22 }}>{sharedCount}</span>
             </div>
           </div>
 
@@ -454,8 +465,8 @@ export const NotesManagementView: FC = () => {
               <Lock size={16} />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "#64748B" }}>PRIVATE TO ME</span>
-              <span style={{ fontSize: "1.15rem", fontWeight: 700, color: "#0F172A" }}>{privateCount}</span>
+              <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--ads-ink-tertiary)", letterSpacing: "0.06em", lineHeight: 1.4 }}>PRIVATE TO ME</span>
+              <span style={{ fontSize: "1.375rem", fontWeight: 650, color: "var(--ads-ink)", letterSpacing: "-0.019em", lineHeight: 1.22 }}>{privateCount}</span>
             </div>
           </div>
 
@@ -464,8 +475,8 @@ export const NotesManagementView: FC = () => {
               <Clock size={16} />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "#64748B" }}>LATEST ENTRY</span>
-              <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#0F172A", marginTop: 2 }}>
+              <span style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--ads-ink-tertiary)", letterSpacing: "0.06em", lineHeight: 1.4 }}>LATEST ENTRY</span>
+              <span style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--ads-ink)", letterSpacing: "-0.01em", marginTop: 2 }}>
                 {notes[0]?.date ? formatDate(notes[0].date) : "None"}
               </span>
             </div>
@@ -476,11 +487,11 @@ export const NotesManagementView: FC = () => {
         {successToast && (
           <div
             style={{
-              padding: "0.5rem 1.25rem",
-              backgroundColor: "#ECFDF5",
-              color: "#065F46",
-              borderBottom: "1px solid #A7F3D0",
-              fontSize: "0.775rem",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              backgroundColor: "var(--ads-green-tint)",
+              color: "var(--ads-green)",
+              borderBottom: "1px solid var(--ads-hairline)",
+              fontSize: "0.8125rem",
               fontWeight: 600,
               display: "flex",
               alignItems: "center",
@@ -488,12 +499,14 @@ export const NotesManagementView: FC = () => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <CheckCircle2 size={15} style={{ color: "#059669" }} />
+              <CheckCircle2 size={15} style={{ color: "var(--ads-green)" }} />
               <span>{successToast}</span>
             </div>
             <button
               onClick={() => setSuccessToast(null)}
-              style={{ background: "none", border: "none", color: "#065F46", cursor: "pointer" }}
+              aria-label="Dismiss message"
+              title="Dismiss"
+              style={{ background: "none", border: "none", color: "var(--ads-green)", cursor: "pointer" }}
             >
               ✕
             </button>
@@ -503,11 +516,11 @@ export const NotesManagementView: FC = () => {
         {error && (
           <div
             style={{
-              padding: "0.5rem 1.25rem",
-              backgroundColor: "#FEF2F2",
-              color: "#991B1B",
-              borderBottom: "1px solid #FECACA",
-              fontSize: "0.775rem",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              backgroundColor: "var(--ads-red-tint)",
+              color: "var(--ads-red)",
+              borderBottom: "1px solid var(--ads-hairline)",
+              fontSize: "0.8125rem",
               fontWeight: 600,
               display: "flex",
               alignItems: "center",
@@ -515,12 +528,14 @@ export const NotesManagementView: FC = () => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <AlertCircle size={15} style={{ color: "#DC2626" }} />
+              <AlertCircle size={15} style={{ color: "var(--ads-red)" }} />
               <span>{error}</span>
             </div>
             <button
               onClick={() => setError(null)}
-              style={{ background: "none", border: "none", color: "#991B1B", cursor: "pointer" }}
+              aria-label="Dismiss error"
+              title="Dismiss"
+              style={{ background: "none", border: "none", color: "var(--ads-red)", cursor: "pointer" }}
             >
               ✕
             </button>
@@ -536,18 +551,18 @@ export const NotesManagementView: FC = () => {
                   {/* Top colored accent line */}
                   <div
                     className="note-card-top-bar"
-                    style={{ backgroundColor: note.colour || "#4F8BFF" }}
+                    style={{ backgroundColor: note.colour || "var(--ads-blue)" }}
                   />
 
                   {/* Header */}
                   <div className="note-card-header">
                     <h3 className="note-card-title">{note.title}</h3>
                     {note.view_all === false ? (
-                      <span title="Private Note" style={{ color: "#7C3AED", display: "flex" }}>
+                      <span title="Private Note" aria-label="Private note" style={{ color: "var(--ads-purple)", display: "flex" }}>
                         <Lock size={13} />
                       </span>
                     ) : (
-                      <span title="Team Shared Note" style={{ color: "#059669", display: "flex" }}>
+                      <span title="Team Shared Note" aria-label="Team shared note" style={{ color: "var(--ads-green)", display: "flex" }}>
                         <Globe size={13} />
                       </span>
                     )}
@@ -573,6 +588,7 @@ export const NotesManagementView: FC = () => {
                         onClick={() => setPreviewNote(note)}
                         className="note-action-btn"
                         title="View Full Note"
+                        aria-label="View Full Note"
                       >
                         <Eye size={13} />
                       </button>
@@ -592,6 +608,7 @@ export const NotesManagementView: FC = () => {
                         onClick={() => setDeleteConfirmNote(note)}
                         className="note-action-btn delete"
                         title="Delete Note"
+                        aria-label="Delete Note"
                       >
                         <Trash2 size={13} />
                       </button>
@@ -601,22 +618,14 @@ export const NotesManagementView: FC = () => {
               ))}
             </div>
           ) : (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "4rem 1rem",
-                color: "#94A3B8",
-                gap: "0.5rem",
-              }}
-            >
-              <FileText size={36} style={{ color: "#CBD5E1" }} />
-              <div style={{ fontSize: "0.95rem", fontWeight: 700, color: "#1E293B" }}>
+            <div className="notes-empty-state">
+              <div className="notes-empty-icon">
+                <FileText size={24} />
+              </div>
+              <div className="notes-empty-title">
                 No notes found
               </div>
-              <div style={{ fontSize: "0.8rem", color: "#64748B" }}>
+              <div className="notes-empty-desc">
                 Keep your station organized by logging shift handovers and duties.
               </div>
               <button
@@ -648,19 +657,21 @@ export const NotesManagementView: FC = () => {
         >
           <div className="tasks-modal-card" style={{ maxWidth: 440 }}>
             <div className="tasks-modal-header">
-              <h2 className="tasks-modal-title" style={{ color: "#EF4444" }}>
+              <h2 className="tasks-modal-title" style={{ color: "var(--ads-red)" }}>
                 Delete Note
               </h2>
               <button
                 type="button"
                 onClick={() => setDeleteConfirmNote(null)}
                 className="tasks-modal-close-btn"
+                aria-label="Close delete note dialog"
+                title="Close"
               >
                 <X size={16} />
               </button>
             </div>
             <div className="tasks-modal-body">
-              <p style={{ margin: 0, fontSize: "0.8125rem", color: "#334155", lineHeight: 1.5 }}>
+              <p style={{ margin: 0, fontSize: "0.8125rem", color: "var(--ads-ink-secondary)", lineHeight: 1.5 }}>
                 Are you sure you want to permanently delete note "{deleteConfirmNote.title}"?
               </p>
             </div>
@@ -678,14 +689,18 @@ export const NotesManagementView: FC = () => {
                 onClick={handleConfirmDelete}
                 disabled={isDeleting}
                 style={{
-                  backgroundColor: "#EF4444",
+                  backgroundColor: "var(--ads-red)",
                   color: "#FFFFFF",
-                  border: "none",
-                  borderRadius: "7px",
-                  padding: "0.45rem 0.95rem",
+                  border: "1px solid transparent",
+                  borderRadius: "var(--ads-r-pill)",
+                  padding: "9px 18px",
                   fontSize: "0.8125rem",
                   fontWeight: 600,
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1,
+                  boxShadow: "0 1px 3px rgba(215, 0, 21, 0.24)",
                   cursor: "pointer",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                 }}
               >
                 {isDeleting ? "Deleting..." : "Delete Note"}

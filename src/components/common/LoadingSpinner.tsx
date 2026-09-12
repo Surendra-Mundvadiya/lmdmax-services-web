@@ -9,7 +9,7 @@ interface LoadingSpinnerProps {
 
 export const LoadingSpinner: FC<LoadingSpinnerProps> = ({
   size = "md",
-  color = "#4F8BFF",
+  color = "#0071E3",
   className = "",
   label,
 }) => {
@@ -21,9 +21,13 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = ({
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: "0.5rem",
+        gap: "var(--ads-s2)",
+        color: "var(--ads-ink-quaternary)",
       }}
       className={className}
+      role="status"
+      aria-live="polite"
+      aria-label={label || "Loading"}
     >
       <svg
         width={sizePx}
@@ -50,7 +54,7 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = ({
           strokeLinecap="round"
         />
       </svg>
-      {label && <span style={{ fontSize: "0.875rem", color: "#64748B" }}>{label}</span>}
+      {label && <span style={{ fontSize: "0.875rem", color: "var(--ads-ink-tertiary)" }}>{label}</span>}
     </div>
   );
 };

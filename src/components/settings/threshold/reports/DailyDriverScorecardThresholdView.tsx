@@ -101,7 +101,10 @@ export const DailyDriverScorecardThresholdView: FC<DailyDriverScorecardThreshold
       {/* Header */}
       <div className="threshold-view-header">
         <div>
-          <h3 className="threshold-view-title flex items-center gap-2">
+          <h3
+            className="threshold-view-title"
+            style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}
+          >
             <span>Set Threshold for Daily Driver Scorecard</span>
             <span className="badge-custom blue">Live API</span>
           </h3>
@@ -137,18 +140,18 @@ export const DailyDriverScorecardThresholdView: FC<DailyDriverScorecardThreshold
       </div>
 
       {/* Color Legend */}
-      <ColorLegendBar type="scorecard_report" className="my-3" />
+      <ColorLegendBar type="scorecard_report" />
 
       {/* Grouped Buckets */}
       {hasMetrics ? (
-        <div className="space-y-6">
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s6)" }}>
           {/* Bucket 1: Previous Day */}
           {data.previous_day.length > 0 && (
             <div className="threshold-bucket-section">
               <div className="threshold-bucket-heading">
-                <Calendar size={16} className="text-blue-600" />
+                <Calendar size={16} style={{ color: "var(--ads-blue)" }} />
                 <span>Previous Day Metrics</span>
-                <span className="badge-custom gray">{data.previous_day.length}</span>
+                <span className="ads-badge ads-badge--neutral">{data.previous_day.length}</span>
               </div>
               <div className="threshold-metrics-list">
                 {data.previous_day.map((field) => (
@@ -169,9 +172,9 @@ export const DailyDriverScorecardThresholdView: FC<DailyDriverScorecardThreshold
           {data["2_days_before"].length > 0 && (
             <div className="threshold-bucket-section">
               <div className="threshold-bucket-heading">
-                <Calendar size={16} className="text-blue-600" />
+                <Calendar size={16} style={{ color: "var(--ads-blue)" }} />
                 <span>2 Days Before Metrics</span>
-                <span className="badge-custom gray">{data["2_days_before"].length}</span>
+                <span className="ads-badge ads-badge--neutral">{data["2_days_before"].length}</span>
               </div>
               <div className="threshold-metrics-list">
                 {data["2_days_before"].map((field) => (
@@ -190,9 +193,17 @@ export const DailyDriverScorecardThresholdView: FC<DailyDriverScorecardThreshold
         </div>
       ) : (
         <div className="threshold-empty-state">
-          <AlertCircle size={32} className="text-slate-400 mb-2" />
-          <h4 className="text-sm font-semibold text-slate-700">No Daily Metrics Available</h4>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm text-center">
+          <AlertCircle size={32} style={{ color: "var(--ads-ink-quaternary)", marginBottom: "var(--ads-s2)" }} />
+          <h4 style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 600, color: "var(--ads-ink)" }}>No Daily Metrics Available</h4>
+          <p
+            style={{
+              margin: "var(--ads-s1) 0 0",
+              maxWidth: "24rem",
+              textAlign: "center",
+              fontSize: "0.8125rem",
+              color: "var(--ads-ink-tertiary)",
+            }}
+          >
             Please upload the Daily Driver Scorecard report to configure previous-day thresholds.
           </p>
         </div>

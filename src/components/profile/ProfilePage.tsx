@@ -365,9 +365,17 @@ export const ProfilePage: FC<ProfilePageProps> = ({ onBackToDashboard }) => {
 
   if (isLoading || !profileData) {
     return (
-      <div className="profile-loading-screen">
-        <LoadingSpinner size="lg" color="#2563EB" />
-        <span className="profile-loading-text">Loading LMDmax Profile...</span>
+      <div
+        className="profile-loading-screen"
+        style={{ backgroundColor: "var(--ads-canvas)" }}
+      >
+        <LoadingSpinner size="lg" color="#0071E3" />
+        <span
+          className="profile-loading-text"
+          style={{ color: "var(--ads-blue)", letterSpacing: "-0.01em" }}
+        >
+          Loading LMDmax Profile...
+        </span>
       </div>
     );
   }
@@ -381,18 +389,52 @@ export const ProfilePage: FC<ProfilePageProps> = ({ onBackToDashboard }) => {
       <div className="profile-outer-shell">
         {/* Dynamic Notification Toast */}
         {notification && (
-          <div className={`notification-banner ${notification.type}`}>
+          <div
+            className={`notification-banner ${notification.type}`}
+            role="status"
+            style={{
+              backgroundColor:
+                notification.type === "success"
+                  ? "var(--ads-green-tint)"
+                  : "var(--ads-red-tint)",
+              border: "1px solid var(--ads-hairline)",
+              borderRadius: "var(--ads-r-md)",
+              color: "var(--ads-ink)",
+              boxShadow: "var(--ads-shadow-xs), var(--ads-bevel)",
+              backdropFilter: "var(--ads-blur-sm)",
+              WebkitBackdropFilter: "var(--ads-blur-sm)",
+              letterSpacing: "-0.01em",
+            }}
+          >
             {notification.type === "success" ? (
-              <CheckCircle2 size={18} />
+              <CheckCircle2
+                size={18}
+                style={{ color: "var(--ads-green)", flexShrink: 0 }}
+              />
             ) : (
-              <AlertCircle size={18} />
+              <AlertCircle
+                size={18}
+                style={{ color: "var(--ads-red)", flexShrink: 0 }}
+              />
             )}
-            <span className="notification-message">{notification.text}</span>
+            <span
+              className="notification-message"
+              style={{ color: "var(--ads-ink)" }}
+            >
+              {notification.text}
+            </span>
             <button
               type="button"
               className="close-notif-btn"
               onClick={() => setNotification(null)}
               title="Dismiss"
+              aria-label="Dismiss notification"
+              style={{
+                color: "var(--ads-ink-tertiary)",
+                borderRadius: "var(--ads-r-xs)",
+                transition:
+                  "background-color var(--ads-dur-fast) var(--ads-ease), opacity var(--ads-dur-fast) var(--ads-ease)",
+              }}
             >
               <X size={15} />
             </button>

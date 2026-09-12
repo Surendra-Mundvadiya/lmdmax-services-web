@@ -235,6 +235,8 @@ export const SignInForm: FC<SignInFormProps> = ({
               type="button"
               className="password-toggle-btn"
               onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              title={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>

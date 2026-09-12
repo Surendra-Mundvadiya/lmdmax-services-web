@@ -117,8 +117,7 @@ export const NavDropdown: FC<NavDropdownProps> = ({
         aria-haspopup="true"
         title={title || label}
         style={{
-          transition: "all 0.15s ease",
-          boxShadow: isOpen ? "0 0 0 2px rgba(37, 99, 235, 0.15)" : "none",
+          boxShadow: isOpen ? "var(--ads-shadow-focus)" : "none",
         }}
       >
         <Icon size={14} style={{ flexShrink: 0 }} />
@@ -126,7 +125,7 @@ export const NavDropdown: FC<NavDropdownProps> = ({
         <ChevronDown
           size={12}
           style={{
-            transition: "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+            transition: "transform 0.2s var(--ads-ease)",
             transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
             flexShrink: 0,
             opacity: 0.8,
@@ -142,8 +141,8 @@ export const NavDropdown: FC<NavDropdownProps> = ({
               location.pathname === item.path ||
               (item.path !== basePath && location.pathname.startsWith(`${item.path}/`));
             const ItemIcon = item.icon || Icon;
-            const color = item.color || "#2563EB";
-            const bgColor = item.bgColor || "#EFF6FF";
+            const color = item.color || "var(--ads-blue)";
+            const bgColor = item.bgColor || "var(--ads-blue-tint)";
 
             return (
               <button
@@ -159,13 +158,13 @@ export const NavDropdown: FC<NavDropdownProps> = ({
                   gap: "0.75rem",
                   padding: "0.6rem 0.85rem",
                   paddingLeft: isItemActive ? "0.95rem" : "0.85rem",
-                  borderRadius: "10px",
-                  transition: "all 0.16s cubic-bezier(0.16, 1, 0.3, 1)",
+                  borderRadius: "var(--ads-r-sm)",
+                  transition: "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                   width: "100%",
                   textAlign: "left",
-                  backgroundColor: isItemActive ? "#EFF6FF" : "transparent",
-                  border: isItemActive ? "1px solid #BFDBFE" : "1px solid transparent",
-                  boxShadow: isItemActive ? "0 2px 6px -1px rgba(37, 99, 235, 0.12)" : "none",
+                  backgroundColor: isItemActive ? "var(--ads-blue-tint)" : "transparent",
+                  border: isItemActive ? "1px solid var(--ads-blue-tint-strong)" : "1px solid transparent",
+                  boxShadow: isItemActive ? "var(--ads-shadow-xs)" : "none",
                   cursor: "pointer",
                 }}
               >
@@ -178,8 +177,8 @@ export const NavDropdown: FC<NavDropdownProps> = ({
                       top: "22%",
                       bottom: "22%",
                       width: "3px",
-                      borderRadius: "4px",
-                      backgroundColor: "#2563EB",
+                      borderRadius: "var(--ads-r-xs)",
+                      backgroundColor: "var(--ads-blue)",
                     }}
                   />
                 )}
@@ -188,18 +187,18 @@ export const NavDropdown: FC<NavDropdownProps> = ({
                 <div
                   className="see-more-icon-box"
                   style={{
-                    color: isItemActive ? "#2563EB" : color,
-                    backgroundColor: isItemActive ? "#DBEAFE" : bgColor,
+                    color: isItemActive ? "var(--ads-blue)" : color,
+                    backgroundColor: isItemActive ? "var(--ads-blue-tint-strong)" : bgColor,
                     width: "34px",
                     height: "34px",
-                    borderRadius: "9px",
+                    borderRadius: "var(--ads-r-sm)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
-                    transition: "all 0.16s ease",
-                    border: isItemActive ? "1px solid rgba(37, 99, 235, 0.25)" : "1px solid transparent",
-                    boxShadow: isItemActive ? "0 2px 4px rgba(37, 99, 235, 0.18)" : "none",
+                    transition: "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease)",
+                    border: isItemActive ? "1px solid rgba(0, 113, 227, 0.25)" : "1px solid transparent",
+                    boxShadow: "none",
                   }}
                 >
                   <ItemIcon size={16} />
@@ -219,7 +218,7 @@ export const NavDropdown: FC<NavDropdownProps> = ({
                     style={{
                       fontSize: "0.84rem",
                       fontWeight: isItemActive ? 650 : 500,
-                      color: isItemActive ? "#1D4ED8" : "#1E293B",
+                      color: isItemActive ? "var(--ads-blue)" : "var(--ads-ink)",
                       whiteSpace: "nowrap",
                       overflow: "hidden",
                       textOverflow: "ellipsis",
@@ -239,10 +238,10 @@ export const NavDropdown: FC<NavDropdownProps> = ({
                         width: "19px",
                         height: "19px",
                         borderRadius: "50%",
-                        backgroundColor: "#2563EB",
+                        backgroundColor: "var(--ads-blue)",
                         color: "#FFFFFF",
                         flexShrink: 0,
-                        boxShadow: "0 2px 5px rgba(37, 99, 235, 0.35)",
+                        boxShadow: "var(--ads-shadow-xs)",
                         marginLeft: "0.5rem",
                       }}
                       title="Currently active"

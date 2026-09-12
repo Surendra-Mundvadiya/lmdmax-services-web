@@ -94,8 +94,10 @@ export const OperationsNavbar: FC<OperationsNavbarProps> = ({
           type="button"
           className="station-selector-btn"
           onClick={() => setStationDropdownOpen(!stationDropdownOpen)}
+          aria-label="Filter by delivery station"
+          aria-expanded={stationDropdownOpen}
         >
-          <Building2 size={14} className="text-blue-600" />
+          <Building2 size={14} style={{ color: "var(--ads-blue)" }} />
           <span className="station-btn-text">{currentStationDisplay}</span>
           <ChevronDown size={14} className="station-arrow-icon" />
         </button>
@@ -120,7 +122,7 @@ export const OperationsNavbar: FC<OperationsNavbarProps> = ({
                   {drivers.length} Drivers
                 </span>
               </div>
-              {selectedStationFilter === "ALL" && <Check size={14} className="text-blue-600" />}
+              {selectedStationFilter === "ALL" && <Check size={14} style={{ color: "var(--ads-blue)" }} />}
             </button>
 
             <div className="station-dropdown-divider" />
@@ -144,7 +146,7 @@ export const OperationsNavbar: FC<OperationsNavbarProps> = ({
                   </div>
                   <div className="station-item-right">
                     <span className="station-item-count">{count}</span>
-                    {isCurrent && <Check size={14} className="text-blue-600" />}
+                    {isCurrent && <Check size={14} style={{ color: "var(--ads-blue)" }} />}
                   </div>
                 </button>
               );

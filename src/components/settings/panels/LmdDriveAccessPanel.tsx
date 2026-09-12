@@ -58,25 +58,17 @@ export const LmdDriveAccessPanel: FC<LmdDriveAccessPanelProps> = ({ onNotificati
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <Smartphone size={20} className="text-blue-600" />
-            <span>LMD Drive APP Access</span>
-            <span className="badge-custom blue">Operations</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Configure driver mobile application sign-in, DVIC vehicle inspection permissions, and VIN scanner access
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Configure driver mobile application sign-in, DVIC vehicle inspection permissions, and VIN scanner access
+        </p>
       </div>
 
       {/* 1. Mobile App Sign-In Defaults */}
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Smartphone size={17} className="text-blue-600" />
+            <Smartphone size={17} />
             <span>Driver Mobile Sign-in Permissions</span>
           </h3>
         </div>
@@ -84,7 +76,7 @@ export const LmdDriveAccessPanel: FC<LmdDriveAccessPanelProps> = ({ onNotificati
           Controls whether delivery drivers can authenticate and log into the LMD Drive mobile application.
         </p>
 
-        <div className="flex flex-col gap-3">
+        <div className="settings-stack">
           <div className="settings-toggle-row">
             <div className="settings-toggle-info">
               <span className="settings-toggle-title">Enable LMD Drive Sign-in by Default</span>
@@ -124,7 +116,7 @@ export const LmdDriveAccessPanel: FC<LmdDriveAccessPanelProps> = ({ onNotificati
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <ShieldCheck size={17} className="text-blue-600" />
+            <ShieldCheck size={17} />
             <span>Driver Vehicle Inspection (DVIC) Access</span>
           </h3>
         </div>
@@ -154,7 +146,7 @@ export const LmdDriveAccessPanel: FC<LmdDriveAccessPanelProps> = ({ onNotificati
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <QrCode size={17} className="text-blue-600" />
+            <QrCode size={17} />
             <span>VIN Barcode Scanner Permission</span>
           </h3>
         </div>
@@ -179,8 +171,21 @@ export const LmdDriveAccessPanel: FC<LmdDriveAccessPanelProps> = ({ onNotificati
           </label>
         </div>
 
-        <div className="flex items-start gap-2 p-3 mt-2 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-800">
-          <Info size={15} className="text-blue-600 shrink-0 mt-0.5" />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "var(--ads-s2)",
+            padding: "var(--ads-s3) var(--ads-s4)",
+            fontSize: "0.75rem",
+            lineHeight: 1.5,
+            color: "var(--ads-ink-secondary)",
+            background: "var(--ads-blue-tint)",
+            border: "1px solid transparent",
+            borderRadius: "var(--ads-r-md)",
+          }}
+        >
+          <Info size={15} style={{ color: "var(--ads-blue)", flexShrink: 0, marginTop: "2px" }} />
           <span>
             When enabled, drivers can scan the door-jamb or windshield VIN barcode directly on mobile to instantly pair with unassigned vans during wave dispatch.
           </span>
@@ -191,10 +196,10 @@ export const LmdDriveAccessPanel: FC<LmdDriveAccessPanelProps> = ({ onNotificati
       <div className="settings-card">
         <div className="settings-card-title-row">
           <h3 className="settings-card-title">
-            <Building size={17} className="text-blue-600" />
+            <Building size={17} />
             <span>Station Auto Sign-in Applicability</span>
           </h3>
-          <span className="text-xs font-semibold px-2 py-0.5 bg-slate-100 text-slate-700 rounded">
+          <span className="ads-badge ads-badge--neutral">
             {stations.length} Delivery Stations
           </span>
         </div>
@@ -202,29 +207,50 @@ export const LmdDriveAccessPanel: FC<LmdDriveAccessPanelProps> = ({ onNotificati
           Select delivery station locations where drivers automatically receive mobile app access upon roster import.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 mt-2">
+        <div className="settings-grid">
           {stations.map((st) => {
             const isChecked = selectedStationIds.includes(String(st.company_id)) || st.current;
             return (
               <label
                 key={st.company_id || st.station_code}
-                className={`flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer ${
-                  isChecked
-                    ? "bg-blue-50/60 border-blue-300 text-blue-900"
-                    : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
-                }`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--ads-s3)",
+                  padding: "var(--ads-s3)",
+                  cursor: "pointer",
+                  background: isChecked ? "var(--ads-blue-tint)" : "var(--ads-material-thick)",
+                  border: isChecked
+                    ? "1px solid var(--ads-blue)"
+                    : "1px solid var(--ads-hairline)",
+                  borderRadius: "var(--ads-r-sm)",
+                  transition:
+                    "background-color var(--ads-dur-fast) var(--ads-ease), border-color var(--ads-dur-fast) var(--ads-ease)",
+                }}
               >
                 <input
                   type="checkbox"
                   checked={isChecked}
                   onChange={() => handleStationToggle(String(st.company_id))}
-                  className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                  aria-label={`Auto sign-in for station ${st.station_code}`}
+                  style={{
+                    width: "16px",
+                    height: "16px",
+                    accentColor: "var(--ads-blue)",
+                    flexShrink: 0,
+                  }}
                 />
-                <div className="flex flex-col">
-                  <span className="font-semibold text-xs text-slate-900">
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <span
+                    style={{
+                      fontSize: "0.75rem",
+                      fontWeight: 600,
+                      color: "var(--ads-ink)",
+                    }}
+                  >
                     Station {st.station_code}
                   </span>
-                  <span className="text-[11px] text-slate-500">
+                  <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)" }}>
                     {st.current ? "Current Station" : st.active ? "Active Station" : "Backup"}
                   </span>
                 </div>

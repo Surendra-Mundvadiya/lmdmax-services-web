@@ -141,87 +141,77 @@ export const ScheduleTemplatesModal: FC<ScheduleTemplatesModalProps> = ({
 
   return (
     <div
+      className="ads-scrim"
       style={{
-        position: "fixed",
-        inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.45)",
-        backdropFilter: "blur(4px)",
         zIndex: 9999,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "1rem",
+        padding: "var(--ads-s4)",
       }}
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div
         style={{
-          backgroundColor: "#FFFFFF",
-          borderRadius: "16px",
+          background: "var(--ads-material-thick)",
+          WebkitBackdropFilter: "var(--ads-blur-lg)",
+          backdropFilter: "var(--ads-blur-lg)",
+          borderRadius: "var(--ads-r-xl)",
           width: "100%",
           maxWidth: "640px",
           maxHeight: "85vh",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-          border: "1px solid #E2E8F0",
+          boxShadow: "var(--ads-shadow-lg), var(--ads-bevel)",
+          border: "1px solid var(--ads-hairline)",
           overflow: "hidden",
+          animation: "ads-sheet-in var(--ads-dur) var(--ads-ease)",
         }}
       >
         {/* Header */}
         <div
           style={{
-            padding: "1.1rem 1.5rem",
-            borderBottom: "1px solid #F1F5F9",
+            padding: "var(--ads-s4) var(--ads-s5)",
+            borderBottom: "1px solid var(--ads-hairline)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: "var(--ads-s3)",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s3)" }}>
             <div
               style={{
                 width: "38px",
                 height: "38px",
-                borderRadius: "10px",
-                backgroundColor: "#EFF6FF",
+                borderRadius: "var(--ads-r-sm)",
+                background: "var(--ads-blue-tint)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#2563EB",
-                border: "1px solid #DBEAFE",
+                color: "var(--ads-blue)",
+                border: "1px solid rgba(0, 113, 227, 0.22)",
+                flexShrink: 0,
               }}
             >
               <Bookmark size={18} />
             </div>
             <div>
-              <h2 style={{ margin: 0, fontSize: "1.0625rem", fontWeight: 700, color: "#0F172A" }}>
+              <h2 className="ads-h3" style={{ margin: 0 }}>
                 Schedule Templates
               </h2>
-              <p style={{ margin: "2px 0 0", fontSize: "0.8125rem", color: "#64748B" }}>
+              <p style={{ margin: "2px 0 0", fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                 Save reusable schedule blueprints or load existing schedules into this period
               </p>
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--ads-s2)" }}>
             {!isSavingNew && (
               <button
                 type="button"
                 onClick={() => setIsSavingNew(true)}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.35rem",
-                  padding: "0.45rem 0.85rem",
-                  borderRadius: "8px",
-                  fontSize: "0.8125rem",
-                  fontWeight: 600,
-                  backgroundColor: "#2563EB",
-                  color: "#FFFFFF",
-                  border: "none",
-                  cursor: "pointer",
-                }}
+                className="ads-btn ads-btn--primary ads-btn--sm"
               >
                 <Plus size={15} style={{ color: "#FFFFFF" }} />
                 <span>Save Current</span>
@@ -230,12 +220,18 @@ export const ScheduleTemplatesModal: FC<ScheduleTemplatesModalProps> = ({
             <button
               type="button"
               onClick={onClose}
+              aria-label="Close schedule templates dialog"
+              title="Close"
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
                 background: "transparent",
                 border: "none",
-                color: "#64748B",
+                borderRadius: "var(--ads-r-sm)",
+                color: "var(--ads-ink-tertiary)",
                 cursor: "pointer",
-                padding: "0.4rem",
+                padding: "var(--ads-s1)",
               }}
             >
               <X size={20} />
@@ -247,14 +243,14 @@ export const ScheduleTemplatesModal: FC<ScheduleTemplatesModalProps> = ({
         {errorMessage && (
           <div
             style={{
-              padding: "0.75rem 1.25rem",
-              backgroundColor: "#FEF2F2",
-              borderBottom: "1px solid #FECACA",
-              color: "#B91C1C",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              background: "var(--ads-red-tint)",
+              borderBottom: "1px solid rgba(215, 0, 21, 0.28)",
+              color: "var(--ads-red)",
               fontSize: "0.8125rem",
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
+              gap: "var(--ads-s2)",
             }}
           >
             <AlertCircle size={16} />
@@ -265,14 +261,14 @@ export const ScheduleTemplatesModal: FC<ScheduleTemplatesModalProps> = ({
         {successMessage && (
           <div
             style={{
-              padding: "0.75rem 1.25rem",
-              backgroundColor: "#ECFDF5",
-              borderBottom: "1px solid #A7F3D0",
-              color: "#047857",
+              padding: "var(--ads-s3) var(--ads-s5)",
+              background: "var(--ads-green-tint)",
+              borderBottom: "1px solid rgba(36, 138, 61, 0.28)",
+              color: "var(--ads-green)",
               fontSize: "0.8125rem",
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
+              gap: "var(--ads-s2)",
             }}
           >
             <Check size={16} />
@@ -281,18 +277,29 @@ export const ScheduleTemplatesModal: FC<ScheduleTemplatesModalProps> = ({
         )}
 
         {/* Body */}
-        <div style={{ padding: "1.25rem", overflowY: "auto", flex: 1 }}>
+        <div style={{ padding: "var(--ads-s5)", overflowY: "auto", flex: 1 }}>
           {isSavingNew ? (
-            <form onSubmit={handleSaveCurrentAsTemplate} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <h3 style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 700, color: "#1E293B" }}>
+            <form
+              onSubmit={handleSaveCurrentAsTemplate}
+              style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s4)" }}
+            >
+              <h3 className="ads-h4" style={{ margin: 0 }}>
                 Save Current Schedule as Template
               </h3>
-              <p style={{ margin: 0, fontSize: "0.8125rem", color: "#64748B" }}>
+              <p style={{ margin: 0, fontSize: "0.8125rem", color: "var(--ads-ink-tertiary)" }}>
                 This will capture the currently active {currentShifts.length} shifts ({startDateStr} to {endDateStr}) as a reusable blueprint.
               </p>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#475569", marginBottom: "0.35rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: "0.75rem",
+                    fontWeight: 600,
+                    color: "var(--ads-ink-secondary)",
+                    marginBottom: "var(--ads-s1)",
+                  }}
+                >
                   Template Name *
                 </label>
                 <input
@@ -301,83 +308,63 @@ export const ScheduleTemplatesModal: FC<ScheduleTemplatesModalProps> = ({
                   placeholder="e.g. Standard 7-Day Peak Schedule"
                   value={templateName}
                   onChange={(e) => setTemplateName(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "0.55rem 0.75rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    fontSize: "0.875rem",
-                  }}
+                  className="ads-input"
+                  style={{ fontSize: "0.875rem" }}
                 />
               </div>
 
-              <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.75rem", marginTop: "0.5rem" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: "var(--ads-s2)",
+                  marginTop: "var(--ads-s2)",
+                }}
+              >
                 <button
                   type="button"
                   onClick={() => setIsSavingNew(false)}
-                  style={{
-                    padding: "0.5rem 1rem",
-                    borderRadius: "8px",
-                    border: "1px solid #CBD5E1",
-                    backgroundColor: "#FFFFFF",
-                    color: "#475569",
-                    fontWeight: 600,
-                    fontSize: "0.8125rem",
-                    cursor: "pointer",
-                  }}
+                  className="ads-btn ads-btn--secondary"
                 >
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  style={{
-                    padding: "0.5rem 1.25rem",
-                    borderRadius: "8px",
-                    backgroundColor: "#2563EB",
-                    color: "#FFFFFF",
-                    border: "none",
-                    fontWeight: 600,
-                    fontSize: "0.8125rem",
-                    cursor: loading ? "not-allowed" : "pointer",
-                  }}
-                >
+                <button type="submit" disabled={loading} className="ads-btn ads-btn--primary">
                   {loading ? "Saving..." : "Save Template"}
                 </button>
               </div>
             </form>
           ) : (
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--ads-s3)" }}>
               {templates.length === 0 ? (
                 <div
                   style={{
                     textAlign: "center",
-                    padding: "2.5rem 1rem",
-                    backgroundColor: "#F8FAFC",
-                    borderRadius: "12px",
-                    border: "1px dashed #CBD5E1",
+                    padding: "var(--ads-s10) var(--ads-s4)",
+                    background: "var(--ads-material-thin)",
+                    borderRadius: "var(--ads-r-md)",
+                    border: "1px dashed var(--ads-hairline-strong)",
                   }}
                 >
-                  <Bookmark size={30} style={{ color: "#94A3B8", margin: "0 auto 0.5rem" }} />
-                  <p style={{ margin: 0, fontSize: "0.875rem", fontWeight: 600, color: "#475569" }}>
+                  <Bookmark
+                    size={30}
+                    style={{ color: "var(--ads-ink-quaternary)", margin: "0 auto var(--ads-s2)" }}
+                  />
+                  <p style={{ margin: 0, fontSize: "0.875rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                     No schedule templates found
                   </p>
-                  <p style={{ margin: "4px 0 1rem", fontSize: "0.75rem", color: "#94A3B8" }}>
+                  <p
+                    style={{
+                      margin: "4px 0 var(--ads-s4)",
+                      fontSize: "0.75rem",
+                      color: "var(--ads-ink-tertiary)",
+                    }}
+                  >
                     You can save the current schedule as a template for future weeks.
                   </p>
                   <button
                     type="button"
                     onClick={() => setIsSavingNew(true)}
-                    style={{
-                      padding: "0.45rem 0.9rem",
-                      borderRadius: "8px",
-                      backgroundColor: "#2563EB",
-                      color: "#FFFFFF",
-                      border: "none",
-                      fontSize: "0.8125rem",
-                      fontWeight: 600,
-                      cursor: "pointer",
-                    }}
+                    className="ads-btn ads-btn--primary ads-btn--sm"
                   >
                     + Save Current Schedule
                   </button>
@@ -386,22 +373,27 @@ export const ScheduleTemplatesModal: FC<ScheduleTemplatesModalProps> = ({
                 templates.map((tmpl) => (
                   <div
                     key={tmpl.id}
+                    className="ads-card"
                     style={{
-                      padding: "0.85rem 1.15rem",
-                      borderRadius: "10px",
-                      backgroundColor: "#FFFFFF",
-                      border: "1px solid #E2E8F0",
+                      padding: "var(--ads-s3) var(--ads-s4)",
+                      borderRadius: "var(--ads-r-md)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      gap: "1rem",
+                      gap: "var(--ads-s4)",
                     }}
                   >
                     <div>
-                      <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "#0F172A" }}>
+                      <span style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                         {tmpl.name}
                       </span>
-                      <div style={{ fontSize: "0.75rem", color: "#64748B", marginTop: "0.2rem" }}>
+                      <div
+                        style={{
+                          fontSize: "0.75rem",
+                          color: "var(--ads-ink-tertiary)",
+                          marginTop: "2px",
+                        }}
+                      >
                         Template #{tmpl.id}
                       </div>
                     </div>
@@ -410,18 +402,11 @@ export const ScheduleTemplatesModal: FC<ScheduleTemplatesModalProps> = ({
                       type="button"
                       onClick={() => handleApplyTemplate(tmpl.id, tmpl.name)}
                       disabled={loading}
+                      className="ads-btn ads-btn--sm"
                       style={{
-                        padding: "0.4rem 0.75rem",
-                        borderRadius: "6px",
-                        backgroundColor: "#EFF6FF",
-                        color: "#2563EB",
-                        border: "1px solid #DBEAFE",
-                        fontSize: "0.75rem",
-                        fontWeight: 600,
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.3rem",
+                        background: "var(--ads-blue-tint)",
+                        color: "var(--ads-blue)",
+                        border: "1px solid rgba(0, 113, 227, 0.22)",
                       }}
                     >
                       <Upload size={12} />

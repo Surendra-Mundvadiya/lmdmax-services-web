@@ -110,10 +110,10 @@ export const AddTaskModal: FC<AddTaskModalProps> = ({
         <div
           style={{
             padding: "0.6rem 0.85rem",
-            backgroundColor: "#FEF2F2",
-            border: "1px solid #FECACA",
-            borderRadius: "8px",
-            color: "#991B1B",
+            backgroundColor: "var(--ads-red-tint)",
+            border: "1px solid transparent",
+            borderRadius: "var(--ads-r-sm)",
+            color: "var(--ads-red)",
             fontSize: "0.775rem",
             display: "flex",
             alignItems: "center",
@@ -149,7 +149,7 @@ export const AddTaskModal: FC<AddTaskModalProps> = ({
       {/* Task Message Input */}
       <div className="tasks-form-group">
         <label className="tasks-form-label">
-          Task Description / Instruction <span style={{ color: "#EF4444" }}>*</span>
+          Task Description / Instruction <span style={{ color: "var(--ads-red)" }}>*</span>
         </label>
         <textarea
           value={message}
@@ -202,16 +202,16 @@ export const AddTaskModal: FC<AddTaskModalProps> = ({
                     {getInitials(adm.name)}
                   </span>
                   <div>
-                    <div style={{ fontSize: "0.775rem", fontWeight: 600, color: "#1E293B" }}>
+                    <div style={{ fontSize: "0.775rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                       {adm.name}
                     </div>
                     {adm.email && (
-                      <div style={{ fontSize: "0.6875rem", color: "#64748B" }}>{adm.email}</div>
+                      <div style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)" }}>{adm.email}</div>
                     )}
                   </div>
                 </div>
 
-                {isSelected && <Check size={14} style={{ color: "#2563EB" }} />}
+                {isSelected && <Check size={14} style={{ color: "var(--ads-blue)" }} />}
               </div>
             );
           })}
@@ -301,9 +301,9 @@ export const AddTaskModal: FC<AddTaskModalProps> = ({
               style={{
                 width: 28,
                 height: 28,
-                borderRadius: 6,
-                backgroundColor: "#EFF6FF",
-                color: "#2563EB",
+                borderRadius: "var(--ads-r-xs)",
+                backgroundColor: "var(--ads-blue-tint)",
+                color: "var(--ads-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -313,12 +313,12 @@ export const AddTaskModal: FC<AddTaskModalProps> = ({
             </div>
             <div>
               <h2 className="tasks-modal-title">Create New Task</h2>
-              <div style={{ fontSize: "0.725rem", color: "#64748B" }}>
+              <div style={{ fontSize: "0.725rem", color: "var(--ads-ink-tertiary)" }}>
                 Station {activeStationCode} • Tag & track operational action items
               </div>
             </div>
           </div>
-          <button
+          <button aria-label="Close" title="Close"
             type="button"
             onClick={onClose}
             disabled={isSubmitting}

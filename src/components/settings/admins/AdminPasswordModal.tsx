@@ -85,8 +85,8 @@ export const AdminPasswordModal: FC<AdminPasswordModalProps> = ({
   };
 
   return (
-    <div className="custom-modal-overlay">
-      <div className="custom-modal-dialog max-w-md">
+    <div className="custom-modal-overlay ads-admin-modal-overlay">
+      <div className="custom-modal-dialog max-w-md ads-admin-modal">
         {/* Modal Header */}
         <div className="custom-modal-header">
           <div className="flex items-center gap-2.5">
@@ -185,7 +185,7 @@ export const AdminPasswordModal: FC<AdminPasswordModalProps> = ({
           </div>
 
           {/* Modal Footer */}
-          <div className="modal-footer" style={{ display: "flex", gap: "0.85rem", justifyContent: "flex-end", marginTop: "1rem", paddingTop: "0.85rem", borderTop: "1px solid #E2E8F0" }}>
+          <div className="modal-footer" style={{ display: "flex", gap: "var(--ads-s3)", justifyContent: "flex-end", marginTop: "var(--ads-s4)", paddingTop: "var(--ads-s4)", borderTop: "1px solid var(--ads-hairline)" }}>
             <button
               type="button"
               className="btn-outline-cancel"
@@ -202,24 +202,28 @@ export const AdminPasswordModal: FC<AdminPasswordModalProps> = ({
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "0.45rem",
-                backgroundColor: "#2563EB",
+                gap: "var(--ads-s2)",
+                backgroundColor: "var(--ads-blue)",
                 color: "#FFFFFF",
-                border: "none",
-                padding: "0.5rem 1.25rem",
-                borderRadius: "6px",
+                border: "1px solid transparent",
+                padding: "9px 18px",
+                borderRadius: "var(--ads-r-pill)",
+                fontFamily: "inherit",
                 fontWeight: 600,
-                fontSize: "0.875rem",
+                fontSize: "0.8125rem",
+                letterSpacing: "-0.01em",
                 cursor: "pointer",
+                transition:
+                  "background-color var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
               }}
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 size={15} className="animate-spin text-white" />
-                  <span className="text-white">Saving...</span>
+                  <Loader2 size={15} className="animate-spin" style={{ color: "#FFFFFF" }} />
+                  <span style={{ color: "#FFFFFF" }}>Saving...</span>
                 </>
               ) : (
-                <span className="text-white">Save Password</span>
+                <span style={{ color: "#FFFFFF" }}>Save Password</span>
               )}
             </button>
           </div>

@@ -19,6 +19,7 @@ import {
 import ChatConversationView from "./ChatConversationView";
 import CreateBroadcastModal from "./CreateBroadcastModal";
 import { getInitials, getAvatarColor } from "../../utils/avatarUtils";
+import "./chats-apple.css";
 
 interface ChatsWorkspaceProps {
   initialChannel?: ChatChannelType;
@@ -269,19 +270,19 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
           >
             Communication
           </span>
-          <ChevronRight size={14} style={{ color: "#64748B" }} />
+          <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
           <span className="upload-breadcrumb-current">Chat</span>
-          <ChevronRight size={14} style={{ color: "#64748B" }} />
+          <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
           <span className="upload-breadcrumb-active-report">
             {currentChannelObj.label}
           </span>
           {activeThread && (
             <>
-              <ChevronRight size={14} style={{ color: "#64748B" }} />
+              <ChevronRight size={14} style={{ color: "var(--ads-ink-tertiary)" }} />
               <span
                 style={{
                   fontSize: "0.8125rem",
-                  color: "#1E293B",
+                  color: "var(--ads-ink)",
                   fontWeight: 600,
                   maxWidth: "180px",
                   overflow: "hidden",
@@ -315,7 +316,7 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                       <span
                         className="upload-segmented-count"
                         style={{
-                          backgroundColor: isActive ? "rgba(255,255,255,0.3)" : "#EF4444",
+                          backgroundColor: isActive ? "rgba(255,255,255,0.3)" : "var(--ads-red)",
                           color: "#FFFFFF",
                         }}
                       >
@@ -339,7 +340,7 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
               className="upload-action-pill-btn"
               title="Broadcast SMS announcement to multiple drivers"
             >
-              <Radio size={14} style={{ color: "#2563EB" }} />
+              <Radio size={14} style={{ color: "var(--ads-blue)" }} />
               <span>Broadcast</span>
             </button>
           )}
@@ -351,7 +352,7 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
         {/* Left: Chat Threads Catalog Sidebar */}
         <aside
           className={`upload-reports-sidebar ${mobileShowChat ? "mobile-hidden" : ""}`}
-          style={{ width: "340px", flexShrink: 0 }}
+          style={{ width: "320px", flexShrink: 0 }}
         >
           {/* Sidebar Header: Title + Count Badge */}
           <div className="upload-sidebar-header">
@@ -368,12 +369,14 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
           {/* In-Sidebar Search & Sub-Filter Pills */}
           <div
             style={{
-              padding: "0.65rem 0.85rem 0.5rem",
-              borderBottom: "1px solid #F1F5F9",
+              padding: "var(--ads-s3) var(--ads-s4) var(--ads-s2)",
+              borderBottom: "1px solid var(--ads-hairline)",
               display: "flex",
               flexDirection: "column",
-              gap: "0.5rem",
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              gap: "var(--ads-s2)",
+              background: "var(--ads-material-thin)",
+              backdropFilter: "var(--ads-blur-md)",
+              WebkitBackdropFilter: "var(--ads-blur-md)",
             }}
           >
             {/* Search Input */}
@@ -385,34 +388,47 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                   left: "0.65rem",
                   top: "50%",
                   transform: "translateY(-50%)",
-                  color: "#94A3B8",
+                  color: "var(--ads-ink-tertiary)",
                   pointerEvents: "none",
                 }}
               />
               <input
                 type="text"
+                aria-label="Search conversations"
                 placeholder="Search conversations..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{
                   width: "100%",
-                  height: "32px",
+                  height: "34px",
                   padding: "0 1.6rem 0 2rem",
-                  borderRadius: "8px",
-                  border: "1px solid #CBD5E1",
-                  fontSize: "0.78rem",
+                  borderRadius: "var(--ads-r-sm)",
+                  border: "1px solid var(--ads-hairline)",
+                  fontSize: "0.8125rem",
                   outline: "none",
-                  backgroundColor: "#F8FAFC",
-                  color: "#0F172A",
+                  background: "var(--ads-material-thick)",
+                  color: "var(--ads-ink)",
                   boxSizing: "border-box",
+                  transition:
+                    "border-color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), background-color var(--ads-dur-fast) var(--ads-ease)",
                 }}
-                onFocus={(e) => (e.target.style.borderColor = "#2563EB")}
-                onBlur={(e) => (e.target.style.borderColor = "#CBD5E1")}
+                onFocus={(e) => {
+                  e.target.style.borderColor = "var(--ads-blue)";
+                  e.target.style.boxShadow = "var(--ads-shadow-focus)";
+                  e.target.style.background = "var(--ads-white)";
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = "var(--ads-hairline)";
+                  e.target.style.boxShadow = "none";
+                  e.target.style.background = "var(--ads-material-thick)";
+                }}
               />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                  title="Clear search"
                   style={{
                     position: "absolute",
                     right: "0.5rem",
@@ -420,7 +436,7 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                     transform: "translateY(-50%)",
                     background: "none",
                     border: "none",
-                    color: "#94A3B8",
+                    color: "var(--ads-ink-tertiary)",
                     cursor: "pointer",
                     padding: 0,
                     display: "flex",
@@ -447,15 +463,17 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                     type="button"
                     onClick={() => setActiveFilter(f.id)}
                     style={{
-                      padding: "0.22rem 0.6rem",
-                      borderRadius: "6px",
-                      border: isFActive ? "1px solid #BFDBFE" : "1px solid #E2E8F0",
-                      backgroundColor: isFActive ? "#EFF6FF" : "#FFFFFF",
-                      color: isFActive ? "#1D4ED8" : "#64748B",
-                      fontSize: "0.72rem",
-                      fontWeight: isFActive ? 700 : 500,
+                      padding: "4px 12px",
+                      borderRadius: "var(--ads-r-pill)",
+                      border: "1px solid transparent",
+                      background: isFActive ? "var(--ads-blue)" : "rgba(0, 0, 0, 0.05)",
+                      color: isFActive ? "#FFFFFF" : "var(--ads-ink-secondary)",
+                      fontSize: "0.75rem",
+                      fontWeight: isFActive ? 600 : 550,
                       cursor: "pointer",
-                      transition: "all 0.15s ease",
+                      boxShadow: isFActive ? "0 1px 4px rgba(0, 113, 227, 0.30)" : "none",
+                      transition:
+                        "background-color var(--ads-dur-fast) var(--ads-ease), color var(--ads-dur-fast) var(--ads-ease), box-shadow var(--ads-dur-fast) var(--ads-ease), transform var(--ads-dur-fast) var(--ads-ease)",
                     }}
                   >
                     {f.label}
@@ -472,11 +490,15 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                 style={{
                   padding: "2.5rem 1rem",
                   textAlign: "center",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   fontSize: "0.8125rem",
                 }}
               >
-                <Loader2 size={24} className="animate-spin" style={{ margin: "0 auto 0.5rem", color: "#2563EB" }} />
+                <Loader2
+                  size={24}
+                  className="animate-spin"
+                  style={{ margin: "0 auto 0.5rem", color: "var(--ads-blue)" }}
+                />
                 <span>Loading conversations...</span>
               </div>
             ) : filteredThreads.length === 0 ? (
@@ -484,15 +506,18 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                 style={{
                   padding: "2.5rem 1rem",
                   textAlign: "center",
-                  color: "#64748B",
+                  color: "var(--ads-ink-tertiary)",
                   fontSize: "0.8125rem",
                 }}
               >
-                <MessageSquare size={32} style={{ margin: "0 auto 0.5rem", color: "#94A3B8" }} />
-                <p style={{ margin: "0 0 0.25rem", fontWeight: 700, color: "#1E293B" }}>
+                <MessageSquare
+                  size={32}
+                  style={{ margin: "0 auto 0.5rem", color: "var(--ads-ink-quaternary)" }}
+                />
+                <p style={{ margin: "0 0 0.25rem", fontWeight: 600, color: "var(--ads-ink)" }}>
                   {searchQuery ? "No matching conversations" : "No conversations"}
                 </p>
-                <p style={{ margin: 0, fontSize: "0.75rem", color: "#94A3B8" }}>
+                <p style={{ margin: 0, fontSize: "0.75rem", color: "var(--ads-ink-tertiary)" }}>
                   {searchQuery ? "Try a different driver or phone number." : "Messages will appear here."}
                 </p>
               </div>
@@ -518,7 +543,7 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                       style={{
                         width: "36px",
                         height: "36px",
-                        borderRadius: "10px",
+                        borderRadius: "var(--ads-r-sm)",
                         backgroundColor: avatarBg,
                         color: "#FFFFFF",
                         display: "flex",
@@ -527,7 +552,7 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                         fontSize: "0.8125rem",
                         fontWeight: 700,
                         flexShrink: 0,
-                        boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                        boxShadow: "var(--ads-shadow-xs)",
                       }}
                     >
                       {initials}
@@ -539,8 +564,8 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                         <span
                           style={{
                             fontSize: "0.8125rem",
-                            fontWeight: isSelected ? 700 : 600,
-                            color: isSelected ? "#1D4ED8" : "#0F172A",
+                            fontWeight: 600,
+                            color: isSelected ? "var(--ads-blue)" : "var(--ads-ink)",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
@@ -548,7 +573,7 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                         >
                           {t.name}
                         </span>
-                        <span style={{ fontSize: "0.6875rem", color: "#94A3B8", flexShrink: 0 }}>
+                        <span style={{ fontSize: "0.6875rem", color: "var(--ads-ink-tertiary)", flexShrink: 0 }}>
                           {formatTime(t.message_time)}
                         </span>
                       </div>
@@ -556,8 +581,8 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.4rem", marginTop: "2px" }}>
                         <span
                           style={{
-                            fontSize: "0.72rem",
-                            color: isSelected ? "#3B82F6" : "#64748B",
+                            fontSize: "0.75rem",
+                            color: isSelected ? "var(--ads-blue)" : "var(--ads-ink-tertiary)",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
@@ -565,7 +590,7 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                           }}
                         >
                           {t.attachments && t.attachments.length > 0 && (
-                            <span style={{ display: "inline-flex", alignItems: "center", gap: "2px", marginRight: "4px", color: "#2563EB" }}>
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: "2px", marginRight: "4px", color: "var(--ads-blue)" }}>
                               <Paperclip size={11} />
                             </span>
                           )}
@@ -573,15 +598,15 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                         </span>
 
                         <div style={{ display: "flex", alignItems: "center", gap: "0.3rem", flexShrink: 0 }}>
-                          {t.is_pinned && <Pin size={11} fill="#F59E0B" color="#F59E0B" />}
+                          {t.is_pinned && <Pin size={11} fill="#B25000" color="#B25000" />}
                           {t.unread_count > 0 && (
                             <span
                               style={{
                                 fontSize: "0.625rem",
-                                fontWeight: 700,
+                                fontWeight: 600,
                                 padding: "0.08rem 0.4rem",
-                                borderRadius: "9999px",
-                                backgroundColor: "#2563EB",
+                                borderRadius: "var(--ads-r-pill)",
+                                background: "var(--ads-blue)",
                                 color: "#FFFFFF",
                               }}
                             >
@@ -595,7 +620,7 @@ export const ChatsWorkspace: FC<ChatsWorkspaceProps> = ({
                     <ChevronRight
                       size={14}
                       style={{
-                        color: isSelected ? "#2563EB" : "#CBD5E1",
+                        color: isSelected ? "var(--ads-blue)" : "var(--ads-ink-quaternary)",
                         flexShrink: 0,
                       }}
                     />

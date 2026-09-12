@@ -1,0 +1,287 @@
+/* ============================================================================
+   Legacy bridge — maps the app's fragmented legacy classes onto the Apple
+   design system tokens.
+
+   Why this file exists: the codebase grew ~10 different "primary button"
+   classes, ~7 card classes and ~5 table classes that look subtly different.
+   Rather than hunt every call site at once, this layer normalises them to one
+   visual language immediately. Component-level cleanup then proceeds safely
+   on top of a consistent baseline.
+
+   `!important` is deliberate here — this is an override layer that must beat
+   higher-specificity legacy selectors. It is confined to this file.
+   ========================================================================= */
+
+/* ── Primary buttons ───────────────────────────────────────────────────── */
+.btn-blue-primary,
+.btn-primary,
+.primary-submit-btn,
+.esign-btn-primary,
+.btn-bulk-blue,
+.btn-add-task,
+.btn-add-rescue,
+.btn-add-note,
+.service-launch-btn,
+.navbar-action-btn-primary,
+.uop-refresh-btn {
+  background: var(--ads-blue) !important;
+  color: #FFFFFF !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--ads-r-pill) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  box-shadow: 0 1px 3px rgba(0, 113, 227, 0.24) !important;
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease) !important;
+}
+
+/* Rule 3 contrast guard — nested text/icons inside filled blue stay white */
+.btn-blue-primary *,
+.btn-primary *,
+.primary-submit-btn *,
+.esign-btn-primary *,
+.btn-bulk-blue *,
+.service-launch-btn *,
+.navbar-action-btn-primary * {
+  color: #FFFFFF !important;
+}
+
+.btn-blue-primary:hover:not(:disabled),
+.btn-primary:hover:not(:disabled),
+.primary-submit-btn:hover:not(:disabled),
+.esign-btn-primary:hover:not(:disabled),
+.btn-bulk-blue:hover:not(:disabled),
+.service-launch-btn:hover:not(:disabled),
+.navbar-action-btn-primary:hover:not(:disabled) {
+  background: var(--ads-blue-hover) !important;
+  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.32) !important;
+  transform: translateY(-1px);
+}
+
+.btn-blue-primary:active,
+.btn-primary:active,
+.primary-submit-btn:active,
+.esign-btn-primary:active { transform: scale(0.975); }
+
+/* ── Outline / secondary buttons ───────────────────────────────────────── */
+.btn-blue-outline,
+.btn-outline,
+.template-icon-btn,
+.admin-action-icon-btn,
+.driver-kebab-btn,
+.navbar-notif-btn,
+.header-icon-box,
+.cal-footer-btn {
+  background: var(--ads-material-thick) !important;
+  -webkit-backdrop-filter: var(--ads-blur-sm) !important;
+  backdrop-filter: var(--ads-blur-sm) !important;
+  color: var(--ads-ink) !important;
+  border: 1px solid var(--ads-hairline) !important;
+  border-radius: var(--ads-r-sm) !important;
+  box-shadow: var(--ads-bevel) !important;
+  transition: all var(--ads-dur-fast) var(--ads-ease) !important;
+}
+.btn-blue-outline:hover,
+.btn-outline:hover,
+.template-icon-btn:hover,
+.admin-action-icon-btn:hover,
+.driver-kebab-btn:hover,
+.navbar-notif-btn:hover,
+.header-icon-box:hover {
+  background: var(--ads-white) !important;
+  border-color: var(--ads-hairline-strong) !important;
+  transform: translateY(-1px);
+}
+
+/* ── Cards → one glass material ────────────────────────────────────────── */
+.uop-card,
+.settings-card,
+.esign-stat-card,
+.sch-shift-card,
+.nav-dropdown-menu-card,
+.glass-kpi-card,
+.company-glass-card,
+.glass-card {
+  background: var(--ads-material-thick) !important;
+  -webkit-backdrop-filter: var(--ads-blur-md) !important;
+  backdrop-filter: var(--ads-blur-md) !important;
+  border: 1px solid var(--ads-hairline) !important;
+  border-radius: var(--ads-r-lg) !important;
+  box-shadow: var(--ads-shadow-sm), var(--ads-bevel) !important;
+  transition: box-shadow var(--ads-t), transform var(--ads-t),
+              border-color var(--ads-t) !important;
+}
+
+.uop-card:hover,
+.esign-stat-card:hover,
+.sch-shift-card:hover {
+  box-shadow: var(--ads-shadow-md), var(--ads-bevel) !important;
+  border-color: var(--ads-hairline-strong) !important;
+  transform: translateY(-2px);
+}
+
+/* ── Modals & sheets ───────────────────────────────────────────────────── */
+.custom-modal-dialog,
+.modal-dialog,
+.template-modal-card,
+.drawer-panel {
+  background: var(--ads-material-thick) !important;
+  -webkit-backdrop-filter: var(--ads-blur-lg) !important;
+  backdrop-filter: var(--ads-blur-lg) !important;
+  border: 1px solid var(--ads-hairline) !important;
+  border-radius: var(--ads-r-xl) !important;
+  box-shadow: var(--ads-shadow-lg), var(--ads-bevel) !important;
+  animation: ads-sheet-in var(--ads-dur) var(--ads-ease);
+}
+
+.modal-backdrop,
+.custom-modal-backdrop {
+  background: rgba(0, 0, 0, 0.32) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  backdrop-filter: blur(6px) !important;
+  animation: ads-fade var(--ads-dur) var(--ads-ease);
+}
+
+/* Kill legacy gradient modal headers (AGENTS.md rule 3) */
+.modal-header,
+.custom-modal-header,
+.template-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--ads-hairline) !important;
+}
+
+/* ── Inputs ────────────────────────────────────────────────────────────── */
+.styled-input,
+.threshold-input,
+.custom-datepicker-input-wrap,
+input[type="text"], input[type="email"], input[type="password"],
+input[type="search"], input[type="number"], input[type="tel"],
+input[type="date"], select, textarea {
+  font-family: var(--font-sans);
+  background: var(--ads-material-thick);
+  border: 1px solid var(--ads-hairline);
+  border-radius: var(--ads-r-sm);
+  color: var(--ads-ink);
+  transition: border-color var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease),
+              background-color var(--ads-dur-fast) var(--ads-ease);
+}
+.styled-input:focus,
+.threshold-input:focus,
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  background: var(--ads-white);
+  border-color: var(--ads-blue);
+  box-shadow: var(--ads-shadow-focus);
+}
+
+.input-label,
+.settings-form-label {
+  color: var(--ads-ink-secondary);
+  font-weight: 550;
+  letter-spacing: -0.005em;
+}
+.field-error-text { color: var(--ads-red); }
+
+/* ── Segmented controls / tabs / nav pills ─────────────────────────────── */
+.upload-segmented-btn,
+.incident-segment-btn,
+.navbar-tab-btn,
+.settings-nav-button,
+.settings-nav-subbutton {
+  border-radius: var(--ads-r-pill) !important;
+  font-weight: 550 !important;
+  letter-spacing: -0.005em !important;
+  transition: all var(--ads-dur-fast) var(--ads-ease) !important;
+}
+.upload-segmented-btn.active,
+.incident-segment-btn.active,
+.navbar-tab-btn.active,
+.settings-nav-button.active,
+.settings-nav-subbutton.active {
+  background: var(--ads-blue) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 1px 4px rgba(0, 113, 227, 0.30) !important;
+}
+.upload-segmented-btn.active *,
+.incident-segment-btn.active *,
+.navbar-tab-btn.active *,
+.settings-nav-button.active * { color: #FFFFFF !important; }
+
+/* ── Status pills & badges ─────────────────────────────────────────────── */
+.incident-status-pill,
+.esign-status-pill,
+.ops-item-badge,
+.admin-role-badge,
+.uop-condition-chip,
+.uop-matrix-tier-pill-small,
+.navbar-station-badge {
+  border-radius: var(--ads-r-pill) !important;
+  font-weight: 600 !important;
+  font-size: 0.6875rem !important;
+  letter-spacing: -0.005em !important;
+  border: 1px solid transparent !important;
+}
+
+/* ── Tables ────────────────────────────────────────────────────────────── */
+.admin-management-table,
+.rescue-table,
+.callout-table,
+.tasks-table,
+.driver-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8125rem;
+}
+.admin-management-table thead th,
+.rescue-table thead th,
+.callout-table thead th,
+.tasks-table thead th,
+.driver-table thead th {
+  background: rgba(255, 255, 255, 0.72) !important;
+  -webkit-backdrop-filter: var(--ads-blur-sm);
+  backdrop-filter: var(--ads-blur-sm);
+  color: var(--ads-ink-tertiary) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--ads-hairline) !important;
+}
+.admin-management-table tbody tr,
+.rescue-table tbody tr,
+.callout-table tbody tr,
+.tasks-table tbody tr,
+.driver-table-row {
+  transition: background-color var(--ads-dur-fast) var(--ads-ease);
+}
+.admin-management-table tbody tr:hover,
+.rescue-table tbody tr:hover,
+.callout-table tbody tr:hover,
+.tasks-table tbody tr:hover,
+.driver-table-row:hover {
+  background: rgba(0, 113, 227, 0.045) !important;
+}
+
+/* Fixes the shorthand-overrides-longhand bug that clipped this table
+   instead of scrolling it on narrow viewports. */
+.driver-table-wrapper {
+  overflow: auto !important;
+}
+
+/* ── Scrollbars ────────────────────────────────────────────────────────── */
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.18);
+  border-radius: var(--ads-r-pill);
+}
+*::-webkit-scrollbar-thumb:hover { background-color: rgba(0, 0, 0, 0.30); }
+
+/* ── Global motion polish ──────────────────────────────────────────────── */
+button, a, .ads-pill, [role="button"] {
+  transition: background-color var(--ads-dur-fast) var(--ads-ease),
+              color var(--ads-dur-fast) var(--ads-ease),
+              border-color var(--ads-dur-fast) var(--ads-ease),
+              box-shadow var(--ads-dur-fast) var(--ads-ease),
+              transform var(--ads-dur-fast) var(--ads-ease);
+}

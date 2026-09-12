@@ -161,22 +161,23 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
 
   return (
     <div className="settings-panel-scroll">
-      {/* Header */}
-      <div className="settings-panel-header-block">
-        <div>
-          <h2 className="settings-panel-heading flex items-center gap-2">
-            <FilePen size={20} className="text-blue-600" />
-            <span>E-signature Settings</span>
-            <span className="badge-custom blue">Performance</span>
-          </h2>
-          <p className="settings-panel-subheading">
-            Configure digital signature workflows, driver refusal permissions, and automated reminders for Write-Ups and Policy Acknowledgments
-          </p>
-        </div>
+      <div className="settings-panel-intro">
+        <p className="settings-panel-intro-text">
+          Configure digital signature workflows, driver refusal permissions, and automated reminders for Write-Ups and Policy Acknowledgments
+        </p>
       </div>
 
       {isLoading ? (
-        <div className="settings-card flex items-center justify-center p-8 text-slate-500 text-xs">
+        <div
+          className="settings-card"
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "var(--ads-s8)",
+            fontSize: "0.8125rem",
+            color: "var(--ads-ink-tertiary)",
+          }}
+        >
           Loading live E-Signature configurations...
         </div>
       ) : (
@@ -185,7 +186,7 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
           <div className="settings-card">
             <div className="settings-card-title-row">
               <h3 className="settings-card-title">
-                <FilePen size={17} className="text-blue-600" />
+                <FilePen size={17} />
                 <span>Refuse to Sign Permissions</span>
               </h3>
             </div>
@@ -211,15 +212,31 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
             </div>
 
             {/* Sub-options for Refuse to Sign */}
-            <div className={`mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center gap-3 transition-opacity ${!allowRefuseToSign ? "opacity-50 pointer-events-none" : ""}`}>
-              <span className="text-xs font-semibold text-slate-700">Applies to Document Types:</span>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                gap: "var(--ads-s3)",
+                paddingTop: "var(--ads-s3)",
+                borderTop: "1px solid var(--ads-hairline)",
+                opacity: allowRefuseToSign ? 1 : 0.5,
+                pointerEvents: allowRefuseToSign ? "auto" : "none",
+                transition: "opacity var(--ads-dur-fast) var(--ads-ease)",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "var(--ads-ink-secondary)",
+                }}
+              >
+                Applies to Document Types
+              </span>
               <button
                 type="button"
-                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
-                  refusalTypes.includes("writeup")
-                    ? "bg-blue-600 text-white border-blue-600"
-                    : "bg-white text-slate-700 border-slate-300 hover:border-slate-400"
-                }`}
+                className={`ads-pill ${refusalTypes.includes("writeup") ? "ads-pill--active" : ""}`}
                 onClick={() => toggleRefusalType("writeup")}
               >
                 {refusalTypes.includes("writeup") && <Check size={13} style={{ color: "#FFFFFF" }} />}
@@ -228,10 +245,8 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
 
               <button
                 type="button"
-                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
-                  refusalTypes.includes("acknowledgement")
-                    ? "bg-blue-600 text-white border-blue-600"
-                    : "bg-white text-slate-700 border-slate-300 hover:border-slate-400"
+                className={`ads-pill ${
+                  refusalTypes.includes("acknowledgement") ? "ads-pill--active" : ""
                 }`}
                 onClick={() => toggleRefusalType("acknowledgement")}
               >
@@ -245,7 +260,7 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
           <div className="settings-card">
             <div className="settings-card-title-row">
               <h3 className="settings-card-title">
-                <BellRing size={17} className="text-blue-600" />
+                <BellRing size={17} />
                 <span>Automated Unsigned Reminders</span>
               </h3>
             </div>
@@ -271,22 +286,34 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
             </div>
 
             {reminderActive && (
-              <div className="mt-4 flex flex-col gap-4 pt-3 border-t border-slate-100">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "var(--ads-s4)",
+                  paddingTop: "var(--ads-s4)",
+                  borderTop: "1px solid var(--ads-hairline)",
+                }}
+              >
                 {/* Frequency & Attempts Grid */}
                 <div className="settings-form-grid-3">
                   <div className="settings-form-field">
                     <label className="settings-form-label">Reminder Frequency</label>
-                    <div className="flex gap-2">
+                    <div style={{ display: "flex", gap: "var(--ads-s2)" }}>
                       <input
                         type="number"
                         min="1"
                         max="168"
-                        className="settings-form-input w-24"
+                        className="settings-form-input"
+                        style={{ width: "6rem" }}
+                        aria-label="Reminder frequency value"
                         value={reminderTimeNumber}
                         onChange={(e) => setReminderTimeNumber(e.target.value)}
                       />
                       <select
-                        className="settings-form-select flex-1"
+                        className="settings-form-select"
+                        style={{ flex: 1 }}
+                        aria-label="Reminder frequency unit"
                         value={reminderTimeUnit}
                         onChange={(e) => setReminderTimeUnit(e.target.value as TimeOptionKey)}
                       >
@@ -311,13 +338,11 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
 
                   <div className="settings-form-field">
                     <label className="settings-form-label">Applicable Documents</label>
-                    <div className="flex gap-2 mt-1">
+                    <div style={{ display: "flex", gap: "var(--ads-s2)" }}>
                       <button
                         type="button"
-                        className={`text-xs px-2.5 py-1.5 rounded border transition-colors font-medium ${
-                          reminderTypes.includes("write-up")
-                            ? "bg-blue-50 text-blue-700 border-blue-300"
-                            : "bg-white text-slate-600 border-slate-200"
+                        className={`ads-pill ${
+                          reminderTypes.includes("write-up") ? "ads-pill--active" : ""
                         }`}
                         onClick={() => toggleReminderType("write-up")}
                       >
@@ -325,10 +350,8 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
                       </button>
                       <button
                         type="button"
-                        className={`text-xs px-2.5 py-1.5 rounded border transition-colors font-medium ${
-                          reminderTypes.includes("ack")
-                            ? "bg-blue-50 text-blue-700 border-blue-300"
-                            : "bg-white text-slate-600 border-slate-200"
+                        className={`ads-pill ${
+                          reminderTypes.includes("ack") ? "ads-pill--active" : ""
                         }`}
                         onClick={() => toggleReminderType("ack")}
                       >
@@ -341,9 +364,17 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
                 {/* Custom Reminder Messages */}
                 {reminderTypes.includes("write-up") && (
                   <div className="settings-form-field">
-                    <label className="settings-form-label flex items-center justify-between">
+                    <label className="settings-form-label" style={{ justifyContent: "space-between" }}>
                       <span>Write-Up Reminder Message</span>
-                      <span className="text-[11px] text-slate-400 font-normal">Sent via SMS & Push</span>
+                      <span
+                        style={{
+                          fontSize: "0.6875rem",
+                          fontWeight: 400,
+                          color: "var(--ads-ink-tertiary)",
+                        }}
+                      >
+                        Sent via SMS &amp; Push
+                      </span>
                     </label>
                     <textarea
                       rows={2}
@@ -356,9 +387,17 @@ export const ESignatureSettingsPanel: FC<ESignatureSettingsPanelProps> = ({ onNo
 
                 {reminderTypes.includes("ack") && (
                   <div className="settings-form-field">
-                    <label className="settings-form-label flex items-center justify-between">
+                    <label className="settings-form-label" style={{ justifyContent: "space-between" }}>
                       <span>Acknowledgment Reminder Message</span>
-                      <span className="text-[11px] text-slate-400 font-normal">Sent via SMS & Push</span>
+                      <span
+                        style={{
+                          fontSize: "0.6875rem",
+                          fontWeight: 400,
+                          color: "var(--ads-ink-tertiary)",
+                        }}
+                      >
+                        Sent via SMS &amp; Push
+                      </span>
                     </label>
                     <textarea
                       rows={2}
