@@ -1,0 +1,725 @@
+/* ==========================================================================
+   DRIVER CALLOUTS MODULE
+   Vanilla CSS - LMDmax Unified Blue-and-White Design System
+   ========================================================================== */
+
+.callout-main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem 1.25rem 1rem;
+  overflow: hidden;
+  background-color: #F0F6FF;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+}
+
+/* ==================== 1. CANVAS HEADER (ON BLUE BACKGROUND SCREEN) ==================== */
+.callout-canvas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.callout-canvas-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.callout-canvas-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.callout-station-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  background-color: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 9999px;
+  color: #1D4ED8;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.callout-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  animation: calloutPulse 2s ease-in-out infinite;
+}
+@keyframes calloutPulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); }
+  50%      { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.35); }
+}
+
+.callout-canvas-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+/* Primary Add Callouts Action Button on Blue Canvas Header */
+.btn-add-callout-canvas {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #FFFFFF !important;
+  background-color: #2563EB;
+  border: 1px solid #1D4ED8;
+  border-radius: 9px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.25);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.btn-add-callout-canvas:hover {
+  background-color: #1D4ED8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+.btn-add-callout-canvas:active {
+  transform: translateY(0);
+}
+
+/* ==================== 2. MAIN SOLID WHITE TABLE CONTAINER ==================== */
+.callout-card-container {
+  flex: 1;
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  min-height: 0;
+}
+
+/* Toast Banners */
+.callout-toast-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 1.25rem;
+  background-color: #F0FDF4;
+  border-bottom: 1px solid #BBF7D0;
+  color: #166534;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.callout-toast-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 1.25rem;
+  background-color: #FFF1F2;
+  border-bottom: 1px solid #FECDD3;
+  color: #9F1239;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ==================== 3. TABLE FILTER & ACTION TOOLBAR ==================== */
+.callout-filter-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #F1F5F9;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.callout-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.callout-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* Search */
+.callout-search-wrap {
+  position: relative;
+  min-width: 220px;
+  max-width: 320px;
+  flex: 1;
+}
+.callout-search-icon {
+  position: absolute;
+  left: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94A3B8;
+  pointer-events: none;
+}
+.callout-search-input {
+  width: 100%;
+  padding: 0.42rem 2rem 0.42rem 2rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  background-color: #F8FAFC;
+  color: #1E293B;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+.callout-search-input::placeholder { color: #94A3B8; }
+.callout-search-input:focus {
+  outline: none;
+  border-color: #93C5FD;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+.callout-search-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94A3B8;
+  cursor: pointer;
+  padding: 0.15rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+.callout-search-clear:hover { color: #475569; }
+
+/* Tool Buttons */
+.callout-tool-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  background-color: #F8FAFC;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.13s ease;
+}
+.callout-tool-btn:hover {
+  background-color: #EFF6FF;
+  border-color: #BFDBFE;
+  color: #1D4ED8;
+}
+
+/* Secondary Button */
+.callout-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.13s ease;
+  white-space: nowrap;
+}
+.callout-btn-secondary:hover {
+  background-color: #F1F5F9;
+  color: #0F172A;
+  border-color: #CBD5E1;
+}
+
+/* Message / Notification Button */
+.callout-btn-msg {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1D4ED8;
+  background-color: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.13s ease;
+  white-space: nowrap;
+}
+.callout-btn-msg:hover:not(:disabled) {
+  background-color: #DBEAFE;
+  border-color: #93C5FD;
+}
+.callout-btn-msg:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Edit Mode Buttons */
+.callout-btn-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.13s ease;
+  white-space: nowrap;
+}
+.callout-btn-edit:hover:not(:disabled) {
+  background-color: #F1F5F9;
+  color: #0F172A;
+  border-color: #CBD5E1;
+}
+.callout-btn-edit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.callout-btn-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.95rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #FFFFFF !important;
+  background-color: #2563EB;
+  border: 1px solid #1D4ED8;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+  transition: all 0.13s ease;
+  white-space: nowrap;
+}
+.callout-btn-save:hover:not(:disabled) {
+  background-color: #1D4ED8;
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+.callout-btn-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.callout-btn-discard {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #64748B;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.13s ease;
+  white-space: nowrap;
+}
+.callout-btn-discard:hover {
+  background-color: #F1F5F9;
+  color: #0F172A;
+}
+
+/* ==================== 4. DATA TABLE ==================== */
+.callout-table-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.callout-table-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  min-height: 0;
+}
+
+.callout-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  text-align: left;
+}
+
+.callout-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.callout-table th {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  background-color: #F8FAFC;
+}
+
+.callout-table tbody tr {
+  border-bottom: 1px solid #F1F5F9;
+  transition: background-color 0.12s ease;
+}
+.callout-table tbody tr:hover {
+  background-color: #F8FAFC;
+}
+
+.callout-table td {
+  padding: 0.75rem 1.25rem;
+  color: #1E293B;
+  vertical-align: middle;
+}
+
+/* Driver Cell */
+.callout-driver-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.callout-driver-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.callout-driver-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+.callout-driver-name {
+  font-weight: 700;
+  color: #0F172A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.callout-driver-id {
+  font-size: 0.6875rem;
+  color: #64748B;
+}
+
+/* Badges */
+.callout-type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1D4ED8;
+  white-space: nowrap;
+}
+
+.callout-excused-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.callout-excused-badge.yes {
+  background-color: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #047857;
+}
+.callout-excused-badge.no {
+  background-color: #FFF1F2;
+  border: 1px solid #FECDD3;
+  color: #BE123C;
+}
+
+/* Message Badges */
+.callout-msg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.callout-msg-badge.sent {
+  background-color: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #047857;
+}
+.callout-msg-badge.unsent {
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #94A3B8;
+}
+
+/* Notes Cell */
+.callout-notes-cell {
+  font-size: 0.8125rem;
+  color: #475569;
+  display: block;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.callout-notes-empty {
+  color: #CBD5E1;
+  font-style: italic;
+}
+
+/* Inline Edit Controls */
+.callout-inline-select {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  border: 1px solid #BFDBFE;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  color: #1E293B;
+  cursor: pointer;
+  transition: border-color 0.13s;
+}
+.callout-inline-select:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.callout-inline-input {
+  width: 100%;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  border: 1px solid #BFDBFE;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  color: #1E293B;
+  transition: border-color 0.13s;
+  box-sizing: border-box;
+}
+.callout-inline-input:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Action Cell */
+.callout-action-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+.callout-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  color: #94A3B8;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+.callout-action-btn:hover {
+  color: #E11D48;
+  background-color: #FFF1F2;
+}
+.callout-action-btn.send:hover {
+  color: #1D4ED8;
+  background-color: #EFF6FF;
+}
+
+/* ==================== 5. EMPTY & LOADING ==================== */
+.callout-empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3.5rem 2rem;
+  text-align: center;
+  color: #94A3B8;
+}
+.callout-empty-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background-color: #EFF6FF;
+  color: #2563EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
+.callout-empty-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+.callout-empty-desc {
+  font-size: 0.8125rem;
+  color: #64748B;
+  max-width: 360px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==================== 6. MODALS ==================== */
+.callout-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.callout-modal-dialog {
+  background: #FFFFFF;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.2);
+  border: 1px solid #E2E8F0;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.callout-modal-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+  text-align: center;
+}
+
+.callout-delete-icon-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background-color: #FFF1F2;
+  color: #E11D48;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.callout-delete-btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #FFFFFF !important;
+  background-color: #E11D48;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+.callout-delete-btn-danger:hover {
+  background-color: #BE123C;
+}
+.callout-delete-btn-danger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.callout-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+.callout-cancel-btn:hover {
+  background-color: #F1F5F9;
+}
+.callout-cancel-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==================== 7. RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .callout-main-container { padding: 0.5rem; }
+  .callout-canvas-header { flex-direction: column; align-items: flex-start; }
+  .callout-canvas-actions { width: 100%; justify-content: space-between; }
+  .callout-filter-toolbar { flex-direction: column; align-items: stretch; }
+  .callout-toolbar-left, .callout-toolbar-right { width: 100%; }
+  .callout-search-wrap { max-width: 100%; }
+}
